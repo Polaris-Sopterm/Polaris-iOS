@@ -17,6 +17,8 @@
 		CE04A060262346C9007C98E2 /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A05F262346C9007C98E2 /* UICollectionView+.swift */; };
 		CE04A06326234701007C98E2 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A06226234701007C98E2 /* UIView+.swift */; };
 		CE04A06626234CEE007C98E2 /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A06526234CEE007C98E2 /* UITableView+.swift */; };
+		CE04A06A2623528C007C98E2 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A0692623528B007C98E2 /* UIViewController+.swift */; };
+		CE04A06E2623595D007C98E2 /* StoryboardName.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A06D2623595D007C98E2 /* StoryboardName.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,8 @@
 		CE04A05F262346C9007C98E2 /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
 		CE04A06226234701007C98E2 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		CE04A06526234CEE007C98E2 /* UITableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+.swift"; sourceTree = "<group>"; };
+		CE04A0692623528B007C98E2 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
+		CE04A06D2623595D007C98E2 /* StoryboardName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardName.swift; sourceTree = "<group>"; };
 		E4A6B1EFA15BD83942E79BD7 /* Pods-polaris-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-polaris-ios.release.xcconfig"; path = "Target Support Files/Pods-polaris-ios/Pods-polaris-ios.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -106,6 +110,7 @@
 			children = (
 				CE04A035262340D1007C98E2 /* AppDelegate.swift */,
 				CE04A037262340D1007C98E2 /* SceneDelegate.swift */,
+				CE04A06C2623584F007C98E2 /* Util */,
 				CE04A05A262345EC007C98E2 /* Extension */,
 				CE04A050262341E1007C98E2 /* Xib */,
 				CE04A04F262341B9007C98E2 /* Storyboard */,
@@ -160,8 +165,17 @@
 				CE04A05F262346C9007C98E2 /* UICollectionView+.swift */,
 				CE04A06526234CEE007C98E2 /* UITableView+.swift */,
 				CE04A06226234701007C98E2 /* UIView+.swift */,
+				CE04A0692623528B007C98E2 /* UIViewController+.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		CE04A06C2623584F007C98E2 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				CE04A06D2623595D007C98E2 /* StoryboardName.swift */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -278,6 +292,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE04A06A2623528C007C98E2 /* UIViewController+.swift in Sources */,
+				CE04A06E2623595D007C98E2 /* StoryboardName.swift in Sources */,
 				CE04A036262340D1007C98E2 /* AppDelegate.swift in Sources */,
 				CE04A038262340D1007C98E2 /* SceneDelegate.swift in Sources */,
 				CE04A060262346C9007C98E2 /* UICollectionView+.swift in Sources */,
