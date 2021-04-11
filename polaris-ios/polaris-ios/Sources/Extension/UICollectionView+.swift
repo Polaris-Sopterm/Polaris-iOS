@@ -14,10 +14,10 @@ extension UICollectionView {
     }
     
     func registerCell<T: UICollectionViewCell>(cell: T.Type) {
-        let identifier = String(describing: cell)
-        let nib = UINib(nibName: identifier, bundle: nil)
+        let identifier  = String(describing: cell)
+        let nib         = UINib(nibName: identifier, bundle: nil)
         
-        if cell.isExistNibFile { self.register(nib, forCellWithReuseIdentifier: identifier) }
-        else { self.register(cell, forCellWithReuseIdentifier: identifier) }
+        if cell.isExistNibFile  { self.register(nib, forCellWithReuseIdentifier: identifier) }
+        else                    { self.register(cell, forCellWithReuseIdentifier: identifier) }
     }
 }
