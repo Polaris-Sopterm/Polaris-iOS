@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A14F93B3F264CEEE5A11042 /* Pods_polaris_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96F59A4C63DB82D6CF9102A2 /* Pods_polaris_ios.framework */; };
 		CE04A036262340D1007C98E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A035262340D1007C98E2 /* AppDelegate.swift */; };
 		CE04A038262340D1007C98E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A037262340D1007C98E2 /* SceneDelegate.swift */; };
 		CE04A03D262340D1007C98E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE04A03B262340D1007C98E2 /* Main.storyboard */; };
@@ -15,6 +16,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		96F59A4C63DB82D6CF9102A2 /* Pods_polaris_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_polaris_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B99945FF07FDC10893694E03 /* Pods-polaris-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-polaris-ios.debug.xcconfig"; path = "Target Support Files/Pods-polaris-ios/Pods-polaris-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		CE04A032262340D1007C98E2 /* polaris-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "polaris-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE04A035262340D1007C98E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE04A037262340D1007C98E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -22,6 +25,7 @@
 		CE04A03E262340D3007C98E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE04A041262340D3007C98E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE04A043262340D3007C98E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E4A6B1EFA15BD83942E79BD7 /* Pods-polaris-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-polaris-ios.release.xcconfig"; path = "Target Support Files/Pods-polaris-ios/Pods-polaris-ios.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +33,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A14F93B3F264CEEE5A11042 /* Pods_polaris_ios.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1EC74505173E8B15479344AC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				96F59A4C63DB82D6CF9102A2 /* Pods_polaris_ios.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		ABEA5892F8C0FC683836E029 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B99945FF07FDC10893694E03 /* Pods-polaris-ios.debug.xcconfig */,
+				E4A6B1EFA15BD83942E79BD7 /* Pods-polaris-ios.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		CE04A029262340D1007C98E2 = {
 			isa = PBXGroup;
 			children = (
 				CE04A034262340D1007C98E2 /* polaris-ios */,
 				CE04A033262340D1007C98E2 /* Products */,
+				ABEA5892F8C0FC683836E029 /* Pods */,
+				1EC74505173E8B15479344AC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -127,9 +152,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE04A046262340D3007C98E2 /* Build configuration list for PBXNativeTarget "polaris-ios" */;
 			buildPhases = (
+				441261B558955FB9298338E6 /* [CP] Check Pods Manifest.lock */,
 				CE04A02E262340D1007C98E2 /* Sources */,
 				CE04A02F262340D1007C98E2 /* Frameworks */,
 				CE04A030262340D1007C98E2 /* Resources */,
+				81B56377512B03F98CF18DC6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -184,6 +211,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		441261B558955FB9298338E6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-polaris-ios-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		81B56377512B03F98CF18DC6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-polaris-ios/Pods-polaris-ios-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-polaris-ios/Pods-polaris-ios-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-polaris-ios/Pods-polaris-ios-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CE04A02E262340D1007C98E2 /* Sources */ = {
@@ -335,6 +404,7 @@
 		};
 		CE04A047262340D3007C98E2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B99945FF07FDC10893694E03 /* Pods-polaris-ios.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -354,6 +424,7 @@
 		};
 		CE04A048262340D3007C98E2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E4A6B1EFA15BD83942E79BD7 /* Pods-polaris-ios.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
