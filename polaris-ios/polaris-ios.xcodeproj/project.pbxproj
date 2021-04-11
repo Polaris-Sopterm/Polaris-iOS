@@ -13,6 +13,7 @@
 		CE04A03D262340D1007C98E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE04A03B262340D1007C98E2 /* Main.storyboard */; };
 		CE04A03F262340D3007C98E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE04A03E262340D3007C98E2 /* Assets.xcassets */; };
 		CE04A042262340D3007C98E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE04A040262340D3007C98E2 /* LaunchScreen.storyboard */; };
+		CE04A05D26234606007C98E2 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A05C26234606007C98E2 /* UIColor+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		CE04A03E262340D3007C98E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE04A041262340D3007C98E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE04A043262340D3007C98E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE04A05C26234606007C98E2 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		E4A6B1EFA15BD83942E79BD7 /* Pods-polaris-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-polaris-ios.release.xcconfig"; path = "Target Support Files/Pods-polaris-ios/Pods-polaris-ios.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -98,6 +100,7 @@
 			children = (
 				CE04A035262340D1007C98E2 /* AppDelegate.swift */,
 				CE04A037262340D1007C98E2 /* SceneDelegate.swift */,
+				CE04A05A262345EC007C98E2 /* Extension */,
 				CE04A050262341E1007C98E2 /* Xib */,
 				CE04A04F262341B9007C98E2 /* Storyboard */,
 				CE04A04E26234111007C98E2 /* Model */,
@@ -142,6 +145,14 @@
 			children = (
 			);
 			path = Xib;
+			sourceTree = "<group>";
+		};
+		CE04A05A262345EC007C98E2 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				CE04A05C26234606007C98E2 /* UIColor+.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,6 +271,7 @@
 			files = (
 				CE04A036262340D1007C98E2 /* AppDelegate.swift in Sources */,
 				CE04A038262340D1007C98E2 /* SceneDelegate.swift in Sources */,
+				CE04A05D26234606007C98E2 /* UIColor+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
