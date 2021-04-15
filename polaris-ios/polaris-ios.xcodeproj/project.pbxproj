@@ -22,6 +22,8 @@
 		CE04A07226235A57007C98E2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A07126235A57007C98E2 /* NetworkManager.swift */; };
 		CE04A07526235BD1007C98E2 /* DefaultSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A07426235BD1007C98E2 /* DefaultSession.swift */; };
 		CEEE56C626286CA200C39358 /* MockProviderFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE56C526286CA200C39358 /* MockProviderFactory.swift */; };
+		CEEE56CF26286FCC00C39358 /* PolarisUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE56CE26286FCC00C39358 /* PolarisUserManager.swift */; };
+		CEEE56D226286FF800C39358 /* UserDefaultWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE56D126286FF800C39358 /* UserDefaultWrapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +45,8 @@
 		CE04A07126235A57007C98E2 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		CE04A07426235BD1007C98E2 /* DefaultSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSession.swift; sourceTree = "<group>"; };
 		CEEE56C526286CA200C39358 /* MockProviderFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockProviderFactory.swift; sourceTree = "<group>"; };
+		CEEE56CE26286FCC00C39358 /* PolarisUserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarisUserManager.swift; sourceTree = "<group>"; };
+		CEEE56D126286FF800C39358 /* UserDefaultWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultWrapper.swift; sourceTree = "<group>"; };
 		E4A6B1EFA15BD83942E79BD7 /* Pods-polaris-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-polaris-ios.release.xcconfig"; path = "Target Support Files/Pods-polaris-ios/Pods-polaris-ios.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -183,6 +187,7 @@
 		CE04A06C2623584F007C98E2 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				CEEE56D126286FF800C39358 /* UserDefaultWrapper.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -215,6 +220,7 @@
 		CEEE56C926286F6200C39358 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				CEEE56CE26286FCC00C39358 /* PolarisUserManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -336,6 +342,8 @@
 				CE04A06A2623528C007C98E2 /* UIViewController+.swift in Sources */,
 				CE04A06E2623595D007C98E2 /* StoryboardName.swift in Sources */,
 				CE04A07526235BD1007C98E2 /* DefaultSession.swift in Sources */,
+				CEEE56CF26286FCC00C39358 /* PolarisUserManager.swift in Sources */,
+				CEEE56D226286FF800C39358 /* UserDefaultWrapper.swift in Sources */,
 				CE04A036262340D1007C98E2 /* AppDelegate.swift in Sources */,
 				CE04A038262340D1007C98E2 /* SceneDelegate.swift in Sources */,
 				CE04A060262346C9007C98E2 /* UICollectionView+.swift in Sources */,
