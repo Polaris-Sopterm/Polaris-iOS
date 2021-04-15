@@ -18,5 +18,15 @@ extension UIView {
         guard let nib = Bundle.main.loadNibNamed(identifier, owner: nil, options: nil) else { return nil }
         return nib.first as? T
     }
+    
+    func makeRounded(cornerRadius : CGFloat?){
+        if let cornerRadius_ = cornerRadius {
+            self.layer.cornerRadius = cornerRadius_
+        }  else {
+            // cornerRadius 가 nil 일 경우의 default
+            self.layer.cornerRadius = self.layer.frame.height / 2
+        }
+        self.layer.masksToBounds = true
+    }
 }
 
