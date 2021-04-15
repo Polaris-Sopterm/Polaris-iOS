@@ -118,6 +118,8 @@
 				CE04A037262340D1007C98E2 /* SceneDelegate.swift */,
 				CEEE56B4262860B700C39358 /* Protocol */,
 				CE04A07026235A4A007C98E2 /* Network */,
+				CEEE56C926286F6200C39358 /* Manager */,
+				CEEE56C826286F3B00C39358 /* Constants */,
 				CE04A06C2623584F007C98E2 /* Util */,
 				CE04A05A262345EC007C98E2 /* Extension */,
 				CE04A050262341E1007C98E2 /* Xib */,
@@ -181,7 +183,6 @@
 		CE04A06C2623584F007C98E2 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				CE04A06D2623595D007C98E2 /* StoryboardName.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -191,6 +192,7 @@
 			children = (
 				CE04A07426235BD1007C98E2 /* DefaultSession.swift */,
 				CE04A07126235A57007C98E2 /* NetworkManager.swift */,
+				CEEE56C526286CA200C39358 /* MockProviderFactory.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -198,9 +200,23 @@
 		CEEE56B4262860B700C39358 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
-				CEEE56C526286CA200C39358 /* MockProviderFactory.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		CEEE56C826286F3B00C39358 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				CE04A06D2623595D007C98E2 /* StoryboardName.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		CEEE56C926286F6200C39358 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
