@@ -1,74 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TodoDateHeaderView" customModule="polaris_ios" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="TodoDateHeaderView" customModule="polaris_ios" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="161"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR" customClass="TodoDateHeaderView" customModule="polaris_ios" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="155"/>
+            <autoresizingMask key="autoresizingMask"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vvh-ZQ-9CY">
-                    <rect key="frame" x="23" y="49" width="368" height="58"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NSO-oc-Yac">
+                    <rect key="frame" x="23" y="49" width="274" height="58"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4월 1일 월요일" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cJQ-3q-bkW">
-                            <rect key="frame" x="22" y="18.5" width="101" height="21"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4월 1일 월요일" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6hA-FR-v5H">
+                            <rect key="frame" x="22" y="18" width="106" height="22"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgPurpleShining" translatesAutoresizingMaskIntoConstraints="NO" id="1ol-A2-ltd">
-                            <rect key="frame" x="83" y="0.0" width="285" height="58"/>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgPurpleShining" translatesAutoresizingMaskIntoConstraints="NO" id="c9c-e9-JMA">
+                            <rect key="frame" x="83" y="0.0" width="191" height="58"/>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H2u-Xi-4oL">
-                            <rect key="frame" x="319" y="13" width="32" height="32"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="git-MQ-RVm">
+                            <rect key="frame" x="219" y="10" width="38" height="38"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="32" id="64n-dF-OM8"/>
-                                <constraint firstAttribute="width" constant="32" id="Rgg-Pj-Zoe"/>
+                                <constraint firstAttribute="height" constant="38" id="DVB-pY-XuM"/>
+                                <constraint firstAttribute="width" constant="38" id="bpI-ip-tTg"/>
                             </constraints>
                             <state key="normal" image="btnAddTodoDate"/>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="0.91380763050000002" green="0.91315567490000005" blue="0.96078437569999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <color key="backgroundColor" red="0.90989881750000001" green="0.90913724900000004" blue="0.96470707649999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="58" id="4jI-O9-D8Z"/>
-                        <constraint firstItem="1ol-A2-ltd" firstAttribute="leading" secondItem="vvh-ZQ-9CY" secondAttribute="leading" constant="83" id="AsC-zL-O3j"/>
-                        <constraint firstItem="cJQ-3q-bkW" firstAttribute="leading" secondItem="vvh-ZQ-9CY" secondAttribute="leading" constant="22" id="C4g-2c-pLG"/>
-                        <constraint firstItem="H2u-Xi-4oL" firstAttribute="centerY" secondItem="1ol-A2-ltd" secondAttribute="centerY" id="HBk-j8-JCO"/>
-                        <constraint firstItem="cJQ-3q-bkW" firstAttribute="centerY" secondItem="vvh-ZQ-9CY" secondAttribute="centerY" id="cKi-PM-Vl4"/>
-                        <constraint firstAttribute="bottom" secondItem="1ol-A2-ltd" secondAttribute="bottom" id="eGr-I2-NUX"/>
-                        <constraint firstAttribute="trailing" secondItem="1ol-A2-ltd" secondAttribute="trailing" id="k7l-x1-xj5"/>
-                        <constraint firstAttribute="trailing" secondItem="H2u-Xi-4oL" secondAttribute="trailing" constant="17" id="rvm-Xq-Zko"/>
-                        <constraint firstItem="1ol-A2-ltd" firstAttribute="top" secondItem="vvh-ZQ-9CY" secondAttribute="top" id="uRi-v4-qvw"/>
+                        <constraint firstAttribute="bottom" secondItem="c9c-e9-JMA" secondAttribute="bottom" id="3C5-2q-ots"/>
+                        <constraint firstItem="c9c-e9-JMA" firstAttribute="leading" secondItem="NSO-oc-Yac" secondAttribute="leading" constant="83" id="SOI-ek-jbK"/>
+                        <constraint firstItem="git-MQ-RVm" firstAttribute="centerY" secondItem="c9c-e9-JMA" secondAttribute="centerY" id="VLC-s5-5Cg"/>
+                        <constraint firstItem="6hA-FR-v5H" firstAttribute="leading" secondItem="NSO-oc-Yac" secondAttribute="leading" constant="22" id="bqr-fs-VBJ"/>
+                        <constraint firstAttribute="height" constant="58" id="erK-Oz-95R"/>
+                        <constraint firstAttribute="trailing" secondItem="git-MQ-RVm" secondAttribute="trailing" constant="17" id="gT9-kC-JAC"/>
+                        <constraint firstItem="6hA-FR-v5H" firstAttribute="centerY" secondItem="NSO-oc-Yac" secondAttribute="centerY" id="jJe-vO-sRc"/>
+                        <constraint firstItem="c9c-e9-JMA" firstAttribute="top" secondItem="NSO-oc-Yac" secondAttribute="top" id="kO5-tc-GQv"/>
+                        <constraint firstAttribute="trailing" secondItem="c9c-e9-JMA" secondAttribute="trailing" id="q42-FD-TUA"/>
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
             <constraints>
-                <constraint firstItem="vvh-ZQ-9CY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="23" id="IkE-nB-asb"/>
-                <constraint firstAttribute="trailing" secondItem="vvh-ZQ-9CY" secondAttribute="trailing" constant="23" id="d2a-8g-ups"/>
-                <constraint firstItem="vvh-ZQ-9CY" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="49" id="hCY-R7-XEV"/>
+                <constraint firstItem="NSO-oc-Yac" firstAttribute="leading" secondItem="VXr-Tz-HHm" secondAttribute="leading" constant="23" id="SSp-cx-KUv"/>
+                <constraint firstItem="VXr-Tz-HHm" firstAttribute="trailing" secondItem="NSO-oc-Yac" secondAttribute="trailing" constant="23" id="WbE-UI-h1E"/>
+                <constraint firstItem="NSO-oc-Yac" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" constant="49" id="l5N-fI-cvI"/>
             </constraints>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="containerView" destination="vvh-ZQ-9CY" id="VDG-yB-Sah"/>
-                <outlet property="dateLabel" destination="cJQ-3q-bkW" id="VHx-Jp-JzP"/>
-                <outlet property="plusButton" destination="H2u-Xi-4oL" id="pY0-4v-4lD"/>
+                <outlet property="containerView" destination="NSO-oc-Yac" id="Zo4-3x-Sas"/>
             </connections>
-            <point key="canvasLocation" x="-20.289855072463769" y="244.75446428571428"/>
-        </view>
+            <point key="canvasLocation" x="137.68115942028987" y="72.65625"/>
+        </collectionReusableView>
     </objects>
     <resources>
         <image name="btnAddTodoDate" width="32" height="32"/>
         <image name="imgPurpleShining" width="246" height="58"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

@@ -11,7 +11,7 @@ import RxCocoa
 
 
 class TodoDateVC: UIViewController {
-
+    
     @IBOutlet weak var wholeTV: UITableView!
     
     let viewModel = TodoDateViewModel()
@@ -25,10 +25,9 @@ class TodoDateVC: UIViewController {
         
         wholeTV.delegate = self
         wholeTV.dataSource = self
+        wholeTV.registerCell(cell: TodoDateTVC.self)
         
-        let tvcNib = UINib(nibName: "TodoDateTVC", bundle: nil)
-        wholeTV.register(tvcNib, forCellReuseIdentifier: "TodoDateTVC")
-       
+        
     }
     
     
@@ -40,9 +39,9 @@ class TodoDateVC: UIViewController {
             .disposed(by: disposeBag)
         
     }
-
-  
-
+    
+    
+    
 }
 
 
@@ -62,9 +61,9 @@ extension TodoDateVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-     
-//        let headerView = TodoDateHeaderView.instanceFromNib()
-        let headerView = TodoDateHeaderView.fromNib()
+        
+        //        let headerView = TodoDateHeaderView.instanceFromNib()
+        let headerView: TodoDateHeaderView? = UIView.fromNib()
         return headerView
     }
     
