@@ -11,7 +11,7 @@ import RxSwift
 
 class NetworkManager {
     static func request<T: Codable, U: TargetType>(provider: MoyaProvider<U> = MoyaProvider(session: DefaultSesssion.shared),
-                                            apiType: U) -> Single<T> {
+                                                   apiType: U) -> Single<T> {
         return Single<T>.create { single in
             provider.request(apiType) { result in
                 switch result {
