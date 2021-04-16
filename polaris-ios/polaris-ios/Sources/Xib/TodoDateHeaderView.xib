@@ -57,6 +57,8 @@
             </constraints>
             <connections>
                 <outlet property="containerView" destination="NSO-oc-Yac" id="Zo4-3x-Sas"/>
+                <outlet property="dateLabel" destination="6hA-FR-v5H" id="ikl-8F-s7r"/>
+                <outlet property="plusButton" destination="git-MQ-RVm" id="zxC-Ux-jaX"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="72.65625"/>
         </collectionReusableView>

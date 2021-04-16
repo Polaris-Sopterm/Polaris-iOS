@@ -12,27 +12,52 @@ import RxCocoa
 class TodoDateViewModel {
     
     
+    
     let todoFetchFinished = PublishSubject<Void>()
     
     
     var dates: [String] = []
     var todos: [[TodoModel]] = []
     var disposeBag = DisposeBag()
+    var todoDateModels: [TodoDateModel] = []
     
     
-    init() {
-        bind()
-    }
-    
-    private func bind() {
-        
-        dates = ["4월 12일","4월 13일","4월 14일","4월 15일"]
-        todos = [[TodoModel(todoTitle: "1_1", todoSubtitle: "0.1", fixed: true,checked: false),TodoModel(todoTitle: "1_2", todoSubtitle: "0.2", fixed: false,checked: false)],[TodoModel(todoTitle: "2_1", todoSubtitle: "0.1", fixed: true,checked: false),TodoModel(todoTitle: "2_2", todoSubtitle: "0.2", fixed: false,checked: false)],[TodoModel(todoTitle: "3_1", todoSubtitle: "0.1", fixed: true,checked: false),TodoModel(todoTitle: "3_2", todoSubtitle: "0.2", fixed: false,checked: false)],[TodoModel(todoTitle: "4_1", todoSubtitle: "0.1", fixed: true,checked: false),TodoModel(todoTitle: "4_2", todoSubtitle: "0.2", fixed: false,checked: false)]]
-        todoFetchFinished.onNext(())
-        
+    struct Input{
+        let checkButtonClicked: Observable<IndexPath>
         
     }
     
+    struct Output{
+        let dataDriver: Driver<[TodoDateModel]>
+    }
+   
+
+    func connect(input: Input) -> Output {
+        todoDateModels = [TodoDateModel(date: "4월 12일 월요일", todos: [TodoModel(todoTitle: "1_1", todoSubtitle: "0.1", fixed: true,checked: false),TodoModel(todoTitle: "1_2", todoSubtitle: "0.2", fixed: false,checked: false)]),TodoDateModel(date: "4월 13일 화요일", todos: [TodoModel(todoTitle: "2_1", todoSubtitle: "0.1", fixed: true,checked: false),TodoModel(todoTitle: "2_2", todoSubtitle: "0.2", fixed: false,checked: false)]),TodoDateModel(date: "4월 14일 수요일", todos: [TodoModel(todoTitle: "3_1", todoSubtitle: "0.1", fixed: true,checked: false),TodoModel(todoTitle: "3_2", todoSubtitle: "0.2", fixed: false,checked: false)]),TodoDateModel(date: "4월 15일 목요일", todos: [TodoModel(todoTitle: "4_1", todoSubtitle: "0.1", fixed: true,checked: false),TodoModel(todoTitle: "4_2", todoSubtitle: "0.2", fixed: false,checked: false)])]
+        let dataDriver: Driver<[TodoDateModel]> = Observable.of(todoDateModels).asDriver(onErrorJustReturn: [])
+      
+        input.checkButtonClicked.flatMapLatest{
+            return Observable.of($0)
+        }.subscribe(onNext: { indexPath in
+            print(indexPath)
+             self.todoDateModels[indexPath.section].todos[indexPath.row].checked = !self.todoDateModels[indexPath.section].todos[indexPath.row].checked
+             self.todoFetchFinished.onNext(())
+        },onDisposed: {
+            print("disposed")
+            
+        })
+    
+         .disposed(by: disposeBag)
+ 
+    
+        
+        return Output(dataDriver: dataDriver)
+        
+        
+    }
+    
+
+
     
     
 }

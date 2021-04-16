@@ -18,23 +18,40 @@ class TodoDateVC: UIViewController {
     let disposeBag = DisposeBag()
     
     
-    
+    let checkButtonClicked = PublishSubject<IndexPath>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         wholeTV.delegate = self
         wholeTV.dataSource = self
         wholeTV.registerCell(cell: TodoDateTVC.self)
+        bindOutput()
+        bindViewModel()
         
+    }
+
+    private func bindViewModel(){
+      
+        let input = TodoDateViewModel.Input(checkButtonClicked: checkButtonClicked)
+        let output = viewModel.connect(input: input)
+        
+
+            
         
     }
     
     
     private func bindOutput(){
+
         viewModel.todoFetchFinished
-            .subscribe(onNext: { error in
-                print("error")
+            .flatMapLatest{
+                return Observable.of($0)
+            }
+            .subscribe(onNext: { [weak self] _ in
+                print("called")
+                self?.wholeTV.reloadData()
+                
+                
             })
             .disposed(by: disposeBag)
         
@@ -48,22 +65,27 @@ class TodoDateVC: UIViewController {
 extension TodoDateVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TodoDateTVC", for: indexPath) as! TodoDateTVC
-        cell.setUIs(todoModel: viewModel.todos[indexPath.section][indexPath.item])
+        
+        let tvcViewModel = TodoDateTVCViewModel(id: indexPath, todoModel: viewModel.todoDateModels[indexPath.section].todos[indexPath.row])
+        
+        cell.bindViewModel(viewModel: tvcViewModel, buttonClicked: checkButtonClicked.asObserver())
+        cell.setUIs(todoModel: tvcViewModel.todoModel)
+
         return cell
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return viewModel.todos[section].count
+        return viewModel.todoDateModels[section].todos.count
         
     }
     func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.dates.count
+        return viewModel.todoDateModels.count
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        //        let headerView = TodoDateHeaderView.instanceFromNib()
         let headerView: TodoDateHeaderView? = UIView.fromNib()
+        headerView?.setDate(date: viewModel.todoDateModels[section].date)
         return headerView
     }
     

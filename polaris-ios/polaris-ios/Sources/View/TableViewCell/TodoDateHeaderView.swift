@@ -11,11 +11,17 @@ class TodoDateHeaderView: UICollectionReusableView {
     
     
     @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var plusButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         containerView.makeRounded(cornerRadius: 20)
+    }
+    
+    func setDate(date: String) {
+        dateLabel.text = date
     }
     
 }
