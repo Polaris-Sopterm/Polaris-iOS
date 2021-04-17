@@ -30,6 +30,7 @@ class HalfModalVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        guard self.isBeingPresented == true || self.isMovingToParent else { return }
         self.halfModalViewWillAppear()
     }
     
