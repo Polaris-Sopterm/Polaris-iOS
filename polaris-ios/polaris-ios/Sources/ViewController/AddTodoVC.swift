@@ -6,24 +6,43 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 class AddTodoVC: HalfModalVC {
-
+    
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
+        self.setupAddButton()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
-    */
-
+    
+    // MARK: - Set Up
+    private func setupAddButton() {
+        self.addButton.makeRoundCorner(directions: .allCorners, radius: 18)
+    }
+    
+    // MARK: - Bind
+    private func bindButton() {
+        self.cancelButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.halfModalViewWillDisappear()
+            })
+            .disposed(by: self.disposeBag)
+        
+        self.addButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.halfModalViewWillDisappear()
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
+    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var addButton: UIButton!
+    private var disposeBag = DisposeBag()
 }

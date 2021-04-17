@@ -44,7 +44,7 @@ class HalfModalVC: UIViewController {
         }, completion: nil)
     }
     
-    private func halfModalViewWillDisappear() {
+    func halfModalViewWillDisappear() {
         UIView.animate(withDuration: type(of: self).animationDuration, animations: {
             self.halfModalView.transform = CGAffineTransform(translationX: 0, y: DeviceInfo.screenHeight)
             self.backgroundView?.alpha   = 0
