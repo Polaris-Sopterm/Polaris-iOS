@@ -8,6 +8,7 @@
 import Foundation
 
 struct StoryboardName {
-    static let main = "Main"
-    static let launch = "LaunchScreen"
+    static let main     = "Main"
+    static let launch   = "LaunchScreen"
+    static let addTodo  = "AddTodo"
 }
