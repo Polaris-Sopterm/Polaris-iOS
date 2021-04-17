@@ -26,6 +26,7 @@
 		CEEE5746262A958B00C39358 /* UserDefaultKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE5745262A958B00C39358 /* UserDefaultKey.swift */; };
 		CEEE574A262A95BD00C39358 /* UserDefaultWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE5749262A95BD00C39358 /* UserDefaultWrapper.swift */; };
 		CEEE574D262A963D00C39358 /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE574C262A963D00C39358 /* DeviceInfo.swift */; };
+		CEEE5750262A965400C39358 /* HalfModalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE574F262A965400C39358 /* HalfModalVC.swift */; };
 		ECA49419262817D500CC2EB8 /* TodoDate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECA49418262817D500CC2EB8 /* TodoDate.storyboard */; };
 		ECA4941C262819D300CC2EB8 /* TodoDateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA4941B262819D300CC2EB8 /* TodoDateVC.swift */; };
 		ECA494232628223200CC2EB8 /* TodoDateTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA494212628223200CC2EB8 /* TodoDateTVC.swift */; };
@@ -61,6 +62,7 @@
 		CEEE5745262A958B00C39358 /* UserDefaultKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultKey.swift; sourceTree = "<group>"; };
 		CEEE5749262A95BD00C39358 /* UserDefaultWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultWrapper.swift; sourceTree = "<group>"; };
 		CEEE574C262A963D00C39358 /* DeviceInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceInfo.swift; sourceTree = "<group>"; };
+		CEEE574F262A965400C39358 /* HalfModalVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HalfModalVC.swift; sourceTree = "<group>"; };
 		E4A6B1EFA15BD83942E79BD7 /* Pods-polaris-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-polaris-ios.release.xcconfig"; path = "Target Support Files/Pods-polaris-ios/Pods-polaris-ios.release.xcconfig"; sourceTree = "<group>"; };
 		ECA49418262817D500CC2EB8 /* TodoDate.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TodoDate.storyboard; sourceTree = "<group>"; };
 		ECA4941B262819D300CC2EB8 /* TodoDateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TodoDateVC.swift; path = "polaris-ios/Sources/ViewController/TodoDateVC.swift"; sourceTree = SOURCE_ROOT; };
@@ -258,6 +260,7 @@
 			isa = PBXGroup;
 			children = (
 				ECA4941B262819D300CC2EB8 /* TodoDateVC.swift */,
+				CEEE574F262A965400C39358 /* HalfModalVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -412,6 +415,7 @@
 				CE04A06E2623595D007C98E2 /* StoryboardName.swift in Sources */,
 				CE04A07526235BD1007C98E2 /* DefaultSession.swift in Sources */,
 				CEEE5746262A958B00C39358 /* UserDefaultKey.swift in Sources */,
+				CEEE5750262A965400C39358 /* HalfModalVC.swift in Sources */,
 				CE04A036262340D1007C98E2 /* AppDelegate.swift in Sources */,
 				CE04A038262340D1007C98E2 /* SceneDelegate.swift in Sources */,
 				CE04A060262346C9007C98E2 /* UICollectionView+.swift in Sources */,
