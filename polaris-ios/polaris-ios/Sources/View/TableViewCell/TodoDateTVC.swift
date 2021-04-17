@@ -26,7 +26,7 @@ class TodoDateTVC: UITableViewCell {
        
     }
     override func prepareForReuse() {
-        disposebag = DisposeBag()
+        self.disposebag = DisposeBag()
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -38,25 +38,25 @@ class TodoDateTVC: UITableViewCell {
         
         
         if todoModel.checked {
-            checkButton.setImage(UIImage(named: "btnCheck"), for: .normal)
+            self.checkButton.setImage(UIImage(named: "btnCheck"), for: .normal)
             
-            todoTitleLabel.textColor = UIColor(red: 198, green: 198, blue: 221, alpha: 1.0)
-            todoSubLabel.textColor = UIColor(red: 198, green: 198, blue: 221, alpha: 1.0)
+            self.todoTitleLabel.textColor = UIColor(red: 198, green: 198, blue: 221, alpha: 1.0)
+            self.todoSubLabel.textColor = UIColor(red: 198, green: 198, blue: 221, alpha: 1.0)
         }
         else {
-            checkButton.setImage(UIImage(named: "btnUncheck"), for: .normal)
-            todoTitleLabel.textColor = UIColor(red: 64, green: 64, blue: 140, alpha: 1.0)
-            todoSubLabel.textColor = UIColor(red: 64, green: 64, blue: 140, alpha: 1.0)
+            self.checkButton.setImage(UIImage(named: "btnUncheck"), for: .normal)
+            self.todoTitleLabel.textColor = UIColor(red: 64, green: 64, blue: 140, alpha: 1.0)
+            self.todoSubLabel.textColor = UIColor(red: 64, green: 64, blue: 140, alpha: 1.0)
         }
         if todoModel.fixed {
-            fixImageView.alpha = 1
+            self.fixImageView.alpha = 1
         }
         else {
-            fixImageView.alpha = 0
+            self.fixImageView.alpha = 0
         }
-        todoTitleLabel.text = todoModel.todoTitle
-        todoSubLabel.text = todoModel.todoSubtitle
-        lineView.backgroundColor = UIColor(red: 233, green: 233, blue: 246, alpha: 1.0)
+        self.todoTitleLabel.text = todoModel.todoTitle
+        self.todoSubLabel.text = todoModel.todoSubtitle
+        self.lineView.backgroundColor = UIColor(red: 233, green: 233, blue: 246, alpha: 1.0)
     }
     
     func bindViewModel<O>(viewModel: TodoDateTVCViewModel, buttonClicked: O) where O: ObserverType, O.Element == IndexPath  {

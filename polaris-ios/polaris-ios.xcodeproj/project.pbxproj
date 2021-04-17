@@ -31,8 +31,8 @@
 		ECA4944026284B0B00CC2EB8 /* TodoDateHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECA4943E26284B0B00CC2EB8 /* TodoDateHeaderView.xib */; };
 		ECA4944426296F6E00CC2EB8 /* TodoDateTVCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA4944326296F6E00CC2EB8 /* TodoDateTVCViewModel.swift */; };
 		ECA494472629729000CC2EB8 /* TodoDateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA494462629729000CC2EB8 /* TodoDateModel.swift */; };
-		ECA4944C262A961900CC2EB8 /* TodoDateTodayTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA4944A262A961900CC2EB8 /* TodoDateTodayTVC.swift */; };
-		ECA4944D262A961900CC2EB8 /* TodoDateTodayTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECA4944B262A961900CC2EB8 /* TodoDateTodayTVC.xib */; };
+		ECA49455262B0D0900CC2EB8 /* TodoDateTodayHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA49453262B0D0900CC2EB8 /* TodoDateTodayHeaderView.swift */; };
+		ECA49456262B0D0900CC2EB8 /* TodoDateTodayHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECA49454262B0D0900CC2EB8 /* TodoDateTodayHeaderView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,8 +64,8 @@
 		ECA4943E26284B0B00CC2EB8 /* TodoDateHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodoDateHeaderView.xib; sourceTree = "<group>"; };
 		ECA4944326296F6E00CC2EB8 /* TodoDateTVCViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDateTVCViewModel.swift; sourceTree = "<group>"; };
 		ECA494462629729000CC2EB8 /* TodoDateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TodoDateModel.swift; path = "polaris-ios/Sources/ViewModel/TodoDateModel.swift"; sourceTree = SOURCE_ROOT; };
-		ECA4944A262A961900CC2EB8 /* TodoDateTodayTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDateTodayTVC.swift; sourceTree = "<group>"; };
-		ECA4944B262A961900CC2EB8 /* TodoDateTodayTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodoDateTodayTVC.xib; sourceTree = "<group>"; };
+		ECA49453262B0D0900CC2EB8 /* TodoDateTodayHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDateTodayHeaderView.swift; sourceTree = "<group>"; };
+		ECA49454262B0D0900CC2EB8 /* TodoDateTodayHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodoDateTodayHeaderView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,7 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				ECA4943E26284B0B00CC2EB8 /* TodoDateHeaderView.xib */,
-				ECA4944B262A961900CC2EB8 /* TodoDateTodayTVC.xib */,
+				ECA49454262B0D0900CC2EB8 /* TodoDateTodayHeaderView.xib */,
 				ECA494222628223200CC2EB8 /* TodoDateTVC.xib */,
 			);
 			path = Xib;
@@ -241,7 +241,7 @@
 			children = (
 				ECA494212628223200CC2EB8 /* TodoDateTVC.swift */,
 				ECA4943D26284B0B00CC2EB8 /* TodoDateHeaderView.swift */,
-				ECA4944A262A961900CC2EB8 /* TodoDateTodayTVC.swift */,
+				ECA49453262B0D0900CC2EB8 /* TodoDateTodayHeaderView.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -319,11 +319,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECA4944D262A961900CC2EB8 /* TodoDateTodayTVC.xib in Resources */,
 				ECA494242628223200CC2EB8 /* TodoDateTVC.xib in Resources */,
 				CE04A042262340D3007C98E2 /* LaunchScreen.storyboard in Resources */,
 				CE04A03F262340D3007C98E2 /* Assets.xcassets in Resources */,
 				ECA49419262817D500CC2EB8 /* TodoDate.storyboard in Resources */,
+				ECA49456262B0D0900CC2EB8 /* TodoDateTodayHeaderView.xib in Resources */,
 				CE04A03D262340D1007C98E2 /* Main.storyboard in Resources */,
 				ECA4944026284B0B00CC2EB8 /* TodoDateHeaderView.xib in Resources */,
 			);
@@ -387,11 +387,11 @@
 				CE04A038262340D1007C98E2 /* SceneDelegate.swift in Sources */,
 				CE04A060262346C9007C98E2 /* UICollectionView+.swift in Sources */,
 				CE04A07226235A57007C98E2 /* Network.swift in Sources */,
+				ECA49455262B0D0900CC2EB8 /* TodoDateTodayHeaderView.swift in Sources */,
 				CE04A06626234CEE007C98E2 /* UITableView+.swift in Sources */,
 				ECA494292628298B00CC2EB8 /* TodoModel.swift in Sources */,
 				ECA494472629729000CC2EB8 /* TodoDateModel.swift in Sources */,
 				ECA4943F26284B0B00CC2EB8 /* TodoDateHeaderView.swift in Sources */,
-				ECA4944C262A961900CC2EB8 /* TodoDateTodayTVC.swift in Sources */,
 				ECA4942C262829EA00CC2EB8 /* TodoDateViewModel.swift in Sources */,
 				CE04A05D26234606007C98E2 /* UIColor+.swift in Sources */,
 				CE04A06326234701007C98E2 /* UIView+.swift in Sources */,

@@ -21,7 +21,7 @@ class TodoDateHeaderView: UICollectionReusableView {
     }
     
     func setDate(date: String) {
-        dateLabel.text = date
+        self.dateLabel.text = date
     }
     
 }

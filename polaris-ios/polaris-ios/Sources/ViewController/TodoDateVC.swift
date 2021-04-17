@@ -22,11 +22,15 @@ class TodoDateVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        wholeTV.delegate = self
-        wholeTV.dataSource = self
-        wholeTV.registerCell(cell: TodoDateTVC.self)
-        bindOutput()
-        bindViewModel()
+        self.setUIs()
+        self.bindOutput()
+        self.bindViewModel()
+    }
+    
+    private func setUIs(){
+        self.wholeTV.delegate = self
+        self.wholeTV.dataSource = self
+        self.wholeTV.registerCell(cell: TodoDateTVC.self)
         
     }
 
@@ -43,7 +47,7 @@ class TodoDateVC: UIViewController {
     
     private func bindOutput(){
 
-        viewModel.todoFetchFinished
+        self.viewModel.todoFetchFinished
             .flatMapLatest{
                 return Observable.of($0)
             }
@@ -85,9 +89,18 @@ extension TodoDateVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let headerView: TodoDateHeaderView? = UIView.fromNib()
-        headerView?.setDate(date: viewModel.todoDateModels[section].date)
-        return headerView
+        if section == 0 {
+            let headerView: TodoDateTodayHeaderView? = UIView.fromNib()
+            headerView?.setDate(date: viewModel.todoDateModels[section].date)
+            return headerView
+        }
+        else{
+            let headerView: TodoDateHeaderView? = UIView.fromNib()
+            headerView?.setDate(date: viewModel.todoDateModels[section].date)
+            return headerView
+        }
+        
+        
     }
     
     
@@ -99,6 +112,10 @@ extension TodoDateVC: UITableViewDelegate{
         return 70
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 58+30+35
+        }
+        
         return 49+58
     }
 }
