@@ -19,8 +19,9 @@
 		CE04A06626234CEE007C98E2 /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A06526234CEE007C98E2 /* UITableView+.swift */; };
 		CE04A06A2623528C007C98E2 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A0692623528B007C98E2 /* UIViewController+.swift */; };
 		CE04A06E2623595D007C98E2 /* StoryboardName.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A06D2623595D007C98E2 /* StoryboardName.swift */; };
-		CE04A07226235A57007C98E2 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A07126235A57007C98E2 /* Network.swift */; };
 		CE04A07526235BD1007C98E2 /* DefaultSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A07426235BD1007C98E2 /* DefaultSession.swift */; };
+		CEEE573D262A952100C39358 /* MockProviderFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE573B262A952000C39358 /* MockProviderFactory.swift */; };
+		CEEE573E262A952100C39358 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE573C262A952100C39358 /* NetworkManager.swift */; };
 		ECA49419262817D500CC2EB8 /* TodoDate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECA49418262817D500CC2EB8 /* TodoDate.storyboard */; };
 		ECA4941C262819D300CC2EB8 /* TodoDateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA4941B262819D300CC2EB8 /* TodoDateVC.swift */; };
 		ECA494232628223200CC2EB8 /* TodoDateTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA494212628223200CC2EB8 /* TodoDateTVC.swift */; };
@@ -49,8 +50,9 @@
 		CE04A06526234CEE007C98E2 /* UITableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+.swift"; sourceTree = "<group>"; };
 		CE04A0692623528B007C98E2 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		CE04A06D2623595D007C98E2 /* StoryboardName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardName.swift; sourceTree = "<group>"; };
-		CE04A07126235A57007C98E2 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		CE04A07426235BD1007C98E2 /* DefaultSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSession.swift; sourceTree = "<group>"; };
+		CEEE573B262A952000C39358 /* MockProviderFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockProviderFactory.swift; sourceTree = "<group>"; };
+		CEEE573C262A952100C39358 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		E4A6B1EFA15BD83942E79BD7 /* Pods-polaris-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-polaris-ios.release.xcconfig"; path = "Target Support Files/Pods-polaris-ios/Pods-polaris-ios.release.xcconfig"; sourceTree = "<group>"; };
 		ECA49418262817D500CC2EB8 /* TodoDate.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TodoDate.storyboard; sourceTree = "<group>"; };
 		ECA4941B262819D300CC2EB8 /* TodoDateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TodoDateVC.swift; path = "polaris-ios/Sources/ViewController/TodoDateVC.swift"; sourceTree = SOURCE_ROOT; };
@@ -218,7 +220,8 @@
 			isa = PBXGroup;
 			children = (
 				CE04A07426235BD1007C98E2 /* DefaultSession.swift */,
-				CE04A07126235A57007C98E2 /* Network.swift */,
+				CEEE573B262A952000C39358 /* MockProviderFactory.swift */,
+				CEEE573C262A952100C39358 /* NetworkManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -371,15 +374,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEEE573E262A952100C39358 /* NetworkManager.swift in Sources */,
 				ECA4941C262819D300CC2EB8 /* TodoDateVC.swift in Sources */,
 				CE04A06A2623528C007C98E2 /* UIViewController+.swift in Sources */,
 				ECA4944426296F6E00CC2EB8 /* TodoDateTVCViewModel.swift in Sources */,
+				CEEE573D262A952100C39358 /* MockProviderFactory.swift in Sources */,
 				CE04A06E2623595D007C98E2 /* StoryboardName.swift in Sources */,
 				CE04A07526235BD1007C98E2 /* DefaultSession.swift in Sources */,
 				CE04A036262340D1007C98E2 /* AppDelegate.swift in Sources */,
 				CE04A038262340D1007C98E2 /* SceneDelegate.swift in Sources */,
 				CE04A060262346C9007C98E2 /* UICollectionView+.swift in Sources */,
-				CE04A07226235A57007C98E2 /* Network.swift in Sources */,
 				CE04A06626234CEE007C98E2 /* UITableView+.swift in Sources */,
 				ECA494292628298B00CC2EB8 /* TodoModel.swift in Sources */,
 				ECA494472629729000CC2EB8 /* TodoDateModel.swift in Sources */,
