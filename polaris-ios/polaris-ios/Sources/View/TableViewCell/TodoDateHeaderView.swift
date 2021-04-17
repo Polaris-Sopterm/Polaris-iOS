@@ -16,7 +16,7 @@ class TodoDateHeaderView: UICollectionReusableView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+
         containerView.makeRounded(cornerRadius: 20)
     }
     
