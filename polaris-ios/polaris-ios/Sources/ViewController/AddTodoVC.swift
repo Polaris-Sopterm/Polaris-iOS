@@ -15,16 +15,10 @@ class AddTodoVC: HalfModalVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.setupAddButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-    }
-    
-    // MARK: - Set Up
-    private func setupAddButton() {
-        self.addButton.makeRoundCorner(directions: .allCorners, radius: 18)
     }
     
     // MARK: - Bind
@@ -37,12 +31,13 @@ class AddTodoVC: HalfModalVC {
         
         self.addButton.rx.tap
             .subscribe(onNext: { [weak self] in
+                guard self?.addButton.enable == true else { return }
                 self?.halfModalViewWillDisappear()
             })
             .disposed(by: self.disposeBag)
     }
     
     @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var addButton: AddButton!
     private var disposeBag = DisposeBag()
 }
