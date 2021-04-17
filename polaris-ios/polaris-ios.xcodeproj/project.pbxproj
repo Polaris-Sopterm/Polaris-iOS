@@ -22,6 +22,7 @@
 		CE04A07526235BD1007C98E2 /* DefaultSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A07426235BD1007C98E2 /* DefaultSession.swift */; };
 		CEEE573D262A952100C39358 /* MockProviderFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE573B262A952000C39358 /* MockProviderFactory.swift */; };
 		CEEE573E262A952100C39358 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE573C262A952100C39358 /* NetworkManager.swift */; };
+		CEEE5743262A955D00C39358 /* PolarisUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE5742262A955D00C39358 /* PolarisUserManager.swift */; };
 		ECA49419262817D500CC2EB8 /* TodoDate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECA49418262817D500CC2EB8 /* TodoDate.storyboard */; };
 		ECA4941C262819D300CC2EB8 /* TodoDateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA4941B262819D300CC2EB8 /* TodoDateVC.swift */; };
 		ECA494232628223200CC2EB8 /* TodoDateTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA494212628223200CC2EB8 /* TodoDateTVC.swift */; };
@@ -53,6 +54,7 @@
 		CE04A07426235BD1007C98E2 /* DefaultSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSession.swift; sourceTree = "<group>"; };
 		CEEE573B262A952000C39358 /* MockProviderFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockProviderFactory.swift; sourceTree = "<group>"; };
 		CEEE573C262A952100C39358 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		CEEE5742262A955D00C39358 /* PolarisUserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolarisUserManager.swift; sourceTree = "<group>"; };
 		E4A6B1EFA15BD83942E79BD7 /* Pods-polaris-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-polaris-ios.release.xcconfig"; path = "Target Support Files/Pods-polaris-ios/Pods-polaris-ios.release.xcconfig"; sourceTree = "<group>"; };
 		ECA49418262817D500CC2EB8 /* TodoDate.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TodoDate.storyboard; sourceTree = "<group>"; };
 		ECA4941B262819D300CC2EB8 /* TodoDateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TodoDateVC.swift; path = "polaris-ios/Sources/ViewController/TodoDateVC.swift"; sourceTree = SOURCE_ROOT; };
@@ -137,6 +139,7 @@
 				CE04A035262340D1007C98E2 /* AppDelegate.swift */,
 				CE04A037262340D1007C98E2 /* SceneDelegate.swift */,
 				CE04A07026235A4A007C98E2 /* Network */,
+				CEEE5741262A954F00C39358 /* Manager */,
 				CE04A06C2623584F007C98E2 /* Util */,
 				CE04A05A262345EC007C98E2 /* Extension */,
 				CE04A050262341E1007C98E2 /* Xib */,
@@ -224,6 +227,14 @@
 				CEEE573C262A952100C39358 /* NetworkManager.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		CEEE5741262A954F00C39358 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				CEEE5742262A955D00C39358 /* PolarisUserManager.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		ECA4941E26281FA800CC2EB8 /* ViewController */ = {
@@ -379,6 +390,7 @@
 				CE04A06A2623528C007C98E2 /* UIViewController+.swift in Sources */,
 				ECA4944426296F6E00CC2EB8 /* TodoDateTVCViewModel.swift in Sources */,
 				CEEE573D262A952100C39358 /* MockProviderFactory.swift in Sources */,
+				CEEE5743262A955D00C39358 /* PolarisUserManager.swift in Sources */,
 				CE04A06E2623595D007C98E2 /* StoryboardName.swift in Sources */,
 				CE04A07526235BD1007C98E2 /* DefaultSession.swift in Sources */,
 				CE04A036262340D1007C98E2 /* AppDelegate.swift in Sources */,
