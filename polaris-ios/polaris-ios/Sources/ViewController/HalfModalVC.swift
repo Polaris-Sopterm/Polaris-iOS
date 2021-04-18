@@ -30,6 +30,7 @@ class HalfModalVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        guard self.isBeingPresented == true || self.isMovingToParent else { return }
         self.halfModalViewWillAppear()
     }
     
@@ -43,7 +44,7 @@ class HalfModalVC: UIViewController {
         }, completion: nil)
     }
     
-    private func halfModalViewWillDisappear() {
+    func halfModalViewWillDisappear() {
         UIView.animate(withDuration: type(of: self).animationDuration, animations: {
             self.halfModalView.transform = CGAffineTransform(translationX: 0, y: DeviceInfo.screenHeight)
             self.backgroundView?.alpha   = 0
@@ -72,7 +73,7 @@ class HalfModalVC: UIViewController {
     // MARK: - Bind
     private func bindDimViewGesture() {
         let tapGesture = UITapGestureRecognizer()
-        self.view.addGestureRecognizer(tapGesture)
+        self.backgroundView?.addGestureRecognizer(tapGesture)
         
         tapGesture.rx.event
             .bind(onNext: { [weak self] recognizer in

@@ -27,6 +27,16 @@
 		CEEE574A262A95BD00C39358 /* UserDefaultWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE5749262A95BD00C39358 /* UserDefaultWrapper.swift */; };
 		CEEE574D262A963D00C39358 /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE574C262A963D00C39358 /* DeviceInfo.swift */; };
 		CEEE5750262A965400C39358 /* HalfModalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE574F262A965400C39358 /* HalfModalVC.swift */; };
+		CEEE575D262AD5FA00C39358 /* AddTodo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEEE575C262AD5FA00C39358 /* AddTodo.storyboard */; };
+		CEEE5760262AD62C00C39358 /* AddTodoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE575F262AD62C00C39358 /* AddTodoVC.swift */; };
+		CEEE5766262ADBA200C39358 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE5765262ADBA200C39358 /* AddButton.swift */; };
+		CEEE576A262AE47B00C39358 /* SampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE5769262AE47B00C39358 /* SampleViewController.swift */; };
+		CEEE576E262AE6F400C39358 /* AddTodoTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE576C262AE6F400C39358 /* AddTodoTextTableViewCell.swift */; };
+		CEEE576F262AE6F400C39358 /* AddTodoTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEE576D262AE6F400C39358 /* AddTodoTextTableViewCell.xib */; };
+		CEEE5774262BE1DE00C39358 /* AddTodoTableViewCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE5773262BE1DE00C39358 /* AddTodoTableViewCellProtocol.swift */; };
+		CEEE5777262BE51C00C39358 /* PolarisMarginTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE5776262BE51C00C39358 /* PolarisMarginTextField.swift */; };
+		CEEE577A262BE54900C39358 /* PolarisMarginTextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEE5779262BE54900C39358 /* PolarisMarginTextField.xib */; };
+		CEEE5782262C018F00C39358 /* AddTodoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE5781262C018F00C39358 /* AddTodoViewModel.swift */; };
 		ECA49419262817D500CC2EB8 /* TodoDate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECA49418262817D500CC2EB8 /* TodoDate.storyboard */; };
 		ECA4941C262819D300CC2EB8 /* TodoDateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA4941B262819D300CC2EB8 /* TodoDateVC.swift */; };
 		ECA494232628223200CC2EB8 /* TodoDateTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA494212628223200CC2EB8 /* TodoDateTVC.swift */; };
@@ -66,6 +76,16 @@
 		CEEE5749262A95BD00C39358 /* UserDefaultWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultWrapper.swift; sourceTree = "<group>"; };
 		CEEE574C262A963D00C39358 /* DeviceInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceInfo.swift; sourceTree = "<group>"; };
 		CEEE574F262A965400C39358 /* HalfModalVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HalfModalVC.swift; sourceTree = "<group>"; };
+		CEEE575C262AD5FA00C39358 /* AddTodo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddTodo.storyboard; sourceTree = "<group>"; };
+		CEEE575F262AD62C00C39358 /* AddTodoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoVC.swift; sourceTree = "<group>"; };
+		CEEE5765262ADBA200C39358 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
+		CEEE5769262AE47B00C39358 /* SampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleViewController.swift; sourceTree = "<group>"; };
+		CEEE576C262AE6F400C39358 /* AddTodoTextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoTextTableViewCell.swift; sourceTree = "<group>"; };
+		CEEE576D262AE6F400C39358 /* AddTodoTextTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTodoTextTableViewCell.xib; sourceTree = "<group>"; };
+		CEEE5773262BE1DE00C39358 /* AddTodoTableViewCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoTableViewCellProtocol.swift; sourceTree = "<group>"; };
+		CEEE5776262BE51C00C39358 /* PolarisMarginTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarisMarginTextField.swift; sourceTree = "<group>"; };
+		CEEE5779262BE54900C39358 /* PolarisMarginTextField.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PolarisMarginTextField.xib; sourceTree = "<group>"; };
+		CEEE5781262C018F00C39358 /* AddTodoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoViewModel.swift; sourceTree = "<group>"; };
 		E4A6B1EFA15BD83942E79BD7 /* Pods-polaris-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-polaris-ios.release.xcconfig"; path = "Target Support Files/Pods-polaris-ios/Pods-polaris-ios.release.xcconfig"; sourceTree = "<group>"; };
 		ECA49418262817D500CC2EB8 /* TodoDate.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TodoDate.storyboard; sourceTree = "<group>"; };
 		ECA4941B262819D300CC2EB8 /* TodoDateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TodoDateVC.swift; path = "polaris-ios/Sources/ViewController/TodoDateVC.swift"; sourceTree = SOURCE_ROOT; };
@@ -152,6 +172,7 @@
 			children = (
 				CE04A035262340D1007C98E2 /* AppDelegate.swift */,
 				CE04A037262340D1007C98E2 /* SceneDelegate.swift */,
+				CEEE5772262BE1B300C39358 /* Protocol */,
 				CEEE5748262A958F00C39358 /* Constants */,
 				CE04A07026235A4A007C98E2 /* Network */,
 				CEEE5741262A954F00C39358 /* Manager */,
@@ -172,6 +193,7 @@
 			children = (
 				ECA4942B262829EA00CC2EB8 /* TodoDateViewModel.swift */,
 				ECA4944326296F6E00CC2EB8 /* TodoDateTVCViewModel.swift */,
+				CEEE5781262C018F00C39358 /* AddTodoViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -179,7 +201,7 @@
 		CE04A04D2623410D007C98E2 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				ECA4942F2628368A00CC2EB8 /* CustomView */,
+				CEEE5764262ADB8F00C39358 /* CustomView */,
 				ECA494202628209C00CC2EB8 /* CollectionViewCell */,
 				ECA4941F2628209500CC2EB8 /* TableViewCell */,
 			);
@@ -201,6 +223,7 @@
 				CE04A03B262340D1007C98E2 /* Main.storyboard */,
 				CE04A040262340D3007C98E2 /* LaunchScreen.storyboard */,
 				ECA49418262817D500CC2EB8 /* TodoDate.storyboard */,
+				CEEE575C262AD5FA00C39358 /* AddTodo.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -208,9 +231,14 @@
 		CE04A050262341E1007C98E2 /* Xib */ = {
 			isa = PBXGroup;
 			children = (
+				CEEE5779262BE54900C39358 /* PolarisMarginTextField.xib */,
 				ECA4943E26284B0B00CC2EB8 /* TodoDateHeaderView.xib */,
 				ECA49454262B0D0900CC2EB8 /* TodoDateTodayHeaderView.xib */,
 				ECA494222628223200CC2EB8 /* TodoDateTVC.xib */,
+				CEEE576D262AE6F400C39358 /* AddTodoTextTableViewCell.xib */,
+				CEEE577F262BF50400C39358 /* View */,
+				CEEE577D262BF4D300C39358 /* CollectionViewCell */,
+				CEEE577C262BF4CD00C39358 /* TableViewCell */,
 			);
 			path = Xib;
 			sourceTree = "<group>";
@@ -264,11 +292,51 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
+		CEEE5764262ADB8F00C39358 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				CEEE5765262ADBA200C39358 /* AddButton.swift */,
+				CEEE5776262BE51C00C39358 /* PolarisMarginTextField.swift */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
+		CEEE5772262BE1B300C39358 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				CEEE5773262BE1DE00C39358 /* AddTodoTableViewCellProtocol.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		CEEE577C262BF4CD00C39358 /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TableViewCell;
+			sourceTree = "<group>";
+		};
+		CEEE577D262BF4D300C39358 /* CollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CollectionViewCell;
+			sourceTree = "<group>";
+		};
+		CEEE577F262BF50400C39358 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		ECA4941E26281FA800CC2EB8 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
 				ECA4941B262819D300CC2EB8 /* TodoDateVC.swift */,
 				CEEE574F262A965400C39358 /* HalfModalVC.swift */,
+				CEEE575F262AD62C00C39358 /* AddTodoVC.swift */,
+				CEEE5769262AE47B00C39358 /* SampleViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -278,6 +346,7 @@
 			children = (
 				ECA494212628223200CC2EB8 /* TodoDateTVC.swift */,
 				ECA4943D26284B0B00CC2EB8 /* TodoDateHeaderView.swift */,
+				CEEE576C262AE6F400C39358 /* AddTodoTextTableViewCell.swift */,
 				ECA49453262B0D0900CC2EB8 /* TodoDateTodayHeaderView.swift */,
 			);
 			path = TableViewCell;
@@ -288,13 +357,6 @@
 			children = (
 			);
 			path = CollectionViewCell;
-			sourceTree = "<group>";
-		};
-		ECA4942F2628368A00CC2EB8 /* CustomView */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CustomView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -356,13 +418,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEEE575D262AD5FA00C39358 /* AddTodo.storyboard in Resources */,
 				ECA494242628223200CC2EB8 /* TodoDateTVC.xib in Resources */,
 				CE04A042262340D3007C98E2 /* LaunchScreen.storyboard in Resources */,
 				CE04A03F262340D3007C98E2 /* Assets.xcassets in Resources */,
+				CEEE576F262AE6F400C39358 /* AddTodoTextTableViewCell.xib in Resources */,
 				ECA49419262817D500CC2EB8 /* TodoDate.storyboard in Resources */,
 				ECA49456262B0D0900CC2EB8 /* TodoDateTodayHeaderView.xib in Resources */,
 				CE04A03D262340D1007C98E2 /* Main.storyboard in Resources */,
 				ECA4944026284B0B00CC2EB8 /* TodoDateHeaderView.xib in Resources */,
+				CEEE577A262BE54900C39358 /* PolarisMarginTextField.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -418,6 +483,8 @@
 				CEEE573E262A952100C39358 /* NetworkManager.swift in Sources */,
 				ECA4941C262819D300CC2EB8 /* TodoDateVC.swift in Sources */,
 				CE04A06A2623528C007C98E2 /* UIViewController+.swift in Sources */,
+				CEEE5766262ADBA200C39358 /* AddButton.swift in Sources */,
+				CEEE5782262C018F00C39358 /* AddTodoViewModel.swift in Sources */,
 				CEEE574A262A95BD00C39358 /* UserDefaultWrapper.swift in Sources */,
 				ECA4944426296F6E00CC2EB8 /* TodoDateTVCViewModel.swift in Sources */,
 				CEEE573D262A952100C39358 /* MockProviderFactory.swift in Sources */,
@@ -433,8 +500,13 @@
 				ECA49455262B0D0900CC2EB8 /* TodoDateTodayHeaderView.swift in Sources */,
 				CE04A06626234CEE007C98E2 /* UITableView+.swift in Sources */,
 				ECA494292628298B00CC2EB8 /* TodoModel.swift in Sources */,
+				CEEE5774262BE1DE00C39358 /* AddTodoTableViewCellProtocol.swift in Sources */,
 				CEEE574D262A963D00C39358 /* DeviceInfo.swift in Sources */,
 				ECA494472629729000CC2EB8 /* TodoDateModel.swift in Sources */,
+				CEEE5760262AD62C00C39358 /* AddTodoVC.swift in Sources */,
+				CEEE576A262AE47B00C39358 /* SampleViewController.swift in Sources */,
+				CEEE576E262AE6F400C39358 /* AddTodoTextTableViewCell.swift in Sources */,
+				CEEE5777262BE51C00C39358 /* PolarisMarginTextField.swift in Sources */,
 				ECA4943F26284B0B00CC2EB8 /* TodoDateHeaderView.swift in Sources */,
 				ECA4942C262829EA00CC2EB8 /* TodoDateViewModel.swift in Sources */,
 				CE04A05D26234606007C98E2 /* UIColor+.swift in Sources */,
