@@ -25,9 +25,9 @@ class TodoDateTodayHeaderView: UICollectionReusableView {
     
     func setUIs(){
         self.containerView.backgroundColor
-            = UIColor(red: 229, green: 248, blue: 252, alpha: 1.0)
-        self.dateLabel.textColor = UIColor(red: 104, green: 199, blue: 220, alpha: 1.0)
-        self.upperButtonLabel.textColor = UIColor(red: 64, green: 64, blue: 140, alpha: 1.0)
+            = .inactiveSky
+        self.dateLabel.textColor = .textSky
+        self.upperButtonLabel.textColor = .maintext
         self.containerView.makeRounded(cornerRadius: 20)
     }
     

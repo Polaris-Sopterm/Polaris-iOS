@@ -38,15 +38,15 @@ class TodoDateTVC: UITableViewCell {
         
         
         if todoModel.checked {
-            self.checkButton.setImage(UIImage(named: "btnCheck"), for: .normal)
+            self.checkButton.setImage(UIImage(named: ImageName.btnCheck), for: .normal)
             
-            self.todoTitleLabel.textColor = UIColor(red: 198, green: 198, blue: 221, alpha: 1.0)
-            self.todoSubLabel.textColor = UIColor(red: 198, green: 198, blue: 221, alpha: 1.0)
+            self.todoTitleLabel.textColor = .inactiveTextPurple
+            self.todoSubLabel.textColor = .inactiveTextPurple
         }
         else {
-            self.checkButton.setImage(UIImage(named: "btnUncheck"), for: .normal)
-            self.todoTitleLabel.textColor = UIColor(red: 64, green: 64, blue: 140, alpha: 1.0)
-            self.todoSubLabel.textColor = UIColor(red: 64, green: 64, blue: 140, alpha: 1.0)
+            self.checkButton.setImage(UIImage(named: ImageName.btnUncheck), for: .normal)
+            self.todoTitleLabel.textColor = .maintext
+            self.todoSubLabel.textColor = .maintext
         }
         if todoModel.fixed {
             self.fixImageView.alpha = 1
@@ -56,7 +56,7 @@ class TodoDateTVC: UITableViewCell {
         }
         self.todoTitleLabel.text = todoModel.todoTitle
         self.todoSubLabel.text = todoModel.todoSubtitle
-        self.lineView.backgroundColor = UIColor(red: 233, green: 233, blue: 246, alpha: 1.0)
+        self.lineView.backgroundColor = .inactivePurple
     }
     
     func bindViewModel<O>(viewModel: TodoDateTVCViewModel, buttonClicked: O) where O: ObserverType, O.Element == IndexPath  {

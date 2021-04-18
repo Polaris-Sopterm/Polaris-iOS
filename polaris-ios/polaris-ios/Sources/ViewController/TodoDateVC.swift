@@ -68,7 +68,9 @@ class TodoDateVC: UIViewController {
 
 extension TodoDateVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TodoDateTVC", for: indexPath) as! TodoDateTVC
+        
+        let identifier = String(describing: TodoDateTVC.self)
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! TodoDateTVC
         
         let tvcViewModel = TodoDateTVCViewModel(id: indexPath, todoModel: viewModel.todoDateModels[indexPath.section].todos[indexPath.row])
         cell.checkButtonClicked = self.checkButtonClicked
