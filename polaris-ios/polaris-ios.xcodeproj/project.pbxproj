@@ -231,11 +231,6 @@
 		CE04A050262341E1007C98E2 /* Xib */ = {
 			isa = PBXGroup;
 			children = (
-				CEEE5779262BE54900C39358 /* PolarisMarginTextField.xib */,
-				ECA4943E26284B0B00CC2EB8 /* TodoDateHeaderView.xib */,
-				ECA49454262B0D0900CC2EB8 /* TodoDateTodayHeaderView.xib */,
-				ECA494222628223200CC2EB8 /* TodoDateTVC.xib */,
-				CEEE576D262AE6F400C39358 /* AddTodoTextTableViewCell.xib */,
 				CEEE577F262BF50400C39358 /* View */,
 				CEEE577D262BF4D300C39358 /* CollectionViewCell */,
 				CEEE577C262BF4CD00C39358 /* TableViewCell */,
@@ -312,6 +307,8 @@
 		CEEE577C262BF4CD00C39358 /* TableViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				ECA494222628223200CC2EB8 /* TodoDateTVC.xib */,
+				CEEE576D262AE6F400C39358 /* AddTodoTextTableViewCell.xib */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -319,6 +316,8 @@
 		CEEE577D262BF4D300C39358 /* CollectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				ECA4943E26284B0B00CC2EB8 /* TodoDateHeaderView.xib */,
+				ECA49454262B0D0900CC2EB8 /* TodoDateTodayHeaderView.xib */,
 			);
 			path = CollectionViewCell;
 			sourceTree = "<group>";
@@ -326,6 +325,7 @@
 		CEEE577F262BF50400C39358 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CEEE5779262BE54900C39358 /* PolarisMarginTextField.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
