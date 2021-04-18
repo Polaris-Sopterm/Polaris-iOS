@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="PolarisMarginTextField" customModule="polaris_ios" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="329" height="53"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AGb-vZ-FCY">
+                    <rect key="frame" x="26" y="17" width="277" height="19"/>
+                    <color key="textColor" name="mainText"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" name="field"/>
+            <constraints>
+                <constraint firstItem="AGb-vZ-FCY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="26" id="MxC-1F-7c7"/>
+                <constraint firstItem="AGb-vZ-FCY" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="17" id="X6A-Og-ueA"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="AGb-vZ-FCY" secondAttribute="bottom" constant="17" id="YbR-TW-N3m"/>
+                <constraint firstAttribute="trailing" secondItem="AGb-vZ-FCY" secondAttribute="trailing" constant="26" id="opD-kx-oTu"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="color" keyPath="selectedBorderColor">
+                    <color key="value" name="mainSky"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="color" keyPath="deSelectedBorderColor">
+                    <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="textField" destination="AGb-vZ-FCY" id="pFS-Z4-Gsy"/>
+            </connections>
+            <point key="canvasLocation" x="21.014492753623191" y="-230.69196428571428"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="field">
+            <color red="0.98000001907348633" green="0.98000001907348633" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="mainSky">
+            <color red="0.49799999594688416" green="0.85900002717971802" blue="0.93699997663497925" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="mainText">
+            <color red="0.25099998712539673" green="0.25099998712539673" blue="0.54900002479553223" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

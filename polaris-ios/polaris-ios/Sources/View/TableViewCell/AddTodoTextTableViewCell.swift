@@ -9,7 +9,9 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class AddTodoTextTableViewCell: UITableViewCell {
+class AddTodoTextTableViewCell: AddTodoTableViewCell {
+    class override var cellHeight: CGFloat { return 100 }
+    
     @IBOutlet weak var titleLabel: UILabel!
     
     // MARK: - Life Cycle

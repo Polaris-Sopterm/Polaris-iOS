@@ -11,6 +11,6 @@ protocol AddTodoTableViewCellProtocol {
     static var cellHeight: CGFloat { get }
 }
 
-class AddTotoTableViewCell: UITableViewCell, AddTodoTableViewCellProtocol {
+class AddTodoTableViewCell: UITableViewCell, AddTodoTableViewCellProtocol {
     class var cellHeight: CGFloat { return 0 }
 }

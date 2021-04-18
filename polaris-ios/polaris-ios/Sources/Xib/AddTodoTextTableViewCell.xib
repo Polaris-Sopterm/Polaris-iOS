@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="어떤 일을 해야하나요?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4u5-Ip-r3m">
-                        <rect key="frame" x="23" y="10" width="124" height="17"/>
+                        <rect key="frame" x="23" y="3" width="124" height="17"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                         <color key="textColor" name="textSky"/>
                         <nil key="highlightedColor"/>
@@ -27,14 +27,14 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="4u5-Ip-r3m" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="23" id="eJw-gY-vg8"/>
-                    <constraint firstItem="4u5-Ip-r3m" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="xUP-vN-snh"/>
+                    <constraint firstItem="4u5-Ip-r3m" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="3" id="xUP-vN-snh"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="titleLabel" destination="4u5-Ip-r3m" id="6mN-Wk-z26"/>
             </connections>
-            <point key="canvasLocation" x="137.68115942028987" y="164.0625"/>
+            <point key="canvasLocation" x="136.95652173913044" y="164.0625"/>
         </tableViewCell>
     </objects>
     <resources>
