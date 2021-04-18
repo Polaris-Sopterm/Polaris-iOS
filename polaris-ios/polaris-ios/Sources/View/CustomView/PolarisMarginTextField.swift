@@ -18,16 +18,21 @@ class PolarisMarginTextField: UIView {
     var text = BehaviorSubject<String>(value: "")
     
     // MARK: - Life Cycle
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+    override func awakeFromNib() {
+        super.awakeFromNib()
         self.setupMarginView()
         self.bindTextField()
     }
     
     // MARK: - Set Up
     private func setupMarginView() {
-        self.layer.borderWidth = 1
-        self.makeRoundCorner(directions: .allCorners, radius: 16)
+        self.clipsToBounds      = true
+        self.layer.borderWidth  = 1
+        self.layer.cornerRadius = 16
+    }
+    
+    func setupPlaceholder(text: String) {
+        self.textField.attributedPlaceholder = NSMutableAttributedString(string: text, attributes: [.foregroundColor: UIColor.inactiveTextPurple, .font: UIFont.systemFont(ofSize: 16, weight: .medium)])
     }
     
     // MARK: - Bind

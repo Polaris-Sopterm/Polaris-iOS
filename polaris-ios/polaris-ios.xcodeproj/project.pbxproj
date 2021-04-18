@@ -36,6 +36,7 @@
 		CEEE5774262BE1DE00C39358 /* AddTodoTableViewCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE5773262BE1DE00C39358 /* AddTodoTableViewCellProtocol.swift */; };
 		CEEE5777262BE51C00C39358 /* PolarisMarginTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE5776262BE51C00C39358 /* PolarisMarginTextField.swift */; };
 		CEEE577A262BE54900C39358 /* PolarisMarginTextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEE5779262BE54900C39358 /* PolarisMarginTextField.xib */; };
+		CEEE5782262C018F00C39358 /* AddTodoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE5781262C018F00C39358 /* AddTodoViewModel.swift */; };
 		ECA49419262817D500CC2EB8 /* TodoDate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECA49418262817D500CC2EB8 /* TodoDate.storyboard */; };
 		ECA4941C262819D300CC2EB8 /* TodoDateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA4941B262819D300CC2EB8 /* TodoDateVC.swift */; };
 		ECA494232628223200CC2EB8 /* TodoDateTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA494212628223200CC2EB8 /* TodoDateTVC.swift */; };
@@ -81,6 +82,7 @@
 		CEEE5773262BE1DE00C39358 /* AddTodoTableViewCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoTableViewCellProtocol.swift; sourceTree = "<group>"; };
 		CEEE5776262BE51C00C39358 /* PolarisMarginTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarisMarginTextField.swift; sourceTree = "<group>"; };
 		CEEE5779262BE54900C39358 /* PolarisMarginTextField.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PolarisMarginTextField.xib; sourceTree = "<group>"; };
+		CEEE5781262C018F00C39358 /* AddTodoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoViewModel.swift; sourceTree = "<group>"; };
 		E4A6B1EFA15BD83942E79BD7 /* Pods-polaris-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-polaris-ios.release.xcconfig"; path = "Target Support Files/Pods-polaris-ios/Pods-polaris-ios.release.xcconfig"; sourceTree = "<group>"; };
 		ECA49418262817D500CC2EB8 /* TodoDate.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TodoDate.storyboard; sourceTree = "<group>"; };
 		ECA4941B262819D300CC2EB8 /* TodoDateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TodoDateVC.swift; path = "polaris-ios/Sources/ViewController/TodoDateVC.swift"; sourceTree = SOURCE_ROOT; };
@@ -185,6 +187,7 @@
 			children = (
 				ECA4942B262829EA00CC2EB8 /* TodoDateViewModel.swift */,
 				ECA4944326296F6E00CC2EB8 /* TodoDateTVCViewModel.swift */,
+				CEEE5781262C018F00C39358 /* AddTodoViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -471,6 +474,7 @@
 				ECA4941C262819D300CC2EB8 /* TodoDateVC.swift in Sources */,
 				CE04A06A2623528C007C98E2 /* UIViewController+.swift in Sources */,
 				CEEE5766262ADBA200C39358 /* AddButton.swift in Sources */,
+				CEEE5782262C018F00C39358 /* AddTodoViewModel.swift in Sources */,
 				CEEE574A262A95BD00C39358 /* UserDefaultWrapper.swift in Sources */,
 				ECA4944426296F6E00CC2EB8 /* TodoDateTVCViewModel.swift in Sources */,
 				CEEE573D262A952100C39358 /* MockProviderFactory.swift in Sources */,

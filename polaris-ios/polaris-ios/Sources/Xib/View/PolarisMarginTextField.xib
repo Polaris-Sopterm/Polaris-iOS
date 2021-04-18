@@ -18,7 +18,7 @@
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AGb-vZ-FCY">
                     <rect key="frame" x="26" y="17" width="277" height="19"/>
                     <color key="textColor" name="mainText"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
             </subviews>

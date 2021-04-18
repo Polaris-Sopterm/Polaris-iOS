@@ -16,8 +16,10 @@ class AddTodoVC: HalfModalVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.bindButton()
+        self.setupTableView()
         self.registerCell()
+        self.bindButton()
+        self.bindTableView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -29,8 +31,14 @@ class AddTodoVC: HalfModalVC {
         self.addOptions = options
     }
     
+    private func setupTableView() {
+        self.tableView.contentInset     = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
+        self.tableView.allowsSelection  = false
+        self.tableView.separatorStyle   = .none
+    }
+    
     private func registerCell() {
-        self.addOptions.addCellType.forEach { cellType in
+        self.addOptions.addCellTypes.forEach { cellType in
             self.tableView.registerCell(cell: cellType)
         }
     }
@@ -50,10 +58,35 @@ class AddTodoVC: HalfModalVC {
             .disposed(by: self.disposeBag)
     }
     
-    private var addOptions: AddOptions = .perDayAddTodo
+    private func bindTableView() {
+        self.tableView.rx.setDelegate(self)
+            .disposed(by: self.disposeBag)
+        
+        self.viewModel.addListTypes
+            .bind(to: self.tableView.rx.items) { tableView, index, item in
+                guard let addTodoCell = tableView.dequeueReusableCell(cell: item, forIndexPath: IndexPath(row: index, section: 0)) as? AddTodoTableViewCellProtocol else { return UITableViewCell() }
+                addTodoCell.configure(by: self.addOptions)
+                return addTodoCell
+            }
+            .disposed(by: self.disposeBag)
+    }
+    
+    private var addOptions: AddOptions = .perDayAddTodo {
+        didSet { self.viewModel.addListTypes.onNext(self.addOptions.addCellTypes) }
+    }
+    
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var addButton: AddButton!
-    private var disposeBag = DisposeBag()
+    
+    private var viewModel   = AddTodoViewModel()
+    private var disposeBag  = DisposeBag()
+}
+
+extension AddTodoVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard let cellHeight = try? self.viewModel.addListTypes.value()[indexPath.row].cellHeight else { return 0 }
+        return cellHeight
+    }
 }
 
 extension AddTodoVC {
@@ -66,9 +99,10 @@ extension AddTodoVC {
         static let dropdownMenu     = AddOptions(rawValue: 1 << 3)
         
         static let perDayAddTodo: AddOptions    = [.addText, dropdownMenu, fixOnTop]
-        static let perTravisAddTodo: AddOptions = [.addText, .selectDay, .fixOnTop]
+        static let perJourneyAddTodo: AddOptions = [.addText, .selectDay, .fixOnTop]
+        static let addJourney: AddOptions        = []
         
-        var addCellType: [AddTodoTableViewCellProtocol.Type] {
+        var addCellTypes: [AddTodoTableViewCellProtocol.Type] {
             var cellTypes = [AddTodoTableViewCellProtocol.Type]()
             if self.contains(.addText) { cellTypes.append(AddTodoTextTableViewCell.self) }
             return cellTypes
