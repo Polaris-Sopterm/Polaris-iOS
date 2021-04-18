@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="aax-zc-RC4">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -10,6 +10,31 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Sample View Controller-->
+        <scene sceneID="eUh-zb-ygY">
+            <objects>
+                <viewController storyboardIdentifier="SampleViewController" id="aax-zc-RC4" customClass="SampleViewController" customModule="polaris_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Z73-I2-ndk">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tsv-zT-lus">
+                                <rect key="frame" x="184" y="734" width="46" height="47"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="next:" destination="aax-zc-RC4" eventType="touchUpInside" id="K48-Fe-1F9"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="f5l-Z2-YON"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6tU-f8-wBQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1349" y="163"/>
+        </scene>
         <!--Add TodoVC-->
         <scene sceneID="5C9-zQ-jaD">
             <objects>
@@ -56,6 +81,10 @@
                                             <constraint firstAttribute="height" constant="1" id="cPw-Vp-GQB"/>
                                         </constraints>
                                     </view>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uK1-zG-Czz">
+                                        <rect key="frame" x="0.0" y="69" width="414" height="762"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TJC-DY-0Z3" customClass="AddButton" customModule="polaris_ios" customModuleProvider="target">
                                         <rect key="frame" x="23" y="740" width="368" height="54"/>
                                         <color key="backgroundColor" name="inactiveBtn"/>
@@ -64,7 +93,7 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" title="추가하기">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleColor" name="inactiveText"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -87,11 +116,15 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="uK1-zG-Czz" secondAttribute="bottom" id="4sg-xw-Jb6"/>
                                     <constraint firstAttribute="trailing" secondItem="R7J-9n-pIF" secondAttribute="trailing" id="6yT-LK-tt4"/>
                                     <constraint firstItem="yCN-Ub-pZD" firstAttribute="leading" secondItem="3EH-GP-kQ8" secondAttribute="leading" id="9AG-er-lzM"/>
+                                    <constraint firstItem="uK1-zG-Czz" firstAttribute="leading" secondItem="3EH-GP-kQ8" secondAttribute="leading" id="BXS-lr-WC6"/>
+                                    <constraint firstAttribute="trailing" secondItem="uK1-zG-Czz" secondAttribute="trailing" id="DcI-RM-8bg"/>
                                     <constraint firstItem="R7J-9n-pIF" firstAttribute="leading" secondItem="3EH-GP-kQ8" secondAttribute="leading" id="F0v-De-aPY"/>
                                     <constraint firstItem="TJC-DY-0Z3" firstAttribute="leading" secondItem="3EH-GP-kQ8" secondAttribute="leading" constant="23" id="Jor-D3-KH2"/>
                                     <constraint firstAttribute="trailing" secondItem="yCN-Ub-pZD" secondAttribute="trailing" id="Mig-7u-Yvi"/>
+                                    <constraint firstItem="uK1-zG-Czz" firstAttribute="top" secondItem="yCN-Ub-pZD" secondAttribute="bottom" id="Mwr-zW-CtV"/>
                                     <constraint firstAttribute="bottom" secondItem="TJC-DY-0Z3" secondAttribute="bottom" constant="37" id="SLV-e2-moj"/>
                                     <constraint firstItem="R7J-9n-pIF" firstAttribute="top" secondItem="3EH-GP-kQ8" secondAttribute="top" id="htj-Al-NlY"/>
                                     <constraint firstItem="yCN-Ub-pZD" firstAttribute="top" secondItem="R7J-9n-pIF" secondAttribute="bottom" id="lFy-Tg-yed"/>
@@ -112,11 +145,12 @@
                         <outlet property="addButton" destination="TJC-DY-0Z3" id="xWU-St-A1N"/>
                         <outlet property="cancelButton" destination="gqL-fC-gRl" id="7cd-eH-Ni9"/>
                         <outlet property="halfModalView" destination="3EH-GP-kQ8" id="Ye5-OB-4xo"/>
+                        <outlet property="tableView" destination="uK1-zG-Czz" id="Tf2-9d-RV2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fLP-AQ-pFr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-545" y="163"/>
+            <point key="canvasLocation" x="-546.37681159420299" y="162.72321428571428"/>
         </scene>
     </scenes>
     <resources>

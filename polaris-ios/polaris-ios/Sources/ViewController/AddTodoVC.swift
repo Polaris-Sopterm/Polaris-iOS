@@ -10,6 +10,7 @@ import RxCocoa
 import RxSwift
 
 class AddTodoVC: HalfModalVC {
+    @IBOutlet weak var tableView: UITableView!
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
