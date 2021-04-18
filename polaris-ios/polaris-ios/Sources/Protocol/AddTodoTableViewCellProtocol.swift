@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol AddTodoTableViewCellProtocol {
+protocol AddTodoTableViewCellProtocol: UITableViewCell {
     static var cellHeight: CGFloat { get }
 }
 
