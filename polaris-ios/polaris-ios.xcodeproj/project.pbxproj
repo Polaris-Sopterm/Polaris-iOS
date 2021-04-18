@@ -351,8 +351,8 @@
 			children = (
 				ECA494212628223200CC2EB8 /* TodoDateTVC.swift */,
 				ECA4943D26284B0B00CC2EB8 /* TodoDateHeaderView.swift */,
-				CEEE576C262AE6F400C39358 /* AddTodoTextTableViewCell.swift */,
 				ECA49453262B0D0900CC2EB8 /* TodoDateTodayHeaderView.swift */,
+				CEEE576C262AE6F400C39358 /* AddTodoTextTableViewCell.swift */,
 				CEEE5784262C112D00C39358 /* AddTodoFixOnTopTableViewCell.swift */,
 			);
 			path = TableViewCell;

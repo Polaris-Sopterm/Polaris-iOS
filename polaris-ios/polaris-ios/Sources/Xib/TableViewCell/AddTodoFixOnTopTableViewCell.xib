@@ -101,7 +101,9 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="fixButton" destination="5Cz-eG-jSL" id="PCz-vo-fdE"/>
+                <outlet property="fixImageView" destination="kSw-8R-d5P" id="L2K-Vk-FM1"/>
                 <outlet property="notFixButton" destination="2mj-F5-6wn" id="xsx-kK-KcS"/>
+                <outlet property="notFixImageView" destination="N8I-Vo-HqC" id="E6Q-UW-k6T"/>
             </connections>
             <point key="canvasLocation" x="138.40579710144928" y="112.83482142857142"/>
         </tableViewCell>
