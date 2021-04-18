@@ -16,12 +16,12 @@ class TodoDateHeaderView: UICollectionReusableView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+
         containerView.makeRounded(cornerRadius: 20)
     }
     
     func setDate(date: String) {
-        dateLabel.text = date
+        self.dateLabel.text = date
     }
     
 }

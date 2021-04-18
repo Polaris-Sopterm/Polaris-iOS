@@ -17,12 +17,16 @@ class TodoDateTVC: UITableViewCell {
     @IBOutlet weak var checkButton: UIButton!
     @IBOutlet weak var lineView: UIView!
     
-    let disposebag = DisposeBag()
-   
+    var disposebag = DisposeBag()
+    var tvcViewModel: TodoDateTVCViewModel?
+    var checkButtonClicked = PublishSubject<IndexPath>()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        
        
+    }
+    override func prepareForReuse() {
+        self.disposebag = DisposeBag()
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -34,19 +38,25 @@ class TodoDateTVC: UITableViewCell {
         
         
         if todoModel.checked {
-            checkButton.setImage(UIImage(named: "btnCheck"), for: .normal)
+            self.checkButton.setImage(UIImage(named: ImageName.btnCheck), for: .normal)
+            
+            self.todoTitleLabel.textColor = .inactiveTextPurple
+            self.todoSubLabel.textColor = .inactiveTextPurple
         }
         else {
-            checkButton.setImage(UIImage(named: "btnUncheck"), for: .normal)
+            self.checkButton.setImage(UIImage(named: ImageName.btnUncheck), for: .normal)
+            self.todoTitleLabel.textColor = .maintext
+            self.todoSubLabel.textColor = .maintext
         }
         if todoModel.fixed {
-            fixImageView.alpha = 1
+            self.fixImageView.alpha = 1
         }
         else {
-            fixImageView.alpha = 0
+            self.fixImageView.alpha = 0
         }
-        todoTitleLabel.text = todoModel.todoTitle
-        todoSubLabel.text = todoModel.todoSubtitle
+        self.todoTitleLabel.text = todoModel.todoTitle
+        self.todoSubLabel.text = todoModel.todoSubtitle
+        self.lineView.backgroundColor = .inactivePurple
     }
     
     func bindViewModel<O>(viewModel: TodoDateTVCViewModel, buttonClicked: O) where O: ObserverType, O.Element == IndexPath  {

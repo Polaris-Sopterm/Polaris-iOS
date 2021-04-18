@@ -44,8 +44,8 @@
                         </constraints>
                         <state key="normal" image="btnUncheck"/>
                     </button>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o9S-lK-ZiL">
-                        <rect key="frame" x="0.0" y="69" width="297" height="1"/>
+                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o9S-lK-ZiL">
+                        <rect key="frame" x="0.0" y="49" width="297" height="22"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="KAK-Vl-mqI"/>
@@ -70,7 +70,7 @@
             <connections>
                 <outlet property="checkButton" destination="WVk-Vg-Jic" id="Joy-Aj-VrI"/>
                 <outlet property="fixImageView" destination="DJA-uM-uUm" id="rc6-Vk-4JW"/>
-                <outlet property="lineView" destination="H2p-sc-9uM" id="cxo-hj-nD4"/>
+                <outlet property="lineView" destination="o9S-lK-ZiL" id="pJI-56-VM8"/>
                 <outlet property="todoSubLabel" destination="rA8-wD-5Vm" id="iwX-R4-2re"/>
                 <outlet property="todoTitleLabel" destination="Gxr-Gq-hPq" id="gAk-4s-qXD"/>
             </connections>
