@@ -73,7 +73,7 @@ class HalfModalVC: UIViewController {
     // MARK: - Bind
     private func bindDimViewGesture() {
         let tapGesture = UITapGestureRecognizer()
-        self.view.addGestureRecognizer(tapGesture)
+        self.backgroundView?.addGestureRecognizer(tapGesture)
         
         tapGesture.rx.event
             .bind(onNext: { [weak self] recognizer in

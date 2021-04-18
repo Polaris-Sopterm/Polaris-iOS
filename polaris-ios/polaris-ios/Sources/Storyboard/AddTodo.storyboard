@@ -111,6 +111,7 @@
                                             <userDefinedRuntimeAttribute type="color" keyPath="disableTextColor">
                                                 <color key="value" name="inactiveText"/>
                                             </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="enable" value="NO"/>
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                 </subviews>

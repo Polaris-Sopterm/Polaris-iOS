@@ -16,6 +16,7 @@ class AddTodoVC: HalfModalVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        self.bindButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -27,12 +28,12 @@ class AddTodoVC: HalfModalVC {
         self.cancelButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.halfModalViewWillDisappear()
+                print("Here?")
             })
             .disposed(by: self.disposeBag)
         
         self.addButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                guard self?.addButton.enable == true else { return }
                 self?.halfModalViewWillDisappear()
             })
             .disposed(by: self.disposeBag)

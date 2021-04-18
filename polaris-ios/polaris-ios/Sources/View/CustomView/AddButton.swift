@@ -12,6 +12,12 @@ class AddButton: UIButton {
     @IBInspectable var disableBackgroundColor: UIColor  = .inactiveBtn
     @IBInspectable var enableTextColor: UIColor         = .white
     @IBInspectable var disableTextColor: UIColor        = .inactiveText
+    @IBInspectable var enable: Bool                     = false {
+        didSet {
+            if self.enable == true  { self.makeEnable() }
+            else                    { self.makeDisable() }
+        }
+    }
     
     @IBInspectable var cornerRadius: CGFloat {
         set { self.layer.cornerRadius = newValue }
@@ -33,13 +39,7 @@ class AddButton: UIButton {
     private func makeDisable() {
         self.backgroundColor            = self.disableBackgroundColor
         self.setTitleColor(self.disableTextColor, for: .normal)
+        
         self.isUserInteractionEnabled   = false
-    }
-    
-    var enable: Bool = false {
-        didSet {
-            if self.enable  { self.makeEnable() }
-            else            { self.makeDisable() }
-        }
     }
 }
