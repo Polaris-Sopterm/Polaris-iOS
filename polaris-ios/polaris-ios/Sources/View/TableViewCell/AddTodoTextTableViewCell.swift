@@ -43,8 +43,8 @@ class AddTodoTextTableViewCell: AddTodoTableViewCell {
         self.polarisMarginTextFieldView?.setupPlaceholder(text: addTodoCategory.placeHolder)
     }
     
-    static let screenRaito: CGFloat         = DeviceInfo.screenWidth / 375
-    static let verticalInset: CGFloat       = 10
+    private static let screenRaito: CGFloat         = DeviceInfo.screenWidth / 375
+    private static let verticalInset: CGFloat       = 10
 }
 
 extension AddTodoTextTableViewCell {

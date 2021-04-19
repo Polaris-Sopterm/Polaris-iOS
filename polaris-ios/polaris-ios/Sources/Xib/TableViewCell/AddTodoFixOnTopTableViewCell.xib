@@ -30,10 +30,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cvO-ox-Fq7">
                                 <rect key="frame" x="0.0" y="0.0" width="79" height="61"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2mj-F5-6wn">
-                                        <rect key="frame" x="0.0" y="0.0" width="79" height="61"/>
-                                        <color key="backgroundColor" name="field"/>
-                                    </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="th5-rH-ntP">
                                         <rect key="frame" x="13.5" y="12" width="52" height="37"/>
                                         <subviews>
@@ -48,7 +44,11 @@
                                             </label>
                                         </subviews>
                                     </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2mj-F5-6wn">
+                                        <rect key="frame" x="0.0" y="0.0" width="79" height="61"/>
+                                    </button>
                                 </subviews>
+                                <color key="backgroundColor" name="field"/>
                                 <constraints>
                                     <constraint firstItem="2mj-F5-6wn" firstAttribute="top" secondItem="cvO-ox-Fq7" secondAttribute="top" id="6DX-cQ-wYc"/>
                                     <constraint firstItem="2mj-F5-6wn" firstAttribute="leading" secondItem="cvO-ox-Fq7" secondAttribute="leading" id="CtE-NC-Gw0"/>
@@ -63,11 +63,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Kk-Qe-OCN">
                                 <rect key="frame" x="87" y="0.0" width="79" height="61"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Cz-eG-jSL">
-                                        <rect key="frame" x="0.0" y="0.0" width="79" height="61"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" name="field"/>
-                                    </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="23x-J2-vu9">
                                         <rect key="frame" x="13.5" y="12.5" width="52" height="36"/>
                                         <subviews>
@@ -82,7 +77,12 @@
                                             </label>
                                         </subviews>
                                     </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Cz-eG-jSL">
+                                        <rect key="frame" x="0.0" y="0.0" width="79" height="61"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </button>
                                 </subviews>
+                                <color key="backgroundColor" name="field"/>
                                 <constraints>
                                     <constraint firstItem="23x-J2-vu9" firstAttribute="centerY" secondItem="6Kk-Qe-OCN" secondAttribute="centerY" id="NSi-Np-zxl"/>
                                     <constraint firstItem="23x-J2-vu9" firstAttribute="centerX" secondItem="6Kk-Qe-OCN" secondAttribute="centerX" id="tHO-sQ-FtJ"/>
@@ -100,10 +100,14 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="fixBackgroundView" destination="6Kk-Qe-OCN" id="LQt-qV-VtS"/>
                 <outlet property="fixButton" destination="5Cz-eG-jSL" id="PCz-vo-fdE"/>
                 <outlet property="fixImageView" destination="kSw-8R-d5P" id="L2K-Vk-FM1"/>
+                <outlet property="fixLabel" destination="fFT-Ku-ZtA" id="hTU-ZV-Jcq"/>
+                <outlet property="notFixBackgroundView" destination="cvO-ox-Fq7" id="Loq-2j-WDI"/>
                 <outlet property="notFixButton" destination="2mj-F5-6wn" id="xsx-kK-KcS"/>
                 <outlet property="notFixImageView" destination="N8I-Vo-HqC" id="E6Q-UW-k6T"/>
+                <outlet property="notFixLabel" destination="KAK-Iq-Vfb" id="1IF-SS-qDa"/>
             </connections>
             <point key="canvasLocation" x="138.40579710144928" y="112.83482142857142"/>
         </tableViewCell>

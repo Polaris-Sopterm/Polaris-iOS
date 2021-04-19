@@ -55,11 +55,11 @@ class PolarisMarginTextField: UIView {
     }
     
     private func makeDeselectedTextFieldColor() {
-        self.layer.borderColor = self.deselectedBorderColor.cgColor
+        self.layer.borderColor = self.unselectedBorderColor.cgColor
     }
     
     @IBInspectable var selectedBorderColor: UIColor     = .mainSky
-    @IBInspectable var deselectedBorderColor: UIColor   = .clear
+    @IBInspectable var unselectedBorderColor: UIColor   = .clear
     
     @IBOutlet weak var textField: UITextField!
     

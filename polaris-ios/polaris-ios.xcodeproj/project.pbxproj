@@ -39,6 +39,8 @@
 		CEEE5782262C018F00C39358 /* AddTodoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE5781262C018F00C39358 /* AddTodoViewModel.swift */; };
 		CEEE5786262C112E00C39358 /* AddTodoFixOnTopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE5784262C112D00C39358 /* AddTodoFixOnTopTableViewCell.swift */; };
 		CEEE5787262C112E00C39358 /* AddTodoFixOnTopTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEE5785262C112D00C39358 /* AddTodoFixOnTopTableViewCell.xib */; };
+		CEEE57A5262C297700C39358 /* AddTodoDropdownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE57A3262C297700C39358 /* AddTodoDropdownTableViewCell.swift */; };
+		CEEE57A6262C297700C39358 /* AddTodoDropdownTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEE57A4262C297700C39358 /* AddTodoDropdownTableViewCell.xib */; };
 		ECA49419262817D500CC2EB8 /* TodoDate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECA49418262817D500CC2EB8 /* TodoDate.storyboard */; };
 		ECA4941C262819D300CC2EB8 /* TodoDateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA4941B262819D300CC2EB8 /* TodoDateVC.swift */; };
 		ECA494232628223200CC2EB8 /* TodoDateTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA494212628223200CC2EB8 /* TodoDateTVC.swift */; };
@@ -90,6 +92,8 @@
 		CEEE5781262C018F00C39358 /* AddTodoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoViewModel.swift; sourceTree = "<group>"; };
 		CEEE5784262C112D00C39358 /* AddTodoFixOnTopTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoFixOnTopTableViewCell.swift; sourceTree = "<group>"; };
 		CEEE5785262C112D00C39358 /* AddTodoFixOnTopTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTodoFixOnTopTableViewCell.xib; sourceTree = "<group>"; };
+		CEEE57A3262C297700C39358 /* AddTodoDropdownTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoDropdownTableViewCell.swift; sourceTree = "<group>"; };
+		CEEE57A4262C297700C39358 /* AddTodoDropdownTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTodoDropdownTableViewCell.xib; sourceTree = "<group>"; };
 		E4A6B1EFA15BD83942E79BD7 /* Pods-polaris-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-polaris-ios.release.xcconfig"; path = "Target Support Files/Pods-polaris-ios/Pods-polaris-ios.release.xcconfig"; sourceTree = "<group>"; };
 		ECA49418262817D500CC2EB8 /* TodoDate.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TodoDate.storyboard; sourceTree = "<group>"; };
 		ECA4941B262819D300CC2EB8 /* TodoDateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TodoDateVC.swift; path = "polaris-ios/Sources/ViewController/TodoDateVC.swift"; sourceTree = SOURCE_ROOT; };
@@ -314,6 +318,7 @@
 				ECA494222628223200CC2EB8 /* TodoDateTVC.xib */,
 				CEEE576D262AE6F400C39358 /* AddTodoTextTableViewCell.xib */,
 				CEEE5785262C112D00C39358 /* AddTodoFixOnTopTableViewCell.xib */,
+				CEEE57A4262C297700C39358 /* AddTodoDropdownTableViewCell.xib */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -354,6 +359,7 @@
 				ECA49453262B0D0900CC2EB8 /* TodoDateTodayHeaderView.swift */,
 				CEEE576C262AE6F400C39358 /* AddTodoTextTableViewCell.swift */,
 				CEEE5784262C112D00C39358 /* AddTodoFixOnTopTableViewCell.swift */,
+				CEEE57A3262C297700C39358 /* AddTodoDropdownTableViewCell.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -428,6 +434,7 @@
 				ECA494242628223200CC2EB8 /* TodoDateTVC.xib in Resources */,
 				CE04A042262340D3007C98E2 /* LaunchScreen.storyboard in Resources */,
 				CE04A03F262340D3007C98E2 /* Assets.xcassets in Resources */,
+				CEEE57A6262C297700C39358 /* AddTodoDropdownTableViewCell.xib in Resources */,
 				CEEE5787262C112E00C39358 /* AddTodoFixOnTopTableViewCell.xib in Resources */,
 				CEEE576F262AE6F400C39358 /* AddTodoTextTableViewCell.xib in Resources */,
 				ECA49419262817D500CC2EB8 /* TodoDate.storyboard in Resources */,
@@ -489,6 +496,7 @@
 			files = (
 				CEEE573E262A952100C39358 /* NetworkManager.swift in Sources */,
 				ECA4941C262819D300CC2EB8 /* TodoDateVC.swift in Sources */,
+				CEEE57A5262C297700C39358 /* AddTodoDropdownTableViewCell.swift in Sources */,
 				CE04A06A2623528C007C98E2 /* UIViewController+.swift in Sources */,
 				CEEE5766262ADBA200C39358 /* AddButton.swift in Sources */,
 				CEEE5782262C018F00C39358 /* AddTodoViewModel.swift in Sources */,

@@ -19,5 +19,5 @@ struct ImageName {
     static let icnUnfixed = "icnUnfixed"
     static let icnUnfixedInactive = "icnUnfixedInactive"
     
-    
+    static let btnMore = "btnMoreDown"
 }

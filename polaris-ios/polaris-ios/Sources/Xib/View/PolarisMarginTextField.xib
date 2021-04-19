@@ -35,7 +35,7 @@
                 <userDefinedRuntimeAttribute type="color" keyPath="selectedBorderColor">
                     <color key="value" name="mainSky"/>
                 </userDefinedRuntimeAttribute>
-                <userDefinedRuntimeAttribute type="color" keyPath="deSelectedBorderColor">
+                <userDefinedRuntimeAttribute type="color" keyPath="unselectedBorderColor">
                     <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
