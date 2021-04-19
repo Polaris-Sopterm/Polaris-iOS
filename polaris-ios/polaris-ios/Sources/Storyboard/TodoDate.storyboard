@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Todo DateVC-->
+        <!--TodoDateVC-->
         <scene sceneID="voD-Et-Cav">
             <objects>
-                <viewController id="UOK-hY-beg" customClass="TodoDateVC" customModule="polaris_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TodoDateVC" title="TodoDateVC" id="UOK-hY-beg" customClass="TodoDateVC" customModule="polaris_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4PJ-U3-Lb6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
