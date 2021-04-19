@@ -53,7 +53,6 @@ class MainStarTVC: UITableViewCell {
     }
     
     func bindViewModel(){
-        print("called")
         let identifier = String(describing: MainStarCVC.self)
         
         self.tvcViewModel.starListRelay.bind(to: starCV.rx.items) { collectionView, index, item in
@@ -97,7 +96,6 @@ extension MainStarTVC: UICollectionViewDelegateFlowLayout {
         
         }
         
-        return UIEdgeInsets(top: 0, left: 38, bottom: 0, right: 0)
     }
     
 }

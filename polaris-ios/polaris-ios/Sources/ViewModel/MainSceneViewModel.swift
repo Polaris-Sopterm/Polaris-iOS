@@ -21,32 +21,20 @@ struct MainSceneViewModel {
     
     struct Output{
         var starList: BehaviorRelay<[MainStarCVCViewModel]>
-        let dataDriver: Driver<[MainStarCVCViewModel]>
         
     }
     func connect(input: Input) -> Output{
         var starList: BehaviorRelay<[MainStarCVCViewModel]> = BehaviorRelay(value: [])
-        
-        
-        
-        
+
         var mainStarModels = [MainStarModel(starName: "도전", starLevel: 4),
                                MainStarModel(starName: "행복", starLevel: 4),
                                MainStarModel(starName: "절제", starLevel: 4),
                                MainStarModel(starName: "감사", starLevel: 4),
                                MainStarModel(starName: "휴식", starLevel: 4)]
-
-
         
         var cvcModels: [MainStarCVCViewModel] = self.convertCVCViewModel(mainStarModels: mainStarModels)
         starList.accept(cvcModels)
-        
-        
-        let dataDriver: Driver<[MainStarCVCViewModel]> = Observable.of(mainStarViewModels).asDriver(onErrorJustReturn: [])
-        
-        
-        
-        return Output(starList: starList,dataDriver: dataDriver)
+        return Output(starList: starList)
     }
     
     func convertCVCViewModel(mainStarModels: [MainStarModel]) -> [MainStarCVCViewModel]{
@@ -106,8 +94,6 @@ struct MainSceneViewModel {
         }
         result += "0"
         result += String(level)
-        print(result)
-        
         return result
     }
     

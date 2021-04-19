@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 struct MainStarCVCViewModel {
-
     
     let starModel: MainStarModel
     let starImgName: String

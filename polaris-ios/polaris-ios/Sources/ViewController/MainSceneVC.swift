@@ -41,16 +41,13 @@ class MainSceneVC: UIViewController {
     private func bindViewModel(){
         let input = MainSceneViewModel.Input()
         let output = viewModel.connect(input: input)
-        output.dataDriver.drive { item in
-            print(item)
-            
-        }
+
         output.starList.subscribe(onNext: { item in
             self.starList = item
             
         })
         .disposed(by: disposeBag)
-        self.dataDriver = output.dataDriver
+
 
     }
 
@@ -64,8 +61,7 @@ extension MainSceneVC: UITableViewDataSource {
         
         cell.setTitle(stars: 1)
         cell.starList = self.starList
-        print("callllled")
-        
+
         return cell
         
     }

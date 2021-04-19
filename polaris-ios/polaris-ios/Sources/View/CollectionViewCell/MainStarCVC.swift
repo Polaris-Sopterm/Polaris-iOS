@@ -22,7 +22,7 @@ class MainStarCVC: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.setUIs()
-        // Initialization code
+
     }
     
     func setUIs(){
