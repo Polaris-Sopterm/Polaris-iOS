@@ -43,13 +43,9 @@ class MainStarTVC: UITableViewCell {
     }
     
     func setTitle(stars: Int) {
-        let text = "어제는\n\(stars)개의 별을 발견했어요."
-        let attributedString = NSMutableAttributedString(string: text)
-        let font = UIFont(name:"AppleSDGothicNeo-Bold", size: 23)
+        self.titleLabel.text = "어제는\n\(stars)개의 별을 발견했어요."
         self.titleLabel.textColor = .white
-        self.titleLabel.font = UIFont(name: "AppleSDGothicNeo-light", size: 23)
-        attributedString.addAttribute(.font, value: font, range:(text as NSString).range(of: "\(stars)개의 별"))
-        self.titleLabel.attributedText = attributedString
+        self.titleLabel.setPartialBold(boldText: "\(stars)개의 별", fontSize: 23)
     }
     
     func bindViewModel(){

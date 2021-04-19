@@ -70,6 +70,7 @@ struct ImageName {
     static let imgChallenge3 = "imgChallenge03"
     static let imgChallenge4 = "imgChallenge04"
     
-    
+    static let imgShootingstar = "imgShootingstar"
+    static let imgShootingstar2 = "imgShootingstar2"
     
 }

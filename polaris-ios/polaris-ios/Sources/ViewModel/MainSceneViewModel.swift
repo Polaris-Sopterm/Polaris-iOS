@@ -69,32 +69,7 @@ struct MainSceneViewModel {
     }
     
     func changeToImgName(starName: String,level: Int)-> String {
-        var result = "img"
-        switch starName {
-        case "행복":
-            result += "Happiness"
-        case "절제":
-            result += "Control"
-        case "감사":
-            result += "Thanks"
-        case "휴식":
-            result += "Rest"
-        case "건강":
-            result += "Health"
-        case "성장":
-            result += "Growth"
-        case "변화":
-            result += "Change"
-        case "극복":
-            result += "Overcome"
-        case "도전":
-            result += "Challenge"
-        default:
-            result += "Happiness"
-        }
-        result += "0"
-        result += String(level)
-        return result
+        return "".makeStarImageName(starName: starName, level: level)
     }
     
     

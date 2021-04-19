@@ -60,6 +60,8 @@
 		ECA49478262C46BB00CC2EB8 /* MainSceneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA49477262C46BB00CC2EB8 /* MainSceneViewModel.swift */; };
 		ECA4947B262C48BB00CC2EB8 /* MainStarCVCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA4947A262C48BB00CC2EB8 /* MainStarCVCViewModel.swift */; };
 		ECA4947E262C670000CC2EB8 /* MainStarTVCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA4947D262C670000CC2EB8 /* MainStarTVCViewModel.swift */; };
+		ECA49486262DC17A00CC2EB8 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA49485262DC17A00CC2EB8 /* UILabel+.swift */; };
+		ECA49489262DC40F00CC2EB8 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA49488262DC40F00CC2EB8 /* String+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -120,6 +122,8 @@
 		ECA49477262C46BB00CC2EB8 /* MainSceneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSceneViewModel.swift; sourceTree = "<group>"; };
 		ECA4947A262C48BB00CC2EB8 /* MainStarCVCViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainStarCVCViewModel.swift; sourceTree = "<group>"; };
 		ECA4947D262C670000CC2EB8 /* MainStarTVCViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainStarTVCViewModel.swift; sourceTree = "<group>"; };
+		ECA49485262DC17A00CC2EB8 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
+		ECA49488262DC40F00CC2EB8 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -271,6 +275,8 @@
 				CE04A06526234CEE007C98E2 /* UITableView+.swift */,
 				CE04A06226234701007C98E2 /* UIView+.swift */,
 				CE04A0692623528B007C98E2 /* UIViewController+.swift */,
+				ECA49485262DC17A00CC2EB8 /* UILabel+.swift */,
+				ECA49488262DC40F00CC2EB8 /* String+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -515,7 +521,9 @@
 			files = (
 				CEEE573E262A952100C39358 /* NetworkManager.swift in Sources */,
 				ECA4941C262819D300CC2EB8 /* TodoDateVC.swift in Sources */,
+				ECA49486262DC17A00CC2EB8 /* UILabel+.swift in Sources */,
 				CE04A06A2623528C007C98E2 /* UIViewController+.swift in Sources */,
+				ECA49489262DC40F00CC2EB8 /* String+.swift in Sources */,
 				CEEE5766262ADBA200C39358 /* AddButton.swift in Sources */,
 				CEEE5782262C018F00C39358 /* AddTodoViewModel.swift in Sources */,
 				CEEE574A262A95BD00C39358 /* UserDefaultWrapper.swift in Sources */,
