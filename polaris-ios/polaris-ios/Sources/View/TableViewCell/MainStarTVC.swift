@@ -43,9 +43,8 @@ class MainStarTVC: UITableViewCell {
     }
     
     func setTitle(stars: Int) {
-        self.titleLabel.text = "어제는\n\(stars)개의 별을 발견했어요."
         self.titleLabel.textColor = .white
-        self.titleLabel.setPartialBold(boldText: "\(stars)개의 별", fontSize: 23)
+        self.titleLabel.setPartialBold(originalText: "어제는\n\(stars)개의 별을 발견했어요.", boldText: "\(stars)개의 별", fontSize: 23, boldFontSize: 23)
     }
     
     func bindViewModel(){
