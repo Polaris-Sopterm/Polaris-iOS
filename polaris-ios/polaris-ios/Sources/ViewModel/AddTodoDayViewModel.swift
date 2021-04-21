@@ -6,7 +6,8 @@
 //
 
 import Foundation
+import RxSwift
 
 class AddTodoDayViewModel {
-    
+    var days = BehaviorSubject<[String]>(value: ["월", "화", "수", "목", "금", "토", "일"])
 }

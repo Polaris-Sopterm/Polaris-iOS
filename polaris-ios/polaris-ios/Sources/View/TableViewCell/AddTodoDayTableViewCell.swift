@@ -21,10 +21,16 @@ class AddTodoDayTableViewCell: AddTodoTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.registerCell()
         self.layoutColletionView()
+        self.bindCollectionView()
     }
     
     // MARK: - Set Up
+    private func registerCell() {
+        self.collectionView.registerCell(cell: PerDayItemCollectionViewCell.self)
+    }
+    
     private func layoutColletionView() {
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.itemSize                 = CGSize(width:  type(of: self).dayCellWidth,
@@ -35,6 +41,21 @@ class AddTodoDayTableViewCell: AddTodoTableViewCell {
         }
     }
     
+    // MARK: - Bind
+    private func bindCollectionView() {
+        self.collectionView.rx.setDelegate(self)
+            .disposed(by: self.disposeBag)
+        
+        self.viewModel.days
+            .bind(to: self.collectionView.rx.items) { collectionView, index, item in
+                guard let perDayCell = collectionView.dequeueReusableCell(cell: PerDayItemCollectionViewCell.self, forIndexPath: IndexPath(row: index, section: 0)) else { return UICollectionViewCell() }
+                
+                perDayCell.configure(day: "월", dayNumber: 1)
+                
+                return perDayCell
+            }
+            .disposed(by: self.disposeBag)
+    }
     
     private static let horizontalInset: CGFloat     = 23
     private static let verticalInset: CGFloat       = 10
@@ -44,4 +65,8 @@ class AddTodoDayTableViewCell: AddTodoTableViewCell {
     
     var viewModel  = AddTodoDayViewModel()
     var disposeBag = DisposeBag()
+}
+
+extension AddTodoDayTableViewCell: UICollectionViewDelegate {
+    
 }

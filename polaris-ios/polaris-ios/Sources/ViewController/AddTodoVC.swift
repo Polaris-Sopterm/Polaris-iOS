@@ -111,7 +111,7 @@ extension AddTodoVC {
             var cellTypes = [AddTodoTableViewCellProtocol.Type]()
             if self.contains(.addText)       { cellTypes.append(AddTodoTextTableViewCell.self) }
             if self.contains(.dropdownMenu)  { cellTypes.append(AddTodoDropdownTableViewCell.self) }
-            if self.contains(.selectDay) { cellTypes.append(AddTodoDayTableViewCell.self) }
+            if self.contains(.selectDay)     { cellTypes.append(AddTodoDayTableViewCell.self) }
             if self.contains(.fixOnTop)      { cellTypes.append(AddTodoFixOnTopTableViewCell.self) }
             return cellTypes
         }
