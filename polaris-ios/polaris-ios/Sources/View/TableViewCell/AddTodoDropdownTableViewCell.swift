@@ -85,7 +85,7 @@ class AddTodoDropdownTableViewCell: AddTodoTableViewCell {
                     self.containerView.layer.borderColor    = UIColor.clear.cgColor
                 }
                 
-                UIView.animate(withDuration: type(of: self).duration) {
+                UIView.animate(withDuration: type(of: self).duration, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: []) {
                     self.layoutIfNeeded()
                 }
                 

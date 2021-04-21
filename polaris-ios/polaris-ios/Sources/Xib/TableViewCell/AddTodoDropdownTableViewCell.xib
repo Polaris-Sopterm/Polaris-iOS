@@ -61,7 +61,7 @@
                                 <rect key="frame" x="0.0" y="53" width="329" height="0.0"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" priority="999" id="ZHB-y3-5UC"/>
+                                    <constraint firstAttribute="height" id="ZHB-y3-5UC"/>
                                 </constraints>
                             </tableView>
                         </subviews>
@@ -72,7 +72,7 @@
                     <constraint firstItem="bjV-e4-7jN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="23" id="0Tf-Fy-Zmj"/>
                     <constraint firstAttribute="trailing" secondItem="bjV-e4-7jN" secondAttribute="trailing" constant="23" id="3QK-u8-9Us"/>
                     <constraint firstItem="c6k-0D-PPH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="23" id="5pi-u9-G0d"/>
-                    <constraint firstAttribute="bottom" secondItem="bjV-e4-7jN" secondAttribute="bottom" constant="15" id="JJr-VU-mFw"/>
+                    <constraint firstAttribute="bottom" secondItem="bjV-e4-7jN" secondAttribute="bottom" priority="999" constant="15" id="JJr-VU-mFw"/>
                     <constraint firstItem="bjV-e4-7jN" firstAttribute="top" secondItem="c6k-0D-PPH" secondAttribute="bottom" constant="15" id="Mqs-4L-p8M"/>
                     <constraint firstItem="c6k-0D-PPH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="gv7-Su-S7D"/>
                 </constraints>
