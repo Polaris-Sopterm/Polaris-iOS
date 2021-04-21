@@ -23,7 +23,6 @@ class AddTodoDropdownTableViewCell: AddTodoTableViewCell {
         super.awakeFromNib()
         // Initialization code
         self.registerCell()
-        self.setupTableView()
         self.setupContainerView()
         self.bindLabel()
         self.bindButton()
@@ -33,10 +32,6 @@ class AddTodoDropdownTableViewCell: AddTodoTableViewCell {
     // MARK: - Set Up
     private func setupContainerView() {
         self.containerView.makeRounded(cornerRadius: 16)
-    }
-    
-    private func setupTableView() {
-        
     }
     
     private func registerCell() {
