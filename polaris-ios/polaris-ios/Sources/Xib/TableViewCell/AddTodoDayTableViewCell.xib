@@ -6,6 +6,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -24,13 +25,32 @@
                         <color key="textColor" name="textSky"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Bol-JZ-HYu">
+                        <rect key="frame" x="23" y="42" width="329" height="66"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="66" id="iRb-IR-HXv"/>
+                        </constraints>
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="eht-iA-36N">
+                            <size key="itemSize" width="128" height="128"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                    </collectionView>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="Bol-JZ-HYu" firstAttribute="top" secondItem="OqG-oh-Au5" secondAttribute="bottom" constant="15" id="UZQ-9s-n1h"/>
                     <constraint firstItem="OqG-oh-Au5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="23" id="jqo-DD-ocf"/>
+                    <constraint firstItem="Bol-JZ-HYu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="23" id="mCx-T8-mRL"/>
                     <constraint firstItem="OqG-oh-Au5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="qAp-h5-gfV"/>
+                    <constraint firstAttribute="trailing" secondItem="Bol-JZ-HYu" secondAttribute="trailing" constant="23" id="yOx-S6-DPS"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="collectionView" destination="Bol-JZ-HYu" id="UYn-yR-MoR"/>
+            </connections>
             <point key="canvasLocation" x="163.04347826086959" y="176.45089285714286"/>
         </tableViewCell>
     </objects>
@@ -38,5 +58,8 @@
         <namedColor name="textSky">
             <color red="0.40799999237060547" green="0.77999997138977051" blue="0.86299997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

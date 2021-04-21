@@ -25,6 +25,7 @@
 		CEC48ED9262DCD2A00FD887F /* AddTodoDropdownViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC48ED8262DCD2A00FD887F /* AddTodoDropdownViewModel.swift */; };
 		CEE574D82630422600EA64B7 /* AddTodoDayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE574D62630422600EA64B7 /* AddTodoDayTableViewCell.swift */; };
 		CEE574D92630422600EA64B7 /* AddTodoDayTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE574D72630422600EA64B7 /* AddTodoDayTableViewCell.xib */; };
+		CEE574E926307B4400EA64B7 /* AddTodoDayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE574E826307B4400EA64B7 /* AddTodoDayViewModel.swift */; };
 		CEEE573D262A952100C39358 /* MockProviderFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE573B262A952000C39358 /* MockProviderFactory.swift */; };
 		CEEE573E262A952100C39358 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE573C262A952100C39358 /* NetworkManager.swift */; };
 		CEEE5743262A955D00C39358 /* PolarisUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE5742262A955D00C39358 /* PolarisUserManager.swift */; };
@@ -96,6 +97,7 @@
 		CEC48ED8262DCD2A00FD887F /* AddTodoDropdownViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoDropdownViewModel.swift; sourceTree = "<group>"; };
 		CEE574D62630422600EA64B7 /* AddTodoDayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoDayTableViewCell.swift; sourceTree = "<group>"; };
 		CEE574D72630422600EA64B7 /* AddTodoDayTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTodoDayTableViewCell.xib; sourceTree = "<group>"; };
+		CEE574E826307B4400EA64B7 /* AddTodoDayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoDayViewModel.swift; sourceTree = "<group>"; };
 		CEEE573B262A952000C39358 /* MockProviderFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockProviderFactory.swift; sourceTree = "<group>"; };
 		CEEE573C262A952100C39358 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		CEEE5742262A955D00C39358 /* PolarisUserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolarisUserManager.swift; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 				ECA49477262C46BB00CC2EB8 /* MainSceneViewModel.swift */,
 				ECA4947A262C48BB00CC2EB8 /* MainStarCVCViewModel.swift */,
 				ECA4947D262C670000CC2EB8 /* MainStarTVCViewModel.swift */,
+				CEE574E826307B4400EA64B7 /* AddTodoDayViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -582,6 +585,7 @@
 				CE04A060262346C9007C98E2 /* UICollectionView+.swift in Sources */,
 				CEE574D82630422600EA64B7 /* AddTodoDayTableViewCell.swift in Sources */,
 				ECA49455262B0D0900CC2EB8 /* TodoDateTodayHeaderView.swift in Sources */,
+				CEE574E926307B4400EA64B7 /* AddTodoDayViewModel.swift in Sources */,
 				CE04A06626234CEE007C98E2 /* UITableView+.swift in Sources */,
 				ECA494292628298B00CC2EB8 /* TodoModel.swift in Sources */,
 				CEEE5774262BE1DE00C39358 /* AddTodoTableViewCellProtocol.swift in Sources */,
