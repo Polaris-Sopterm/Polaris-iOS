@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="110" id="KGk-i7-Jjw" customClass="AddTodoDropdownTableViewCell" customModule="polaris_ios" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="어떤 여정을 마무리하기 위해 할 일인가요?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c6k-0D-PPH">
+                        <rect key="frame" x="23" y="10" width="231" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="17" id="zpf-Vd-Tve"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                        <color key="textColor" name="textSky"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="bjV-e4-7jN">
+                        <rect key="frame" x="23" y="42" width="329" height="53"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wzy-Np-cwc">
+                                <rect key="frame" x="0.0" y="0.0" width="329" height="53"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QlE-Iq-iNK">
+                                        <rect key="frame" x="23" y="17" width="243" height="19.5"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                        <color key="textColor" name="mainText"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qZ1-aa-5IP">
+                                        <rect key="frame" x="276" y="6.5" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="3rU-x2-Oi5"/>
+                                            <constraint firstAttribute="width" constant="40" id="ybw-3o-IYY"/>
+                                        </constraints>
+                                        <state key="normal" image="btnMoreDown"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="qZ1-aa-5IP" firstAttribute="leading" secondItem="QlE-Iq-iNK" secondAttribute="trailing" constant="10" id="TDe-Rm-JYH"/>
+                                    <constraint firstItem="QlE-Iq-iNK" firstAttribute="leading" secondItem="wzy-Np-cwc" secondAttribute="leading" constant="23" id="bPg-d6-WRg"/>
+                                    <constraint firstItem="qZ1-aa-5IP" firstAttribute="centerY" secondItem="wzy-Np-cwc" secondAttribute="centerY" id="h8p-Yh-Pl2"/>
+                                    <constraint firstAttribute="trailing" secondItem="qZ1-aa-5IP" secondAttribute="trailing" constant="13" id="hth-HI-Nt2"/>
+                                    <constraint firstItem="QlE-Iq-iNK" firstAttribute="centerY" secondItem="wzy-Np-cwc" secondAttribute="centerY" id="l6E-R9-17q"/>
+                                    <constraint firstAttribute="width" secondItem="wzy-Np-cwc" secondAttribute="height" multiplier="329:53" id="rek-Ie-Otd"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CDR-vs-Ka7">
+                                <rect key="frame" x="0.0" y="53" width="329" height="0.0"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" id="ZHB-y3-5UC"/>
+                                </constraints>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" name="field"/>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="bjV-e4-7jN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="23" id="0Tf-Fy-Zmj"/>
+                    <constraint firstAttribute="trailing" secondItem="bjV-e4-7jN" secondAttribute="trailing" constant="23" id="3QK-u8-9Us"/>
+                    <constraint firstItem="c6k-0D-PPH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="23" id="5pi-u9-G0d"/>
+                    <constraint firstAttribute="bottom" secondItem="bjV-e4-7jN" secondAttribute="bottom" priority="999" constant="15" id="JJr-VU-mFw"/>
+                    <constraint firstItem="bjV-e4-7jN" firstAttribute="top" secondItem="c6k-0D-PPH" secondAttribute="bottom" constant="15" id="Mqs-4L-p8M"/>
+                    <constraint firstItem="c6k-0D-PPH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="gv7-Su-S7D"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="containerView" destination="bjV-e4-7jN" id="9qT-AE-Tua"/>
+                <outlet property="dropdownButton" destination="qZ1-aa-5IP" id="lue-5J-xff"/>
+                <outlet property="selectedLabel" destination="QlE-Iq-iNK" id="Qf1-hO-PEA"/>
+                <outlet property="tableView" destination="CDR-vs-Ka7" id="mi7-NV-7rq"/>
+                <outlet property="tableViewHeightConstraint" destination="ZHB-y3-5UC" id="cWw-Xg-QoJ"/>
+            </connections>
+            <point key="canvasLocation" x="138.40579710144928" y="52.901785714285715"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="btnMoreDown" width="40" height="40"/>
+        <namedColor name="field">
+            <color red="0.98000001907348633" green="0.98000001907348633" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="mainText">
+            <color red="0.25099998712539673" green="0.25099998712539673" blue="0.54900002479553223" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="textSky">
+            <color red="0.40799999237060547" green="0.77999997138977051" blue="0.86299997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

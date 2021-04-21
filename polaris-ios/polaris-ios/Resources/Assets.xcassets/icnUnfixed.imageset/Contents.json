@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "icnFixed.png",
+      "filename" : "icnUnfixed.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "icnFixed@2x.png",
+      "filename" : "icnUnfixed@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "icnFixed@3x.png",
+      "filename" : "icnUnfixed@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

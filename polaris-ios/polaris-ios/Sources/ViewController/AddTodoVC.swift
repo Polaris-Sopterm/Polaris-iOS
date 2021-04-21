@@ -87,6 +87,11 @@ extension AddTodoVC: UITableViewDelegate {
         guard let cellHeight = try? self.viewModel.addListTypes.value()[indexPath.row].cellHeight else { return 0 }
         return cellHeight
     }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard let cellHeight = try? self.viewModel.addListTypes.value()[indexPath.row].cellHeight else { return UITableView.automaticDimension }
+        return cellHeight
+    }
 }
 
 extension AddTodoVC {
@@ -98,13 +103,16 @@ extension AddTodoVC {
         static let fixOnTop         = AddOptions(rawValue: 1 << 2)
         static let dropdownMenu     = AddOptions(rawValue: 1 << 3)
         
-        static let perDayAddTodo: AddOptions    = [.addText, dropdownMenu, fixOnTop]
+        static let perDayAddTodo: AddOptions     = [.addText, dropdownMenu, fixOnTop]
         static let perJourneyAddTodo: AddOptions = [.addText, .selectDay, .fixOnTop]
         static let addJourney: AddOptions        = []
         
         var addCellTypes: [AddTodoTableViewCellProtocol.Type] {
             var cellTypes = [AddTodoTableViewCellProtocol.Type]()
-            if self.contains(.addText) { cellTypes.append(AddTodoTextTableViewCell.self) }
+            if self.contains(.addText)       { cellTypes.append(AddTodoTextTableViewCell.self) }
+            if self.contains(.dropdownMenu)  { cellTypes.append(AddTodoDropdownTableViewCell.self) }
+            if self.contains(.selectDay) { cellTypes.append(AddTodoDayTableViewCell.self) }
+            if self.contains(.fixOnTop)      { cellTypes.append(AddTodoFixOnTopTableViewCell.self) }
             return cellTypes
         }
     }
