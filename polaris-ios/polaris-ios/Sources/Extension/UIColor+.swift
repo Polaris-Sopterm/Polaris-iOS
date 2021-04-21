@@ -81,4 +81,8 @@ extension UIColor {
     @nonobjc class var inactiveTextPurple: UIColor {
         return UIColor(red: 198.0 / 255.0, green: 198.0 / 255.0, blue: 221.0 / 255.0, alpha: 1.0)
     }
+    @nonobjc class var darkBlue10: UIColor {
+      return UIColor(red: 0.0, green: 0.0, blue: 102.0 / 255.0, alpha: 0.1)
+    }
+
 }
