@@ -13,6 +13,7 @@ class AddTodoDropdownTableViewCell: AddTodoTableViewCell {
     override class var cellHeight: CGFloat { return UITableView.automaticDimension }
     
     @IBOutlet weak var containerView: UIStackView!
+    @IBOutlet weak var selectedLabel: UILabel!
     @IBOutlet weak var dropdownButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
@@ -22,8 +23,10 @@ class AddTodoDropdownTableViewCell: AddTodoTableViewCell {
         super.awakeFromNib()
         // Initialization code
         self.registerCell()
-        self.bindButton()
+        self.setupTableView()
         self.setupContainerView()
+        self.bindLabel()
+        self.bindButton()
         self.bindTableView()
     }
     
@@ -32,14 +35,34 @@ class AddTodoDropdownTableViewCell: AddTodoTableViewCell {
         self.containerView.makeRounded(cornerRadius: 16)
     }
     
+    private func setupTableView() {
+        
+    }
+    
     private func registerCell() {
         self.tableView.registerCell(cell: DropdownItemTableViewCell.self)
     }
     
     // MARK: - Bind
+    private func bindLabel() {
+        self.viewModel.selectedMenu
+            .distinctUntilChanged()
+            .subscribe(onNext: { [weak self] selectedMenu in
+                guard let self = self else { return }
+                
+                if let selectedMenu = selectedMenu {
+                    self.selectedLabel.text = selectedMenu
+                } else {
+                    self.selectedLabel.text = "선택 안함"
+                }
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
     private func bindButton() {
         self.dropdownButton.rx.tap
-            .subscribe(onNext: {
+            .subscribe(onNext: { [weak self] in
+                guard let self    = self else { return }
                 guard let expaned = try? self.viewModel.isExpanded.value() else { return }
                 
                 self.viewModel.isExpanded.onNext(!expaned)
@@ -47,11 +70,19 @@ class AddTodoDropdownTableViewCell: AddTodoTableViewCell {
             .disposed(by: self.disposeBag)
         
         self.viewModel.isExpanded
-            .subscribe(onNext: { expanded in
+            .distinctUntilChanged()
+            .subscribe(onNext: { [weak self] expanded in
+                guard let self = self else { return }
+                
                 if expanded {
                     self.tableViewHeightConstraint.constant = 341
-                } else {
+                    self.containerView.layer.borderWidth    = 1
+                    self.containerView.layer.borderColor    = type(of: self).selectBorderColor.cgColor
+                }
+                else {
                     self.tableViewHeightConstraint.constant = 0
+                    self.containerView.layer.borderWidth    = 0
+                    self.containerView.layer.borderColor    = UIColor.clear.cgColor
                 }
                 
                 UIView.animate(withDuration: type(of: self).duration) {
@@ -62,7 +93,6 @@ class AddTodoDropdownTableViewCell: AddTodoTableViewCell {
                 (self.superview as? UITableView)?.endUpdates()
             })
             .disposed(by: self.disposeBag)
-            
     }
     
     private func bindTableView() {
@@ -91,5 +121,13 @@ class AddTodoDropdownTableViewCell: AddTodoTableViewCell {
 extension AddTodoDropdownTableViewCell: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return type(of: self).menuCellHeight
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let selectedMenu = try? self.viewModel.menus.value()[indexPath.row] else { return }
+        self.viewModel.isExpanded.onNext(false)
+        self.viewModel.selectedMenu.onNext(selectedMenu)
+        
+        self.tableView.deselectRow(at: indexPath, animated: false)
     }
 }

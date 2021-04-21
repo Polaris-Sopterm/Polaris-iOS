@@ -33,18 +33,23 @@
                                 <rect key="frame" x="0.0" y="0.0" width="329" height="53"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QlE-Iq-iNK">
-                                        <rect key="frame" x="23" y="17" width="42.5" height="19.5"/>
+                                        <rect key="frame" x="23" y="17" width="243" height="19.5"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                         <color key="textColor" name="mainText"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qZ1-aa-5IP">
                                         <rect key="frame" x="276" y="6.5" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="3rU-x2-Oi5"/>
+                                            <constraint firstAttribute="width" constant="40" id="ybw-3o-IYY"/>
+                                        </constraints>
                                         <state key="normal" image="btnMoreDown"/>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="qZ1-aa-5IP" firstAttribute="leading" secondItem="QlE-Iq-iNK" secondAttribute="trailing" constant="10" id="TDe-Rm-JYH"/>
                                     <constraint firstItem="QlE-Iq-iNK" firstAttribute="leading" secondItem="wzy-Np-cwc" secondAttribute="leading" constant="23" id="bPg-d6-WRg"/>
                                     <constraint firstItem="qZ1-aa-5IP" firstAttribute="centerY" secondItem="wzy-Np-cwc" secondAttribute="centerY" id="h8p-Yh-Pl2"/>
                                     <constraint firstAttribute="trailing" secondItem="qZ1-aa-5IP" secondAttribute="trailing" constant="13" id="hth-HI-Nt2"/>
@@ -75,6 +80,7 @@
             <connections>
                 <outlet property="containerView" destination="bjV-e4-7jN" id="9qT-AE-Tua"/>
                 <outlet property="dropdownButton" destination="qZ1-aa-5IP" id="lue-5J-xff"/>
+                <outlet property="selectedLabel" destination="QlE-Iq-iNK" id="Qf1-hO-PEA"/>
                 <outlet property="tableView" destination="CDR-vs-Ka7" id="mi7-NV-7rq"/>
                 <outlet property="tableViewHeightConstraint" destination="ZHB-y3-5UC" id="cWw-Xg-QoJ"/>
             </connections>
