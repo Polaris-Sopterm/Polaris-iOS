@@ -24,6 +24,9 @@ class AddTodoDayTableViewCell: AddTodoTableViewCell {
         self.registerCell()
         self.layoutColletionView()
         self.bindCollectionView()
+        
+        print(Date.todayDay)
+        print(Date.todayWeekDay)
     }
     
     // MARK: - Set Up
@@ -63,8 +66,8 @@ class AddTodoDayTableViewCell: AddTodoTableViewCell {
     private static let dayCellHeight: CGFloat       = 66 * screenRatio
     private static let dayCellWidth: CGFloat        = (DeviceInfo.screenWidth - (2 * horizontalInset) - (6 * 2)) / 7
     
-    var viewModel  = AddTodoDayViewModel()
-    var disposeBag = DisposeBag()
+    private var viewModel  = AddTodoDayViewModel()
+    private var disposeBag = DisposeBag()
 }
 
 extension AddTodoDayTableViewCell: UICollectionViewDelegate {

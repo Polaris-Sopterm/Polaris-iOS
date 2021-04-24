@@ -29,6 +29,7 @@
 		CEE574EC26307C4D00EA64B7 /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE574EB26307C4D00EA64B7 /* Array+.swift */; };
 		CEE574F026307D7C00EA64B7 /* PerDayItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE574EE26307D7C00EA64B7 /* PerDayItemCollectionViewCell.swift */; };
 		CEE574F126307D7C00EA64B7 /* PerDayItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE574EF26307D7C00EA64B7 /* PerDayItemCollectionViewCell.xib */; };
+		CEE574F5263092A400EA64B7 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE574F4263092A400EA64B7 /* Date+.swift */; };
 		CEEE573D262A952100C39358 /* MockProviderFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE573B262A952000C39358 /* MockProviderFactory.swift */; };
 		CEEE573E262A952100C39358 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE573C262A952100C39358 /* NetworkManager.swift */; };
 		CEEE5743262A955D00C39358 /* PolarisUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE5742262A955D00C39358 /* PolarisUserManager.swift */; };
@@ -104,6 +105,7 @@
 		CEE574EB26307C4D00EA64B7 /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
 		CEE574EE26307D7C00EA64B7 /* PerDayItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PerDayItemCollectionViewCell.swift; path = "polaris-ios/Sources/View/CollectionViewCell/PerDayItemCollectionViewCell.swift"; sourceTree = SOURCE_ROOT; };
 		CEE574EF26307D7C00EA64B7 /* PerDayItemCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = PerDayItemCollectionViewCell.xib; path = "polaris-ios/Sources/Xib/CollectionViewCell/PerDayItemCollectionViewCell.xib"; sourceTree = SOURCE_ROOT; };
+		CEE574F4263092A400EA64B7 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		CEEE573B262A952000C39358 /* MockProviderFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockProviderFactory.swift; sourceTree = "<group>"; };
 		CEEE573C262A952100C39358 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		CEEE5742262A955D00C39358 /* PolarisUserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolarisUserManager.swift; sourceTree = "<group>"; };
@@ -308,6 +310,7 @@
 				ECA49485262DC17A00CC2EB8 /* UILabel+.swift */,
 				ECA49488262DC40F00CC2EB8 /* String+.swift */,
 				CEE574EB26307C4D00EA64B7 /* Array+.swift */,
+				CEE574F4263092A400EA64B7 /* Date+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -578,6 +581,7 @@
 				CEEE574A262A95BD00C39358 /* UserDefaultWrapper.swift in Sources */,
 				CEC48ED4262DCA9100FD887F /* DropdownItemTableViewCell.swift in Sources */,
 				ECA4944426296F6E00CC2EB8 /* TodoDateTVCViewModel.swift in Sources */,
+				CEE574F5263092A400EA64B7 /* Date+.swift in Sources */,
 				CEEE573D262A952100C39358 /* MockProviderFactory.swift in Sources */,
 				CEE574EC26307C4D00EA64B7 /* Array+.swift in Sources */,
 				ECA49466262C2C7700CC2EB8 /* MainStarTVC.swift in Sources */,
