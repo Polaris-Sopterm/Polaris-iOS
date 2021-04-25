@@ -26,6 +26,8 @@ class AddTodoVC: HalfModalVC {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        PolarisToastManager.shared.showToast(with: "안녕하세요")
     }
     
     // MARK: - Set Up
