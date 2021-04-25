@@ -24,9 +24,6 @@ class AddTodoDayTableViewCell: AddTodoTableViewCell {
         self.registerCell()
         self.layoutColletionView()
         self.bindCollectionView()
-        
-        print(Date.todayDay)
-        print(Date.todayWeekDay)
     }
     
     // MARK: - Set Up
