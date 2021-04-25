@@ -26,9 +26,9 @@ class PerDayItemCollectionViewCell: UICollectionViewCell {
         self.makeRounded(cornerRadius: 15)
     }
     
-    func configure(day: String, dayNumber: Int) {
-        self.dayLabel.text       = day
-        self.dayNumberLabel.text = "\(dayNumber)"
+    func configure(weekday: String, day: Int) {
+        self.dayLabel.text       = weekday
+        self.dayNumberLabel.text = "\(day)"
     }
     
     private func update(by isSelected: Bool) {

@@ -46,12 +46,11 @@ class AddTodoDayTableViewCell: AddTodoTableViewCell {
         self.collectionView.rx.setDelegate(self)
             .disposed(by: self.disposeBag)
         
-        self.viewModel.days
+        self.viewModel.daysSubject
             .bind(to: self.collectionView.rx.items) { collectionView, index, item in
                 guard let perDayCell = collectionView.dequeueReusableCell(cell: PerDayItemCollectionViewCell.self, forIndexPath: IndexPath(row: index, section: 0)) else { return UICollectionViewCell() }
                 
-                perDayCell.configure(day: "월", dayNumber: 1)
-                
+                perDayCell.configure(weekday: item.weekday, day: item.day)
                 return perDayCell
             }
             .disposed(by: self.disposeBag)
