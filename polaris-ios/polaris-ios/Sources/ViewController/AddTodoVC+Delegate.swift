@@ -14,3 +14,10 @@ extension AddTodoVC: AddTodoTextTableViewCellDelegate {
         print(didChangeText)
     }
 }
+
+extension AddTodoVC: AddTodoDayTableViewCellDelegate {
+    func addTodoDayTableViewCell(_ addTodoDayTableViewCell: AddTodoDayTableViewCell, didSelectDay: Int, didSelectWeekday: Date.WeekDay) {
+        print(didSelectDay, didSelectWeekday)
+    }
+}
+

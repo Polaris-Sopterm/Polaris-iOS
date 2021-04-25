@@ -8,12 +8,19 @@
 import UIKit
 import RxSwift
 
+protocol AddTodoDayTableViewCellDelegate: AddTodoTableViewCellDelegate {
+    func addTodoDayTableViewCell(_ addTodoDayTableViewCell: AddTodoDayTableViewCell, didSelectDay: Int, didSelectWeekday: Date.WeekDay)
+}
+
 class AddTodoDayTableViewCell: AddTodoTableViewCell {
     override class var cellHeight: CGFloat {
         let labelHeight: CGFloat = 17
         let spacing: CGFloat     = 15
         return (verticalInset * 2) + dayCellHeight + spacing + labelHeight
     }
+    
+    override var delegate: AddTodoTableViewCellDelegate? { didSet { self._delegate = delegate as? AddTodoDayTableViewCellDelegate } }
+    weak var _delegate: AddTodoDayTableViewCellDelegate?
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -43,9 +50,6 @@ class AddTodoDayTableViewCell: AddTodoTableViewCell {
     
     // MARK: - Bind
     private func bindCollectionView() {
-        self.collectionView.rx.setDelegate(self)
-            .disposed(by: self.disposeBag)
-        
         self.viewModel.daysSubject
             .bind(to: self.collectionView.rx.items) { collectionView, index, item in
                 guard let perDayCell = collectionView.dequeueReusableCell(cell: PerDayItemCollectionViewCell.self, forIndexPath: IndexPath(row: index, section: 0)) else { return UICollectionViewCell() }
@@ -53,6 +57,23 @@ class AddTodoDayTableViewCell: AddTodoTableViewCell {
                 perDayCell.configure(weekday: item.weekday, day: item.day)
                 return perDayCell
             }
+            .disposed(by: self.disposeBag)
+        
+        self.collectionView.rx.itemSelected
+            .subscribe(onNext: { [weak self] indexPath in
+                guard let self = self else { return }
+                guard let selectedDay = try? self.viewModel.daysSubject.value()[safe: indexPath.row] else { return }
+                self.viewModel.selectedDaySubject.onNext(selectedDay)
+            })
+            .disposed(by: self.disposeBag)
+        
+        self.viewModel.selectedDaySubject
+            .subscribe(onNext: { [weak self] selectedDay in
+                guard let self = self else { return }
+                guard let selectedDay = selectedDay else { return }
+                
+                self._delegate?.addTodoDayTableViewCell(self, didSelectDay: selectedDay.day, didSelectWeekday: selectedDay.weekday)
+            })
             .disposed(by: self.disposeBag)
     }
     
@@ -64,8 +85,4 @@ class AddTodoDayTableViewCell: AddTodoTableViewCell {
     
     private var viewModel  = AddTodoDayViewModel()
     private var disposeBag = DisposeBag()
-}
-
-extension AddTodoDayTableViewCell: UICollectionViewDelegate {
-    
 }

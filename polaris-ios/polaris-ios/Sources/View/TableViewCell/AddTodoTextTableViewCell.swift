@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 protocol AddTodoTextTableViewCellDelegate: AddTodoTableViewCellDelegate {
-    func addTodoTextTableViewCell(_ tableViewCell: AddTodoTextTableViewCell, didChangeText: String)
+    func addTodoTextTableViewCell(_ addTodoTextTableViewCell: AddTodoTextTableViewCell, didChangeText: String)
 }
 
 class AddTodoTextTableViewCell: AddTodoTableViewCell {
