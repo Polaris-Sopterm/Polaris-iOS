@@ -27,3 +27,8 @@ extension AddTodoVC: AddTodoFixOnTopTableViewCellDelegate {
     }
 }
 
+extension AddTodoVC: AddTodoDropdownTableViewCellDelegate {
+    func addTodoDropdownTableViewCell(_ addTodoDropdownTableViewCell: AddTodoDropdownTableViewCell, didSelectedMenu: String) {
+        print(didSelectedMenu)
+    }
+}

@@ -9,8 +9,15 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+protocol AddTodoDropdownTableViewCellDelegate: AddTodoTableViewCellDelegate {
+    func addTodoDropdownTableViewCell(_ addTodoDropdownTableViewCell: AddTodoDropdownTableViewCell, didSelectedMenu: String)
+}
+
 class AddTodoDropdownTableViewCell: AddTodoTableViewCell {
     override class var cellHeight: CGFloat { return UITableView.automaticDimension }
+    
+    override weak var delegate: AddTodoTableViewCellDelegate? { didSet { self._delegate = self.delegate as? AddTodoDropdownTableViewCellDelegate } }
+    weak var _delegate: AddTodoDropdownTableViewCellDelegate?
     
     @IBOutlet weak var containerView: UIStackView!
     @IBOutlet weak var selectedLabel: UILabel!
@@ -47,6 +54,7 @@ class AddTodoDropdownTableViewCell: AddTodoTableViewCell {
                 
                 if let selectedMenu = selectedMenu {
                     self.selectedLabel.text = selectedMenu
+                    self._delegate?.addTodoDropdownTableViewCell(self, didSelectedMenu: selectedMenu)
                 } else {
                     self.selectedLabel.text = "선택 안함"
                 }
@@ -73,11 +81,19 @@ class AddTodoDropdownTableViewCell: AddTodoTableViewCell {
                     self.tableViewHeightConstraint.constant = 341
                     self.containerView.layer.borderWidth    = 1
                     self.containerView.layer.borderColor    = type(of: self).selectBorderColor.cgColor
+                    
+                    UIView.animate(withDuration: type(of: self).duration) {
+                        self.dropdownButton.transform = CGAffineTransform(rotationAngle: .pi)
+                    }
                 }
                 else {
                     self.tableViewHeightConstraint.constant = 0
                     self.containerView.layer.borderWidth    = 0
                     self.containerView.layer.borderColor    = UIColor.clear.cgColor
+                    
+                    UIView.animate(withDuration: type(of: self).duration) {
+                        self.dropdownButton.transform = .identity
+                    }
                 }
                 
                 UIView.animate(withDuration: type(of: self).duration, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, options: []) {
