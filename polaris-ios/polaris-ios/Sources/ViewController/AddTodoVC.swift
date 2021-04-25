@@ -16,6 +16,7 @@ class AddTodoVC: HalfModalVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        self.setupTitle()
         self.setupTableView()
         self.registerCell()
         self.bindButton()
@@ -29,6 +30,12 @@ class AddTodoVC: HalfModalVC {
     // MARK: - Set Up
     func setupAddOptions(_ options: AddOptions) {
         self.addOptions = options
+    }
+    
+    private func setupTitle() {
+        if self.addOptions == .perDayAddTodo            { self.titleLabel.text = "3월 1일의 할 일" }
+        else if self.addOptions == .perJourneyAddTodo   { self.titleLabel.text = "폴라리스의 할 일" }
+        else                                            { self.titleLabel.text = "여정 추가하기" }
     }
     
     private func setupTableView() {
@@ -65,6 +72,7 @@ class AddTodoVC: HalfModalVC {
         self.viewModel.addListTypes
             .bind(to: self.tableView.rx.items) { tableView, index, item in
                 guard let addTodoCell = tableView.dequeueReusableCell(cell: item, forIndexPath: IndexPath(row: index, section: 0)) as? AddTodoTableViewCellProtocol else { return UITableViewCell() }
+                addTodoCell.delegate = self
                 addTodoCell.configure(by: self.addOptions)
                 return addTodoCell
             }
@@ -75,6 +83,7 @@ class AddTodoVC: HalfModalVC {
         didSet { self.viewModel.addListTypes.onNext(self.addOptions.addCellTypes) }
     }
     
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var addButton: AddButton!
     

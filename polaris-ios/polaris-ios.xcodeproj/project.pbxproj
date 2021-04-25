@@ -26,6 +26,7 @@
 		CE574D9E263524140046D20A /* SelectStarItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE574D9C263524140046D20A /* SelectStarItemCollectionViewCell.xib */; };
 		CE574DA226352A6D0046D20A /* PolarisStar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE574DA126352A6D0046D20A /* PolarisStar.swift */; };
 		CE574DA526352CB60046D20A /* AddTodoSelectStarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE574DA426352CB60046D20A /* AddTodoSelectStarViewModel.swift */; };
+		CE574DA8263555330046D20A /* AddTodoVC+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE574DA7263555330046D20A /* AddTodoVC+Delegate.swift */; };
 		CEC48ED4262DCA9100FD887F /* DropdownItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC48ED2262DCA9100FD887F /* DropdownItemTableViewCell.swift */; };
 		CEC48ED5262DCA9100FD887F /* DropdownItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC48ED3262DCA9100FD887F /* DropdownItemTableViewCell.xib */; };
 		CEC48ED9262DCD2A00FD887F /* AddTodoDropdownViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC48ED8262DCD2A00FD887F /* AddTodoDropdownViewModel.swift */; };
@@ -108,6 +109,7 @@
 		CE574D9C263524140046D20A /* SelectStarItemCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectStarItemCollectionViewCell.xib; sourceTree = "<group>"; };
 		CE574DA126352A6D0046D20A /* PolarisStar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarisStar.swift; sourceTree = "<group>"; };
 		CE574DA426352CB60046D20A /* AddTodoSelectStarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoSelectStarViewModel.swift; sourceTree = "<group>"; };
+		CE574DA7263555330046D20A /* AddTodoVC+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddTodoVC+Delegate.swift"; sourceTree = "<group>"; };
 		CEC48ED2262DCA9100FD887F /* DropdownItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownItemTableViewCell.swift; sourceTree = "<group>"; };
 		CEC48ED3262DCA9100FD887F /* DropdownItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DropdownItemTableViewCell.xib; sourceTree = "<group>"; };
 		CEC48ED8262DCD2A00FD887F /* AddTodoDropdownViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoDropdownViewModel.swift; sourceTree = "<group>"; };
@@ -427,6 +429,7 @@
 				CEEE575F262AD62C00C39358 /* AddTodoVC.swift */,
 				CEEE5769262AE47B00C39358 /* SampleViewController.swift */,
 				ECA49461262C20DD00CC2EB8 /* MainSceneVC.swift */,
+				CE574DA7263555330046D20A /* AddTodoVC+Delegate.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -614,6 +617,7 @@
 				CEEE5746262A958B00C39358 /* UserDefaultKey.swift in Sources */,
 				ECA49478262C46BB00CC2EB8 /* MainSceneViewModel.swift in Sources */,
 				ECA49470262C2DD200CC2EB8 /* MainStarCVC.swift in Sources */,
+				CE574DA8263555330046D20A /* AddTodoVC+Delegate.swift in Sources */,
 				CEEE5750262A965400C39358 /* HalfModalVC.swift in Sources */,
 				ECA4945B262C177D00CC2EB8 /* ImageName.swift in Sources */,
 				CE04A036262340D1007C98E2 /* AppDelegate.swift in Sources */,

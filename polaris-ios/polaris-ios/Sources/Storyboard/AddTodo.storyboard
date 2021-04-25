@@ -163,6 +163,7 @@
                         <outlet property="cancelButton" destination="gqL-fC-gRl" id="7cd-eH-Ni9"/>
                         <outlet property="halfModalView" destination="3EH-GP-kQ8" id="Ye5-OB-4xo"/>
                         <outlet property="tableView" destination="uK1-zG-Czz" id="Tf2-9d-RV2"/>
+                        <outlet property="titleLabel" destination="fFJ-bK-g1Z" id="lVh-bb-BSH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fLP-AQ-pFr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

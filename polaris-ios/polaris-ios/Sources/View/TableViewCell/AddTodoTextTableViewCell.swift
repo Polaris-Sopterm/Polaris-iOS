@@ -9,6 +9,10 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+protocol AddTodoTextTableViewCellDelegate: AddTodoTableViewCellDelegate {
+    func addTodoTextTableViewCell(_ tableViewCell: AddTodoTextTableViewCell, didChangeText: String)
+}
+
 class AddTodoTextTableViewCell: AddTodoTableViewCell {
     class override var cellHeight: CGFloat {
         let textFieldHeight: CGFloat = (screenRaito * 53)
@@ -16,6 +20,9 @@ class AddTodoTextTableViewCell: AddTodoTableViewCell {
         let labelHeight: CGFloat     = 17
         return (verticalInset * 2) + space + textFieldHeight + labelHeight
     }
+    
+    override weak var delegate: AddTodoTableViewCellDelegate? { didSet { _delegate = self.delegate as? AddTodoTextTableViewCellDelegate } }
+    weak var _delegate: AddTodoTextTableViewCellDelegate?
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var textFieldContainerView: UIView!
@@ -32,6 +39,7 @@ class AddTodoTextTableViewCell: AddTodoTableViewCell {
     private func setupTextFieldView() {
         guard let polarisMarginTextFieldView = self.polarisMarginTextFieldView else { return }
         self.textFieldContainerView.addSubview(polarisMarginTextFieldView)
+        self.polarisMarginTextFieldView?.delegate = self
     }
     
     override func configure(by addOptions: AddTodoVC.AddOptions) {
@@ -65,5 +73,11 @@ extension AddTodoTextTableViewCell {
             case .journey:   return "이번주 목표한 일을 적어주세요."
             }
         }
+    }
+}
+
+extension AddTodoTextTableViewCell: PolarisMarginTextFieldDelegate {
+    func polarisMarginTextField(_ polarisMarginTextField: PolarisMarginTextField, didChangeText: String) {
+        self._delegate?.addTodoTextTableViewCell(self, didChangeText: didChangeText)
     }
 }
