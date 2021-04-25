@@ -20,6 +20,11 @@
 		CE04A06A2623528C007C98E2 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A0692623528B007C98E2 /* UIViewController+.swift */; };
 		CE04A06E2623595D007C98E2 /* StoryboardName.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A06D2623595D007C98E2 /* StoryboardName.swift */; };
 		CE04A07526235BD1007C98E2 /* DefaultSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A07426235BD1007C98E2 /* DefaultSession.swift */; };
+		CE574D97263517B60046D20A /* AddTodoSelectStarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE574D95263517B60046D20A /* AddTodoSelectStarTableViewCell.swift */; };
+		CE574D98263517B60046D20A /* AddTodoSelectStarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE574D96263517B60046D20A /* AddTodoSelectStarTableViewCell.xib */; };
+		CE574D9D263524140046D20A /* SelectStarItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE574D9B263524140046D20A /* SelectStarItemCollectionViewCell.swift */; };
+		CE574D9E263524140046D20A /* SelectStarItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE574D9C263524140046D20A /* SelectStarItemCollectionViewCell.xib */; };
+		CE574DA226352A6D0046D20A /* PolarisStar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE574DA126352A6D0046D20A /* PolarisStar.swift */; };
 		CEC48ED4262DCA9100FD887F /* DropdownItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC48ED2262DCA9100FD887F /* DropdownItemTableViewCell.swift */; };
 		CEC48ED5262DCA9100FD887F /* DropdownItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC48ED3262DCA9100FD887F /* DropdownItemTableViewCell.xib */; };
 		CEC48ED9262DCD2A00FD887F /* AddTodoDropdownViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC48ED8262DCD2A00FD887F /* AddTodoDropdownViewModel.swift */; };
@@ -96,6 +101,11 @@
 		CE04A0692623528B007C98E2 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		CE04A06D2623595D007C98E2 /* StoryboardName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardName.swift; sourceTree = "<group>"; };
 		CE04A07426235BD1007C98E2 /* DefaultSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSession.swift; sourceTree = "<group>"; };
+		CE574D95263517B60046D20A /* AddTodoSelectStarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoSelectStarTableViewCell.swift; sourceTree = "<group>"; };
+		CE574D96263517B60046D20A /* AddTodoSelectStarTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTodoSelectStarTableViewCell.xib; sourceTree = "<group>"; };
+		CE574D9B263524140046D20A /* SelectStarItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectStarItemCollectionViewCell.swift; sourceTree = "<group>"; };
+		CE574D9C263524140046D20A /* SelectStarItemCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectStarItemCollectionViewCell.xib; sourceTree = "<group>"; };
+		CE574DA126352A6D0046D20A /* PolarisStar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarisStar.swift; sourceTree = "<group>"; };
 		CEC48ED2262DCA9100FD887F /* DropdownItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownItemTableViewCell.swift; sourceTree = "<group>"; };
 		CEC48ED3262DCA9100FD887F /* DropdownItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DropdownItemTableViewCell.xib; sourceTree = "<group>"; };
 		CEC48ED8262DCD2A00FD887F /* AddTodoDropdownViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoDropdownViewModel.swift; sourceTree = "<group>"; };
@@ -321,6 +331,7 @@
 				CEEE5749262A95BD00C39358 /* UserDefaultWrapper.swift */,
 				CEEE574C262A963D00C39358 /* DeviceInfo.swift */,
 				EC49B958262EAF3D0080F8C3 /* StarNames.swift */,
+				CE574DA126352A6D0046D20A /* PolarisStar.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -380,6 +391,7 @@
 				CEEE57A4262C297700C39358 /* AddTodoDropdownTableViewCell.xib */,
 				CEC48ED3262DCA9100FD887F /* DropdownItemTableViewCell.xib */,
 				CEE574D72630422600EA64B7 /* AddTodoDayTableViewCell.xib */,
+				CE574D96263517B60046D20A /* AddTodoSelectStarTableViewCell.xib */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -391,6 +403,7 @@
 				ECA4943E26284B0B00CC2EB8 /* TodoDateHeaderView.xib */,
 				ECA49454262B0D0900CC2EB8 /* TodoDateTodayHeaderView.xib */,
 				CEE574EF26307D7C00EA64B7 /* PerDayItemCollectionViewCell.xib */,
+				CE574D9C263524140046D20A /* SelectStarItemCollectionViewCell.xib */,
 			);
 			path = CollectionViewCell;
 			sourceTree = "<group>";
@@ -427,6 +440,7 @@
 				CEC48ED2262DCA9100FD887F /* DropdownItemTableViewCell.swift */,
 				CEE574D62630422600EA64B7 /* AddTodoDayTableViewCell.swift */,
 				ECA49464262C2C7700CC2EB8 /* MainStarTVC.swift */,
+				CE574D95263517B60046D20A /* AddTodoSelectStarTableViewCell.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -436,6 +450,7 @@
 			children = (
 				ECA4946E262C2DD200CC2EB8 /* MainStarCVC.swift */,
 				CEE574EE26307D7C00EA64B7 /* PerDayItemCollectionViewCell.swift */,
+				CE574D9B263524140046D20A /* SelectStarItemCollectionViewCell.swift */,
 			);
 			path = CollectionViewCell;
 			sourceTree = "<group>";
@@ -504,6 +519,7 @@
 				CEEE575D262AD5FA00C39358 /* AddTodo.storyboard in Resources */,
 				ECA494242628223200CC2EB8 /* TodoDateTVC.xib in Resources */,
 				CEE574F126307D7C00EA64B7 /* PerDayItemCollectionViewCell.xib in Resources */,
+				CE574D98263517B60046D20A /* AddTodoSelectStarTableViewCell.xib in Resources */,
 				CE04A042262340D3007C98E2 /* LaunchScreen.storyboard in Resources */,
 				CE04A03F262340D3007C98E2 /* Assets.xcassets in Resources */,
 				CEEE57A6262C297700C39358 /* AddTodoDropdownTableViewCell.xib in Resources */,
@@ -511,6 +527,7 @@
 				ECA49467262C2C7700CC2EB8 /* MainStarTVC.xib in Resources */,
 				CEEE576F262AE6F400C39358 /* AddTodoTextTableViewCell.xib in Resources */,
 				ECA49419262817D500CC2EB8 /* TodoDate.storyboard in Resources */,
+				CE574D9E263524140046D20A /* SelectStarItemCollectionViewCell.xib in Resources */,
 				ECA49456262B0D0900CC2EB8 /* TodoDateTodayHeaderView.xib in Resources */,
 				CE04A03D262340D1007C98E2 /* Main.storyboard in Resources */,
 				CEC48ED5262DCA9100FD887F /* DropdownItemTableViewCell.xib in Resources */,
@@ -583,6 +600,7 @@
 				ECA4944426296F6E00CC2EB8 /* TodoDateTVCViewModel.swift in Sources */,
 				CEE574F5263092A400EA64B7 /* Date+.swift in Sources */,
 				CEEE573D262A952100C39358 /* MockProviderFactory.swift in Sources */,
+				CE574DA226352A6D0046D20A /* PolarisStar.swift in Sources */,
 				CEE574EC26307C4D00EA64B7 /* Array+.swift in Sources */,
 				ECA49466262C2C7700CC2EB8 /* MainStarTVC.swift in Sources */,
 				CEEE5743262A955D00C39358 /* PolarisUserManager.swift in Sources */,
@@ -610,12 +628,14 @@
 				ECA494472629729000CC2EB8 /* TodoDateModel.swift in Sources */,
 				ECA49475262C461700CC2EB8 /* MainStarModel.swift in Sources */,
 				CEEE5760262AD62C00C39358 /* AddTodoVC.swift in Sources */,
+				CE574D9D263524140046D20A /* SelectStarItemCollectionViewCell.swift in Sources */,
 				CEEE576A262AE47B00C39358 /* SampleViewController.swift in Sources */,
 				CEEE576E262AE6F400C39358 /* AddTodoTextTableViewCell.swift in Sources */,
 				CEEE5777262BE51C00C39358 /* PolarisMarginTextField.swift in Sources */,
 				ECA4943F26284B0B00CC2EB8 /* TodoDateHeaderView.swift in Sources */,
 				EC49B959262EAF3D0080F8C3 /* StarNames.swift in Sources */,
 				ECA4942C262829EA00CC2EB8 /* TodoDateViewModel.swift in Sources */,
+				CE574D97263517B60046D20A /* AddTodoSelectStarTableViewCell.swift in Sources */,
 				CE04A05D26234606007C98E2 /* UIColor+.swift in Sources */,
 				CE04A06326234701007C98E2 /* UIView+.swift in Sources */,
 				ECA4947B262C48BB00CC2EB8 /* MainStarCVCViewModel.swift in Sources */,
