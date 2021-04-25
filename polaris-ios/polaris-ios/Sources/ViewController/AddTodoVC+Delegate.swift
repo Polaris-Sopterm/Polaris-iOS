@@ -21,3 +21,9 @@ extension AddTodoVC: AddTodoDayTableViewCellDelegate {
     }
 }
 
+extension AddTodoVC: AddTodoFixOnTopTableViewCellDelegate {
+    func addTodoFixOnTopTableViewCell(_ addTodoFixOnTopTableViewCell: AddTodoFixOnTopTableViewCell, shouldFixed: Bool) {
+        print(shouldFixed)
+    }
+}
+

@@ -8,6 +8,10 @@
 import UIKit
 import RxSwift
 
+protocol AddTodoFixOnTopTableViewCellDelegate: AddTodoTableViewCellDelegate {
+    func addTodoFixOnTopTableViewCell(_ addTodoFixOnTopTableViewCell: AddTodoFixOnTopTableViewCell, shouldFixed: Bool)
+}
+
 class AddTodoFixOnTopTableViewCell: AddTodoTableViewCell {
     override class var cellHeight: CGFloat {
         let verticalInset: CGFloat  = 10
@@ -16,6 +20,9 @@ class AddTodoFixOnTopTableViewCell: AddTodoTableViewCell {
         let buttonHeight: CGFloat   = 61
         return (verticalInset * 2) + labelHeight + spacing + buttonHeight
     }
+    
+    override weak var delegate: AddTodoTableViewCellDelegate? { didSet { self._delegate = self.delegate as? AddTodoFixOnTopTableViewCellDelegate; self._delegate?.addTodoFixOnTopTableViewCell(self, shouldFixed: false) } }
+    weak var _delegate: AddTodoFixOnTopTableViewCellDelegate?
     
     @IBOutlet weak var notFixBackgroundView: UIView!
     @IBOutlet weak var notFixButton: UIButton!
@@ -91,17 +98,19 @@ class AddTodoFixOnTopTableViewCell: AddTodoTableViewCell {
                 
                 if isFixed == true  { self.setFixSelected() }
                 else                { self.setNotFixSelected() }
+                
+                self._delegate?.addTodoFixOnTopTableViewCell(self, shouldFixed: isFixed)
             })
             .disposed(by: self.disposeBag)
     }
     
-    private var fixed = BehaviorSubject<Bool?>(value: nil)
+    private var fixed = BehaviorSubject<Bool>(value: false)
     
-    static var selectedBackgroundColor: UIColor     = UIColor.inactiveSky
-    static var unselectedBackgroundColor: UIColor   = UIColor.field
+    private static let selectedBackgroundColor: UIColor     = UIColor.inactiveSky
+    private static let unselectedBackgroundColor: UIColor   = UIColor.field
     
-    static var selectedBorderColor: UIColor         = UIColor.mainSky
-    static var unselectedBorderColor: UIColor       = UIColor.inactiveText
+    private static let selectedBorderColor: UIColor         = UIColor.mainSky
+    private static let unselectedBorderColor: UIColor       = UIColor.inactiveText
     
-    var disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
 }
