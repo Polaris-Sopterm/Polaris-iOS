@@ -19,7 +19,7 @@ class AddTodoDayTableViewCell: AddTodoTableViewCell {
         return (verticalInset * 2) + dayCellHeight + spacing + labelHeight
     }
     
-    override var delegate: AddTodoTableViewCellDelegate? { didSet { self._delegate = delegate as? AddTodoDayTableViewCellDelegate } }
+    override weak var delegate: AddTodoTableViewCellDelegate? { didSet { self._delegate = delegate as? AddTodoDayTableViewCellDelegate } }
     weak var _delegate: AddTodoDayTableViewCellDelegate?
     
     @IBOutlet weak var collectionView: UICollectionView!

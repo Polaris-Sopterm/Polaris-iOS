@@ -11,19 +11,19 @@ import RxSwift
 class AddTodoSelectStarViewModel {
     lazy var starsSubject   = BehaviorSubject<[PolarisStar]>(value: self.initPolarisStars())
     
-    var selectedFlagSubject = PublishSubject<IndexPath>()
-    var selectedStarsSet    = Set<IndexPath>()
+    var selectedFlagSubject = PublishSubject<PolarisStar>()
+    var selectedStarsSet    = Set<PolarisStar>()
     
     init() {
         _ = self.selectedFlagSubject
-            .subscribe(onNext: { [weak self] indexPath in
+            .subscribe(onNext: { [weak self] selectedStar in
                 guard let self = self else { return }
                 defer { self.starsSubject.onNext(self.initPolarisStars()) }
                 
-                if self.selectedStarsSet.contains(indexPath) { self.selectedStarsSet.remove(indexPath); return }
+                if self.selectedStarsSet.contains(selectedStar) { self.selectedStarsSet.remove(selectedStar); return }
                 if self.selectedStarsSet.count >= self.selectedMaxCount { return }
                 
-                self.selectedStarsSet.insert(indexPath)
+                self.selectedStarsSet.insert(selectedStar)
             })
     }
     

@@ -9,8 +9,15 @@ import UIKit
 import RxCocoa
 import RxSwift
 
+protocol AddTodoSelectStarTableViewCellDelegate: AddTodoTableViewCellDelegate {
+    func addTodoSelectStarTableViewCell(_ addTodoSelectStarTableViewCell: AddTodoSelectStarTableViewCell, didSelectedStars stars: Set<PolarisStar>)
+}
+
 class AddTodoSelectStarTableViewCell: AddTodoTableViewCell {
     override class var cellHeight: CGFloat { return 397 * screenRatio }
+    
+    override weak var delegate: AddTodoTableViewCellDelegate? { didSet { self._delegate = self.delegate as? AddTodoSelectStarTableViewCellDelegate } }
+    weak var _delegate: AddTodoSelectStarTableViewCellDelegate?
 
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -45,8 +52,7 @@ class AddTodoSelectStarTableViewCell: AddTodoTableViewCell {
                 guard let starItemCell = collectionView.dequeueReusableCell(cell: SelectStarItemCollectionViewCell.self, forIndexPath: IndexPath(row: index
                                                                                                                                                  , section: 0)) else { return UICollectionViewCell() }
                 
-                let isSelected = self.viewModel.selectedStarsSet.contains(IndexPath(row: index, section: 0))
-                
+                let isSelected = self.viewModel.selectedStarsSet.contains(item)
                 starItemCell.configure(by: item, isSelected)
                 return starItemCell
             }
@@ -54,7 +60,11 @@ class AddTodoSelectStarTableViewCell: AddTodoTableViewCell {
         
         self.collectionView.rx.itemSelected
             .subscribe(onNext: { [weak self] indexPath in
-                self?.viewModel.selectedFlagSubject.onNext(indexPath)
+                guard let self = self else { return }
+                guard let selectedStar = try? self.viewModel.starsSubject.value()[safe: indexPath.row] else { return }
+                
+                self.viewModel.selectedFlagSubject.onNext(selectedStar)
+                self._delegate?.addTodoSelectStarTableViewCell(self, didSelectedStars: self.viewModel.selectedStarsSet)
             })
             .disposed(by: self.disposeBag)
     }

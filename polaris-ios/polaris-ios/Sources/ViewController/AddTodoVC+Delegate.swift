@@ -32,3 +32,9 @@ extension AddTodoVC: AddTodoDropdownTableViewCellDelegate {
         print(didSelectedMenu)
     }
 }
+
+extension AddTodoVC: AddTodoSelectStarTableViewCellDelegate {
+    func addTodoSelectStarTableViewCell(_ addTodoSelectStarTableViewCell: AddTodoSelectStarTableViewCell, didSelectedStars stars: Set<PolarisStar>) {
+        print(stars)
+    }
+}
