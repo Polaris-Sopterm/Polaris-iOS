@@ -10,31 +10,31 @@ import Foundation
 extension AddTodoVC: AddTodoTableViewCellDelegate {}
 
 extension AddTodoVC: AddTodoTextTableViewCellDelegate {
-    func addTodoTextTableViewCell(_ tableViewCell: AddTodoTextTableViewCell, didChangeText: String) {
-        print(didChangeText)
+    func addTodoTextTableViewCell(_ tableViewCell: AddTodoTextTableViewCell, didChangeText text: String) {
+        self.viewModel.addTextSubject.onNext(text)
     }
 }
 
 extension AddTodoVC: AddTodoDayTableViewCellDelegate {
-    func addTodoDayTableViewCell(_ addTodoDayTableViewCell: AddTodoDayTableViewCell, didSelectDay: Int, didSelectWeekday: Date.WeekDay) {
-        print(didSelectDay, didSelectWeekday)
+    func addTodoDayTableViewCell(_ addTodoDayTableViewCell: AddTodoDayTableViewCell, didSelectDay day: Int, didSelectWeekday weekday: Date.WeekDay) {
+        self.viewModel.selectDaySubject.onNext((weekday, day))
     }
 }
 
 extension AddTodoVC: AddTodoFixOnTopTableViewCellDelegate {
-    func addTodoFixOnTopTableViewCell(_ addTodoFixOnTopTableViewCell: AddTodoFixOnTopTableViewCell, shouldFixed: Bool) {
-        print(shouldFixed)
+    func addTodoFixOnTopTableViewCell(_ addTodoFixOnTopTableViewCell: AddTodoFixOnTopTableViewCell, shouldFixed isFixed: Bool) {
+        self.viewModel.fixOnTopSubject.onNext(isFixed)
     }
 }
 
 extension AddTodoVC: AddTodoDropdownTableViewCellDelegate {
-    func addTodoDropdownTableViewCell(_ addTodoDropdownTableViewCell: AddTodoDropdownTableViewCell, didSelectedMenu: String) {
-        print(didSelectedMenu)
+    func addTodoDropdownTableViewCell(_ addTodoDropdownTableViewCell: AddTodoDropdownTableViewCell, didSelectedMenu menu: String) {
+        self.viewModel.dropdownSubject.onNext(menu)
     }
 }
 
 extension AddTodoVC: AddTodoSelectStarTableViewCellDelegate {
     func addTodoSelectStarTableViewCell(_ addTodoSelectStarTableViewCell: AddTodoSelectStarTableViewCell, didSelectedStars stars: Set<PolarisStar>) {
-        print(stars)
+        self.viewModel.selectStarSubject.onNext(stars)
     }
 }

@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 
 protocol AddTodoFixOnTopTableViewCellDelegate: AddTodoTableViewCellDelegate {
-    func addTodoFixOnTopTableViewCell(_ addTodoFixOnTopTableViewCell: AddTodoFixOnTopTableViewCell, shouldFixed: Bool)
+    func addTodoFixOnTopTableViewCell(_ addTodoFixOnTopTableViewCell: AddTodoFixOnTopTableViewCell, shouldFixed isFixed: Bool)
 }
 
 class AddTodoFixOnTopTableViewCell: AddTodoTableViewCell {

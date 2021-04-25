@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 
 protocol AddTodoDayTableViewCellDelegate: AddTodoTableViewCellDelegate {
-    func addTodoDayTableViewCell(_ addTodoDayTableViewCell: AddTodoDayTableViewCell, didSelectDay: Int, didSelectWeekday: Date.WeekDay)
+    func addTodoDayTableViewCell(_ addTodoDayTableViewCell: AddTodoDayTableViewCell, didSelectDay day: Int, didSelectWeekday weekday: Date.WeekDay)
 }
 
 class AddTodoDayTableViewCell: AddTodoTableViewCell {

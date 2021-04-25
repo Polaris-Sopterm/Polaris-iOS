@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 protocol AddTodoDropdownTableViewCellDelegate: AddTodoTableViewCellDelegate {
-    func addTodoDropdownTableViewCell(_ addTodoDropdownTableViewCell: AddTodoDropdownTableViewCell, didSelectedMenu: String)
+    func addTodoDropdownTableViewCell(_ addTodoDropdownTableViewCell: AddTodoDropdownTableViewCell, didSelectedMenu menu: String)
 }
 
 class AddTodoDropdownTableViewCell: AddTodoTableViewCell {

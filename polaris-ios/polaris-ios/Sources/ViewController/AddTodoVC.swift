@@ -16,10 +16,11 @@ class AddTodoVC: HalfModalVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.setupTitle()
+        self.setupTitleLabel()
         self.setupTableView()
         self.registerCell()
-        self.bindButton()
+        self.bindButtons()
+        self.bindEnableButton()
         self.bindTableView()
     }
     
@@ -29,13 +30,13 @@ class AddTodoVC: HalfModalVC {
     
     // MARK: - Set Up
     func setupAddOptions(_ options: AddOptions) {
-        self.addOptions = options
+        self.viewModel.setViewModel(by: options)
     }
     
-    private func setupTitle() {
-        if self.addOptions == .perDayAddTodo            { self.titleLabel.text = "3월 1일의 할 일" }
-        else if self.addOptions == .perJourneyAddTodo   { self.titleLabel.text = "폴라리스의 할 일" }
-        else                                            { self.titleLabel.text = "여정 추가하기" }
+    private func setupTitleLabel() {
+        if self.viewModel.currentAddOption == .perDayAddTodo            { self.titleLabel.text = "3월 1일의 할 일" }
+        else if self.viewModel.currentAddOption == .perJourneyAddTodo   { self.titleLabel.text = "폴라리스의 할 일" }
+        else                                                            { self.titleLabel.text = "여정 추가하기" }
     }
     
     private func setupTableView() {
@@ -45,13 +46,12 @@ class AddTodoVC: HalfModalVC {
     }
     
     private func registerCell() {
-        self.addOptions.addCellTypes.forEach { cellType in
-            self.tableView.registerCell(cell: cellType)
-        }
+        guard let cellTypes = try? self.viewModel.addListTypes.value() else { return }
+        cellTypes.forEach { cellType in self.tableView.registerCell(cell: cellType) }
     }
     
     // MARK: - Bind
-    private func bindButton() {
+    private func bindButtons() {
         self.cancelButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.halfModalViewWillDisappear()
@@ -60,7 +60,19 @@ class AddTodoVC: HalfModalVC {
         
         self.addButton.rx.tap
             .subscribe(onNext: { [weak self] in
+                // FIXME: - 추가할 때, 서버로 넘기는 로직 들어가야 함
                 self?.halfModalViewWillDisappear()
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
+    private func bindEnableButton() {
+        self.viewModel.addEnableFlagSubject
+            .distinctUntilChanged()
+            .subscribe(onNext: { [weak self] isEnable in
+                guard let self = self else { return }
+                if isEnable == true { self.addButton.enable = true }
+                else                { self.addButton.enable = false }
             })
             .disposed(by: self.disposeBag)
     }
@@ -71,24 +83,22 @@ class AddTodoVC: HalfModalVC {
         
         self.viewModel.addListTypes
             .bind(to: self.tableView.rx.items) { tableView, index, item in
-                guard let addTodoCell = tableView.dequeueReusableCell(cell: item, forIndexPath: IndexPath(row: index, section: 0)) as? AddTodoTableViewCellProtocol else { return UITableViewCell() }
+                guard let addTodoCell      = tableView.dequeueReusableCell(cell: item, forIndexPath: IndexPath(row: index, section: 0)) as? AddTodoTableViewCellProtocol,
+                      let currentAddOption = self.viewModel.currentAddOption else { return UITableViewCell() }
+                
                 addTodoCell.delegate = self
-                addTodoCell.configure(by: self.addOptions)
+                addTodoCell.configure(by: currentAddOption)
                 return addTodoCell
             }
             .disposed(by: self.disposeBag)
-    }
-    
-    private var addOptions: AddOptions = .perDayAddTodo {
-        didSet { self.viewModel.addListTypes.onNext(self.addOptions.addCellTypes) }
     }
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var addButton: AddButton!
     
-    private var viewModel   = AddTodoViewModel()
-    private var disposeBag  = DisposeBag()
+    var viewModel   = AddTodoViewModel()
+    var disposeBag  = DisposeBag()
 }
 
 extension AddTodoVC: UITableViewDelegate {
@@ -125,6 +135,15 @@ extension AddTodoVC {
             if self.contains(.fixOnTop)      { cellTypes.append(AddTodoFixOnTopTableViewCell.self) }
             if self.contains(.selectStar)    { cellTypes.append(AddTodoSelectStarTableViewCell.self) }
             return cellTypes
+        }
+        
+        var menuKey: String? {
+            if self == .addText           { return "ADD_TEXT" }
+            else if self == .selectDay    { return "SELECT_DAY" }
+            else if self == .fixOnTop     { return "FIX_ON_TOP" }
+            else if self == .dropdownMenu { return "DROPDOWN_MENU" }
+            else if self == .selectStar   { return "SELECT_STAR" }
+            else                          { return nil }
         }
     }
 }
