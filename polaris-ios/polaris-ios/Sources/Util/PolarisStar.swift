@@ -7,16 +7,16 @@
 
 import UIKit
 
-enum PolarisStar: String {
+enum PolarisStar: String, CaseIterable {
     case happiness  = "Happiness"
     case control    = "Control"
     case thanks     = "Thanks"
     case rest       = "Rest"
     case growth     = "Growth"
-    case health     = "Health"
     case change     = "Change"
-    case challenge  = "Challenge"
+    case health     = "Health"
     case overcome   = "Overcome"
+    case challenge  = "Challenge"
     
     var title: String {
         switch self {

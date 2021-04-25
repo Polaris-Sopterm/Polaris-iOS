@@ -10,9 +10,7 @@ import RxCocoa
 import RxSwift
 
 class AddTodoSelectStarTableViewCell: AddTodoTableViewCell {
-    override class var cellHeight: CGFloat {
-        return 100
-    }
+    override class var cellHeight: CGFloat { return 397 * screenRatio }
 
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -20,10 +18,16 @@ class AddTodoSelectStarTableViewCell: AddTodoTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.registerCell()
         self.layoutCollectionView()
+        self.bindCollectionView()
     }
     
     // MARK: - Set Up
+    private func registerCell() {
+        self.collectionView.registerCell(cell: SelectStarItemCollectionViewCell.self)
+    }
+    
     private func layoutCollectionView() {
         if let layout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.itemSize                 = CGSize(width: type(of: self).starCellWidth,
@@ -34,9 +38,34 @@ class AddTodoSelectStarTableViewCell: AddTodoTableViewCell {
         }
     }
     
+    // MARK: - Bind
+    private func bindCollectionView() {
+        self.viewModel.starsSubject
+            .bind(to: self.collectionView.rx.items) { collectionView, index, item in
+                guard let starItemCell = collectionView.dequeueReusableCell(cell: SelectStarItemCollectionViewCell.self, forIndexPath: IndexPath(row: index
+                                                                                                                                                 , section: 0)) else { return UICollectionViewCell() }
+                
+                let isSelected = self.viewModel.selectedStarsSet.contains(IndexPath(row: index, section: 0))
+                
+                starItemCell.configure(by: item, isSelected)
+                return starItemCell
+            }
+            .disposed(by: self.disposeBag)
+        
+        self.collectionView.rx.itemSelected
+            .subscribe(onNext: { [weak self] indexPath in
+                self?.viewModel.selectedFlagSubject.onNext(indexPath)
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
+    private static let screenRatio: CGFloat         = DeviceInfo.screenWidth / 375
     private static let verticalInset: CGFloat       = 10
     private static let horizontalInset: CGFloat     = 23
     private static let itemSpacing: CGFloat         = 8
     private static let starCellWidth: CGFloat       = (DeviceInfo.screenWidth - (2 * horizontalInset) - (2 * itemSpacing)) / 3
     private static let starCellHeight: CGFloat      = starCellWidth
+    
+    private var disposeBag = DisposeBag()
+    private var viewModel  = AddTodoSelectStarViewModel()
 }

@@ -25,6 +25,7 @@
 		CE574D9D263524140046D20A /* SelectStarItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE574D9B263524140046D20A /* SelectStarItemCollectionViewCell.swift */; };
 		CE574D9E263524140046D20A /* SelectStarItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE574D9C263524140046D20A /* SelectStarItemCollectionViewCell.xib */; };
 		CE574DA226352A6D0046D20A /* PolarisStar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE574DA126352A6D0046D20A /* PolarisStar.swift */; };
+		CE574DA526352CB60046D20A /* AddTodoSelectStarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE574DA426352CB60046D20A /* AddTodoSelectStarViewModel.swift */; };
 		CEC48ED4262DCA9100FD887F /* DropdownItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC48ED2262DCA9100FD887F /* DropdownItemTableViewCell.swift */; };
 		CEC48ED5262DCA9100FD887F /* DropdownItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC48ED3262DCA9100FD887F /* DropdownItemTableViewCell.xib */; };
 		CEC48ED9262DCD2A00FD887F /* AddTodoDropdownViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC48ED8262DCD2A00FD887F /* AddTodoDropdownViewModel.swift */; };
@@ -106,6 +107,7 @@
 		CE574D9B263524140046D20A /* SelectStarItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectStarItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		CE574D9C263524140046D20A /* SelectStarItemCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectStarItemCollectionViewCell.xib; sourceTree = "<group>"; };
 		CE574DA126352A6D0046D20A /* PolarisStar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarisStar.swift; sourceTree = "<group>"; };
+		CE574DA426352CB60046D20A /* AddTodoSelectStarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoSelectStarViewModel.swift; sourceTree = "<group>"; };
 		CEC48ED2262DCA9100FD887F /* DropdownItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownItemTableViewCell.swift; sourceTree = "<group>"; };
 		CEC48ED3262DCA9100FD887F /* DropdownItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DropdownItemTableViewCell.xib; sourceTree = "<group>"; };
 		CEC48ED8262DCD2A00FD887F /* AddTodoDropdownViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoDropdownViewModel.swift; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 				ECA4947A262C48BB00CC2EB8 /* MainStarCVCViewModel.swift */,
 				ECA4947D262C670000CC2EB8 /* MainStarTVCViewModel.swift */,
 				CEE574E826307B4400EA64B7 /* AddTodoDayViewModel.swift */,
+				CE574DA426352CB60046D20A /* AddTodoSelectStarViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -622,6 +625,7 @@
 				CEE574E926307B4400EA64B7 /* AddTodoDayViewModel.swift in Sources */,
 				CE04A06626234CEE007C98E2 /* UITableView+.swift in Sources */,
 				ECA494292628298B00CC2EB8 /* TodoModel.swift in Sources */,
+				CE574DA526352CB60046D20A /* AddTodoSelectStarViewModel.swift in Sources */,
 				CEEE5774262BE1DE00C39358 /* AddTodoTableViewCellProtocol.swift in Sources */,
 				CEEE574D262A963D00C39358 /* DeviceInfo.swift in Sources */,
 				ECA4947E262C670000CC2EB8 /* MainStarTVCViewModel.swift in Sources */,
