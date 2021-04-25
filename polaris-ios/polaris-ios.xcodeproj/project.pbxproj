@@ -27,6 +27,9 @@
 		CE574DA226352A6D0046D20A /* PolarisStar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE574DA126352A6D0046D20A /* PolarisStar.swift */; };
 		CE574DA526352CB60046D20A /* AddTodoSelectStarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE574DA426352CB60046D20A /* AddTodoSelectStarViewModel.swift */; };
 		CE574DA8263555330046D20A /* AddTodoVC+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE574DA7263555330046D20A /* AddTodoVC+Delegate.swift */; };
+		CE574DBB26357CBC0046D20A /* PolarisToastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE574DBA26357CBC0046D20A /* PolarisToastManager.swift */; };
+		CE574DBE263588E20046D20A /* PolarisToastView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE574DBD263588E20046D20A /* PolarisToastView.xib */; };
+		CE574DC1263589180046D20A /* PolarisToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE574DC0263589180046D20A /* PolarisToastView.swift */; };
 		CEC48ED4262DCA9100FD887F /* DropdownItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC48ED2262DCA9100FD887F /* DropdownItemTableViewCell.swift */; };
 		CEC48ED5262DCA9100FD887F /* DropdownItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC48ED3262DCA9100FD887F /* DropdownItemTableViewCell.xib */; };
 		CEC48ED9262DCD2A00FD887F /* AddTodoDropdownViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC48ED8262DCD2A00FD887F /* AddTodoDropdownViewModel.swift */; };
@@ -110,6 +113,9 @@
 		CE574DA126352A6D0046D20A /* PolarisStar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarisStar.swift; sourceTree = "<group>"; };
 		CE574DA426352CB60046D20A /* AddTodoSelectStarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoSelectStarViewModel.swift; sourceTree = "<group>"; };
 		CE574DA7263555330046D20A /* AddTodoVC+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddTodoVC+Delegate.swift"; sourceTree = "<group>"; };
+		CE574DBA26357CBC0046D20A /* PolarisToastManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarisToastManager.swift; sourceTree = "<group>"; };
+		CE574DBD263588E20046D20A /* PolarisToastView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PolarisToastView.xib; sourceTree = "<group>"; };
+		CE574DC0263589180046D20A /* PolarisToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarisToastView.swift; sourceTree = "<group>"; };
 		CEC48ED2262DCA9100FD887F /* DropdownItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownItemTableViewCell.swift; sourceTree = "<group>"; };
 		CEC48ED3262DCA9100FD887F /* DropdownItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DropdownItemTableViewCell.xib; sourceTree = "<group>"; };
 		CEC48ED8262DCD2A00FD887F /* AddTodoDropdownViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoDropdownViewModel.swift; sourceTree = "<group>"; };
@@ -355,6 +361,7 @@
 			isa = PBXGroup;
 			children = (
 				CEEE5742262A955D00C39358 /* PolarisUserManager.swift */,
+				CE574DBA26357CBC0046D20A /* PolarisToastManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -374,6 +381,7 @@
 			children = (
 				CEEE5765262ADBA200C39358 /* AddButton.swift */,
 				CEEE5776262BE51C00C39358 /* PolarisMarginTextField.swift */,
+				CE574DC0263589180046D20A /* PolarisToastView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -417,6 +425,7 @@
 			isa = PBXGroup;
 			children = (
 				CEEE5779262BE54900C39358 /* PolarisMarginTextField.xib */,
+				CE574DBD263588E20046D20A /* PolarisToastView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -534,6 +543,7 @@
 				CEEE576F262AE6F400C39358 /* AddTodoTextTableViewCell.xib in Resources */,
 				ECA49419262817D500CC2EB8 /* TodoDate.storyboard in Resources */,
 				CE574D9E263524140046D20A /* SelectStarItemCollectionViewCell.xib in Resources */,
+				CE574DBE263588E20046D20A /* PolarisToastView.xib in Resources */,
 				ECA49456262B0D0900CC2EB8 /* TodoDateTodayHeaderView.xib in Resources */,
 				CE04A03D262340D1007C98E2 /* Main.storyboard in Resources */,
 				CEC48ED5262DCA9100FD887F /* DropdownItemTableViewCell.xib in Resources */,
@@ -623,6 +633,7 @@
 				CE04A036262340D1007C98E2 /* AppDelegate.swift in Sources */,
 				CE04A038262340D1007C98E2 /* SceneDelegate.swift in Sources */,
 				CE04A060262346C9007C98E2 /* UICollectionView+.swift in Sources */,
+				CE574DC1263589180046D20A /* PolarisToastView.swift in Sources */,
 				CEE574D82630422600EA64B7 /* AddTodoDayTableViewCell.swift in Sources */,
 				ECA49455262B0D0900CC2EB8 /* TodoDateTodayHeaderView.swift in Sources */,
 				CEE574F026307D7C00EA64B7 /* PerDayItemCollectionViewCell.swift in Sources */,
@@ -641,6 +652,7 @@
 				CEEE576E262AE6F400C39358 /* AddTodoTextTableViewCell.swift in Sources */,
 				CEEE5777262BE51C00C39358 /* PolarisMarginTextField.swift in Sources */,
 				ECA4943F26284B0B00CC2EB8 /* TodoDateHeaderView.swift in Sources */,
+				CE574DBB26357CBC0046D20A /* PolarisToastManager.swift in Sources */,
 				EC49B959262EAF3D0080F8C3 /* StarNames.swift in Sources */,
 				ECA4942C262829EA00CC2EB8 /* TodoDateViewModel.swift in Sources */,
 				CE574D97263517B60046D20A /* AddTodoSelectStarTableViewCell.swift in Sources */,
