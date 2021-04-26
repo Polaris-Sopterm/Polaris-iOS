@@ -10,12 +10,11 @@ import RxSwift
 import RxCocoa
 
 protocol PolarisMarginTextFieldDelegate: class {
-    func polarisMarginTextField(_ polarisMarginTextField: PolarisMarginTextField, changedText: String?)
+    func polarisMarginTextField(_ polarisMarginTextField: PolarisMarginTextField, didChangeText: String)
 }
 
 class PolarisMarginTextField: UIView {
     weak var delegate: PolarisMarginTextFieldDelegate?
-    var text = BehaviorSubject<String>(value: "")
     
     // MARK: - Life Cycle
     override func awakeFromNib() {
@@ -44,8 +43,7 @@ class PolarisMarginTextField: UIView {
                 if text.isEmpty == true { self.makeDeselectedTextFieldColor() }
                 else                    { self.makeSelectedTextFieldColor() }
                 
-                self.text.onNext(text)
-                self.delegate?.polarisMarginTextField(self, changedText: text)
+                self.delegate?.polarisMarginTextField(self, didChangeText: text)
             })
             .disposed(by: self.disposeBag)
     }
@@ -55,13 +53,13 @@ class PolarisMarginTextField: UIView {
     }
     
     private func makeDeselectedTextFieldColor() {
-        self.layer.borderColor = self.deselectedBorderColor.cgColor
+        self.layer.borderColor = self.unselectedBorderColor.cgColor
     }
     
     @IBInspectable var selectedBorderColor: UIColor     = .mainSky
-    @IBInspectable var deselectedBorderColor: UIColor   = .clear
+    @IBInspectable var unselectedBorderColor: UIColor   = .clear
     
     @IBOutlet weak var textField: UITextField!
     
-    var disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
 }

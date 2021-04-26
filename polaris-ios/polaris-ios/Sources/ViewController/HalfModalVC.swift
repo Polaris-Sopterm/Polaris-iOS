@@ -23,7 +23,6 @@ class HalfModalVC: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.setupDimView()
-        self.setupHalfModalView()
         self.bindDimViewGesture()
         self.bindHalfModalPanGesture()
     }
@@ -32,6 +31,11 @@ class HalfModalVC: UIViewController {
         super.viewWillAppear(animated)
         guard self.isBeingPresented == true || self.isMovingToParent else { return }
         self.halfModalViewWillAppear()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.setupHalfModalView()
     }
     
     private func halfModalViewWillAppear() {

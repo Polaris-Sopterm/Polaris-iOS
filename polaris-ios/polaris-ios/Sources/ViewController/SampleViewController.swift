@@ -22,6 +22,20 @@ class SampleViewController: UIViewController {
         self.present(addTodo, animated: false, completion: nil)
     }
     
+    @IBAction func nextPerJourney(_ sender: Any) {
+        guard let addTodo = AddTodoVC.instantiateFromStoryboard(StoryboardName.addTodo) else { return }
+        addTodo.modalPresentationStyle = .overFullScreen
+        addTodo.setupAddOptions(.perJourneyAddTodo)
+        self.present(addTodo, animated: false, completion: nil)
+    }
+    
+    @IBAction func nextAddJourney(_ sender: Any) {
+        guard let addTodo = AddTodoVC.instantiateFromStoryboard(StoryboardName.addTodo) else { return }
+        addTodo.modalPresentationStyle = .overFullScreen
+        addTodo.setupAddOptions(.addJourney)
+        self.present(addTodo, animated: false, completion: nil)
+    }
+    
     /*
     // MARK: - Navigation
 

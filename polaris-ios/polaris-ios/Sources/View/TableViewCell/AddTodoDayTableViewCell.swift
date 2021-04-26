@@ -1,0 +1,88 @@
+//
+//  AddTodoDayTableViewCell.swift
+//  polaris-ios
+//
+//  Created by USER on 2021/04/21.
+//
+
+import UIKit
+import RxSwift
+
+protocol AddTodoDayTableViewCellDelegate: AddTodoTableViewCellDelegate {
+    func addTodoDayTableViewCell(_ addTodoDayTableViewCell: AddTodoDayTableViewCell, didSelectDay day: Int, didSelectWeekday weekday: Date.WeekDay)
+}
+
+class AddTodoDayTableViewCell: AddTodoTableViewCell {
+    override class var cellHeight: CGFloat {
+        let labelHeight: CGFloat = 17
+        let spacing: CGFloat     = 15
+        return (verticalInset * 2) + dayCellHeight + spacing + labelHeight
+    }
+    
+    override weak var delegate: AddTodoTableViewCellDelegate? { didSet { self._delegate = delegate as? AddTodoDayTableViewCellDelegate } }
+    weak var _delegate: AddTodoDayTableViewCellDelegate?
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    // MARK: - Life Cycle
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+        self.registerCell()
+        self.layoutColletionView()
+        self.bindCollectionView()
+    }
+    
+    // MARK: - Set Up
+    private func registerCell() {
+        self.collectionView.registerCell(cell: PerDayItemCollectionViewCell.self)
+    }
+    
+    private func layoutColletionView() {
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.itemSize                 = CGSize(width:  type(of: self).dayCellWidth,
+                                                     height: type(of: self).dayCellHeight)
+            layout.sectionInset             = .zero
+            layout.minimumLineSpacing       = 2
+            layout.minimumInteritemSpacing  = 0
+        }
+    }
+    
+    // MARK: - Bind
+    private func bindCollectionView() {
+        self.viewModel.daysSubject
+            .bind(to: self.collectionView.rx.items) { collectionView, index, item in
+                guard let perDayCell = collectionView.dequeueReusableCell(cell: PerDayItemCollectionViewCell.self, forIndexPath: IndexPath(row: index, section: 0)) else { return UICollectionViewCell() }
+                
+                perDayCell.configure(weekday: item.weekday, day: item.day)
+                return perDayCell
+            }
+            .disposed(by: self.disposeBag)
+        
+        self.collectionView.rx.itemSelected
+            .subscribe(onNext: { [weak self] indexPath in
+                guard let self = self else { return }
+                guard let selectedDay = try? self.viewModel.daysSubject.value()[safe: indexPath.row] else { return }
+                self.viewModel.selectedDaySubject.onNext(selectedDay)
+            })
+            .disposed(by: self.disposeBag)
+        
+        self.viewModel.selectedDaySubject
+            .subscribe(onNext: { [weak self] selectedDay in
+                guard let self = self else { return }
+                guard let selectedDay = selectedDay else { return }
+                
+                self._delegate?.addTodoDayTableViewCell(self, didSelectDay: selectedDay.day, didSelectWeekday: selectedDay.weekday)
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
+    private static let horizontalInset: CGFloat     = 23
+    private static let verticalInset: CGFloat       = 10
+    private static let screenRatio: CGFloat         = DeviceInfo.screenWidth / 375
+    private static let dayCellHeight: CGFloat       = 66 * screenRatio
+    private static let dayCellWidth: CGFloat        = (DeviceInfo.screenWidth - (2 * horizontalInset) - (6 * 2)) / 7
+    
+    private var viewModel  = AddTodoDayViewModel()
+    private var disposeBag = DisposeBag()
+}
