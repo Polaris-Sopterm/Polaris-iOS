@@ -19,11 +19,27 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tsv-zT-lus">
-                                <rect key="frame" x="184" y="734" width="46" height="47"/>
+                                <rect key="frame" x="20" y="742" width="122" height="47"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="PerDayAddTodo"/>
                                 <connections>
                                     <action selector="next:" destination="aax-zc-RC4" eventType="touchUpInside" id="K48-Fe-1F9"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SEC-wb-blJ">
+                                <rect key="frame" x="168" y="750" width="78" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="PerJourney"/>
+                                <connections>
+                                    <action selector="nextPerJourney:" destination="aax-zc-RC4" eventType="touchUpInside" id="aMB-xa-NVW"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VgX-lW-LeH">
+                                <rect key="frame" x="288" y="750" width="82" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="addJourney"/>
+                                <connections>
+                                    <action selector="nextAddJourney:" destination="aax-zc-RC4" eventType="touchUpInside" id="kHU-DQ-R6C"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -33,7 +49,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6tU-f8-wBQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1349" y="163"/>
+            <point key="canvasLocation" x="-1349.2753623188407" y="162.72321428571428"/>
         </scene>
         <!--Add TodoVC-->
         <scene sceneID="5C9-zQ-jaD">
@@ -147,6 +163,7 @@
                         <outlet property="cancelButton" destination="gqL-fC-gRl" id="7cd-eH-Ni9"/>
                         <outlet property="halfModalView" destination="3EH-GP-kQ8" id="Ye5-OB-4xo"/>
                         <outlet property="tableView" destination="uK1-zG-Czz" id="Tf2-9d-RV2"/>
+                        <outlet property="titleLabel" destination="fFJ-bK-g1Z" id="lVh-bb-BSH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fLP-AQ-pFr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
