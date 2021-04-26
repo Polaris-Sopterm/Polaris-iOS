@@ -13,4 +13,5 @@ struct StarNames {
                                                       "건강":"Health","성장":"Growth",
                                                       "변화":"Change","극복":"Overcome",
                                                       "도전":"Challenge"]
+
 }
