@@ -23,6 +23,8 @@ class MainSceneVC: UIViewController {
         }
     }
     let disposeBag = DisposeBag()
+    let starTVCHeight = 285*(DeviceInfo.screenHeight/812.0)
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +37,7 @@ class MainSceneVC: UIViewController {
         self.wholeTV.delegate = self
         self.wholeTV.dataSource = self
         self.wholeTV.registerCell(cell: MainStarTVC.self)
+        self.wholeTV.registerCell(cell: MainTodoTVC.self)
         self.wholeTV.backgroundColor = .clear
         
         for _ in 0...2{
@@ -101,16 +104,25 @@ class MainSceneVC: UIViewController {
 
 extension MainSceneVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let identifier = String(describing: MainStarTVC.self)
-        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! MainStarTVC
-        
-        cell.starList = self.starList
+        if indexPath.section == 0{
+            let identifier = String(describing: MainStarTVC.self)
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! MainStarTVC
+            cell.starList = self.starList
 
-        return cell
+            return cell
+        }
+       
+        else {
+            let identifier = String(describing: MainTodoTVC.self)
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! MainTodoTVC
+          
+
+            return cell
+        }
         
     }
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
@@ -119,7 +131,15 @@ extension MainSceneVC: UITableViewDataSource {
 
 extension MainSceneVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 400
+        
+        
+        switch indexPath.section{
+        case 0:
+            return starTVCHeight
+        default:
+            return DeviceInfo.screenHeight-starTVCHeight
+        }
+        
     }
     
 }
