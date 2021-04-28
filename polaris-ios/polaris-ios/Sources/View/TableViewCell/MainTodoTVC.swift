@@ -55,10 +55,33 @@ extension MainTodoTVC: UICollectionViewDataSource {
        
         return cell
     }
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        1
+    }
+    
+    
 }
 
 extension MainTodoTVC: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: 93)
+    }
+}
 
+extension MainTodoTVC: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
+
+            guard let headerView: MainTodoHeaderView = UIView.fromNib() else { return UICollectionReusableView()}
+            print("yj2")
+            return headerView
+        default :
+            assert(false,"")
+        
+        }
+        
+    }
 }
 
 extension MainTodoTVC: UIScrollViewDelegate {

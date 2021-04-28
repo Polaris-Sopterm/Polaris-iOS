@@ -33,6 +33,8 @@ class MainTodoCVC: UICollectionViewCell {
         self.backgroundColor = .clear
         self.todoTV.backgroundColor = .clear
         
+        self.todoTV.registerCell(cell: TodoDateTVC.self)
+        
         self.titleLabel.text = "폴라리스"
         self.titleLabel.font = UIFont.systemFont(ofSize: 18,weight: .light)
         self.titleLabel.textColor = .maintext
@@ -55,5 +57,42 @@ class MainTodoCVC: UICollectionViewCell {
             label.textColor = .maintext
         }
         
+    }
+}
+
+extension MainTodoCVC: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let identifier = String(describing: TodoDateTVC.self)
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! TodoDateTVC
+      
+        
+        
+        return cell
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        3
+        
+    }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        1
+    }
+    
+    
+    
+}
+
+extension MainTodoCVC: UITableViewDelegate{
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70
+    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 58+30+35
+        }
+        
+        return 49+58
     }
 }
