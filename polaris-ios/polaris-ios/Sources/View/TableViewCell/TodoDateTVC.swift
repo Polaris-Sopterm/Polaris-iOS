@@ -18,10 +18,15 @@ class TodoDateTVC: UITableViewCell {
     @IBOutlet weak var lineView: UIView!
     
     var disposebag = DisposeBag()
-    var tvcViewModel: TodoDateTVCViewModel?
+    var tvcViewModel: TodoDateTVCViewModel?{
+        didSet{
+            self.setUIs(todoModel: tvcViewModel!.todoModel)
+        }
+    }
     var checkButtonClicked = PublishSubject<IndexPath>()
     
     override func awakeFromNib() {
+        self.backgroundColor = .clear
         super.awakeFromNib()
        
     }

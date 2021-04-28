@@ -8,13 +8,23 @@
 import UIKit
 
 class MainTodoTVC: UITableViewCell {
-    @IBOutlet weak var wholeCV: UICollectionView!
     
-    private var currentIndex: CGFloat = 0
+    @IBOutlet weak var lineView: UIView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var subLabel: UILabel!
+    @IBOutlet weak var fixedImage: UIImageView!
+    
+    @IBOutlet weak var checkButton: UIButton!
+    @IBOutlet weak var checkButtonImage: UIImageView!
+    
+    var tvcViewModel: MainTodoTVCViewModel?{
+        didSet{
+            print("called")
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        setUIs()
         // Initialization code
     }
 
@@ -24,100 +34,36 @@ class MainTodoTVC: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setUIs(){
-        self.wholeCV.dataSource = self
-        self.wholeCV.delegate = self
-        self.wholeCV.decelerationRate = .fast
+    
+    func setUIs(todoModel: TodoModel){
         
-        let layout = self.wholeCV.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.minimumLineSpacing = 0
-        
-        layout.itemSize = CGSize(width: DeviceInfo.screenWidth, height: DeviceInfo.screenHeight-285*(DeviceInfo.screenHeight/812.0))
-        
-        
-        self.wholeCV.registerCell(cell: MainTodoCVC.self)
         self.backgroundColor = .clear
-        self.wholeCV.backgroundColor = .clear
-    }
-    
-    
-}
-
-
-extension MainTodoTVC: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        5
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let identifier = String(describing: MainTodoCVC.self)
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! MainTodoCVC
-       
-        return cell
-    }
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        1
-    }
-    
-    
-}
-
-extension MainTodoTVC: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 93)
-    }
-}
-
-extension MainTodoTVC: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        switch kind {
-        case UICollectionView.elementKindSectionHeader:
-
-            guard let headerView: MainTodoHeaderView = UIView.fromNib() else { return UICollectionReusableView()}
-            print("yj2")
-            return headerView
-        default :
-            assert(false,"")
+        self.titleLabel.textColor = .white
+        self.subLabel.textColor = .white
         
-        }
+        self.titleLabel.font = UIFont.systemFont(ofSize: 16,weight: .bold)
+        self.subLabel.font = UIFont.systemFont(ofSize: 11,weight: .medium)
         
-    }
-}
-
-extension MainTodoTVC: UIScrollViewDelegate {
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        if scrollView == wholeCV {
-            let layout = self.wholeCV.collectionViewLayout as! UICollectionViewFlowLayout
-            let cellWidthIncludingSpacing = layout.itemSize.width + layout.minimumLineSpacing
-
-            var offset = targetContentOffset.pointee
-            let index = (offset.x + scrollView.contentInset.left) / cellWidthIncludingSpacing
-            var roundedIndex = round(index)
-
-            if scrollView.contentOffset.x > targetContentOffset.pointee.x {
-                roundedIndex = floor(index)
-            } else if scrollView.contentOffset.x < targetContentOffset.pointee.x {
-                roundedIndex = ceil(index)
-            } else {
-                roundedIndex = round(index)
-            }
-
-            if currentIndex > roundedIndex {
-                currentIndex -= 1
-                roundedIndex = currentIndex
-            } else if currentIndex < roundedIndex {
-                currentIndex += 1
-                roundedIndex = currentIndex
-            }
-
-
-            offset = CGPoint(x: roundedIndex * cellWidthIncludingSpacing - scrollView.contentInset.left, y: -scrollView.contentInset.top)
-            targetContentOffset.pointee = offset
+        if todoModel.checked {
+            self.checkButton.setImage(UIImage(named: ImageName.btnCheck), for: .normal)
+            self.titleLabel.alpha = 0.35
+            self.subLabel.alpha = 0.35
+           
         }
+        else {
+            self.checkButton.setImage(UIImage(named: ImageName.btnUncheck), for: .normal)
+        }
+        if todoModel.fixed {
+            self.fixedImage.alpha = 1
+        }
+        else {
+            self.fixedImage.alpha = 0
+        }
+        self.titleLabel.text = todoModel.todoTitle
+        self.subLabel.text = todoModel.todoSubtitle
+        self.lineView.backgroundColor = .inactivePurple
     }
     
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-       
-
-    }
+    
 }
+

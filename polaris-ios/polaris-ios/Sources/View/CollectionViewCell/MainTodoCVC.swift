@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class MainTodoCVC: UICollectionViewCell {
     @IBOutlet weak var upperView: UIView!
@@ -20,9 +22,29 @@ class MainTodoCVC: UICollectionViewCell {
     private var colorNames = ["lightblue","bubblegumPink"]
     private var labelTexts = ["성장","도전"]
     
+    var disposeBag = DisposeBag()
+    
+    var viewModel: MainTodoCVCViewModel? {
+        didSet{
+            self.viewModel?.todoListRelay.bind(to: todoTV.rx.items) { tableView, index, item in
+                let identifier = String(describing: MainTodoTVC.self)
+                let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: IndexPath(item: index, section: 0)) as! MainTodoTVC
+                
+                cell.tvcViewModel = MainTodoTVCViewModel(id: IndexPath(item: index, section: 0), todoModel: item.todoModel)
+                cell.setUIs(todoModel: item.todoModel)
+                return cell
+            }.disposed(by: disposeBag)
+        }
+    }
+    
+    override func prepareForReuse() {
+        self.disposeBag = DisposeBag()
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.setUIs()
+        self.disposeBag = DisposeBag()
         // Initialization code
     
     }
@@ -32,8 +54,9 @@ class MainTodoCVC: UICollectionViewCell {
         self.upperView.makeRounded(cornerRadius: 22)
         self.backgroundColor = .clear
         self.todoTV.backgroundColor = .clear
+        self.todoTV.delegate = self
         
-        self.todoTV.registerCell(cell: TodoDateTVC.self)
+        self.todoTV.registerCell(cell: MainTodoTVC.self)
         
         self.titleLabel.text = "폴라리스"
         self.titleLabel.font = UIFont.systemFont(ofSize: 18,weight: .light)
@@ -60,39 +83,11 @@ class MainTodoCVC: UICollectionViewCell {
     }
 }
 
-extension MainTodoCVC: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let identifier = String(describing: TodoDateTVC.self)
-        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! TodoDateTVC
-      
-        
-        
-        return cell
-    }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        3
-        
-    }
-    func numberOfSections(in tableView: UITableView) -> Int {
-        1
-    }
-    
-    
-    
-}
+
 
 extension MainTodoCVC: UITableViewDelegate{
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
-    }
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 0 {
-            return 58+30+35
-        }
-        
-        return 49+58
+        return 63
     }
 }

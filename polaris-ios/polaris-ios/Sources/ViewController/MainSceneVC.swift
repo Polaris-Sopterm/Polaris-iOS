@@ -11,7 +11,19 @@ import RxCocoa
 
 class MainSceneVC: UIViewController {
 
-    @IBOutlet weak var wholeTV: UITableView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var starCVCHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var starCV: UICollectionView!
+    @IBOutlet weak var weekContainView: UIView!
+    @IBOutlet weak var weekLabel: UILabel!
+    @IBOutlet weak var nowLabel: UILabel!
+    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var pageControl: UIPageControl!
+    
+    @IBOutlet weak var todoCV: UICollectionView!
+    
+    var currentIndex: CGFloat = 0
+    
     
     
     let viewModel = MainSceneViewModel()
@@ -19,43 +31,97 @@ class MainSceneVC: UIViewController {
     var dataDriver: Driver<[MainStarCVCViewModel]>?
     var starList: [MainStarCVCViewModel] = [] {
         didSet{
-            self.wholeTV.reloadData()
+            self.setTitle(stars: self.starList.count)
         }
     }
     let disposeBag = DisposeBag()
-    let starTVCHeight = 285*(DeviceInfo.screenHeight/812.0)
+    let starTVCHeight = 212*(DeviceInfo.screenHeight/812.0)
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setUIs()
+        self.setStarCollectionView()
+        self.setTodoCollectionView()
         self.bindViewModel()
         // Do any additional setup after loading the view.
     }
     
     func setUIs(){
-        self.wholeTV.delegate = self
-        self.wholeTV.dataSource = self
-        self.wholeTV.registerCell(cell: MainStarTVC.self)
-        self.wholeTV.registerCell(cell: MainTodoTVC.self)
-        self.wholeTV.backgroundColor = .clear
-        
+ 
         for _ in 0...2{
             self.cometAnimation()
         }
+        self.weekContainView.backgroundColor = .white60
+        self.weekContainView.setBorder(borderColor: .white, borderWidth: 1.0)
+        self.weekContainView.makeRounded(cornerRadius: 9)
+        self.weekLabel.font = UIFont.systemFont(ofSize: 13,weight: .bold)
+        self.weekLabel.textColor = .white
+        self.nowLabel.font = UIFont.systemFont(ofSize: 16,weight: .bold)
+        self.nowLabel.textColor = .white
+        
+        self.pageControl.numberOfPages = 5
+//        self.pageControl.frame.size.width = CGFloat(5) * 5 - 14
+        if #available(iOS 14.0, *) {
+            self.pageControl.backgroundStyle = .minimal
+            self.pageControl.allowsContinuousInteraction = false
+        }
+       
+        
        
 
+        
+    }
+    
+    func setStarCollectionView() {
+        self.starCV.delegate = self
+        self.starCV.registerCell(cell: MainStarCVC.self)
+        self.starCV.backgroundColor = .clear
+    }
+    
+    func setTodoCollectionView() {
+        self.todoCV.registerCell(cell: MainTodoCVC.self)
+        self.todoCV.backgroundColor = .clear
+        self.todoCV.delegate = self
+        let layout = self.todoCV.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.minimumLineSpacing = 0
+        
+        layout.itemSize = CGSize(width: DeviceInfo.screenWidth, height: DeviceInfo.screenHeight-285*(DeviceInfo.screenHeight/812.0))
+        
+    }
+    
+    func setTitle(stars: Int) {
+        self.titleLabel.textColor = .white
+        self.titleLabel.setPartialBold(originalText: "어제는\n\(stars)개의 별을 발견했어요.", boldText: "\(stars)개의 별", fontSize: 23, boldFontSize: 23)
     }
     
     private func bindViewModel(){
         let input = MainSceneViewModel.Input()
         let output = viewModel.connect(input: input)
 
+     
+        
         output.starList.subscribe(onNext: { item in
             self.starList = item
-            
         })
         .disposed(by: disposeBag)
+        
+        output.starList.bind(to: starCV.rx.items) { collectionView, index, item in
+            let identifier = String(describing: MainStarCVC.self)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: IndexPath(item: index, section: 0)) as! MainStarCVC
+            cell.cvcViewModel = item
+            self.setTitle(stars: self.starList.count)
+            return cell
+        }.disposed(by: disposeBag)
+        
+        output.todoStarList.bind(to: todoCV.rx.items) { collectionView, index, item in
+            let identifier = String(describing: MainTodoCVC.self)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: IndexPath(item: index, section: 0)) as! MainTodoCVC
+            cell.viewModel = item
+            return cell
+        }.disposed(by: disposeBag)
+        
 
 
     }
@@ -102,44 +168,90 @@ class MainSceneVC: UIViewController {
 
 }
 
-extension MainSceneVC: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0{
-            let identifier = String(describing: MainStarTVC.self)
-            let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! MainStarTVC
-            cell.starList = self.starList
+extension MainSceneVC: UICollectionViewDelegateFlowLayout {
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        if collectionView == self.starCV {
+            let starViewModel = self.starList
+            return CGSize(width: starViewModel[indexPath.item].cellWidth, height: collectionView.frame.height)
+        }else {
+            return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+        }
+        
+        
+    }
+        
+      
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        if collectionView == self.starCV {
+            return 15
+        }
+        return 0
+    }
 
-            return cell
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        if collectionView == self.starCV {
+            switch self.starList.count {
+            case 1 :
+                return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 30)
+            case 2 :
+                return UIEdgeInsets(top: 0, left: 93, bottom: 0, right: 30)
+            case 3 :
+                return UIEdgeInsets(top: 0, left: 21, bottom: 0, right: 30)
+                
+            default :
+                return UIEdgeInsets(top: 0, left: 38, bottom: 0, right: 30)
+            
+            }
+        }
+        else {
+            return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         }
        
-        else {
-            let identifier = String(describing: MainTodoTVC.self)
-            let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! MainTodoTVC
-          
-
-            return cell
-        }
-        
-    }
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-}
-
-extension MainSceneVC: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        
-        switch indexPath.section{
-        case 0:
-            return starTVCHeight
-        default:
-            return DeviceInfo.screenHeight-starTVCHeight
-        }
         
     }
     
 }
+
+
+extension MainSceneVC: UIScrollViewDelegate {
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        if scrollView == self.todoCV {
+            let layout = self.todoCV.collectionViewLayout as! UICollectionViewFlowLayout
+            let cellWidthIncludingSpacing = layout.itemSize.width + layout.minimumLineSpacing
+
+            var offset = targetContentOffset.pointee
+            let index = (offset.x + scrollView.contentInset.left) / cellWidthIncludingSpacing
+            var roundedIndex = round(index)
+
+            if scrollView.contentOffset.x > targetContentOffset.pointee.x {
+                roundedIndex = floor(index)
+            } else if scrollView.contentOffset.x < targetContentOffset.pointee.x {
+                roundedIndex = ceil(index)
+            } else {
+                roundedIndex = round(index)
+            }
+
+            if currentIndex > roundedIndex {
+                currentIndex -= 1
+                roundedIndex = currentIndex
+            } else if currentIndex < roundedIndex {
+                currentIndex += 1
+                roundedIndex = currentIndex
+            }
+            offset = CGPoint(x: roundedIndex * cellWidthIncludingSpacing - scrollView.contentInset.left, y: -scrollView.contentInset.top)
+            targetContentOffset.pointee = offset
+            self.pageControl.currentPage = Int(self.currentIndex)
+        }
+    }
+    
+    
+    
+}
+
+
+
+

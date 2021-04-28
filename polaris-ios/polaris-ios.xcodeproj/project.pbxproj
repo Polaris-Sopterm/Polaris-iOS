@@ -62,6 +62,9 @@
 		CEEE57A5262C297700C39358 /* AddTodoDropdownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE57A3262C297700C39358 /* AddTodoDropdownTableViewCell.swift */; };
 		CEEE57A6262C297700C39358 /* AddTodoDropdownTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEE57A4262C297700C39358 /* AddTodoDropdownTableViewCell.xib */; };
 		EC49B959262EAF3D0080F8C3 /* StarNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC49B958262EAF3D0080F8C3 /* StarNames.swift */; };
+		EC7A3BF526394C3400B59C98 /* TodoStarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7A3BF426394C3400B59C98 /* TodoStarModel.swift */; };
+		EC7A3BF826394CC900B59C98 /* MainTodoCVCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7A3BF726394CC900B59C98 /* MainTodoCVCViewModel.swift */; };
+		EC7A3BFB2639537A00B59C98 /* MainTodoTVCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7A3BFA2639537A00B59C98 /* MainTodoTVCViewModel.swift */; };
 		ECA49419262817D500CC2EB8 /* TodoDate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECA49418262817D500CC2EB8 /* TodoDate.storyboard */; };
 		ECA4941C262819D300CC2EB8 /* TodoDateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA4941B262819D300CC2EB8 /* TodoDateVC.swift */; };
 		ECA494232628223200CC2EB8 /* TodoDateTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA494212628223200CC2EB8 /* TodoDateTVC.swift */; };
@@ -157,6 +160,9 @@
 		CEEE57A4262C297700C39358 /* AddTodoDropdownTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTodoDropdownTableViewCell.xib; sourceTree = "<group>"; };
 		E4A6B1EFA15BD83942E79BD7 /* Pods-polaris-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-polaris-ios.release.xcconfig"; path = "Target Support Files/Pods-polaris-ios/Pods-polaris-ios.release.xcconfig"; sourceTree = "<group>"; };
 		EC49B958262EAF3D0080F8C3 /* StarNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarNames.swift; sourceTree = "<group>"; };
+		EC7A3BF426394C3400B59C98 /* TodoStarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoStarModel.swift; sourceTree = "<group>"; };
+		EC7A3BF726394CC900B59C98 /* MainTodoCVCViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTodoCVCViewModel.swift; sourceTree = "<group>"; };
+		EC7A3BFA2639537A00B59C98 /* MainTodoTVCViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTodoTVCViewModel.swift; sourceTree = "<group>"; };
 		ECA49418262817D500CC2EB8 /* TodoDate.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TodoDate.storyboard; sourceTree = "<group>"; };
 		ECA4941B262819D300CC2EB8 /* TodoDateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TodoDateVC.swift; path = "polaris-ios/Sources/ViewController/TodoDateVC.swift"; sourceTree = SOURCE_ROOT; };
 		ECA494212628223200CC2EB8 /* TodoDateTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDateTVC.swift; sourceTree = "<group>"; };
@@ -290,6 +296,9 @@
 				ECA4947D262C670000CC2EB8 /* MainStarTVCViewModel.swift */,
 				CEE574E826307B4400EA64B7 /* AddTodoDayViewModel.swift */,
 				CE574DA426352CB60046D20A /* AddTodoSelectStarViewModel.swift */,
+				EC7A3BF426394C3400B59C98 /* TodoStarModel.swift */,
+				EC7A3BF726394CC900B59C98 /* MainTodoCVCViewModel.swift */,
+				EC7A3BFA2639537A00B59C98 /* MainTodoTVCViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -682,9 +691,12 @@
 				CE574D9D263524140046D20A /* SelectStarItemCollectionViewCell.swift in Sources */,
 				CEEE576A262AE47B00C39358 /* SampleViewController.swift in Sources */,
 				CEEE576E262AE6F400C39358 /* AddTodoTextTableViewCell.swift in Sources */,
+				EC7A3BF526394C3400B59C98 /* TodoStarModel.swift in Sources */,
 				CEEE5777262BE51C00C39358 /* PolarisMarginTextField.swift in Sources */,
 				ECA4943F26284B0B00CC2EB8 /* TodoDateHeaderView.swift in Sources */,
 				CE574DBB26357CBC0046D20A /* PolarisToastManager.swift in Sources */,
+				EC7A3BF826394CC900B59C98 /* MainTodoCVCViewModel.swift in Sources */,
+				EC7A3BFB2639537A00B59C98 /* MainTodoTVCViewModel.swift in Sources */,
 				EC49B959262EAF3D0080F8C3 /* StarNames.swift in Sources */,
 				ECA4942C262829EA00CC2EB8 /* TodoDateViewModel.swift in Sources */,
 				CE574D97263517B60046D20A /* AddTodoSelectStarTableViewCell.swift in Sources */,

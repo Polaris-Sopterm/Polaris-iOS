@@ -20,24 +20,36 @@ struct MainSceneViewModel {
     }
     
     struct Output{
-        var starList: BehaviorRelay<[MainStarCVCViewModel]>
+        let starList: BehaviorRelay<[MainStarCVCViewModel]>
+        let todoStarList: BehaviorRelay<[MainTodoCVCViewModel]>
         
     }
     func connect(input: Input) -> Output{
-        var starList: BehaviorRelay<[MainStarCVCViewModel]> = BehaviorRelay(value: [])
+        let starList: BehaviorRelay<[MainStarCVCViewModel]> = BehaviorRelay(value: [])
 
-        var mainStarModels = [MainStarModel(starName: "도전", starLevel: 4),
+        let mainStarModels = [MainStarModel(starName: "도전", starLevel: 4),
                                MainStarModel(starName: "행복", starLevel: 4),
                                MainStarModel(starName: "절제", starLevel: 4),
                                MainStarModel(starName: "감사", starLevel: 4),
                                MainStarModel(starName: "휴식", starLevel: 4)]
         
-        var cvcModels: [MainStarCVCViewModel] = self.convertCVCViewModel(mainStarModels: mainStarModels)
-        starList.accept(cvcModels)
-        return Output(starList: starList)
+        
+        let todoStarList: BehaviorRelay<[MainTodoCVCViewModel]> = BehaviorRelay(value: [])
+        let todoStarModels = [TodoStarModel(star: "폴라리스", todos: [TodoModel(todoTitle: "메인화면 완성하기", todoSubtitle: "3월 1일 수요일", fixed: true,checked: false),TodoModel(todoTitle: "메인화면 완성하기", todoSubtitle: "3월 2일 목요일", fixed: false,checked: false)]),
+                              TodoStarModel(star: "폴라리스", todos: [TodoModel(todoTitle: "메인화면 완성하기", todoSubtitle: "3월 1일 수요일", fixed: true,checked: false),TodoModel(todoTitle: "메인화면 완성하기", todoSubtitle: "3월 1일 수요일", fixed: false,checked: false)]),
+                              TodoStarModel(star: "폴라리스", todos: [TodoModel(todoTitle: "메인화면 완성하기", todoSubtitle: "3월 1일 수요일", fixed: true,checked: false),TodoModel(todoTitle: "메인화면 완성하기", todoSubtitle: "3월 1일 수요일", fixed: false,checked: false)]),
+                              TodoStarModel(star: "폴라리스", todos: [TodoModel(todoTitle: "메인화면 완성하기", todoSubtitle: "3월 1일 수요일", fixed: true,checked: false),TodoModel(todoTitle: "메인화면 완성하기", todoSubtitle: "3월 1일 수요일", fixed: false,checked: false)]),
+                              TodoStarModel(star: "폴라리스", todos: [TodoModel(todoTitle: "메인화면 완성하기", todoSubtitle: "3월 1일 수요일", fixed: true,checked: false),TodoModel(todoTitle: "메인화면 완성하기", todoSubtitle: "3월 1일 수요일", fixed: false,checked: false)])]
+        
+       
+        
+
+        starList.accept(self.convertStarCVCViewModel(mainStarModels: mainStarModels))
+        todoStarList.accept(self.convertTodoCVCViewModel(todoStarModels: todoStarModels))
+        return Output(starList: starList,todoStarList: todoStarList)
     }
     
-    func convertCVCViewModel(mainStarModels: [MainStarModel]) -> [MainStarCVCViewModel]{
+    func convertStarCVCViewModel(mainStarModels: [MainStarModel]) -> [MainStarCVCViewModel]{
         var resultList: [MainStarCVCViewModel] = []
 
         switch mainStarModels.count {
@@ -66,6 +78,19 @@ struct MainSceneViewModel {
         return resultList
         
         
+    }
+    
+    func convertTodoCVCViewModel(todoStarModels: [TodoStarModel]) -> [MainTodoCVCViewModel]{
+        var resultList: [MainTodoCVCViewModel] = []
+        
+        for (idx,model) in todoStarModels.enumerated() {
+            let tvcModels: [MainTodoTVCViewModel] = model.todos.map{MainTodoTVCViewModel(id: IndexPath(row: idx, section: 0),todoModel: $0)}
+            let todoListRelay:BehaviorRelay<[MainTodoTVCViewModel]> = BehaviorRelay(value: tvcModels)
+            let starNameRelay:BehaviorRelay<String> = BehaviorRelay(value: model.star)
+            
+            resultList.append(MainTodoCVCViewModel(todoListRelay: todoListRelay,starName: starNameRelay))
+        }
+        return resultList
     }
     
     func changeToImgName(starName: String,level: Int)-> String {
