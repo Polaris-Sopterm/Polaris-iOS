@@ -61,7 +61,7 @@ class MainSceneVC: UIViewController {
         self.nowLabel.font = UIFont.systemFont(ofSize: 16,weight: .bold)
         self.nowLabel.textColor = .white
         
-        self.pageControl.numberOfPages = 5
+        
 //        self.pageControl.frame.size.width = CGFloat(5) * 5 - 14
         if #available(iOS 14.0, *) {
             self.pageControl.backgroundStyle = .minimal
@@ -119,6 +119,7 @@ class MainSceneVC: UIViewController {
             let identifier = String(describing: MainTodoCVC.self)
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: IndexPath(item: index, section: 0)) as! MainTodoCVC
             cell.viewModel = item
+            self.pageControl.numberOfPages = output.todoStarList.value.count
             return cell
         }.disposed(by: disposeBag)
         
