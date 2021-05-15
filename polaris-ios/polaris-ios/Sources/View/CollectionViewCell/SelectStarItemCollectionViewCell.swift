@@ -8,6 +8,7 @@
 import UIKit
 
 class SelectStarItemCollectionViewCell: UICollectionViewCell {
+    
     @IBOutlet weak var starImageView: UIImageView!
     @IBOutlet weak var starLabel: UILabel!
         
@@ -48,4 +49,5 @@ class SelectStarItemCollectionViewCell: UICollectionViewCell {
     
     private static let selectedTextColor: UIColor           = .textSky
     private static let unselectedTextColor: UIColor         = .inactiveText
+    
 }

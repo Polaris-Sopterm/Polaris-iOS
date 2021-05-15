@@ -14,6 +14,7 @@ protocol AddTodoSelectStarTableViewCellDelegate: AddTodoTableViewCellDelegate {
 }
 
 class AddTodoSelectStarTableViewCell: AddTodoTableViewCell {
+    
     override class var cellHeight: CGFloat { return 397 * screenRatio }
     
     override weak var delegate: AddTodoTableViewCellDelegate? { didSet { self._delegate = self.delegate as? AddTodoSelectStarTableViewCellDelegate } }
@@ -78,4 +79,5 @@ class AddTodoSelectStarTableViewCell: AddTodoTableViewCell {
     
     private var disposeBag = DisposeBag()
     private var viewModel  = AddTodoSelectStarViewModel()
+    
 }
