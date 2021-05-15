@@ -17,23 +17,20 @@ class SampleViewController: UIViewController {
     
     @IBAction func next(_ sender: Any) {
         guard let addTodo = AddTodoVC.instantiateFromStoryboard(StoryboardName.addTodo) else { return }
-        addTodo.modalPresentationStyle = .overFullScreen
         addTodo.setupAddOptions(.perDayAddTodo)
-        self.present(addTodo, animated: false, completion: nil)
+        addTodo.presentWithAnimation(from: self)
     }
     
     @IBAction func nextPerJourney(_ sender: Any) {
         guard let addTodo = AddTodoVC.instantiateFromStoryboard(StoryboardName.addTodo) else { return }
-        addTodo.modalPresentationStyle = .overFullScreen
         addTodo.setupAddOptions(.perJourneyAddTodo)
-        self.present(addTodo, animated: false, completion: nil)
+        addTodo.presentWithAnimation(from: self)
     }
     
     @IBAction func nextAddJourney(_ sender: Any) {
         guard let addTodo = AddTodoVC.instantiateFromStoryboard(StoryboardName.addTodo) else { return }
-        addTodo.modalPresentationStyle = .overFullScreen
         addTodo.setupAddOptions(.addJourney)
-        self.present(addTodo, animated: false, completion: nil)
+        addTodo.presentWithAnimation(from: self)
     }
     
     /*

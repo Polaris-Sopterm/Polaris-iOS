@@ -10,24 +10,20 @@ import RxCocoa
 import RxSwift
 
 class AddTodoVC: HalfModalVC {
+    
+    @IBOutlet weak var addTodoHalfModalView: UIView!
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        self.halfModalView = self.addTodoHalfModalView
         self.setupTitleLabel()
         self.setupTableView()
         self.registerCell()
         self.bindButtons()
         self.bindEnableButton()
         self.bindTableView()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        PolarisToastManager.shared.showToast(with: "안녕하세요")
     }
     
     // MARK: - Set Up
@@ -56,14 +52,14 @@ class AddTodoVC: HalfModalVC {
     private func bindButtons() {
         self.cancelButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                self?.halfModalViewWillDisappear()
+                self?.dismissWithAnimation()
             })
             .disposed(by: self.disposeBag)
         
         self.addButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 // FIXME: - 추가할 때, 서버로 넘기는 로직 들어가야 함
-                self?.halfModalViewWillDisappear()
+                self?.dismissWithAnimation()
             })
             .disposed(by: self.disposeBag)
     }
