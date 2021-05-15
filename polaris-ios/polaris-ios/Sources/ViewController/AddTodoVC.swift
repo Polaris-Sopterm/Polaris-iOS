@@ -11,8 +11,8 @@ import RxSwift
 
 class AddTodoVC: HalfModalVC {
     
-    @IBOutlet weak var addTodoHalfModalView: UIView!
-    @IBOutlet weak var tableView: UITableView!
+    var disposeBag  = DisposeBag()
+    var viewModel   = AddTodoViewModel()
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
@@ -32,9 +32,9 @@ class AddTodoVC: HalfModalVC {
     }
     
     private func setupTitleLabel() {
-        if self.viewModel.currentAddOption == .perDayAddTodo            { self.titleLabel.text = "3월 1일의 할 일" }
-        else if self.viewModel.currentAddOption == .perJourneyAddTodo   { self.titleLabel.text = "폴라리스의 할 일" }
-        else                                                            { self.titleLabel.text = "여정 추가하기" }
+        if self.viewModel.currentAddOption == .perDayAddTodo          { self.titleLabel.text = "3월 1일의 할 일" }
+        else if self.viewModel.currentAddOption == .perJourneyAddTodo { self.titleLabel.text = "폴라리스의 할 일" }
+        else                                                          { self.titleLabel.text = "여정 추가하기" }
     }
     
     private func setupTableView() {
@@ -91,12 +91,12 @@ class AddTodoVC: HalfModalVC {
             .disposed(by: self.disposeBag)
     }
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var addButton: AddButton!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var cancelButton: UIButton!
+    @IBOutlet private weak var addButton: AddButton!
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var addTodoHalfModalView: UIView!
     
-    var viewModel   = AddTodoViewModel()
-    var disposeBag  = DisposeBag()
 }
 
 extension AddTodoVC: UITableViewDelegate {

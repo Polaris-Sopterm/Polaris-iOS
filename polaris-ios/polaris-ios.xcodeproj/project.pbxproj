@@ -465,9 +465,9 @@
 				ECA4941B262819D300CC2EB8 /* TodoDateVC.swift */,
 				CEEE574F262A965400C39358 /* HalfModalVC.swift */,
 				CEEE575F262AD62C00C39358 /* AddTodoVC.swift */,
+				CE574DA7263555330046D20A /* AddTodoVC+Delegate.swift */,
 				CEEE5769262AE47B00C39358 /* SampleViewController.swift */,
 				ECA49461262C20DD00CC2EB8 /* MainSceneVC.swift */,
-				CE574DA7263555330046D20A /* AddTodoVC+Delegate.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";

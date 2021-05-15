@@ -10,6 +10,7 @@ import RxCocoa
 import RxSwift
 
 open class HalfModalVC: UIViewController {
+    
     /// `HalfModalView` 반 모달로 띄우기 원하는 UIView
     public weak var halfModalView: UIView? {
         didSet { self.setupHalfModalView() }
@@ -18,7 +19,6 @@ open class HalfModalVC: UIViewController {
     // MARK: - Life Cycle
     public override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         self.setupDimView()
         self.bindDimViewGesture()
     }
