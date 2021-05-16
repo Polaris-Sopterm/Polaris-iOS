@@ -15,6 +15,8 @@ protocol JourneyTodoHeaderViewDelegate: AnyObject {
 
 class JourneyTodoHeaderView: UIView {
     
+    static var headerHeight: CGFloat = (58 * screenRatio) + (2 * verticalInset)
+    
     weak var delegate: JourneyTodoHeaderViewDelegate?
     
     override func awakeFromNib() {
@@ -23,9 +25,9 @@ class JourneyTodoHeaderView: UIView {
     }
     
     func setUI(as headerType: HeaderType) {
-        self.effectImageView.image = headerType.effectImage
-        self.dayLabel.textColor    = headerType.textColor
-        self.backgroundColor       = headerType.backgroundColor
+        self.effectImageView.image          = headerType.effectImage
+        self.dayLabel.textColor             = headerType.textColor
+        self.backgroundView.backgroundColor = headerType.backgroundColor
         
         switch headerType {
         case .today:
@@ -50,7 +52,8 @@ class JourneyTodoHeaderView: UIView {
             .disposed(by: self.disposeBag)
     }
     
-    private static let screenRatio: CGFloat = DeviceInfo.screenWidth / 375
+    private static let verticalInset: CGFloat = 5
+    private static let screenRatio: CGFloat   = DeviceInfo.screenWidth / 375
     
     private var disposeBag = DisposeBag()
     

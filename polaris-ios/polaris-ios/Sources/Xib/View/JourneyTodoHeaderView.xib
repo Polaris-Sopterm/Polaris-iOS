@@ -11,11 +11,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="JourneyTodoHeaderView" customModule="polaris_ios" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="58"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="68"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WBS-9a-s3J">
-                    <rect key="frame" x="23" y="0.0" width="329" height="58"/>
+                    <rect key="frame" x="23" y="5" width="329" height="58"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rnk-KR-UPo">
                             <rect key="frame" x="83" y="0.0" width="246" height="58"/>
@@ -44,14 +44,19 @@
                         <constraint firstItem="VSr-2y-CvQ" firstAttribute="leading" secondItem="WBS-9a-s3J" secondAttribute="leading" constant="22" id="gv4-ZO-98M"/>
                         <constraint firstAttribute="bottom" secondItem="rnk-KR-UPo" secondAttribute="bottom" id="ifg-y7-mJh"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="20"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="WBS-9a-s3J" secondAttribute="bottom" id="7Di-0x-nz0"/>
+                <constraint firstAttribute="bottom" secondItem="WBS-9a-s3J" secondAttribute="bottom" constant="5" id="7Di-0x-nz0"/>
                 <constraint firstItem="WBS-9a-s3J" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.877333" id="8Zg-7O-ySh"/>
                 <constraint firstItem="WBS-9a-s3J" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="eFY-Jg-92Y"/>
-                <constraint firstItem="WBS-9a-s3J" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="xKh-Nz-0gL"/>
+                <constraint firstItem="WBS-9a-s3J" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="xKh-Nz-0gL"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
