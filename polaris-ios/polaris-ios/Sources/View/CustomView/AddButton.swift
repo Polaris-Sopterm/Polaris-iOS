@@ -8,6 +8,7 @@
 import UIKit
 
 class AddButton: UIButton {
+    
     @IBInspectable var enableBackgroundColor: UIColor   = .mainSky
     @IBInspectable var disableBackgroundColor: UIColor  = .inactiveBtn
     @IBInspectable var enableTextColor: UIColor         = .white
@@ -17,11 +18,6 @@ class AddButton: UIButton {
             if self.enable == true  { self.makeEnable() }
             else                    { self.makeDisable() }
         }
-    }
-    
-    @IBInspectable var cornerRadius: CGFloat {
-        set { self.layer.cornerRadius = newValue }
-        get { return self.layer.cornerRadius }
     }
 
     // MARK: - Life Cycle
@@ -39,7 +35,7 @@ class AddButton: UIButton {
     private func makeDisable() {
         self.backgroundColor            = self.disableBackgroundColor
         self.setTitleColor(self.disableTextColor, for: .normal)
-        
         self.isUserInteractionEnabled   = false
     }
+    
 }
