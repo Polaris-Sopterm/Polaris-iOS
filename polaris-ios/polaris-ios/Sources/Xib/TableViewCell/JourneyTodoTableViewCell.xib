@@ -60,6 +60,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="checkButton" destination="I6I-b7-zGX" id="Svk-VL-O2n"/>
                 <outlet property="fixImageView" destination="yvm-0y-cLm" id="HsW-MR-XMU"/>
                 <outlet property="subTitleLabel" destination="8g5-4s-DF9" id="Jyc-ff-Ow2"/>
                 <outlet property="titleLabel" destination="ai1-Wr-a0U" id="O4F-Na-Dzw"/>
