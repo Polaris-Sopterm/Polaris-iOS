@@ -22,8 +22,6 @@ class AddTodoDayTableViewCell: AddTodoTableViewCell {
     override weak var delegate: AddTodoTableViewCellDelegate? { didSet { self._delegate = delegate as? AddTodoDayTableViewCellDelegate } }
     weak var _delegate: AddTodoDayTableViewCellDelegate?
     
-    @IBOutlet weak var collectionView: UICollectionView!
-    
     // MARK: - Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -85,4 +83,7 @@ class AddTodoDayTableViewCell: AddTodoTableViewCell {
     
     private var viewModel  = AddTodoDayViewModel()
     private var disposeBag = DisposeBag()
+    
+    @IBOutlet private weak var collectionView: UICollectionView!
+    
 }

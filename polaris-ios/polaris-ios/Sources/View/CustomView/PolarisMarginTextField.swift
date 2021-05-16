@@ -14,6 +14,10 @@ protocol PolarisMarginTextFieldDelegate: class {
 }
 
 class PolarisMarginTextField: UIView {
+    
+    @IBInspectable var selectedBorderColor: UIColor     = .mainSky
+    @IBInspectable var unselectedBorderColor: UIColor   = .clear
+    
     weak var delegate: PolarisMarginTextFieldDelegate?
     
     // MARK: - Life Cycle
@@ -56,10 +60,8 @@ class PolarisMarginTextField: UIView {
         self.layer.borderColor = self.unselectedBorderColor.cgColor
     }
     
-    @IBInspectable var selectedBorderColor: UIColor     = .mainSky
-    @IBInspectable var unselectedBorderColor: UIColor   = .clear
-    
-    @IBOutlet weak var textField: UITextField!
-    
     private var disposeBag = DisposeBag()
+    
+    @IBOutlet private weak var textField: UITextField!
+    
 }

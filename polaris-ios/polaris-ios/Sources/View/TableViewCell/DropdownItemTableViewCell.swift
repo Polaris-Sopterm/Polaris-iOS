@@ -8,7 +8,6 @@
 import UIKit
 
 class DropdownItemTableViewCell: UITableViewCell {
-    @IBOutlet weak var menuLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -19,6 +18,9 @@ class DropdownItemTableViewCell: UITableViewCell {
     func configure(by menu: String) {
         self.menuLabel.text = menu
     }
+    
+    @IBOutlet private weak var menuLabel: UILabel!
+    
 }
 
 

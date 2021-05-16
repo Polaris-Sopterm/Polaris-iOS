@@ -38,9 +38,10 @@ class AddTodoVC: HalfModalVC {
     }
     
     private func setupTableView() {
-        self.tableView.contentInset     = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
-        self.tableView.allowsSelection  = false
-        self.tableView.separatorStyle   = .none
+        self.tableView.contentInset        = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
+        self.tableView.allowsSelection     = false
+        self.tableView.separatorStyle      = .none
+        self.tableView.keyboardDismissMode = .onDrag
     }
     
     private func registerCell() {

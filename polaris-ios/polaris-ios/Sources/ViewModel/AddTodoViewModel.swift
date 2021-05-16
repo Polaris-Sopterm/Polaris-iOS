@@ -9,6 +9,7 @@ import Foundation
 import RxSwift
 
 class AddTodoViewModel {
+    
     var currentAddOption: AddTodoVC.AddOptions? = nil
     var addListTypes      = BehaviorSubject<[AddTodoTableViewCellProtocol.Type]>(value: [])
     
@@ -63,4 +64,5 @@ class AddTodoViewModel {
     }
     
     private var disposeBag = DisposeBag()
+    
 }
