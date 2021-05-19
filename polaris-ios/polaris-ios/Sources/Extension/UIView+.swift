@@ -8,6 +8,26 @@
 import UIKit
 
 extension UIView {
+    
+    @IBInspectable var cornerRadius: CGFloat {
+        get { return self.layer.cornerRadius     }
+        set { self.layer.cornerRadius = newValue }
+    }
+    
+    @IBInspectable var borderWidth: CGFloat {
+        get { return self.layer.borderWidth     }
+        set { self.layer.borderWidth = newValue }
+    }
+    
+    @IBInspectable var borderColor: UIColor? {
+        get {
+            guard let color = self.layer.borderColor else { return nil }
+            return UIColor(cgColor: color)
+        }
+        
+        set { self.layer.borderColor = newValue?.cgColor }
+    }
+    
     static var isExistNibFile: Bool {
         let nibName = String(describing: self)
         return Bundle.main.path(forResource: nibName, ofType: "nib") != nil

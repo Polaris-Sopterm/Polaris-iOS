@@ -24,10 +24,6 @@ class AddTodoTextTableViewCell: AddTodoTableViewCell {
     override weak var delegate: AddTodoTableViewCellDelegate? { didSet { _delegate = self.delegate as? AddTodoTextTableViewCellDelegate } }
     weak var _delegate: AddTodoTextTableViewCellDelegate?
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var textFieldContainerView: UIView!
-    private var polarisMarginTextFieldView: PolarisMarginTextField? = UIView.fromNib()
-    
     // MARK: - Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -53,6 +49,11 @@ class AddTodoTextTableViewCell: AddTodoTableViewCell {
     
     private static let screenRaito: CGFloat         = DeviceInfo.screenWidth / 375
     private static let verticalInset: CGFloat       = 10
+    
+    private var polarisMarginTextFieldView: PolarisMarginTextField? = UIView.fromNib()
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var textFieldContainerView: UIView!
+    
 }
 
 extension AddTodoTextTableViewCell {

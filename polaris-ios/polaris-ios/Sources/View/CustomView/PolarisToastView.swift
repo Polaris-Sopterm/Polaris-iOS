@@ -8,10 +8,8 @@
 import UIKit
 
 class PolarisToastView: UIView {
-    typealias TouchHandler = (() -> Void)
     
-    @IBOutlet weak var backgroundView: UIView!
-    @IBOutlet weak var toastLabel: UILabel!
+    typealias TouchHandler = (() -> Void)
     
     var duration: TimeInterval = 1
     
@@ -60,4 +58,8 @@ class PolarisToastView: UIView {
     }
     
     private var touchHandler: TouchHandler?
+    
+    @IBOutlet private weak var backgroundView: UIView!
+    @IBOutlet private weak var toastLabel: UILabel!
+
 }
