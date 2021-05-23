@@ -15,8 +15,7 @@ class PolarisButton: UIButton {
     @IBInspectable var disableTextColor: UIColor        = .inactiveText
     @IBInspectable var enable: Bool                     = false {
         didSet {
-            if self.enable == true  { self.makeEnable()  }
-            else                    { self.makeDisable() }
+            self.adjustButton(as: self.enable)
         }
     }
 
@@ -24,12 +23,16 @@ class PolarisButton: UIButton {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.clipsToBounds = true
-        self.makeDisable()
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.makeDisable()
+        self.adjustButton(as: self.enable)
+    }
+    
+    private func adjustButton(as enable: Bool) {
+        if enable == true { self.makeEnable()  }
+        else              { self.makeDisable() }
     }
     
     private func makeEnable() {
