@@ -5,6 +5,8 @@
 //  Created by USER on 2021/05/23.
 //
 
+import RxCocoa
+import RxSwift
 import UIKit
 
 class LoginVC: UIViewController {
@@ -21,6 +23,8 @@ class LoginVC: UIViewController {
         self.setupTextField()
         self.setupObserver()
         self.addKeyboardDismissTapGesture()
+        self.bindTextFields()
+        self.observeProceedAbleLogin()
     }
     
     override func viewDidLayoutSubviews() {
@@ -99,8 +103,43 @@ class LoginVC: UIViewController {
         }
     }
     
+    private func bindTextFields() {
+        self.idTextField.rx.text.orEmpty
+            .distinctUntilChanged()
+            .subscribe(onNext: { [weak self] text in
+                guard let self = self else { return }
+                
+                self.viewModel.idSubject.onNext(text)
+            })
+            .disposed(by: self.disposeBag)
+        
+        self.pwTextField.rx.text.orEmpty
+            .distinctUntilChanged()
+            .subscribe(onNext: { [weak self] text in
+                guard let self = self else { return }
+                
+                self.viewModel.pwSubject.onNext(text)
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
+    private func observeProceedAbleLogin() {
+        self.viewModel.proceedAbleSubject
+            .distinctUntilChanged()
+            .subscribe(onNext: { [weak self] isProceed in
+                guard let self = self else { return }
+                
+                if isProceed == true { self.loginButton.enable = true  }
+                else                 { self.loginButton.enable = false }
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
     private static let logoTopConstraintValue: CGFloat      = 72 + DeviceInfo.topSafeAreaInset
     private static let textFieldTopConstraintValue: CGFloat = 77
+    
+    private var disposeBag = DisposeBag()
+    private var viewModel  = LoginViewModel()
     
     @IBOutlet private weak var backgroundView: UIView!
     @IBOutlet private weak var logoTopConstraint: NSLayoutConstraint!

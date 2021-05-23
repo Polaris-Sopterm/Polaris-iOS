@@ -15,7 +15,7 @@ class PolarisButton: UIButton {
     @IBInspectable var disableTextColor: UIColor        = .inactiveText
     @IBInspectable var enable: Bool                     = false {
         didSet {
-            if self.enable == true  { self.makeEnable() }
+            if self.enable == true  { self.makeEnable()  }
             else                    { self.makeDisable() }
         }
     }
@@ -33,15 +33,15 @@ class PolarisButton: UIButton {
     }
     
     private func makeEnable() {
+        self.isUserInteractionEnabled   = true
         self.backgroundColor            = self.enableBackgroundColor
         self.setTitleColor(self.enableTextColor, for: .normal)
-        self.isUserInteractionEnabled   = true
     }
     
     private func makeDisable() {
+        self.isUserInteractionEnabled   = false
         self.backgroundColor            = self.disableBackgroundColor
         self.setTitleColor(self.disableTextColor, for: .normal)
-        self.isUserInteractionEnabled   = false
     }
     
 }
