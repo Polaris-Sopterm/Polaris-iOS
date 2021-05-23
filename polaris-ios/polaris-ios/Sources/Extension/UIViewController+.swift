@@ -8,6 +8,7 @@
 import UIKit
 
 extension UIViewController {
+    
     static var rootViewController: UIViewController? {
         return UIApplication.shared.windows.filter({ $0.isKeyWindow }).first?.rootViewController
     }
@@ -30,5 +31,25 @@ extension UIViewController {
         
         return storyboard.instantiateViewController(withIdentifier: identifier) as? Self
     }
+    
+    func addKeyboardDismissTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard(_:)))
+        self.view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func dismissKeyboard(_ recognizer: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
+    
+    func animateWithKeyboard(_ notification: NSNotification, animation: (CGRect?, Double?) -> Void) {
+        let frameKey         = UIResponder.keyboardFrameEndUserInfoKey
+        let keyboardFrame    = (notification.userInfo?[frameKey] as? NSValue)?.cgRectValue
+        
+        let durationKey      = UIResponder.keyboardAnimationDurationUserInfoKey
+        let keyboardDuration = notification.userInfo?[durationKey] as? Double
+        
+        animation(keyboardFrame, keyboardDuration)
+    }
+    
 }
 

@@ -204,6 +204,7 @@
                         <outlet property="logoTopConstraint" destination="s8d-Lo-e6T" id="u3K-fc-qql"/>
                         <outlet property="pwTextField" destination="Flx-1J-ABo" id="sfM-HW-MKF"/>
                         <outlet property="signupButton" destination="Osy-cj-gkP" id="xdF-Sq-Peu"/>
+                        <outlet property="textFieldTopConstraint" destination="n59-9T-tY7" id="9PA-oH-7Ec"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Msw-kc-L20" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
