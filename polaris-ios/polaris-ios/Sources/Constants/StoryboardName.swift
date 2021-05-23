@@ -14,4 +14,5 @@ struct StoryboardName {
     static let todoDate     = "TodoDate"
     static let journeyTodo  = "JourneyTodo"
     static let mainSceneVC  = "MainScene"
+    static let intro        = "Intro"
 }

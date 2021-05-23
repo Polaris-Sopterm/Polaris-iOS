@@ -1,5 +1,5 @@
 //
-//  AddButton.swift
+//  PolarisButton.swift
 //  polaris-ios
 //
 //  Created by USER on 2021/04/17.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddButton: UIButton {
+class PolarisButton: UIButton {
     
     @IBInspectable var enableBackgroundColor: UIColor   = .mainSky
     @IBInspectable var disableBackgroundColor: UIColor  = .inactiveBtn
@@ -24,6 +24,12 @@ class AddButton: UIButton {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.clipsToBounds = true
+        self.makeDisable()
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.makeDisable()
     }
     
     private func makeEnable() {
