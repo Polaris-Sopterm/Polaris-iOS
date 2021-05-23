@@ -94,7 +94,7 @@ class AddTodoVC: HalfModalVC {
     
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var cancelButton: UIButton!
-    @IBOutlet private weak var addButton: AddButton!
+    @IBOutlet private weak var addButton: PolarisButton!
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var addTodoHalfModalView: UIView!
     
