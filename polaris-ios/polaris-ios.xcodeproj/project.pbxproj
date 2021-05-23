@@ -23,6 +23,7 @@
 		CE13213A265A14E8001E3C1F /* Intro.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE132139265A14E8001E3C1F /* Intro.storyboard */; };
 		CE13213D265A1519001E3C1F /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13213C265A1519001E3C1F /* LoginVC.swift */; };
 		CE132141265A408F001E3C1F /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE132140265A408E001E3C1F /* LoginViewModel.swift */; };
+		CE132144265A5CD1001E3C1F /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE132143265A5CD1001E3C1F /* SignupVC.swift */; };
 		CE574D97263517B60046D20A /* AddTodoSelectStarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE574D95263517B60046D20A /* AddTodoSelectStarTableViewCell.swift */; };
 		CE574D98263517B60046D20A /* AddTodoSelectStarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE574D96263517B60046D20A /* AddTodoSelectStarTableViewCell.xib */; };
 		CE574D9D263524140046D20A /* SelectStarItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE574D9B263524140046D20A /* SelectStarItemCollectionViewCell.swift */; };
@@ -129,6 +130,7 @@
 		CE132139265A14E8001E3C1F /* Intro.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Intro.storyboard; sourceTree = "<group>"; };
 		CE13213C265A1519001E3C1F /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		CE132140265A408E001E3C1F /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		CE132143265A5CD1001E3C1F /* SignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
 		CE574D95263517B60046D20A /* AddTodoSelectStarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoSelectStarTableViewCell.swift; sourceTree = "<group>"; };
 		CE574D96263517B60046D20A /* AddTodoSelectStarTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTodoSelectStarTableViewCell.xib; sourceTree = "<group>"; };
 		CE574D9B263524140046D20A /* SelectStarItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectStarItemCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -494,6 +496,7 @@
 				ECA49461262C20DD00CC2EB8 /* MainSceneVC.swift */,
 				CEC19ADE2650E13100DA747C /* JourneyTodoVC.swift */,
 				CE13213C265A1519001E3C1F /* LoginVC.swift */,
+				CE132143265A5CD1001E3C1F /* SignupVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -720,6 +723,7 @@
 				ECA494472629729000CC2EB8 /* TodoDateModel.swift in Sources */,
 				CE132141265A408F001E3C1F /* LoginViewModel.swift in Sources */,
 				ECA49475262C461700CC2EB8 /* MainStarModel.swift in Sources */,
+				CE132144265A5CD1001E3C1F /* SignupVC.swift in Sources */,
 				ECDC5A47263552A700A1B5A9 /* MainTodoTVC.swift in Sources */,
 				CEEE5760262AD62C00C39358 /* AddTodoVC.swift in Sources */,
 				CE574D9D263524140046D20A /* SelectStarItemCollectionViewCell.swift in Sources */,

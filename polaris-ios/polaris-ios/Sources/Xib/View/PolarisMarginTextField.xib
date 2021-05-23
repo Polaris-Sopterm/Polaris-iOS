@@ -19,7 +19,7 @@
                     <rect key="frame" x="26" y="17" width="277" height="19"/>
                     <color key="textColor" name="mainText"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
                 </textField>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>

@@ -15,8 +15,8 @@ protocol PolarisMarginTextFieldDelegate: class {
 
 class PolarisMarginTextField: UIView {
     
-    @IBInspectable var selectedBorderColor: UIColor     = .mainSky
-    @IBInspectable var unselectedBorderColor: UIColor   = .clear
+    var selectedBorderColor: UIColor     = .mainSky
+    var unselectedBorderColor: UIColor   = .clear
     
     weak var delegate: PolarisMarginTextFieldDelegate?
     
@@ -31,6 +31,7 @@ class PolarisMarginTextField: UIView {
     private func setupMarginView() {
         self.clipsToBounds      = true
         self.layer.borderWidth  = 1
+        self.layer.borderColor  = self.unselectedBorderColor.cgColor
         self.layer.cornerRadius = 16
     }
     
@@ -38,14 +39,35 @@ class PolarisMarginTextField: UIView {
         self.textField.attributedPlaceholder = NSMutableAttributedString(string: text, attributes: [.foregroundColor: UIColor.inactiveTextPurple, .font: UIFont.systemFont(ofSize: 16, weight: .medium)])
     }
     
+    func setScure(_ isSecure: Bool) {
+        self.textField.isSecureTextEntry = isSecure
+    }
+    
+    func setKeyboardReturnType(_ returnType: UIReturnKeyType) {
+        self.textField.returnKeyType = returnType
+    }
+    
+    func setKeyboardType(_ keyboardType: UIKeyboardType) {
+        self.textField.keyboardType = keyboardType
+    }
+    
     // MARK: - Bind
     private func bindTextField() {
+        self.textField.rx.controlEvent(.editingDidBegin)
+            .subscribe(onNext: { [weak self] in
+                self?.makeSelectedTextFieldColor()
+            })
+            .disposed(by: self.disposeBag)
+        
+        self.textField.rx.controlEvent(.editingDidEnd)
+            .subscribe(onNext: { [weak self] in
+                self?.makeDeselectedTextFieldColor()
+            })
+            .disposed(by: self.disposeBag)
+        
         self.textField.rx.text.orEmpty
             .subscribe(onNext: { [weak self] text in
                 guard let self = self else { return }
-                
-                if text.isEmpty == true { self.makeDeselectedTextFieldColor() }
-                else                    { self.makeSelectedTextFieldColor() }
                 
                 self.delegate?.polarisMarginTextField(self, didChangeText: text)
             })
