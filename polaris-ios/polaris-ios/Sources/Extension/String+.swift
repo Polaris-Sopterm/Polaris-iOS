@@ -34,7 +34,7 @@ extension String {
             let characterSet = CharacterSet(charactersIn: String(character))
             if set.isSuperset(of: characterSet) == true { return true }
         }
-        return true
+        return false
     }
     
 }

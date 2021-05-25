@@ -44,7 +44,7 @@ class SignupVC: UIViewController {
     }
     
     private func observeInputState() {
-        self.viewModel.totalInputStateRelay
+        self.viewModel.stepRelay
             .distinctUntilChanged()
             .subscribe(onNext: { [weak self] inputState in
                 guard let self = self          else { return }
@@ -71,16 +71,19 @@ class SignupVC: UIViewController {
     }
     
     private func observeValidateInputs() {
+        var isFirst: Bool = true
+        
         self.viewModel.validateIdSubejct
             .distinctUntilChanged()
             .do(onNext: { [weak self] validate in
                 guard let self = self else { return }
-                
+    
                 switch validate {
                 case .empty:         self.idValidateView.isHidden = true
                 case .validation(_): self.idValidateView.isHidden = false
                 }
                 
+                guard isFirst == false else { isFirst = false; return }
                 UIView.animate(withDuration: 0.3) { [weak self] in self?.view.layoutIfNeeded() }
             })
             .debounce(.seconds(1), scheduler: MainScheduler.instance)
@@ -88,19 +91,23 @@ class SignupVC: UIViewController {
                 guard let self = self else { return }
                 
                 guard self.viewModel.isProcessableFirstStep(validate) == true else { return }
-                self.viewModel.totalInputStateRelay.accept(.secondStep)
+                self.viewModel.stepRelay.accept(.secondStep)
             })
             .disposed(by: self.disposeBag)
         
         self.viewModel.validatePwSubject
             .distinctUntilChanged()
+            .do(onNext: { [weak self] validate in
+                guard let self = self else { return }
+                
+                self.updatePwValidateUI(as: validate)
+            })
+            .debounce(.seconds(1), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] validate in
                 guard let self = self else { return }
                 
-                let currentInputState = self.viewModel.totalInputStateRelay.value
-                
-                guard validate == true, currentInputState == .secondStep else { return }
-                self.viewModel.totalInputStateRelay.accept(.lastStep)
+                guard self.viewModel.isProcessableSecondStep(validate) == true else { return }
+                self.viewModel.stepRelay.accept(.lastStep)
             })
             .disposed(by: self.disposeBag)
         
@@ -109,13 +116,45 @@ class SignupVC: UIViewController {
             .subscribe(onNext: { [weak self] validate in
                 guard let self = self else { return }
                 
-                defer { /* 닉네임 유효성 체크하는 부분 추가 */ }
+                guard self.viewModel.isProcessableLastStep(validate) == true else { return }
+                print("진행 가능")
             })
             .disposed(by: self.disposeBag)
     }
     
-    private func updateValidateUI(_ option: InputOptions, as validate: Bool) {
+    private func updatePwValidateUI(as state: PwValidateState) {
+        guard self.viewModel.isFirstStep == false else { return }
         
+        switch state {
+        case .allValidation(let isAll):
+            self.pwCountValidateImageView.image = isAll ? #imageLiteral(resourceName: "icnPass") : #imageLiteral(resourceName: "icnError")
+            self.pwCombiValidateImageView.image = isAll ? #imageLiteral(resourceName: "icnPass") : #imageLiteral(resourceName: "icnError")
+        case .eachValidation(let invalidType):
+            if invalidType == .combi {
+                self.pwCombiValidateImageView.image = #imageLiteral(resourceName: "icnError")
+                self.pwCountValidateImageView.image = #imageLiteral(resourceName: "icnPass")
+            } else {
+                self.pwCountValidateImageView.image = #imageLiteral(resourceName: "icnError")
+                self.pwCombiValidateImageView.image = #imageLiteral(resourceName: "icnPass")
+            }
+        default: break
+        }
+        
+        self.pwCombiValidateView.isHidden = state == .empty
+        self.pwCountValidateView.isHidden = state == .empty
+        UIView.animate(withDuration: 0.3) { self.view.layoutIfNeeded() }
+    }
+    
+    private func updateNicknameValidateUI(as state: NicknameValidateState) {
+        guard self.viewModel.isFirstStep == false else { return }
+        
+        switch state {
+        case .validation(let validate): self.nicknameValidateImageView.image = validate ? #imageLiteral(resourceName: "icnPass") : #imageLiteral(resourceName: "icnError")
+        case .empty: break
+        }
+        
+        self.nicknameValidateView.isHidden = state == .empty
+        UIView.animate(withDuration: 0.3) { [weak self] in self?.view.layoutIfNeeded() }
     }
     
     private var disposeBag = DisposeBag()
@@ -137,12 +176,15 @@ class SignupVC: UIViewController {
     @IBOutlet private weak var pwTextFieldContainerView: UIView!
     private var pwTextFieldView: PolarisMarginTextField? = UIView.fromNib()
     @IBOutlet private weak var pwCountValidateView: UIView!
+    @IBOutlet private weak var pwCountValidateImageView: UIImageView!
     @IBOutlet private weak var pwCombiValidateView: UIView!
+    @IBOutlet private weak var pwCombiValidateImageView: UIImageView!
     
     @IBOutlet private weak var nicknameInputContainerView: UIView!
     @IBOutlet private weak var nicknameTextFieldContainerView: UIView!
     private var nicknameTextFieldView: PolarisMarginTextField? = UIView.fromNib()
     @IBOutlet private weak var nicknameValidateView: UIView!
+    @IBOutlet private weak var nicknameValidateImageView: UIImageView!
     
 }
 

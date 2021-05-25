@@ -285,7 +285,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0A0-NZ-trE">
                                                         <rect key="frame" x="0.0" y="0.0" width="327" height="114.33333333333333"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="별명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E2w-t5-ieh">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="별명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E2w-t5-ieh">
                                                                 <rect key="frame" x="0.0" y="0.0" width="24.333333333333332" height="17"/>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                                 <color key="textColor" name="textSky"/>
@@ -304,7 +304,7 @@
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KQe-f5-kgV">
                                                                         <rect key="frame" x="0.0" y="0.0" width="327" height="14.333333333333334"/>
                                                                         <subviews>
-                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icnPass" translatesAutoresizingMaskIntoConstraints="NO" id="uZ2-Yb-6v4">
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icnError" translatesAutoresizingMaskIntoConstraints="NO" id="uZ2-Yb-6v4">
                                                                                 <rect key="frame" x="5" y="1.3333333333333712" width="12" height="12"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="12" id="KWv-eL-i0g"/>
@@ -347,7 +347,7 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dz7-CQ-oxu">
                                                         <rect key="frame" x="0.0" y="154.33333333333337" width="327" height="134.66666666666663"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="비밀번호" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Egh-fH-cbm">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="비밀번호" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Egh-fH-cbm">
                                                                 <rect key="frame" x="0.0" y="0.0" width="48.666666666666664" height="17"/>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                                 <color key="textColor" name="textSky"/>
@@ -366,14 +366,14 @@
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2v1-Pj-5u4">
                                                                         <rect key="frame" x="0.0" y="0.0" width="327" height="14.333333333333334"/>
                                                                         <subviews>
-                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icnPass" translatesAutoresizingMaskIntoConstraints="NO" id="MDT-S7-WSx">
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icnError" translatesAutoresizingMaskIntoConstraints="NO" id="MDT-S7-WSx">
                                                                                 <rect key="frame" x="5" y="1.3333333333333144" width="12" height="12"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="12" id="2vp-27-xcj"/>
                                                                                     <constraint firstAttribute="width" constant="12" id="qGM-ti-EAu"/>
                                                                                 </constraints>
                                                                             </imageView>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="6자리 이상이어야 해요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GtA-Ov-8Uh">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="6자리 이상이어야 해요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GtA-Ov-8Uh">
                                                                                 <rect key="frame" x="22" y="0.0" width="305" height="14.333333333333334"/>
                                                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -400,7 +400,7 @@
                                                                                     <constraint firstAttribute="height" constant="12" id="pEo-PD-IPd"/>
                                                                                 </constraints>
                                                                             </imageView>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="영문과 숫자를 조합해야 해요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mUZ-5D-l3Z">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="영문과 숫자를 조합해야 해요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mUZ-5D-l3Z">
                                                                                 <rect key="frame" x="22" y="0.0" width="305" height="14.333333333333334"/>
                                                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -455,14 +455,14 @@
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j0O-qK-A8g">
                                                                         <rect key="frame" x="0.0" y="0.0" width="327" height="14.333333333333334"/>
                                                                         <subviews>
-                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icnPass" translatesAutoresizingMaskIntoConstraints="NO" id="meS-bX-udw">
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icnError" translatesAutoresizingMaskIntoConstraints="NO" id="meS-bX-udw">
                                                                                 <rect key="frame" x="5" y="1.3333333333332575" width="12" height="12"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" constant="12" id="YTR-PR-BLI"/>
                                                                                     <constraint firstAttribute="height" constant="12" id="jgp-iY-nr8"/>
                                                                                 </constraints>
                                                                             </imageView>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="사용 가능한 아이디에요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SVV-TK-aCF">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="사용 가능한 아이디에요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SVV-TK-aCF">
                                                                                 <rect key="frame" x="22" y="0.0" width="305" height="14.333333333333334"/>
                                                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -549,8 +549,11 @@
                         <outlet property="nicknameInputContainerView" destination="0A0-NZ-trE" id="EnJ-KI-Lja"/>
                         <outlet property="nicknameTextFieldContainerView" destination="vJa-ZP-YDg" id="uvp-eX-QC0"/>
                         <outlet property="nicknameTopConstraint" destination="WTJ-Hd-HOr" id="9Ty-7p-3bQ"/>
+                        <outlet property="nicknameValidateImageView" destination="uZ2-Yb-6v4" id="4rH-ZQ-BTR"/>
                         <outlet property="nicknameValidateView" destination="KQe-f5-kgV" id="2HU-dS-DQc"/>
+                        <outlet property="pwCombiValidateImageView" destination="bZ9-m2-JP4" id="23r-an-DyX"/>
                         <outlet property="pwCombiValidateView" destination="MIu-ZP-iD1" id="iiz-Hg-s7U"/>
+                        <outlet property="pwCountValidateImageView" destination="MDT-S7-WSx" id="p0u-qI-lwg"/>
                         <outlet property="pwCountValidateView" destination="2v1-Pj-5u4" id="ICV-ns-9qt"/>
                         <outlet property="pwDescriptionStackView" destination="evB-BF-ptj" id="FjG-Tu-kbX"/>
                         <outlet property="pwDescriptionTopConstraint" destination="ngx-WW-Pm3" id="2ce-uj-wUc"/>
@@ -568,7 +571,6 @@
         <image name="bgStars" width="375" height="812"/>
         <image name="icnError" width="12" height="12"/>
         <image name="icnId" width="13.333333015441895" height="15.666666984558105"/>
-        <image name="icnPass" width="12" height="12"/>
         <image name="icnPw" width="18" height="10"/>
         <image name="imgPolaris" width="99" height="24"/>
         <image name="imgPolarisStar" width="55" height="55"/>
