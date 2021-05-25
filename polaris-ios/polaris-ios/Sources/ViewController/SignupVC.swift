@@ -19,6 +19,7 @@ class SignupVC: UIViewController {
         self.setupTextFields()
         self.observeInputState()
         self.observeValidateInputs()
+        self.observeCompleteSignup()
     }
     
     private func setupTextFields() {
@@ -78,18 +79,16 @@ class SignupVC: UIViewController {
             .do(onNext: { [weak self] validate in
                 guard let self = self else { return }
     
-                switch validate {
-                case .empty:         self.idValidateView.isHidden = true
-                case .validation(_): self.idValidateView.isHidden = false
-                }
+                self.updateIdValidateUI(as: validate)
                 
                 guard isFirst == false else { isFirst = false; return }
                 UIView.animate(withDuration: 0.3) { [weak self] in self?.view.layoutIfNeeded() }
             })
-            .debounce(.seconds(1), scheduler: MainScheduler.instance)
+            .debounce(.milliseconds(600), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] validate in
                 guard let self = self else { return }
                 
+                guard self.viewModel.isLastStep == false else { self.viewModel.confirmCompleteSignup(); return }
                 guard self.viewModel.isProcessableFirstStep(validate) == true else { return }
                 self.viewModel.stepRelay.accept(.secondStep)
             })
@@ -102,10 +101,11 @@ class SignupVC: UIViewController {
                 
                 self.updatePwValidateUI(as: validate)
             })
-            .debounce(.seconds(1), scheduler: MainScheduler.instance)
+            .debounce(.milliseconds(600), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] validate in
                 guard let self = self else { return }
                 
+                guard self.viewModel.isLastStep == false else { self.viewModel.confirmCompleteSignup(); return }
                 guard self.viewModel.isProcessableSecondStep(validate) == true else { return }
                 self.viewModel.stepRelay.accept(.lastStep)
             })
@@ -113,13 +113,42 @@ class SignupVC: UIViewController {
         
         self.viewModel.validateNicknameSubject
             .distinctUntilChanged()
+            .do(onNext: { [weak self] validate in
+                guard let self = self else { return }
+                
+                self.updateNicknameValidateUI(as: validate)
+            })
+            .debounce(.milliseconds(600), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] validate in
                 guard let self = self else { return }
                 
-                guard self.viewModel.isProcessableLastStep(validate) == true else { return }
-                print("진행 가능")
+                guard self.viewModel.isLastStep == true else { return }
+                self.viewModel.confirmCompleteSignup()
             })
             .disposed(by: self.disposeBag)
+    }
+    
+    private func observeCompleteSignup() {
+        self.viewModel.completeSignupSubject
+            .distinctUntilChanged()
+            .subscribe(onNext: { isComplete in
+                if isComplete == true {
+                    #warning("회원 가입 완료")
+                    print("회원가입 가능")
+                } else {
+                    print("아직 불가")
+                }
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
+    private func updateIdValidateUI(as state: IdValidateState) {
+        switch state {
+        case .validation(let validate): self.idValidateImageView.image = validate ? #imageLiteral(resourceName: "icnPass") : #imageLiteral(resourceName: "icnError")
+        case .empty: break
+        }
+        
+        self.idValidateView.isHidden = state == .empty
     }
     
     private func updatePwValidateUI(as state: PwValidateState) {
@@ -171,6 +200,7 @@ class SignupVC: UIViewController {
     @IBOutlet private weak var idTextFieldContainerView: UIView!
     private var idTextFieldView: PolarisMarginTextField? = UIView.fromNib()
     @IBOutlet private weak var idValidateView: UIView!
+    @IBOutlet private weak var idValidateImageView: UIImageView!
     
     @IBOutlet private weak var pwInputContainerView: UIView!
     @IBOutlet private weak var pwTextFieldContainerView: UIView!

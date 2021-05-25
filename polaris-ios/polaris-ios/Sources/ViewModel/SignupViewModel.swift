@@ -25,6 +25,8 @@ class SignupViewModel {
     let validatePwSubject       = BehaviorSubject<PwValidateState>(value: .empty)
     let validateNicknameSubject = BehaviorSubject<NicknameValidateState>(value: .empty)
     
+    let completeSignupSubject   = BehaviorSubject<Bool>(value: false)
+    
     init() {
         self.idSubject
             .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
@@ -58,7 +60,8 @@ class SignupViewModel {
     
     func isValidateId(as input: String) -> IdValidateState {
         if input.isEmpty == true { return .empty }
-        else                     { return .validation(true) }
+        else if input.count >= 6 { return .validation(true)  }
+        else                     { return .validation(false) }
     }
     
     func isValidatePw(as input: String) -> PwValidateState {
@@ -92,9 +95,19 @@ class SignupViewModel {
         return true
     }
     
-    func isProcessableLastStep(_ nicknameValidateState: NicknameValidateState) -> Bool {
-        guard case .validation(true) = nicknameValidateState, self.isLastStep == true else { return false }
-        return true
+    func confirmCompleteSignup() {
+        self.completeSignupSubject.onNext(self.isCompleteSignup)
+    }
+    
+    private var isCompleteSignup: Bool {
+        guard self.isLastStep == true else { return false }
+        
+        guard let idValidate       = try? self.validateIdSubejct.value(),
+              let pwValidate       = try? self.validatePwSubject.value(),
+              let nicknameValidate = try? self.validateNicknameSubject.value() else { return false }
+        
+        if idValidate == .validation(true) && pwValidate == .allValidation(true) && nicknameValidate == .validation(true) { return true }
+        else { return false }
     }
     
     private var disposeBag = DisposeBag()
