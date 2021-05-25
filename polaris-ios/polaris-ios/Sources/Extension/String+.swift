@@ -29,4 +29,12 @@ extension String {
         return attributeString
     }
     
+    func containsCharacterSet(_ set: CharacterSet) -> Bool {
+        for character in self {
+            let characterSet = CharacterSet(charactersIn: String(character))
+            if set.isSuperset(of: characterSet) == true { return true }
+        }
+        return true
+    }
+    
 }

@@ -15,8 +15,8 @@ protocol PolarisMarginTextFieldDelegate: class {
 
 class PolarisMarginTextField: UIView {
     
-    var selectedBorderColor: UIColor     = .mainSky
-    var unselectedBorderColor: UIColor   = .clear
+    @IBInspectable var selectedBorderColor: UIColor     = .mainSky
+    @IBInspectable var unselectedBorderColor: UIColor   = .clear
     
     weak var delegate: PolarisMarginTextFieldDelegate?
     

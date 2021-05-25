@@ -10,10 +10,10 @@ import RxSwift
 
 class LoginViewModel {
     
-    var idSubject = BehaviorSubject<String>(value: "")
-    var pwSubject = BehaviorSubject<String>(value: "")
+    let idSubject = BehaviorSubject<String>(value: "")
+    let pwSubject = BehaviorSubject<String>(value: "")
     
-    var proceedAbleSubject = BehaviorSubject<Bool>(value: false)
+    let proceedAbleSubject = BehaviorSubject<Bool>(value: false)
     
     init() {
         Observable.combineLatest(self.idSubject, self.pwSubject)

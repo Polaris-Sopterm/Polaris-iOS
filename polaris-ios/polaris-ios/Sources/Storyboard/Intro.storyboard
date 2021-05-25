@@ -542,12 +542,19 @@
                     <connections>
                         <outlet property="idDescriptionStackView" destination="r2t-8U-PIJ" id="gDx-vj-k4N"/>
                         <outlet property="idDescriptionTopConstraint" destination="aSj-eu-FAM" id="Wfe-vv-put"/>
+                        <outlet property="idInputContainerView" destination="q9t-Rx-gRg" id="j3F-9c-0yv"/>
                         <outlet property="idTextFieldContainerView" destination="Zac-Wx-QZW" id="Wu6-sz-3Az"/>
+                        <outlet property="idValidateView" destination="j0O-qK-A8g" id="3Py-SZ-BrJ"/>
                         <outlet property="nicknameDescriptionStackView" destination="d5a-Tl-cSD" id="jNA-Wx-Hmr"/>
+                        <outlet property="nicknameInputContainerView" destination="0A0-NZ-trE" id="EnJ-KI-Lja"/>
                         <outlet property="nicknameTextFieldContainerView" destination="vJa-ZP-YDg" id="uvp-eX-QC0"/>
                         <outlet property="nicknameTopConstraint" destination="WTJ-Hd-HOr" id="9Ty-7p-3bQ"/>
+                        <outlet property="nicknameValidateView" destination="KQe-f5-kgV" id="2HU-dS-DQc"/>
+                        <outlet property="pwCombiValidateView" destination="MIu-ZP-iD1" id="iiz-Hg-s7U"/>
+                        <outlet property="pwCountValidateView" destination="2v1-Pj-5u4" id="ICV-ns-9qt"/>
                         <outlet property="pwDescriptionStackView" destination="evB-BF-ptj" id="FjG-Tu-kbX"/>
                         <outlet property="pwDescriptionTopConstraint" destination="ngx-WW-Pm3" id="2ce-uj-wUc"/>
+                        <outlet property="pwInputContainerView" destination="Dz7-CQ-oxu" id="ngS-Lt-XqQ"/>
                         <outlet property="pwTextFieldContainerView" destination="H7L-sa-geA" id="Glm-rE-G5J"/>
                     </connections>
                 </viewController>
