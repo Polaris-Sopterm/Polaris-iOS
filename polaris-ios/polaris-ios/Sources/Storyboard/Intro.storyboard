@@ -295,7 +295,7 @@
                                                                 <rect key="frame" x="0.0" y="32" width="327" height="53"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" secondItem="vJa-ZP-YDg" secondAttribute="height" multiplier="327:53" id="ceu-DX-k42"/>
+                                                                    <constraint firstAttribute="height" constant="53" id="AOX-N8-Gof"/>
                                                                 </constraints>
                                                             </view>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Fjw-tp-9K8">
@@ -311,7 +311,7 @@
                                                                                     <constraint firstAttribute="width" constant="12" id="Pbl-Az-CpJ"/>
                                                                                 </constraints>
                                                                             </imageView>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="6자리 이상이어야 해요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9XV-xN-TDu">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="6자리 이상이어야 해요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9XV-xN-TDu">
                                                                                 <rect key="frame" x="22" y="0.0" width="305" height="14.333333333333334"/>
                                                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -357,7 +357,7 @@
                                                                 <rect key="frame" x="0.0" y="32" width="327" height="53"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" secondItem="H7L-sa-geA" secondAttribute="height" multiplier="327:53" id="X7S-aB-UnB"/>
+                                                                    <constraint firstAttribute="height" constant="53" id="IzS-Sd-SEQ"/>
                                                                 </constraints>
                                                             </view>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="GKy-EY-SS2">
@@ -446,7 +446,7 @@
                                                                 <rect key="frame" x="0.0" y="32.000000000000057" width="327" height="53"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" secondItem="Zac-Wx-QZW" secondAttribute="height" multiplier="327:53" id="Wbq-T6-pTf"/>
+                                                                    <constraint firstAttribute="height" constant="53" id="DR3-mk-hbt"/>
                                                                 </constraints>
                                                             </view>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="p1C-Mm-V9D">
