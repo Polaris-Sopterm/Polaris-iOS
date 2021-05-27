@@ -20,6 +20,12 @@ class SignupVC: UIViewController {
         self.observeInputState()
         self.observeValidateInputs()
         self.observeCompleteSignup()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now()+2) {
+            guard let vc = LoginVC.instantiateFromStoryboard(StoryboardName.intro) else { return }
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
+        }
     }
     
     private func setupTextFields() {
