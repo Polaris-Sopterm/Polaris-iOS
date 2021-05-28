@@ -1,14 +1,20 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
 
-target 'polaris-ios' do
-  # Comment the next line if you don't want to use dynamic frameworks
+platform :ios, '13.0'
+inhibit_all_warnings!
+
+abstract_target 'polaris-ios' do
   use_frameworks!
   
-  # Pods for polaris-ios
   pod 'RxSwift', '6.1.0'
   pod 'RxCocoa', '6.1.0'
   pod 'Moya', '~> 14.0'
-  pod 'Kingfisher', '~> 6.0' 
+  pod 'Kingfisher', '~> 6.0'
+
+  target 'Polaris' do
+  end
+  
+  target 'Polaris Dev' do
+  end
   
 end
