@@ -111,8 +111,7 @@ class LoginVC: UIViewController {
             guard let self = self                         else { return }
             guard let keyboardDuration = keyboardDuration else { return }
             
-            self.logoTopConstraint.constant      = type(of: self).logoTopConstraintValue - DeviceInfo.topSafeAreaInset - 20
-            self.textFieldTopConstraint.constant = type(of: self).textFieldTopConstraintValue - 70
+            self.layoutForKeyboardShow()
             UIView.animate(withDuration: keyboardDuration) { self.view.layoutIfNeeded() }
         }
     }
@@ -124,8 +123,7 @@ class LoginVC: UIViewController {
             guard let self = self                         else { return }
             guard let keyboardDuration = keyboardDuration else { return }
             
-            self.logoTopConstraint.constant      = type(of: self).logoTopConstraintValue
-            self.textFieldTopConstraint.constant = type(of: self).textFieldTopConstraintValue
+            self.layoutForKeyboardHide()
             UIView.animate(withDuration: keyboardDuration) { self.view.layoutIfNeeded() }
         }
     }
@@ -133,7 +131,9 @@ class LoginVC: UIViewController {
     private func presentSignup() {
         guard let signupViewController = SignupVC.instantiateFromStoryboard(StoryboardName.intro) else { return }
         signupViewController.modalPresentationStyle = .fullScreen
-        self.present(signupViewController, animated: true, completion: nil)
+        self.present(signupViewController, animated: true) {
+            self.layoutForKeyboardHide()
+        }
     }
     
     private func bindTextFields() {
@@ -174,6 +174,16 @@ class LoginVC: UIViewController {
                 else                 { self.loginButton.enable = false }
             })
             .disposed(by: self.disposeBag)
+    }
+    
+    private func layoutForKeyboardHide() {
+        self.logoTopConstraint.constant      = type(of: self).logoTopConstraintValue
+        self.textFieldTopConstraint.constant = type(of: self).textFieldTopConstraintValue
+    }
+    
+    private func layoutForKeyboardShow() {
+        self.logoTopConstraint.constant      = type(of: self).logoTopConstraintValue - DeviceInfo.topSafeAreaInset - 20
+        self.textFieldTopConstraint.constant = type(of: self).textFieldTopConstraintValue - 70
     }
     
     private static let logoTopConstraintValue: CGFloat      = 72 + DeviceInfo.topSafeAreaInset

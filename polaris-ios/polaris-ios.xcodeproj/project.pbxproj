@@ -218,7 +218,6 @@
 		62A763CE321F34C429250864 /* Pods_polaris_ios_Polaris.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_polaris_ios_Polaris.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B9070CF72A6FB1E8ED31409 /* Pods-polaris-ios-Polaris Dev.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-polaris-ios-Polaris Dev.beta.xcconfig"; path = "Target Support Files/Pods-polaris-ios-Polaris Dev/Pods-polaris-ios-Polaris Dev.beta.xcconfig"; sourceTree = "<group>"; };
 		7786249D4A467FFBE039BB94 /* Pods_polaris_ios_Polaris_Dev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_polaris_ios_Polaris_Dev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B99945FF07FDC10893694E03 /* Pods-polaris-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-polaris-ios.debug.xcconfig"; path = "Target Support Files/Pods-polaris-ios/Pods-polaris-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		CE04A032262340D1007C98E2 /* Polaris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Polaris.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE04A035262340D1007C98E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE04A037262340D1007C98E2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -287,7 +286,6 @@
 		CEEE5785262C112D00C39358 /* AddTodoFixOnTopTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTodoFixOnTopTableViewCell.xib; sourceTree = "<group>"; };
 		CEEE57A3262C297700C39358 /* AddTodoDropdownTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoDropdownTableViewCell.swift; sourceTree = "<group>"; };
 		CEEE57A4262C297700C39358 /* AddTodoDropdownTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTodoDropdownTableViewCell.xib; sourceTree = "<group>"; };
-		E4A6B1EFA15BD83942E79BD7 /* Pods-polaris-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-polaris-ios.release.xcconfig"; path = "Target Support Files/Pods-polaris-ios/Pods-polaris-ios.release.xcconfig"; sourceTree = "<group>"; };
 		E5008C7064D7B9664A90B023 /* Pods-polaris-ios-Polaris Dev.real.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-polaris-ios-Polaris Dev.real.xcconfig"; path = "Target Support Files/Pods-polaris-ios-Polaris Dev/Pods-polaris-ios-Polaris Dev.real.xcconfig"; sourceTree = "<group>"; };
 		EBADBF5A561A9E7C0BAAF039 /* Pods-polaris-ios-Polaris.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-polaris-ios-Polaris.beta.xcconfig"; path = "Target Support Files/Pods-polaris-ios-Polaris/Pods-polaris-ios-Polaris.beta.xcconfig"; sourceTree = "<group>"; };
 		EC49B958262EAF3D0080F8C3 /* StarNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarNames.swift; sourceTree = "<group>"; };
@@ -361,8 +359,6 @@
 		ABEA5892F8C0FC683836E029 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				B99945FF07FDC10893694E03 /* Pods-polaris-ios.debug.xcconfig */,
-				E4A6B1EFA15BD83942E79BD7 /* Pods-polaris-ios.release.xcconfig */,
 				EBADBF5A561A9E7C0BAAF039 /* Pods-polaris-ios-Polaris.beta.xcconfig */,
 				317393C453134FBB910813E0 /* Pods-polaris-ios-Polaris.real.xcconfig */,
 				6B9070CF72A6FB1E8ED31409 /* Pods-polaris-ios-Polaris Dev.beta.xcconfig */,
