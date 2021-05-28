@@ -13,7 +13,7 @@
         <!--LoginVC-->
         <scene sceneID="hjW-M7-4rQ">
             <objects>
-                <viewController storyboardIdentifier="LoginVC" id="n1X-ni-oYe" customClass="LoginVC" customModule="polaris_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginVC" id="n1X-ni-oYe" customClass="LoginVC" customModule="Polaris" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="quS-P0-1q2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -104,7 +104,7 @@
                                             </view>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gYj-fE-9Q7" customClass="PolarisButton" customModule="polaris_ios" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gYj-fE-9Q7" customClass="PolarisButton" customModule="Polaris" customModuleProvider="target">
                                         <rect key="frame" x="23" y="479.33333333333331" width="329" height="53.999999999999943"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="gYj-fE-9Q7" secondAttribute="height" multiplier="329:54" id="9gQ-W6-R1B"/>
@@ -214,7 +214,7 @@
         <!--SignupVC-->
         <scene sceneID="OiR-mr-Uhd">
             <objects>
-                <viewController storyboardIdentifier="SignupVC" id="Dcd-Sd-89U" customClass="SignupVC" customModule="polaris_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignupVC" id="Dcd-Sd-89U" customClass="SignupVC" customModule="Polaris" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pVE-lf-47N">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

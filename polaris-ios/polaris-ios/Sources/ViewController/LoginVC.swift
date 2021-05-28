@@ -19,6 +19,7 @@ class LoginVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupBackgroundView()
+        self.setupCometAnimation()
         self.setupLogoTopConstraint()
         self.setupTextField()
         self.setupObserver()
@@ -26,8 +27,6 @@ class LoginVC: UIViewController {
         self.bindTextFields()
         self.bindSignupButton()
         self.observeProceedAbleLogin()
-        
-        self.setupCometAnimation()
     }
     
     override func viewDidLayoutSubviews() {
@@ -89,8 +88,8 @@ class LoginVC: UIViewController {
         cometImageView.frame = CGRect(x: DeviceInfo.screenWidth, y: yPosition, width: cometType.size, height: cometType.size)
         self.view.addSubview(cometImageView)
 
-        UIView.animate(withDuration: duration, delay:0.0, options:.curveEaseIn, animations: {
-            cometImageView.transform = CGAffineTransform(translationX: -DeviceInfo.screenWidth-120, y: DeviceInfo.screenWidth+120.0)
+        UIView.animate(withDuration: duration, delay: 0, options: .curveEaseIn, animations: {
+            cometImageView.transform = CGAffineTransform(translationX: -DeviceInfo.screenWidth - 120, y: DeviceInfo.screenWidth + 120)
         }, completion: { [weak self] finished in
             guard finished == true else { return }
             
@@ -130,7 +129,7 @@ class LoginVC: UIViewController {
     
     private func presentSignup() {
         guard let signupViewController = SignupVC.instantiateFromStoryboard(StoryboardName.intro) else { return }
-        signupViewController.modalPresentationStyle = .fullScreen
+        signupViewController.modalPresentationStyle = .overFullScreen
         self.present(signupViewController, animated: true) {
             self.layoutForKeyboardHide()
         }
