@@ -229,7 +229,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="r2t-8U-PIJ">
-                                                <rect key="frame" x="24" y="46" width="327" height="60.333333333333343"/>
+                                                <rect key="frame" x="24" y="66" width="327" height="60.333333333333343"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="아이디를" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g6x-oI-FbO">
                                                         <rect key="frame" x="0.0" y="0.0" width="327" height="27.666666666666668"/>
@@ -246,7 +246,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="evB-BF-ptj">
-                                                <rect key="frame" x="24" y="46" width="327" height="60.333333333333343"/>
+                                                <rect key="frame" x="24" y="66" width="327" height="60.333333333333343"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="영문 숫자 조합 6자리 이상의" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ctB-2s-a1U">
                                                         <rect key="frame" x="0.0" y="0.0" width="327" height="27.666666666666668"/>
@@ -263,7 +263,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="d5a-Tl-cSD">
-                                                <rect key="frame" x="24" y="46" width="327" height="60.333333333333343"/>
+                                                <rect key="frame" x="24" y="66" width="327" height="60.333333333333343"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="별명을" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vzb-Se-434">
                                                         <rect key="frame" x="0.0" y="0.0" width="327" height="27.666666666666668"/>
@@ -280,7 +280,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="pLZ-Tn-dXh">
-                                                <rect key="frame" x="24" y="157.33333333333334" width="327" height="443.33333333333326"/>
+                                                <rect key="frame" x="24" y="177.33333333333334" width="327" height="443.33333333333326"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0A0-NZ-trE">
                                                         <rect key="frame" x="0.0" y="0.0" width="327" height="114.33333333333333"/>
@@ -497,21 +497,31 @@
                                                     </view>
                                                 </subviews>
                                             </stackView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcx-6w-zok">
+                                                <rect key="frame" x="9" y="11" width="48" height="48"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="48" id="JU1-Pf-7mv"/>
+                                                    <constraint firstAttribute="width" constant="48" id="img-sQ-7xf"/>
+                                                </constraints>
+                                                <state key="normal" image="btnCloseJoin"/>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="evB-BF-ptj" firstAttribute="leading" secondItem="4LD-9E-bGg" secondAttribute="leading" constant="24" id="7QI-Cl-Wox"/>
                                             <constraint firstItem="pLZ-Tn-dXh" firstAttribute="top" secondItem="r2t-8U-PIJ" secondAttribute="bottom" constant="51" id="7Sz-yE-5fi"/>
+                                            <constraint firstItem="dcx-6w-zok" firstAttribute="leading" secondItem="4LD-9E-bGg" secondAttribute="leading" constant="9" id="8Pi-nw-Vcv"/>
                                             <constraint firstItem="pLZ-Tn-dXh" firstAttribute="leading" secondItem="4LD-9E-bGg" secondAttribute="leading" constant="24" id="8zX-fU-JD8"/>
+                                            <constraint firstItem="dcx-6w-zok" firstAttribute="top" secondItem="4LD-9E-bGg" secondAttribute="top" constant="11" id="Blc-AR-Sj8"/>
                                             <constraint firstAttribute="trailing" secondItem="d5a-Tl-cSD" secondAttribute="trailing" constant="24" id="EEr-uy-zAr"/>
                                             <constraint firstAttribute="trailing" secondItem="r2t-8U-PIJ" secondAttribute="trailing" constant="24" id="MMR-Dt-9ay"/>
                                             <constraint firstItem="d5a-Tl-cSD" firstAttribute="leading" secondItem="4LD-9E-bGg" secondAttribute="leading" constant="24" id="TOy-if-vmg"/>
                                             <constraint firstItem="r2t-8U-PIJ" firstAttribute="leading" secondItem="4LD-9E-bGg" secondAttribute="leading" constant="24" id="UdU-oK-4Px"/>
-                                            <constraint firstItem="d5a-Tl-cSD" firstAttribute="top" secondItem="4LD-9E-bGg" secondAttribute="top" constant="46" id="WTJ-Hd-HOr"/>
-                                            <constraint firstItem="r2t-8U-PIJ" firstAttribute="top" secondItem="4LD-9E-bGg" secondAttribute="top" constant="46" id="aSj-eu-FAM"/>
+                                            <constraint firstItem="d5a-Tl-cSD" firstAttribute="top" secondItem="dcx-6w-zok" secondAttribute="bottom" constant="7" id="WTJ-Hd-HOr"/>
+                                            <constraint firstItem="r2t-8U-PIJ" firstAttribute="top" secondItem="dcx-6w-zok" secondAttribute="bottom" constant="7" id="aSj-eu-FAM"/>
                                             <constraint firstAttribute="trailing" secondItem="pLZ-Tn-dXh" secondAttribute="trailing" constant="24" id="akx-a1-AfC"/>
                                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="pLZ-Tn-dXh" secondAttribute="bottom" constant="46" id="jh6-RR-y7X"/>
-                                            <constraint firstItem="evB-BF-ptj" firstAttribute="top" secondItem="4LD-9E-bGg" secondAttribute="top" constant="46" id="ngx-WW-Pm3"/>
+                                            <constraint firstItem="evB-BF-ptj" firstAttribute="top" secondItem="dcx-6w-zok" secondAttribute="bottom" constant="7" id="ngx-WW-Pm3"/>
                                             <constraint firstAttribute="trailing" secondItem="evB-BF-ptj" secondAttribute="trailing" constant="24" id="p5o-qy-BPK"/>
                                         </constraints>
                                     </view>
@@ -540,8 +550,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="closeButton" destination="dcx-6w-zok" id="7eA-9m-928"/>
+                        <outlet property="closeButtonTopConstraint" destination="Blc-AR-Sj8" id="Uyp-1C-s0z"/>
                         <outlet property="idDescriptionStackView" destination="r2t-8U-PIJ" id="gDx-vj-k4N"/>
-                        <outlet property="idDescriptionTopConstraint" destination="aSj-eu-FAM" id="Wfe-vv-put"/>
                         <outlet property="idInputContainerView" destination="q9t-Rx-gRg" id="j3F-9c-0yv"/>
                         <outlet property="idTextFieldContainerView" destination="Zac-Wx-QZW" id="Wu6-sz-3Az"/>
                         <outlet property="idValidateImageView" destination="meS-bX-udw" id="pI7-PB-YaM"/>
@@ -549,7 +560,6 @@
                         <outlet property="nicknameDescriptionStackView" destination="d5a-Tl-cSD" id="jNA-Wx-Hmr"/>
                         <outlet property="nicknameInputContainerView" destination="0A0-NZ-trE" id="EnJ-KI-Lja"/>
                         <outlet property="nicknameTextFieldContainerView" destination="vJa-ZP-YDg" id="uvp-eX-QC0"/>
-                        <outlet property="nicknameTopConstraint" destination="WTJ-Hd-HOr" id="9Ty-7p-3bQ"/>
                         <outlet property="nicknameValidateImageView" destination="uZ2-Yb-6v4" id="4rH-ZQ-BTR"/>
                         <outlet property="nicknameValidateView" destination="KQe-f5-kgV" id="2HU-dS-DQc"/>
                         <outlet property="pwCombiValidateImageView" destination="bZ9-m2-JP4" id="23r-an-DyX"/>
@@ -557,7 +567,6 @@
                         <outlet property="pwCountValidateImageView" destination="MDT-S7-WSx" id="p0u-qI-lwg"/>
                         <outlet property="pwCountValidateView" destination="2v1-Pj-5u4" id="ICV-ns-9qt"/>
                         <outlet property="pwDescriptionStackView" destination="evB-BF-ptj" id="FjG-Tu-kbX"/>
-                        <outlet property="pwDescriptionTopConstraint" destination="ngx-WW-Pm3" id="2ce-uj-wUc"/>
                         <outlet property="pwInputContainerView" destination="Dz7-CQ-oxu" id="ngS-Lt-XqQ"/>
                         <outlet property="pwTextFieldContainerView" destination="H7L-sa-geA" id="Glm-rE-G5J"/>
                     </connections>
@@ -570,6 +579,7 @@
     <resources>
         <image name="bgJoin" width="375" height="812"/>
         <image name="bgStars" width="375" height="812"/>
+        <image name="btnCloseJoin" width="48" height="48"/>
         <image name="icnError" width="12" height="12"/>
         <image name="icnId" width="13.333333015441895" height="15.666666984558105"/>
         <image name="icnPw" width="18" height="10"/>

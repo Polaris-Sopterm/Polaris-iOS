@@ -17,15 +17,10 @@ class SignupVC: UIViewController {
         self.addKeyboardDismissTapGesture()
         self.adjustTopConstraint()
         self.setupTextFields()
+        self.bindCloseButton()
         self.observeInputState()
         self.observeValidateInputs()
         self.observeCompleteSignup()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now()+2) {
-            guard let vc = LoginVC.instantiateFromStoryboard(StoryboardName.intro) else { return }
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true, completion: nil)
-        }
     }
     
     private func setupTextFields() {
@@ -43,36 +38,18 @@ class SignupVC: UIViewController {
     }
     
     private func adjustTopConstraint() {
-        let defaultTopConstraint: CGFloat = 46
+        let defaultTopConstraint: CGFloat = 11
         
-        self.idDescriptionTopConstraint.constant = defaultTopConstraint + DeviceInfo.topSafeAreaInset
-        self.pwDescriptionTopConstraint.constant = defaultTopConstraint + DeviceInfo.topSafeAreaInset
-        self.nicknameTopConstraint.constant      = defaultTopConstraint + DeviceInfo.topSafeAreaInset
+        self.closeButtonTopConstraint.constant = defaultTopConstraint + DeviceInfo.topSafeAreaInset
     }
     
     private func observeInputState() {
         self.viewModel.stepRelay
             .distinctUntilChanged()
             .subscribe(onNext: { [weak self] inputState in
-                guard let self = self          else { return }
+                guard let self = self else { return }
                 
-                if inputState == .firstStep {
-                    self.idInputContainerView.isHidden       = false
-                    self.pwInputContainerView.isHidden       = true
-                    self.nicknameInputContainerView.isHidden = true
-                } else if inputState == .secondStep {
-                    self.pwInputContainerView.alpha    = 0
-                    self.pwInputContainerView.isHidden = false
-                } else if inputState == .lastStep {
-                    self.nicknameInputContainerView.alpha    = 0
-                    self.nicknameInputContainerView.isHidden = false
-                }
-                
-                guard inputState != .firstStep else { return }
-                UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut]) {
-                    [self.pwInputContainerView, self.nicknameInputContainerView].forEach { $0?.alpha = 1 }
-                    self.view.layoutIfNeeded()
-                }
+                self.updateUI(as: inputState)
             })
             .disposed(by: self.disposeBag)
     }
@@ -140,12 +117,50 @@ class SignupVC: UIViewController {
             .subscribe(onNext: { isComplete in
                 if isComplete == true {
                     #warning("회원 가입 완료")
-                    print("회원가입 가능")
                 } else {
-                    print("아직 불가")
                 }
             })
             .disposed(by: self.disposeBag)
+    }
+    
+    private func bindCloseButton() {
+        self.closeButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.dismiss(animated: true, completion: nil)
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
+    private func updateUI(as step: InputOptions) {
+        if step == .firstStep {
+            self.idInputContainerView.isHidden         = false
+            self.pwInputContainerView.isHidden         = true
+            self.nicknameInputContainerView.isHidden   = true
+            
+            self.idDescriptionStackView.isHidden       = false
+            self.pwDescriptionStackView.isHidden       = true
+            self.nicknameDescriptionStackView.isHidden = true
+        } else if step == .secondStep {
+            self.pwInputContainerView.alpha            = 0
+            self.pwInputContainerView.isHidden         = false
+            
+            self.pwDescriptionStackView.isHidden       = false
+            self.idDescriptionStackView.isHidden       = true
+            self.nicknameDescriptionStackView.isHidden = true
+        } else if step == .lastStep {
+            self.nicknameInputContainerView.alpha      = 0
+            self.nicknameInputContainerView.isHidden   = false
+            
+            self.nicknameDescriptionStackView.isHidden = false
+            self.idDescriptionStackView.isHidden       = true
+            self.pwDescriptionStackView.isHidden       = true
+        }
+        
+        guard step != .firstStep else { return }
+        UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut]) {
+            [self.pwInputContainerView, self.nicknameInputContainerView].forEach { $0?.alpha = 1 }
+            self.view.layoutIfNeeded()
+        }
     }
     
     private func updateIdValidateUI(as state: IdValidateState) {
@@ -198,9 +213,8 @@ class SignupVC: UIViewController {
     @IBOutlet private weak var idDescriptionStackView: UIStackView!
     @IBOutlet private weak var pwDescriptionStackView: UIStackView!
     @IBOutlet private weak var nicknameDescriptionStackView: UIStackView!
-    @IBOutlet private weak var idDescriptionTopConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var pwDescriptionTopConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var nicknameTopConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var closeButton: UIButton!
+    @IBOutlet private weak var closeButtonTopConstraint: NSLayoutConstraint!
     
     @IBOutlet private weak var idInputContainerView: UIView!
     @IBOutlet private weak var idTextFieldContainerView: UIView!

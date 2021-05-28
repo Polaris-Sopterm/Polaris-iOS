@@ -24,6 +24,7 @@ class LoginVC: UIViewController {
         self.setupObserver()
         self.addKeyboardDismissTapGesture()
         self.bindTextFields()
+        self.bindSignupButton()
         self.observeProceedAbleLogin()
         
         self.setupCometAnimation()
@@ -129,6 +130,12 @@ class LoginVC: UIViewController {
         }
     }
     
+    private func presentSignup() {
+        guard let signupViewController = SignupVC.instantiateFromStoryboard(StoryboardName.intro) else { return }
+        signupViewController.modalPresentationStyle = .fullScreen
+        self.present(signupViewController, animated: true, completion: nil)
+    }
+    
     private func bindTextFields() {
         self.idTextField.rx.text.orEmpty
             .distinctUntilChanged()
@@ -145,6 +152,14 @@ class LoginVC: UIViewController {
                 guard let self = self else { return }
                 
                 self.viewModel.pwSubject.onNext(text)
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
+    private func bindSignupButton() {
+        self.signupButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.presentSignup()
             })
             .disposed(by: self.disposeBag)
     }
