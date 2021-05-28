@@ -131,36 +131,19 @@ class SignupVC: UIViewController {
             .disposed(by: self.disposeBag)
     }
     
-    private func updateUI(as step: InputOptions) {
-        if step == .firstStep {
-            self.idInputContainerView.isHidden         = false
-            self.pwInputContainerView.isHidden         = true
-            self.nicknameInputContainerView.isHidden   = true
+    private func updateUI(as state: InputOptions) {
+        self.idInputContainerView.isHidden       = state.contains(.id) ? false : true
+        self.pwInputContainerView.isHidden       = state.contains(.pw) ? false : true
+        self.nicknameInputContainerView.isHidden = state.contains(.nickname) ? false : true
+        
+        [self.idDescriptionStackView, self.pwDescriptionStackView, self.nicknameDescriptionStackView].enumerated().forEach { index, descriptionView in
+            guard let step = state.step else { return }
             
-            self.idDescriptionStackView.isHidden       = false
-            self.pwDescriptionStackView.isHidden       = true
-            self.nicknameDescriptionStackView.isHidden = true
-        } else if step == .secondStep {
-            self.pwInputContainerView.alpha            = 0
-            self.pwInputContainerView.isHidden         = false
-            
-            self.pwDescriptionStackView.isHidden       = false
-            self.idDescriptionStackView.isHidden       = true
-            self.nicknameDescriptionStackView.isHidden = true
-        } else if step == .lastStep {
-            self.nicknameInputContainerView.alpha      = 0
-            self.nicknameInputContainerView.isHidden   = false
-            
-            self.nicknameDescriptionStackView.isHidden = false
-            self.idDescriptionStackView.isHidden       = true
-            self.pwDescriptionStackView.isHidden       = true
+            descriptionView?.isHidden = (index + 1) == step ? false : true
         }
         
-        guard step != .firstStep else { return }
-        UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut]) {
-            [self.pwInputContainerView, self.nicknameInputContainerView].forEach { $0?.alpha = 1 }
-            self.view.layoutIfNeeded()
-        }
+        guard state != .firstStep else { return }
+        UIView.animate(withDuration: 0.35, delay: 0, options: [.curveEaseInOut]) { self.view.layoutIfNeeded() }
     }
     
     private func updateIdValidateUI(as state: IdValidateState) {
@@ -180,13 +163,8 @@ class SignupVC: UIViewController {
             self.pwCountValidateImageView.image = isAll ? #imageLiteral(resourceName: "icnPass") : #imageLiteral(resourceName: "icnError")
             self.pwCombiValidateImageView.image = isAll ? #imageLiteral(resourceName: "icnPass") : #imageLiteral(resourceName: "icnError")
         case .eachValidation(let invalidType):
-            if invalidType == .combi {
-                self.pwCombiValidateImageView.image = #imageLiteral(resourceName: "icnError")
-                self.pwCountValidateImageView.image = #imageLiteral(resourceName: "icnPass")
-            } else {
-                self.pwCountValidateImageView.image = #imageLiteral(resourceName: "icnError")
-                self.pwCombiValidateImageView.image = #imageLiteral(resourceName: "icnPass")
-            }
+            self.pwCombiValidateImageView.image = (invalidType == .combi) ? #imageLiteral(resourceName: "icnError") : #imageLiteral(resourceName: "icnPass")
+            self.pwCountValidateImageView.image = (invalidType == .count) ? #imageLiteral(resourceName: "icnError") : #imageLiteral(resourceName: "icnPass")
         default: break
         }
         
@@ -252,7 +230,6 @@ extension SignupVC: PolarisMarginTextFieldDelegate {
     
 }
 
-
 extension SignupVC {
     struct InputOptions: OptionSet {
         let rawValue: Int
@@ -264,5 +241,12 @@ extension SignupVC {
         static let firstStep: InputOptions  = [.id]
         static let secondStep: InputOptions = [.id, .pw]
         static let lastStep: InputOptions   = [.id, .pw, .nickname]
+        
+        var step: Int? {
+            if self == .firstStep       { return 1 }
+            else if self == .secondStep { return 2 }
+            else if self == .lastStep   { return 3 }
+            else                        { return nil }
+        }
     }
 }
