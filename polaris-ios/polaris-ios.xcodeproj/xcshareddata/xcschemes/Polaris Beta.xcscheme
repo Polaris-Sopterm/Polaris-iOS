@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CE43D02126613D66003126F2"
-               BuildableName = "Polaris Dev.app"
-               BlueprintName = "Polaris Dev"
+               BuildableName = "Polaris Beta.app"
+               BlueprintName = "Polaris Beta"
                ReferencedContainer = "container:polaris-ios.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,8 +45,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CE43D02126613D66003126F2"
-            BuildableName = "Polaris Dev.app"
-            BlueprintName = "Polaris Dev"
+            BuildableName = "Polaris Beta.app"
+            BlueprintName = "Polaris Beta"
             ReferencedContainer = "container:polaris-ios.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -62,8 +62,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CE43D02126613D66003126F2"
-            BuildableName = "Polaris Dev.app"
-            BlueprintName = "Polaris Dev"
+            BuildableName = "Polaris Beta.app"
+            BlueprintName = "Polaris Beta"
             ReferencedContainer = "container:polaris-ios.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

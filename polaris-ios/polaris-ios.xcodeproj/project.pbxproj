@@ -237,7 +237,7 @@
 		CE132140265A408E001E3C1F /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		CE132143265A5CD1001E3C1F /* SignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
 		CE37CC6C265A7674004F327E /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
-		CE43D09026613D66003126F2 /* Polaris Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Polaris Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE43D09026613D66003126F2 /* Polaris Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Polaris Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE43D09126613D66003126F2 /* polaris-ios.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "polaris-ios.plist"; path = "/Users/user/Desktop/Polaris-iOS/polaris-ios/polaris-ios.plist"; sourceTree = "<absolute>"; };
 		CE574D95263517B60046D20A /* AddTodoSelectStarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoSelectStarTableViewCell.swift; sourceTree = "<group>"; };
 		CE574D96263517B60046D20A /* AddTodoSelectStarTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTodoSelectStarTableViewCell.xib; sourceTree = "<group>"; };
@@ -381,7 +381,7 @@
 			isa = PBXGroup;
 			children = (
 				CE04A032262340D1007C98E2 /* Polaris.app */,
-				CE43D09026613D66003126F2 /* Polaris Dev.app */,
+				CE43D09026613D66003126F2 /* Polaris Beta.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -678,9 +678,9 @@
 			productReference = CE04A032262340D1007C98E2 /* Polaris.app */;
 			productType = "com.apple.product-type.application";
 		};
-		CE43D02126613D66003126F2 /* Polaris Dev */ = {
+		CE43D02126613D66003126F2 /* Polaris Beta */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CE43D08D26613D66003126F2 /* Build configuration list for PBXNativeTarget "Polaris Dev" */;
+			buildConfigurationList = CE43D08D26613D66003126F2 /* Build configuration list for PBXNativeTarget "Polaris Beta" */;
 			buildPhases = (
 				CE43D02226613D66003126F2 /* [CP] Check Pods Manifest.lock */,
 				CE43D02326613D66003126F2 /* Sources */,
@@ -692,9 +692,9 @@
 			);
 			dependencies = (
 			);
-			name = "Polaris Dev";
+			name = "Polaris Beta";
 			productName = "polaris-ios";
-			productReference = CE43D09026613D66003126F2 /* Polaris Dev.app */;
+			productReference = CE43D09026613D66003126F2 /* Polaris Beta.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -725,7 +725,7 @@
 			projectRoot = "";
 			targets = (
 				CE04A031262340D1007C98E2 /* Polaris */,
-				CE43D02126613D66003126F2 /* Polaris Dev */,
+				CE43D02126613D66003126F2 /* Polaris Beta */,
 			);
 		};
 /* End PBXProject section */
@@ -1067,7 +1067,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		CE04A044262340D3007C98E2 /* Beta */ = {
+		CE04A044262340D3007C98E2 /* Dev */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1126,7 +1126,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
-			name = Beta;
+			name = Dev;
 		};
 		CE04A045262340D3007C98E2 /* Real */ = {
 			isa = XCBuildConfiguration;
@@ -1183,7 +1183,7 @@
 			};
 			name = Real;
 		};
-		CE04A047262340D3007C98E2 /* Beta */ = {
+		CE04A047262340D3007C98E2 /* Dev */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EBADBF5A561A9E7C0BAAF039 /* Pods-polaris-ios-Polaris.beta.xcconfig */;
 			buildSettings = {
@@ -1206,7 +1206,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
-			name = Beta;
+			name = Dev;
 		};
 		CE04A048262340D3007C98E2 /* Real */ = {
 			isa = XCBuildConfiguration;
@@ -1233,7 +1233,7 @@
 			};
 			name = Real;
 		};
-		CE43D08E26613D66003126F2 /* Beta */ = {
+		CE43D08E26613D66003126F2 /* Dev */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6B9070CF72A6FB1E8ED31409 /* Pods-polaris-ios-Polaris Dev.beta.xcconfig */;
 			buildSettings = {
@@ -1255,7 +1255,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
-			name = Beta;
+			name = Dev;
 		};
 		CE43D08F26613D66003126F2 /* Real */ = {
 			isa = XCBuildConfiguration;
@@ -1287,7 +1287,7 @@
 		CE04A02D262340D1007C98E2 /* Build configuration list for PBXProject "polaris-ios" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CE04A044262340D3007C98E2 /* Beta */,
+				CE04A044262340D3007C98E2 /* Dev */,
 				CE04A045262340D3007C98E2 /* Real */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1296,16 +1296,16 @@
 		CE04A046262340D3007C98E2 /* Build configuration list for PBXNativeTarget "Polaris" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CE04A047262340D3007C98E2 /* Beta */,
+				CE04A047262340D3007C98E2 /* Dev */,
 				CE04A048262340D3007C98E2 /* Real */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Real;
 		};
-		CE43D08D26613D66003126F2 /* Build configuration list for PBXNativeTarget "Polaris Dev" */ = {
+		CE43D08D26613D66003126F2 /* Build configuration list for PBXNativeTarget "Polaris Beta" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CE43D08E26613D66003126F2 /* Beta */,
+				CE43D08E26613D66003126F2 /* Dev */,
 				CE43D08F26613D66003126F2 /* Real */,
 			);
 			defaultConfigurationIsVisible = 0;
