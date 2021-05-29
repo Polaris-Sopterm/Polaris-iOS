@@ -15,6 +15,29 @@ class SignupViewModel {
     var isSecondStep: Bool { return self.stepRelay.value == .secondStep }
     var isLastStep: Bool   { return self.stepRelay.value == .lastStep }
     
+    var isProcessableFirstStep: Bool {
+        guard let idValidateState = try? self.validateIdSubejct.value()          else { return false }
+        guard case .validation(true) = idValidateState, self.isFirstStep == true else { return false }
+        return true
+    }
+    
+    var isProcessableSecondStep: Bool {
+        guard let pwValidateState = try? self.validatePwSubject.value()              else { return false }
+        guard case .allValidation(true) = pwValidateState, self.isSecondStep == true else { return false }
+        return true
+    }
+    
+    var isProcessableCompleteSignup: Bool {
+        guard self.isLastStep == true else { return false }
+        
+        guard let idValidate       = try? self.validateIdSubejct.value(),
+              let pwValidate       = try? self.validatePwSubject.value(),
+              let nicknameValidate = try? self.validateNicknameSubject.value() else { return false }
+        
+        if idValidate == .validation(true) && pwValidate == .allValidation(true) && nicknameValidate == .validation(true) { return true }
+        else { return false }
+    }
+    
     let stepRelay = BehaviorRelay<SignupVC.InputOptions>(value: .firstStep)
     
     let idSubject       = BehaviorSubject<String>(value: "")
@@ -85,29 +108,8 @@ class SignupViewModel {
         else                    { return .validation(true) }
     }
     
-    func isProcessableFirstStep(_ idValidateState: IdValidateState) -> Bool {
-        guard case .validation(true) = idValidateState, self.isFirstStep == true else { return false }
-        return true
-    }
-    
-    func isProcessableSecondStep(_ pwValidateState: PwValidateState) -> Bool {
-        guard case .allValidation(true) = pwValidateState, self.isSecondStep == true else { return false }
-        return true
-    }
-    
     func confirmCompleteSignup() {
-        self.completeSignupSubject.onNext(self.isCompleteSignup)
-    }
-    
-    private var isCompleteSignup: Bool {
-        guard self.isLastStep == true else { return false }
-        
-        guard let idValidate       = try? self.validateIdSubejct.value(),
-              let pwValidate       = try? self.validatePwSubject.value(),
-              let nicknameValidate = try? self.validateNicknameSubject.value() else { return false }
-        
-        if idValidate == .validation(true) && pwValidate == .allValidation(true) && nicknameValidate == .validation(true) { return true }
-        else { return false }
+        self.completeSignupSubject.onNext(self.isProcessableCompleteSignup)
     }
     
     private var disposeBag = DisposeBag()

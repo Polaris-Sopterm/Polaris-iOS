@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (5.4.1)
+  - Alamofire (5.4.2)
   - Kingfisher (6.2.1)
   - Moya (14.0.0):
     - Moya/Core (= 14.0.0)
@@ -28,13 +28,13 @@ SPEC REPOS:
     - RxSwift
 
 SPEC CHECKSUMS:
-  Alamofire: 2291f7d21ca607c491dd17642e5d40fdcda0e65c
+  Alamofire: bfbc4c2fe5909b1d94fb4ef2277c6b3727ef5dae
   Kingfisher: e71c6fac2aebb1262888cabc2cb13d313362a48f
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
   RxCocoa: 5c51f02d562cbd94629f6c26cf0c80fe4ab8d343
   RxRelay: 483e1a19fad961b41f0b0c0bee506f46c1ae14fe
   RxSwift: a834e5c538e89eca0cae86f403f4fbf0336786ce
 
-PODFILE CHECKSUM: 3abff7c456f9dc12ec40372a3e335dfee66f37e0
+PODFILE CHECKSUM: 666c61e045fe725c49081dbd4b1367919c8fc191
 
 COCOAPODS: 1.10.1

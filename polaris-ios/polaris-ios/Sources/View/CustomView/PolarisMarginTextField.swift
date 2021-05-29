@@ -2,15 +2,16 @@
 //  PolarisMarginTextField.swift
 //  polaris-ios
 //
-//  Created by USER on 2021/04/18.
+//  Created by Dongmin on 2021/04/18.
 //
 
 import UIKit
 import RxSwift
 import RxCocoa
 
-protocol PolarisMarginTextFieldDelegate: class {
+protocol PolarisMarginTextFieldDelegate: AnyObject {
     func polarisMarginTextField(_ polarisMarginTextField: PolarisMarginTextField, didChangeText: String)
+    func polarisMarginTextFieldDidTapReturn(_ polarisMarginTextField: PolarisMarginTextField)
 }
 
 class PolarisMarginTextField: UIView {
@@ -36,7 +37,8 @@ class PolarisMarginTextField: UIView {
     }
     
     func setupPlaceholder(text: String) {
-        self.textField.attributedPlaceholder = NSMutableAttributedString(string: text, attributes: [.foregroundColor: UIColor.inactiveTextPurple, .font: UIFont.systemFont(ofSize: 16, weight: .medium)])
+        self.textField.attributedPlaceholder = NSMutableAttributedString(string: text,
+                                                                         attributes: [.foregroundColor: UIColor.inactiveTextPurple, .font: UIFont.systemFont(ofSize: 16, weight: .medium)])
     }
     
     func setScure(_ isSecure: Bool) {
@@ -49,6 +51,14 @@ class PolarisMarginTextField: UIView {
     
     func setKeyboardType(_ keyboardType: UIKeyboardType) {
         self.textField.keyboardType = keyboardType
+    }
+    
+    func becomeKeyboardFirstResponder() {
+        self.textField.becomeFirstResponder()
+    }
+    
+    func resignKeyboardFirstResponder() {
+        self.textField.resignFirstResponder()
     }
     
     // MARK: - Bind
@@ -70,6 +80,14 @@ class PolarisMarginTextField: UIView {
                 guard let self = self else { return }
                 
                 self.delegate?.polarisMarginTextField(self, didChangeText: text)
+            })
+            .disposed(by: self.disposeBag)
+        
+        self.textField.rx.controlEvent(.editingDidEndOnExit)
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                
+                self.delegate?.polarisMarginTextFieldDidTapReturn(self)
             })
             .disposed(by: self.disposeBag)
     }

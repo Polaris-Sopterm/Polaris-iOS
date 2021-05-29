@@ -78,7 +78,11 @@ extension AddTodoTextTableViewCell {
 }
 
 extension AddTodoTextTableViewCell: PolarisMarginTextFieldDelegate {
+    
     func polarisMarginTextField(_ polarisMarginTextField: PolarisMarginTextField, didChangeText: String) {
         self._delegate?.addTodoTextTableViewCell(self, didChangeText: didChangeText)
     }
+    
+    func polarisMarginTextFieldDidTapReturn(_ polarisMarginTextField: PolarisMarginTextField) {}
+    
 }

@@ -59,61 +59,37 @@ class SignupVC: UIViewController {
         
         self.viewModel.validateIdSubejct
             .distinctUntilChanged()
-            .do(onNext: { [weak self] validate in
+            .subscribe(onNext: { [weak self] validate in
                 guard let self = self else { return }
-    
+                
                 self.updateIdValidateUI(as: validate)
                 
                 guard isFirst == false else { isFirst = false; return }
                 UIView.animate(withDuration: 0.3) { [weak self] in self?.view.layoutIfNeeded() }
             })
-            .debounce(.milliseconds(600), scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] validate in
-                guard let self = self else { return }
-                
-                guard self.viewModel.isLastStep == false else { self.viewModel.confirmCompleteSignup(); return }
-                guard self.viewModel.isProcessableFirstStep(validate) == true else { return }
-                self.viewModel.stepRelay.accept(.secondStep)
-            })
             .disposed(by: self.disposeBag)
         
         self.viewModel.validatePwSubject
             .distinctUntilChanged()
-            .do(onNext: { [weak self] validate in
-                guard let self = self else { return }
-                
-                self.updatePwValidateUI(as: validate)
-            })
-            .debounce(.milliseconds(600), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] validate in
                 guard let self = self else { return }
                 
-                guard self.viewModel.isLastStep == false else { self.viewModel.confirmCompleteSignup(); return }
-                guard self.viewModel.isProcessableSecondStep(validate) == true else { return }
-                self.viewModel.stepRelay.accept(.lastStep)
+                self.updatePwValidateUI(as: validate)
             })
             .disposed(by: self.disposeBag)
         
         self.viewModel.validateNicknameSubject
             .distinctUntilChanged()
-            .do(onNext: { [weak self] validate in
-                guard let self = self else { return }
-                
-                self.updateNicknameValidateUI(as: validate)
-            })
-            .debounce(.milliseconds(600), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] validate in
                 guard let self = self else { return }
                 
-                guard self.viewModel.isLastStep == true else { return }
-                self.viewModel.confirmCompleteSignup()
+                self.updateNicknameValidateUI(as: validate)
             })
             .disposed(by: self.disposeBag)
     }
     
     private func observeCompleteSignup() {
         self.viewModel.completeSignupSubject
-            .distinctUntilChanged()
             .subscribe(onNext: { isComplete in
                 if isComplete == true {
                     #warning("회원 가입 완료")
@@ -226,6 +202,31 @@ extension SignupVC: PolarisMarginTextFieldDelegate {
         } else {
             self.viewModel.nicknameSubject.onNext(didChangeText)
         }
+    }
+    
+    func polarisMarginTextFieldDidTapReturn(_ polarisMarginTextField: PolarisMarginTextField) {
+        if polarisMarginTextField == self.idTextFieldView { self.processFirstStep() }
+        else if polarisMarginTextField == self.pwTextFieldView { self.processSecondStep() }
+        else { self.processLastStep() }
+    }
+    
+    private func processFirstStep() {
+        guard self.viewModel.isLastStep == false            else { self.viewModel.confirmCompleteSignup(); return }
+        guard self.viewModel.isProcessableFirstStep == true else { return }
+        self.pwTextFieldView?.becomeKeyboardFirstResponder()
+        self.viewModel.stepRelay.accept(.secondStep)
+    }
+    
+    private func processSecondStep() {
+        guard self.viewModel.isLastStep == false             else { self.viewModel.confirmCompleteSignup(); return }
+        guard self.viewModel.isProcessableSecondStep == true else { return }
+        self.nicknameTextFieldView?.becomeKeyboardFirstResponder()
+        self.viewModel.stepRelay.accept(.lastStep)
+    }
+    
+    private func processLastStep() {
+        guard self.viewModel.isLastStep == true else { return }
+        self.viewModel.confirmCompleteSignup()
     }
     
 }
