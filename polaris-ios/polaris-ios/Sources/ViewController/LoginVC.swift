@@ -19,11 +19,13 @@ class LoginVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupBackgroundView()
+        self.setupCometAnimation()
         self.setupLogoTopConstraint()
         self.setupTextField()
         self.setupObserver()
         self.addKeyboardDismissTapGesture()
         self.bindTextFields()
+        self.bindSignupButton()
         self.observeProceedAbleLogin()
     }
     
@@ -72,6 +74,30 @@ class LoginVC: UIViewController {
                            name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    private func setupCometAnimation() {
+        (0...2).forEach { _ in self.startCometAnimation() }
+    }
+    
+    private func startCometAnimation() {
+        guard let cometType = ShootingComet.allCases.randomElement() else { return }
+        
+        let yPosition = CGFloat(Int.random(in: 0...400))
+        let duration  = Double(Int.random(in: 15...60)) / 10.0
+        
+        let cometImageView   = UIImageView(image: cometType.starImage)
+        cometImageView.frame = CGRect(x: DeviceInfo.screenWidth, y: yPosition, width: cometType.size, height: cometType.size)
+        self.view.addSubview(cometImageView)
+
+        UIView.animate(withDuration: duration, delay: 0, options: .curveEaseIn, animations: {
+            cometImageView.transform = CGAffineTransform(translationX: -DeviceInfo.screenWidth - 120, y: DeviceInfo.screenWidth + 120)
+        }, completion: { [weak self] finished in
+            guard finished == true else { return }
+            
+            cometImageView.removeFromSuperview()
+            self?.startCometAnimation()
+        })
+    }
+    
     private func adjustToDeviceSize() {
         let gradientLayer = self.backgroundView.layer.sublayers?.first(where: { $0 is CAGradientLayer })
         gradientLayer?.frame = self.view.bounds
@@ -84,8 +110,7 @@ class LoginVC: UIViewController {
             guard let self = self                         else { return }
             guard let keyboardDuration = keyboardDuration else { return }
             
-            self.logoTopConstraint.constant      = type(of: self).logoTopConstraintValue - DeviceInfo.topSafeAreaInset - 20
-            self.textFieldTopConstraint.constant = type(of: self).textFieldTopConstraintValue - 70
+            self.layoutForKeyboardShow()
             UIView.animate(withDuration: keyboardDuration) { self.view.layoutIfNeeded() }
         }
     }
@@ -97,9 +122,16 @@ class LoginVC: UIViewController {
             guard let self = self                         else { return }
             guard let keyboardDuration = keyboardDuration else { return }
             
-            self.logoTopConstraint.constant      = type(of: self).logoTopConstraintValue
-            self.textFieldTopConstraint.constant = type(of: self).textFieldTopConstraintValue
+            self.layoutForKeyboardHide()
             UIView.animate(withDuration: keyboardDuration) { self.view.layoutIfNeeded() }
+        }
+    }
+    
+    private func presentSignup() {
+        guard let signupViewController = SignupVC.instantiateFromStoryboard(StoryboardName.intro) else { return }
+        signupViewController.modalPresentationStyle = .overFullScreen
+        self.present(signupViewController, animated: true) {
+            self.layoutForKeyboardHide()
         }
     }
     
@@ -123,6 +155,14 @@ class LoginVC: UIViewController {
             .disposed(by: self.disposeBag)
     }
     
+    private func bindSignupButton() {
+        self.signupButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.presentSignup()
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
     private func observeProceedAbleLogin() {
         self.viewModel.proceedAbleSubject
             .distinctUntilChanged()
@@ -133,6 +173,16 @@ class LoginVC: UIViewController {
                 else                 { self.loginButton.enable = false }
             })
             .disposed(by: self.disposeBag)
+    }
+    
+    private func layoutForKeyboardHide() {
+        self.logoTopConstraint.constant      = type(of: self).logoTopConstraintValue
+        self.textFieldTopConstraint.constant = type(of: self).textFieldTopConstraintValue
+    }
+    
+    private func layoutForKeyboardShow() {
+        self.logoTopConstraint.constant      = type(of: self).logoTopConstraintValue - DeviceInfo.topSafeAreaInset - 20
+        self.textFieldTopConstraint.constant = type(of: self).textFieldTopConstraintValue - 70
     }
     
     private static let logoTopConstraintValue: CGFloat      = 72 + DeviceInfo.topSafeAreaInset

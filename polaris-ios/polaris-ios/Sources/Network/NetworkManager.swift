@@ -2,7 +2,7 @@
 //  Network.swift
 //  polaris-ios
 //
-//  Created by USER on 2021/04/12.
+//  Created by Dongmin on 2021/04/12.
 //
 
 import Foundation

@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="PolarisMarginTextField" customModule="polaris_ios" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="PolarisMarginTextField" customModule="Polaris" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="329" height="53"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -19,7 +19,7 @@
                     <rect key="frame" x="26" y="17" width="277" height="19"/>
                     <color key="textColor" name="mainText"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
                 </textField>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
