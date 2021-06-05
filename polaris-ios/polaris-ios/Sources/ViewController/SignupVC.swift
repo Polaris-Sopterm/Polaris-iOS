@@ -98,12 +98,11 @@ class SignupVC: UIViewController {
     
     private func observeCompleteSignup() {
         self.viewModel.completeSignupSubject
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { isComplete in
                 if isComplete == true {
-                    #warning("회원 가입 완료")
-                    print("회원 가입 가능")
-                } else {
-                    print("회원 가입 불가")
+                    let popupView: TermsOfServiceView? = UIView.fromNib()
+                    popupView?.presentPopupView(from: self)
                 }
             })
             .disposed(by: self.disposeBag)
@@ -111,6 +110,7 @@ class SignupVC: UIViewController {
     
     private func bindCloseButton() {
         self.closeButton.rx.tap
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
                 self?.dismiss(animated: true, completion: nil)
             })

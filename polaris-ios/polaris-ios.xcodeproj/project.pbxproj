@@ -142,6 +142,10 @@
 		CE574DC1263589180046D20A /* PolarisToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE574DC0263589180046D20A /* PolarisToastView.swift */; };
 		CE63050B2667E36E00EBC1D4 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE63050A2667E36E00EBC1D4 /* UserAPI.swift */; };
 		CE63050F2667E7BA00EBC1D4 /* NetworkInform.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE63050E2667E7BA00EBC1D4 /* NetworkInform.swift */; };
+		CE8F719F266BDA3500D4FDD7 /* TermsOfServiceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8F719E266BDA3500D4FDD7 /* TermsOfServiceView.xib */; };
+		CE8F71A0266BDA3500D4FDD7 /* TermsOfServiceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8F719E266BDA3500D4FDD7 /* TermsOfServiceView.xib */; };
+		CE8F71A4266BDA4D00D4FDD7 /* TermsOfServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F71A3266BDA4D00D4FDD7 /* TermsOfServiceView.swift */; };
+		CE8F71A5266BDA4D00D4FDD7 /* TermsOfServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F71A3266BDA4D00D4FDD7 /* TermsOfServiceView.swift */; };
 		CEC19ADC2650E11400DA747C /* JourneyTodo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEC19ADB2650E11400DA747C /* JourneyTodo.storyboard */; };
 		CEC19ADF2650E13100DA747C /* JourneyTodoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC19ADE2650E13100DA747C /* JourneyTodoVC.swift */; };
 		CEC19AE42650F86100DA747C /* JourneyTodoHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC19AE32650F86100DA747C /* JourneyTodoHeaderView.xib */; };
@@ -269,6 +273,8 @@
 		CE63050E2667E7BA00EBC1D4 /* NetworkInform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInform.swift; sourceTree = "<group>"; };
 		CE82B9382661D2FF004B6D81 /* Moya.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Moya.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE82B9AC2661DA11004B6D81 /* polaris-ios.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "polaris-ios.plist"; sourceTree = "<group>"; };
+		CE8F719E266BDA3500D4FDD7 /* TermsOfServiceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TermsOfServiceView.xib; sourceTree = "<group>"; };
+		CE8F71A3266BDA4D00D4FDD7 /* TermsOfServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceView.swift; sourceTree = "<group>"; };
 		CEC19ADB2650E11400DA747C /* JourneyTodo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JourneyTodo.storyboard; sourceTree = "<group>"; };
 		CEC19ADE2650E13100DA747C /* JourneyTodoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyTodoVC.swift; sourceTree = "<group>"; };
 		CEC19AE32650F86100DA747C /* JourneyTodoHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JourneyTodoHeaderView.xib; sourceTree = "<group>"; };
@@ -582,6 +588,7 @@
 				CEEE5776262BE51C00C39358 /* PolarisMarginTextField.swift */,
 				CE574DC0263589180046D20A /* PolarisToastView.swift */,
 				CEC19AE62650F87400DA747C /* JourneyTodoHeaderView.swift */,
+				CE8F71A3266BDA4D00D4FDD7 /* TermsOfServiceView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -632,6 +639,7 @@
 				CEEE5779262BE54900C39358 /* PolarisMarginTextField.xib */,
 				CE574DBD263588E20046D20A /* PolarisToastView.xib */,
 				CEC19AE32650F86100DA747C /* JourneyTodoHeaderView.xib */,
+				CE8F719E266BDA3500D4FDD7 /* TermsOfServiceView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -776,6 +784,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEE574D92630422600EA64B7 /* AddTodoDayTableViewCell.xib in Resources */,
+				CE8F719F266BDA3500D4FDD7 /* TermsOfServiceView.xib in Resources */,
 				ECA49471262C2DD200CC2EB8 /* MainStarCVC.xib in Resources */,
 				CEEE575D262AD5FA00C39358 /* AddTodo.storyboard in Resources */,
 				ECA494242628223200CC2EB8 /* TodoDateTVC.xib in Resources */,
@@ -812,6 +821,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE43D06F26613D66003126F2 /* AddTodoDayTableViewCell.xib in Resources */,
+				CE8F71A0266BDA3500D4FDD7 /* TermsOfServiceView.xib in Resources */,
 				CE43D07026613D66003126F2 /* MainStarCVC.xib in Resources */,
 				CE43D07126613D66003126F2 /* AddTodo.storyboard in Resources */,
 				CE43D07226613D66003126F2 /* TodoDateTVC.xib in Resources */,
@@ -964,6 +974,7 @@
 				ECA49470262C2DD200CC2EB8 /* MainStarCVC.swift in Sources */,
 				CE574DA8263555330046D20A /* AddTodoVC+Delegate.swift in Sources */,
 				CE63050F2667E7BA00EBC1D4 /* NetworkInform.swift in Sources */,
+				CE8F71A4266BDA4D00D4FDD7 /* TermsOfServiceView.swift in Sources */,
 				CEEE5750262A965400C39358 /* HalfModalVC.swift in Sources */,
 				ECDC5A572636A0AB00A1B5A9 /* MainTodoContentTVC.swift in Sources */,
 				ECA4945B262C177D00CC2EB8 /* ImageName.swift in Sources */,
@@ -1049,6 +1060,7 @@
 				CE43D03E26613D66003126F2 /* MainStarCVC.swift in Sources */,
 				CE43D03F26613D66003126F2 /* AddTodoVC+Delegate.swift in Sources */,
 				CEF055DD2667EA35000E34A0 /* NetworkInform.swift in Sources */,
+				CE8F71A5266BDA4D00D4FDD7 /* TermsOfServiceView.swift in Sources */,
 				CE43D04026613D66003126F2 /* HalfModalVC.swift in Sources */,
 				CE43D04126613D66003126F2 /* MainTodoContentTVC.swift in Sources */,
 				CE43D04226613D66003126F2 /* ImageName.swift in Sources */,
