@@ -24,15 +24,6 @@ class AddTodoFixOnTopTableViewCell: AddTodoTableViewCell {
     override weak var delegate: AddTodoTableViewCellDelegate? { didSet { self._delegate = self.delegate as? AddTodoFixOnTopTableViewCellDelegate; self._delegate?.addTodoFixOnTopTableViewCell(self, shouldFixed: false) } }
     weak var _delegate: AddTodoFixOnTopTableViewCellDelegate?
     
-    @IBOutlet weak var notFixBackgroundView: UIView!
-    @IBOutlet weak var notFixButton: UIButton!
-    @IBOutlet weak var notFixImageView: UIImageView!
-    @IBOutlet weak var notFixLabel: UILabel!
-    @IBOutlet weak var fixBackgroundView: UIView!
-    @IBOutlet weak var fixButton: UIButton!
-    @IBOutlet weak var fixImageView: UIImageView!
-    @IBOutlet weak var fixLabel: UILabel!
-    
     // MARK: - Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -104,8 +95,6 @@ class AddTodoFixOnTopTableViewCell: AddTodoTableViewCell {
             .disposed(by: self.disposeBag)
     }
     
-    private var fixed = BehaviorSubject<Bool>(value: false)
-    
     private static let selectedBackgroundColor: UIColor     = UIColor.inactiveSky
     private static let unselectedBackgroundColor: UIColor   = UIColor.field
     
@@ -113,4 +102,15 @@ class AddTodoFixOnTopTableViewCell: AddTodoTableViewCell {
     private static let unselectedBorderColor: UIColor       = UIColor.inactiveText
     
     private var disposeBag = DisposeBag()
+    private var fixed      = BehaviorSubject<Bool>(value: false)
+    
+    @IBOutlet private weak var notFixBackgroundView: UIView!
+    @IBOutlet private weak var notFixButton: UIButton!
+    @IBOutlet private weak var notFixImageView: UIImageView!
+    @IBOutlet private weak var notFixLabel: UILabel!
+    @IBOutlet private weak var fixBackgroundView: UIView!
+    @IBOutlet private weak var fixButton: UIButton!
+    @IBOutlet private weak var fixImageView: UIImageView!
+    @IBOutlet private weak var fixLabel: UILabel!
+    
 }

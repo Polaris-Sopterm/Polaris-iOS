@@ -19,12 +19,6 @@ class AddTodoDropdownTableViewCell: AddTodoTableViewCell {
     override weak var delegate: AddTodoTableViewCellDelegate? { didSet { self._delegate = self.delegate as? AddTodoDropdownTableViewCellDelegate } }
     weak var _delegate: AddTodoDropdownTableViewCellDelegate?
     
-    @IBOutlet weak var containerView: UIStackView!
-    @IBOutlet weak var selectedLabel: UILabel!
-    @IBOutlet weak var dropdownButton: UIButton!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
-    
     // MARK: - Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -122,11 +116,17 @@ class AddTodoDropdownTableViewCell: AddTodoTableViewCell {
     private static let duration: TimeInterval       = 0.7
     private static let screenRatio: CGFloat         = DeviceInfo.screenWidth / 375
     private static let menuCellHeight: CGFloat      = 56 * screenRatio
-    
     private static let selectBorderColor: UIColor   = UIColor.mainSky
     
-    var viewModel  = AddTodoDropdownViewModel()
-    var disposeBag = DisposeBag()
+    private var viewModel  = AddTodoDropdownViewModel()
+    private var disposeBag = DisposeBag()
+    
+    @IBOutlet private weak var containerView: UIStackView!
+    @IBOutlet private weak var selectedLabel: UILabel!
+    @IBOutlet private weak var dropdownButton: UIButton!
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var tableViewHeightConstraint: NSLayoutConstraint!
+    
 }
 
 extension AddTodoDropdownTableViewCell: UITableViewDelegate {

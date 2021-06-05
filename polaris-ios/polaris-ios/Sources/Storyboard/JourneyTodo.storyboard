@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="b1c-v5-1I9">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Journey TodoVC-->
+        <scene sceneID="68p-gd-CdL">
+            <objects>
+                <viewController storyboardIdentifier="JourneyTodoVC" id="b1c-v5-1I9" customClass="JourneyTodoVC" customModule="polaris_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7Xz-P3-T2d">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="grouped" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="52" translatesAutoresizingMaskIntoConstraints="NO" id="ExB-mA-UE9">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kch-lX-xEh">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="95"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="wfN-hi-4t2">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="95"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cjo-0s-ECd">
+                                            <rect key="frame" x="269" y="54" width="123" height="21"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                            <state key="normal" title="날짜 별 할일 보기" image="icn_dateview">
+                                                <color key="titleColor" red="0.25098039215686274" green="0.25098039215686274" blue="0.5490196078431373" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="Cjo-0s-ECd" secondAttribute="bottom" constant="20" id="fRm-G2-UUb"/>
+                                        <constraint firstAttribute="trailing" secondItem="Cjo-0s-ECd" secondAttribute="trailing" constant="22" id="irb-id-Wsp"/>
+                                    </constraints>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="95" id="ICt-3Q-UZf"/>
+                                </constraints>
+                                <blurEffect style="regular"/>
+                            </visualEffectView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="52h-Ss-KOM"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="52h-Ss-KOM" firstAttribute="trailing" secondItem="ExB-mA-UE9" secondAttribute="trailing" id="FLL-66-Wl7"/>
+                            <constraint firstAttribute="bottom" secondItem="ExB-mA-UE9" secondAttribute="bottom" id="GiW-44-Weo"/>
+                            <constraint firstItem="ExB-mA-UE9" firstAttribute="top" secondItem="7Xz-P3-T2d" secondAttribute="top" id="P03-bg-FdH"/>
+                            <constraint firstItem="ExB-mA-UE9" firstAttribute="leading" secondItem="52h-Ss-KOM" secondAttribute="leading" id="gDu-QG-N6Y"/>
+                            <constraint firstItem="Kch-lX-xEh" firstAttribute="top" secondItem="7Xz-P3-T2d" secondAttribute="top" id="ikP-rb-oBu"/>
+                            <constraint firstItem="52h-Ss-KOM" firstAttribute="trailing" secondItem="Kch-lX-xEh" secondAttribute="trailing" id="mp3-j9-Wiz"/>
+                            <constraint firstItem="Kch-lX-xEh" firstAttribute="leading" secondItem="52h-Ss-KOM" secondAttribute="leading" id="pRd-ut-BaO"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="navigationHeightConstraint" destination="ICt-3Q-UZf" id="BRY-ps-p7P"/>
+                        <outlet property="tableView" destination="ExB-mA-UE9" id="mAC-18-5c6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="esL-Cv-EEt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="151" y="133"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="icn_dateview" width="21" height="21"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
