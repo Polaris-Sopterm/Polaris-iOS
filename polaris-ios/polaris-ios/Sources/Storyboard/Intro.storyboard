@@ -231,7 +231,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="r2t-8U-PIJ">
                                                 <rect key="frame" x="24" y="66" width="327" height="60.333333333333343"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="아이디를" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g6x-oI-FbO">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이메일을" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g6x-oI-FbO">
                                                         <rect key="frame" x="0.0" y="0.0" width="327" height="27.666666666666668"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
                                                         <color key="textColor" name="mainText"/>
@@ -280,7 +280,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="pLZ-Tn-dXh">
-                                                <rect key="frame" x="24" y="177.33333333333334" width="327" height="443.33333333333326"/>
+                                                <rect key="frame" x="24" y="177.33333333333334" width="327" height="463.66666666666663"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0A0-NZ-trE">
                                                         <rect key="frame" x="0.0" y="0.0" width="327" height="114.33333333333333"/>
@@ -301,7 +301,7 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Fjw-tp-9K8">
                                                                 <rect key="frame" x="0.0" y="99.999999999999972" width="327" height="14.333333333333329"/>
                                                                 <subviews>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KQe-f5-kgV">
+                                                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KQe-f5-kgV">
                                                                         <rect key="frame" x="0.0" y="0.0" width="327" height="14.333333333333334"/>
                                                                         <subviews>
                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icnError" translatesAutoresizingMaskIntoConstraints="NO" id="uZ2-Yb-6v4">
@@ -363,7 +363,7 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="GKy-EY-SS2">
                                                                 <rect key="frame" x="0.0" y="100" width="327" height="34.666666666666657"/>
                                                                 <subviews>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2v1-Pj-5u4">
+                                                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2v1-Pj-5u4">
                                                                         <rect key="frame" x="0.0" y="0.0" width="327" height="14.333333333333334"/>
                                                                         <subviews>
                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icnError" translatesAutoresizingMaskIntoConstraints="NO" id="MDT-S7-WSx">
@@ -390,8 +390,8 @@
                                                                             <constraint firstAttribute="bottom" secondItem="GtA-Ov-8Uh" secondAttribute="bottom" id="q8p-EP-hMx"/>
                                                                         </constraints>
                                                                     </view>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MIu-ZP-iD1">
-                                                                        <rect key="frame" x="0.0" y="20.333333333333314" width="327" height="14.333333333333336"/>
+                                                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MIu-ZP-iD1">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="327" height="14.333333333333334"/>
                                                                         <subviews>
                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icnError" translatesAutoresizingMaskIntoConstraints="NO" id="bZ9-m2-JP4">
                                                                                 <rect key="frame" x="5" y="1.3333333333333144" width="12" height="12"/>
@@ -434,9 +434,9 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q9t-Rx-gRg">
-                                                        <rect key="frame" x="0.0" y="329" width="327" height="114.33333333333331"/>
+                                                        <rect key="frame" x="0.0" y="329" width="327" height="134.66666666666663"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="아이디" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WcK-3P-8fC">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="이메일" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WcK-3P-8fC">
                                                                 <rect key="frame" x="0.0" y="0.0" width="36.333333333333336" height="17"/>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                                 <color key="textColor" name="textSky"/>
@@ -450,9 +450,36 @@
                                                                 </constraints>
                                                             </view>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="p1C-Mm-V9D">
-                                                                <rect key="frame" x="0.0" y="100.00000000000006" width="327" height="14.333333333333329"/>
+                                                                <rect key="frame" x="0.0" y="100.00000000000006" width="327" height="34.666666666666657"/>
                                                                 <subviews>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j0O-qK-A8g">
+                                                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xTs-H1-tjc">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="327" height="0.0"/>
+                                                                        <subviews>
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icnError" translatesAutoresizingMaskIntoConstraints="NO" id="sn3-M2-HLh">
+                                                                                <rect key="frame" x="5" y="-6" width="12" height="12"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="width" constant="12" id="DF4-Qr-VDu"/>
+                                                                                    <constraint firstAttribute="height" constant="12" id="tan-FI-jO3"/>
+                                                                                </constraints>
+                                                                            </imageView>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="올바른 이메일 형식이어야 해요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DXF-cW-wqx">
+                                                                                <rect key="frame" x="22" y="0.0" width="305" height="0.0"/>
+                                                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                        </subviews>
+                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="bottom" secondItem="DXF-cW-wqx" secondAttribute="bottom" id="7zQ-4b-oTh"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="DXF-cW-wqx" secondAttribute="trailing" id="RRp-nM-sJU"/>
+                                                                            <constraint firstItem="sn3-M2-HLh" firstAttribute="centerY" secondItem="xTs-H1-tjc" secondAttribute="centerY" id="SNe-wv-Rsm"/>
+                                                                            <constraint firstItem="sn3-M2-HLh" firstAttribute="leading" secondItem="xTs-H1-tjc" secondAttribute="leading" constant="5" id="Wvq-ZH-JR5"/>
+                                                                            <constraint firstItem="DXF-cW-wqx" firstAttribute="top" secondItem="xTs-H1-tjc" secondAttribute="top" id="Wz2-X9-Cq5"/>
+                                                                            <constraint firstItem="DXF-cW-wqx" firstAttribute="leading" secondItem="sn3-M2-HLh" secondAttribute="trailing" constant="5" id="txi-Ag-doa"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j0O-qK-A8g">
                                                                         <rect key="frame" x="0.0" y="0.0" width="327" height="14.333333333333334"/>
                                                                         <subviews>
                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icnError" translatesAutoresizingMaskIntoConstraints="NO" id="meS-bX-udw">
@@ -555,6 +582,8 @@
                         <outlet property="idDescriptionStackView" destination="r2t-8U-PIJ" id="gDx-vj-k4N"/>
                         <outlet property="idDuplicatedValidateImageView" destination="meS-bX-udw" id="pI7-PB-YaM"/>
                         <outlet property="idDuplicatedValidateView" destination="j0O-qK-A8g" id="3Py-SZ-BrJ"/>
+                        <outlet property="idFormatValidateImageView" destination="sn3-M2-HLh" id="b0A-1m-XzG"/>
+                        <outlet property="idFormatValidateView" destination="xTs-H1-tjc" id="kNu-ve-SPO"/>
                         <outlet property="idInputContainerView" destination="q9t-Rx-gRg" id="j3F-9c-0yv"/>
                         <outlet property="idTextFieldContainerView" destination="Zac-Wx-QZW" id="Wu6-sz-3Az"/>
                         <outlet property="nicknameDescriptionStackView" destination="d5a-Tl-cSD" id="jNA-Wx-Hmr"/>
@@ -562,11 +591,11 @@
                         <outlet property="nicknameTextFieldContainerView" destination="vJa-ZP-YDg" id="uvp-eX-QC0"/>
                         <outlet property="nicknameValidateImageView" destination="uZ2-Yb-6v4" id="4rH-ZQ-BTR"/>
                         <outlet property="nicknameValidateView" destination="KQe-f5-kgV" id="2HU-dS-DQc"/>
-                        <outlet property="pwCombiValidateImageView" destination="bZ9-m2-JP4" id="23r-an-DyX"/>
-                        <outlet property="pwCombiValidateView" destination="MIu-ZP-iD1" id="iiz-Hg-s7U"/>
                         <outlet property="pwCountValidateImageView" destination="MDT-S7-WSx" id="p0u-qI-lwg"/>
                         <outlet property="pwCountValidateView" destination="2v1-Pj-5u4" id="ICV-ns-9qt"/>
                         <outlet property="pwDescriptionStackView" destination="evB-BF-ptj" id="FjG-Tu-kbX"/>
+                        <outlet property="pwFormatValidateImageView" destination="bZ9-m2-JP4" id="23r-an-DyX"/>
+                        <outlet property="pwFormatValidateView" destination="MIu-ZP-iD1" id="iiz-Hg-s7U"/>
                         <outlet property="pwInputContainerView" destination="Dz7-CQ-oxu" id="ngS-Lt-XqQ"/>
                         <outlet property="pwTextFieldContainerView" destination="H7L-sa-geA" id="Glm-rE-G5J"/>
                     </connections>

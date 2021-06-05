@@ -8,35 +8,9 @@
 import Foundation
 import RxSwift
 import RxRelay
+import OSLog
 
 class SignupViewModel {
-    
-    var isFirstStep: Bool  { return self.stepRelay.value == .firstStep }
-    var isSecondStep: Bool { return self.stepRelay.value == .secondStep }
-    var isLastStep: Bool   { return self.stepRelay.value == .lastStep }
-    
-    var isProcessableFirstStep: Bool {
-        guard let idValidateState = try? self.validateIdSubejct.value()          else { return false }
-        guard case .validation(true) = idValidateState, self.isFirstStep == true else { return false }
-        return true
-    }
-    
-    var isProcessableSecondStep: Bool {
-        guard let pwValidateState = try? self.validatePwSubject.value()              else { return false }
-        guard case .allValidation(true) = pwValidateState, self.isSecondStep == true else { return false }
-        return true
-    }
-    
-    var isProcessableCompleteSignup: Bool {
-        guard self.isLastStep == true else { return false }
-        
-        guard let idValidate       = try? self.validateIdSubejct.value(),
-              let pwValidate       = try? self.validatePwSubject.value(),
-              let nicknameValidate = try? self.validateNicknameSubject.value() else { return false }
-        
-        if idValidate == .validation(true) && pwValidate == .allValidation(true) && nicknameValidate == .validation(true) { return true }
-        else { return false }
-    }
     
     let stepRelay = BehaviorRelay<SignupVC.InputOptions>(value: .firstStep)
     
@@ -44,161 +18,109 @@ class SignupViewModel {
     let pwSubject       = BehaviorSubject<String>(value: "")
     let nicknameSubject = BehaviorSubject<String>(value: "")
     
-    let validateIdSubejct       = BehaviorSubject<IdValidateState>(value: .empty)
-    let validatePwSubject       = BehaviorSubject<PwValidateState>(value: .empty)
-    let validateNicknameSubject = BehaviorSubject<NicknameValidateState>(value: .empty)
+    let idDuplicatedValidRelay  = BehaviorRelay<Bool>(value: false)
+    let idFormatValidRelay      = BehaviorRelay<Bool>(value: false)
+    let pwCountValidRelay       = BehaviorRelay<Bool>(value: false)
+    let pwFormatValidRelay      = BehaviorRelay<Bool>(value: false)
+    let nicknameCountValidRelay = BehaviorRelay<Bool>(value: false)
     
     let completeSignupSubject   = BehaviorSubject<Bool>(value: false)
+    
+    var isFirstStep: Bool  { return self.stepRelay.value == .firstStep }
+    var isSecondStep: Bool { return self.stepRelay.value == .secondStep }
+    var isLastStep: Bool   { return self.stepRelay.value == .lastStep }
     
     init() {
         self.idSubject
             .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] id in
-                guard let self = self else { return }
-                
-                self.isValidateId(as: id)
+                self?.checkEmailFormatValidation(id)
+                self?.checkEmailDuplicatedValidation(id)
             })
             .disposed(by: self.disposeBag)
         
-        
         self.pwSubject
             .subscribe(onNext: { [weak self] pw in
-                guard let self = self else { return }
-                
-                let validateState = self.isValidatePw(as: pw)
-                self.validatePwSubject.onNext(validateState)
+                self?.checkPasswordFormatValidation(pw)
+                self?.checkPasswordCountValidation(pw)
             })
             .disposed(by: self.disposeBag)
         
         self.nicknameSubject
             .subscribe(onNext: { [weak self] nickname in
-                guard let self = self else { return }
-                
-                let validateState = self.isValidateNickname(as: nickname)
-                self.validateNicknameSubject.onNext(validateState)
+                self?.checkNicknameCountValidation(nickname)
             })
             .disposed(by: self.disposeBag)
-        
-        
     }
     
-    func isValidateId(as input: String) {
-        if input.isEmpty == true { self.validateIdSubejct.onNext(.empty) }
-        else                     { self.requestCheckEmail(input) }
+    func processFirstStep() {
+        guard self.isFirstStep == true else { return }
+        
+        if self.isProcessableFirstStep == true { self.stepRelay.accept(.secondStep) }
     }
     
-    func isValidatePw(as input: String) -> PwValidateState {
-        if input.isEmpty == true { return .empty }
+    func processSecondStep() {
+        guard self.isSecondStep == true else { return }
         
-        let containAlphabet: Bool = input.containsCharacterSet(CharacterSet.letters)
-        let containNumber: Bool   = input.containsCharacterSet(CharacterSet.decimalDigits)
-        
-        let combiValidate: Bool   = containAlphabet == true && containNumber == true
-        let countValidate: Bool   = input.count >= 6
-        
-        if combiValidate == true && countValidate == true       { return .allValidation(true) }
-        else if combiValidate == true && countValidate == false { return .eachValidation(.count) }
-        else if combiValidate == false && countValidate == true { return .eachValidation(.combi) }
-        else { return .allValidation(false) }
+        if self.isProcessableSecondStep == true { self.stepRelay.accept(.lastStep) }
     }
     
-    func isValidateNickname(as input: String) -> NicknameValidateState {
-        if input.isEmpty        { return .empty }
-        else if input.count < 6 { return .validation(false) }
-        else                    { return .validation(true) }
+    func processLastStep() {
+        guard self.isLastStep == true else { return }
+        
+        if self.isProcessableLastStep == true { self.completeSignupSubject.onNext(true) }
+        else { self.completeSignupSubject.onNext(false) }
     }
     
-    func confirmCompleteSignup() {
-        guard let email    = try? self.idSubject.value(),
-              let password = try? self.pwSubject.value(),
-              let nickname = try? self.nicknameSubject.value() else { return }
-        
-        self.requestSignup(email, password, nickname)
+    private func checkEmailFormatValidation(_ id: String) {
+        guard id.isEmailFormat() == true else { self.idFormatValidRelay.accept(false); return }
+        self.idFormatValidRelay.accept(true)
     }
     
-    private func requestCheckEmail(_ email: String) {
-        let userAPI = UserAPI.checkEmail(email: email)
+    private func checkEmailDuplicatedValidation(_ id: String) {
+        let userAPI = UserAPI.checkEmail(email: id)
         
-        NetworkManager.request(apiType: userAPI).subscribe(onSuccess: { (checkEmail: CheckEmailModel) in
-            if checkEmail.isDuplicated == true { self.validateIdSubejct.onNext(.validation(false)) }
-            else                               { self.validateIdSubejct.onNext(.validation(true)) }
-        }, onFailure: { error in
-            #warning("이 뷰에서 독립적으로 Error 처리하는 경우")
-            print(error.localizedDescription)
-        })
-        .disposed(by: self.disposeBag)
+        NetworkManager.request(apiType: userAPI)
+            .subscribe(onSuccess: { [weak self] (checkEmailModel: CheckEmailModel) in
+                guard let self = self else { return }
+                
+                if checkEmailModel.isDuplicated == true { self.idDuplicatedValidRelay.accept(false) }
+                else { self.idDuplicatedValidRelay.accept(true) }
+            }, onFailure: { [weak self] error in
+                #warning("Logging 찍어보는 하나 구현해야함")
+                self?.idDuplicatedValidRelay.accept(false)
+            })
+            .disposed(by: self.disposeBag)
     }
     
-    private func requestSignup(_ email: String, _ password: String, _ nickname: String) {
-        let userAPI = UserAPI.createUser(email: email, password: password, nickname: nickname)
-        
-        NetworkManager.request(apiType: userAPI).subscribe(onSuccess: { (signupModel: SignupModel) in
-            self.completeSignupSubject.onNext(true)
-        }, onFailure: { error in
-            self.completeSignupSubject.onNext(false)
-        })
-        .disposed(by: self.disposeBag)
+    private func checkPasswordFormatValidation(_ password: String) {
+        let passwordFormatValidation = password.isPasswordFormat()
+        self.pwFormatValidRelay.accept(passwordFormatValidation)
+    }
+    
+    private func checkPasswordCountValidation(_ password: String) {
+        let passwordCountValidation = password.count >= 6
+        self.pwCountValidRelay.accept(passwordCountValidation)
+    }
+    
+    private func checkNicknameCountValidation(_ nickname: String) {
+        let nicknameCountValidation = nickname.count >= 6
+        self.nicknameCountValidRelay.accept(nicknameCountValidation)
+    }
+    
+    private var isProcessableFirstStep: Bool {
+        return self.idDuplicatedValidRelay.value == true && self.idFormatValidRelay.value == true
+    }
+    
+    private var isProcessableSecondStep: Bool {
+        return self.isProcessableFirstStep == true && self.pwFormatValidRelay.value == true
+            && self.pwCountValidRelay.value == true
+    }
+    
+    private var isProcessableLastStep: Bool {
+        return self.isProcessableSecondStep == true && self.nicknameCountValidRelay.value == true
     }
     
     private var disposeBag = DisposeBag()
     
-}
-
-/*
- 중복 검사하는 부분 너무 구리게 짜서 나중에 고쳐야할 듯... 조건 늘어나면 추가하기 힘들듯
- */
-enum IdValidateState: Equatable {
-    case empty
-    case validation(Bool)
-    
-    static func ==(lhs: Self, rhs: Self) -> Bool {
-        if case .empty = lhs, case .empty = rhs { return true }
-        
-        if case validation(let lhsValiate) = lhs, case validation(let rhsValidate) = rhs {
-            return lhsValiate == rhsValidate
-        }
-        
-        return false
-    }
-}
-
-enum PwValidateState: Equatable {
-    case empty
-    case allValidation(Bool)
-    case eachValidation(PwInValidateType)
-    
-    // 둘 중 하나가 유효하지 못 한 경우 들어감
-    enum PwInValidateType {
-        case count
-        case combi
-    }
-    
-    static func ==(lhs: Self, rhs: Self) -> Bool {
-        if case .empty = lhs, case .empty = rhs { return true }
-        
-        if case allValidation(let lhsValidate) = lhs, case allValidation(let rhsValidate) = rhs {
-            return lhsValidate == rhsValidate
-        }
-        
-        if case eachValidation(let lhsInvalid) = lhs, case eachValidation(let rhsInvalid) = rhs {
-            return lhsInvalid == rhsInvalid
-        }
-        
-        return false
-    }
-}
-
-enum NicknameValidateState: Equatable {
-    case empty
-    case validation(Bool)
-    
-    static func ==(lhs: Self, rhs: Self) -> Bool {
-        if case .empty = lhs, case .empty = rhs { return true }
-        
-        if case validation(let lhsValiate) = lhs, case validation(let rhsValidate) = rhs {
-            return lhsValiate == rhsValidate
-        }
-        
-        return false
-    }
 }
