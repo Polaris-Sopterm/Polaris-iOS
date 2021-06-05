@@ -93,7 +93,9 @@ class SignupVC: UIViewController {
             .subscribe(onNext: { isComplete in
                 if isComplete == true {
                     #warning("회원 가입 완료")
+                    print("회원 가입 가능")
                 } else {
+                    print("회원 가입 불가")
                 }
             })
             .disposed(by: self.disposeBag)
@@ -124,11 +126,11 @@ class SignupVC: UIViewController {
     
     private func updateIdValidateUI(as state: IdValidateState) {
         switch state {
-        case .validation(let validate): self.idValidateImageView.image = validate ? #imageLiteral(resourceName: "icnPass") : #imageLiteral(resourceName: "icnError")
+        case .validation(let validate): self.idDuplicatedValidateImageView.image = validate ? #imageLiteral(resourceName: "icnPass") : #imageLiteral(resourceName: "icnError")
         case .empty: break
         }
         
-        self.idValidateView.isHidden = state == .empty
+        self.idDuplicatedValidateView.isHidden = state == .empty
     }
     
     private func updatePwValidateUI(as state: PwValidateState) {
@@ -173,8 +175,10 @@ class SignupVC: UIViewController {
     @IBOutlet private weak var idInputContainerView: UIView!
     @IBOutlet private weak var idTextFieldContainerView: UIView!
     private var idTextFieldView: PolarisMarginTextField? = UIView.fromNib()
-    @IBOutlet private weak var idValidateView: UIView!
-    @IBOutlet private weak var idValidateImageView: UIImageView!
+    @IBOutlet private weak var idDuplicatedValidateView: UIView!
+    @IBOutlet private weak var idDuplicatedValidateImageView: UIImageView!
+    @IBOutlet private weak var idFormatValidateView: UIView!
+    @IBOutlet private weak var idFormatValidateImageView: UIImageView!
     
     @IBOutlet private weak var pwInputContainerView: UIView!
     @IBOutlet private weak var pwTextFieldContainerView: UIView!

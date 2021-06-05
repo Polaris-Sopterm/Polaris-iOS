@@ -56,8 +56,7 @@ class SignupViewModel {
             .subscribe(onNext: { [weak self] id in
                 guard let self = self else { return }
                 
-                let validateState = self.isValidateId(as: id)
-                self.validateIdSubejct.onNext(validateState)
+                self.isValidateId(as: id)
             })
             .disposed(by: self.disposeBag)
         
@@ -79,12 +78,13 @@ class SignupViewModel {
                 self.validateNicknameSubject.onNext(validateState)
             })
             .disposed(by: self.disposeBag)
+        
+        
     }
     
-    func isValidateId(as input: String) -> IdValidateState {
-        if input.isEmpty == true { return .empty }
-        else if input.count >= 6 { return .validation(true)  }
-        else                     { return .validation(false) }
+    func isValidateId(as input: String) {
+        if input.isEmpty == true { self.validateIdSubejct.onNext(.empty) }
+        else                     { self.requestCheckEmail(input) }
     }
     
     func isValidatePw(as input: String) -> PwValidateState {
@@ -109,24 +109,56 @@ class SignupViewModel {
     }
     
     func confirmCompleteSignup() {
-        self.completeSignupSubject.onNext(self.isProcessableCompleteSignup)
+        guard let email    = try? self.idSubject.value(),
+              let password = try? self.pwSubject.value(),
+              let nickname = try? self.nicknameSubject.value() else { return }
+        
+        self.requestSignup(email, password, nickname)
+    }
+    
+    private func requestCheckEmail(_ email: String) {
+        let userAPI = UserAPI.checkEmail(email: email)
+        
+        NetworkManager.request(apiType: userAPI).subscribe(onSuccess: { (checkEmail: CheckEmailModel) in
+            if checkEmail.isDuplicated == true { self.validateIdSubejct.onNext(.validation(false)) }
+            else                               { self.validateIdSubejct.onNext(.validation(true)) }
+        }, onFailure: { error in
+            #warning("이 뷰에서 독립적으로 Error 처리하는 경우")
+            print(error.localizedDescription)
+        })
+        .disposed(by: self.disposeBag)
+    }
+    
+    private func requestSignup(_ email: String, _ password: String, _ nickname: String) {
+        let userAPI = UserAPI.createUser(email: email, password: password, nickname: nickname)
+        
+        NetworkManager.request(apiType: userAPI).subscribe(onSuccess: { (signupModel: SignupModel) in
+            self.completeSignupSubject.onNext(true)
+        }, onFailure: { error in
+            self.completeSignupSubject.onNext(false)
+        })
+        .disposed(by: self.disposeBag)
     }
     
     private var disposeBag = DisposeBag()
     
 }
 
+/*
+ 중복 검사하는 부분 너무 구리게 짜서 나중에 고쳐야할 듯... 조건 늘어나면 추가하기 힘들듯
+ */
 enum IdValidateState: Equatable {
     case empty
     case validation(Bool)
     
     static func ==(lhs: Self, rhs: Self) -> Bool {
-        if case .validation(let lhsValidate) = lhs, case .validation(let rhsValidate) = rhs {
-            return lhsValidate == rhsValidate
+        if case .empty = lhs, case .empty = rhs { return true }
+        
+        if case validation(let lhsValiate) = lhs, case validation(let rhsValidate) = rhs {
+            return lhsValiate == rhsValidate
         }
         
-        if case .empty = lhs, case .empty = rhs { return true }
-        else                                    { return false }
+        return false
     }
 }
 
