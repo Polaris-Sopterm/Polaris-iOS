@@ -17,7 +17,6 @@ class TermsOfServiceView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.setupButtons()
         self.bindButtons()
         self.bindTapGesture()
         self.bindCheck()
@@ -37,14 +36,6 @@ class TermsOfServiceView: UIView {
             completion?()
             self.removeFromSuperview()
         }
-    }
-    
-    private func setupButtons() {
-        let singleLinePersonalText = NSAttributedString(string: "개인정보 수집이용 동의", attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
-        self.personalTermDescButton.setAttributedTitle(singleLinePersonalText, for: .normal)
-        
-        let singleLineServicetext = NSAttributedString(string: "서비스 이용약관 동의", attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
-        self.serviceTermDescButton.setAttributedTitle(singleLineServicetext, for: .normal)
     }
     
     private func animateForPresent() {

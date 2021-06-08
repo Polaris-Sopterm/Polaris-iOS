@@ -89,11 +89,18 @@
                                                         <color key="titleColor" name="textSky"/>
                                                     </state>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EiG-ld-Bcw">
-                                                    <rect key="frame" x="41" y="-5.3333333333333712" width="129" height="29"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                                    <state key="normal" title="개인정보 수집이용 동의">
-                                                        <color key="titleColor" name="mainText"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EiG-ld-Bcw">
+                                                    <rect key="frame" x="41" y="-5.3333333333333712" width="129" height="28.666666666666668"/>
+                                                    <state key="normal">
+                                                        <attributedString key="attributedTitle">
+                                                            <fragment content="개인정보 수집이용 동의">
+                                                                <attributes>
+                                                                    <color key="NSColor" name="mainText"/>
+                                                                    <font key="NSFont" size="14" name="AppleSDGothicNeo-Bold"/>
+                                                                    <integer key="NSUnderline" value="1"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                        </attributedString>
                                                     </state>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pnx-fp-HBj">
@@ -134,11 +141,18 @@
                                                     </constraints>
                                                     <state key="normal" image="btnUncheck"/>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m49-Gk-JnR">
-                                                    <rect key="frame" x="41" y="-5.3333333333333712" width="116" height="29"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                                    <state key="normal" title="서비스 이용약관 동의">
-                                                        <color key="titleColor" name="mainText"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m49-Gk-JnR">
+                                                    <rect key="frame" x="41" y="-5.3333333333333712" width="117" height="28.666666666666668"/>
+                                                    <state key="normal">
+                                                        <attributedString key="attributedTitle">
+                                                            <fragment content="서비스 이용약관 동의">
+                                                                <attributes>
+                                                                    <color key="NSColor" name="mainText"/>
+                                                                    <font key="NSFont" size="14" name="AppleSDGothicNeo-Bold"/>
+                                                                    <integer key="NSUnderline" value="1"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                        </attributedString>
                                                     </state>
                                                 </button>
                                             </subviews>
