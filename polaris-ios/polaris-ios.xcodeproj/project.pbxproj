@@ -148,6 +148,8 @@
 		CE8F71A5266BDA4D00D4FDD7 /* TermsOfServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F71A3266BDA4D00D4FDD7 /* TermsOfServiceView.swift */; };
 		CEAC5990266F9F210092A255 /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAC598F266F9F210092A255 /* AuthModel.swift */; };
 		CEAC5991266F9F210092A255 /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAC598F266F9F210092A255 /* AuthModel.swift */; };
+		CEAC5995266FBEA50092A255 /* PolarisErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAC5994266FBEA50092A255 /* PolarisErrorModel.swift */; };
+		CEAC5996266FBEA50092A255 /* PolarisErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAC5994266FBEA50092A255 /* PolarisErrorModel.swift */; };
 		CEC19ADC2650E11400DA747C /* JourneyTodo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEC19ADB2650E11400DA747C /* JourneyTodo.storyboard */; };
 		CEC19ADF2650E13100DA747C /* JourneyTodoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC19ADE2650E13100DA747C /* JourneyTodoVC.swift */; };
 		CEC19AE42650F86100DA747C /* JourneyTodoHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC19AE32650F86100DA747C /* JourneyTodoHeaderView.xib */; };
@@ -278,6 +280,7 @@
 		CE8F719E266BDA3500D4FDD7 /* TermsOfServiceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TermsOfServiceView.xib; sourceTree = "<group>"; };
 		CE8F71A3266BDA4D00D4FDD7 /* TermsOfServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceView.swift; sourceTree = "<group>"; };
 		CEAC598F266F9F210092A255 /* AuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
+		CEAC5994266FBEA50092A255 /* PolarisErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarisErrorModel.swift; sourceTree = "<group>"; };
 		CEC19ADB2650E11400DA747C /* JourneyTodo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = JourneyTodo.storyboard; sourceTree = "<group>"; };
 		CEC19ADE2650E13100DA747C /* JourneyTodoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyTodoVC.swift; sourceTree = "<group>"; };
 		CEC19AE32650F86100DA747C /* JourneyTodoHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JourneyTodoHeaderView.xib; sourceTree = "<group>"; };
@@ -656,6 +659,7 @@
 				CEF055ED2667EB38000E34A0 /* CheckEmailModel.swift */,
 				CEF055F22667ED81000E34A0 /* SignupModel.swift */,
 				CEAC598F266F9F210092A255 /* AuthModel.swift */,
+				CEAC5994266FBEA50092A255 /* PolarisErrorModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1002,6 +1006,7 @@
 				CEC19AEB265103AA00DA747C /* JourneyTodoTableViewCell.swift in Sources */,
 				ECA494472629729000CC2EB8 /* TodoDateModel.swift in Sources */,
 				CE132141265A408F001E3C1F /* LoginViewModel.swift in Sources */,
+				CEAC5995266FBEA50092A255 /* PolarisErrorModel.swift in Sources */,
 				ECA49475262C461700CC2EB8 /* MainStarModel.swift in Sources */,
 				CEF055EE2667EB38000E34A0 /* CheckEmailModel.swift in Sources */,
 				CE132144265A5CD1001E3C1F /* SignupVC.swift in Sources */,
@@ -1089,6 +1094,7 @@
 				CE43D05326613D66003126F2 /* JourneyTodoTableViewCell.swift in Sources */,
 				CE43D05426613D66003126F2 /* TodoDateModel.swift in Sources */,
 				CE43D05526613D66003126F2 /* LoginViewModel.swift in Sources */,
+				CEAC5996266FBEA50092A255 /* PolarisErrorModel.swift in Sources */,
 				CE43D05626613D66003126F2 /* MainStarModel.swift in Sources */,
 				CEF055EF2667EB38000E34A0 /* CheckEmailModel.swift in Sources */,
 				CE43D05726613D66003126F2 /* SignupVC.swift in Sources */,

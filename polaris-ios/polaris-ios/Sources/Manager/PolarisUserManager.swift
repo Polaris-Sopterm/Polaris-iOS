@@ -22,4 +22,9 @@ class PolarisUserManager {
         self.refreshToken = refreshToken
     }
     
+    func resetUserInfo() {
+        self.authToken    = nil
+        self.refreshToken = nil
+    }
+    
 }

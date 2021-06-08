@@ -38,6 +38,7 @@ class LoginViewModel {
         NetworkManager.request(apiType: userAPI)
             .subscribe(onSuccess: { (authModel: AuthModel) in
                 #warning("다음 화면 넘어가는 로직")
+                print(authModel)
                 PolarisUserManager.shared.updateAuthToken(authModel.accessToken, authModel.refreshToken)
             }, onFailure: { error in
                 print(error.localizedDescription)

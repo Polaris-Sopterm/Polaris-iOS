@@ -10,7 +10,10 @@ import Foundation
 @propertyWrapper struct UserDefaultWrapper<T> {
     var wrappedValue: T? {
         get { return UserDefaults.standard.object(forKey: self.key) as? T }
-        set { UserDefaults.standard.setValue(newValue, forKey: key) }
+        set {
+            if newValue == nil { UserDefaults.standard.removeObject(forKey: key) }
+            else               { UserDefaults.standard.setValue(newValue, forKey: key) }
+        }
     }
     
     init(key: String) {
