@@ -19,6 +19,7 @@ class TermsOfServiceView: UIView {
         super.awakeFromNib()
         self.setupButtons()
         self.bindButtons()
+        self.bindTapGesture()
         self.bindCheck()
     }
     
@@ -39,11 +40,11 @@ class TermsOfServiceView: UIView {
     }
     
     private func setupButtons() {
-        let singleLineText = NSMutableAttributedString(string: "개인정보 수집이용 동의", attributes: [.underlineStyle: NSUnderlineStyle.single])
-        self.personalTermDescButton.setAttributedTitle(singleLineText, for: .normal)
+        let singleLinePersonalText = NSAttributedString(string: "개인정보 수집이용 동의", attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
+        self.personalTermDescButton.setAttributedTitle(singleLinePersonalText, for: .normal)
         
-        singleLineText.mutableString.setString("서비스 이용약관 동의")
-        self.serviceTermDescButton.setAttributedTitle(singleLineText, for: .normal)
+        let singleLineServicetext = NSAttributedString(string: "서비스 이용약관 동의", attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
+        self.serviceTermDescButton.setAttributedTitle(singleLineServicetext, for: .normal)
     }
     
     private func animateForPresent() {
@@ -54,6 +55,16 @@ class TermsOfServiceView: UIView {
             self.dimView.alpha       = 1
             self.termsView.transform = .identity
         }
+    }
+    
+    private func bindTapGesture() {
+        let tapGesture = UITapGestureRecognizer()
+        self.addGestureRecognizer(tapGesture)
+        tapGesture.rx.event
+            .subscribe(onNext: { [weak self] recognizer in
+                self?.dismissPopupView()
+            })
+            .disposed(by: self.disposeBag)
     }
     
     private func bindButtons() {
