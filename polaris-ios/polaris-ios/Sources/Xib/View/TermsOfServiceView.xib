@@ -57,7 +57,7 @@
                                 <constraint firstAttribute="height" constant="1" id="sTW-jj-dBp"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1S1-Gu-Q6i">
+                        <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1S1-Gu-Q6i">
                             <rect key="frame" x="23" y="202" width="329" height="54"/>
                             <color key="backgroundColor" name="inactiveText"/>
                             <constraints>
@@ -126,12 +126,6 @@
                                                         <color key="titleColor" name="textSky"/>
                                                     </state>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="서비스 이용약관 동의" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rTH-ss-646">
-                                                    <rect key="frame" x="41" y="0.66666666666662877" width="116" height="17"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                                    <color key="textColor" name="mainText"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pzV-zP-JT2">
                                                     <rect key="frame" x="311" y="0.0" width="18" height="18"/>
                                                     <constraints>
@@ -140,15 +134,22 @@
                                                     </constraints>
                                                     <state key="normal" image="btnUncheck"/>
                                                 </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m49-Gk-JnR">
+                                                    <rect key="frame" x="41" y="-5.3333333333333712" width="116" height="29"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                    <state key="normal" title="서비스 이용약관 동의">
+                                                        <color key="titleColor" name="mainText"/>
+                                                    </state>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstItem="ox0-kL-y2T" firstAttribute="leading" secondItem="yZK-sQ-Kqe" secondAttribute="leading" id="9K4-kK-lRL"/>
-                                                <constraint firstItem="rTH-ss-646" firstAttribute="centerY" secondItem="yZK-sQ-Kqe" secondAttribute="centerY" id="Drp-SD-hHx"/>
+                                                <constraint firstItem="m49-Gk-JnR" firstAttribute="leading" secondItem="ox0-kL-y2T" secondAttribute="trailing" constant="5" id="Bl5-pF-shH"/>
                                                 <constraint firstItem="pzV-zP-JT2" firstAttribute="centerY" secondItem="yZK-sQ-Kqe" secondAttribute="centerY" id="Mey-97-qf3"/>
-                                                <constraint firstItem="rTH-ss-646" firstAttribute="leading" secondItem="ox0-kL-y2T" secondAttribute="trailing" constant="5" id="RYm-yV-MSL"/>
                                                 <constraint firstItem="ox0-kL-y2T" firstAttribute="centerY" secondItem="yZK-sQ-Kqe" secondAttribute="centerY" id="Ufn-hi-Y1V"/>
                                                 <constraint firstAttribute="trailing" secondItem="pzV-zP-JT2" secondAttribute="trailing" id="aSG-Ec-njW"/>
+                                                <constraint firstItem="m49-Gk-JnR" firstAttribute="centerY" secondItem="yZK-sQ-Kqe" secondAttribute="centerY" id="mWW-cB-nC7"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -199,9 +200,14 @@
             </constraints>
             <connections>
                 <outlet property="closeButton" destination="KT7-hG-rZk" id="edQ-xu-gti"/>
+                <outlet property="completeButton" destination="1S1-Gu-Q6i" id="xVq-Oi-AyB"/>
                 <outlet property="dimView" destination="GoZ-7J-tYL" id="71a-e9-6Uy"/>
-                <outlet property="personalTermsCheckButton" destination="Pnx-fp-HBj" id="EXD-6U-Dp4"/>
-                <outlet property="serviceTermsCheckButton" destination="pzV-zP-JT2" id="9h1-c1-eh3"/>
+                <outlet property="personalTermButton" destination="qwn-Uc-twB" id="P75-fD-iw6"/>
+                <outlet property="personalTermCheckButton" destination="Pnx-fp-HBj" id="EXD-6U-Dp4"/>
+                <outlet property="personalTermDescButton" destination="EiG-ld-Bcw" id="9rG-Tr-2HG"/>
+                <outlet property="serviceTermButton" destination="ox0-kL-y2T" id="7BW-Yj-GVN"/>
+                <outlet property="serviceTermCheckButton" destination="pzV-zP-JT2" id="9h1-c1-eh3"/>
+                <outlet property="serviceTermDescButton" destination="m49-Gk-JnR" id="dBn-TR-F0J"/>
                 <outlet property="termsView" destination="mr2-Py-F18" id="I6S-oU-wTL"/>
             </connections>
             <point key="canvasLocation" x="140" y="97.536945812807886"/>

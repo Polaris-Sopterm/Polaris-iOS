@@ -53,6 +53,19 @@ class SignupViewModel {
             .disposed(by: self.disposeBag)
     }
     
+    func requestSignup() {
+        guard let id = try? self.idSubject.value(), let pw = try? self.pwSubject.value(),
+              let nickname = try? self.nicknameSubject.value() else { return }
+        let userAPI = UserAPI.createUser(email: id, password: pw, nickname: nickname)
+        NetworkManager.request(apiType: userAPI)
+            .subscribe(onSuccess: { (signupModel: SignupModel) in
+                print(signupModel)
+            }, onFailure: { error in
+                print(error.localizedDescription)
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
     func processFirstStep() {
         guard self.isFirstStep == true else { return }
         

@@ -102,6 +102,7 @@ class SignupVC: UIViewController {
             .subscribe(onNext: { isComplete in
                 if isComplete == true {
                     let popupView: TermsOfServiceView? = UIView.fromNib()
+                    popupView?.completion = { [weak self] in self?.viewModel.requestSignup() }
                     popupView?.presentPopupView(from: self)
                 }
             })
