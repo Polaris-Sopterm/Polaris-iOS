@@ -31,6 +31,21 @@ class LoginViewModel {
         else                                                    { return false }
     }
     
+    func requestLogin() {
+        guard let id = try? self.idSubject.value(), let password = try? self.pwSubject.value() else { return }
+        
+        let userAPI = UserAPI.auth(email: id, password: password)
+        NetworkManager.request(apiType: userAPI)
+            .subscribe(onSuccess: { (authModel: AuthModel) in
+                #warning("다음 화면 넘어가는 로직")
+                print(authModel)
+                PolarisUserManager.shared.updateAuthToken(authModel.accessToken, authModel.refreshToken)
+            }, onFailure: { error in
+                print(error.localizedDescription)
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
     private var disposeBag = DisposeBag()
     
 }

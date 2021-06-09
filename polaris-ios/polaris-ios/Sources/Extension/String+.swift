@@ -29,12 +29,22 @@ extension String {
         return attributeString
     }
     
-    func containsCharacterSet(_ set: CharacterSet) -> Bool {
-        for character in self {
-            let characterSet = CharacterSet(charactersIn: String(character))
-            if set.isSuperset(of: characterSet) == true { return true }
-        }
-        return false
+    func isEmailFormat() -> Bool {
+        let emailPattern: String = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        let regex = try? NSRegularExpression(pattern: emailPattern, options: [])
+        let matchNumber = regex?.numberOfMatches(in: self, options: [], range: NSRange(self.startIndex..., in: self))
+        return matchNumber != 0
+    }
+    
+    func isPasswordFormat() -> Bool {
+        let digitFormat: String    = "[0-9]"
+        let alphabetFormat: String = "[a-zA-Z]"
+        
+        let digitRegex = try? NSRegularExpression(pattern: digitFormat, options: [])
+        let alphaRegex = try? NSRegularExpression(pattern: alphabetFormat, options: [])
+        
+        return digitRegex?.numberOfMatches(in: self, options: [], range: NSRange(self.startIndex..., in: self)) != 0 &&
+            alphaRegex?.numberOfMatches(in: self, options: [], range: NSRange(self.startIndex..., in: self)) != 0
     }
     
 }

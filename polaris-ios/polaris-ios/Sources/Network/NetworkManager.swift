@@ -13,10 +13,14 @@ class NetworkManager {
     static func request<T: Codable, U: TargetType>(provider: MoyaProvider<U> = MoyaProvider(session: DefaultSesssion.shared),
                                                    apiType: U) -> Single<T> {
         return Single<T>.create { single in
-            provider.request(apiType) { result in
+            let request = provider.request(apiType) { result in
                 switch result {
                 case .success(let response):
-                    guard self.isProcessableResponse(response) == true else { return }
+                    if let polarisError = response.polarisErrorModel?.polarisError {
+                        self.handlePolarisError(polarisError)
+                        single(.failure(polarisError))
+                        return
+                    }
                     
                     do {
                         guard let resultData = try response.mapString().data(using: .utf8) else {
@@ -34,13 +38,31 @@ class NetworkManager {
                 }
             }
             
-            return Disposables.create()
+            return Disposables.create { request.cancel() }
         }
-        
+        .retry { errorObservable -> Observable<Int> in
+            return errorObservable.flatMap { error -> Observable<Int> in
+                let polarisError = error as? PolarisErrorModel.PolarisError
+                if polarisError == .expiredToken {
+                    return Observable<Int>.timer(.seconds(1), scheduler: MainScheduler.instance)
+                }
+                return Observable.error(error)
+            }
+        }
     }
     
-    private static func isProcessableResponse(_ response: Moya.Response) -> Bool {
-        // TODO: 서버 데이터 타입보고 에러 코드 전역적으로 처리하기 위한 메소드
-        return true
+    private static func handlePolarisError(_ polarisError: PolarisErrorModel.PolarisError) {
+        if case .expiredRefreshToken = polarisError { self.showLoginViewController() }
     }
+    
+}
+
+extension NetworkManager {
+    
+    private static func showLoginViewController() {
+        guard let loginViewController = LoginVC.instantiateFromStoryboard(StoryboardName.intro) else { return }
+        UIApplication.shared.windows
+            .filter({ $0.isKeyWindow }).first?.rootViewController = loginViewController
+    }
+    
 }

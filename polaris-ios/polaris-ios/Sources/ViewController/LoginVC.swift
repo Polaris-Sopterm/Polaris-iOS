@@ -25,7 +25,7 @@ class LoginVC: UIViewController {
         self.setupObserver()
         self.addKeyboardDismissTapGesture()
         self.bindTextFields()
-        self.bindSignupButton()
+        self.bindButtons()
         self.observeProceedAbleLogin()
     }
     
@@ -155,10 +155,17 @@ class LoginVC: UIViewController {
             .disposed(by: self.disposeBag)
     }
     
-    private func bindSignupButton() {
+    private func bindButtons() {
         self.signupButton.rx.tap
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
                 self?.presentSignup()
+            })
+            .disposed(by: self.disposeBag)
+        
+        self.loginButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.requestLogin()
             })
             .disposed(by: self.disposeBag)
     }
@@ -166,6 +173,7 @@ class LoginVC: UIViewController {
     private func observeProceedAbleLogin() {
         self.viewModel.proceedAbleSubject
             .distinctUntilChanged()
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] isProceed in
                 guard let self = self else { return }
                 
