@@ -26,7 +26,7 @@ class LoginVC: UIViewController {
         self.addKeyboardDismissTapGesture()
         self.bindTextFields()
         self.bindButtons()
-        self.observeProceedAbleLogin()
+        self.observeViewModel()
     }
     
     override func viewDidLayoutSubviews() {
@@ -170,7 +170,7 @@ class LoginVC: UIViewController {
             .disposed(by: self.disposeBag)
     }
     
-    private func observeProceedAbleLogin() {
+    private func observeViewModel() {
         self.viewModel.proceedAbleSubject
             .distinctUntilChanged()
             .observe(on: MainScheduler.instance)
@@ -179,6 +179,14 @@ class LoginVC: UIViewController {
                 
                 if isProceed == true { self.loginButton.enable = true  }
                 else                 { self.loginButton.enable = false }
+            })
+            .disposed(by: self.disposeBag)
+        
+        self.viewModel.completeLoginSubject
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: {
+                guard let mainSceneVC = MainSceneVC.instantiateFromStoryboard(StoryboardName.mainSceneVC) else { return }
+                UIApplication.shared.windows.filter({ $0.isKeyWindow }).first?.rootViewController = mainSceneVC
             })
             .disposed(by: self.disposeBag)
     }

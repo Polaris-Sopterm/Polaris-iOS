@@ -10,6 +10,7 @@ import Moya
 import RxSwift
 
 class NetworkManager {
+    
     static func request<T: Codable, U: TargetType>(provider: MoyaProvider<U> = MoyaProvider(session: DefaultSesssion.shared),
                                                    apiType: U) -> Single<T> {
         return Single<T>.create { single in
@@ -52,14 +53,22 @@ class NetworkManager {
     }
     
     private static func handlePolarisError(_ polarisError: PolarisErrorModel.PolarisError) {
-        if case .expiredRefreshToken = polarisError { self.showLoginViewController() }
+        switch polarisError {
+        case .expiredToken:        self.handleExpiredAccessTokenError()
+        case .expiredRefreshToken: self.handleExpiredRefreshTokenError()
+        }
     }
     
 }
 
 extension NetworkManager {
     
-    private static func showLoginViewController() {
+    private static func handleExpiredAccessTokenError() {
+        PolarisUserManager.shared.requestAccessTokenUsingRefreshToken()
+    }
+    
+    private static func handleExpiredRefreshTokenError() {
+        PolarisUserManager.shared.resetUserInfo()
         guard let loginViewController = LoginVC.instantiateFromStoryboard(StoryboardName.intro) else { return }
         UIApplication.shared.windows
             .filter({ $0.isKeyWindow }).first?.rootViewController = loginViewController

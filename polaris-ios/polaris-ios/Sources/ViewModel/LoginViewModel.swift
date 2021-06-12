@@ -13,7 +13,8 @@ class LoginViewModel {
     let idSubject = BehaviorSubject<String>(value: "")
     let pwSubject = BehaviorSubject<String>(value: "")
     
-    let proceedAbleSubject = BehaviorSubject<Bool>(value: false)
+    let proceedAbleSubject   = BehaviorSubject<Bool>(value: false)
+    let completeLoginSubject = PublishSubject<Void>()
     
     init() {
         Observable.combineLatest(self.idSubject, self.pwSubject)
@@ -37,9 +38,8 @@ class LoginViewModel {
         let userAPI = UserAPI.auth(email: id, password: password)
         NetworkManager.request(apiType: userAPI)
             .subscribe(onSuccess: { (authModel: AuthModel) in
-                #warning("다음 화면 넘어가는 로직")
-                print(authModel)
                 PolarisUserManager.shared.updateAuthToken(authModel.accessToken, authModel.refreshToken)
+                self.completeLoginSubject.onNext(())
             }, onFailure: { error in
                 print(error.localizedDescription)
             })
