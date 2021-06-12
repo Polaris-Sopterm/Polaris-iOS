@@ -136,6 +136,26 @@ class LoginVC: UIViewController {
     }
     
     private func bindTextFields() {
+        Observable.merge([self.idTextField.rx.controlEvent(.editingDidBegin).asObservable(),
+                          self.pwTextField.rx.controlEvent(.editingDidBegin).asObservable()])
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                print("Here")
+                self.idTextContainerView.borderColor = self.idTextField.isFirstResponder ? .white : .clear
+                self.pwTextContainerView.borderColor = self.pwTextField.isFirstResponder ? .white : .clear
+            })
+            .disposed(by: self.disposeBag)
+        
+        Observable.merge([self.idTextField.rx.controlEvent(.editingDidEnd).asObservable(),
+                          self.pwTextField.rx.controlEvent(.editingDidEnd).asObservable()])
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                print("didEnt")
+                self.idTextContainerView.borderColor = self.idTextField.isFirstResponder ? .white : .clear
+                self.pwTextContainerView.borderColor = self.pwTextField.isFirstResponder ? .white : .clear
+            })
+            .disposed(by: self.disposeBag)
+        
         self.idTextField.rx.text.orEmpty
             .distinctUntilChanged()
             .subscribe(onNext: { [weak self] text in
@@ -212,7 +232,9 @@ class LoginVC: UIViewController {
     
     @IBOutlet private weak var textFieldTopConstraint: NSLayoutConstraint!
     @IBOutlet private weak var idTextField: UITextField!
+    @IBOutlet private weak var idTextContainerView: UIView!
     @IBOutlet private weak var pwTextField: UITextField!
+    @IBOutlet private weak var pwTextContainerView: UIView!
     
     @IBOutlet private weak var loginButton: PolarisButton!
     @IBOutlet private weak var signupButton: UIButton!

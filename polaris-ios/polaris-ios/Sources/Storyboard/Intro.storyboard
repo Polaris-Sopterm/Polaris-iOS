@@ -69,6 +69,12 @@
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                         <real key="value" value="16"/>
                                                     </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dBT-VT-8hO">
@@ -99,6 +105,12 @@
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                         <real key="value" value="16"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
@@ -199,9 +211,11 @@
                     <connections>
                         <outlet property="backgroundView" destination="uko-LO-bxn" id="YHD-gX-cnc"/>
                         <outlet property="forgetPwButton" destination="nQs-v3-LhB" id="Aew-DE-NrW"/>
+                        <outlet property="idTextContainerView" destination="X2x-Zd-TXb" id="JhY-2s-G7Z"/>
                         <outlet property="idTextField" destination="bgf-EA-j31" id="WXh-AH-M3Y"/>
                         <outlet property="loginButton" destination="gYj-fE-9Q7" id="pwY-wq-0UO"/>
                         <outlet property="logoTopConstraint" destination="s8d-Lo-e6T" id="u3K-fc-qql"/>
+                        <outlet property="pwTextContainerView" destination="dBT-VT-8hO" id="lyc-Sb-kKr"/>
                         <outlet property="pwTextField" destination="Flx-1J-ABo" id="sfM-HW-MKF"/>
                         <outlet property="signupButton" destination="Osy-cj-gkP" id="xdF-Sq-Peu"/>
                         <outlet property="textFieldTopConstraint" destination="n59-9T-tY7" id="9PA-oH-7Ec"/>
