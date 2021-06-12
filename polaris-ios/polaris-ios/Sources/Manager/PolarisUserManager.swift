@@ -19,7 +19,7 @@ class PolarisUserManager {
     var hasRefreshToken: Bool { return self.refreshToken != nil }
     
     func updateAuthToken(_ token: String, _ refreshToken: String) {
-        self.authToken = token
+        self.authToken    = token
         self.refreshToken = refreshToken
     }
     
