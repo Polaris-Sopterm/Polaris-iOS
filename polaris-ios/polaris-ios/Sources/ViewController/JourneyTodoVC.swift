@@ -81,6 +81,12 @@ extension JourneyTodoVC: UITableViewDelegate {
         
         return journeyTodoHeaderView
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard self.isBeingDismissed == false else { return }
+        if scrollView.contentOffset.y < -type(of: self).navigationHeight-10 { self.dismissFromTop() }
+    }
+    
 }
 
 extension JourneyTodoVC: JourneyTodoHeaderViewDelegate {

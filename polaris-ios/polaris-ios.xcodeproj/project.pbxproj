@@ -84,7 +84,6 @@
 		CE43D05826613D66003126F2 /* MainTodoTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDC5A45263552A700A1B5A9 /* MainTodoTVC.swift */; };
 		CE43D05926613D66003126F2 /* AddTodoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE575F262AD62C00C39358 /* AddTodoVC.swift */; };
 		CE43D05A26613D66003126F2 /* SelectStarItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE574D9B263524140046D20A /* SelectStarItemCollectionViewCell.swift */; };
-		CE43D05B26613D66003126F2 /* SampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE5769262AE47B00C39358 /* SampleViewController.swift */; };
 		CE43D05C26613D66003126F2 /* AddTodoTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE576C262AE6F400C39358 /* AddTodoTextTableViewCell.swift */; };
 		CE43D05D26613D66003126F2 /* TodoStarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7A3BF426394C3400B59C98 /* TodoStarModel.swift */; };
 		CE43D05E26613D66003126F2 /* PolarisMarginTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE5776262BE51C00C39358 /* PolarisMarginTextField.swift */; };
@@ -176,7 +175,6 @@
 		CEEE575D262AD5FA00C39358 /* AddTodo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEEE575C262AD5FA00C39358 /* AddTodo.storyboard */; };
 		CEEE5760262AD62C00C39358 /* AddTodoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE575F262AD62C00C39358 /* AddTodoVC.swift */; };
 		CEEE5766262ADBA200C39358 /* PolarisButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE5765262ADBA200C39358 /* PolarisButton.swift */; };
-		CEEE576A262AE47B00C39358 /* SampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE5769262AE47B00C39358 /* SampleViewController.swift */; };
 		CEEE576E262AE6F400C39358 /* AddTodoTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE576C262AE6F400C39358 /* AddTodoTextTableViewCell.swift */; };
 		CEEE576F262AE6F400C39358 /* AddTodoTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEE576D262AE6F400C39358 /* AddTodoTextTableViewCell.xib */; };
 		CEEE5774262BE1DE00C39358 /* AddTodoTableViewCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE5773262BE1DE00C39358 /* AddTodoTableViewCellProtocol.swift */; };
@@ -307,7 +305,6 @@
 		CEEE575C262AD5FA00C39358 /* AddTodo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddTodo.storyboard; sourceTree = "<group>"; };
 		CEEE575F262AD62C00C39358 /* AddTodoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoVC.swift; sourceTree = "<group>"; };
 		CEEE5765262ADBA200C39358 /* PolarisButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarisButton.swift; sourceTree = "<group>"; };
-		CEEE5769262AE47B00C39358 /* SampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleViewController.swift; sourceTree = "<group>"; };
 		CEEE576C262AE6F400C39358 /* AddTodoTextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoTextTableViewCell.swift; sourceTree = "<group>"; };
 		CEEE576D262AE6F400C39358 /* AddTodoTextTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTodoTextTableViewCell.xib; sourceTree = "<group>"; };
 		CEEE5773262BE1DE00C39358 /* AddTodoTableViewCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoTableViewCellProtocol.swift; sourceTree = "<group>"; };
@@ -671,7 +668,6 @@
 				CEEE574F262A965400C39358 /* HalfModalVC.swift */,
 				CEEE575F262AD62C00C39358 /* AddTodoVC.swift */,
 				CE574DA7263555330046D20A /* AddTodoVC+Delegate.swift */,
-				CEEE5769262AE47B00C39358 /* SampleViewController.swift */,
 				ECA49461262C20DD00CC2EB8 /* MainSceneVC.swift */,
 				CEC19ADE2650E13100DA747C /* JourneyTodoVC.swift */,
 				CE13213C265A1519001E3C1F /* LoginVC.swift */,
@@ -1013,7 +1009,6 @@
 				ECDC5A47263552A700A1B5A9 /* MainTodoTVC.swift in Sources */,
 				CEEE5760262AD62C00C39358 /* AddTodoVC.swift in Sources */,
 				CE574D9D263524140046D20A /* SelectStarItemCollectionViewCell.swift in Sources */,
-				CEEE576A262AE47B00C39358 /* SampleViewController.swift in Sources */,
 				CEEE576E262AE6F400C39358 /* AddTodoTextTableViewCell.swift in Sources */,
 				EC7A3BF526394C3400B59C98 /* TodoStarModel.swift in Sources */,
 				CEEE5777262BE51C00C39358 /* PolarisMarginTextField.swift in Sources */,
@@ -1101,7 +1096,6 @@
 				CE43D05826613D66003126F2 /* MainTodoTVC.swift in Sources */,
 				CE43D05926613D66003126F2 /* AddTodoVC.swift in Sources */,
 				CE43D05A26613D66003126F2 /* SelectStarItemCollectionViewCell.swift in Sources */,
-				CE43D05B26613D66003126F2 /* SampleViewController.swift in Sources */,
 				CE43D05C26613D66003126F2 /* AddTodoTextTableViewCell.swift in Sources */,
 				CE43D05D26613D66003126F2 /* TodoStarModel.swift in Sources */,
 				CE43D05E26613D66003126F2 /* PolarisMarginTextField.swift in Sources */,
@@ -1318,7 +1312,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = W4P5NU5GJ2;
+				DEVELOPMENT_TEAM = AKW8XUH283;
 				INFOPLIST_FILE = "polaris-ios/polaris-ios.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1342,7 +1336,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = W4P5NU5GJ2;
+				DEVELOPMENT_TEAM = AKW8XUH283;
 				INFOPLIST_FILE = "polaris-ios/polaris-ios.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (

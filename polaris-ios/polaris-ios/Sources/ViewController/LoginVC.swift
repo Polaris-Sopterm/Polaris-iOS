@@ -26,7 +26,7 @@ class LoginVC: UIViewController {
         self.addKeyboardDismissTapGesture()
         self.bindTextFields()
         self.bindButtons()
-        self.observeProceedAbleLogin()
+        self.observeViewModel()
     }
     
     override func viewDidLayoutSubviews() {
@@ -136,6 +136,26 @@ class LoginVC: UIViewController {
     }
     
     private func bindTextFields() {
+        Observable.merge([self.idTextField.rx.controlEvent(.editingDidBegin).asObservable(),
+                          self.pwTextField.rx.controlEvent(.editingDidBegin).asObservable()])
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                print("Here")
+                self.idTextContainerView.borderColor = self.idTextField.isFirstResponder ? .white : .clear
+                self.pwTextContainerView.borderColor = self.pwTextField.isFirstResponder ? .white : .clear
+            })
+            .disposed(by: self.disposeBag)
+        
+        Observable.merge([self.idTextField.rx.controlEvent(.editingDidEnd).asObservable(),
+                          self.pwTextField.rx.controlEvent(.editingDidEnd).asObservable()])
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                print("didEnt")
+                self.idTextContainerView.borderColor = self.idTextField.isFirstResponder ? .white : .clear
+                self.pwTextContainerView.borderColor = self.pwTextField.isFirstResponder ? .white : .clear
+            })
+            .disposed(by: self.disposeBag)
+        
         self.idTextField.rx.text.orEmpty
             .distinctUntilChanged()
             .subscribe(onNext: { [weak self] text in
@@ -170,7 +190,7 @@ class LoginVC: UIViewController {
             .disposed(by: self.disposeBag)
     }
     
-    private func observeProceedAbleLogin() {
+    private func observeViewModel() {
         self.viewModel.proceedAbleSubject
             .distinctUntilChanged()
             .observe(on: MainScheduler.instance)
@@ -179,6 +199,14 @@ class LoginVC: UIViewController {
                 
                 if isProceed == true { self.loginButton.enable = true  }
                 else                 { self.loginButton.enable = false }
+            })
+            .disposed(by: self.disposeBag)
+        
+        self.viewModel.completeLoginSubject
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: {
+                guard let mainSceneVC = MainSceneVC.instantiateFromStoryboard(StoryboardName.mainSceneVC) else { return }
+                UIApplication.shared.windows.filter({ $0.isKeyWindow }).first?.rootViewController = mainSceneVC
             })
             .disposed(by: self.disposeBag)
     }
@@ -204,7 +232,9 @@ class LoginVC: UIViewController {
     
     @IBOutlet private weak var textFieldTopConstraint: NSLayoutConstraint!
     @IBOutlet private weak var idTextField: UITextField!
+    @IBOutlet private weak var idTextContainerView: UIView!
     @IBOutlet private weak var pwTextField: UITextField!
+    @IBOutlet private weak var pwTextContainerView: UIView!
     
     @IBOutlet private weak var loginButton: PolarisButton!
     @IBOutlet private weak var signupButton: UIButton!

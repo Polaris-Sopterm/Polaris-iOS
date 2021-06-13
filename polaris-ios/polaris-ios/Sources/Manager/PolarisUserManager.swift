@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RxSwift
 
 class PolarisUserManager {
     
@@ -18,7 +19,7 @@ class PolarisUserManager {
     var hasRefreshToken: Bool { return self.refreshToken != nil }
     
     func updateAuthToken(_ token: String, _ refreshToken: String) {
-        self.authToken = token
+        self.authToken    = token
         self.refreshToken = refreshToken
     }
     
@@ -26,5 +27,19 @@ class PolarisUserManager {
         self.authToken    = nil
         self.refreshToken = nil
     }
+    
+    func requestAccessTokenUsingRefreshToken() {
+        guard let refreshToken = self.refreshToken else { return }
+        
+        let reauthAPI = UserAPI.reauth(refreshToken: refreshToken)
+        NetworkManager.request(apiType: reauthAPI).subscribe(onSuccess: { (authModel: AuthModel) in
+            self.updateAuthToken(authModel.accessToken, authModel.refreshToken)
+        }, onFailure: { error in
+            print(error.localizedDescription)
+        })
+        .disposed(by: self.disposeBag)
+    }
+    
+    private let disposeBag = DisposeBag()
     
 }
