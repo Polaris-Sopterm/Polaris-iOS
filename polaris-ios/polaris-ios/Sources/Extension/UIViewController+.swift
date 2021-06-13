@@ -51,5 +51,24 @@ extension UIViewController {
         animation(keyboardFrame, keyboardDuration)
     }
     
+    func presentFromBottom(_ viewController: UIViewController) {
+        viewController.modalPresentationStyle = .overFullScreen
+        let transition = CATransition()
+        transition.duration = 0.5
+        transition.type = .reveal
+        transition.subtype = .fromTop
+        self.view.window?.layer.add(transition, forKey: kCATransition)
+        self.present(viewController, animated: false)
+    }
+    
+    func dismissFromTop() {
+        let transition = CATransition()
+        transition.duration = 0.5
+        transition.type = .moveIn
+        transition.subtype = .fromBottom
+        self.view.window?.layer.add(transition, forKey: kCATransition)
+        self.dismiss(animated: false)
+    }
+    
 }
 

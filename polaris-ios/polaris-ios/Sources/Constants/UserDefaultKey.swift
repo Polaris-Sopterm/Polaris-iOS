@@ -9,4 +9,5 @@ import Foundation
 
 struct UserDefaultsKey {
     static let auth = "authrorication"
+    static let refresh = "refreshToken"
 }

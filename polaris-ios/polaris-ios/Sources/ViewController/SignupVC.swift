@@ -18,8 +18,8 @@ class SignupVC: UIViewController {
         self.adjustTopConstraint()
         self.setupTextFields()
         self.bindCloseButton()
-        self.observeInputState()
-        self.observeValidateInputs()
+        self.observeStepSignup()
+        self.observeValidation()
         self.observeCompleteSignup()
     }
     
@@ -43,57 +43,67 @@ class SignupVC: UIViewController {
         self.closeButtonTopConstraint.constant = defaultTopConstraint + DeviceInfo.topSafeAreaInset
     }
     
-    private func observeInputState() {
+    private func observeStepSignup() {
         self.viewModel.stepRelay
             .distinctUntilChanged()
-            .subscribe(onNext: { [weak self] inputState in
+            .subscribe(onNext: { [weak self] step in
                 guard let self = self else { return }
                 
-                self.updateUI(as: inputState)
+                self.updateUI(as: step)
             })
             .disposed(by: self.disposeBag)
     }
     
-    private func observeValidateInputs() {
-        var isFirst: Bool = true
-        
-        self.viewModel.validateIdSubejct
+    private func observeValidation() {
+        self.viewModel.idDuplicatedValidRelay
             .distinctUntilChanged()
-            .subscribe(onNext: { [weak self] validate in
-                guard let self = self else { return }
-                
-                self.updateIdValidateUI(as: validate)
-                
-                guard isFirst == false else { isFirst = false; return }
-                UIView.animate(withDuration: 0.3) { [weak self] in self?.view.layoutIfNeeded() }
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { validation in
+                self.idDuplicatedValidateImageView.image = validation ? #imageLiteral(resourceName: "icnPass") : #imageLiteral(resourceName: "icnError")
             })
             .disposed(by: self.disposeBag)
         
-        self.viewModel.validatePwSubject
+        self.viewModel.idFormatValidRelay
             .distinctUntilChanged()
-            .subscribe(onNext: { [weak self] validate in
-                guard let self = self else { return }
-                
-                self.updatePwValidateUI(as: validate)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { validation in
+                self.idFormatValidateImageView.image = validation ? #imageLiteral(resourceName: "icnPass") : #imageLiteral(resourceName: "icnError")
             })
             .disposed(by: self.disposeBag)
         
-        self.viewModel.validateNicknameSubject
+        self.viewModel.pwFormatValidRelay
             .distinctUntilChanged()
-            .subscribe(onNext: { [weak self] validate in
-                guard let self = self else { return }
-                
-                self.updateNicknameValidateUI(as: validate)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { validation in
+                self.pwFormatValidateImageView.image = validation ? #imageLiteral(resourceName: "icnPass") : #imageLiteral(resourceName: "icnError")
+            })
+            .disposed(by: self.disposeBag)
+        
+        self.viewModel.pwCountValidRelay
+            .distinctUntilChanged()
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { validation in
+                self.pwCountValidateImageView.image = validation ? #imageLiteral(resourceName: "icnPass") : #imageLiteral(resourceName: "icnError")
+            })
+            .disposed(by: self.disposeBag)
+        
+        self.viewModel.nicknameCountValidRelay
+            .distinctUntilChanged()
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { validation in
+                self.nicknameValidateImageView.image = validation ? #imageLiteral(resourceName: "icnPass") : #imageLiteral(resourceName: "icnError")
             })
             .disposed(by: self.disposeBag)
     }
     
     private func observeCompleteSignup() {
         self.viewModel.completeSignupSubject
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { isComplete in
                 if isComplete == true {
-                    #warning("회원 가입 완료")
-                } else {
+                    let popupView: TermsOfServiceView? = UIView.fromNib()
+                    popupView?.completion = { [weak self] in self?.viewModel.requestSignup() }
+                    popupView?.presentPopupView(from: self)
                 }
             })
             .disposed(by: self.disposeBag)
@@ -101,6 +111,7 @@ class SignupVC: UIViewController {
     
     private func bindCloseButton() {
         self.closeButton.rx.tap
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
                 self?.dismiss(animated: true, completion: nil)
             })
@@ -122,43 +133,18 @@ class SignupVC: UIViewController {
         UIView.animate(withDuration: 0.35, delay: 0, options: [.curveEaseInOut]) { self.view.layoutIfNeeded() }
     }
     
-    private func updateIdValidateUI(as state: IdValidateState) {
-        switch state {
-        case .validation(let validate): self.idValidateImageView.image = validate ? #imageLiteral(resourceName: "icnPass") : #imageLiteral(resourceName: "icnError")
-        case .empty: break
+    private func updateValidationViewHiddenState(state: InputOptions, input: String) {
+        if state == .id {
+            self.idFormatValidateView.isHidden     = input.isEmpty
+            self.idDuplicatedValidateView.isHidden = input.isEmpty
+        } else if state == .pw {
+            self.pwFormatValidateView.isHidden      = input.isEmpty
+            self.pwCountValidateView.isHidden      = input.isEmpty
+        } else {
+            self.nicknameValidateView.isHidden     = input.isEmpty
         }
         
-        self.idValidateView.isHidden = state == .empty
-    }
-    
-    private func updatePwValidateUI(as state: PwValidateState) {
-        guard self.viewModel.isFirstStep == false else { return }
-        
-        switch state {
-        case .allValidation(let isAll):
-            self.pwCountValidateImageView.image = isAll ? #imageLiteral(resourceName: "icnPass") : #imageLiteral(resourceName: "icnError")
-            self.pwCombiValidateImageView.image = isAll ? #imageLiteral(resourceName: "icnPass") : #imageLiteral(resourceName: "icnError")
-        case .eachValidation(let invalidType):
-            self.pwCombiValidateImageView.image = (invalidType == .combi) ? #imageLiteral(resourceName: "icnError") : #imageLiteral(resourceName: "icnPass")
-            self.pwCountValidateImageView.image = (invalidType == .count) ? #imageLiteral(resourceName: "icnError") : #imageLiteral(resourceName: "icnPass")
-        default: break
-        }
-        
-        self.pwCombiValidateView.isHidden = state == .empty
-        self.pwCountValidateView.isHidden = state == .empty
         UIView.animate(withDuration: 0.3) { self.view.layoutIfNeeded() }
-    }
-    
-    private func updateNicknameValidateUI(as state: NicknameValidateState) {
-        guard self.viewModel.isFirstStep == false else { return }
-        
-        switch state {
-        case .validation(let validate): self.nicknameValidateImageView.image = validate ? #imageLiteral(resourceName: "icnPass") : #imageLiteral(resourceName: "icnError")
-        case .empty: break
-        }
-        
-        self.nicknameValidateView.isHidden = state == .empty
-        UIView.animate(withDuration: 0.3) { [weak self] in self?.view.layoutIfNeeded() }
     }
     
     private var disposeBag = DisposeBag()
@@ -173,16 +159,18 @@ class SignupVC: UIViewController {
     @IBOutlet private weak var idInputContainerView: UIView!
     @IBOutlet private weak var idTextFieldContainerView: UIView!
     private var idTextFieldView: PolarisMarginTextField? = UIView.fromNib()
-    @IBOutlet private weak var idValidateView: UIView!
-    @IBOutlet private weak var idValidateImageView: UIImageView!
+    @IBOutlet private weak var idDuplicatedValidateView: UIView!
+    @IBOutlet private weak var idDuplicatedValidateImageView: UIImageView!
+    @IBOutlet private weak var idFormatValidateView: UIView!
+    @IBOutlet private weak var idFormatValidateImageView: UIImageView!
     
     @IBOutlet private weak var pwInputContainerView: UIView!
     @IBOutlet private weak var pwTextFieldContainerView: UIView!
     private var pwTextFieldView: PolarisMarginTextField? = UIView.fromNib()
     @IBOutlet private weak var pwCountValidateView: UIView!
     @IBOutlet private weak var pwCountValidateImageView: UIImageView!
-    @IBOutlet private weak var pwCombiValidateView: UIView!
-    @IBOutlet private weak var pwCombiValidateImageView: UIImageView!
+    @IBOutlet private weak var pwFormatValidateView: UIView!
+    @IBOutlet private weak var pwFormatValidateImageView: UIImageView!
     
     @IBOutlet private weak var nicknameInputContainerView: UIView!
     @IBOutlet private weak var nicknameTextFieldContainerView: UIView!
@@ -196,37 +184,27 @@ extension SignupVC: PolarisMarginTextFieldDelegate {
     
     func polarisMarginTextField(_ polarisMarginTextField: PolarisMarginTextField, didChangeText: String) {
         if polarisMarginTextField == self.idTextFieldView {
+            self.updateValidationViewHiddenState(state: .id, input: didChangeText)
             self.viewModel.idSubject.onNext(didChangeText)
         } else if polarisMarginTextField == self.pwTextFieldView {
+            self.updateValidationViewHiddenState(state: .pw, input: didChangeText)
             self.viewModel.pwSubject.onNext(didChangeText)
         } else {
+            self.updateValidationViewHiddenState(state: .nickname, input: didChangeText)
             self.viewModel.nicknameSubject.onNext(didChangeText)
         }
     }
     
     func polarisMarginTextFieldDidTapReturn(_ polarisMarginTextField: PolarisMarginTextField) {
-        if polarisMarginTextField == self.idTextFieldView { self.processFirstStep() }
-        else if polarisMarginTextField == self.pwTextFieldView { self.processSecondStep() }
-        else { self.processLastStep() }
-    }
-    
-    private func processFirstStep() {
-        guard self.viewModel.isLastStep == false            else { self.viewModel.confirmCompleteSignup(); return }
-        guard self.viewModel.isProcessableFirstStep == true else { return }
-        self.pwTextFieldView?.becomeKeyboardFirstResponder()
-        self.viewModel.stepRelay.accept(.secondStep)
-    }
-    
-    private func processSecondStep() {
-        guard self.viewModel.isLastStep == false             else { self.viewModel.confirmCompleteSignup(); return }
-        guard self.viewModel.isProcessableSecondStep == true else { return }
-        self.nicknameTextFieldView?.becomeKeyboardFirstResponder()
-        self.viewModel.stepRelay.accept(.lastStep)
-    }
-    
-    private func processLastStep() {
-        guard self.viewModel.isLastStep == true else { return }
-        self.viewModel.confirmCompleteSignup()
+        guard self.viewModel.isLastStep == false else { self.viewModel.processLastStep(); return }
+        
+        if polarisMarginTextField == self.idTextFieldView {
+            self.viewModel.processFirstStep()
+        } else if polarisMarginTextField == self.pwTextFieldView {
+            self.viewModel.processSecondStep()
+        } else {
+            self.viewModel.processLastStep()
+        }
     }
     
 }

@@ -59,6 +59,7 @@ class MainSceneVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setupSwipeGesture()
         self.setUIs()
         self.setStarCollectionView()
         self.setTodoCollectionView()
@@ -184,6 +185,18 @@ class MainSceneVC: UIViewController {
        
     }
 
+    private func setupSwipeGesture() {
+        let swipeGesture       = UISwipeGestureRecognizer()
+        swipeGesture.direction = .up
+        self.view.addGestureRecognizer(swipeGesture)
+        
+        swipeGesture.rx.event.subscribe(onNext: { [weak self] recognizer in
+            guard let self = self else { return }
+            guard let journeyTodoVC = JourneyTodoVC.instantiateFromStoryboard(StoryboardName.journeyTodo) else { return }
+            self.presentFromBottom(journeyTodoVC)
+        })
+        .disposed(by: self.disposeBag)
+    }
 
 }
 

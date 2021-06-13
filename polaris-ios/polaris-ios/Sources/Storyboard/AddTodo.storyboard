@@ -13,7 +13,7 @@
         <!--Sample View Controller-->
         <scene sceneID="eUh-zb-ygY">
             <objects>
-                <viewController storyboardIdentifier="SampleViewController" id="aax-zc-RC4" customClass="SampleViewController" customModule="polaris_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SampleViewController" id="aax-zc-RC4" customClass="SampleViewController" customModule="Polaris" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Z73-I2-ndk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -54,7 +54,7 @@
         <!--Add TodoVC-->
         <scene sceneID="5C9-zQ-jaD">
             <objects>
-                <viewController storyboardIdentifier="AddTodoVC" id="5Dd-ww-2k7" customClass="AddTodoVC" customModule="polaris_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddTodoVC" id="5Dd-ww-2k7" customClass="AddTodoVC" customModule="Polaris" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UgI-fC-jDp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -101,7 +101,7 @@
                                         <rect key="frame" x="0.0" y="69" width="414" height="762"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </tableView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TJC-DY-0Z3" customClass="PolarisButton" customModule="polaris_ios" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TJC-DY-0Z3" customClass="PolarisButton" customModule="Polaris" customModuleProvider="target">
                                         <rect key="frame" x="23" y="740" width="368" height="54"/>
                                         <color key="backgroundColor" name="inactiveBtn"/>
                                         <constraints>
