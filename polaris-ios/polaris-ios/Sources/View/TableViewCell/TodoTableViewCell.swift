@@ -73,20 +73,28 @@ class TodoTableViewCell: MainTableViewCell {
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
                 
-                let currentTab = self.viewModel.currentTab
-                self.viewModel.update(tab: currentTab == .day ? .journey : .day)
+                let currentTab            = self.viewModel.currentTabRelay.value
+                let nextTab: TodoCategory = currentTab == .day ? .journey : .day
+                self.viewModel.currentTabRelay.accept(nextTab)
             })
             .disposed(by: self.disposeBag)
     }
     
     private func observeCategory() {
-        self.viewModel.reloadSubject
+        self.viewModel.currentTabRelay
+            .distinctUntilChanged()
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] in
-                self?.tableView.reloadData()
+            .subscribe(onNext: { [weak self] currentTab in
+                guard let self = self else { return }
+                
+                self.tableView.reloadData()
+                self.updateCategoryButton(as: currentTab)
             })
             .disposed(by: self.disposeBag)
-        
+    }
+    
+    private func updateCategoryButton(as category: TodoCategory) {
+        self.categoryButton.setTitle(category.title, for: .normal)
     }
     
     private static var navigationHeight: CGFloat { return 51 + DeviceInfo.topSafeAreaInset }
@@ -112,7 +120,7 @@ extension TodoTableViewCell: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let currentTab = self.viewModel.currentTab
+        let currentTab = self.viewModel.currentTabRelay.value
         guard let todoCell = tableView.dequeueReusableCell(cell: currentTab.cellType, forIndexPath: indexPath) else { return UITableViewCell() }
         
         return todoCell
@@ -123,23 +131,29 @@ extension TodoTableViewCell: UITableViewDataSource {
 extension TodoTableViewCell: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let currentCellType = self.viewModel.currentTab.cellType
+        let currentCellType = self.viewModel.currentTabRelay.value.cellType
         return currentCellType.cellHeight
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return JourneyTodoHeaderView.headerHeight
+        let currentHeaderType = self.viewModel.currentTabRelay.value.headerType
+        return currentHeaderType.headerHeight
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let journeyTodoHeaderView: JourneyTodoHeaderView = UIView.fromNib() else { return nil }
+        let currentHeaderType = self.viewModel.currentTabRelay.value
+        var todoHeaderView: TodoHeaderView
         
-        if section == 0 { journeyTodoHeaderView.setUI(as: .today) }
-        else            { journeyTodoHeaderView.setUI(as: .other) }
+        if currentHeaderType == .day {
+            guard let dayHeaderView: DayTodoHeaderView = UIView.fromNib() else { return nil }
+            todoHeaderView = dayHeaderView
+        } else {
+            guard let journeyHeaderView: JourneyTodoHeaderView = UIView.fromNib() else { return nil }
+            todoHeaderView = journeyHeaderView
+        }
         
-        journeyTodoHeaderView.delegate = self
-        
-        return journeyTodoHeaderView
+        todoHeaderView.delegate = self
+        return todoHeaderView
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -152,16 +166,17 @@ extension TodoTableViewCell: UITableViewDelegate {
     
 }
 
-extension TodoTableViewCell: JourneyTodoHeaderViewDelegate {
-    func journeyTodoHeaderView(_ journeyTodoHeaderView: JourneyTodoHeaderView, didTapAddTodo date: String) {
-        #warning("데이터 대입했을 때, 구현 필요")
-        print(date)
+extension TodoTableViewCell: DayTodoHeaderViewDelegate {
+    func dayTodoHeaderView(_ dayTodoHeaderView: DayTodoHeaderView, didTapAddTodo date: String) {
     }
+    
+    
 }
 
-extension TodoTableViewCell: DayTodoTableViewCellDelegate {
-    func dayTodoTableViewCell(_ journeyTodoTableViewCell: DayTodoTableViewCell, didTapCheck todo: String) {
-        #warning("여기도 처리 코드 필요 아마 API 요청이 될 듯")
-        print("todo")
+extension TodoTableViewCell: JourneyTodoHeaderViewDelegate {
+    func journeyTodoHeaderView(_ journeyTodoHeaderView: JourneyTodoHeaderView, didTapEdit todo: String) {
+    }
+    
+    func journeyTodoHeaderView(_ journeyTodoHeaderView: JourneyTodoHeaderView, didTapAdd todo: String) {
     }
 }

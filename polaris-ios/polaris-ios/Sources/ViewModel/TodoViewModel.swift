@@ -7,10 +7,18 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 enum TodoCategory {
     case day
     case journey
+    
+    var title: String {
+        switch self {
+        case .day:      return "날짜 별 할일 보기"
+        case .journey:  return "여정 별 할일 보기"
+        }
+    }
     
     var cellType: TodoCategoryCell.Type {
         switch self {
@@ -18,16 +26,17 @@ enum TodoCategory {
         case .journey: return JourneyTodoTableViewCell.self
         }
     }
+    
+    var headerType: TodoHeaderView.Type {
+        switch self {
+        case .day:     return DayTodoHeaderView.self
+        case .journey: return DayTodoHeaderView.self
+        }
+    }
 }
 
 class TodoViewModel {
     
-    let reloadSubject = PublishSubject<Void>()
-    
-    func update(tab: TodoCategory) {
-        self.currentTab = tab
-    }
-    
-    private(set) var currentTab: TodoCategory = .day
+    let currentTabRelay = BehaviorRelay<TodoCategory>(value: .day)
     
 }
