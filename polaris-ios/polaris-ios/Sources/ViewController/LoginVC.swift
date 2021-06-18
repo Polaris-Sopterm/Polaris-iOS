@@ -140,7 +140,7 @@ class LoginVC: UIViewController {
                           self.pwTextField.rx.controlEvent(.editingDidBegin).asObservable()])
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
-                print("Here")
+                
                 self.idTextContainerView.borderColor = self.idTextField.isFirstResponder ? .white : .clear
                 self.pwTextContainerView.borderColor = self.pwTextField.isFirstResponder ? .white : .clear
             })
@@ -150,7 +150,7 @@ class LoginVC: UIViewController {
                           self.pwTextField.rx.controlEvent(.editingDidEnd).asObservable()])
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
-                print("didEnt")
+                
                 self.idTextContainerView.borderColor = self.idTextField.isFirstResponder ? .white : .clear
                 self.pwTextContainerView.borderColor = self.pwTextField.isFirstResponder ? .white : .clear
             })

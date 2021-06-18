@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="1017" id="KGk-i7-Jjw" customClass="TodoByDayTableViewCell" customModule="Polaris" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="812"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="812"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="grouped" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="1aO-k7-65Z" customClass="TodoByDayCustomTableView" customModule="Polaris" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="812"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="812" id="v7H-4D-sew"/>
+                        </constraints>
+                    </tableView>
+                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gZR-zT-7Ew">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="95"/>
+                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="fWO-qg-t31">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="95"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9a0-L5-IpN">
+                                    <rect key="frame" x="175" y="54" width="123" height="21"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                    <state key="normal" title="날짜 별 할일 보기" image="icn_dateview">
+                                        <color key="titleColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="9a0-L5-IpN" secondAttribute="bottom" constant="20" id="ENc-O5-ukH"/>
+                                <constraint firstAttribute="trailing" secondItem="9a0-L5-IpN" secondAttribute="trailing" constant="22" id="wlk-Zd-cR6"/>
+                            </constraints>
+                        </view>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="95" id="7sU-Cc-jDR"/>
+                        </constraints>
+                        <blurEffect style="regular"/>
+                    </visualEffectView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="1aO-k7-65Z" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="0jM-fc-uee"/>
+                    <constraint firstAttribute="bottom" secondItem="1aO-k7-65Z" secondAttribute="bottom" id="VpL-tt-YSU"/>
+                    <constraint firstItem="gZR-zT-7Ew" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="XA8-EM-pwZ"/>
+                    <constraint firstItem="1aO-k7-65Z" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Zy2-aX-D4y"/>
+                    <constraint firstAttribute="trailing" secondItem="1aO-k7-65Z" secondAttribute="trailing" id="bwV-Vh-kqG"/>
+                    <constraint firstItem="gZR-zT-7Ew" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="hJ6-U2-yJd"/>
+                    <constraint firstAttribute="trailing" secondItem="gZR-zT-7Ew" secondAttribute="trailing" id="uNy-0P-Nyh"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="navigationHeightConstraint" destination="7sU-Cc-jDR" id="euk-WW-bz4"/>
+                <outlet property="tableView" destination="1aO-k7-65Z" id="nIj-Ob-Vqc"/>
+            </connections>
+            <point key="canvasLocation" x="140.57971014492756" y="258.14732142857144"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="icn_dateview" width="21" height="21"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
