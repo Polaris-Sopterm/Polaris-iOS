@@ -76,7 +76,7 @@
 		CE43D05026613D66003126F2 /* AddTodoTableViewCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE5773262BE1DE00C39358 /* AddTodoTableViewCellProtocol.swift */; };
 		CE43D05126613D66003126F2 /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE574C262A963D00C39358 /* DeviceInfo.swift */; };
 		CE43D05226613D66003126F2 /* MainStarTVCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA4947D262C670000CC2EB8 /* MainStarTVCViewModel.swift */; };
-		CE43D05326613D66003126F2 /* JourneyTodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC19AE9265103AA00DA747C /* JourneyTodoTableViewCell.swift */; };
+		CE43D05326613D66003126F2 /* DayTodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC19AE9265103AA00DA747C /* DayTodoTableViewCell.swift */; };
 		CE43D05426613D66003126F2 /* TodoDateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA494462629729000CC2EB8 /* TodoDateModel.swift */; };
 		CE43D05526613D66003126F2 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE132140265A408E001E3C1F /* LoginViewModel.swift */; };
 		CE43D05626613D66003126F2 /* MainStarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA49474262C461700CC2EB8 /* MainStarModel.swift */; };
@@ -122,11 +122,23 @@
 		CE43D08326613D66003126F2 /* JourneyTodoHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC19AE32650F86100DA747C /* JourneyTodoHeaderView.xib */; };
 		CE43D08426613D66003126F2 /* MainTodoCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECDC5A4C2635530300A1B5A9 /* MainTodoCVC.xib */; };
 		CE43D08526613D66003126F2 /* DropdownItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC48ED3262DCA9100FD887F /* DropdownItemTableViewCell.xib */; };
-		CE43D08626613D66003126F2 /* JourneyTodoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC19AEA265103AA00DA747C /* JourneyTodoTableViewCell.xib */; };
+		CE43D08626613D66003126F2 /* DayTodoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC19AEA265103AA00DA747C /* DayTodoTableViewCell.xib */; };
 		CE43D08726613D66003126F2 /* TodoDateHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECA4943E26284B0B00CC2EB8 /* TodoDateHeaderView.xib */; };
 		CE43D08826613D66003126F2 /* PolarisMarginTextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEE5779262BE54900C39358 /* PolarisMarginTextField.xib */; };
 		CE43D08A26613D66003126F2 /* MainTodoHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECDC5A5B2636A13600A1B5A9 /* MainTodoHeaderView.xib */; };
 		CE43D08B26613D66003126F2 /* MainScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECA4945E262C205C00CC2EB8 /* MainScene.storyboard */; };
+		CE574000267C8E9900665933 /* TodoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE573FFF267C8E9900665933 /* TodoViewModel.swift */; };
+		CE574001267C8E9900665933 /* TodoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE573FFF267C8E9900665933 /* TodoViewModel.swift */; };
+		CE57400E267C903700665933 /* JourneyTodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE57400C267C903700665933 /* JourneyTodoTableViewCell.swift */; };
+		CE57400F267C903700665933 /* JourneyTodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE57400C267C903700665933 /* JourneyTodoTableViewCell.swift */; };
+		CE574010267C903700665933 /* JourneyTodoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE57400D267C903700665933 /* JourneyTodoTableViewCell.xib */; };
+		CE574011267C903700665933 /* JourneyTodoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE57400D267C903700665933 /* JourneyTodoTableViewCell.xib */; };
+		CE574019267CB1B700665933 /* TodoCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE574018267CB1B700665933 /* TodoCellProtocol.swift */; };
+		CE57401A267CB1B700665933 /* TodoCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE574018267CB1B700665933 /* TodoCellProtocol.swift */; };
+		CE57401E267CB4E100665933 /* DayTodoHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE57401D267CB4E100665933 /* DayTodoHeaderView.xib */; };
+		CE57401F267CB4E100665933 /* DayTodoHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE57401D267CB4E100665933 /* DayTodoHeaderView.xib */; };
+		CE574023267CB4FA00665933 /* DayTodoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE574022267CB4FA00665933 /* DayTodoHeaderView.swift */; };
+		CE574024267CB4FA00665933 /* DayTodoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE574022267CB4FA00665933 /* DayTodoHeaderView.swift */; };
 		CE574D97263517B60046D20A /* AddTodoSelectStarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE574D95263517B60046D20A /* AddTodoSelectStarTableViewCell.swift */; };
 		CE574D98263517B60046D20A /* AddTodoSelectStarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE574D96263517B60046D20A /* AddTodoSelectStarTableViewCell.xib */; };
 		CE574D9D263524140046D20A /* SelectStarItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE574D9B263524140046D20A /* SelectStarItemCollectionViewCell.swift */; };
@@ -151,23 +163,21 @@
 		CEA44E62267B398100A05650 /* MainSceneTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA44E5E267B398100A05650 /* MainSceneTableViewCell.xib */; };
 		CEA44E68267B3B8100A05650 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA44E67267B3B8100A05650 /* MainTableViewCell.swift */; };
 		CEA44E69267B3B8100A05650 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA44E67267B3B8100A05650 /* MainTableViewCell.swift */; };
-		CEA44E6E267B3BE300A05650 /* TodoByDayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA44E6C267B3BE300A05650 /* TodoByDayTableViewCell.swift */; };
-		CEA44E6F267B3BE300A05650 /* TodoByDayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA44E6C267B3BE300A05650 /* TodoByDayTableViewCell.swift */; };
-		CEA44E70267B3BE300A05650 /* TodoByDayTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA44E6D267B3BE300A05650 /* TodoByDayTableViewCell.xib */; };
-		CEA44E71267B3BE300A05650 /* TodoByDayTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA44E6D267B3BE300A05650 /* TodoByDayTableViewCell.xib */; };
+		CEA44E6E267B3BE300A05650 /* TodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA44E6C267B3BE300A05650 /* TodoTableViewCell.swift */; };
+		CEA44E6F267B3BE300A05650 /* TodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA44E6C267B3BE300A05650 /* TodoTableViewCell.swift */; };
+		CEA44E70267B3BE300A05650 /* TodoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA44E6D267B3BE300A05650 /* TodoTableViewCell.xib */; };
+		CEA44E71267B3BE300A05650 /* TodoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA44E6D267B3BE300A05650 /* TodoTableViewCell.xib */; };
 		CEAC5990266F9F210092A255 /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAC598F266F9F210092A255 /* AuthModel.swift */; };
 		CEAC5991266F9F210092A255 /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAC598F266F9F210092A255 /* AuthModel.swift */; };
 		CEAC5995266FBEA50092A255 /* PolarisErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAC5994266FBEA50092A255 /* PolarisErrorModel.swift */; };
 		CEAC5996266FBEA50092A255 /* PolarisErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAC5994266FBEA50092A255 /* PolarisErrorModel.swift */; };
 		CEC19AE42650F86100DA747C /* JourneyTodoHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC19AE32650F86100DA747C /* JourneyTodoHeaderView.xib */; };
 		CEC19AE72650F87400DA747C /* JourneyTodoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC19AE62650F87400DA747C /* JourneyTodoHeaderView.swift */; };
-		CEC19AEB265103AA00DA747C /* JourneyTodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC19AE9265103AA00DA747C /* JourneyTodoTableViewCell.swift */; };
-		CEC19AEC265103AA00DA747C /* JourneyTodoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC19AEA265103AA00DA747C /* JourneyTodoTableViewCell.xib */; };
+		CEC19AEB265103AA00DA747C /* DayTodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC19AE9265103AA00DA747C /* DayTodoTableViewCell.swift */; };
+		CEC19AEC265103AA00DA747C /* DayTodoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC19AEA265103AA00DA747C /* DayTodoTableViewCell.xib */; };
 		CEC48ED4262DCA9100FD887F /* DropdownItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC48ED2262DCA9100FD887F /* DropdownItemTableViewCell.swift */; };
 		CEC48ED5262DCA9100FD887F /* DropdownItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC48ED3262DCA9100FD887F /* DropdownItemTableViewCell.xib */; };
 		CEC48ED9262DCD2A00FD887F /* AddTodoDropdownViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC48ED8262DCD2A00FD887F /* AddTodoDropdownViewModel.swift */; };
-		CECC2619267B50F50074C66B /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC2618267B50F50074C66B /* MainViewModel.swift */; };
-		CECC261A267B50F50074C66B /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECC2618267B50F50074C66B /* MainViewModel.swift */; };
 		CEE574D82630422600EA64B7 /* AddTodoDayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE574D62630422600EA64B7 /* AddTodoDayTableViewCell.swift */; };
 		CEE574D92630422600EA64B7 /* AddTodoDayTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE574D72630422600EA64B7 /* AddTodoDayTableViewCell.xib */; };
 		CEE574E926307B4400EA64B7 /* AddTodoDayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE574E826307B4400EA64B7 /* AddTodoDayViewModel.swift */; };
@@ -271,6 +281,12 @@
 		CE207B882661CBC7009A812A /* ServerHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerHost.swift; sourceTree = "<group>"; };
 		CE37CC6C265A7674004F327E /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
 		CE43D09026613D66003126F2 /* Polaris Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Polaris Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE573FFF267C8E9900665933 /* TodoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewModel.swift; sourceTree = "<group>"; };
+		CE57400C267C903700665933 /* JourneyTodoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyTodoTableViewCell.swift; sourceTree = "<group>"; };
+		CE57400D267C903700665933 /* JourneyTodoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JourneyTodoTableViewCell.xib; sourceTree = "<group>"; };
+		CE574018267CB1B700665933 /* TodoCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCellProtocol.swift; sourceTree = "<group>"; };
+		CE57401D267CB4E100665933 /* DayTodoHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DayTodoHeaderView.xib; sourceTree = "<group>"; };
+		CE574022267CB4FA00665933 /* DayTodoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayTodoHeaderView.swift; sourceTree = "<group>"; };
 		CE574D95263517B60046D20A /* AddTodoSelectStarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoSelectStarTableViewCell.swift; sourceTree = "<group>"; };
 		CE574D96263517B60046D20A /* AddTodoSelectStarTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTodoSelectStarTableViewCell.xib; sourceTree = "<group>"; };
 		CE574D9B263524140046D20A /* SelectStarItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectStarItemCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -291,18 +307,17 @@
 		CEA44E5D267B398100A05650 /* MainSceneTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSceneTableViewCell.swift; sourceTree = "<group>"; };
 		CEA44E5E267B398100A05650 /* MainSceneTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainSceneTableViewCell.xib; sourceTree = "<group>"; };
 		CEA44E67267B3B8100A05650 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
-		CEA44E6C267B3BE300A05650 /* TodoByDayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoByDayTableViewCell.swift; sourceTree = "<group>"; };
-		CEA44E6D267B3BE300A05650 /* TodoByDayTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodoByDayTableViewCell.xib; sourceTree = "<group>"; };
+		CEA44E6C267B3BE300A05650 /* TodoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTableViewCell.swift; sourceTree = "<group>"; };
+		CEA44E6D267B3BE300A05650 /* TodoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodoTableViewCell.xib; sourceTree = "<group>"; };
 		CEAC598F266F9F210092A255 /* AuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
 		CEAC5994266FBEA50092A255 /* PolarisErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarisErrorModel.swift; sourceTree = "<group>"; };
 		CEC19AE32650F86100DA747C /* JourneyTodoHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JourneyTodoHeaderView.xib; sourceTree = "<group>"; };
 		CEC19AE62650F87400DA747C /* JourneyTodoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyTodoHeaderView.swift; sourceTree = "<group>"; };
-		CEC19AE9265103AA00DA747C /* JourneyTodoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyTodoTableViewCell.swift; sourceTree = "<group>"; };
-		CEC19AEA265103AA00DA747C /* JourneyTodoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JourneyTodoTableViewCell.xib; sourceTree = "<group>"; };
+		CEC19AE9265103AA00DA747C /* DayTodoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayTodoTableViewCell.swift; sourceTree = "<group>"; };
+		CEC19AEA265103AA00DA747C /* DayTodoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DayTodoTableViewCell.xib; sourceTree = "<group>"; };
 		CEC48ED2262DCA9100FD887F /* DropdownItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownItemTableViewCell.swift; sourceTree = "<group>"; };
 		CEC48ED3262DCA9100FD887F /* DropdownItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DropdownItemTableViewCell.xib; sourceTree = "<group>"; };
 		CEC48ED8262DCD2A00FD887F /* AddTodoDropdownViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoDropdownViewModel.swift; sourceTree = "<group>"; };
-		CECC2618267B50F50074C66B /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		CEE574D62630422600EA64B7 /* AddTodoDayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoDayTableViewCell.swift; sourceTree = "<group>"; };
 		CEE574D72630422600EA64B7 /* AddTodoDayTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTodoDayTableViewCell.xib; sourceTree = "<group>"; };
 		CEE574E826307B4400EA64B7 /* AddTodoDayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoDayViewModel.swift; sourceTree = "<group>"; };
@@ -493,7 +508,7 @@
 				EC7A3BFA2639537A00B59C98 /* MainTodoTVCViewModel.swift */,
 				CE132140265A408E001E3C1F /* LoginViewModel.swift */,
 				CE37CC6C265A7674004F327E /* SignupViewModel.swift */,
-				CECC2618267B50F50074C66B /* MainViewModel.swift */,
+				CE573FFF267C8E9900665933 /* TodoViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -605,6 +620,7 @@
 				CEEE5765262ADBA200C39358 /* PolarisButton.swift */,
 				CEEE5776262BE51C00C39358 /* PolarisMarginTextField.swift */,
 				CE574DC0263589180046D20A /* PolarisToastView.swift */,
+				CE574022267CB4FA00665933 /* DayTodoHeaderView.swift */,
 				CEC19AE62650F87400DA747C /* JourneyTodoHeaderView.swift */,
 				CE8F71A3266BDA4D00D4FDD7 /* TermsOfServiceView.swift */,
 			);
@@ -615,6 +631,7 @@
 			isa = PBXGroup;
 			children = (
 				CEEE5773262BE1DE00C39358 /* AddTodoTableViewCellProtocol.swift */,
+				CE574018267CB1B700665933 /* TodoCellProtocol.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -632,9 +649,10 @@
 				CEC48ED3262DCA9100FD887F /* DropdownItemTableViewCell.xib */,
 				CEE574D72630422600EA64B7 /* AddTodoDayTableViewCell.xib */,
 				CE574D96263517B60046D20A /* AddTodoSelectStarTableViewCell.xib */,
-				CEC19AEA265103AA00DA747C /* JourneyTodoTableViewCell.xib */,
+				CEC19AEA265103AA00DA747C /* DayTodoTableViewCell.xib */,
+				CE57400D267C903700665933 /* JourneyTodoTableViewCell.xib */,
 				CEA44E5E267B398100A05650 /* MainSceneTableViewCell.xib */,
-				CEA44E6D267B3BE300A05650 /* TodoByDayTableViewCell.xib */,
+				CEA44E6D267B3BE300A05650 /* TodoTableViewCell.xib */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -658,6 +676,7 @@
 			children = (
 				CEEE5779262BE54900C39358 /* PolarisMarginTextField.xib */,
 				CE574DBD263588E20046D20A /* PolarisToastView.xib */,
+				CE57401D267CB4E100665933 /* DayTodoHeaderView.xib */,
 				CEC19AE32650F86100DA747C /* JourneyTodoHeaderView.xib */,
 				CE8F719E266BDA3500D4FDD7 /* TermsOfServiceView.xib */,
 			);
@@ -708,10 +727,11 @@
 				ECDC5A45263552A700A1B5A9 /* MainTodoTVC.swift */,
 				ECDC5A552636A0AB00A1B5A9 /* MainTodoContentTVC.swift */,
 				CE574D95263517B60046D20A /* AddTodoSelectStarTableViewCell.swift */,
-				CEC19AE9265103AA00DA747C /* JourneyTodoTableViewCell.swift */,
+				CEC19AE9265103AA00DA747C /* DayTodoTableViewCell.swift */,
+				CE57400C267C903700665933 /* JourneyTodoTableViewCell.swift */,
 				CEA44E5D267B398100A05650 /* MainSceneTableViewCell.swift */,
 				CEA44E67267B3B8100A05650 /* MainTableViewCell.swift */,
-				CEA44E6C267B3BE300A05650 /* TodoByDayTableViewCell.swift */,
+				CEA44E6C267B3BE300A05650 /* TodoTableViewCell.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -824,7 +844,9 @@
 				ECA49419262817D500CC2EB8 /* TodoDate.storyboard in Resources */,
 				CEA44E61267B398100A05650 /* MainSceneTableViewCell.xib in Resources */,
 				CE574D9E263524140046D20A /* SelectStarItemCollectionViewCell.xib in Resources */,
+				CE57401E267CB4E100665933 /* DayTodoHeaderView.xib in Resources */,
 				CE574DBE263588E20046D20A /* PolarisToastView.xib in Resources */,
+				CE574010267C903700665933 /* JourneyTodoTableViewCell.xib in Resources */,
 				ECA49456262B0D0900CC2EB8 /* TodoDateTodayHeaderView.xib in Resources */,
 				CE04A03D262340D1007C98E2 /* Main.storyboard in Resources */,
 				ECDC5A582636A0AB00A1B5A9 /* MainTodoContentTVC.xib in Resources */,
@@ -832,10 +854,10 @@
 				CEC19AE42650F86100DA747C /* JourneyTodoHeaderView.xib in Resources */,
 				ECDC5A4E2635530300A1B5A9 /* MainTodoCVC.xib in Resources */,
 				CEC48ED5262DCA9100FD887F /* DropdownItemTableViewCell.xib in Resources */,
-				CEC19AEC265103AA00DA747C /* JourneyTodoTableViewCell.xib in Resources */,
+				CEC19AEC265103AA00DA747C /* DayTodoTableViewCell.xib in Resources */,
 				ECA4944026284B0B00CC2EB8 /* TodoDateHeaderView.xib in Resources */,
 				CEEE577A262BE54900C39358 /* PolarisMarginTextField.xib in Resources */,
-				CEA44E70267B3BE300A05650 /* TodoByDayTableViewCell.xib in Resources */,
+				CEA44E70267B3BE300A05650 /* TodoTableViewCell.xib in Resources */,
 				ECDC5A5D2636A13600A1B5A9 /* MainTodoHeaderView.xib in Resources */,
 				ECA4945F262C205C00CC2EB8 /* MainScene.storyboard in Resources */,
 			);
@@ -862,7 +884,9 @@
 				CE43D07C26613D66003126F2 /* TodoDate.storyboard in Resources */,
 				CEA44E62267B398100A05650 /* MainSceneTableViewCell.xib in Resources */,
 				CE43D07D26613D66003126F2 /* SelectStarItemCollectionViewCell.xib in Resources */,
+				CE57401F267CB4E100665933 /* DayTodoHeaderView.xib in Resources */,
 				CE43D07E26613D66003126F2 /* PolarisToastView.xib in Resources */,
+				CE574011267C903700665933 /* JourneyTodoTableViewCell.xib in Resources */,
 				CE43D07F26613D66003126F2 /* TodoDateTodayHeaderView.xib in Resources */,
 				CE43D08026613D66003126F2 /* Main.storyboard in Resources */,
 				CE43D08126613D66003126F2 /* MainTodoContentTVC.xib in Resources */,
@@ -870,10 +894,10 @@
 				CE43D08326613D66003126F2 /* JourneyTodoHeaderView.xib in Resources */,
 				CE43D08426613D66003126F2 /* MainTodoCVC.xib in Resources */,
 				CE43D08526613D66003126F2 /* DropdownItemTableViewCell.xib in Resources */,
-				CE43D08626613D66003126F2 /* JourneyTodoTableViewCell.xib in Resources */,
+				CE43D08626613D66003126F2 /* DayTodoTableViewCell.xib in Resources */,
 				CE43D08726613D66003126F2 /* TodoDateHeaderView.xib in Resources */,
 				CE43D08826613D66003126F2 /* PolarisMarginTextField.xib in Resources */,
-				CEA44E71267B3BE300A05650 /* TodoByDayTableViewCell.xib in Resources */,
+				CEA44E71267B3BE300A05650 /* TodoTableViewCell.xib in Resources */,
 				CE43D08A26613D66003126F2 /* MainTodoHeaderView.xib in Resources */,
 				CE43D08B26613D66003126F2 /* MainScene.storyboard in Resources */,
 			);
@@ -974,11 +998,13 @@
 				CEA44E59267B386800A05650 /* MainVC.swift in Sources */,
 				CE04A06A2623528C007C98E2 /* UIViewController+.swift in Sources */,
 				ECDC5A5C2636A13600A1B5A9 /* MainTodoHeaderView.swift in Sources */,
+				CE574023267CB4FA00665933 /* DayTodoHeaderView.swift in Sources */,
 				ECA49489262DC40F00CC2EB8 /* String+.swift in Sources */,
 				CEEE5766262ADBA200C39358 /* PolarisButton.swift in Sources */,
 				CEEE5782262C018F00C39358 /* AddTodoViewModel.swift in Sources */,
 				CEEE5786262C112E00C39358 /* AddTodoFixOnTopTableViewCell.swift in Sources */,
 				CEEE574A262A95BD00C39358 /* UserDefaultWrapper.swift in Sources */,
+				CE574000267C8E9900665933 /* TodoViewModel.swift in Sources */,
 				CE207B892661CBC7009A812A /* ServerHost.swift in Sources */,
 				CEC48ED4262DCA9100FD887F /* DropdownItemTableViewCell.swift in Sources */,
 				ECA4944426296F6E00CC2EB8 /* TodoDateTVCViewModel.swift in Sources */,
@@ -995,14 +1021,15 @@
 				CEF055F32667ED81000E34A0 /* SignupModel.swift in Sources */,
 				CE63050B2667E36E00EBC1D4 /* UserAPI.swift in Sources */,
 				CE04A06E2623595D007C98E2 /* StoryboardName.swift in Sources */,
+				CE57400E267C903700665933 /* JourneyTodoTableViewCell.swift in Sources */,
 				CEC48ED9262DCD2A00FD887F /* AddTodoDropdownViewModel.swift in Sources */,
 				CE04A07526235BD1007C98E2 /* DefaultSession.swift in Sources */,
 				CEEE5746262A958B00C39358 /* UserDefaultKey.swift in Sources */,
+				CE574019267CB1B700665933 /* TodoCellProtocol.swift in Sources */,
 				CEAC5990266F9F210092A255 /* AuthModel.swift in Sources */,
 				ECA49478262C46BB00CC2EB8 /* MainSceneViewModel.swift in Sources */,
 				ECA49470262C2DD200CC2EB8 /* MainStarCVC.swift in Sources */,
 				CE574DA8263555330046D20A /* AddTodoVC+Delegate.swift in Sources */,
-				CECC2619267B50F50074C66B /* MainViewModel.swift in Sources */,
 				CE63050F2667E7BA00EBC1D4 /* NetworkInform.swift in Sources */,
 				CE8F71A4266BDA4D00D4FDD7 /* TermsOfServiceView.swift in Sources */,
 				CEEE5750262A965400C39358 /* HalfModalVC.swift in Sources */,
@@ -1024,8 +1051,8 @@
 				CEEE5774262BE1DE00C39358 /* AddTodoTableViewCellProtocol.swift in Sources */,
 				CEEE574D262A963D00C39358 /* DeviceInfo.swift in Sources */,
 				ECA4947E262C670000CC2EB8 /* MainStarTVCViewModel.swift in Sources */,
-				CEC19AEB265103AA00DA747C /* JourneyTodoTableViewCell.swift in Sources */,
-				CEA44E6E267B3BE300A05650 /* TodoByDayTableViewCell.swift in Sources */,
+				CEC19AEB265103AA00DA747C /* DayTodoTableViewCell.swift in Sources */,
+				CEA44E6E267B3BE300A05650 /* TodoTableViewCell.swift in Sources */,
 				ECA494472629729000CC2EB8 /* TodoDateModel.swift in Sources */,
 				CE132141265A408F001E3C1F /* LoginViewModel.swift in Sources */,
 				CEAC5995266FBEA50092A255 /* PolarisErrorModel.swift in Sources */,
@@ -1065,11 +1092,13 @@
 				CEA44E5A267B386800A05650 /* MainVC.swift in Sources */,
 				CE43D02826613D66003126F2 /* UIViewController+.swift in Sources */,
 				CE43D02926613D66003126F2 /* MainTodoHeaderView.swift in Sources */,
+				CE574024267CB4FA00665933 /* DayTodoHeaderView.swift in Sources */,
 				CE43D02A26613D66003126F2 /* String+.swift in Sources */,
 				CE43D02B26613D66003126F2 /* PolarisButton.swift in Sources */,
 				CE43D02C26613D66003126F2 /* AddTodoViewModel.swift in Sources */,
 				CE43D02D26613D66003126F2 /* AddTodoFixOnTopTableViewCell.swift in Sources */,
 				CE43D02E26613D66003126F2 /* UserDefaultWrapper.swift in Sources */,
+				CE574001267C8E9900665933 /* TodoViewModel.swift in Sources */,
 				CE207B8A2661CBC7009A812A /* ServerHost.swift in Sources */,
 				CE43D02F26613D66003126F2 /* DropdownItemTableViewCell.swift in Sources */,
 				CE43D03026613D66003126F2 /* TodoDateTVCViewModel.swift in Sources */,
@@ -1086,14 +1115,15 @@
 				CEF055F42667ED81000E34A0 /* SignupModel.swift in Sources */,
 				CEF055D22667E9D4000E34A0 /* UserAPI.swift in Sources */,
 				CE43D03926613D66003126F2 /* StoryboardName.swift in Sources */,
+				CE57400F267C903700665933 /* JourneyTodoTableViewCell.swift in Sources */,
 				CE43D03A26613D66003126F2 /* AddTodoDropdownViewModel.swift in Sources */,
 				CE43D03B26613D66003126F2 /* DefaultSession.swift in Sources */,
 				CE43D03C26613D66003126F2 /* UserDefaultKey.swift in Sources */,
+				CE57401A267CB1B700665933 /* TodoCellProtocol.swift in Sources */,
 				CEAC5991266F9F210092A255 /* AuthModel.swift in Sources */,
 				CE43D03D26613D66003126F2 /* MainSceneViewModel.swift in Sources */,
 				CE43D03E26613D66003126F2 /* MainStarCVC.swift in Sources */,
 				CE43D03F26613D66003126F2 /* AddTodoVC+Delegate.swift in Sources */,
-				CECC261A267B50F50074C66B /* MainViewModel.swift in Sources */,
 				CEF055DD2667EA35000E34A0 /* NetworkInform.swift in Sources */,
 				CE8F71A5266BDA4D00D4FDD7 /* TermsOfServiceView.swift in Sources */,
 				CE43D04026613D66003126F2 /* HalfModalVC.swift in Sources */,
@@ -1115,8 +1145,8 @@
 				CE43D05026613D66003126F2 /* AddTodoTableViewCellProtocol.swift in Sources */,
 				CE43D05126613D66003126F2 /* DeviceInfo.swift in Sources */,
 				CE43D05226613D66003126F2 /* MainStarTVCViewModel.swift in Sources */,
-				CE43D05326613D66003126F2 /* JourneyTodoTableViewCell.swift in Sources */,
-				CEA44E6F267B3BE300A05650 /* TodoByDayTableViewCell.swift in Sources */,
+				CE43D05326613D66003126F2 /* DayTodoTableViewCell.swift in Sources */,
+				CEA44E6F267B3BE300A05650 /* TodoTableViewCell.swift in Sources */,
 				CE43D05426613D66003126F2 /* TodoDateModel.swift in Sources */,
 				CE43D05526613D66003126F2 /* LoginViewModel.swift in Sources */,
 				CEAC5996266FBEA50092A255 /* PolarisErrorModel.swift in Sources */,

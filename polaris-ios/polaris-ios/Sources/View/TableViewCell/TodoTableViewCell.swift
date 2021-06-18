@@ -5,9 +5,11 @@
 //  Created by Dongmin on 2021/06/17.
 //
 
+import RxCocoa
+import RxSwift
 import UIKit
 
-class TodoByDayCustomTableView: UITableView, UIGestureRecognizerDelegate {
+class TodoCustomTableView: UITableView, UIGestureRecognizerDelegate {
     
     override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         guard let velocity = (gestureRecognizer as? UIPanGestureRecognizer)?.velocity(in: self) else { return true }
@@ -29,7 +31,7 @@ class TodoByDayCustomTableView: UITableView, UIGestureRecognizerDelegate {
     
 }
 
-class TodoByDayTableViewCell: MainTableViewCell {
+class TodoTableViewCell: MainTableViewCell {
     
     override static var cellHeight: CGFloat { return DeviceInfo.screenHeight }
 
@@ -38,6 +40,8 @@ class TodoByDayTableViewCell: MainTableViewCell {
         self.navigationHeightConstraint.constant = type(of: self).navigationHeight
         self.registerCell()
         self.setupTableView()
+        self.bindButtons()
+        self.observeCategory()
     }
     
     override func prepareForReuse() {
@@ -50,6 +54,7 @@ class TodoByDayTableViewCell: MainTableViewCell {
     }
     
     private func registerCell() {
+        self.tableView.registerCell(cell: DayTodoTableViewCell.self)
         self.tableView.registerCell(cell: JourneyTodoTableViewCell.self)
     }
     
@@ -63,15 +68,40 @@ class TodoByDayTableViewCell: MainTableViewCell {
                                                                      right: 0)
     }
     
+    private func bindButtons() {
+        self.categoryButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                
+                let currentTab = self.viewModel.currentTab
+                self.viewModel.update(tab: currentTab == .day ? .journey : .day)
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
+    private func observeCategory() {
+        self.viewModel.reloadSubject
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] in
+                self?.tableView.reloadData()
+            })
+            .disposed(by: self.disposeBag)
+        
+    }
+    
     private static var navigationHeight: CGFloat { return 51 + DeviceInfo.topSafeAreaInset }
+    
+    private let viewModel  = TodoViewModel()
+    private let disposeBag = DisposeBag()
     
     private weak var superTableView: UITableView?
     @IBOutlet private weak var navigationHeightConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var tableView: TodoByDayCustomTableView!
+    @IBOutlet private weak var tableView: TodoCustomTableView!
+    @IBOutlet private weak var categoryButton: UIButton!
     
 }
 
-extension TodoByDayTableViewCell: UITableViewDataSource {
+extension TodoTableViewCell: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 3
@@ -82,20 +112,19 @@ extension TodoByDayTableViewCell: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        #warning("Test로 2번째만 Check 표시")
-        guard let journeyTodoCell = tableView.dequeueReusableCell(cell: JourneyTodoTableViewCell.self, forIndexPath: indexPath) else { return UITableViewCell() }
+        let currentTab = self.viewModel.currentTab
+        guard let todoCell = tableView.dequeueReusableCell(cell: currentTab.cellType, forIndexPath: indexPath) else { return UITableViewCell() }
         
-        if indexPath.row == 2 { journeyTodoCell.updateUI(as: true) }
-        
-        return journeyTodoCell
+        return todoCell
     }
     
 }
 
-extension TodoByDayTableViewCell: UITableViewDelegate {
+extension TodoTableViewCell: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return JourneyTodoTableViewCell.cellHeight
+        let currentCellType = self.viewModel.currentTab.cellType
+        return currentCellType.cellHeight
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -123,15 +152,15 @@ extension TodoByDayTableViewCell: UITableViewDelegate {
     
 }
 
-extension TodoByDayTableViewCell: JourneyTodoHeaderViewDelegate {
+extension TodoTableViewCell: JourneyTodoHeaderViewDelegate {
     func journeyTodoHeaderView(_ journeyTodoHeaderView: JourneyTodoHeaderView, didTapAddTodo date: String) {
         #warning("데이터 대입했을 때, 구현 필요")
         print(date)
     }
 }
 
-extension TodoByDayTableViewCell: JourneyTodoTableViewCellDelegate {
-    func journeyTodoTableViewCell(_ journeyTodoTableViewCell: JourneyTodoTableViewCell, didTapCheck todo: String) {
+extension TodoTableViewCell: DayTodoTableViewCellDelegate {
+    func dayTodoTableViewCell(_ journeyTodoTableViewCell: DayTodoTableViewCell, didTapCheck todo: String) {
         #warning("여기도 처리 코드 필요 아마 API 요청이 될 듯")
         print("todo")
     }

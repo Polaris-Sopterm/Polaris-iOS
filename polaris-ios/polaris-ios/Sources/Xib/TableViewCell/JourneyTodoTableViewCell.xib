@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -17,55 +18,57 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="63"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icnFixed" translatesAutoresizingMaskIntoConstraints="NO" id="yvm-0y-cLm">
-                        <rect key="frame" x="33" y="16.5" width="9" height="14"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="9" id="XQG-yq-G4H"/>
-                            <constraint firstAttribute="height" constant="14" id="uhu-I2-lfW"/>
-                        </constraints>
-                    </imageView>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="OYn-Hf-al7">
-                        <rect key="frame" x="49" y="13.5" width="101" height="36"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="A4T-kN-sKk">
+                        <rect key="frame" x="48" y="13.5" width="254" height="36"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="메인화면 만들기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ai1-Wr-a0U">
-                                <rect key="frame" x="0.0" y="0.0" width="101" height="19.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="메인화면 완성하기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kEK-qN-V0K">
+                                <rect key="frame" x="0.0" y="0.0" width="254" height="19.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                 <color key="textColor" name="mainText"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="폴라리스" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8g5-4s-DF9">
-                                <rect key="frame" x="0.0" y="22.5" width="101" height="13.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3월 1일 수요일" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j5z-Fu-1NS">
+                                <rect key="frame" x="0.0" y="22.5" width="254" height="13.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="11"/>
                                 <color key="textColor" name="mainText"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                     </stackView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I6I-b7-zGX">
-                        <rect key="frame" x="312" y="22.5" width="18" height="18"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EEY-40-lUa">
+                        <rect key="frame" x="311" y="22.5" width="18" height="18"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="18" id="60T-bD-Cmj"/>
-                            <constraint firstAttribute="height" constant="18" id="zDg-He-Obl"/>
+                            <constraint firstAttribute="height" constant="18" id="eqV-wf-pFV"/>
+                            <constraint firstAttribute="width" constant="18" id="jc6-Uz-IWx"/>
                         </constraints>
                         <state key="normal" image="btnUncheck"/>
                     </button>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icnFixed" translatesAutoresizingMaskIntoConstraints="NO" id="TiT-ke-aPJ">
+                        <rect key="frame" x="33" y="16.5" width="9" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="14" id="cPf-RD-JN4"/>
+                            <constraint firstAttribute="width" constant="9" id="e6U-gJ-NER"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="yvm-0y-cLm" firstAttribute="centerY" secondItem="ai1-Wr-a0U" secondAttribute="centerY" id="6QJ-bP-zdo"/>
-                    <constraint firstItem="OYn-Hf-al7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="49" id="8Is-sQ-RKq"/>
-                    <constraint firstItem="yvm-0y-cLm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="33" id="cIG-qe-y70"/>
-                    <constraint firstAttribute="trailing" secondItem="I6I-b7-zGX" secondAttribute="trailing" constant="45" id="j0z-y6-u9c"/>
-                    <constraint firstItem="OYn-Hf-al7" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="pf3-yW-YoJ"/>
-                    <constraint firstItem="I6I-b7-zGX" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="plZ-qr-il3"/>
+                    <constraint firstItem="EEY-40-lUa" firstAttribute="leading" secondItem="A4T-kN-sKk" secondAttribute="trailing" constant="9" id="7Xc-VZ-cQu"/>
+                    <constraint firstItem="TiT-ke-aPJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="33" id="duM-TN-9fe"/>
+                    <constraint firstItem="EEY-40-lUa" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="fhf-QD-scw"/>
+                    <constraint firstAttribute="trailing" secondItem="EEY-40-lUa" secondAttribute="trailing" constant="46" id="pUX-sM-Ruc"/>
+                    <constraint firstItem="A4T-kN-sKk" firstAttribute="leading" secondItem="TiT-ke-aPJ" secondAttribute="trailing" constant="6" id="t4L-tb-SbN"/>
+                    <constraint firstItem="A4T-kN-sKk" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="tzX-rA-6q7"/>
+                    <constraint firstItem="TiT-ke-aPJ" firstAttribute="centerY" secondItem="kEK-qN-V0K" secondAttribute="centerY" id="wXK-Oy-j53"/>
                 </constraints>
             </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="checkButton" destination="I6I-b7-zGX" id="Svk-VL-O2n"/>
-                <outlet property="fixImageView" destination="yvm-0y-cLm" id="HsW-MR-XMU"/>
-                <outlet property="subTitleLabel" destination="8g5-4s-DF9" id="Jyc-ff-Ow2"/>
-                <outlet property="titleLabel" destination="ai1-Wr-a0U" id="O4F-Na-Dzw"/>
+                <outlet property="checkButton" destination="EEY-40-lUa" id="wGT-P4-2E0"/>
+                <outlet property="dayLabel" destination="j5z-Fu-1NS" id="Kpe-Dz-LHH"/>
+                <outlet property="fixedImageView" destination="TiT-ke-aPJ" id="a1T-W5-DL5"/>
+                <outlet property="todoLabel" destination="kEK-qN-V0K" id="yfP-pf-nKC"/>
             </connections>
-            <point key="canvasLocation" x="-21.014492753623191" y="140.95982142857142"/>
+            <point key="canvasLocation" x="139.85507246376812" y="32.477678571428569"/>
         </tableViewCell>
     </objects>
     <resources>

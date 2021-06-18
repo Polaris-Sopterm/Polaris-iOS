@@ -29,7 +29,6 @@ class MainVC: UIViewController {
     }
     
     private let disposeBag = DisposeBag()
-    private let viewModel  = MainViewModel()
     
     @IBOutlet private weak var tableView: UITableView!
     

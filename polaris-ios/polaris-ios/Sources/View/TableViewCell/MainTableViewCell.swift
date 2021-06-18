@@ -13,7 +13,7 @@ enum MainSceneCellType: Int, CaseIterable {
     var cellType: MainTableViewCell.Type {
         switch self {
         case .main:      return MainSceneTableViewCell.self
-        case .todoByDay: return TodoByDayTableViewCell.self
+        case .todoByDay: return TodoTableViewCell.self
         }
     }
 }

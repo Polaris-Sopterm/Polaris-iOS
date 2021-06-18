@@ -9,15 +9,16 @@ import RxCocoa
 import RxSwift
 import UIKit
 
-protocol JourneyTodoHeaderViewDelegate: AnyObject {
+protocol JourneyTodoHeaderViewDelegate: TodoHeaderViewDelegate {
     func journeyTodoHeaderView(_ journeyTodoHeaderView: JourneyTodoHeaderView, didTapAddTodo date: String)
 }
 
-class JourneyTodoHeaderView: UIView {
+class JourneyTodoHeaderView: TodoHeaderView {
     
-    static var headerHeight: CGFloat = (58 * screenRatio) + (2 * verticalInset)
-    
-    weak var delegate: JourneyTodoHeaderViewDelegate?
+    override static var headerHeight: CGFloat { return (58 * screenRatio) + (2 * verticalInset) }
+    override weak var delegate: TodoHeaderViewDelegate? {
+        didSet { self._delegate = self.delegate as? JourneyTodoHeaderViewDelegate }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -47,7 +48,7 @@ class JourneyTodoHeaderView: UIView {
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
                 #warning("여기에 AddTodo 하는 날짜 넘기는 코드 필요")
-                self.delegate?.journeyTodoHeaderView(self, didTapAddTodo: "")
+                self._delegate?.journeyTodoHeaderView(self, didTapAddTodo: "")
             })
             .disposed(by: self.disposeBag)
     }
@@ -56,6 +57,7 @@ class JourneyTodoHeaderView: UIView {
     private static let screenRatio: CGFloat   = DeviceInfo.screenWidth / 375
     
     private var disposeBag = DisposeBag()
+    private weak var _delegate: JourneyTodoHeaderViewDelegate?
     
     @IBOutlet private weak var backgroundView: UIView!
     @IBOutlet private weak var dayLabel: UILabel!
