@@ -2,96 +2,61 @@
 //  JourneyTodoHeaderView.swift
 //  polaris-ios
 //
-//  Created by USER on 2021/05/16.
+//  Created by Dongmin on 2021/06/18.
 //
 
 import RxCocoa
 import RxSwift
 import UIKit
 
-protocol JourneyTodoHeaderViewDelegate: AnyObject {
-    func journeyTodoHeaderView(_ journeyTodoHeaderView: JourneyTodoHeaderView, didTapAddTodo date: String)
+protocol JourneyTodoHeaderViewDelegate: TodoHeaderViewDelegate {
+    func journeyTodoHeaderView(_ journeyTodoHeaderView: JourneyTodoHeaderView, didTapEdit todo: String)
+    func journeyTodoHeaderView(_ journeyTodoHeaderView: JourneyTodoHeaderView, didTapAdd todo: String)
 }
 
-class JourneyTodoHeaderView: UIView {
-    
-    static var headerHeight: CGFloat = (58 * screenRatio) + (2 * verticalInset)
-    
-    weak var delegate: JourneyTodoHeaderViewDelegate?
+class JourneyTodoHeaderView: TodoHeaderView {
+
+    override static var headerHeight: CGFloat { return 85 * screenRatio }
+    override weak var delegate: TodoHeaderViewDelegate? {
+        didSet { self._delegate = self.delegate as? JourneyTodoHeaderViewDelegate }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.bindAddButton()
+        self.bindButtons()
     }
     
-    func setUI(as headerType: HeaderType) {
-        self.effectImageView.image          = headerType.effectImage
-        self.dayLabel.textColor             = headerType.textColor
-        self.backgroundView.backgroundColor = headerType.backgroundColor
-        
-        switch headerType {
-        case .today:
-            self.effectTrailingConstraint.constant = 29
-            self.effectWidthConstraint.constant    = 166 * type(of: self).screenRatio
-        case .other:
-            self.effectTrailingConstraint.constant = 0
-            self.effectWidthConstraint.constant    = 246 * type(of: self).screenRatio
-        }
-        
-        self.layoutIfNeeded()
-    }
-    
-    private func bindAddButton() {
-        self.addButton.rx.tap
-            .throttle(.milliseconds(500), latest: false, scheduler: MainScheduler.instance)
+    private func bindButtons() {
+        self.editButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
-                #warning("여기에 AddTodo 하는 날짜 넘기는 코드 필요")
-                self.delegate?.journeyTodoHeaderView(self, didTapAddTodo: "")
+                self._delegate?.journeyTodoHeaderView(self, didTapEdit: "")
+            })
+            .disposed(by: self.disposeBag)
+        
+        self.addButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                self._delegate?.journeyTodoHeaderView(self, didTapAdd: "")
             })
             .disposed(by: self.disposeBag)
     }
     
-    private static let verticalInset: CGFloat = 5
-    private static let screenRatio: CGFloat   = DeviceInfo.screenWidth / 375
+    private static var screenRatio: CGFloat { return DeviceInfo.screenWidth / 375 }
     
-    private var disposeBag = DisposeBag()
-    
-    @IBOutlet private weak var backgroundView: UIView!
-    @IBOutlet private weak var dayLabel: UILabel!
-    
-    @IBOutlet private weak var effectImageView: UIImageView!
-    @IBOutlet private weak var effectWidthConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var effectTrailingConstraint: NSLayoutConstraint!
-    
+    private let disposeBag = DisposeBag()
+
+    private weak var _delegate: JourneyTodoHeaderViewDelegate?
+    @IBOutlet private weak var editButton: UIButton!
     @IBOutlet private weak var addButton: UIButton!
     
-}
-
-extension JourneyTodoHeaderView {
-    enum HeaderType {
-        case today
-        case other
-        
-        var effectImage: UIImage? {
-            switch self {
-            case .today: return #imageLiteral(resourceName: "imgSkyShining.png")
-            case .other: return #imageLiteral(resourceName: "imgPurpleShining.png")
-            }
-        }
-        
-        var backgroundColor: UIColor {
-            switch self {
-            case .today: return .inactiveSky
-            case .other: return .inactivePurple
-            }
-        }
-        
-        var textColor: UIColor {
-            switch self {
-            case .today: return .textSky
-            case .other: return .maintext
-            }
-        }
-    }
+    @IBOutlet private weak var firstStarCategoryView: UIView!
+    @IBOutlet private weak var firstCategoryColorView: UIView!
+    @IBOutlet private weak var firstCategoryLabel: UILabel!
+    
+    @IBOutlet private weak var secondStarCategoryView: UIView!
+    @IBOutlet private weak var secondCategoryColorView: UIView!
+    @IBOutlet private weak var secondCategoryLabel: UILabel!
+    
+    
 }

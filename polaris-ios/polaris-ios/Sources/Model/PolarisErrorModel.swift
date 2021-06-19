@@ -18,8 +18,8 @@ extension Moya.Response {
 }
 
 struct PolarisErrorModel: Codable {
-    var code: Int
-    var message: String
+    let code: Int
+    let message: String
 }
 
 extension PolarisErrorModel {

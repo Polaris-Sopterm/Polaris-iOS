@@ -8,6 +8,6 @@
 import Foundation
 
 struct AuthModel: Codable {
-    var accessToken: String
-    var refreshToken: String
+    let accessToken: String
+    let refreshToken: String
 }
