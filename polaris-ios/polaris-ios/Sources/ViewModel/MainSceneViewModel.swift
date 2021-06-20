@@ -22,16 +22,22 @@ struct MainSceneViewModel {
     struct Output{
         let starList: BehaviorRelay<[MainStarCVCViewModel]>
         let todoStarList: BehaviorRelay<[MainTodoCVCViewModel]>
+        let state: BehaviorRelay<[StarCollectionViewState]>
+        let lookBackState: BehaviorRelay<[MainLookBackCellState]>
         
     }
     func connect(input: Input) -> Output{
         let starList: BehaviorRelay<[MainStarCVCViewModel]> = BehaviorRelay(value: [])
+        let state: BehaviorRelay<[StarCollectionViewState]> = BehaviorRelay(value: [])
+        let lookBackState: BehaviorRelay<[MainLookBackCellState]> = BehaviorRelay(value: [])
 
         let mainStarModels = [MainStarModel(starName: "도전", starLevel: 4),
                                MainStarModel(starName: "행복", starLevel: 4),
                                MainStarModel(starName: "절제", starLevel: 4),
                                MainStarModel(starName: "감사", starLevel: 4),
                                MainStarModel(starName: "휴식", starLevel: 4)]
+//        let mainStarModels: [MainStarModel] = []
+        
         
         
         let todoStarList: BehaviorRelay<[MainTodoCVCViewModel]> = BehaviorRelay(value: [])
@@ -41,12 +47,18 @@ struct MainSceneViewModel {
                               TodoStarModel(star: "폴라리스", todos: [TodoModel(todoTitle: "메인화면 완성하기", todoSubtitle: "3월 1일 수요일", fixed: true,checked: false),TodoModel(todoTitle: "메인화면 완성하기", todoSubtitle: "3월 1일 수요일", fixed: false,checked: false)]),
                               TodoStarModel(star: "폴라리스", todos: [TodoModel(todoTitle: "메인화면 완성하기", todoSubtitle: "3월 1일 수요일", fixed: true,checked: false),TodoModel(todoTitle: "메인화면 완성하기", todoSubtitle: "3월 1일 수요일", fixed: false,checked: false)])]
         
+        // Lookbackstate 서버에서 받아오기 필요
+        lookBackState.accept([.lookback])
        
+        if mainStarModels.count == 0 {
+            state.accept([StarCollectionViewState.showLookBack])
+        } else {
+            state.accept([StarCollectionViewState.showStar])
+        }
         
-
         starList.accept(self.convertStarCVCViewModel(mainStarModels: mainStarModels))
         todoStarList.accept(self.convertTodoCVCViewModel(todoStarModels: todoStarModels))
-        return Output(starList: starList,todoStarList: todoStarList)
+        return Output(starList: starList,todoStarList: todoStarList,state: state,lookBackState: lookBackState)
     }
     
     func convertStarCVCViewModel(mainStarModels: [MainStarModel]) -> [MainStarCVCViewModel]{

@@ -96,6 +96,8 @@ extension UIColor {
     @nonobjc class var white60: UIColor {
         return UIColor(white: 1.0, alpha: 0.6)
     }
-    
+    @nonobjc class var white40: UIColor {
+      return UIColor(white: 1.0, alpha: 0.4)
+    }
     
 }
