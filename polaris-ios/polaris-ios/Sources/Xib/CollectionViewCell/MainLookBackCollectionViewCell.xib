@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="MainLookBackCollectionViewCell" customModule="Polaris" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="453" height="248"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="453" height="248"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oiq-GO-jIo">
+                        <rect key="frame" x="23" y="19" width="407" height="229"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o1h-e8-c4O">
+                                <rect key="frame" x="28" y="39" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xvQ-rl-Bet">
+                                <rect key="frame" x="28" y="72" width="41.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pLa-Z6-saO">
+                                <rect key="frame" x="20" y="160" width="367" height="47"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="47" id="7Od-9P-RoV"/>
+                                </constraints>
+                                <state key="normal" title="여정 돌아보기">
+                                    <color key="titleColor" red="0.91380763050000002" green="0.91315567490000005" blue="0.96078437569999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1hx-4P-uoC">
+                                <rect key="frame" x="352" y="13" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="FTb-YO-Dmh"/>
+                                    <constraint firstAttribute="height" constant="40" id="owd-uS-0dP"/>
+                                </constraints>
+                                <state key="normal" image="btnClose"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="1hx-4P-uoC" firstAttribute="top" secondItem="Oiq-GO-jIo" secondAttribute="top" constant="13" id="5lr-ri-ilA"/>
+                            <constraint firstItem="o1h-e8-c4O" firstAttribute="leading" secondItem="Oiq-GO-jIo" secondAttribute="leading" constant="28" id="FhX-lZ-K4O"/>
+                            <constraint firstAttribute="bottom" secondItem="pLa-Z6-saO" secondAttribute="bottom" constant="22" id="Gfd-wl-Ues"/>
+                            <constraint firstItem="pLa-Z6-saO" firstAttribute="leading" secondItem="Oiq-GO-jIo" secondAttribute="leading" constant="20" id="SJO-pS-AHO"/>
+                            <constraint firstItem="xvQ-rl-Bet" firstAttribute="top" secondItem="o1h-e8-c4O" secondAttribute="bottom" constant="12" id="cM6-rT-Eva"/>
+                            <constraint firstAttribute="trailing" secondItem="pLa-Z6-saO" secondAttribute="trailing" constant="20" id="ein-ah-l5E"/>
+                            <constraint firstItem="o1h-e8-c4O" firstAttribute="top" secondItem="Oiq-GO-jIo" secondAttribute="top" constant="39" id="g5F-xD-KkJ"/>
+                            <constraint firstAttribute="trailing" secondItem="1hx-4P-uoC" secondAttribute="trailing" constant="15" id="jBs-t8-5SK"/>
+                            <constraint firstItem="xvQ-rl-Bet" firstAttribute="leading" secondItem="o1h-e8-c4O" secondAttribute="leading" id="rV8-2D-96t"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Oiq-GO-jIo" secondAttribute="trailing" constant="23" id="ASr-Bi-7nL"/>
+                <constraint firstAttribute="bottom" secondItem="Oiq-GO-jIo" secondAttribute="bottom" id="HVz-eo-hCS"/>
+                <constraint firstItem="Oiq-GO-jIo" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="23" id="ZoL-F0-JLy"/>
+                <constraint firstItem="Oiq-GO-jIo" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="19" id="lYQ-Ap-gUz"/>
+            </constraints>
+            <size key="customSize" width="453" height="248"/>
+            <connections>
+                <outlet property="closeButton" destination="1hx-4P-uoC" id="IO2-Ll-BfL"/>
+                <outlet property="containView" destination="Oiq-GO-jIo" id="uhK-uf-bwd"/>
+                <outlet property="lookBackButton" destination="pLa-Z6-saO" id="1vr-xc-75J"/>
+                <outlet property="subTitleLabel" destination="xvQ-rl-Bet" id="Jee-aT-KLx"/>
+                <outlet property="titleLabel" destination="o1h-e8-c4O" id="oWA-93-Zul"/>
+                <outlet property="titleLabelTopConstraint" destination="g5F-xD-KkJ" id="Hwg-UV-sbz"/>
+            </connections>
+            <point key="canvasLocation" x="429.71014492753625" y="172.09821428571428"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="btnClose" width="26" height="26"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

@@ -212,6 +212,10 @@
 		CEF055F32667ED81000E34A0 /* SignupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF055F22667ED81000E34A0 /* SignupModel.swift */; };
 		CEF055F42667ED81000E34A0 /* SignupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF055F22667ED81000E34A0 /* SignupModel.swift */; };
 		CF563CFEB72C3AF1EB396E01 /* Pods_polaris_ios_Polaris.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62A763CE321F34C429250864 /* Pods_polaris_ios_Polaris.framework */; };
+		EC08F3D0267DD24100F915F3 /* MainLookBackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC08F3CE267DD24100F915F3 /* MainLookBackCollectionViewCell.swift */; };
+		EC08F3D1267DD24100F915F3 /* MainLookBackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC08F3CE267DD24100F915F3 /* MainLookBackCollectionViewCell.swift */; };
+		EC08F3D2267DD24100F915F3 /* MainLookBackCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC08F3CF267DD24100F915F3 /* MainLookBackCollectionViewCell.xib */; };
+		EC08F3D3267DD24100F915F3 /* MainLookBackCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC08F3CF267DD24100F915F3 /* MainLookBackCollectionViewCell.xib */; };
 		EC49B959262EAF3D0080F8C3 /* StarNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC49B958262EAF3D0080F8C3 /* StarNames.swift */; };
 		EC7A3BF526394C3400B59C98 /* TodoStarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7A3BF426394C3400B59C98 /* TodoStarModel.swift */; };
 		EC7A3BF826394CC900B59C98 /* MainTodoCVCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7A3BF726394CC900B59C98 /* MainTodoCVCViewModel.swift */; };
@@ -349,6 +353,8 @@
 		CEF055F22667ED81000E34A0 /* SignupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupModel.swift; sourceTree = "<group>"; };
 		E5008C7064D7B9664A90B023 /* Pods-polaris-ios-Polaris Dev.real.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-polaris-ios-Polaris Dev.real.xcconfig"; path = "Target Support Files/Pods-polaris-ios-Polaris Dev/Pods-polaris-ios-Polaris Dev.real.xcconfig"; sourceTree = "<group>"; };
 		EBADBF5A561A9E7C0BAAF039 /* Pods-polaris-ios-Polaris.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-polaris-ios-Polaris.beta.xcconfig"; path = "Target Support Files/Pods-polaris-ios-Polaris/Pods-polaris-ios-Polaris.beta.xcconfig"; sourceTree = "<group>"; };
+		EC08F3CE267DD24100F915F3 /* MainLookBackCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLookBackCollectionViewCell.swift; sourceTree = "<group>"; };
+		EC08F3CF267DD24100F915F3 /* MainLookBackCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainLookBackCollectionViewCell.xib; sourceTree = "<group>"; };
 		EC49B958262EAF3D0080F8C3 /* StarNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarNames.swift; sourceTree = "<group>"; };
 		EC7A3BF426394C3400B59C98 /* TodoStarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoStarModel.swift; sourceTree = "<group>"; };
 		EC7A3BF726394CC900B59C98 /* MainTodoCVCViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTodoCVCViewModel.swift; sourceTree = "<group>"; };
@@ -667,6 +673,7 @@
 				ECDC5A5B2636A13600A1B5A9 /* MainTodoHeaderView.xib */,
 				CEE574EF26307D7C00EA64B7 /* PerDayItemCollectionViewCell.xib */,
 				CE574D9C263524140046D20A /* SelectStarItemCollectionViewCell.xib */,
+				EC08F3CF267DD24100F915F3 /* MainLookBackCollectionViewCell.xib */,
 			);
 			path = CollectionViewCell;
 			sourceTree = "<group>";
@@ -744,6 +751,7 @@
 				ECDC5A4B2635530300A1B5A9 /* MainTodoCVC.swift */,
 				CEE574EE26307D7C00EA64B7 /* PerDayItemCollectionViewCell.swift */,
 				CE574D9B263524140046D20A /* SelectStarItemCollectionViewCell.swift */,
+				EC08F3CE267DD24100F915F3 /* MainLookBackCollectionViewCell.swift */,
 			);
 			path = CollectionViewCell;
 			sourceTree = "<group>";
@@ -840,6 +848,7 @@
 				CEEE5787262C112E00C39358 /* AddTodoFixOnTopTableViewCell.xib in Resources */,
 				ECA49467262C2C7700CC2EB8 /* MainStarTVC.xib in Resources */,
 				CE13213A265A14E8001E3C1F /* Intro.storyboard in Resources */,
+				EC08F3D2267DD24100F915F3 /* MainLookBackCollectionViewCell.xib in Resources */,
 				CEEE576F262AE6F400C39358 /* AddTodoTextTableViewCell.xib in Resources */,
 				ECA49419262817D500CC2EB8 /* TodoDate.storyboard in Resources */,
 				CEA44E61267B398100A05650 /* MainSceneTableViewCell.xib in Resources */,
@@ -880,6 +889,7 @@
 				CE43D07826613D66003126F2 /* AddTodoFixOnTopTableViewCell.xib in Resources */,
 				CE43D07926613D66003126F2 /* MainStarTVC.xib in Resources */,
 				CE43D07A26613D66003126F2 /* Intro.storyboard in Resources */,
+				EC08F3D3267DD24100F915F3 /* MainLookBackCollectionViewCell.xib in Resources */,
 				CE43D07B26613D66003126F2 /* AddTodoTextTableViewCell.xib in Resources */,
 				CE43D07C26613D66003126F2 /* TodoDate.storyboard in Resources */,
 				CEA44E62267B398100A05650 /* MainSceneTableViewCell.xib in Resources */,
@@ -1056,6 +1066,7 @@
 				ECA494472629729000CC2EB8 /* TodoDateModel.swift in Sources */,
 				CE132141265A408F001E3C1F /* LoginViewModel.swift in Sources */,
 				CEAC5995266FBEA50092A255 /* PolarisErrorModel.swift in Sources */,
+				EC08F3D0267DD24100F915F3 /* MainLookBackCollectionViewCell.swift in Sources */,
 				ECA49475262C461700CC2EB8 /* MainStarModel.swift in Sources */,
 				CEF055EE2667EB38000E34A0 /* CheckEmailModel.swift in Sources */,
 				CE132144265A5CD1001E3C1F /* SignupVC.swift in Sources */,
@@ -1150,6 +1161,7 @@
 				CE43D05426613D66003126F2 /* TodoDateModel.swift in Sources */,
 				CE43D05526613D66003126F2 /* LoginViewModel.swift in Sources */,
 				CEAC5996266FBEA50092A255 /* PolarisErrorModel.swift in Sources */,
+				EC08F3D1267DD24100F915F3 /* MainLookBackCollectionViewCell.swift in Sources */,
 				CE43D05626613D66003126F2 /* MainStarModel.swift in Sources */,
 				CEF055EF2667EB38000E34A0 /* CheckEmailModel.swift in Sources */,
 				CE43D05726613D66003126F2 /* SignupVC.swift in Sources */,
@@ -1398,9 +1410,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = AKW8XUH283;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "polaris-ios/polaris-ios.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (

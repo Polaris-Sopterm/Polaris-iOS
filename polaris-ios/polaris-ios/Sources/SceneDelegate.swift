@@ -59,7 +59,6 @@ extension SceneDelegate {
             guard let loginVC = LoginVC.instantiateFromStoryboard(StoryboardName.intro) else { return }
             self.window?.rootViewController = loginVC
         }
-        
         self.window?.makeKeyAndVisible()
     }
     
