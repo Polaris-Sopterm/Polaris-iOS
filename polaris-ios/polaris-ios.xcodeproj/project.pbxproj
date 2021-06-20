@@ -178,6 +178,10 @@
 		CEC48ED4262DCA9100FD887F /* DropdownItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC48ED2262DCA9100FD887F /* DropdownItemTableViewCell.swift */; };
 		CEC48ED5262DCA9100FD887F /* DropdownItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC48ED3262DCA9100FD887F /* DropdownItemTableViewCell.xib */; };
 		CEC48ED9262DCD2A00FD887F /* AddTodoDropdownViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC48ED8262DCD2A00FD887F /* AddTodoDropdownViewModel.swift */; };
+		CEC74B12267F9842002AFF18 /* PolarisPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC74B11267F9842002AFF18 /* PolarisPopupView.swift */; };
+		CEC74B13267F9842002AFF18 /* PolarisPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC74B11267F9842002AFF18 /* PolarisPopupView.swift */; };
+		CEC74B17267F984E002AFF18 /* PolarisPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC74B16267F984E002AFF18 /* PolarisPopupView.xib */; };
+		CEC74B18267F984E002AFF18 /* PolarisPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC74B16267F984E002AFF18 /* PolarisPopupView.xib */; };
 		CEE574D82630422600EA64B7 /* AddTodoDayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE574D62630422600EA64B7 /* AddTodoDayTableViewCell.swift */; };
 		CEE574D92630422600EA64B7 /* AddTodoDayTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE574D72630422600EA64B7 /* AddTodoDayTableViewCell.xib */; };
 		CEE574E926307B4400EA64B7 /* AddTodoDayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE574E826307B4400EA64B7 /* AddTodoDayViewModel.swift */; };
@@ -322,6 +326,8 @@
 		CEC48ED2262DCA9100FD887F /* DropdownItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownItemTableViewCell.swift; sourceTree = "<group>"; };
 		CEC48ED3262DCA9100FD887F /* DropdownItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DropdownItemTableViewCell.xib; sourceTree = "<group>"; };
 		CEC48ED8262DCD2A00FD887F /* AddTodoDropdownViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoDropdownViewModel.swift; sourceTree = "<group>"; };
+		CEC74B11267F9842002AFF18 /* PolarisPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarisPopupView.swift; sourceTree = "<group>"; };
+		CEC74B16267F984E002AFF18 /* PolarisPopupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PolarisPopupView.xib; sourceTree = "<group>"; };
 		CEE574D62630422600EA64B7 /* AddTodoDayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoDayTableViewCell.swift; sourceTree = "<group>"; };
 		CEE574D72630422600EA64B7 /* AddTodoDayTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTodoDayTableViewCell.xib; sourceTree = "<group>"; };
 		CEE574E826307B4400EA64B7 /* AddTodoDayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoDayViewModel.swift; sourceTree = "<group>"; };
@@ -629,6 +635,7 @@
 				CE574022267CB4FA00665933 /* JourneyTodoHeaderView.swift */,
 				CEC19AE62650F87400DA747C /* DayTodoHeaderView.swift */,
 				CE8F71A3266BDA4D00D4FDD7 /* TermsOfServiceView.swift */,
+				CEC74B11267F9842002AFF18 /* PolarisPopupView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -686,6 +693,7 @@
 				CE57401D267CB4E100665933 /* JourneyTodoHeaderView.xib */,
 				CEC19AE32650F86100DA747C /* DayTodoHeaderView.xib */,
 				CE8F719E266BDA3500D4FDD7 /* TermsOfServiceView.xib */,
+				CEC74B16267F984E002AFF18 /* PolarisPopupView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -863,6 +871,7 @@
 				CEC19AE42650F86100DA747C /* DayTodoHeaderView.xib in Resources */,
 				ECDC5A4E2635530300A1B5A9 /* MainTodoCVC.xib in Resources */,
 				CEC48ED5262DCA9100FD887F /* DropdownItemTableViewCell.xib in Resources */,
+				CEC74B17267F984E002AFF18 /* PolarisPopupView.xib in Resources */,
 				CEC19AEC265103AA00DA747C /* DayTodoTableViewCell.xib in Resources */,
 				ECA4944026284B0B00CC2EB8 /* TodoDateHeaderView.xib in Resources */,
 				CEEE577A262BE54900C39358 /* PolarisMarginTextField.xib in Resources */,
@@ -904,6 +913,7 @@
 				CE43D08326613D66003126F2 /* DayTodoHeaderView.xib in Resources */,
 				CE43D08426613D66003126F2 /* MainTodoCVC.xib in Resources */,
 				CE43D08526613D66003126F2 /* DropdownItemTableViewCell.xib in Resources */,
+				CEC74B18267F984E002AFF18 /* PolarisPopupView.xib in Resources */,
 				CE43D08626613D66003126F2 /* DayTodoTableViewCell.xib in Resources */,
 				CE43D08726613D66003126F2 /* TodoDateHeaderView.xib in Resources */,
 				CE43D08826613D66003126F2 /* PolarisMarginTextField.xib in Resources */,
@@ -1059,6 +1069,7 @@
 				ECA494292628298B00CC2EB8 /* TodoModel.swift in Sources */,
 				CE574DA526352CB60046D20A /* AddTodoSelectStarViewModel.swift in Sources */,
 				CEEE5774262BE1DE00C39358 /* AddTodoTableViewCellProtocol.swift in Sources */,
+				CEC74B12267F9842002AFF18 /* PolarisPopupView.swift in Sources */,
 				CEEE574D262A963D00C39358 /* DeviceInfo.swift in Sources */,
 				ECA4947E262C670000CC2EB8 /* MainStarTVCViewModel.swift in Sources */,
 				CEC19AEB265103AA00DA747C /* DayTodoTableViewCell.swift in Sources */,
@@ -1154,6 +1165,7 @@
 				CE43D04E26613D66003126F2 /* TodoModel.swift in Sources */,
 				CE43D04F26613D66003126F2 /* AddTodoSelectStarViewModel.swift in Sources */,
 				CE43D05026613D66003126F2 /* AddTodoTableViewCellProtocol.swift in Sources */,
+				CEC74B13267F9842002AFF18 /* PolarisPopupView.swift in Sources */,
 				CE43D05126613D66003126F2 /* DeviceInfo.swift in Sources */,
 				CE43D05226613D66003126F2 /* MainStarTVCViewModel.swift in Sources */,
 				CE43D05326613D66003126F2 /* DayTodoTableViewCell.swift in Sources */,
@@ -1387,7 +1399,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6ZTQ76LJPZ;
+				DEVELOPMENT_TEAM = AKW8XUH283;
 				INFOPLIST_FILE = "polaris-ios/polaris-ios.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1411,9 +1423,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = AKW8XUH283;
 				INFOPLIST_FILE = "polaris-ios/polaris-ios.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
