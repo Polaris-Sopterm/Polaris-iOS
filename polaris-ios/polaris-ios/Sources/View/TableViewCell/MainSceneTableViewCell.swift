@@ -27,26 +27,21 @@ final class MainSceneTableViewCell: MainTableViewCell {
     @IBOutlet weak var nowLabel: UILabel!
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var pageControl: UIPageControl!
-    
     @IBOutlet weak var todoCV: UICollectionView!
     
-    
-    var currentIndex: CGFloat = 0
-    
-    var viewState = StarCollectionViewState.showStar
-    var lookBackState = MainLookBackCellState.lookback
-    
-    let viewModel = MainSceneViewModel()
-    var starTVCViewModel: MainStarTVCViewModel?
-    var dataDriver: Driver<[MainStarCVCViewModel]>?
-    var starList: [MainStarCVCViewModel] = [] {
+    private var currentIndex: CGFloat = 0
+    private var viewState = StarCollectionViewState.showStar
+    private var lookBackState = MainLookBackCellState.lookback
+    private let viewModel = MainSceneViewModel()
+    private var starTVCViewModel: MainStarTVCViewModel?
+    private var dataDriver: Driver<[MainStarCVCViewModel]>?
+    private var starList: [MainStarCVCViewModel] = [] {
         didSet{
             self.setTitle(stars: self.starList.count,lookBackState: self.lookBackState)
         }
     }
-    let disposeBag = DisposeBag()
-    let starTVCHeight = 212*(DeviceInfo.screenHeight/812.0)
-    
+    private let disposeBag = DisposeBag()
+    private let starTVCHeight = 212*(DeviceInfo.screenHeight/812.0)
     override static var cellHeight: CGFloat { return DeviceInfo.screenHeight }
     
     override func awakeFromNib() {
@@ -104,8 +99,6 @@ final class MainSceneTableViewCell: MainTableViewCell {
         self.starCV.registerCell(cell: MainStarCVC.self)
         self.starCV.registerCell(cell: MainLookBackCollectionViewCell.self)
         self.starCV.backgroundColor = .clear
-        
-        
     }
     
     func setTodoCollectionView() {
@@ -114,44 +107,31 @@ final class MainSceneTableViewCell: MainTableViewCell {
         self.todoCV.delegate = self
         let layout = self.todoCV.collectionViewLayout as! UICollectionViewFlowLayout
         layout.minimumLineSpacing = 0
-        
         layout.itemSize = CGSize(width: DeviceInfo.screenWidth, height: DeviceInfo.screenHeight-285*(DeviceInfo.screenHeight/812.0))
-        
     }
     
     func setTitle(stars: Int,lookBackState: MainLookBackCellState) {
-        
         if stars == 0 {
             switch lookBackState {
-            
             case .build:
                 let titleText = """
                     여정을 세우고
                     더 보람찬 일주일을 보내보세요.
                     """
-                
                 self.titleLabel.setPartialBold(originalText: titleText, boldText: "더 보람찬 일주일을 보내보세요.", fontSize: 23, boldFontSize: 23)
             case .lookback:
-               
-                
                 let titleText = """
                     3월 첫째주
                     어떤 별을 찾았는지 확인해보세요!
                     """
-                
                 self.titleLabel.setPartialBold(originalText: titleText, boldText: "3월 첫째주", fontSize: 23, boldFontSize: 23)
-                
             case .rest :
                 let titleText = """
                     때로는
                     휴식도 도움이 된답니다.
                     """
-                
                 self.titleLabel.setPartialBold(originalText: titleText, boldText: "때로는", fontSize: 23, boldFontSize: 23)
-            
             }
-            
-            
         }
         else {
             self.titleLabel.setPartialBold(originalText: "어제는\n\(stars)개의 별을 발견했어요.", boldText: "\(stars)개의 별", fontSize: 23, boldFontSize: 23)
@@ -162,9 +142,6 @@ final class MainSceneTableViewCell: MainTableViewCell {
     private func bindViewModel(){
         let input = MainSceneViewModel.Input()
         let output = viewModel.connect(input: input)
-        
-        
-        
         output.starList.subscribe(onNext: { item in
             self.starList = item
         })
@@ -174,14 +151,10 @@ final class MainSceneTableViewCell: MainTableViewCell {
             self.viewState = value[0]
         })
         .disposed(by: disposeBag)
-        
-
         output.lookBackState.subscribe(onNext: { value in
             self.lookBackState = value[0]
         })
-        
-        
-        
+    
         output.state.subscribe(onNext: { state in
             self.viewState = state[0]
             
@@ -189,7 +162,6 @@ final class MainSceneTableViewCell: MainTableViewCell {
         }).disposed(by: disposeBag)
         
         switch output.state.value[0] {
-        
         case StarCollectionViewState.showStar:
             output.starList.bind(to: starCV.rx.items) { collectionView, index, item in
                 let identifier = String(describing: MainStarCVC.self)
@@ -222,9 +194,6 @@ final class MainSceneTableViewCell: MainTableViewCell {
             self.pageControl.numberOfPages = output.todoStarList.value.count
             return cell
         }.disposed(by: disposeBag)
-        
-        
-        
     }
     
     private func setCometLayout(comet: UIImageView,size: Int) {
@@ -274,21 +243,16 @@ extension MainSceneTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == self.starCV {
             if self.viewState == StarCollectionViewState.showStar {
-                
                 let starViewModel = self.starList
                 return CGSize(width: starViewModel[indexPath.item].cellWidth, height: collectionView.frame.height)
             }
             else {
                 return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
             }
-            
         }
         else {
             return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
         }
-        
-        
-        
     }
     
     
@@ -307,7 +271,6 @@ extension MainSceneTableViewCell: UICollectionViewDelegateFlowLayout {
         if collectionView == self.starCV && self.viewState == StarCollectionViewState.showStar {
             
             switch self.starList.count {
-            
             case 1 :
                 return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 30)
             case 2 :
@@ -317,16 +280,12 @@ extension MainSceneTableViewCell: UICollectionViewDelegateFlowLayout {
                 
             default :
                 return UIEdgeInsets(top: 0, left: 38, bottom: 0, right: 30)
-                
             }
         }
         else {
             return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         }
-        
-        
     }
-    
 }
 
 

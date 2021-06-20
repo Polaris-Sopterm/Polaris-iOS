@@ -24,7 +24,7 @@ class MainLookBackCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var titleLabelTopConstraint: NSLayoutConstraint!
     
-    var state: MainLookBackCellState = .lookback
+    private var state: MainLookBackCellState = .lookback
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,7 +37,6 @@ class MainLookBackCollectionViewCell: UICollectionViewCell {
         self.containView.makeRounded(cornerRadius: 12)
         self.titleLabel.textColor = .maintext
         self.titleLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        
         self.subTitleLabel.textColor = .white
         self.subTitleLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         self.lookBackButton.backgroundColor = .mainSky
@@ -56,8 +55,6 @@ class MainLookBackCollectionViewCell: UICollectionViewCell {
             self.closeButton.isHidden = true
             self.titleLabelTopConstraint.constant = 34
             self.lookBackButton.setTitle("여정 세우기", for: .normal)
-            
-            
         case .lookback :
             self.titleLabel.text = "여정을 돌아볼 시간이에요."
             self.subTitleLabel.text = """
@@ -67,7 +64,6 @@ class MainLookBackCollectionViewCell: UICollectionViewCell {
             self.closeButton.isHidden = false
             self.titleLabelTopConstraint.constant = 39
             self.lookBackButton.setTitle("여정 돌아보기", for: .normal)
-            
         case .rest :
             self.titleLabel.text = "쉬어간 여정을 돌아보는 의미"
             self.subTitleLabel.text = """
