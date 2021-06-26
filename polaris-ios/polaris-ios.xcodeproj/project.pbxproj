@@ -32,6 +32,8 @@
 		CE2952E32687893000E21871 /* TodoAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2952E12687893000E21871 /* TodoAPI.swift */; };
 		CE2952E52687940100E21871 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2952E42687940100E21871 /* UIButton+.swift */; };
 		CE2952E62687940100E21871 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2952E42687940100E21871 /* UIButton+.swift */; };
+		CE2952E826879C0500E21871 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE2952E726879C0500E21871 /* GoogleService-Info.plist */; };
+		CE2952E926879C0500E21871 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE2952E726879C0500E21871 /* GoogleService-Info.plist */; };
 		CE37CC6D265A7674004F327E /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37CC6C265A7674004F327E /* SignupViewModel.swift */; };
 		CE43D02426613D66003126F2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE573C262A952100C39358 /* NetworkManager.swift */; };
 		CE43D02526613D66003126F2 /* TodoDateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA4941B262819D300CC2EB8 /* TodoDateVC.swift */; };
@@ -316,6 +318,8 @@
 		CE207B882661CBC7009A812A /* ServerHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerHost.swift; sourceTree = "<group>"; };
 		CE2952E12687893000E21871 /* TodoAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoAPI.swift; sourceTree = "<group>"; };
 		CE2952E42687940100E21871 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
+		CE2952E726879C0500E21871 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CE2952EA26879C1200E21871 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CE37CC6C265A7674004F327E /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
 		CE43D09026613D66003126F2 /* Polaris Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Polaris Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE573FFF267C8E9900665933 /* TodoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewModel.swift; sourceTree = "<group>"; };
@@ -497,6 +501,7 @@
 			children = (
 				CE04A04A262340EA007C98E2 /* Resources */,
 				CE04A04B262340F1007C98E2 /* Sources */,
+				CE2952EA26879C1200E21871 /* GoogleService-Info.plist */,
 				CE04A043262340D3007C98E2 /* polaris-AppStore-Info.plist */,
 				CE82B9AC2661DA11004B6D81 /* polaris-ios.plist */,
 			);
@@ -514,6 +519,7 @@
 		CE04A04B262340F1007C98E2 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				CE2952E726879C0500E21871 /* GoogleService-Info.plist */,
 				CE04A035262340D1007C98E2 /* AppDelegate.swift */,
 				CE04A037262340D1007C98E2 /* SceneDelegate.swift */,
 				CEEE5772262BE1B300C39358 /* Protocol */,
@@ -905,6 +911,7 @@
 				ECDC5A4E2635530300A1B5A9 /* MainTodoCVC.xib in Resources */,
 				CEC48ED5262DCA9100FD887F /* DropdownItemTableViewCell.xib in Resources */,
 				CEC74B17267F984E002AFF18 /* PolarisPopupView.xib in Resources */,
+				CE2952E826879C0500E21871 /* GoogleService-Info.plist in Resources */,
 				CEC19AEC265103AA00DA747C /* DayTodoTableViewCell.xib in Resources */,
 				ECA4944026284B0B00CC2EB8 /* TodoDateHeaderView.xib in Resources */,
 				CEEE577A262BE54900C39358 /* PolarisMarginTextField.xib in Resources */,
@@ -947,6 +954,7 @@
 				CE43D08426613D66003126F2 /* MainTodoCVC.xib in Resources */,
 				CE43D08526613D66003126F2 /* DropdownItemTableViewCell.xib in Resources */,
 				CEC74B18267F984E002AFF18 /* PolarisPopupView.xib in Resources */,
+				CE2952E926879C0500E21871 /* GoogleService-Info.plist in Resources */,
 				CE43D08626613D66003126F2 /* DayTodoTableViewCell.xib in Resources */,
 				CE43D08726613D66003126F2 /* TodoDateHeaderView.xib in Resources */,
 				CE43D08826613D66003126F2 /* PolarisMarginTextField.xib in Resources */,
