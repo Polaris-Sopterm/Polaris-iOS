@@ -28,6 +28,8 @@
 		CE207B852661CADE009A812A /* BuildPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE207B832661CADE009A812A /* BuildPhase.swift */; };
 		CE207B892661CBC7009A812A /* ServerHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE207B882661CBC7009A812A /* ServerHost.swift */; };
 		CE207B8A2661CBC7009A812A /* ServerHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE207B882661CBC7009A812A /* ServerHost.swift */; };
+		CE2952E22687893000E21871 /* TodoAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2952E12687893000E21871 /* TodoAPI.swift */; };
+		CE2952E32687893000E21871 /* TodoAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2952E12687893000E21871 /* TodoAPI.swift */; };
 		CE37CC6D265A7674004F327E /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37CC6C265A7674004F327E /* SignupViewModel.swift */; };
 		CE43D02426613D66003126F2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE573C262A952100C39358 /* NetworkManager.swift */; };
 		CE43D02526613D66003126F2 /* TodoDateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA4941B262819D300CC2EB8 /* TodoDateVC.swift */; };
@@ -259,6 +261,29 @@
 		ECDC5A5D2636A13600A1B5A9 /* MainTodoHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECDC5A5B2636A13600A1B5A9 /* MainTodoHeaderView.xib */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		CE29525E268746A600E21871 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE295261268746AA00E21871 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		28E1460E80D206193AB4D3E6 /* Pods-polaris-ios-Polaris Beta.dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-polaris-ios-Polaris Beta.dev.xcconfig"; path = "Target Support Files/Pods-polaris-ios-Polaris Beta/Pods-polaris-ios-Polaris Beta.dev.xcconfig"; sourceTree = "<group>"; };
 		317393C453134FBB910813E0 /* Pods-polaris-ios-Polaris.real.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-polaris-ios-Polaris.real.xcconfig"; path = "Target Support Files/Pods-polaris-ios-Polaris/Pods-polaris-ios-Polaris.real.xcconfig"; sourceTree = "<group>"; };
@@ -287,6 +312,7 @@
 		CE132143265A5CD1001E3C1F /* SignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
 		CE207B832661CADE009A812A /* BuildPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildPhase.swift; sourceTree = "<group>"; };
 		CE207B882661CBC7009A812A /* ServerHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerHost.swift; sourceTree = "<group>"; };
+		CE2952E12687893000E21871 /* TodoAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoAPI.swift; sourceTree = "<group>"; };
 		CE37CC6C265A7674004F327E /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
 		CE43D09026613D66003126F2 /* Polaris Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Polaris Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE573FFF267C8E9900665933 /* TodoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewModel.swift; sourceTree = "<group>"; };
@@ -602,6 +628,7 @@
 			isa = PBXGroup;
 			children = (
 				CE63050A2667E36E00EBC1D4 /* UserAPI.swift */,
+				CE2952E12687893000E21871 /* TodoAPI.swift */,
 			);
 			path = Moya;
 			sourceTree = "<group>";
@@ -776,6 +803,7 @@
 				CE04A02F262340D1007C98E2 /* Frameworks */,
 				CE04A030262340D1007C98E2 /* Resources */,
 				81B56377512B03F98CF18DC6 /* [CP] Embed Pods Frameworks */,
+				CE29525E268746A600E21871 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -795,6 +823,7 @@
 				CE43D06C26613D66003126F2 /* Frameworks */,
 				CE43D06E26613D66003126F2 /* Resources */,
 				CE43D08C26613D66003126F2 /* [CP] Embed Pods Frameworks */,
+				CE295261268746AA00E21871 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1017,6 +1046,7 @@
 				ECA49486262DC17A00CC2EB8 /* UILabel+.swift in Sources */,
 				CEA44E59267B386800A05650 /* MainVC.swift in Sources */,
 				CE04A06A2623528C007C98E2 /* UIViewController+.swift in Sources */,
+				CE2952E22687893000E21871 /* TodoAPI.swift in Sources */,
 				ECDC5A5C2636A13600A1B5A9 /* MainTodoHeaderView.swift in Sources */,
 				CE574023267CB4FA00665933 /* JourneyTodoHeaderView.swift in Sources */,
 				ECA49489262DC40F00CC2EB8 /* String+.swift in Sources */,
@@ -1113,6 +1143,7 @@
 				CE43D02726613D66003126F2 /* UILabel+.swift in Sources */,
 				CEA44E5A267B386800A05650 /* MainVC.swift in Sources */,
 				CE43D02826613D66003126F2 /* UIViewController+.swift in Sources */,
+				CE2952E32687893000E21871 /* TodoAPI.swift in Sources */,
 				CE43D02926613D66003126F2 /* MainTodoHeaderView.swift in Sources */,
 				CE574024267CB4FA00665933 /* JourneyTodoHeaderView.swift in Sources */,
 				CE43D02A26613D66003126F2 /* String+.swift in Sources */,

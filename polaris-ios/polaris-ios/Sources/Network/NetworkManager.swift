@@ -8,6 +8,7 @@
 import Foundation
 import Moya
 import RxSwift
+import Network
 
 class NetworkManager {
     

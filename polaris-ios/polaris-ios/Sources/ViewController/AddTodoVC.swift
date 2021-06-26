@@ -11,8 +11,8 @@ import RxSwift
 
 class AddTodoVC: HalfModalVC {
     
-    var disposeBag  = DisposeBag()
-    var viewModel   = AddTodoViewModel()
+    let disposeBag  = DisposeBag()
+    let viewModel   = AddTodoViewModel()
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
