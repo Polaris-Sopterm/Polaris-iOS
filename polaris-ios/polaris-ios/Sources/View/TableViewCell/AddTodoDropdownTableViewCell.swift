@@ -113,7 +113,7 @@ class AddTodoDropdownTableViewCell: AddTodoTableViewCell {
             .disposed(by: self.disposeBag)
     }
     
-    private static let duration: TimeInterval       = 0.7
+    private static let duration: TimeInterval       = 0.2
     private static let screenRatio: CGFloat         = DeviceInfo.screenWidth / 375
     private static let menuCellHeight: CGFloat      = 56 * screenRatio
     private static let selectBorderColor: UIColor   = UIColor.mainSky

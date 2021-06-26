@@ -11,8 +11,7 @@ import RxSwift
 
 class AddTodoVC: HalfModalVC {
     
-    let disposeBag  = DisposeBag()
-    let viewModel   = AddTodoViewModel()
+    let viewModel = AddTodoViewModel()
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
@@ -91,6 +90,8 @@ class AddTodoVC: HalfModalVC {
             }
             .disposed(by: self.disposeBag)
     }
+    
+    private let disposeBag  = DisposeBag()
     
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var cancelButton: UIButton!
