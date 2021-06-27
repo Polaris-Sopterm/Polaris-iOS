@@ -20,7 +20,6 @@ open class HalfModalVC: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         self.setupDimView()
-        self.bindDimViewGesture()
     }
     
     public override func viewDidLayoutSubviews() {
@@ -80,6 +79,8 @@ open class HalfModalVC: UIViewController {
     }
     
     private func setupDimView() {
+        self.view.backgroundColor       = .clear
+        
         let backgroundView              = UIView(frame: .zero)
         backgroundView.frame            = self.view.bounds
         backgroundView.backgroundColor  = UIColor.maintext
@@ -89,19 +90,6 @@ open class HalfModalVC: UIViewController {
         self.view.addSubview(backgroundView)
         
         if let halfModalView = self.halfModalView { self.view.bringSubviewToFront(halfModalView) }
-    }
-    
-    // MARK: - Bind
-    private func bindDimViewGesture() {
-        let tapGesture = UITapGestureRecognizer()
-        self.backgroundView?.addGestureRecognizer(tapGesture)
-        
-        tapGesture.rx.event
-            .bind(onNext: { [weak self] recognizer in
-                guard let self = self else { return }
-                self.dismissWithAnimation()
-            })
-            .disposed(by: self.disposeBag)
     }
     
     private func bindHalfModalPanGesture() {
@@ -123,9 +111,7 @@ open class HalfModalVC: UIViewController {
                 switch recognizer.state {
                 case .changed:
                     guard resultY >= 0 else { return }
-                    print(velocityY)
                     halfModalView.transform = CGAffineTransform(translationX: 0, y: resultY)
-                    self.backgroundView?.alpha   = 0.5 - (min(max(0, resultY), thresholdY) / thresholdY) * 0.5
                 case .ended, .cancelled, .failed:
                     guard resultY <= thresholdY, velocityY <= 1200 else { self.dismissWithAnimation(); return }
                     
