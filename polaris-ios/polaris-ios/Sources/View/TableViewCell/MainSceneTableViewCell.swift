@@ -80,18 +80,12 @@ final class MainSceneTableViewCell: MainTableViewCell {
         self.weekLabel.textColor = .white
         self.nowLabel.font = UIFont.systemFont(ofSize: 16,weight: .bold)
         self.nowLabel.textColor = .white
-        
         self.titleLabel.textColor = .white
-        //        self.pageControl.frame.size.width = CGFloat(5) * 5 - 14
+//        self.titleLabel.setLineSpacing(spacing: 15)
         if #available(iOS 14.0, *) {
             self.pageControl.backgroundStyle = .minimal
             self.pageControl.allowsContinuousInteraction = false
         }
-        
-        
-        
-        
-        
     }
     
     func setStarCollectionView() {
@@ -135,6 +129,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
         }
         else {
             self.titleLabel.setPartialBold(originalText: "어제는\n\(stars)개의 별을 발견했어요.", boldText: "\(stars)개의 별", fontSize: 23, boldFontSize: 23)
+//            self.titleLabel.text = "어제는\n\(stars)개의 별을 발견했어요."
         }
 
     }
@@ -294,7 +289,6 @@ extension MainSceneTableViewCell: UIScrollViewDelegate {
         if scrollView == self.todoCV {
             let layout = self.todoCV.collectionViewLayout as! UICollectionViewFlowLayout
             let cellWidthIncludingSpacing = layout.itemSize.width + layout.minimumLineSpacing
-            
             var offset = targetContentOffset.pointee
             let index = (offset.x + scrollView.contentInset.left) / cellWidthIncludingSpacing
             var roundedIndex = round(index)

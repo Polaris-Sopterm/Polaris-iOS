@@ -52,13 +52,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 extension SceneDelegate {
     
     func setInitRootViewController() {
-        if PolarisUserManager.shared.hasToken == true {
-            guard let mainSceneVC = MainVC.instantiateFromStoryboard(StoryboardName.main) else { return }
-            self.window?.rootViewController = mainSceneVC
-        } else {
-            guard let loginVC = LoginVC.instantiateFromStoryboard(StoryboardName.intro) else { return }
-            self.window?.rootViewController = loginVC
-        }
+//        if PolarisUserManager.shared.hasToken == true {
+//            guard let mainSceneVC = MainVC.instantiateFromStoryboard(StoryboardName.main) else { return }
+//            self.window?.rootViewController = mainSceneVC
+//        } else {
+//            guard let loginVC = LoginVC.instantiateFromStoryboard(StoryboardName.intro) else { return }
+//            self.window?.rootViewController = loginVC
+//        }
+        guard let mainSceneVC = MainVC.instantiateFromStoryboard(StoryboardName.main) else { return }
+        self.window?.rootViewController = mainSceneVC
         self.window?.makeKeyAndVisible()
     }
     
