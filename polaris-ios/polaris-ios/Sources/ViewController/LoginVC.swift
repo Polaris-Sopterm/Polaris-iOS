@@ -205,8 +205,8 @@ class LoginVC: UIViewController {
         self.viewModel.completeLoginSubject
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: {
-                guard let mainSceneVC = MainSceneVC.instantiateFromStoryboard(StoryboardName.mainSceneVC) else { return }
-                UIApplication.shared.windows.filter({ $0.isKeyWindow }).first?.rootViewController = mainSceneVC
+                guard let mainVC = MainVC.instantiateFromStoryboard(StoryboardName.main) else { return }
+                UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController = mainVC
             })
             .disposed(by: self.disposeBag)
     }

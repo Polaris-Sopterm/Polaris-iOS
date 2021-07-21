@@ -10,10 +10,15 @@ import RxSwift
 import SnapKit
 import UIKit
 
+protocol TermsOfServiceDelegate: AnyObject {
+    func termsOfServiceViewDidTapPersonalTerm(_ termsOfServiceView: TermsOfServiceView)
+    func termsOfServiceViewDidTapServiceTerm(_ termsOfServiceView: TermsOfServiceView)
+    func termsOfServiceViewDidTapComplete(_ termsOfServiceView: TermsOfServiceView)
+}
+
 class TermsOfServiceView: UIView {
     
-    typealias Completion = () -> Void
-    var completion: Completion?
+    weak var delegate: TermsOfServiceDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,12 +33,12 @@ class TermsOfServiceView: UIView {
         self.animateForPresent()
     }
     
-    private func dismissPopupView(completion: Completion? = nil) {
+    private func dismissPopupView() {
         UIView.animate(withDuration: 0.3, animations: {
             self.termsView.transform = CGAffineTransform(translationX: 0, y: 290)
             self.dimView.alpha       = 0
         }) { _ in
-            completion?()
+            self.delegate?.termsOfServiceViewDidTapComplete(self)
             self.removeFromSuperview()
         }
     }
@@ -89,9 +94,23 @@ class TermsOfServiceView: UIView {
         self.completeButton.rx.tap
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
-                self?.dismissPopupView(completion: self?.completion)
+                self?.dismissPopupView()
             })
             .disposed(by: self.disposeBag)
+        
+        Observable.merge(self.personalTermButton.rx.tap.asObservable(),
+                         self.personalTermDescButton.rx.tap.asObservable())
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                self.delegate?.termsOfServiceViewDidTapPersonalTerm(self)
+            }).disposed(by: self.disposeBag)
+        
+        Observable.merge(self.serviceTermButton.rx.tap.asObservable(),
+                         self.serviceTermDescButton.rx.tap.asObservable())
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                self.delegate?.termsOfServiceViewDidTapServiceTerm(self)
+            }).disposed(by: self.disposeBag)
     }
     
     private func bindCheck() {

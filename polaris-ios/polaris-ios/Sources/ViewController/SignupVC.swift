@@ -10,6 +10,8 @@ import RxSwift
 import UIKit
 
 class SignupVC: UIViewController {
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
 
     // MARK: - Life Cycle
     override func viewDidLoad() {
@@ -31,6 +33,7 @@ class SignupVC: UIViewController {
         self.idTextFieldContainerView.addSubview(idTextFieldView)
         self.pwTextFieldContainerView.addSubview(pwTextFieldView)
         self.nicknameTextFieldContainerView.addSubview(nicknameTextFieldView)
+        self.pwTextFieldView?.setScure(true)
         
         idTextFieldView.delegate       = self
         pwTextFieldView.delegate       = self
@@ -102,8 +105,8 @@ class SignupVC: UIViewController {
             .subscribe(onNext: { isComplete in
                 if isComplete == true {
                     let popupView: TermsOfServiceView? = UIView.fromNib()
-                    popupView?.completion = { [weak self] in self?.viewModel.requestSignup() }
                     popupView?.presentPopupView(from: self)
+                    popupView?.delegate = self
                 }
             })
             .disposed(by: self.disposeBag)
@@ -205,6 +208,24 @@ extension SignupVC: PolarisMarginTextFieldDelegate {
         } else {
             self.viewModel.processLastStep()
         }
+    }
+    
+}
+
+extension SignupVC: TermsOfServiceDelegate {
+    
+    func termsOfServiceViewDidTapPersonalTerm(_ termsOfServiceView: TermsOfServiceView) {
+        #warning("Personal Term WebView 뜨는 것")
+        print("Personal Terms Webview")
+    }
+    
+    func termsOfServiceViewDidTapServiceTerm(_ termsOfServiceView: TermsOfServiceView) {
+        #warning("Service Term WebView 뜨는 것")
+        print("Service Term WebView")
+    }
+    
+    func termsOfServiceViewDidTapComplete(_ termsOfServiceView: TermsOfServiceView) {
+        self.viewModel.requestSignup()
     }
     
 }

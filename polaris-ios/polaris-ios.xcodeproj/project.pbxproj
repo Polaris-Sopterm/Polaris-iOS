@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		343EE86C1BBB3A61832CF112 /* Pods_polaris_ios_Polaris_Beta.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B35230A1FF0651B0EB66A598 /* Pods_polaris_ios_Polaris_Beta.framework */; };
+		8924680670F33E94E942DFA3 /* Pods_polaris_ios_Polaris.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62A763CE321F34C429250864 /* Pods_polaris_ios_Polaris.framework */; };
 		CE04A036262340D1007C98E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A035262340D1007C98E2 /* AppDelegate.swift */; };
 		CE04A038262340D1007C98E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A037262340D1007C98E2 /* SceneDelegate.swift */; };
 		CE04A03D262340D1007C98E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE04A03B262340D1007C98E2 /* Main.storyboard */; };
@@ -24,6 +25,9 @@
 		CE13213D265A1519001E3C1F /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13213C265A1519001E3C1F /* LoginVC.swift */; };
 		CE132141265A408F001E3C1F /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE132140265A408E001E3C1F /* LoginViewModel.swift */; };
 		CE132144265A5CD1001E3C1F /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE132143265A5CD1001E3C1F /* SignupVC.swift */; };
+		CE16C26026A84F9100D87096 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE16C25F26A84F9100D87096 /* GoogleService-Info.plist */; };
+		CE16C26126A84F9100D87096 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE16C25F26A84F9100D87096 /* GoogleService-Info.plist */; };
+		CE16C26226A84F9100D87096 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE16C25F26A84F9100D87096 /* GoogleService-Info.plist */; };
 		CE207B842661CADE009A812A /* BuildPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE207B832661CADE009A812A /* BuildPhase.swift */; };
 		CE207B852661CADE009A812A /* BuildPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE207B832661CADE009A812A /* BuildPhase.swift */; };
 		CE207B892661CBC7009A812A /* ServerHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE207B882661CBC7009A812A /* ServerHost.swift */; };
@@ -32,8 +36,6 @@
 		CE2952E32687893000E21871 /* TodoAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2952E12687893000E21871 /* TodoAPI.swift */; };
 		CE2952E52687940100E21871 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2952E42687940100E21871 /* UIButton+.swift */; };
 		CE2952E62687940100E21871 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2952E42687940100E21871 /* UIButton+.swift */; };
-		CE2952E826879C0500E21871 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE2952E726879C0500E21871 /* GoogleService-Info.plist */; };
-		CE2952E926879C0500E21871 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE2952E726879C0500E21871 /* GoogleService-Info.plist */; };
 		CE2952EE2687A0A500E21871 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE573C262A952100C39358 /* NetworkManager.swift */; };
 		CE2952EF2687A0A500E21871 /* TodoDateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA4941B262819D300CC2EB8 /* TodoDateVC.swift */; };
 		CE2952F02687A0A500E21871 /* AddTodoDropdownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE57A3262C297700C39358 /* AddTodoDropdownTableViewCell.swift */; };
@@ -61,7 +63,6 @@
 		CE2953062687A0A500E21871 /* MainStarTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA49464262C2C7700CC2EB8 /* MainStarTVC.swift */; };
 		CE2953072687A0A500E21871 /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37CC6C265A7674004F327E /* SignupViewModel.swift */; };
 		CE2953082687A0A500E21871 /* PolarisUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE5742262A955D00C39358 /* PolarisUserManager.swift */; };
-		CE2953092687A0A500E21871 /* MainSceneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA49461262C20DD00CC2EB8 /* MainSceneVC.swift */; };
 		CE29530A2687A0A500E21871 /* SignupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF055F22667ED81000E34A0 /* SignupModel.swift */; };
 		CE29530B2687A0A500E21871 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE63050A2667E36E00EBC1D4 /* UserAPI.swift */; };
 		CE29530C2687A0A500E21871 /* StoryboardName.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A06D2623595D007C98E2 /* StoryboardName.swift */; };
@@ -125,7 +126,6 @@
 		CE2953462687A0A500E21871 /* MainStarCVCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA4947A262C48BB00CC2EB8 /* MainStarCVCViewModel.swift */; };
 		CE2953472687A0A500E21871 /* TodoDateTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA494212628223200CC2EB8 /* TodoDateTVC.swift */; };
 		CE2953482687A0A500E21871 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13213C265A1519001E3C1F /* LoginVC.swift */; };
-		CE29534A2687A0A500E21871 /* Pods_polaris_ios_Polaris.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62A763CE321F34C429250864 /* Pods_polaris_ios_Polaris.framework */; };
 		CE29534C2687A0A500E21871 /* AddTodoDayTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE574D72630422600EA64B7 /* AddTodoDayTableViewCell.xib */; };
 		CE29534D2687A0A500E21871 /* TermsOfServiceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8F719E266BDA3500D4FDD7 /* TermsOfServiceView.xib */; };
 		CE29534E2687A0A500E21871 /* MainStarCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECA4946F262C2DD200CC2EB8 /* MainStarCVC.xib */; };
@@ -155,13 +155,11 @@
 		CE2953662687A0A500E21871 /* MainTodoCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECDC5A4C2635530300A1B5A9 /* MainTodoCVC.xib */; };
 		CE2953672687A0A500E21871 /* DropdownItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC48ED3262DCA9100FD887F /* DropdownItemTableViewCell.xib */; };
 		CE2953682687A0A500E21871 /* PolarisPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC74B16267F984E002AFF18 /* PolarisPopupView.xib */; };
-		CE2953692687A0A500E21871 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE2952E726879C0500E21871 /* GoogleService-Info.plist */; };
 		CE29536A2687A0A500E21871 /* DayTodoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC19AEA265103AA00DA747C /* DayTodoTableViewCell.xib */; };
 		CE29536B2687A0A500E21871 /* TodoDateHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECA4943E26284B0B00CC2EB8 /* TodoDateHeaderView.xib */; };
 		CE29536C2687A0A500E21871 /* PolarisMarginTextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEE5779262BE54900C39358 /* PolarisMarginTextField.xib */; };
 		CE29536D2687A0A500E21871 /* TodoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA44E6D267B3BE300A05650 /* TodoTableViewCell.xib */; };
 		CE29536E2687A0A500E21871 /* MainTodoHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECDC5A5B2636A13600A1B5A9 /* MainTodoHeaderView.xib */; };
-		CE29536F2687A0A500E21871 /* MainScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECA4945E262C205C00CC2EB8 /* MainScene.storyboard */; };
 		CE37CC6D265A7674004F327E /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37CC6C265A7674004F327E /* SignupViewModel.swift */; };
 		CE43D02426613D66003126F2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE573C262A952100C39358 /* NetworkManager.swift */; };
 		CE43D02526613D66003126F2 /* TodoDateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA4941B262819D300CC2EB8 /* TodoDateVC.swift */; };
@@ -183,7 +181,6 @@
 		CE43D03526613D66003126F2 /* MainStarTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA49464262C2C7700CC2EB8 /* MainStarTVC.swift */; };
 		CE43D03626613D66003126F2 /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37CC6C265A7674004F327E /* SignupViewModel.swift */; };
 		CE43D03726613D66003126F2 /* PolarisUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE5742262A955D00C39358 /* PolarisUserManager.swift */; };
-		CE43D03826613D66003126F2 /* MainSceneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA49461262C20DD00CC2EB8 /* MainSceneVC.swift */; };
 		CE43D03926613D66003126F2 /* StoryboardName.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A06D2623595D007C98E2 /* StoryboardName.swift */; };
 		CE43D03A26613D66003126F2 /* AddTodoDropdownViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC48ED8262DCD2A00FD887F /* AddTodoDropdownViewModel.swift */; };
 		CE43D03B26613D66003126F2 /* DefaultSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A07426235BD1007C98E2 /* DefaultSession.swift */; };
@@ -260,7 +257,6 @@
 		CE43D08726613D66003126F2 /* TodoDateHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECA4943E26284B0B00CC2EB8 /* TodoDateHeaderView.xib */; };
 		CE43D08826613D66003126F2 /* PolarisMarginTextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEE5779262BE54900C39358 /* PolarisMarginTextField.xib */; };
 		CE43D08A26613D66003126F2 /* MainTodoHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECDC5A5B2636A13600A1B5A9 /* MainTodoHeaderView.xib */; };
-		CE43D08B26613D66003126F2 /* MainScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECA4945E262C205C00CC2EB8 /* MainScene.storyboard */; };
 		CE574000267C8E9900665933 /* TodoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE573FFF267C8E9900665933 /* TodoViewModel.swift */; };
 		CE574001267C8E9900665933 /* TodoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE573FFF267C8E9900665933 /* TodoViewModel.swift */; };
 		CE57400E267C903700665933 /* JourneyTodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE57400C267C903700665933 /* JourneyTodoTableViewCell.swift */; };
@@ -371,8 +367,6 @@
 		ECA49455262B0D0900CC2EB8 /* TodoDateTodayHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA49453262B0D0900CC2EB8 /* TodoDateTodayHeaderView.swift */; };
 		ECA49456262B0D0900CC2EB8 /* TodoDateTodayHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECA49454262B0D0900CC2EB8 /* TodoDateTodayHeaderView.xib */; };
 		ECA4945B262C177D00CC2EB8 /* ImageName.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA4945A262C177D00CC2EB8 /* ImageName.swift */; };
-		ECA4945F262C205C00CC2EB8 /* MainScene.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECA4945E262C205C00CC2EB8 /* MainScene.storyboard */; };
-		ECA49462262C20DD00CC2EB8 /* MainSceneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA49461262C20DD00CC2EB8 /* MainSceneVC.swift */; };
 		ECA49466262C2C7700CC2EB8 /* MainStarTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA49464262C2C7700CC2EB8 /* MainStarTVC.swift */; };
 		ECA49467262C2C7700CC2EB8 /* MainStarTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECA49465262C2C7700CC2EB8 /* MainStarTVC.xib */; };
 		ECA49470262C2DD200CC2EB8 /* MainStarCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA4946E262C2DD200CC2EB8 /* MainStarCVC.swift */; };
@@ -428,11 +422,11 @@
 
 /* Begin PBXFileReference section */
 		28E1460E80D206193AB4D3E6 /* Pods-polaris-ios-Polaris Beta.dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-polaris-ios-Polaris Beta.dev.xcconfig"; path = "Target Support Files/Pods-polaris-ios-Polaris Beta/Pods-polaris-ios-Polaris Beta.dev.xcconfig"; sourceTree = "<group>"; };
-		317393C453134FBB910813E0 /* Pods-polaris-ios-Polaris.real.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-polaris-ios-Polaris.real.xcconfig"; path = "Target Support Files/Pods-polaris-ios-Polaris/Pods-polaris-ios-Polaris.real.xcconfig"; sourceTree = "<group>"; };
+		41065D3F274DA570D2B846D8 /* Pods-polaris-ios-Polaris.dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-polaris-ios-Polaris.dev.xcconfig"; path = "Target Support Files/Pods-polaris-ios-Polaris/Pods-polaris-ios-Polaris.dev.xcconfig"; sourceTree = "<group>"; };
+		43C3EC4528DFE818CCD35BD9 /* Pods-polaris-ios-Polaris.real.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-polaris-ios-Polaris.real.xcconfig"; path = "Target Support Files/Pods-polaris-ios-Polaris/Pods-polaris-ios-Polaris.real.xcconfig"; sourceTree = "<group>"; };
 		517538F94A5A3B74533443DA /* Pods-polaris-ios-Polaris Beta.real.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-polaris-ios-Polaris Beta.real.xcconfig"; path = "Target Support Files/Pods-polaris-ios-Polaris Beta/Pods-polaris-ios-Polaris Beta.real.xcconfig"; sourceTree = "<group>"; };
 		62A763CE321F34C429250864 /* Pods_polaris_ios_Polaris.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_polaris_ios_Polaris.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B9070CF72A6FB1E8ED31409 /* Pods-polaris-ios-Polaris Dev.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-polaris-ios-Polaris Dev.beta.xcconfig"; path = "Target Support Files/Pods-polaris-ios-Polaris Dev/Pods-polaris-ios-Polaris Dev.beta.xcconfig"; sourceTree = "<group>"; };
-		9E68778B32FE6D06DC2E5282 /* Pods-polaris-ios-Polaris.dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-polaris-ios-Polaris.dev.xcconfig"; path = "Target Support Files/Pods-polaris-ios-Polaris/Pods-polaris-ios-Polaris.dev.xcconfig"; sourceTree = "<group>"; };
 		B35230A1FF0651B0EB66A598 /* Pods_polaris_ios_Polaris_Beta.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_polaris_ios_Polaris_Beta.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE04A032262340D1007C98E2 /* Polaris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Polaris.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE04A035262340D1007C98E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -452,11 +446,11 @@
 		CE13213C265A1519001E3C1F /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		CE132140265A408E001E3C1F /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		CE132143265A5CD1001E3C1F /* SignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
+		CE16C25F26A84F9100D87096 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = "GoogleService-Info.plist"; path = "polaris-ios/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		CE207B832661CADE009A812A /* BuildPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildPhase.swift; sourceTree = "<group>"; };
 		CE207B882661CBC7009A812A /* ServerHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerHost.swift; sourceTree = "<group>"; };
 		CE2952E12687893000E21871 /* TodoAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoAPI.swift; sourceTree = "<group>"; };
 		CE2952E42687940100E21871 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
-		CE2952E726879C0500E21871 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CE2952EA26879C1200E21871 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CE2953752687A0A500E21871 /* Polaris Alpha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Polaris Alpha.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE2953882687A30F00E21871 /* polaris-alpha-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "polaris-alpha-Info.plist"; sourceTree = "<group>"; };
@@ -551,8 +545,6 @@
 		ECA49453262B0D0900CC2EB8 /* TodoDateTodayHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDateTodayHeaderView.swift; sourceTree = "<group>"; };
 		ECA49454262B0D0900CC2EB8 /* TodoDateTodayHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodoDateTodayHeaderView.xib; sourceTree = "<group>"; };
 		ECA4945A262C177D00CC2EB8 /* ImageName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageName.swift; sourceTree = "<group>"; };
-		ECA4945E262C205C00CC2EB8 /* MainScene.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainScene.storyboard; sourceTree = "<group>"; };
-		ECA49461262C20DD00CC2EB8 /* MainSceneVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSceneVC.swift; sourceTree = "<group>"; };
 		ECA49464262C2C7700CC2EB8 /* MainStarTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainStarTVC.swift; sourceTree = "<group>"; };
 		ECA49465262C2C7700CC2EB8 /* MainStarTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainStarTVC.xib; sourceTree = "<group>"; };
 		ECA4946E262C2DD200CC2EB8 /* MainStarCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainStarCVC.swift; sourceTree = "<group>"; };
@@ -579,6 +571,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF563CFEB72C3AF1EB396E01 /* Pods_polaris_ios_Polaris.framework in Frameworks */,
+				8924680670F33E94E942DFA3 /* Pods_polaris_ios_Polaris.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -586,7 +579,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE29534A2687A0A500E21871 /* Pods_polaris_ios_Polaris.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -615,12 +607,12 @@
 			isa = PBXGroup;
 			children = (
 				EBADBF5A561A9E7C0BAAF039 /* Pods-polaris-ios-Polaris.beta.xcconfig */,
-				317393C453134FBB910813E0 /* Pods-polaris-ios-Polaris.real.xcconfig */,
 				6B9070CF72A6FB1E8ED31409 /* Pods-polaris-ios-Polaris Dev.beta.xcconfig */,
 				E5008C7064D7B9664A90B023 /* Pods-polaris-ios-Polaris Dev.real.xcconfig */,
-				9E68778B32FE6D06DC2E5282 /* Pods-polaris-ios-Polaris.dev.xcconfig */,
 				28E1460E80D206193AB4D3E6 /* Pods-polaris-ios-Polaris Beta.dev.xcconfig */,
 				517538F94A5A3B74533443DA /* Pods-polaris-ios-Polaris Beta.real.xcconfig */,
+				41065D3F274DA570D2B846D8 /* Pods-polaris-ios-Polaris.dev.xcconfig */,
+				43C3EC4528DFE818CCD35BD9 /* Pods-polaris-ios-Polaris.real.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -669,7 +661,7 @@
 		CE04A04B262340F1007C98E2 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				CE2952E726879C0500E21871 /* GoogleService-Info.plist */,
+				CE16C25F26A84F9100D87096 /* GoogleService-Info.plist */,
 				CE04A035262340D1007C98E2 /* AppDelegate.swift */,
 				CE04A037262340D1007C98E2 /* SceneDelegate.swift */,
 				CEEE5772262BE1B300C39358 /* Protocol */,
@@ -727,7 +719,6 @@
 				CE04A040262340D3007C98E2 /* LaunchScreen.storyboard */,
 				ECA49418262817D500CC2EB8 /* TodoDate.storyboard */,
 				CEEE575C262AD5FA00C39358 /* AddTodo.storyboard */,
-				ECA4945E262C205C00CC2EB8 /* MainScene.storyboard */,
 				CE132139265A14E8001E3C1F /* Intro.storyboard */,
 			);
 			path = Storyboard;
@@ -906,7 +897,6 @@
 				CEEE574F262A965400C39358 /* HalfModalVC.swift */,
 				CEEE575F262AD62C00C39358 /* AddTodoVC.swift */,
 				CE574DA7263555330046D20A /* AddTodoVC+Delegate.swift */,
-				ECA49461262C20DD00CC2EB8 /* MainSceneVC.swift */,
 				CE13213C265A1519001E3C1F /* LoginVC.swift */,
 				CE132143265A5CD1001E3C1F /* SignupVC.swift */,
 				CEA44E58267B386800A05650 /* MainVC.swift */,
@@ -978,11 +968,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE2953722687A0A500E21871 /* Build configuration list for PBXNativeTarget "Polaris Alpha" */;
 			buildPhases = (
-				CE2952EC2687A0A500E21871 /* [CP] Check Pods Manifest.lock */,
 				CE2952ED2687A0A500E21871 /* Sources */,
 				CE2953492687A0A500E21871 /* Frameworks */,
 				CE29534B2687A0A500E21871 /* Resources */,
-				CE2953702687A0A500E21871 /* [CP] Embed Pods Frameworks */,
 				CE2953712687A0A500E21871 /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -1059,6 +1047,7 @@
 				CEEE575D262AD5FA00C39358 /* AddTodo.storyboard in Resources */,
 				ECA494242628223200CC2EB8 /* TodoDateTVC.xib in Resources */,
 				CEE574F126307D7C00EA64B7 /* PerDayItemCollectionViewCell.xib in Resources */,
+				CE16C26026A84F9100D87096 /* GoogleService-Info.plist in Resources */,
 				CE574D98263517B60046D20A /* AddTodoSelectStarTableViewCell.xib in Resources */,
 				CE04A042262340D3007C98E2 /* LaunchScreen.storyboard in Resources */,
 				CE04A03F262340D3007C98E2 /* Assets.xcassets in Resources */,
@@ -1082,13 +1071,11 @@
 				ECDC5A4E2635530300A1B5A9 /* MainTodoCVC.xib in Resources */,
 				CEC48ED5262DCA9100FD887F /* DropdownItemTableViewCell.xib in Resources */,
 				CEC74B17267F984E002AFF18 /* PolarisPopupView.xib in Resources */,
-				CE2952E826879C0500E21871 /* GoogleService-Info.plist in Resources */,
 				CEC19AEC265103AA00DA747C /* DayTodoTableViewCell.xib in Resources */,
 				ECA4944026284B0B00CC2EB8 /* TodoDateHeaderView.xib in Resources */,
 				CEEE577A262BE54900C39358 /* PolarisMarginTextField.xib in Resources */,
 				CEA44E70267B3BE300A05650 /* TodoTableViewCell.xib in Resources */,
 				ECDC5A5D2636A13600A1B5A9 /* MainTodoHeaderView.xib in Resources */,
-				ECA4945F262C205C00CC2EB8 /* MainScene.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1102,6 +1089,7 @@
 				CE29534F2687A0A500E21871 /* AddTodo.storyboard in Resources */,
 				CE2953502687A0A500E21871 /* TodoDateTVC.xib in Resources */,
 				CE2953512687A0A500E21871 /* PerDayItemCollectionViewCell.xib in Resources */,
+				CE16C26126A84F9100D87096 /* GoogleService-Info.plist in Resources */,
 				CE2953522687A0A500E21871 /* AddTodoSelectStarTableViewCell.xib in Resources */,
 				CE2953532687A0A500E21871 /* LaunchScreen.storyboard in Resources */,
 				CE2953542687A0A500E21871 /* Assets.xcassets in Resources */,
@@ -1125,13 +1113,11 @@
 				CE2953662687A0A500E21871 /* MainTodoCVC.xib in Resources */,
 				CE2953672687A0A500E21871 /* DropdownItemTableViewCell.xib in Resources */,
 				CE2953682687A0A500E21871 /* PolarisPopupView.xib in Resources */,
-				CE2953692687A0A500E21871 /* GoogleService-Info.plist in Resources */,
 				CE29536A2687A0A500E21871 /* DayTodoTableViewCell.xib in Resources */,
 				CE29536B2687A0A500E21871 /* TodoDateHeaderView.xib in Resources */,
 				CE29536C2687A0A500E21871 /* PolarisMarginTextField.xib in Resources */,
 				CE29536D2687A0A500E21871 /* TodoTableViewCell.xib in Resources */,
 				CE29536E2687A0A500E21871 /* MainTodoHeaderView.xib in Resources */,
-				CE29536F2687A0A500E21871 /* MainScene.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1145,6 +1131,7 @@
 				CE43D07126613D66003126F2 /* AddTodo.storyboard in Resources */,
 				CE43D07226613D66003126F2 /* TodoDateTVC.xib in Resources */,
 				CE43D07326613D66003126F2 /* PerDayItemCollectionViewCell.xib in Resources */,
+				CE16C26226A84F9100D87096 /* GoogleService-Info.plist in Resources */,
 				CE43D07426613D66003126F2 /* AddTodoSelectStarTableViewCell.xib in Resources */,
 				CE43D07526613D66003126F2 /* LaunchScreen.storyboard in Resources */,
 				CE43D07626613D66003126F2 /* Assets.xcassets in Resources */,
@@ -1168,13 +1155,11 @@
 				CE43D08426613D66003126F2 /* MainTodoCVC.xib in Resources */,
 				CE43D08526613D66003126F2 /* DropdownItemTableViewCell.xib in Resources */,
 				CEC74B18267F984E002AFF18 /* PolarisPopupView.xib in Resources */,
-				CE2952E926879C0500E21871 /* GoogleService-Info.plist in Resources */,
 				CE43D08626613D66003126F2 /* DayTodoTableViewCell.xib in Resources */,
 				CE43D08726613D66003126F2 /* TodoDateHeaderView.xib in Resources */,
 				CE43D08826613D66003126F2 /* PolarisMarginTextField.xib in Resources */,
 				CEA44E71267B3BE300A05650 /* TodoTableViewCell.xib in Resources */,
 				CE43D08A26613D66003126F2 /* MainTodoHeaderView.xib in Resources */,
-				CE43D08B26613D66003126F2 /* MainScene.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1204,45 +1189,6 @@
 			showEnvVarsInLog = 0;
 		};
 		81B56377512B03F98CF18DC6 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-polaris-ios-Polaris/Pods-polaris-ios-Polaris-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-polaris-ios-Polaris/Pods-polaris-ios-Polaris-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-polaris-ios-Polaris/Pods-polaris-ios-Polaris-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CE2952EC2687A0A500E21871 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-polaris-ios-Polaris-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CE2953702687A0A500E21871 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1332,7 +1278,6 @@
 				ECA49466262C2C7700CC2EB8 /* MainStarTVC.swift in Sources */,
 				CE37CC6D265A7674004F327E /* SignupViewModel.swift in Sources */,
 				CEEE5743262A955D00C39358 /* PolarisUserManager.swift in Sources */,
-				ECA49462262C20DD00CC2EB8 /* MainSceneVC.swift in Sources */,
 				CEF055F32667ED81000E34A0 /* SignupModel.swift in Sources */,
 				CE63050B2667E36E00EBC1D4 /* UserAPI.swift in Sources */,
 				CE04A06E2623595D007C98E2 /* StoryboardName.swift in Sources */,
@@ -1430,7 +1375,6 @@
 				CE2953062687A0A500E21871 /* MainStarTVC.swift in Sources */,
 				CE2953072687A0A500E21871 /* SignupViewModel.swift in Sources */,
 				CE2953082687A0A500E21871 /* PolarisUserManager.swift in Sources */,
-				CE2953092687A0A500E21871 /* MainSceneVC.swift in Sources */,
 				CE29530A2687A0A500E21871 /* SignupModel.swift in Sources */,
 				CE29530B2687A0A500E21871 /* UserAPI.swift in Sources */,
 				CE29530C2687A0A500E21871 /* StoryboardName.swift in Sources */,
@@ -1528,7 +1472,6 @@
 				CE43D03526613D66003126F2 /* MainStarTVC.swift in Sources */,
 				CE43D03626613D66003126F2 /* SignupViewModel.swift in Sources */,
 				CE43D03726613D66003126F2 /* PolarisUserManager.swift in Sources */,
-				CE43D03826613D66003126F2 /* MainSceneVC.swift in Sources */,
 				CEF055F42667ED81000E34A0 /* SignupModel.swift in Sources */,
 				CEF055D22667E9D4000E34A0 /* UserAPI.swift in Sources */,
 				CE43D03926613D66003126F2 /* StoryboardName.swift in Sources */,
@@ -1668,7 +1611,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1723,7 +1666,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = NO;
@@ -1736,7 +1679,7 @@
 		};
 		CE04A047262340D3007C98E2 /* Dev */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9E68778B32FE6D06DC2E5282 /* Pods-polaris-ios-Polaris.dev.xcconfig */;
+			baseConfigurationReference = 41065D3F274DA570D2B846D8 /* Pods-polaris-ios-Polaris.dev.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1745,7 +1688,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = AKW8XUH283;
 				INFOPLIST_FILE = "polaris-ios/polaris-AppStore-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1762,7 +1705,7 @@
 		};
 		CE04A048262340D3007C98E2 /* Real */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 317393C453134FBB910813E0 /* Pods-polaris-ios-Polaris.real.xcconfig */;
+			baseConfigurationReference = 43C3EC4528DFE818CCD35BD9 /* Pods-polaris-ios-Polaris.real.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1771,7 +1714,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = AKW8XUH283;
 				INFOPLIST_FILE = "polaris-ios/polaris-AppStore-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1788,7 +1731,6 @@
 		};
 		CE2953732687A0A500E21871 /* Dev */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9E68778B32FE6D06DC2E5282 /* Pods-polaris-ios-Polaris.dev.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1797,7 +1739,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = AKW8XUH283;
 				INFOPLIST_FILE = "polaris-ios/polaris-alpha-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1814,7 +1756,6 @@
 		};
 		CE2953742687A0A500E21871 /* Real */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 317393C453134FBB910813E0 /* Pods-polaris-ios-Polaris.real.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1823,7 +1764,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = AKW8XUH283;
 				INFOPLIST_FILE = "polaris-ios/polaris-alpha-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1849,7 +1790,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = AKW8XUH283;
 				INFOPLIST_FILE = "polaris-ios/polaris-ios.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1875,7 +1816,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = AKW8XUH283;
 				INFOPLIST_FILE = "polaris-ios/polaris-ios.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

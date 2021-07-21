@@ -101,7 +101,6 @@ class SignupViewModel {
                 if checkEmailModel.isDuplicated == true { self.idDuplicatedValidRelay.accept(false) }
                 else { self.idDuplicatedValidRelay.accept(true) }
             }, onFailure: { [weak self] error in
-                #warning("Logging 찍어보는 하나 구현해야함")
                 self?.idDuplicatedValidRelay.accept(false)
             })
             .disposed(by: self.disposeBag)
