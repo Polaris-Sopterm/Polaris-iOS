@@ -215,13 +215,19 @@ extension SignupVC: PolarisMarginTextFieldDelegate {
 extension SignupVC: TermsOfServiceDelegate {
     
     func termsOfServiceViewDidTapPersonalTerm(_ termsOfServiceView: TermsOfServiceView) {
-        #warning("Personal Term WebView 뜨는 것")
-        print("Personal Terms Webview")
+        guard let personalWebController = PolarisWebViewController.instantiateFromStoryboard(StoryboardName.common) else { return }
+        personalWebController.setWebViewTitle(ServiceTermKind.service.title)
+        personalWebController.setWebViewURL(ServiceTermKind.service.url)
+        personalWebController.modalPresentationStyle = .fullScreen
+        self.present(personalWebController, animated: true, completion: nil)
     }
     
     func termsOfServiceViewDidTapServiceTerm(_ termsOfServiceView: TermsOfServiceView) {
-        #warning("Service Term WebView 뜨는 것")
-        print("Service Term WebView")
+        guard let termsOfSeviceWebController = PolarisWebViewController.instantiateFromStoryboard(StoryboardName.common) else { return }
+        termsOfSeviceWebController.setWebViewTitle(ServiceTermKind.personal.title)
+        termsOfSeviceWebController.setWebViewURL(ServiceTermKind.personal.url)
+        termsOfSeviceWebController.modalPresentationStyle = .fullScreen
+        self.present(termsOfSeviceWebController, animated: true, completion: nil)
     }
     
     func termsOfServiceViewDidTapComplete(_ termsOfServiceView: TermsOfServiceView) {
