@@ -44,8 +44,15 @@
                                     <constraint firstItem="OAp-A1-Igf" firstAttribute="leading" secondItem="85P-is-ujg" secondAttribute="leading" constant="12" id="Xjj-1b-NQz"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eIl-J9-2PV">
+                                <rect key="frame" x="0.0" y="104" width="414" height="1"/>
+                                <color key="backgroundColor" name="inactivePurple"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="w3g-pp-CIy"/>
+                                </constraints>
+                            </view>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Rc-0l-jNh" customClass="PolarisWebView" customModule="Polaris" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="104" width="414" height="792"/>
+                                <rect key="frame" x="0.0" y="105" width="414" height="791"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration" allowsAirPlayForMediaPlayback="NO">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -61,8 +68,11 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="8Rc-0l-jNh" secondAttribute="trailing" id="DHl-jh-AZ2"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="85P-is-ujg" secondAttribute="trailing" id="KuQ-93-vlX"/>
                             <constraint firstItem="85P-is-ujg" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Pjz-5x-tHs"/>
+                            <constraint firstItem="eIl-J9-2PV" firstAttribute="top" secondItem="85P-is-ujg" secondAttribute="bottom" id="To2-xS-d1B"/>
                             <constraint firstItem="85P-is-ujg" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="eBR-a0-MfT"/>
-                            <constraint firstItem="8Rc-0l-jNh" firstAttribute="top" secondItem="85P-is-ujg" secondAttribute="bottom" id="qgS-Pa-j33"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="eIl-J9-2PV" secondAttribute="trailing" id="lVO-hw-nQZ"/>
+                            <constraint firstItem="8Rc-0l-jNh" firstAttribute="top" secondItem="eIl-J9-2PV" secondAttribute="bottom" id="mja-L2-Wwr"/>
+                            <constraint firstItem="eIl-J9-2PV" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="sOZ-6K-BIt"/>
                         </constraints>
                     </view>
                     <connections>
@@ -73,11 +83,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-42" y="94"/>
+            <point key="canvasLocation" x="-42.028985507246382" y="93.75"/>
         </scene>
     </scenes>
     <resources>
         <image name="btnCloseJoin" width="48" height="48"/>
+        <namedColor name="inactivePurple">
+            <color red="0.91399997472763062" green="0.91399997472763062" blue="0.9649999737739563" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="mainText">
             <color red="0.25099998712539673" green="0.25099998712539673" blue="0.54900002479553223" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
