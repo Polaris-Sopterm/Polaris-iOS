@@ -285,6 +285,9 @@
 		CE8F71A0266BDA3500D4FDD7 /* TermsOfServiceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8F719E266BDA3500D4FDD7 /* TermsOfServiceView.xib */; };
 		CE8F71A4266BDA4D00D4FDD7 /* TermsOfServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F71A3266BDA4D00D4FDD7 /* TermsOfServiceView.swift */; };
 		CE8F71A5266BDA4D00D4FDD7 /* TermsOfServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F71A3266BDA4D00D4FDD7 /* TermsOfServiceView.swift */; };
+		CEA3CFD726A85C4B00577DA4 /* ShootingComet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA3CFD626A85C4B00577DA4 /* ShootingComet.swift */; };
+		CEA3CFD826A85C6500577DA4 /* ShootingComet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA3CFD626A85C4B00577DA4 /* ShootingComet.swift */; };
+		CEA3CFD926A85C6500577DA4 /* ShootingComet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA3CFD626A85C4B00577DA4 /* ShootingComet.swift */; };
 		CEA44E59267B386800A05650 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA44E58267B386800A05650 /* MainVC.swift */; };
 		CEA44E5A267B386800A05650 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA44E58267B386800A05650 /* MainVC.swift */; };
 		CEA44E5F267B398100A05650 /* MainSceneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA44E5D267B398100A05650 /* MainSceneTableViewCell.swift */; };
@@ -478,6 +481,7 @@
 		CE82B9AC2661DA11004B6D81 /* polaris-ios.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "polaris-ios.plist"; sourceTree = "<group>"; };
 		CE8F719E266BDA3500D4FDD7 /* TermsOfServiceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TermsOfServiceView.xib; sourceTree = "<group>"; };
 		CE8F71A3266BDA4D00D4FDD7 /* TermsOfServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceView.swift; sourceTree = "<group>"; };
+		CEA3CFD626A85C4B00577DA4 /* ShootingComet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShootingComet.swift; sourceTree = "<group>"; };
 		CEA44E58267B386800A05650 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		CEA44E5D267B398100A05650 /* MainSceneTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSceneTableViewCell.swift; sourceTree = "<group>"; };
 		CEA44E5E267B398100A05650 /* MainSceneTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainSceneTableViewCell.xib; sourceTree = "<group>"; };
@@ -664,6 +668,7 @@
 				CE16C25F26A84F9100D87096 /* GoogleService-Info.plist */,
 				CE04A035262340D1007C98E2 /* AppDelegate.swift */,
 				CE04A037262340D1007C98E2 /* SceneDelegate.swift */,
+				CEA3CFD526A85C3D00577DA4 /* Enum */,
 				CEEE5772262BE1B300C39358 /* Protocol */,
 				CEEE5748262A958F00C39358 /* Constants */,
 				CE04A07026235A4A007C98E2 /* Network */,
@@ -782,6 +787,14 @@
 				CE2952E12687893000E21871 /* TodoAPI.swift */,
 			);
 			path = Moya;
+			sourceTree = "<group>";
+		};
+		CEA3CFD526A85C3D00577DA4 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				CEA3CFD626A85C4B00577DA4 /* ShootingComet.swift */,
+			);
+			path = Enum;
 			sourceTree = "<group>";
 		};
 		CEEE5741262A954F00C39358 /* Manager */ = {
@@ -1312,6 +1325,7 @@
 				CEC74B12267F9842002AFF18 /* PolarisPopupView.swift in Sources */,
 				CEEE574D262A963D00C39358 /* DeviceInfo.swift in Sources */,
 				ECA4947E262C670000CC2EB8 /* MainStarTVCViewModel.swift in Sources */,
+				CEA3CFD726A85C4B00577DA4 /* ShootingComet.swift in Sources */,
 				CEC19AEB265103AA00DA747C /* DayTodoTableViewCell.swift in Sources */,
 				CEA44E6E267B3BE300A05650 /* TodoTableViewCell.swift in Sources */,
 				ECA494472629729000CC2EB8 /* TodoDateModel.swift in Sources */,
@@ -1409,6 +1423,7 @@
 				CE2953292687A0A500E21871 /* PolarisPopupView.swift in Sources */,
 				CE29532A2687A0A500E21871 /* DeviceInfo.swift in Sources */,
 				CE29532B2687A0A500E21871 /* MainStarTVCViewModel.swift in Sources */,
+				CEA3CFD826A85C6500577DA4 /* ShootingComet.swift in Sources */,
 				CE29532C2687A0A500E21871 /* DayTodoTableViewCell.swift in Sources */,
 				CE29532D2687A0A500E21871 /* TodoTableViewCell.swift in Sources */,
 				CE29532E2687A0A500E21871 /* TodoDateModel.swift in Sources */,
@@ -1506,6 +1521,7 @@
 				CEC74B13267F9842002AFF18 /* PolarisPopupView.swift in Sources */,
 				CE43D05126613D66003126F2 /* DeviceInfo.swift in Sources */,
 				CE43D05226613D66003126F2 /* MainStarTVCViewModel.swift in Sources */,
+				CEA3CFD926A85C6500577DA4 /* ShootingComet.swift in Sources */,
 				CE43D05326613D66003126F2 /* DayTodoTableViewCell.swift in Sources */,
 				CEA44E6F267B3BE300A05650 /* TodoTableViewCell.swift in Sources */,
 				CE43D05426613D66003126F2 /* TodoDateModel.swift in Sources */,

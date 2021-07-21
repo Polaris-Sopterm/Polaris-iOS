@@ -33,12 +33,12 @@ class TermsOfServiceView: UIView {
         self.animateForPresent()
     }
     
-    private func dismissPopupView() {
+    func dismissPopupView(completion: (() -> Void)? = nil) {
         UIView.animate(withDuration: 0.3, animations: {
             self.termsView.transform = CGAffineTransform(translationX: 0, y: 290)
             self.dimView.alpha       = 0
         }) { _ in
-            self.delegate?.termsOfServiceViewDidTapComplete(self)
+            completion?()
             self.removeFromSuperview()
         }
     }
@@ -55,7 +55,7 @@ class TermsOfServiceView: UIView {
     
     private func bindTapGesture() {
         let tapGesture = UITapGestureRecognizer()
-        self.addGestureRecognizer(tapGesture)
+        self.dimView.addGestureRecognizer(tapGesture)
         tapGesture.rx.event
             .subscribe(onNext: { [weak self] recognizer in
                 self?.dismissPopupView()
@@ -94,7 +94,8 @@ class TermsOfServiceView: UIView {
         self.completeButton.rx.tap
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
-                self?.dismissPopupView()
+                guard let self = self else { return }
+                self.dismissPopupView { self.delegate?.termsOfServiceViewDidTapComplete(self) }
             })
             .disposed(by: self.disposeBag)
         

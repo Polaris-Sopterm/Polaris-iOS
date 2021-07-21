@@ -32,6 +32,11 @@
                                         <constraint firstAttribute="width" constant="26" id="ySb-bj-1WK"/>
                                     </constraints>
                                     <state key="normal" image="btnClose"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="imageTintColor">
+                                            <color key="value" red="0.64529601947031012" green="0.70050426365173968" blue="0.64256634375730448" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="약관을 확인해주세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="44Q-in-klG">
                                     <rect key="frame" x="112.33333333333333" y="24.333333333333371" width="150.33333333333337" height="21.666666666666671"/>

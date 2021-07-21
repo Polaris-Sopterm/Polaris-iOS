@@ -225,7 +225,7 @@ extension SignupVC: TermsOfServiceDelegate {
     }
     
     func termsOfServiceViewDidTapComplete(_ termsOfServiceView: TermsOfServiceView) {
-        self.viewModel.requestSignup()
+//        self.viewModel.requestSignup()
     }
     
 }
