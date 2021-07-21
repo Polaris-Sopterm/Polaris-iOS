@@ -63,7 +63,7 @@
 		CE2953062687A0A500E21871 /* MainStarTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA49464262C2C7700CC2EB8 /* MainStarTVC.swift */; };
 		CE2953072687A0A500E21871 /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37CC6C265A7674004F327E /* SignupViewModel.swift */; };
 		CE2953082687A0A500E21871 /* PolarisUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE5742262A955D00C39358 /* PolarisUserManager.swift */; };
-		CE29530A2687A0A500E21871 /* SignupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF055F22667ED81000E34A0 /* SignupModel.swift */; };
+		CE29530A2687A0A500E21871 /* PolarisUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF055F22667ED81000E34A0 /* PolarisUser.swift */; };
 		CE29530B2687A0A500E21871 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE63050A2667E36E00EBC1D4 /* UserAPI.swift */; };
 		CE29530C2687A0A500E21871 /* StoryboardName.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A06D2623595D007C98E2 /* StoryboardName.swift */; };
 		CE29530D2687A0A500E21871 /* JourneyTodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE57400C267C903700665933 /* JourneyTodoTableViewCell.swift */; };
@@ -361,8 +361,8 @@
 		CEF055DD2667EA35000E34A0 /* NetworkInform.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE63050E2667E7BA00EBC1D4 /* NetworkInform.swift */; };
 		CEF055EE2667EB38000E34A0 /* CheckEmailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF055ED2667EB38000E34A0 /* CheckEmailModel.swift */; };
 		CEF055EF2667EB38000E34A0 /* CheckEmailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF055ED2667EB38000E34A0 /* CheckEmailModel.swift */; };
-		CEF055F32667ED81000E34A0 /* SignupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF055F22667ED81000E34A0 /* SignupModel.swift */; };
-		CEF055F42667ED81000E34A0 /* SignupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF055F22667ED81000E34A0 /* SignupModel.swift */; };
+		CEF055F32667ED81000E34A0 /* PolarisUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF055F22667ED81000E34A0 /* PolarisUser.swift */; };
+		CEF055F42667ED81000E34A0 /* PolarisUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF055F22667ED81000E34A0 /* PolarisUser.swift */; };
 		CF563CFEB72C3AF1EB396E01 /* Pods_polaris_ios_Polaris.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62A763CE321F34C429250864 /* Pods_polaris_ios_Polaris.framework */; };
 		EC08F3D0267DD24100F915F3 /* MainLookBackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC08F3CE267DD24100F915F3 /* MainLookBackCollectionViewCell.swift */; };
 		EC08F3D1267DD24100F915F3 /* MainLookBackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC08F3CE267DD24100F915F3 /* MainLookBackCollectionViewCell.swift */; };
@@ -547,7 +547,7 @@
 		CEEE57A3262C297700C39358 /* AddTodoDropdownTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoDropdownTableViewCell.swift; sourceTree = "<group>"; };
 		CEEE57A4262C297700C39358 /* AddTodoDropdownTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTodoDropdownTableViewCell.xib; sourceTree = "<group>"; };
 		CEF055ED2667EB38000E34A0 /* CheckEmailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckEmailModel.swift; sourceTree = "<group>"; };
-		CEF055F22667ED81000E34A0 /* SignupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupModel.swift; sourceTree = "<group>"; };
+		CEF055F22667ED81000E34A0 /* PolarisUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarisUser.swift; sourceTree = "<group>"; };
 		E5008C7064D7B9664A90B023 /* Pods-polaris-ios-Polaris Dev.real.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-polaris-ios-Polaris Dev.real.xcconfig"; path = "Target Support Files/Pods-polaris-ios-Polaris Dev/Pods-polaris-ios-Polaris Dev.real.xcconfig"; sourceTree = "<group>"; };
 		EBADBF5A561A9E7C0BAAF039 /* Pods-polaris-ios-Polaris.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-polaris-ios-Polaris.beta.xcconfig"; path = "Target Support Files/Pods-polaris-ios-Polaris/Pods-polaris-ios-Polaris.beta.xcconfig"; sourceTree = "<group>"; };
 		EC08F3CE267DD24100F915F3 /* MainLookBackCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLookBackCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -928,7 +928,7 @@
 				ECA494462629729000CC2EB8 /* TodoDateModel.swift */,
 				ECA49474262C461700CC2EB8 /* MainStarModel.swift */,
 				CEF055ED2667EB38000E34A0 /* CheckEmailModel.swift */,
-				CEF055F22667ED81000E34A0 /* SignupModel.swift */,
+				CEF055F22667ED81000E34A0 /* PolarisUser.swift */,
 				CEAC598F266F9F210092A255 /* AuthModel.swift */,
 				CEAC5994266FBEA50092A255 /* PolarisErrorModel.swift */,
 			);
@@ -1329,7 +1329,7 @@
 				ECA49466262C2C7700CC2EB8 /* MainStarTVC.swift in Sources */,
 				CE37CC6D265A7674004F327E /* SignupViewModel.swift in Sources */,
 				CEEE5743262A955D00C39358 /* PolarisUserManager.swift in Sources */,
-				CEF055F32667ED81000E34A0 /* SignupModel.swift in Sources */,
+				CEF055F32667ED81000E34A0 /* PolarisUser.swift in Sources */,
 				CE63050B2667E36E00EBC1D4 /* UserAPI.swift in Sources */,
 				CE04A06E2623595D007C98E2 /* StoryboardName.swift in Sources */,
 				CE57400E267C903700665933 /* JourneyTodoTableViewCell.swift in Sources */,
@@ -1431,7 +1431,7 @@
 				CE2953062687A0A500E21871 /* MainStarTVC.swift in Sources */,
 				CE2953072687A0A500E21871 /* SignupViewModel.swift in Sources */,
 				CE2953082687A0A500E21871 /* PolarisUserManager.swift in Sources */,
-				CE29530A2687A0A500E21871 /* SignupModel.swift in Sources */,
+				CE29530A2687A0A500E21871 /* PolarisUser.swift in Sources */,
 				CE29530B2687A0A500E21871 /* UserAPI.swift in Sources */,
 				CE29530C2687A0A500E21871 /* StoryboardName.swift in Sources */,
 				CE29530D2687A0A500E21871 /* JourneyTodoTableViewCell.swift in Sources */,
@@ -1533,7 +1533,7 @@
 				CE43D03526613D66003126F2 /* MainStarTVC.swift in Sources */,
 				CE43D03626613D66003126F2 /* SignupViewModel.swift in Sources */,
 				CE43D03726613D66003126F2 /* PolarisUserManager.swift in Sources */,
-				CEF055F42667ED81000E34A0 /* SignupModel.swift in Sources */,
+				CEF055F42667ED81000E34A0 /* PolarisUser.swift in Sources */,
 				CEF055D22667E9D4000E34A0 /* UserAPI.swift in Sources */,
 				CE43D03926613D66003126F2 /* StoryboardName.swift in Sources */,
 				CE57400F267C903700665933 /* JourneyTodoTableViewCell.swift in Sources */,

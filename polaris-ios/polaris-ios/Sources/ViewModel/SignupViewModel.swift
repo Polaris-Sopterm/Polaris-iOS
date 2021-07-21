@@ -53,15 +53,16 @@ class SignupViewModel {
             .disposed(by: self.disposeBag)
     }
     
-    func requestSignup() {
+    func requestSignup(completion: @escaping () -> Void) {
         guard let id = try? self.idSubject.value(), let pw = try? self.pwSubject.value(),
               let nickname = try? self.nicknameSubject.value() else { return }
         let userAPI = UserAPI.createUser(email: id, password: pw, nickname: nickname)
-        let some = NetworkManager.request(apiType: userAPI)
-            .subscribe(onSuccess: { (signupModel: SignupModel) in
-                print(signupModel)
+        NetworkManager.request(apiType: userAPI)
+            .subscribe(onSuccess: { (signupModel: PolarisUser) in
+                PolarisUserManager.shared.updateUser(signupModel)
+                completion()
             }, onFailure: { error in
-
+                #warning("네트워크 에러일 때, 처리 필요")
                 print(error.localizedDescription)
             })
             .disposed(by: self.disposeBag)

@@ -19,6 +19,7 @@ class SignupVC: UIViewController {
         self.addKeyboardDismissTapGesture()
         self.adjustTopConstraint()
         self.setupTextFields()
+        self.setupLoadingIndicator()
         self.bindCloseButton()
         self.observeStepSignup()
         self.observeValidation()
@@ -40,9 +41,26 @@ class SignupVC: UIViewController {
         nicknameTextFieldView.delegate = self
     }
     
+    private func setupLoadingIndicator() {
+        self.stopLoadingIndicator()
+        self.view.addSubview(self.loadingIndicator)
+        self.loadingIndicator.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+        }
+    }
+    
+    private func startLoadingIndicator() {
+        self.loadingIndicator.isHidden = false
+        self.loadingIndicator.startAnimating()
+    }
+    
+    private func stopLoadingIndicator() {
+        self.loadingIndicator.isHidden = true
+        self.loadingIndicator.stopAnimating()
+    }
+    
     private func adjustTopConstraint() {
         let defaultTopConstraint: CGFloat = 11
-        
         self.closeButtonTopConstraint.constant = defaultTopConstraint + DeviceInfo.topSafeAreaInset
     }
     
@@ -153,6 +171,8 @@ class SignupVC: UIViewController {
     private var disposeBag = DisposeBag()
     private var viewModel  = SignupViewModel()
     
+    private let loadingIndicator = UIActivityIndicatorView(style: .medium)
+    
     @IBOutlet private weak var idDescriptionStackView: UIStackView!
     @IBOutlet private weak var pwDescriptionStackView: UIStackView!
     @IBOutlet private weak var nicknameDescriptionStackView: UIStackView!
@@ -231,7 +251,12 @@ extension SignupVC: TermsOfServiceDelegate {
     }
     
     func termsOfServiceViewDidTapComplete(_ termsOfServiceView: TermsOfServiceView) {
-//        self.viewModel.requestSignup()
+        self.startLoadingIndicator()
+        self.viewModel.requestSignup { [weak self] in
+            self?.stopLoadingIndicator()
+            guard let mainVC = MainVC.instantiateFromStoryboard(StoryboardName.main) else { return }
+            UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController = mainVC
+        }
     }
     
 }
