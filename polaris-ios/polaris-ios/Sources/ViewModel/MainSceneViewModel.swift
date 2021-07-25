@@ -15,6 +15,8 @@ struct MainSceneViewModel {
     var mainStarViewModels: [MainStarCVCViewModel] = []
     var heightList: [CGFloat] = [CGFloat(52.0),CGFloat(93.0),CGFloat(52.0),CGFloat(87.0),CGFloat(28.0),CGFloat(71),CGFloat(34),CGFloat(86),CGFloat(58)]
     
+    private var disposeBag = DisposeBag()
+    
     struct Input{
     
     }
@@ -26,10 +28,19 @@ struct MainSceneViewModel {
         let lookBackState: BehaviorRelay<[MainLookBackCellState]>
         
     }
+    
+    
+    
     func connect(input: Input) -> Output{
+        
+        
+        
+        
         let starList: BehaviorRelay<[MainStarCVCViewModel]> = BehaviorRelay(value: [])
         let state: BehaviorRelay<[StarCollectionViewState]> = BehaviorRelay(value: [])
         let lookBackState: BehaviorRelay<[MainLookBackCellState]> = BehaviorRelay(value: [])
+
+        
 
         let mainStarModels = [MainStarModel(starName: "도전", starLevel: 4),
                                MainStarModel(starName: "행복", starLevel: 4),
@@ -37,6 +48,18 @@ struct MainSceneViewModel {
                                MainStarModel(starName: "감사", starLevel: 4),
                                MainStarModel(starName: "휴식", starLevel: 4)]
 //        let mainStarModels: [MainStarModel] = []
+        
+//        let userAPI = UserAPI.createUser(email: id, password: pw, nickname: nickname)
+      
+        
+        let homeAPI = HomeAPI.getHomeBanner(isSkipped: true)
+        let some = NetworkManager.request(apiType: homeAPI)
+            .subscribe(onSuccess: { (homeModel: HomeModel) in
+                print(homeModel)
+            }, onFailure: { error in
+                print(error.localizedDescription)
+            })
+            .disposed(by: self.disposeBag)
         
         
         

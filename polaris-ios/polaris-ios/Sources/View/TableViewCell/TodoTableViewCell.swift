@@ -88,7 +88,8 @@ class TodoTableViewCell: MainTableViewCell {
                 guard let self = self else { return }
                 
                 self.tableView.reloadData()
-                self.updateCategoryButton(as: currentTab)
+                self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+                self.updateCategoryButton(as: currentTab == .day ? .journey : .day)
             })
             .disposed(by: self.disposeBag)
     }
@@ -167,16 +168,27 @@ extension TodoTableViewCell: UITableViewDelegate {
 }
 
 extension TodoTableViewCell: DayTodoHeaderViewDelegate {
+    
     func dayTodoHeaderView(_ dayTodoHeaderView: DayTodoHeaderView, didTapAddTodo date: String) {
+        guard let addTodoVC = AddTodoVC.instantiateFromStoryboard(StoryboardName.addTodo),
+              let visibleController = UIViewController.getVisibleController() else { return }
+        addTodoVC.setupAddOptions(.perDayAddTodo)
+        addTodoVC.presentWithAnimation(from: visibleController)
     }
     
     
 }
 
 extension TodoTableViewCell: JourneyTodoHeaderViewDelegate {
+    
     func journeyTodoHeaderView(_ journeyTodoHeaderView: JourneyTodoHeaderView, didTapEdit todo: String) {
     }
     
     func journeyTodoHeaderView(_ journeyTodoHeaderView: JourneyTodoHeaderView, didTapAdd todo: String) {
+        guard let addTodoVC = AddTodoVC.instantiateFromStoryboard(StoryboardName.addTodo),
+              let visibleController = UIViewController.getVisibleController() else { return }
+        addTodoVC.setupAddOptions(.perJourneyAddTodo)
+        addTodoVC.presentWithAnimation(from: visibleController)
     }
+    
 }

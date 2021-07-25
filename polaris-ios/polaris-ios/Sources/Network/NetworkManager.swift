@@ -8,6 +8,7 @@
 import Foundation
 import Moya
 import RxSwift
+import Network
 
 class NetworkManager {
     
@@ -21,7 +22,7 @@ class NetworkManager {
                         self.handlePolarisError(polarisError)
                         single(.failure(polarisError))
                         return
-                    }
+                    }           
                     
                     do {
                         guard let resultData = try response.mapString().data(using: .utf8) else {
