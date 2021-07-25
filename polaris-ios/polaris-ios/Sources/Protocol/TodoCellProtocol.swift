@@ -14,6 +14,8 @@ class TodoHeaderView: UIView {
     weak var delegate: TodoHeaderViewDelegate?
     class var headerHeight: CGFloat { return 0 }
     
+    func configure(_ headerModel: TodoHeaderModel) {}
+    
 }
 
 class TodoCategoryCell: UITableViewCell {

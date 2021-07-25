@@ -15,6 +15,8 @@ class MainVC: UIViewController {
         super.viewDidLoad()
         self.registerCell()
         self.setupTableView()
+        
+        print(PolarisUserManager.shared.authToken)
     }
     
     private func registerCell() {

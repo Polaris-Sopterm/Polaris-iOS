@@ -73,9 +73,9 @@ class TodoTableViewCell: MainTableViewCell {
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
                 
-                let currentTab            = self.viewModel.currentTabRelay.value
-                let nextTab: TodoCategory = currentTab == .day ? .journey : .day
-                self.viewModel.currentTabRelay.accept(nextTab)
+                let currentTab               = self.viewModel.currentTabRelay.value
+                let changedTab: TodoCategory = currentTab == .day ? .journey : .day
+                self.viewModel.currentTabRelay.accept(changedTab)
             })
             .disposed(by: self.disposeBag)
     }
@@ -142,10 +142,10 @@ extension TodoTableViewCell: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let currentHeaderType = self.viewModel.currentTabRelay.value
+        let currentTab = self.viewModel.currentTabRelay.value
         var todoHeaderView: TodoHeaderView
         
-        if currentHeaderType == .day {
+        if currentTab == .day {
             guard let dayHeaderView: DayTodoHeaderView = UIView.fromNib() else { return nil }
             todoHeaderView = dayHeaderView
         } else {
@@ -154,6 +154,7 @@ extension TodoTableViewCell: UITableViewDelegate {
         }
         
         todoHeaderView.delegate = self
+        
         return todoHeaderView
     }
     
@@ -175,7 +176,6 @@ extension TodoTableViewCell: DayTodoHeaderViewDelegate {
         addTodoVC.setupAddOptions(.perDayAddTodo)
         addTodoVC.presentWithAnimation(from: visibleController)
     }
-    
     
 }
 

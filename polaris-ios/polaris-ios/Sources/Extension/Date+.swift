@@ -52,10 +52,20 @@ extension Date {
         }
         return week
     }
+    
+//    static var weekDays: [Date] {
+//        var weekDays: [Date] = [self.normalizedCurrent]
+//        for add in 1...6 {
+//            guard let day = Calendar.current.date(byAdding: .day, value: add, to: self.normalizedCurrent) else { continue }
+//            weekDays.append(day)
+//        }
+//        return weekDays
+//    }
+    
 }
 
 extension Date {
-    enum WeekDay: Int {
+    enum WeekDay: Int, CaseIterable {
         case sunday = 1, monday, tuesday, wednesday, thursday, friday, saturday
         
         var korWeekday: String {

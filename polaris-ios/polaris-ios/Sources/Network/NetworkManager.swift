@@ -55,8 +55,9 @@ class NetworkManager {
     
     private static func handlePolarisError(_ polarisError: PolarisErrorModel.PolarisError) {
         switch polarisError {
-        case .expiredToken:        self.handleExpiredAccessTokenError()
-        case .expiredRefreshToken: self.handleExpiredRefreshTokenError()
+        case .expiredToken:         self.handleExpiredAccessTokenError()
+        case .expiredRefreshToken:  self.handleExpiredRefreshTokenError()
+        case .login_Info_Incorrect: self.handleLoginError()
         }
     }
     
@@ -73,6 +74,16 @@ extension NetworkManager {
         guard let loginViewController = LoginVC.instantiateFromStoryboard(StoryboardName.intro) else { return }
         UIApplication.shared.windows
             .filter({ $0.isKeyWindow }).first?.rootViewController = loginViewController
+    }
+    
+    private static func handleLoginError() {
+        guard let visibleController = UIViewController.getVisibleController() else { return }
+        guard visibleController is LoginVC                                    else { return }
+        
+        guard let popupView: PolarisPopupView = UIView.fromNib() else { return }
+        #warning("확인형 팝업으로 바꿔야함")
+        popupView.configure(title: "로그인에 실패했어요.", subTitle: "실패했습니다.")
+        popupView.show(in: visibleController.view)
     }
     
 }

@@ -52,7 +52,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 extension SceneDelegate {
     
     func setInitRootViewController() {
-        #warning("테스트용으로 제거")
 //        if PolarisUserManager.shared.hasToken == true {
 //            guard let mainSceneVC = MainVC.instantiateFromStoryboard(StoryboardName.main) else { return }
 //            self.window?.rootViewController = mainSceneVC

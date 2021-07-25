@@ -30,13 +30,27 @@ enum TodoCategory {
     var headerType: TodoHeaderView.Type {
         switch self {
         case .day:     return DayTodoHeaderView.self
-        case .journey: return DayTodoHeaderView.self
+        case .journey: return JourneyTodoHeaderView.self
         }
     }
 }
 
 class TodoViewModel {
     
+    typealias DayTodoSectionModel = [[String]]
+    
     let currentTabRelay = BehaviorRelay<TodoCategory>(value: .day)
+    
+    func requestTodoList() {
+        let todoListAPI = TodoAPI.listTodoByDate(year: "2021", month: "7", weekNo: "4")
+        
+//        NetworkManager.request(apiType: todoListAPI)
+    }
+    
+    private(set) var journeyTodoModel      = [String]()
+    private(set) var jouneyTodoHeaderModel = [Date]()
+    
+    private(set) var dayTodoHeaderModel = [Date]()
+    private(set) var dayTodoModel       = [String]()
     
 }

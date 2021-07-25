@@ -13,8 +13,9 @@ class LoginViewModel {
     let idSubject = BehaviorSubject<String>(value: "")
     let pwSubject = BehaviorSubject<String>(value: "")
     
-    let proceedAbleSubject   = BehaviorSubject<Bool>(value: false)
-    let completeLoginSubject = PublishSubject<Void>()
+    let loadingSubject          = BehaviorSubject<Bool>(value: false)
+    let canProcessLoginSubject  = BehaviorSubject<Bool>(value: false)
+    let completeLoginSubject    = PublishSubject<Void>()
     
     init() {
         Observable.combineLatest(self.idSubject, self.pwSubject)
@@ -22,9 +23,8 @@ class LoginViewModel {
                 guard let self = self else { return }
                 
                 let isProceedLogin = self.isProceedLogin(idInput, pwInput)
-                self.proceedAbleSubject.onNext(isProceedLogin)
-            })
-            .disposed(by: self.disposeBag)
+                self.canProcessLoginSubject.onNext(isProceedLogin)
+            }).disposed(by: self.disposeBag)
     }
     
     func isProceedLogin(_ idInput: String, _ pwInput: String) -> Bool {
@@ -35,15 +35,17 @@ class LoginViewModel {
     func requestLogin() {
         guard let id = try? self.idSubject.value(), let password = try? self.pwSubject.value() else { return }
         
+        self.loadingSubject.onNext(true)
         let userAPI = UserAPI.auth(email: id, password: password)
         NetworkManager.request(apiType: userAPI)
             .subscribe(onSuccess: { (authModel: AuthModel) in
                 PolarisUserManager.shared.updateAuthToken(authModel.accessToken, authModel.refreshToken)
                 self.completeLoginSubject.onNext(())
+                self.loadingSubject.onNext(false)
             }, onFailure: { error in
                 print(error.localizedDescription)
-            })
-            .disposed(by: self.disposeBag)
+                self.loadingSubject.onNext(false)
+            }).disposed(by: self.disposeBag)
     }
     
     private var disposeBag = DisposeBag()
