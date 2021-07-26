@@ -333,6 +333,9 @@
 		CEC74B13267F9842002AFF18 /* PolarisPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC74B11267F9842002AFF18 /* PolarisPopupView.swift */; };
 		CEC74B17267F984E002AFF18 /* PolarisPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC74B16267F984E002AFF18 /* PolarisPopupView.xib */; };
 		CEC74B18267F984E002AFF18 /* PolarisPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC74B16267F984E002AFF18 /* PolarisPopupView.xib */; };
+		CEDB478426AEF7520024ABD4 /* AddTodoResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDB478326AEF7520024ABD4 /* AddTodoResponseModel.swift */; };
+		CEDB478526AEF7CE0024ABD4 /* AddTodoResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDB478326AEF7520024ABD4 /* AddTodoResponseModel.swift */; };
+		CEDB478626AEF7CE0024ABD4 /* AddTodoResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDB478326AEF7520024ABD4 /* AddTodoResponseModel.swift */; };
 		CEE574D82630422600EA64B7 /* AddTodoDayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE574D62630422600EA64B7 /* AddTodoDayTableViewCell.swift */; };
 		CEE574D92630422600EA64B7 /* AddTodoDayTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE574D72630422600EA64B7 /* AddTodoDayTableViewCell.xib */; };
 		CEE574E926307B4400EA64B7 /* AddTodoDayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE574E826307B4400EA64B7 /* AddTodoDayViewModel.swift */; };
@@ -523,6 +526,7 @@
 		CEC48ED8262DCD2A00FD887F /* AddTodoDropdownViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoDropdownViewModel.swift; sourceTree = "<group>"; };
 		CEC74B11267F9842002AFF18 /* PolarisPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarisPopupView.swift; sourceTree = "<group>"; };
 		CEC74B16267F984E002AFF18 /* PolarisPopupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PolarisPopupView.xib; sourceTree = "<group>"; };
+		CEDB478326AEF7520024ABD4 /* AddTodoResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoResponseModel.swift; sourceTree = "<group>"; };
 		CEE574D62630422600EA64B7 /* AddTodoDayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoDayTableViewCell.swift; sourceTree = "<group>"; };
 		CEE574D72630422600EA64B7 /* AddTodoDayTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTodoDayTableViewCell.xib; sourceTree = "<group>"; };
 		CEE574E826307B4400EA64B7 /* AddTodoDayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoDayViewModel.swift; sourceTree = "<group>"; };
@@ -833,6 +837,32 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		CEDB478026AEF7050024ABD4 /* AddTodo */ = {
+			isa = PBXGroup;
+			children = (
+				CEDB478326AEF7520024ABD4 /* AddTodoResponseModel.swift */,
+			);
+			path = AddTodo;
+			sourceTree = "<group>";
+		};
+		CEDB478126AEF7100024ABD4 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				CEAC5994266FBEA50092A255 /* PolarisErrorModel.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		CEDB478226AEF72E0024ABD4 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				CEF055ED2667EB38000E34A0 /* CheckEmailModel.swift */,
+				CEF055F22667ED81000E34A0 /* PolarisUser.swift */,
+				CEAC598F266F9F210092A255 /* AuthModel.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
 		CEEE5741262A954F00C39358 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
@@ -928,13 +958,12 @@
 		CEF055EA2667EB20000E34A0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CEDB478126AEF7100024ABD4 /* Common */,
+				CEDB478226AEF72E0024ABD4 /* User */,
+				CEDB478026AEF7050024ABD4 /* AddTodo */,
 				ECA494282628298B00CC2EB8 /* TodoModel.swift */,
 				ECA494462629729000CC2EB8 /* TodoDateModel.swift */,
 				ECA49474262C461700CC2EB8 /* MainStarModel.swift */,
-				CEF055ED2667EB38000E34A0 /* CheckEmailModel.swift */,
-				CEF055F22667ED81000E34A0 /* PolarisUser.swift */,
-				CEAC598F266F9F210092A255 /* AuthModel.swift */,
-				CEAC5994266FBEA50092A255 /* PolarisErrorModel.swift */,
 				CEA3CFF026A92B8900577DA4 /* TodoDayListModel.swift */,
 			);
 			path = Model;
@@ -1371,6 +1400,7 @@
 				ECA4947E262C670000CC2EB8 /* MainStarTVCViewModel.swift in Sources */,
 				CEA3CFF126A92B8900577DA4 /* TodoDayListModel.swift in Sources */,
 				CEA3CFD726A85C4B00577DA4 /* ShootingComet.swift in Sources */,
+				CEDB478426AEF7520024ABD4 /* AddTodoResponseModel.swift in Sources */,
 				CEC19AEB265103AA00DA747C /* DayTodoTableViewCell.swift in Sources */,
 				CEA44E6E267B3BE300A05650 /* TodoTableViewCell.swift in Sources */,
 				ECA494472629729000CC2EB8 /* TodoDateModel.swift in Sources */,
@@ -1474,6 +1504,7 @@
 				CE29532B2687A0A500E21871 /* MainStarTVCViewModel.swift in Sources */,
 				CEA3CFF226A92B8900577DA4 /* TodoDayListModel.swift in Sources */,
 				CEA3CFD826A85C6500577DA4 /* ShootingComet.swift in Sources */,
+				CEDB478526AEF7CE0024ABD4 /* AddTodoResponseModel.swift in Sources */,
 				CE29532C2687A0A500E21871 /* DayTodoTableViewCell.swift in Sources */,
 				CE29532D2687A0A500E21871 /* TodoTableViewCell.swift in Sources */,
 				CE29532E2687A0A500E21871 /* TodoDateModel.swift in Sources */,
@@ -1577,6 +1608,7 @@
 				CE43D05226613D66003126F2 /* MainStarTVCViewModel.swift in Sources */,
 				CEA3CFF326A92B8900577DA4 /* TodoDayListModel.swift in Sources */,
 				CEA3CFD926A85C6500577DA4 /* ShootingComet.swift in Sources */,
+				CEDB478626AEF7CE0024ABD4 /* AddTodoResponseModel.swift in Sources */,
 				CE43D05326613D66003126F2 /* DayTodoTableViewCell.swift in Sources */,
 				CEA44E6F267B3BE300A05650 /* TodoTableViewCell.swift in Sources */,
 				CE43D05426613D66003126F2 /* TodoDateModel.swift in Sources */,

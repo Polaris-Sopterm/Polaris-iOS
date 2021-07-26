@@ -9,7 +9,7 @@ import Foundation
 import Moya
 
 enum TodoAPI {
-    case createToDo(title: String, date: String, journeyTitle: String? = nil, journeyIdx: Int, isTop: Bool)
+    case createToDo(title: String, date: String, journeyTitle: String = "default", journeyIdx: Int? = nil, isTop: Bool)
     case createJourney(title: String, date: String, journeyIdx: Int, isTop: Bool)
     case listTodoByDate(year: String, month: String, weekNo: String)
 }
@@ -42,8 +42,8 @@ extension TodoAPI: TargetType {
     var task: Task {
         switch self {
         case .createToDo(let title, let date, let journeyTitle, let journeyIdx, let isTop):
-            var params: [String: Any] = ["title": title, "date": date, "journeyIdx": journeyIdx, "isTop": isTop]
-            if let journeyTitle = journeyTitle { params["journeyTitle"] = journeyTitle }
+            var params: [String: Any] = ["title": title, "date": date, "journeyTitle": journeyTitle, "isTop": isTop]
+            if let journeyIdx = journeyIdx { params["journeyIdx"] = journeyIdx }
             return .requestParameters(parameters: params, encoding: JSONEncoding.default)
         case .createJourney(let title, let date, let journeyIdx, let isTop):
             return .requestParameters(parameters: ["title": title, "date": date, "journeyIdx": journeyIdx, "isTop": isTop], encoding: JSONEncoding.default)
@@ -53,6 +53,7 @@ extension TodoAPI: TargetType {
     }
     
     var headers: [String : String]? {
+        print(NetworkInform.headers)
         return NetworkInform.headers
     }
     

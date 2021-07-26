@@ -78,6 +78,13 @@ extension Date {
         return thisWeekDates
     }
     
+    func convertToString(using format: String = "yyyy-MM-dd") -> String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.dateFormat = format
+        return formatter.string(from: self)
+    }
+    
 }
 
 extension Date {

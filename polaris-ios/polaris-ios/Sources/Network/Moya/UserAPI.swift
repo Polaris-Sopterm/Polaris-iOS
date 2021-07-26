@@ -49,7 +49,6 @@ extension UserAPI: TargetType {
             return .requestParameters(parameters: ["email": email, "password": password], encoding: JSONEncoding.default)
         case .reauth(let refreshToken):
             return .requestParameters(parameters: ["refreshToken": refreshToken], encoding: JSONEncoding.default)
-            return .requestParameters(parameters: ["":""], encoding: URLEncoding.queryString)
         }
     }
     

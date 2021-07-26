@@ -41,12 +41,11 @@ class NetworkManager {
             }
             
             return Disposables.create { request.cancel() }
-        }
-        .retry { errorObservable -> Observable<Int> in
+        }.retry { errorObservable -> Observable<Int> in
             return errorObservable.flatMap { error -> Observable<Int> in
                 let polarisError = error as? PolarisErrorModel.PolarisError
                 if polarisError == .expiredToken {
-                    return Observable<Int>.timer(.seconds(1), scheduler: MainScheduler.instance)
+                    return Observable<Int>.timer(.milliseconds(1500), scheduler: MainScheduler.instance)
                 }
                 return Observable.error(error)
             }
@@ -58,6 +57,7 @@ class NetworkManager {
         case .expiredToken:         self.handleExpiredAccessTokenError()
         case .expiredRefreshToken:  self.handleExpiredRefreshTokenError()
         case .login_Info_Incorrect: self.handleLoginError()
+        default:                    return
         }
     }
     

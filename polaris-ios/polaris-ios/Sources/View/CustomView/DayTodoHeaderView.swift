@@ -10,7 +10,7 @@ import RxSwift
 import UIKit
 
 protocol DayTodoHeaderViewDelegate: TodoHeaderViewDelegate {
-    func dayTodoHeaderView(_ dayTodoHeaderView: DayTodoHeaderView, didTapAddTodo date: String)
+    func dayTodoHeaderView(_ dayTodoHeaderView: DayTodoHeaderView, didTapAddTodo date: Date)
 }
 
 class DayTodoHeaderView: TodoHeaderView {
@@ -45,8 +45,9 @@ class DayTodoHeaderView: TodoHeaderView {
     private func bindButtons() {
         self.addButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                guard let self = self else { return }
-                self._delegate?.dayTodoHeaderView(self, didTapAddTodo: "")
+                guard let self = self             else { return }
+                guard let addTodoDate = self.date else { return }
+                self._delegate?.dayTodoHeaderView(self, didTapAddTodo: addTodoDate)
             })
             .disposed(by: self.disposeBag)
     }

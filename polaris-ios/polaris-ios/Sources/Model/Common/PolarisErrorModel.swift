@@ -33,12 +33,14 @@ extension PolarisErrorModel {
         case expiredToken           = 21   // Access Token 만료된 경우
         case expiredRefreshToken    = 22   // Refresh Token 만료된 경우
         case login_Info_Incorrect   = 13   // 로그인 정보 잘못 입력한 경우
+        case didNotFoundUser        = 3    // Access Token 바뀌고 User를 못찾는 경우
         
         var message: String {
             switch self {
             case .expiredToken:         return "토큰이 만료되었습니다."
             case .expiredRefreshToken:  return "재발급 토큰이 만료되었습니다."
             case .login_Info_Incorrect: return "로그인 정보가 잘못되었습니다."
+            case .didNotFoundUser:      return "사용자를 찾을 수 없습니다."
             }
         }
     }
