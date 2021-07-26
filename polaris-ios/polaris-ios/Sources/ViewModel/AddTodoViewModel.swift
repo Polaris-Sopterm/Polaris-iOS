@@ -10,7 +10,6 @@ import RxSwift
 
 class AddTodoViewModel {
     
-    var currentAddOption: AddTodoVC.AddOptions? = nil
     var addListTypes      = BehaviorSubject<[AddTodoTableViewCellProtocol.Type]>(value: [])
     
     var addTextSubject    = BehaviorSubject<String?>(value: nil)
@@ -27,14 +26,25 @@ class AddTodoViewModel {
         self.bindEnableFlag(by: addOptions)
     }
     
+    func requestAddTodo() {
+        guard let currentAddOption = self.currentAddOption else { return }
+        
+        if currentAddOption == .perDayAddTodo {
+            self.requestAddTodoDay()
+        } else if currentAddOption == .perJourneyAddTodo {
+            self.requestAddTodoJourney()
+        }
+    }
+    
     private func bindEnableFlag(by addOptions: AddTodoVC.AddOptions) {
         if addOptions == .perDayAddTodo {
             Observable.combineLatest(self.addTextSubject, self.dropdownSubject, self.fixOnTopSubject)
                 .subscribe(onNext: { [weak self] addText, dropdownMenu, fixOnTop in
                     guard let self = self else { return }
-                    guard let addText   = addText, !addText.isEmpty,
-                          dropdownMenu  != nil,
-                          fixOnTop      != nil else { self.addEnableFlagSubject.onNext(false); return }
+                    guard let addText = addText, !addText.isEmpty, fixOnTop != nil else {
+                        self.addEnableFlagSubject.onNext(false)
+                        return
+                    }
                     
                     self.addEnableFlagSubject.onNext(true)
                 })
@@ -63,6 +73,19 @@ class AddTodoViewModel {
         }
     }
     
-    private var disposeBag = DisposeBag()
+    private func requestAddTodoDay() {
+        guard let addText = try? self.addTextSubject.value()    else { return }
+        guard let fixOnTop = try? self.fixOnTopSubject.value()  else { return }
+        
+        #warning("여기에 추가해야 함.. request API")
+    }
+    
+    private func requestAddTodoJourney() {
+        
+    }
+    
+    private let disposeBag = DisposeBag()
+    
+    private(set) var currentAddOption: AddTodoVC.AddOptions?
     
 }

@@ -37,20 +37,26 @@ enum TodoCategory {
 
 class TodoViewModel {
     
-    typealias DayTodoSectionModel = [[String]]
-    
     let currentTabRelay = BehaviorRelay<TodoCategory>(value: .day)
+    let todoListModel   = BehaviorRelay<TodoDayListModel?>(value: nil)
+    
+    init() {
+        self.todoDayHeaderModel = Date.daysThisWeek
+        self.todoDayHeaderModel.forEach { self.todoDayListTable.updateValue([], forKey: $0) }
+    }
     
     func requestTodoList() {
         let todoListAPI = TodoAPI.listTodoByDate(year: "2021", month: "7", weekNo: "4")
-        
-//        NetworkManager.request(apiType: todoListAPI)
+        NetworkManager.request(apiType: todoListAPI).subscribe(onSuccess: { (todoListModel: TodoDayListModel) in
+            print(todoListModel)
+        }, onFailure: { error in
+            print(error.localizedDescription)
+        }).disposed(by: self.disposeBag)
     }
     
-    private(set) var journeyTodoModel      = [String]()
-    private(set) var jouneyTodoHeaderModel = [Date]()
+    private(set) var todoDayHeaderModel: [Date]
+    private(set) var todoDayListTable: [Date: [TodoDayPerModel]] = [:]
     
-    private(set) var dayTodoHeaderModel = [Date]()
-    private(set) var dayTodoModel       = [String]()
+    private let disposeBag = DisposeBag()
     
 }

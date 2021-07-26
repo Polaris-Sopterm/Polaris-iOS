@@ -27,7 +27,6 @@ class AddTodoFixOnTopTableViewCell: AddTodoTableViewCell {
     // MARK: - Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         self.setupButtons()
         self.bindButton()
         self.bindUI()

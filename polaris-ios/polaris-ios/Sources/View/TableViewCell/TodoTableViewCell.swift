@@ -42,6 +42,9 @@ class TodoTableViewCell: MainTableViewCell {
         self.setupTableView()
         self.bindButtons()
         self.observeCategory()
+        
+        #warning("추가한 TodoList 가져오는 API")
+//        self.viewModel.requestTodoList()
     }
     
     override func prepareForReuse() {
@@ -88,7 +91,8 @@ class TodoTableViewCell: MainTableViewCell {
                 guard let self = self else { return }
                 
                 self.tableView.reloadData()
-                self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+//                self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+                self.tableView.setContentOffset(CGPoint(x: 0, y: -type(of: self).navigationHeight), animated: false)
                 self.updateCategoryButton(as: currentTab == .day ? .journey : .day)
             })
             .disposed(by: self.disposeBag)
@@ -113,11 +117,19 @@ class TodoTableViewCell: MainTableViewCell {
 extension TodoTableViewCell: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        let currentTab = self.viewModel.currentTabRelay.value
+        if currentTab == .day { return Date.WeekDay.allCases.count }
+        else                  { return 0 }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        let currentTab = self.viewModel.currentTabRelay.value
+        if currentTab == .day {
+            guard let currentDate = self.viewModel.todoDayHeaderModel[safe: section] else { return 0 }
+            return self.viewModel.todoDayListTable[currentDate]?.count ?? 0
+        } else {
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -146,7 +158,9 @@ extension TodoTableViewCell: UITableViewDelegate {
         var todoHeaderView: TodoHeaderView
         
         if currentTab == .day {
-            guard let dayHeaderView: DayTodoHeaderView = UIView.fromNib() else { return nil }
+            guard let dayHeaderView: DayTodoHeaderView = UIView.fromNib()     else { return nil }
+            guard let date = self.viewModel.todoDayHeaderModel[safe: section] else { return nil }
+            dayHeaderView.configure(date)
             todoHeaderView = dayHeaderView
         } else {
             guard let journeyHeaderView: JourneyTodoHeaderView = UIView.fromNib() else { return nil }

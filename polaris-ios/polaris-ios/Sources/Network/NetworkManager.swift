@@ -65,10 +65,12 @@ class NetworkManager {
 
 extension NetworkManager {
     
+    // AccessToken만 만료된 경우
     private static func handleExpiredAccessTokenError() {
         PolarisUserManager.shared.requestAccessTokenUsingRefreshToken()
     }
     
+    // Access Token, Refresh Token 모두 만료된 경우
     private static func handleExpiredRefreshTokenError() {
         PolarisUserManager.shared.resetUserInfo()
         guard let loginViewController = LoginVC.instantiateFromStoryboard(StoryboardName.intro) else { return }

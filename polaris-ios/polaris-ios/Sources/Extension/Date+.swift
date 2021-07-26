@@ -53,14 +53,30 @@ extension Date {
         return week
     }
     
-//    static var weekDays: [Date] {
-//        var weekDays: [Date] = [self.normalizedCurrent]
-//        for add in 1...6 {
-//            guard let day = Calendar.current.date(byAdding: .day, value: add, to: self.normalizedCurrent) else { continue }
-//            weekDays.append(day)
-//        }
-//        return weekDays
-//    }
+    static var daysThisWeek: [Date] {
+        let currentWeekDay  = Calendar.current.component(.weekday, from: normalizedCurrent)
+        
+        var thisWeekDates: [Date] = []
+        var distancesBetweenWeekDay: [Int] = []
+        
+        if currentWeekDay == WeekDay.sunday.rawValue {
+            distancesBetweenWeekDay = [-6, -5, -4, -3, -2, -1, 0] }
+        else {
+            for weekDay in WeekDay.monday.rawValue...WeekDay.saturday.rawValue {
+                let tempDistanceBetweenWeekDay = weekDay - currentWeekDay
+                distancesBetweenWeekDay.append(tempDistanceBetweenWeekDay)
+            }
+            
+            let sundayWeekDay = 8
+            distancesBetweenWeekDay.append(sundayWeekDay - currentWeekDay)
+        }
+        
+        distancesBetweenWeekDay.forEach { distance in
+            guard let calculatedDate = Calendar.current.date(byAdding: .day, value: distance, to: normalizedCurrent) else { return }
+            thisWeekDates.append(calculatedDate)
+        }
+        return thisWeekDates
+    }
     
 }
 

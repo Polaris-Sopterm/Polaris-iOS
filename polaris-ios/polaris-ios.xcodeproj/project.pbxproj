@@ -303,9 +303,9 @@
 		CEA3CFED26A8766700577DA4 /* ServiceTermKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA3CFEC26A8766700577DA4 /* ServiceTermKind.swift */; };
 		CEA3CFEE26A8766700577DA4 /* ServiceTermKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA3CFEC26A8766700577DA4 /* ServiceTermKind.swift */; };
 		CEA3CFEF26A8766700577DA4 /* ServiceTermKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA3CFEC26A8766700577DA4 /* ServiceTermKind.swift */; };
-		CEA3CFF126A92B8900577DA4 /* TodoHeaderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA3CFF026A92B8900577DA4 /* TodoHeaderModel.swift */; };
-		CEA3CFF226A92B8900577DA4 /* TodoHeaderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA3CFF026A92B8900577DA4 /* TodoHeaderModel.swift */; };
-		CEA3CFF326A92B8900577DA4 /* TodoHeaderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA3CFF026A92B8900577DA4 /* TodoHeaderModel.swift */; };
+		CEA3CFF126A92B8900577DA4 /* TodoDayListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA3CFF026A92B8900577DA4 /* TodoDayListModel.swift */; };
+		CEA3CFF226A92B8900577DA4 /* TodoDayListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA3CFF026A92B8900577DA4 /* TodoDayListModel.swift */; };
+		CEA3CFF326A92B8900577DA4 /* TodoDayListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA3CFF026A92B8900577DA4 /* TodoDayListModel.swift */; };
 		CEA44E59267B386800A05650 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA44E58267B386800A05650 /* MainVC.swift */; };
 		CEA44E5A267B386800A05650 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA44E58267B386800A05650 /* MainVC.swift */; };
 		CEA44E5F267B398100A05650 /* MainSceneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA44E5D267B398100A05650 /* MainSceneTableViewCell.swift */; };
@@ -505,7 +505,7 @@
 		CEA3CFE426A8696400577DA4 /* PolarisWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarisWebViewController.swift; sourceTree = "<group>"; };
 		CEA3CFE826A869D200577DA4 /* ObservableType+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableType+.swift"; sourceTree = "<group>"; };
 		CEA3CFEC26A8766700577DA4 /* ServiceTermKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTermKind.swift; sourceTree = "<group>"; };
-		CEA3CFF026A92B8900577DA4 /* TodoHeaderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoHeaderModel.swift; sourceTree = "<group>"; };
+		CEA3CFF026A92B8900577DA4 /* TodoDayListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDayListModel.swift; sourceTree = "<group>"; };
 		CEA44E58267B386800A05650 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		CEA44E5D267B398100A05650 /* MainSceneTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSceneTableViewCell.swift; sourceTree = "<group>"; };
 		CEA44E5E267B398100A05650 /* MainSceneTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainSceneTableViewCell.xib; sourceTree = "<group>"; };
@@ -935,7 +935,7 @@
 				CEF055F22667ED81000E34A0 /* PolarisUser.swift */,
 				CEAC598F266F9F210092A255 /* AuthModel.swift */,
 				CEAC5994266FBEA50092A255 /* PolarisErrorModel.swift */,
-				CEA3CFF026A92B8900577DA4 /* TodoHeaderModel.swift */,
+				CEA3CFF026A92B8900577DA4 /* TodoDayListModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1369,7 +1369,7 @@
 				CEC74B12267F9842002AFF18 /* PolarisPopupView.swift in Sources */,
 				CEEE574D262A963D00C39358 /* DeviceInfo.swift in Sources */,
 				ECA4947E262C670000CC2EB8 /* MainStarTVCViewModel.swift in Sources */,
-				CEA3CFF126A92B8900577DA4 /* TodoHeaderModel.swift in Sources */,
+				CEA3CFF126A92B8900577DA4 /* TodoDayListModel.swift in Sources */,
 				CEA3CFD726A85C4B00577DA4 /* ShootingComet.swift in Sources */,
 				CEC19AEB265103AA00DA747C /* DayTodoTableViewCell.swift in Sources */,
 				CEA44E6E267B3BE300A05650 /* TodoTableViewCell.swift in Sources */,
@@ -1472,7 +1472,7 @@
 				CE2953292687A0A500E21871 /* PolarisPopupView.swift in Sources */,
 				CE29532A2687A0A500E21871 /* DeviceInfo.swift in Sources */,
 				CE29532B2687A0A500E21871 /* MainStarTVCViewModel.swift in Sources */,
-				CEA3CFF226A92B8900577DA4 /* TodoHeaderModel.swift in Sources */,
+				CEA3CFF226A92B8900577DA4 /* TodoDayListModel.swift in Sources */,
 				CEA3CFD826A85C6500577DA4 /* ShootingComet.swift in Sources */,
 				CE29532C2687A0A500E21871 /* DayTodoTableViewCell.swift in Sources */,
 				CE29532D2687A0A500E21871 /* TodoTableViewCell.swift in Sources */,
@@ -1575,7 +1575,7 @@
 				CEC74B13267F9842002AFF18 /* PolarisPopupView.swift in Sources */,
 				CE43D05126613D66003126F2 /* DeviceInfo.swift in Sources */,
 				CE43D05226613D66003126F2 /* MainStarTVCViewModel.swift in Sources */,
-				CEA3CFF326A92B8900577DA4 /* TodoHeaderModel.swift in Sources */,
+				CEA3CFF326A92B8900577DA4 /* TodoDayListModel.swift in Sources */,
 				CEA3CFD926A85C6500577DA4 /* ShootingComet.swift in Sources */,
 				CE43D05326613D66003126F2 /* DayTodoTableViewCell.swift in Sources */,
 				CEA44E6F267B3BE300A05650 /* TodoTableViewCell.swift in Sources */,

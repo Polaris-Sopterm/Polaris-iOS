@@ -20,10 +20,11 @@ class DayTodoHeaderView: TodoHeaderView {
         didSet { self._delegate = self.delegate as? DayTodoHeaderViewDelegate }
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    func configure(_ date: Date) {
+        self.date = date
+        self.updateUI()
     }
-    
+
     func setUI(as headerType: HeaderType) {
         self.effectImageView.image          = headerType.effectImage
         self.dayLabel.textColor             = headerType.textColor
@@ -50,8 +51,19 @@ class DayTodoHeaderView: TodoHeaderView {
             .disposed(by: self.disposeBag)
     }
     
+    private func updateUI() {
+        guard let date = self.date else { return }
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "M월 d일 EEEE"
+        dateFormatter.locale = Locale.init(identifier: "ko")
+        self.dayLabel.text = dateFormatter.string(from: date)
+    }
+    
     private static let verticalInset: CGFloat = 5
     private static let screenRatio: CGFloat   = DeviceInfo.screenWidth / 375
+    
+    private var date: Date?
     
     private var disposeBag = DisposeBag()
     private weak var _delegate: DayTodoHeaderViewDelegate?
