@@ -78,6 +78,10 @@ extension Date {
         return thisWeekDates
     }
     
+    var normalizedDate: Date? {
+        return Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: self)
+    }
+    
     func convertToString(using format: String = "yyyy-MM-dd") -> String {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "ko_KR")

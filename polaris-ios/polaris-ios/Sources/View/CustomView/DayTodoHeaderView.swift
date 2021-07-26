@@ -22,10 +22,12 @@ class DayTodoHeaderView: TodoHeaderView {
     
     func configure(_ date: Date) {
         self.date = date
-        self.updateUI()
+        
+        self.dayLabel.text = date.convertToString(using: "M월 d일 EEEE")
+        date.normalizedDate == Date().normalizedDate ? self.updateUI(as: .today) : self.updateUI(as: .other)
     }
 
-    func setUI(as headerType: HeaderType) {
+    private func updateUI(as headerType: HeaderType) {
         self.effectImageView.image          = headerType.effectImage
         self.dayLabel.textColor             = headerType.textColor
         self.backgroundView.backgroundColor = headerType.backgroundColor
@@ -50,15 +52,6 @@ class DayTodoHeaderView: TodoHeaderView {
                 self._delegate?.dayTodoHeaderView(self, didTapAddTodo: addTodoDate)
             })
             .disposed(by: self.disposeBag)
-    }
-    
-    private func updateUI() {
-        guard let date = self.date else { return }
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "M월 d일 EEEE"
-        dateFormatter.locale = Locale.init(identifier: "ko")
-        self.dayLabel.text = dateFormatter.string(from: date)
     }
     
     private static let verticalInset: CGFloat = 5

@@ -336,6 +336,12 @@
 		CEDB478426AEF7520024ABD4 /* AddTodoResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDB478326AEF7520024ABD4 /* AddTodoResponseModel.swift */; };
 		CEDB478526AEF7CE0024ABD4 /* AddTodoResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDB478326AEF7520024ABD4 /* AddTodoResponseModel.swift */; };
 		CEDB478626AEF7CE0024ABD4 /* AddTodoResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDB478326AEF7520024ABD4 /* AddTodoResponseModel.swift */; };
+		CEDB478A26AF26610024ABD4 /* TodoListEmptyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDB478826AF26610024ABD4 /* TodoListEmptyTableViewCell.swift */; };
+		CEDB478B26AF26610024ABD4 /* TodoListEmptyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEDB478926AF26610024ABD4 /* TodoListEmptyTableViewCell.xib */; };
+		CEDB478C26AF27D30024ABD4 /* TodoListEmptyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEDB478926AF26610024ABD4 /* TodoListEmptyTableViewCell.xib */; };
+		CEDB478D26AF27D30024ABD4 /* TodoListEmptyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEDB478926AF26610024ABD4 /* TodoListEmptyTableViewCell.xib */; };
+		CEDB478E26AF27DA0024ABD4 /* TodoListEmptyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDB478826AF26610024ABD4 /* TodoListEmptyTableViewCell.swift */; };
+		CEDB478F26AF27DA0024ABD4 /* TodoListEmptyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDB478826AF26610024ABD4 /* TodoListEmptyTableViewCell.swift */; };
 		CEE574D82630422600EA64B7 /* AddTodoDayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE574D62630422600EA64B7 /* AddTodoDayTableViewCell.swift */; };
 		CEE574D92630422600EA64B7 /* AddTodoDayTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE574D72630422600EA64B7 /* AddTodoDayTableViewCell.xib */; };
 		CEE574E926307B4400EA64B7 /* AddTodoDayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE574E826307B4400EA64B7 /* AddTodoDayViewModel.swift */; };
@@ -527,6 +533,8 @@
 		CEC74B11267F9842002AFF18 /* PolarisPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarisPopupView.swift; sourceTree = "<group>"; };
 		CEC74B16267F984E002AFF18 /* PolarisPopupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PolarisPopupView.xib; sourceTree = "<group>"; };
 		CEDB478326AEF7520024ABD4 /* AddTodoResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoResponseModel.swift; sourceTree = "<group>"; };
+		CEDB478826AF26610024ABD4 /* TodoListEmptyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListEmptyTableViewCell.swift; sourceTree = "<group>"; };
+		CEDB478926AF26610024ABD4 /* TodoListEmptyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodoListEmptyTableViewCell.xib; sourceTree = "<group>"; };
 		CEE574D62630422600EA64B7 /* AddTodoDayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoDayTableViewCell.swift; sourceTree = "<group>"; };
 		CEE574D72630422600EA64B7 /* AddTodoDayTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTodoDayTableViewCell.xib; sourceTree = "<group>"; };
 		CEE574E826307B4400EA64B7 /* AddTodoDayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoDayViewModel.swift; sourceTree = "<group>"; };
@@ -741,7 +749,6 @@
 				CEEE5764262ADB8F00C39358 /* CustomView */,
 				ECA494202628209C00CC2EB8 /* CollectionViewCell */,
 				ECA4941F2628209500CC2EB8 /* TableViewCell */,
-				CEA3CFDB26A85E7600577DA4 /* PolarisWebView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -863,6 +870,14 @@
 			path = User;
 			sourceTree = "<group>";
 		};
+		CEDB478726AF25080024ABD4 /* TodoList */ = {
+			isa = PBXGroup;
+			children = (
+				CEA3CFF026A92B8900577DA4 /* TodoDayListModel.swift */,
+			);
+			path = TodoList;
+			sourceTree = "<group>";
+		};
 		CEEE5741262A954F00C39358 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
@@ -886,6 +901,7 @@
 		CEEE5764262ADB8F00C39358 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				CEA3CFDB26A85E7600577DA4 /* PolarisWebView.swift */,
 				CEEE5765262ADBA200C39358 /* PolarisButton.swift */,
 				CEEE5776262BE51C00C39358 /* PolarisMarginTextField.swift */,
 				CE574DC0263589180046D20A /* PolarisToastView.swift */,
@@ -923,6 +939,7 @@
 				CE57400D267C903700665933 /* JourneyTodoTableViewCell.xib */,
 				CEA44E5E267B398100A05650 /* MainSceneTableViewCell.xib */,
 				CEA44E6D267B3BE300A05650 /* TodoTableViewCell.xib */,
+				CEDB478926AF26610024ABD4 /* TodoListEmptyTableViewCell.xib */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -958,13 +975,13 @@
 		CEF055EA2667EB20000E34A0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CEDB478726AF25080024ABD4 /* TodoList */,
 				CEDB478126AEF7100024ABD4 /* Common */,
 				CEDB478226AEF72E0024ABD4 /* User */,
 				CEDB478026AEF7050024ABD4 /* AddTodo */,
 				ECA494282628298B00CC2EB8 /* TodoModel.swift */,
 				ECA494462629729000CC2EB8 /* TodoDateModel.swift */,
 				ECA49474262C461700CC2EB8 /* MainStarModel.swift */,
-				CEA3CFF026A92B8900577DA4 /* TodoDayListModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1004,6 +1021,7 @@
 				CEA44E5D267B398100A05650 /* MainSceneTableViewCell.swift */,
 				CEA44E67267B3B8100A05650 /* MainTableViewCell.swift */,
 				CEA44E6C267B3BE300A05650 /* TodoTableViewCell.swift */,
+				CEDB478826AF26610024ABD4 /* TodoListEmptyTableViewCell.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -1138,6 +1156,7 @@
 				EC08F3D2267DD24100F915F3 /* MainLookBackCollectionViewCell.xib in Resources */,
 				CEEE576F262AE6F400C39358 /* AddTodoTextTableViewCell.xib in Resources */,
 				ECA49419262817D500CC2EB8 /* TodoDate.storyboard in Resources */,
+				CEDB478B26AF26610024ABD4 /* TodoListEmptyTableViewCell.xib in Resources */,
 				CEA44E61267B398100A05650 /* MainSceneTableViewCell.xib in Resources */,
 				CE574D9E263524140046D20A /* SelectStarItemCollectionViewCell.xib in Resources */,
 				CE57401E267CB4E100665933 /* JourneyTodoHeaderView.xib in Resources */,
@@ -1181,6 +1200,7 @@
 				CE2953592687A0A500E21871 /* MainLookBackCollectionViewCell.xib in Resources */,
 				CE29535A2687A0A500E21871 /* AddTodoTextTableViewCell.xib in Resources */,
 				CE29535B2687A0A500E21871 /* TodoDate.storyboard in Resources */,
+				CEDB478C26AF27D30024ABD4 /* TodoListEmptyTableViewCell.xib in Resources */,
 				CE29535C2687A0A500E21871 /* MainSceneTableViewCell.xib in Resources */,
 				CE29535D2687A0A500E21871 /* SelectStarItemCollectionViewCell.xib in Resources */,
 				CE29535E2687A0A500E21871 /* JourneyTodoHeaderView.xib in Resources */,
@@ -1224,6 +1244,7 @@
 				EC08F3D3267DD24100F915F3 /* MainLookBackCollectionViewCell.xib in Resources */,
 				CE43D07B26613D66003126F2 /* AddTodoTextTableViewCell.xib in Resources */,
 				CE43D07C26613D66003126F2 /* TodoDate.storyboard in Resources */,
+				CEDB478D26AF27D30024ABD4 /* TodoListEmptyTableViewCell.xib in Resources */,
 				CEA44E62267B398100A05650 /* MainSceneTableViewCell.xib in Resources */,
 				CE43D07D26613D66003126F2 /* SelectStarItemCollectionViewCell.xib in Resources */,
 				CE57401F267CB4E100665933 /* JourneyTodoHeaderView.xib in Resources */,
@@ -1340,6 +1361,7 @@
 				ECA49486262DC17A00CC2EB8 /* UILabel+.swift in Sources */,
 				CEA44E59267B386800A05650 /* MainVC.swift in Sources */,
 				CE04A06A2623528C007C98E2 /* UIViewController+.swift in Sources */,
+				CEDB478A26AF26610024ABD4 /* TodoListEmptyTableViewCell.swift in Sources */,
 				CE2952E22687893000E21871 /* TodoAPI.swift in Sources */,
 				ECDC5A5C2636A13600A1B5A9 /* MainTodoHeaderView.swift in Sources */,
 				CE574023267CB4FA00665933 /* JourneyTodoHeaderView.swift in Sources */,
@@ -1444,6 +1466,7 @@
 				CE2952F12687A0A500E21871 /* UILabel+.swift in Sources */,
 				CE2952F22687A0A500E21871 /* MainVC.swift in Sources */,
 				CE2952F32687A0A500E21871 /* UIViewController+.swift in Sources */,
+				CEDB478E26AF27DA0024ABD4 /* TodoListEmptyTableViewCell.swift in Sources */,
 				CE2952F42687A0A500E21871 /* TodoAPI.swift in Sources */,
 				CE2952F52687A0A500E21871 /* MainTodoHeaderView.swift in Sources */,
 				CE2952F62687A0A500E21871 /* JourneyTodoHeaderView.swift in Sources */,
@@ -1548,6 +1571,7 @@
 				CE43D02726613D66003126F2 /* UILabel+.swift in Sources */,
 				CEA44E5A267B386800A05650 /* MainVC.swift in Sources */,
 				CE43D02826613D66003126F2 /* UIViewController+.swift in Sources */,
+				CEDB478F26AF27DA0024ABD4 /* TodoListEmptyTableViewCell.swift in Sources */,
 				CE2952E32687893000E21871 /* TodoAPI.swift in Sources */,
 				CE43D02926613D66003126F2 /* MainTodoHeaderView.swift in Sources */,
 				CE574024267CB4FA00665933 /* JourneyTodoHeaderView.swift in Sources */,

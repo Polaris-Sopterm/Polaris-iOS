@@ -76,7 +76,6 @@ class AddTodoVC: HalfModalVC {
         
         self.addButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                // FIXME: - 추가할 때, 서버로 넘기는 로직 들어가야 함
                 self?.viewModel.requestAddTodo()
             })
             .disposed(by: self.disposeBag)

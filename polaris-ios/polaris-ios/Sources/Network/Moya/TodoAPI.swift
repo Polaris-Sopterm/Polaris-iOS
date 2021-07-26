@@ -11,7 +11,7 @@ import Moya
 enum TodoAPI {
     case createToDo(title: String, date: String, journeyTitle: String = "default", journeyIdx: Int? = nil, isTop: Bool)
     case createJourney(title: String, date: String, journeyIdx: Int, isTop: Bool)
-    case listTodoByDate(year: String, month: String, weekNo: String)
+    case listTodoByDate(year: String? = nil, month: String? = nil, weekNo: String? = nil)
 }
 
 extension TodoAPI: TargetType {
@@ -48,12 +48,15 @@ extension TodoAPI: TargetType {
         case .createJourney(let title, let date, let journeyIdx, let isTop):
             return .requestParameters(parameters: ["title": title, "date": date, "journeyIdx": journeyIdx, "isTop": isTop], encoding: JSONEncoding.default)
         case .listTodoByDate(let year, let month, let weekNo):
-            return .requestParameters(parameters: ["year": year, "month": month, "weekNo": weekNo], encoding: URLEncoding.queryString)
+            var params: [String: Any] = [:]
+            if let year = year      { params["year"] = year }
+            if let month = month    { params["month"] = month }
+            if let weekNo = weekNo  { params["weekNo"] = weekNo }
+            return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
         }
     }
     
     var headers: [String : String]? {
-        print(NetworkInform.headers)
         return NetworkInform.headers
     }
     
