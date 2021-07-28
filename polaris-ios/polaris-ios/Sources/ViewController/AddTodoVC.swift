@@ -17,23 +17,41 @@ class AddTodoVC: HalfModalVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.halfModalView = self.addTodoHalfModalView
+        self.setupLoadingIndicator()
         self.setupTitleLabel()
         self.setupTableView()
         self.registerCell()
         self.bindButtons()
         self.bindEnableButton()
         self.bindTableView()
+        self.observeViewModel()
     }
     
     // MARK: - Set Up
-    func setupAddOptions(_ options: AddOptions) {
+    func setAddOptions(_ options: AddOptions, _ addTodoDate: Date? = nil) {
         self.viewModel.setViewModel(by: options)
     }
     
+    func setAddTodoDate(_ date: Date) {
+        self.viewModel.setAddTodoDate(date)
+    }
+    
     private func setupTitleLabel() {
-        if self.viewModel.currentAddOption == .perDayAddTodo          { self.titleLabel.text = "3월 1일의 할 일" }
-        else if self.viewModel.currentAddOption == .perJourneyAddTodo { self.titleLabel.text = "폴라리스의 할 일" }
-        else                                                          { self.titleLabel.text = "여정 추가하기" }
+        if self.viewModel.currentAddOption == .perDayAddTodo {
+            guard let date = self.viewModel.addTodoDate else { return }
+            self.titleLabel.text = date.convertToString(using: "M월 d일") + "의 할 일"
+        } else if self.viewModel.currentAddOption == .perJourneyAddTodo {
+            self.titleLabel.text = "폴라리스의 할 일"
+        } else {
+            self.titleLabel.text = "여정 추가하기"
+        }
+    }
+    
+    private func setupLoadingIndicator() {
+        self.view.addSubview(self.loadingIndicatorView)
+        self.loadingIndicatorView.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+        }
     }
     
     private func setupTableView() {
@@ -58,8 +76,7 @@ class AddTodoVC: HalfModalVC {
         
         self.addButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                // FIXME: - 추가할 때, 서버로 넘기는 로직 들어가야 함
-                self?.dismissWithAnimation()
+                self?.viewModel.requestAddTodo()
             })
             .disposed(by: self.disposeBag)
     }
@@ -91,7 +108,29 @@ class AddTodoVC: HalfModalVC {
             .disposed(by: self.disposeBag)
     }
     
+    private func observeViewModel() {
+        self.viewModel.completeAddTodoSubject.observeOnMain(onNext: { [weak self] in
+            self?.dismissWithAnimation()
+        }).disposed(by: self.disposeBag)
+        
+        self.viewModel.loadingSubject.observeOnMain(onNext: { [weak self] isLoading in
+            isLoading ? self?.startLoadingIndicator() : self?.stopLoadingIndicator()
+        }).disposed(by: self.disposeBag)
+    }
+    
+    private func startLoadingIndicator() {
+        self.loadingIndicatorView.isHidden = false
+        self.loadingIndicatorView.startAnimating()
+    }
+    
+    private func stopLoadingIndicator() {
+        self.loadingIndicatorView.isHidden = true
+        self.loadingIndicatorView.stopAnimating()
+    }
+    
     private let disposeBag  = DisposeBag()
+    
+    private let loadingIndicatorView = UIActivityIndicatorView(style: .medium)
     
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var cancelButton: UIButton!
