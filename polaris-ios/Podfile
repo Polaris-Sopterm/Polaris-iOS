@@ -18,4 +18,7 @@ abstract_target 'polaris-ios' do
   target 'Polaris Beta' do
   end
   
+  target 'Polaris Alpha' do
+  end
+  
 end

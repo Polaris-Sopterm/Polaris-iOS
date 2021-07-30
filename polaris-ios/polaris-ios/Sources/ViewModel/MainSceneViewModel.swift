@@ -47,12 +47,12 @@ struct MainSceneViewModel {
                                MainStarModel(starName: "절제", starLevel: 4),
                                MainStarModel(starName: "감사", starLevel: 4),
                                MainStarModel(starName: "휴식", starLevel: 4)]
-//        let mainStarModels: [MainStarModel] = []
-        
-//        let userAPI = UserAPI.createUser(email: id, password: pw, nickname: nickname)
-      
-        
-        let homeAPI = HomeAPI.getHomeBanner(isSkipped: true)
+
+        if PolarisUserManager.shared.hasToken{
+            print(PolarisUserManager.shared.authToken)
+        }
+
+        let homeAPI = HomeAPI.getHomeBanner(isSkipped: false)
         let some = NetworkManager.request(apiType: homeAPI)
             .subscribe(onSuccess: { (homeModel: HomeModel) in
                 print(homeModel)

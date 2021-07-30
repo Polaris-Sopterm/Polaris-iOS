@@ -10,6 +10,8 @@ import RxSwift
 import UIKit
 
 class SignupVC: UIViewController {
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle { return .lightContent }
 
     // MARK: - Life Cycle
     override func viewDidLoad() {
@@ -17,6 +19,7 @@ class SignupVC: UIViewController {
         self.addKeyboardDismissTapGesture()
         self.adjustTopConstraint()
         self.setupTextFields()
+        self.setupLoadingIndicator()
         self.bindCloseButton()
         self.observeStepSignup()
         self.observeValidation()
@@ -31,15 +34,33 @@ class SignupVC: UIViewController {
         self.idTextFieldContainerView.addSubview(idTextFieldView)
         self.pwTextFieldContainerView.addSubview(pwTextFieldView)
         self.nicknameTextFieldContainerView.addSubview(nicknameTextFieldView)
+        self.pwTextFieldView?.setScure(true)
         
         idTextFieldView.delegate       = self
         pwTextFieldView.delegate       = self
         nicknameTextFieldView.delegate = self
     }
     
+    private func setupLoadingIndicator() {
+        self.stopLoadingIndicator()
+        self.view.addSubview(self.loadingIndicator)
+        self.loadingIndicator.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+        }
+    }
+    
+    private func startLoadingIndicator() {
+        self.loadingIndicator.isHidden = false
+        self.loadingIndicator.startAnimating()
+    }
+    
+    private func stopLoadingIndicator() {
+        self.loadingIndicator.isHidden = true
+        self.loadingIndicator.stopAnimating()
+    }
+    
     private func adjustTopConstraint() {
         let defaultTopConstraint: CGFloat = 11
-        
         self.closeButtonTopConstraint.constant = defaultTopConstraint + DeviceInfo.topSafeAreaInset
     }
     
@@ -102,8 +123,8 @@ class SignupVC: UIViewController {
             .subscribe(onNext: { isComplete in
                 if isComplete == true {
                     let popupView: TermsOfServiceView? = UIView.fromNib()
-                    popupView?.completion = { [weak self] in self?.viewModel.requestSignup() }
                     popupView?.presentPopupView(from: self)
+                    popupView?.delegate = self
                 }
             })
             .disposed(by: self.disposeBag)
@@ -149,6 +170,8 @@ class SignupVC: UIViewController {
     
     private var disposeBag = DisposeBag()
     private var viewModel  = SignupViewModel()
+    
+    private let loadingIndicator = UIActivityIndicatorView(style: .medium)
     
     @IBOutlet private weak var idDescriptionStackView: UIStackView!
     @IBOutlet private weak var pwDescriptionStackView: UIStackView!
@@ -204,6 +227,35 @@ extension SignupVC: PolarisMarginTextFieldDelegate {
             self.viewModel.processSecondStep()
         } else {
             self.viewModel.processLastStep()
+        }
+    }
+    
+}
+
+extension SignupVC: TermsOfServiceDelegate {
+    
+    func termsOfServiceViewDidTapPersonalTerm(_ termsOfServiceView: TermsOfServiceView) {
+        guard let personalWebController = PolarisWebViewController.instantiateFromStoryboard(StoryboardName.common) else { return }
+        personalWebController.setWebViewTitle(ServiceTermKind.service.title)
+        personalWebController.setWebViewURL(ServiceTermKind.service.url)
+        personalWebController.modalPresentationStyle = .fullScreen
+        self.present(personalWebController, animated: true, completion: nil)
+    }
+    
+    func termsOfServiceViewDidTapServiceTerm(_ termsOfServiceView: TermsOfServiceView) {
+        guard let termsOfSeviceWebController = PolarisWebViewController.instantiateFromStoryboard(StoryboardName.common) else { return }
+        termsOfSeviceWebController.setWebViewTitle(ServiceTermKind.personal.title)
+        termsOfSeviceWebController.setWebViewURL(ServiceTermKind.personal.url)
+        termsOfSeviceWebController.modalPresentationStyle = .fullScreen
+        self.present(termsOfSeviceWebController, animated: true, completion: nil)
+    }
+    
+    func termsOfServiceViewDidTapComplete(_ termsOfServiceView: TermsOfServiceView) {
+        self.startLoadingIndicator()
+        self.viewModel.requestSignup { [weak self] in
+            self?.stopLoadingIndicator()
+            guard let mainVC = MainVC.instantiateFromStoryboard(StoryboardName.main) else { return }
+            UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController = mainVC
         }
     }
     

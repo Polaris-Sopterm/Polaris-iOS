@@ -23,12 +23,10 @@ class NetworkManager {
                         single(.failure(polarisError))
                         return
                     }           
-                    
                     do {
                         guard let resultData = try response.mapString().data(using: .utf8) else {
                             throw NSError(domain: "JSON Parsing Error", code: -1, userInfo: nil)
                         }
-                        
                         let responseJson = try JSONDecoder().decode(T.self, from: resultData)
                         single(.success(responseJson))
                     } catch let error {

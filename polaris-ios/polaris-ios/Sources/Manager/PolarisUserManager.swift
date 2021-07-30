@@ -40,6 +40,11 @@ class PolarisUserManager {
         .disposed(by: self.disposeBag)
     }
     
+    func updateUser(_ polarisUser: PolarisUser) {
+        self.user = polarisUser
+    }
+    
+    private(set) var user: PolarisUser?
     private let disposeBag = DisposeBag()
     
 }

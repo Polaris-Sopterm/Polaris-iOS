@@ -14,7 +14,7 @@ enum HomeAPI {
     func getPath() -> String {
         switch(self){
         case let .getHomeBanner(isSkipped):
-            return "/home/v0/banner/:"+String(isSkipped)
+            return "/home/v0/banner/"+String(isSkipped)
             
         }
     }
@@ -29,6 +29,7 @@ extension HomeAPI: TargetType {
     
     var path: String {
         switch self {
+        
         case .getHomeBanner: return HomeAPI.getPath(self)()
         }
     }
@@ -44,7 +45,8 @@ extension HomeAPI: TargetType {
     var task: Task {
         switch self {
         case .getHomeBanner(let isSkipped):
-            return .requestParameters(parameters: [:], encoding: JSONEncoding.default)
+            print(self.getPath())
+            return .requestParameters(parameters: [:], encoding: URLEncoding.queryString)
         }
     }
     
