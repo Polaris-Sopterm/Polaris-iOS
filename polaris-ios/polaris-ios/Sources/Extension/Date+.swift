@@ -52,10 +52,47 @@ extension Date {
         }
         return week
     }
+    
+    static var daysThisWeek: [Date] {
+        let currentWeekDay  = Calendar.current.component(.weekday, from: normalizedCurrent)
+        
+        var thisWeekDates: [Date] = []
+        var distancesBetweenWeekDay: [Int] = []
+        
+        if currentWeekDay == WeekDay.sunday.rawValue {
+            distancesBetweenWeekDay = [-6, -5, -4, -3, -2, -1, 0] }
+        else {
+            for weekDay in WeekDay.monday.rawValue...WeekDay.saturday.rawValue {
+                let tempDistanceBetweenWeekDay = weekDay - currentWeekDay
+                distancesBetweenWeekDay.append(tempDistanceBetweenWeekDay)
+            }
+            
+            let sundayWeekDay = 8
+            distancesBetweenWeekDay.append(sundayWeekDay - currentWeekDay)
+        }
+        
+        distancesBetweenWeekDay.forEach { distance in
+            guard let calculatedDate = Calendar.current.date(byAdding: .day, value: distance, to: normalizedCurrent) else { return }
+            thisWeekDates.append(calculatedDate)
+        }
+        return thisWeekDates
+    }
+    
+    var normalizedDate: Date? {
+        return Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: self)
+    }
+    
+    func convertToString(using format: String = "yyyy-MM-dd") -> String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.dateFormat = format
+        return formatter.string(from: self)
+    }
+    
 }
 
 extension Date {
-    enum WeekDay: Int {
+    enum WeekDay: Int, CaseIterable {
         case sunday = 1, monday, tuesday, wednesday, thursday, friday, saturday
         
         var korWeekday: String {

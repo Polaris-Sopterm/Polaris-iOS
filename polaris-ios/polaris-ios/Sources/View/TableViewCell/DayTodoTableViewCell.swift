@@ -25,7 +25,8 @@ class DayTodoTableViewCell: TodoCategoryCell {
         self.bindCheckButton()
     }
     
-    func configure() {
+    override func configure(_ todoListModel: TodoListModelProtocol) {
+        guard let todoPerModel = todoListModel as? TodoDayPerModel else { return }
         
     }
     

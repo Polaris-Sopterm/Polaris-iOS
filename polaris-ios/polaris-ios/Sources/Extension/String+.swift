@@ -47,4 +47,11 @@ extension String {
             alphaRegex?.numberOfMatches(in: self, options: [], range: NSRange(self.startIndex..., in: self)) != 0
     }
     
+    func convertToDate(_ format: String = "yyyy-MM-dd") -> Date? {
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        formatter.locale = Locale(identifier: "ko_KR")
+        return formatter.date(from: self)
+    }
+    
 }

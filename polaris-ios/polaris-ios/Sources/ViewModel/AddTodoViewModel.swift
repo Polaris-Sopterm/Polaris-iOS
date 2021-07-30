@@ -10,16 +10,17 @@ import RxSwift
 
 class AddTodoViewModel {
     
-    var currentAddOption: AddTodoVC.AddOptions? = nil
-    var addListTypes      = BehaviorSubject<[AddTodoTableViewCellProtocol.Type]>(value: [])
+    let addListTypes      = BehaviorSubject<[AddTodoTableViewCellProtocol.Type]>(value: [])
     
-    var addTextSubject    = BehaviorSubject<String?>(value: nil)
-    var dropdownSubject   = BehaviorSubject<String?>(value: nil)
-    var fixOnTopSubject   = BehaviorSubject<Bool?>(value: nil)
-    var selectDaySubject  = BehaviorSubject<(weekday: Date.WeekDay, day: Int)?>(value: nil)
-    var selectStarSubject = BehaviorSubject<Set<PolarisStar>?>(value: nil)
+    let addTextSubject    = BehaviorSubject<String?>(value: nil)
+    let dropdownSubject   = BehaviorSubject<String?>(value: nil)
+    let fixOnTopSubject   = BehaviorSubject<Bool?>(value: nil)
+    let selectDaySubject  = BehaviorSubject<(weekday: Date.WeekDay, day: Int)?>(value: nil)
+    let selectStarSubject = BehaviorSubject<Set<PolarisStar>?>(value: nil)
     
-    var addEnableFlagSubject = BehaviorSubject<Bool>(value: false)
+    let addEnableFlagSubject   = BehaviorSubject<Bool>(value: false)
+    let completeAddTodoSubject = PublishSubject<Void>()
+    let loadingSubject         = BehaviorSubject<Bool>(value: false)
     
     func setViewModel(by addOptions: AddTodoVC.AddOptions) {
         self.currentAddOption = addOptions
@@ -27,14 +28,44 @@ class AddTodoViewModel {
         self.bindEnableFlag(by: addOptions)
     }
     
+    func setAddTodoDate(_ date: Date) {
+        self.addTodoDate = date
+    }
+    
+    func requestAddTodo() {
+        self.loadingSubject.onNext(true)
+        if self.currentAddOption == .perDayAddTodo {
+            self.requestAddTodoDay()
+        } else if self.currentAddOption == .perJourneyAddTodo {
+            
+        }
+    }
+    
+    private func requestAddTodoDay() {
+        guard let addText = try? self.addTextSubject.value()    else { return }
+        guard let fixOnTop = try? self.fixOnTopSubject.value()  else { return }
+        guard let addTodoDate = self.addTodoDate                else { return }
+        
+        let createTodoAPI = TodoAPI.createToDo(title: addText, date: addTodoDate.convertToString(), isTop: fixOnTop)
+        NetworkManager.request(apiType: createTodoAPI).subscribe(onSuccess: { (responseModel: AddTodoResponseModel) in
+            self.completeAddTodoSubject.onNext(())
+            self.loadingSubject.onNext(false)
+        }, onFailure: { error in
+            #warning("Error에 관한 처리 필요 - 팝업(?)")
+            print(error.localizedDescription)
+            self.loadingSubject.onNext(false)
+        }).disposed(by: self.disposeBag)
+    }
+    
     private func bindEnableFlag(by addOptions: AddTodoVC.AddOptions) {
         if addOptions == .perDayAddTodo {
             Observable.combineLatest(self.addTextSubject, self.dropdownSubject, self.fixOnTopSubject)
                 .subscribe(onNext: { [weak self] addText, dropdownMenu, fixOnTop in
                     guard let self = self else { return }
-                    guard let addText   = addText, !addText.isEmpty,
-                          dropdownMenu  != nil,
-                          fixOnTop      != nil else { self.addEnableFlagSubject.onNext(false); return }
+                    guard let addText = addText, !addText.isEmpty, fixOnTop != nil else {
+                        self.addEnableFlagSubject.onNext(false)
+                        return
+                    }
                     
                     self.addEnableFlagSubject.onNext(true)
                 })
@@ -63,6 +94,14 @@ class AddTodoViewModel {
         }
     }
     
-    private var disposeBag = DisposeBag()
+    private func requestAddTodoJourney() {
+        
+    }
+    
+    private let disposeBag = DisposeBag()
+    
+    // 날짜에 더할때만 씀
+    private(set) var addTodoDate: Date?
+    private(set) var currentAddOption: AddTodoVC.AddOptions?
     
 }

@@ -19,6 +19,7 @@ class LoginVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupBackgroundView()
+        self.setupLoadingView()
         self.setupCometAnimation()
         self.setupLogoTopConstraint()
         self.setupTextField()
@@ -49,6 +50,20 @@ class LoginVC: UIViewController {
         
         self.backgroundView.layer.addSublayer(gradientLayer)
         self.backgroundView.subviews.forEach { [weak self] in self?.backgroundView.bringSubviewToFront($0) }
+    }
+    
+    private func setupLoadingView() {
+        self.view.addSubview(self.loadingView)
+        self.loadingView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        self.loadingView.addSubview(self.loadingIndicator)
+        self.loadingIndicator.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+        
+        self.stopLoadingIndicator()
     }
     
     private func setupLogoTopConstraint() {
@@ -96,6 +111,16 @@ class LoginVC: UIViewController {
             cometImageView.removeFromSuperview()
             self?.startCometAnimation()
         })
+    }
+    
+    private func startLoadingIndicator() {
+        self.loadingView.isHidden = false
+        self.loadingIndicator.startAnimating()
+    }
+    
+    private func stopLoadingIndicator() {
+        self.loadingView.isHidden = true
+        self.loadingIndicator.stopAnimating()
     }
     
     private func adjustToDeviceSize() {
@@ -191,7 +216,7 @@ class LoginVC: UIViewController {
     }
     
     private func observeViewModel() {
-        self.viewModel.proceedAbleSubject
+        self.viewModel.canProcessLoginSubject
             .distinctUntilChanged()
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] isProceed in
@@ -199,16 +224,18 @@ class LoginVC: UIViewController {
                 
                 if isProceed == true { self.loginButton.enable = true  }
                 else                 { self.loginButton.enable = false }
-            })
-            .disposed(by: self.disposeBag)
+            }).disposed(by: self.disposeBag)
         
         self.viewModel.completeLoginSubject
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: {
                 guard let mainVC = MainVC.instantiateFromStoryboard(StoryboardName.main) else { return }
                 UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController = mainVC
-            })
-            .disposed(by: self.disposeBag)
+            }).disposed(by: self.disposeBag)
+        
+        self.viewModel.loadingSubject.observeOnMain(onNext: { [weak self] loading in
+            loading ? self?.startLoadingIndicator() : self?.stopLoadingIndicator()
+        }).disposed(by: self.disposeBag)
     }
     
     private func layoutForKeyboardHide() {
@@ -226,6 +253,9 @@ class LoginVC: UIViewController {
     
     private var disposeBag = DisposeBag()
     private var viewModel  = LoginViewModel()
+    
+    private let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(style: .medium)
+    private let loadingView: UIView                       = UIView(frame: .zero)
     
     @IBOutlet private weak var backgroundView: UIView!
     @IBOutlet private weak var logoTopConstraint: NSLayoutConstraint!
