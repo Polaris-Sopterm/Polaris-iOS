@@ -12,7 +12,7 @@ struct ServerHost {
     static var main: String {
         switch BuildPhase.current {
         case .dev:  return "https://polaris-dev-n3c7rawkea-du.a.run.app"
-        case .real: return "https://polaris-main-n3c7rawkea-du.a.run.app"
+        case .real: return "https://polaris-main-0722-n3c7rawkea-du.a.run.app"
         }
     }
     

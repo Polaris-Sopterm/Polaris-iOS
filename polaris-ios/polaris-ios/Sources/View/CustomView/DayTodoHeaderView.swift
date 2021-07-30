@@ -10,7 +10,7 @@ import RxSwift
 import UIKit
 
 protocol DayTodoHeaderViewDelegate: TodoHeaderViewDelegate {
-    func dayTodoHeaderView(_ dayTodoHeaderView: DayTodoHeaderView, didTapAddTodo date: String)
+    func dayTodoHeaderView(_ dayTodoHeaderView: DayTodoHeaderView, didTapAddTodo date: Date)
 }
 
 class DayTodoHeaderView: TodoHeaderView {
@@ -20,11 +20,14 @@ class DayTodoHeaderView: TodoHeaderView {
         didSet { self._delegate = self.delegate as? DayTodoHeaderViewDelegate }
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    func configure(_ date: Date) {
+        self.date = date
+        
+        self.dayLabel.text = date.convertToString(using: "M월 d일 EEEE")
+        date.normalizedDate == Date().normalizedDate ? self.updateUI(as: .today) : self.updateUI(as: .other)
     }
-    
-    func setUI(as headerType: HeaderType) {
+
+    private func updateUI(as headerType: HeaderType) {
         self.effectImageView.image          = headerType.effectImage
         self.dayLabel.textColor             = headerType.textColor
         self.backgroundView.backgroundColor = headerType.backgroundColor
@@ -44,14 +47,17 @@ class DayTodoHeaderView: TodoHeaderView {
     private func bindButtons() {
         self.addButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                guard let self = self else { return }
-                self._delegate?.dayTodoHeaderView(self, didTapAddTodo: "")
+                guard let self = self             else { return }
+                guard let addTodoDate = self.date else { return }
+                self._delegate?.dayTodoHeaderView(self, didTapAddTodo: addTodoDate)
             })
             .disposed(by: self.disposeBag)
     }
     
     private static let verticalInset: CGFloat = 5
     private static let screenRatio: CGFloat   = DeviceInfo.screenWidth / 375
+    
+    private var date: Date?
     
     private var disposeBag = DisposeBag()
     private weak var _delegate: DayTodoHeaderViewDelegate?

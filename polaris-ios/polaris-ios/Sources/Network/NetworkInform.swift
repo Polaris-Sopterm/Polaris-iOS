@@ -10,7 +10,8 @@ import Foundation
 struct NetworkInform {
     
     static var headers: [String: String] {
-        return ["Content-Type": "application/json"]
+        let authToken = PolarisUserManager.shared.authToken ?? ""
+        return ["Content-Type": "application/json", "Authorization": "Bearer \(authToken)"]
     }
     
 }
