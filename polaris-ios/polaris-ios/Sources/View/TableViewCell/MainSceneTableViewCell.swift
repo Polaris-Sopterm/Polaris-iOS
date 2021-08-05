@@ -14,6 +14,7 @@ import SnapKit
 enum StarCollectionViewState: Int, CaseIterable {
     case showStar = 1
     case showLookBack
+    case showIncomplete
 }
 
 
@@ -35,6 +36,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
     private let viewModel = MainSceneViewModel()
     private var starTVCViewModel: MainStarTVCViewModel?
     private var dataDriver: Driver<[MainStarCVCViewModel]>?
+    private var homeModel: HomeModel?
     private var starList: [MainStarCVCViewModel] = [] {
         didSet{
             self.setTitle(stars: self.starList.count,lookBackState: self.lookBackState)
@@ -111,55 +113,40 @@ final class MainSceneTableViewCell: MainTableViewCell {
     }
     
     func setTitle(stars: Int,lookBackState: MainLookBackCellState) {
-        if stars == 0 {
-            switch lookBackState {
-            case .build:
-                let titleText = """
-                    여정을 세우고
-                    더 보람찬 일주일을 보내보세요.
-                    """
-                self.titleLabel.setPartialBold(originalText: titleText, boldText: "더 보람찬 일주일을 보내보세요.", fontSize: 23, boldFontSize: 23)
-            case .lookback:
-                let titleText = """
-                    3월 첫째주
-                    어떤 별을 찾았는지 확인해보세요!
-                    """
-                self.titleLabel.setPartialBold(originalText: titleText, boldText: "3월 첫째주", fontSize: 23, boldFontSize: 23)
-            case .rest :
-                let titleText = """
-                    때로는
-                    휴식도 도움이 된답니다.
-                    """
-                self.titleLabel.setPartialBold(originalText: titleText, boldText: "때로는", fontSize: 23, boldFontSize: 23)
-            }
-        }
-        else {
-            self.titleLabel.setPartialBold(originalText: "어제는\n\(stars)개의 별을 발견했어요.", boldText: "\(stars)개의 별", fontSize: 23, boldFontSize: 23)
-        }
-
+        self.titleLabel.setPartialBold(originalText: "어제는\n\(stars)개의 별을 발견했어요.", boldText: "\(stars)개의 별", fontSize: 23, boldFontSize: 23)
     }
     
     private func bindViewModel(){
         let input = MainSceneViewModel.Input()
         let output = viewModel.connect(input: input)
+        output.homeModelRelay.subscribe(onNext: { homeModel in
+            self.homeModel = homeModel.last
+        })
+        .disposed(by: disposeBag)
+        
         output.starList.subscribe(onNext: { item in
             self.starList = item
         })
         .disposed(by: disposeBag)
-        
+    
         output.state.subscribe(onNext: { value in
             self.viewState = value[0]
         })
         .disposed(by: disposeBag)
+        
         output.lookBackState.subscribe(onNext: { value in
             self.lookBackState = value[0]
         })
+        .disposed(by: disposeBag)
     
         output.state.subscribe(onNext: { state in
             self.viewState = state[0]
-            
-            
         }).disposed(by: disposeBag)
+        
+        output.mainTextRelay.subscribe(onNext: { text in
+            self.titleLabel.setPartialBold(originalText: text, boldText: "", fontSize: 23, boldFontSize: 23)
+        })
+        .disposed(by: disposeBag)
         
         switch output.state.value[0] {
         case StarCollectionViewState.showStar:
@@ -175,11 +162,14 @@ final class MainSceneTableViewCell: MainTableViewCell {
             
         default :
             print(output.state.value)
-            self.setTitle(stars: self.starList.count,lookBackState: self.lookBackState)
+//            self.setTitle(stars: self.starList.count,lookBackState: self.lookBackState)
             output.state.bind(to: starCV.rx.items){ collectionView, index, item in
                 let identifier = String(describing: MainLookBackCollectionViewCell.self)
                 let cell = self.starCV.dequeueReusableCell(withReuseIdentifier: identifier, for: IndexPath(item: index, section: 0)) as! MainLookBackCollectionViewCell
-                cell.setState(state: self.lookBackState)
+                
+                if self.homeModel != nil {
+                    cell.setState(state: self.lookBackState, bannerTitle: self.homeModel!.bannerTitle, bannerText: self.homeModel!.bannerText, buttonText: self.homeModel!.buttonText)
+                }
                 self.weekContainView.isHidden = true
                 
                 return cell

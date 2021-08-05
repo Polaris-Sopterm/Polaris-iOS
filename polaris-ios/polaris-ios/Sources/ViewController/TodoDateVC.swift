@@ -16,8 +16,6 @@ class TodoDateVC: UIViewController {
     
     let viewModel = TodoDateViewModel()
     let disposeBag = DisposeBag()
-    
-    
     let checkButtonClicked = PublishSubject<IndexPath>()
     
     override func viewDidLoad() {
@@ -31,47 +29,31 @@ class TodoDateVC: UIViewController {
         self.wholeTV.delegate = self
         self.wholeTV.dataSource = self
         self.wholeTV.registerCell(cell: TodoDateTVC.self)
-        
     }
 
     private func bindViewModel(){
-      
         let input = TodoDateViewModel.Input(checkButtonClicked: checkButtonClicked)
         let output = viewModel.connect(input: input)
-        
-
-            
-        
     }
     
-    
     private func bindOutput(){
-
         self.viewModel.todoFetchFinished
             .flatMapLatest{
                 return Observable.of($0)
             }
             .subscribe(onNext: { [weak self] _ in
-                print("called")
                 self?.wholeTV.reloadData()
-                
-                
             })
             .disposed(by: disposeBag)
-        
     }
-    
-    
-    
+
 }
 
 
 extension TodoDateVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let identifier = String(describing: TodoDateTVC.self)
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! TodoDateTVC
-        
         let tvcViewModel = TodoDateTVCViewModel(id: indexPath, todoModel: viewModel.todoDateModels[indexPath.section].todos[indexPath.row])
         cell.checkButtonClicked = self.checkButtonClicked
         cell.tvcViewModel = tvcViewModel
@@ -81,9 +63,7 @@ extension TodoDateVC: UITableViewDataSource {
         return cell
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return viewModel.todoDateModels[section].todos.count
-        
     }
     func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel.todoDateModels.count
@@ -101,11 +81,8 @@ extension TodoDateVC: UITableViewDataSource {
             headerView?.setDate(date: viewModel.todoDateModels[section].date)
             return headerView
         }
-        
-        
+
     }
-    
-    
 }
 
 extension TodoDateVC: UITableViewDelegate{

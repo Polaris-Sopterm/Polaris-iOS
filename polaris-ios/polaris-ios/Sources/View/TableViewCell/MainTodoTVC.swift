@@ -19,7 +19,7 @@ class MainTodoTVC: UITableViewCell {
     
     var tvcViewModel: MainTodoTVCViewModel?{
         didSet{
-            print("called")
+
         }
     }
     
@@ -30,17 +30,14 @@ class MainTodoTVC: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
     
     
     func setUIs(todoModel: TodoModel){
-        
         self.backgroundColor = .clear
         self.titleLabel.textColor = .white
         self.subLabel.textColor = .white
-        
         self.titleLabel.font = UIFont.systemFont(ofSize: 16,weight: .bold)
         self.subLabel.font = UIFont.systemFont(ofSize: 11,weight: .medium)
         
