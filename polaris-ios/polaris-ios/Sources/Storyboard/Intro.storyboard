@@ -224,6 +224,94 @@
             </objects>
             <point key="canvasLocation" x="176.80000000000001" y="144.82758620689657"/>
         </scene>
+        <!--OnboardingVC-->
+        <scene sceneID="xJy-Os-J0e">
+            <objects>
+                <viewController storyboardIdentifier="OnboardingVC" id="zER-Xr-Dbz" customClass="OnboardingVC" customModule="Polaris" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3Ke-sZ-ldz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboarding_bg" translatesAutoresizingMaskIntoConstraints="NO" id="bom-Ee-evK">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fk8-qS-4vo">
+                                <rect key="frame" x="0.0" y="44" width="375" height="54"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xTl-vx-mLF">
+                                        <rect key="frame" x="311" y="0.0" width="54" height="54"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="54" id="AM4-fU-xpG"/>
+                                            <constraint firstAttribute="height" constant="54" id="p2W-N0-RA2"/>
+                                        </constraints>
+                                        <state key="normal" title="SKIP">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2yW-XX-2MW">
+                                        <rect key="frame" x="9" y="3" width="48" height="48"/>
+                                        <state key="normal" image="btnBackLookBack"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="xTl-vx-mLF" secondAttribute="trailing" constant="10" id="0N9-uM-aLB"/>
+                                    <constraint firstItem="2yW-XX-2MW" firstAttribute="centerY" secondItem="Fk8-qS-4vo" secondAttribute="centerY" id="DSJ-n3-qSr"/>
+                                    <constraint firstAttribute="height" constant="54" id="gBL-cF-KSe"/>
+                                    <constraint firstItem="2yW-XX-2MW" firstAttribute="leading" secondItem="Fk8-qS-4vo" secondAttribute="leading" constant="9" id="rTJ-4g-SK1"/>
+                                    <constraint firstItem="xTl-vx-mLF" firstAttribute="centerY" secondItem="Fk8-qS-4vo" secondAttribute="centerY" id="rwi-8l-XKT"/>
+                                </constraints>
+                            </view>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="ELG-xa-jXd">
+                                <rect key="frame" x="-15" y="101" width="139" height="7"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="7" id="4A3-04-CnI"/>
+                                </constraints>
+                                <color key="pageIndicatorTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="currentPageIndicatorTintColor" name="mainSky"/>
+                            </pageControl>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DD1-AS-Oy9">
+                                <rect key="frame" x="0.0" y="134" width="375" height="678"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="uxr-9b-P5A">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ZrF-dT-Zvj"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="DD1-AS-Oy9" secondAttribute="bottom" id="Ati-Bj-Isj"/>
+                            <constraint firstAttribute="trailing" secondItem="bom-Ee-evK" secondAttribute="trailing" id="DuP-ac-YvQ"/>
+                            <constraint firstItem="bom-Ee-evK" firstAttribute="leading" secondItem="3Ke-sZ-ldz" secondAttribute="leading" id="JIP-44-twB"/>
+                            <constraint firstItem="bom-Ee-evK" firstAttribute="top" secondItem="3Ke-sZ-ldz" secondAttribute="top" id="LsP-jC-cdN"/>
+                            <constraint firstItem="Fk8-qS-4vo" firstAttribute="top" secondItem="ZrF-dT-Zvj" secondAttribute="top" id="Nja-gL-MN3"/>
+                            <constraint firstAttribute="bottom" secondItem="bom-Ee-evK" secondAttribute="bottom" id="PiC-CK-dCP"/>
+                            <constraint firstItem="ZrF-dT-Zvj" firstAttribute="trailing" secondItem="Fk8-qS-4vo" secondAttribute="trailing" id="XbJ-BJ-O2T"/>
+                            <constraint firstItem="ELG-xa-jXd" firstAttribute="top" secondItem="Fk8-qS-4vo" secondAttribute="bottom" constant="3" id="ZzW-gf-Njy"/>
+                            <constraint firstItem="Fk8-qS-4vo" firstAttribute="leading" secondItem="ZrF-dT-Zvj" secondAttribute="leading" id="eAj-cl-N8r"/>
+                            <constraint firstItem="ELG-xa-jXd" firstAttribute="leading" secondItem="ZrF-dT-Zvj" secondAttribute="leading" constant="-15" id="gOa-7s-2Fj"/>
+                            <constraint firstItem="DD1-AS-Oy9" firstAttribute="leading" secondItem="ZrF-dT-Zvj" secondAttribute="leading" id="h0X-Mb-ZPd"/>
+                            <constraint firstItem="DD1-AS-Oy9" firstAttribute="top" secondItem="ELG-xa-jXd" secondAttribute="bottom" constant="26" id="jrV-5P-mR1"/>
+                            <constraint firstItem="ZrF-dT-Zvj" firstAttribute="trailing" secondItem="DD1-AS-Oy9" secondAttribute="trailing" id="rPa-P2-ESM"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backButton" destination="2yW-XX-2MW" id="aih-aw-FvL"/>
+                        <outlet property="collectionView" destination="DD1-AS-Oy9" id="tBc-Uw-Lvq"/>
+                        <outlet property="pageControl" destination="ELG-xa-jXd" id="OMm-1N-nem"/>
+                        <outlet property="skipButton" destination="xTl-vx-mLF" id="kF1-Ah-nzH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ptd-LL-agE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="176.80000000000001" y="833.49753694581284"/>
+        </scene>
         <!--SignupVC-->
         <scene sceneID="OiR-mr-Uhd">
             <objects>
@@ -621,12 +709,14 @@
     <resources>
         <image name="bgJoin" width="375" height="812"/>
         <image name="bgStars" width="375" height="812"/>
+        <image name="btnBackLookBack" width="48" height="48"/>
         <image name="btnCloseJoin" width="48" height="48"/>
         <image name="icnError" width="12" height="12"/>
         <image name="icnId" width="13.333333015441895" height="15.666666984558105"/>
         <image name="icnPw" width="18" height="10"/>
         <image name="imgPolaris" width="99" height="24"/>
         <image name="imgPolarisStar" width="55" height="55"/>
+        <image name="onboarding_bg" width="375" height="812"/>
         <namedColor name="inactiveText">
             <color red="0.79600000381469727" green="0.83099997043609619" blue="0.83099997043609619" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
