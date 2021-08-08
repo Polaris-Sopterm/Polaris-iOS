@@ -38,10 +38,13 @@ class AddTodoTextTableViewCell: AddTodoTableViewCell {
         self.polarisMarginTextFieldView?.delegate = self
     }
     
-    override func configure(by addOptions: AddTodoVC.AddOptions) {
+    override func configure(by addOptions: AddTodoVC.AddOptions, date: Date?) {
         var addTodoCategory: AddTextCategory
-        if addOptions.contains(.perDayAddTodo) || addOptions.contains(.perJourneyAddTodo) { addTodoCategory = AddTextCategory.todo }
-        else { addTodoCategory = AddTextCategory.journey }
+        if addOptions.contains(.perDayAddTodo) || addOptions.contains(.perJourneyAddTodo) {
+            addTodoCategory = AddTextCategory.todo
+        } else {
+            addTodoCategory = AddTextCategory.journey
+        }
         
         self.titleLabel.text = addTodoCategory.title
         self.polarisMarginTextFieldView?.setupPlaceholder(text: addTodoCategory.placeHolder)

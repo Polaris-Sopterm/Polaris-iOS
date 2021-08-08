@@ -162,6 +162,12 @@
 		CE29536D2687A0A500E21871 /* TodoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA44E6D267B3BE300A05650 /* TodoTableViewCell.xib */; };
 		CE29536E2687A0A500E21871 /* MainTodoHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECDC5A5B2636A13600A1B5A9 /* MainTodoHeaderView.xib */; };
 		CE37CC6D265A7674004F327E /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37CC6C265A7674004F327E /* SignupViewModel.swift */; };
+		CE40B3E926C00E4E0000151F /* JourneyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE40B3E826C00E4E0000151F /* JourneyAPI.swift */; };
+		CE40B3EA26C00E4E0000151F /* JourneyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE40B3E826C00E4E0000151F /* JourneyAPI.swift */; };
+		CE40B3EB26C00E4E0000151F /* JourneyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE40B3E826C00E4E0000151F /* JourneyAPI.swift */; };
+		CE40B3EF26C00F790000151F /* JourneyTitleListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE40B3EE26C00F790000151F /* JourneyTitleListModel.swift */; };
+		CE40B3F026C00F790000151F /* JourneyTitleListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE40B3EE26C00F790000151F /* JourneyTitleListModel.swift */; };
+		CE40B3F126C00F790000151F /* JourneyTitleListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE40B3EE26C00F790000151F /* JourneyTitleListModel.swift */; };
 		CE43D02426613D66003126F2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE573C262A952100C39358 /* NetworkManager.swift */; };
 		CE43D02526613D66003126F2 /* TodoDateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA4941B262819D300CC2EB8 /* TodoDateVC.swift */; };
 		CE43D02626613D66003126F2 /* AddTodoDropdownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE57A3262C297700C39358 /* AddTodoDropdownTableViewCell.swift */; };
@@ -489,6 +495,8 @@
 		CE2953752687A0A500E21871 /* Polaris Alpha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Polaris Alpha.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE2953882687A30F00E21871 /* polaris-alpha-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "polaris-alpha-Info.plist"; sourceTree = "<group>"; };
 		CE37CC6C265A7674004F327E /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
+		CE40B3E826C00E4E0000151F /* JourneyAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyAPI.swift; sourceTree = "<group>"; };
+		CE40B3EE26C00F790000151F /* JourneyTitleListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyTitleListModel.swift; sourceTree = "<group>"; };
 		CE43D09026613D66003126F2 /* Polaris Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Polaris Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE573FFF267C8E9900665933 /* TodoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewModel.swift; sourceTree = "<group>"; };
 		CE57400C267C903700665933 /* JourneyTodoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyTodoTableViewCell.swift; sourceTree = "<group>"; };
@@ -826,11 +834,20 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		CE40B3ED26C00F650000151F /* Journey */ = {
+			isa = PBXGroup;
+			children = (
+				CE40B3EE26C00F790000151F /* JourneyTitleListModel.swift */,
+			);
+			path = Journey;
+			sourceTree = "<group>";
+		};
 		CE6305092667E35D00EBC1D4 /* Moya */ = {
 			isa = PBXGroup;
 			children = (
 				CE63050A2667E36E00EBC1D4 /* UserAPI.swift */,
 				CE2952E12687893000E21871 /* TodoAPI.swift */,
+				CE40B3E826C00E4E0000151F /* JourneyAPI.swift */,
 			);
 			path = Moya;
 			sourceTree = "<group>";
@@ -983,6 +1000,7 @@
 		CEF055EA2667EB20000E34A0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CE40B3ED26C00F650000151F /* Journey */,
 				CEDB478726AF25080024ABD4 /* TodoList */,
 				CEDB478126AEF7100024ABD4 /* Common */,
 				CEDB478226AEF72E0024ABD4 /* User */,
@@ -1408,6 +1426,7 @@
 				ECA4941C262819D300CC2EB8 /* TodoDateVC.swift in Sources */,
 				CEEE57A5262C297700C39358 /* AddTodoDropdownTableViewCell.swift in Sources */,
 				ECA49486262DC17A00CC2EB8 /* UILabel+.swift in Sources */,
+				CE40B3E926C00E4E0000151F /* JourneyAPI.swift in Sources */,
 				CEA44E59267B386800A05650 /* MainVC.swift in Sources */,
 				CE04A06A2623528C007C98E2 /* UIViewController+.swift in Sources */,
 				CEDB478A26AF26610024ABD4 /* TodoListEmptyTableViewCell.swift in Sources */,
@@ -1420,6 +1439,7 @@
 				CEEE5786262C112E00C39358 /* AddTodoFixOnTopTableViewCell.swift in Sources */,
 				CEEE574A262A95BD00C39358 /* UserDefaultWrapper.swift in Sources */,
 				CE574000267C8E9900665933 /* TodoViewModel.swift in Sources */,
+				CE40B3EF26C00F790000151F /* JourneyTitleListModel.swift in Sources */,
 				CE207B892661CBC7009A812A /* ServerHost.swift in Sources */,
 				CEC48ED4262DCA9100FD887F /* DropdownItemTableViewCell.swift in Sources */,
 				ECA4944426296F6E00CC2EB8 /* TodoDateTVCViewModel.swift in Sources */,
@@ -1513,6 +1533,7 @@
 				CE2952EF2687A0A500E21871 /* TodoDateVC.swift in Sources */,
 				CE2952F02687A0A500E21871 /* AddTodoDropdownTableViewCell.swift in Sources */,
 				CE2952F12687A0A500E21871 /* UILabel+.swift in Sources */,
+				CE40B3EA26C00E4E0000151F /* JourneyAPI.swift in Sources */,
 				CE2952F22687A0A500E21871 /* MainVC.swift in Sources */,
 				CE2952F32687A0A500E21871 /* UIViewController+.swift in Sources */,
 				CEDB478E26AF27DA0024ABD4 /* TodoListEmptyTableViewCell.swift in Sources */,
@@ -1525,6 +1546,7 @@
 				CE2952FA2687A0A500E21871 /* AddTodoFixOnTopTableViewCell.swift in Sources */,
 				CE2952FB2687A0A500E21871 /* UserDefaultWrapper.swift in Sources */,
 				CE2952FC2687A0A500E21871 /* TodoViewModel.swift in Sources */,
+				CE40B3F026C00F790000151F /* JourneyTitleListModel.swift in Sources */,
 				CE2952FD2687A0A500E21871 /* ServerHost.swift in Sources */,
 				CE2952FE2687A0A500E21871 /* DropdownItemTableViewCell.swift in Sources */,
 				CE2952FF2687A0A500E21871 /* TodoDateTVCViewModel.swift in Sources */,
@@ -1618,6 +1640,7 @@
 				CE43D02526613D66003126F2 /* TodoDateVC.swift in Sources */,
 				CE43D02626613D66003126F2 /* AddTodoDropdownTableViewCell.swift in Sources */,
 				CE43D02726613D66003126F2 /* UILabel+.swift in Sources */,
+				CE40B3EB26C00E4E0000151F /* JourneyAPI.swift in Sources */,
 				CEA44E5A267B386800A05650 /* MainVC.swift in Sources */,
 				CE43D02826613D66003126F2 /* UIViewController+.swift in Sources */,
 				CEDB478F26AF27DA0024ABD4 /* TodoListEmptyTableViewCell.swift in Sources */,
@@ -1630,6 +1653,7 @@
 				CE43D02D26613D66003126F2 /* AddTodoFixOnTopTableViewCell.swift in Sources */,
 				CE43D02E26613D66003126F2 /* UserDefaultWrapper.swift in Sources */,
 				CE574001267C8E9900665933 /* TodoViewModel.swift in Sources */,
+				CE40B3F126C00F790000151F /* JourneyTitleListModel.swift in Sources */,
 				CE207B8A2661CBC7009A812A /* ServerHost.swift in Sources */,
 				CE43D02F26613D66003126F2 /* DropdownItemTableViewCell.swift in Sources */,
 				CE43D03026613D66003126F2 /* TodoDateTVCViewModel.swift in Sources */,

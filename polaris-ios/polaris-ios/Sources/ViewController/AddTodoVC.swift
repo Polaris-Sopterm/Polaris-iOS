@@ -103,12 +103,17 @@ class AddTodoVC: HalfModalVC {
             .disposed(by: self.disposeBag)
         
         self.viewModel.addListTypes
-            .bind(to: self.tableView.rx.items) { tableView, index, item in
-                guard let addTodoCell      = tableView.dequeueReusableCell(cell: item, forIndexPath: IndexPath(row: index, section: 0)) as? AddTodoTableViewCellProtocol,
-                      let currentAddOption = self.viewModel.currentAddOption else { return UITableViewCell() }
+            .bind(to: self.tableView.rx.items) { [weak self] tableView, index, item in
+                guard let self = self else { return UITableViewCell() }
+                
+                let indexPath = IndexPath(row: index, section: 0)
+                let cell      = tableView.dequeueReusableCell(cell: item, forIndexPath: indexPath)
+                
+                guard let addTodoCell = cell as? AddTodoTableViewCellProtocol else { return UITableViewCell() }
+                guard let currentAddOption = self.viewModel.currentAddOption  else { return UITableViewCell() }
                 
                 addTodoCell.delegate = self
-                addTodoCell.configure(by: currentAddOption)
+                addTodoCell.configure(by: currentAddOption, date: self.viewModel.addTodoDate)
                 return addTodoCell
             }
             .disposed(by: self.disposeBag)

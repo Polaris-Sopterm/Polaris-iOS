@@ -28,8 +28,8 @@ extension AddTodoVC: AddTodoFixOnTopTableViewCellDelegate {
 }
 
 extension AddTodoVC: AddTodoDropdownTableViewCellDelegate {
-    func addTodoDropdownTableViewCell(_ addTodoDropdownTableViewCell: AddTodoDropdownTableViewCell, didSelectedMenu menu: String) {
-        self.viewModel.dropdownSubject.onNext(menu)
+    func addTodoDropdownTableViewCell(_ addTodoDropdownTableViewCell: AddTodoDropdownTableViewCell, didSelectedJourney journey: JourneyTitleModel) {
+        self.viewModel.dropdownSubject.onNext(journey)
     }
 }
 
