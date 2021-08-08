@@ -9,7 +9,13 @@ import UIKit
 import RxCocoa
 import RxSwift
 
+protocol AddTodoViewControllerDelegate: AnyObject {
+    func addTodoViewController(_ viewController: AddTodoVC, didCompleteAddOption option: AddTodoVC.AddOptions)
+}
+
 class AddTodoVC: HalfModalVC {
+    
+    weak var delegate: AddTodoViewControllerDelegate?
     
     let viewModel = AddTodoViewModel()
     
@@ -110,7 +116,10 @@ class AddTodoVC: HalfModalVC {
     
     private func observeViewModel() {
         self.viewModel.completeAddTodoSubject.observeOnMain(onNext: { [weak self] in
-            self?.dismissWithAnimation()
+            guard let self = self                                     else { return }
+            guard let currentOption = self.viewModel.currentAddOption else { return }
+            self.delegate?.addTodoViewController(self, didCompleteAddOption: currentOption)
+            self.dismissWithAnimation()
         }).disposed(by: self.disposeBag)
         
         self.viewModel.loadingSubject.observeOnMain(onNext: { [weak self] isLoading in

@@ -16,7 +16,7 @@ struct TodoDayModel: Codable {
     let todoList: [TodoDayPerModel]?
 }
 
-struct TodoDayPerModel: Codable {
+struct TodoDayPerModel: Codable, TodoListModelProtocol {
     let idx: Int?
     let title: String?
     let isTop: Bool?

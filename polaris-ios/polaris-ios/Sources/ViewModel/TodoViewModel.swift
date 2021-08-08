@@ -41,6 +41,7 @@ class TodoViewModel {
     let currentTabRelay = BehaviorRelay<TodoCategory>(value: .day)
     
     init() {
+        self.todoDayHeadersInform = Date.daysThisWeek
         self.todoDayHeadersInform.forEach { self.todoDayListTable.updateValue([], forKey: $0) }
     }
     
@@ -49,25 +50,38 @@ class TodoViewModel {
         
         if currentTab == .day {
             let todoDayList = self.todoDayList(at: section)
-            return todoDayList?.count == 0 || todoDayList == nil ? true : false
+            return todoDayList.count == 0 ? true : false
         } else {
             return false
         }
     }
     
-    func todoDayList(at section: Int) -> [TodoDayPerModel]? {
-        guard let todoDate = self.todoDayHeadersInform[safe: section] else { return nil }
-        guard let todoList = self.todoDayListTable[todoDate]          else { return nil }
-        return todoList
+    // 전부 현재 Selected Tab 기준으로 받아옴
+    func todoListNumberOfRows(in section: Int) -> Int {
+        if self.currentTabRelay.value == .day {
+            guard let todoDate = self.todoDayHeadersInform[safe: section] else { return 1 }
+            guard let todoList = self.todoDayListTable[todoDate]          else { return 1 }
+            return todoList.count != 0 ? todoList.count : 1
+        } else {
+            return 0
+        }
     }
     
-    func requestTodoList() {
+    // 전부 현재 Selected Tab 기준으로 받아옴
+    func todoDayList(at section: Int) -> [TodoListModelProtocol] {
+        if self.currentTabRelay.value == .day {
+            guard let todoDate = self.todoDayHeadersInform[safe: section] else { return [] }
+            guard let todoList = self.todoDayListTable[todoDate]          else { return [] }
+            return todoList
+        } else {
+            return []
+        }
+    }
+    
+    func requestTodoDayList() {
         let todoListAPI = TodoAPI.listTodoByDate()
-        NetworkManager.request(apiType: todoListAPI).subscribe(onSuccess: { (todoListModel: TodoDayListModel) in
-            self.updateTodoDayListModel(todoListModel)
-        }, onFailure: { error in
-            #warning("Error 처리 로직")
-            print(error.localizedDescription)
+        NetworkManager.request(apiType: todoListAPI).subscribe(onSuccess: { [weak self] (todoListModel: TodoDayListModel) in
+            self?.updateTodoDayListModel(todoListModel)
         }).disposed(by: self.disposeBag)
     }
     
@@ -87,7 +101,7 @@ class TodoViewModel {
     }
     
     // Date 업데이트 시킬 때, 12:00:00으로 맞추어서 Normalized 시킴
-    private(set) var todoDayHeadersInform: [Date]                = Date.daysThisWeek
+    private(set) var todoDayHeadersInform: [Date]
     private(set) var todoDayListTable: [Date: [TodoDayPerModel]] = [:]
     
     private let disposeBag = DisposeBag()

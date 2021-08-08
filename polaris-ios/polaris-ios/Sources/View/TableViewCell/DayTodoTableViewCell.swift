@@ -28,16 +28,23 @@ class DayTodoTableViewCell: TodoCategoryCell {
     override func configure(_ todoListModel: TodoListModelProtocol) {
         guard let todoPerModel = todoListModel as? TodoDayPerModel else { return }
         
+        self.titleLabel.text       = todoPerModel.title
+        self.subTitleLabel.text    = "아무거나... 넣어줘 소연"
+        self.fixImageView.isHidden = todoPerModel.isTop == false
+        
+        self.updateUI(as: todoPerModel.isDone)
     }
     
-    func updateUI(as checkState: Bool) {
+    func updateUI(as checkStatus: Bool?) {
+        guard let checkStatus = checkStatus else { return }
+        
         let checkImage: UIImage?   = #imageLiteral(resourceName: "btnCheck")
         let uncheckImage: UIImage? = #imageLiteral(resourceName: "btnUncheck")
         
         let checkTextColor: UIColor   = .inactiveTextPurple
         let uncheckTextColor: UIColor = .maintext
         
-        if checkState == true {
+        if checkStatus == true {
             self.titleLabel.textColor    = checkTextColor
             self.subTitleLabel.textColor = checkTextColor
             self.fixImageView.alpha      = 0.5

@@ -43,7 +43,7 @@ class TodoTableViewCell: MainTableViewCell {
         self.bindButtons()
         self.observeViewModel()
         
-        self.viewModel.requestTodoList()
+        self.viewModel.requestTodoDayList()
     }
     
     override func prepareForReuse() {
@@ -91,18 +91,34 @@ class TodoTableViewCell: MainTableViewCell {
                 guard let self = self else { return }
                 
                 self.tableView.reloadData()
-                self.tableView.setContentOffset(CGPoint(x: 0, y: -type(of: self).navigationHeight), animated: false)
+                
+                if self.viewModel.currentTabRelay.value == .day {
+                    self.scrollToCurrentDay()
+                } else {
+                    self.tableView.setContentOffset(CGPoint(x: 0, y: -type(of: self).navigationHeight), animated: false)
+                }
                 self.updateCategoryButton(as: currentTab == .day ? .journey : .day)
             })
             .disposed(by: self.disposeBag)
         
         self.viewModel.reloadSubject.observeOnMain(onNext: { [weak self] in
             self?.tableView.reloadData()
+            
+            if self?.viewModel.currentTabRelay.value == .day { self?.scrollToCurrentDay() }
         }).disposed(by: self.disposeBag)
     }
     
     private func updateCategoryButton(as category: TodoCategory) {
         self.categoryButton.setTitle(category.title, for: .normal)
+    }
+    
+    private func scrollToCurrentDay() {
+        let currentDate = Date.normalizedCurrent
+        
+        guard let currentSection = self.viewModel.todoDayHeadersInform.firstIndex(of: currentDate) else { return }
+        self.tableView.scrollToRow(at: IndexPath(row: 0, section: currentSection),
+                                   at: .top,
+                                   animated: false)
     }
     
     private static var navigationHeight: CGFloat { return 51 + DeviceInfo.topSafeAreaInset }
@@ -126,24 +142,26 @@ extension TodoTableViewCell: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let currentTab = self.viewModel.currentTabRelay.value
-        if currentTab == .day {
-            guard let todoDayList = self.viewModel.todoDayList(at: section) else { return 1 }
-            return todoDayList.count == 0 ? 1 : todoDayList.count
-        } else {
-            return 0
-        }
+        return self.viewModel.todoListNumberOfRows(in: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if self.viewModel.isEmptySection(at: indexPath.section) {
-            guard let emptyCell = tableView.dequeueReusableCell(cell: TodoListEmptyTableViewCell.self, forIndexPath: indexPath) else { return UITableViewCell() }
+            guard let emptyCell = tableView.dequeueReusableCell(cell: TodoListEmptyTableViewCell.self,
+                                                                forIndexPath: indexPath) else {
+                return UITableViewCell()
+            }
             return emptyCell
         }
         
         let currentTab = self.viewModel.currentTabRelay.value
-        guard let todoCell = tableView.dequeueReusableCell(cell: currentTab.cellType, forIndexPath: indexPath) else { return UITableViewCell() }
+        let todoList   = self.viewModel.todoDayList(at: indexPath.section)
+        let cell       = tableView.dequeueReusableCell(cell: currentTab.cellType, forIndexPath: indexPath)
         
+        guard let todoCell = cell                           else { return UITableViewCell() }
+        guard let todoModel = todoList[safe: indexPath.row] else { return UITableViewCell() }
+        
+        todoCell.configure(todoModel)
         return todoCell
     }
     
@@ -198,6 +216,7 @@ extension TodoTableViewCell: DayTodoHeaderViewDelegate {
               let visibleController = UIViewController.getVisibleController() else { return }
         addTodoVC.setAddOptions(.perDayAddTodo)
         addTodoVC.setAddTodoDate(date)
+        addTodoVC.delegate = self
         addTodoVC.presentWithAnimation(from: visibleController)
     }
     
@@ -212,7 +231,20 @@ extension TodoTableViewCell: JourneyTodoHeaderViewDelegate {
         guard let addTodoVC = AddTodoVC.instantiateFromStoryboard(StoryboardName.addTodo),
               let visibleController = UIViewController.getVisibleController() else { return }
         addTodoVC.setAddOptions(.perJourneyAddTodo)
+        addTodoVC.delegate = self
         addTodoVC.presentWithAnimation(from: visibleController)
+    }
+    
+}
+
+extension TodoTableViewCell: AddTodoViewControllerDelegate {
+    
+    func addTodoViewController(_ viewController: AddTodoVC, didCompleteAddOption option: AddTodoVC.AddOptions) {
+        if option == .perDayAddTodo {
+            self.viewModel.requestTodoDayList()
+        } else if option == .perJourneyAddTodo {
+            #warning("여정별 할일 받아오는 것 추가")
+        }
     }
     
 }
