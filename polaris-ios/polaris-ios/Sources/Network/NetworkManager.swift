@@ -24,6 +24,7 @@ class NetworkManager {
                         return
                     }
                     
+                    print(try? response.mapString())
                     do {
                         guard let resultData = try response.mapString().data(using: .utf8) else {
                             throw NSError(domain: "JSON Parsing Error", code: -1, userInfo: nil)

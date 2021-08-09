@@ -23,4 +23,5 @@ struct TodoDayPerModel: Codable, TodoListModelProtocol {
     let isDone: Bool?
     let date: String?
     let createdAt: String?
+    let journey: JourneyTitleModel?
 }

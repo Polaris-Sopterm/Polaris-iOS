@@ -161,6 +161,7 @@ extension TodoTableViewCell: UITableViewDataSource {
         guard let todoCell = cell                           else { return UITableViewCell() }
         guard let todoModel = todoList[safe: indexPath.row] else { return UITableViewCell() }
         
+        todoCell.delegate = self
         todoCell.configure(todoModel)
         return todoCell
     }
@@ -233,6 +234,14 @@ extension TodoTableViewCell: JourneyTodoHeaderViewDelegate {
         addTodoVC.setAddOptions(.perJourneyAddTodo)
         addTodoVC.delegate = self
         addTodoVC.presentWithAnimation(from: visibleController)
+    }
+    
+}
+
+extension TodoTableViewCell: DayTodoTableViewCellDelegate {
+    
+    func dayTodoTableViewCell(_ dayTodoTableViewCell: DayTodoTableViewCell, didTapCheck todo: TodoDayPerModel) {
+        print(todo)
     }
     
 }

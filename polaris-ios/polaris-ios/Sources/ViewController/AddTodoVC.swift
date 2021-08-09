@@ -125,6 +125,8 @@ class AddTodoVC: HalfModalVC {
             guard let currentOption = self.viewModel.currentAddOption else { return }
             self.delegate?.addTodoViewController(self, didCompleteAddOption: currentOption)
             self.dismissWithAnimation()
+            
+            PolarisToastManager.shared.showToast(with: "할 일이 추가되었어요.")
         }).disposed(by: self.disposeBag)
         
         self.viewModel.loadingSubject.observeOnMain(onNext: { [weak self] isLoading in

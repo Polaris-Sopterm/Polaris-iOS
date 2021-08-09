@@ -44,7 +44,7 @@ final class OnboardingVC: UIViewController {
             .disposed(by: self.disposeBag)
         
         self.viewModel.onboardingLevelRelay
-            .bind(to: self.collectionView.rx.items) { collectionView, index, item in
+            .bind(to: self.collectionView.rx.items) { [weak self] collectionView, index, item in
                 let indexPath = IndexPath(item: index, section: 0)
                 let cell      = collectionView.dequeueReusableCell(cell: OnboardingCollectionViewCell.self,
                                                                    forIndexPath: indexPath)
