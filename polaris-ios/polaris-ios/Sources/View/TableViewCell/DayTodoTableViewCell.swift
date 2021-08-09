@@ -28,6 +28,7 @@ class DayTodoTableViewCell: TodoCategoryCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.bindCheckButton()
+        self.bindPanGesture()
     }
     
     override func configure(_ todoListModel: TodoListModelProtocol) {
@@ -76,15 +77,54 @@ class DayTodoTableViewCell: TodoCategoryCell {
             .disposed(by: self.disposeBag)
     }
     
+    private func bindPanGesture() {
+        let panGesture = UIPanGestureRecognizer()
+        panGesture.rx.event.observeOnMain(onNext: { [weak self] panGesture in
+            guard let self = self else { return }
+            
+            let transition = panGesture.translation(in: self)
+            let changedY   = transition.x + self.contentViewLeadingConstraint.constant
+            
+            switch panGesture.state {
+            case .cancelled, .ended, .failed:
+                if changedY <= -56 { self.animateToExpanding() }
+                else               { self.animateToInitial() }
+            case .changed:
+                guard changedY >= -112 && changedY <= 0 else { return }
+                self.contentViewLeadingConstraint.constant = changedY
+            default:
+                break
+            }
+            
+            panGesture.setTranslation(.zero, in: self)
+        }).disposed(by: self.disposeBag)
+        self.addGestureRecognizer(panGesture)
+    }
+    
+    private func animateToExpanding() {
+        self.contentViewLeadingConstraint.constant = -112
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, animations: {
+            self.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    private func animateToInitial() {
+        self.contentViewLeadingConstraint.constant = 0
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, animations: {
+            self.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
     private static let screenRatio: CGFloat = DeviceInfo.screenWidth / 375
     
-    private var disposeBag = DisposeBag()
-    
+    private let disposeBag = DisposeBag()
     private var todoModel: TodoDayPerModel?
     
     @IBOutlet private weak var fixImageView: UIImageView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var subTitleLabel: UILabel!
     @IBOutlet private weak var checkButton: UIButton!
+    
+    @IBOutlet private weak var contentViewLeadingConstraint: NSLayoutConstraint!
     
 }
