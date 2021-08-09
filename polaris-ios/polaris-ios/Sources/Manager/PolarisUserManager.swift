@@ -12,15 +12,17 @@ class PolarisUserManager {
     
     static let shared = PolarisUserManager()
     
-    @UserDefaultWrapper<String>(key: UserDefaultsKey.auth) private(set) var authToken
-    @UserDefaultWrapper<String>(key: UserDefaultsKey.refresh) private(set) var refreshToken
-    
     var hasToken: Bool        { return self.authToken != nil }
     var hasRefreshToken: Bool { return self.refreshToken != nil }
     
     func updateAuthToken(_ token: String, _ refreshToken: String) {
         self.authToken    = token
         self.refreshToken = refreshToken
+    }
+    
+    // 앱에 최초 한 번 진입한 경우 - Onboarding을 경험했다고 표시
+    func updateOnboardingExperienceStatus() {
+        self.isInitialMember = false
     }
     
     func resetUserInfo() {
@@ -44,7 +46,12 @@ class PolarisUserManager {
         self.user = polarisUser
     }
     
-    private(set) var user: PolarisUser?
     private let disposeBag = DisposeBag()
+    
+    private(set) var user: PolarisUser?
+    
+    @UserDefaultWrapper<Bool>(key: UserDefaultsKey.isInitialMember) private(set) var isInitialMember
+    @UserDefaultWrapper<String>(key: UserDefaultsKey.auth) private(set) var authToken
+    @UserDefaultWrapper<String>(key: UserDefaultsKey.refresh) private(set) var refreshToken
     
 }

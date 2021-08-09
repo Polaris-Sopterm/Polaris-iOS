@@ -43,7 +43,7 @@ class OnboardingCollectionViewCell: UICollectionViewCell {
         self.onboardingImageView.alpha     = 0
         self.onboardingImageView.transform = CGAffineTransform(translationX: 0, y: 300)
         
-        UIView.animate(withDuration: 0.7) {
+        UIView.animate(withDuration: 1.0) {
             self.titleLabel.alpha              = 1
             self.subTitleLabel.alpha           = 1
             self.descriptionLabel.alpha        = 1

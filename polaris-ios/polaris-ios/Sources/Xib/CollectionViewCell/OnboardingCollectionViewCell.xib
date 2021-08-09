@@ -35,8 +35,8 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgMockup1" translatesAutoresizingMaskIntoConstraints="NO" id="WZs-2n-KFM">
-                        <rect key="frame" x="48" y="157" width="279" height="522"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgMockup2" translatesAutoresizingMaskIntoConstraints="NO" id="WZs-2n-KFM">
+                        <rect key="frame" x="48" y="146" width="279" height="533"/>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8uJ-9v-jVa">
                         <rect key="frame" x="23" y="588" width="54" height="54"/>
@@ -81,6 +81,7 @@
                 <constraint firstAttribute="trailing" secondItem="PTm-F7-3Yn" secondAttribute="trailing" constant="23" id="hzu-QV-sKf"/>
                 <constraint firstItem="jyJ-5U-yvP" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="klx-qV-ayh"/>
                 <constraint firstAttribute="bottom" secondItem="8uJ-9v-jVa" secondAttribute="bottom" constant="37" id="lhB-ey-ieX"/>
+                <constraint firstItem="WZs-2n-KFM" firstAttribute="top" secondItem="17C-ra-lIf" secondAttribute="bottom" constant="51" id="sDG-nb-6j8"/>
                 <constraint firstItem="17C-ra-lIf" firstAttribute="top" secondItem="qmO-Yl-ZSF" secondAttribute="bottom" constant="15" id="wd9-z6-QlN"/>
                 <constraint firstAttribute="bottom" secondItem="7CT-d4-ubY" secondAttribute="bottom" constant="37" id="ziW-Oe-VlA"/>
                 <constraint firstItem="qmO-Yl-ZSF" firstAttribute="top" secondItem="jyJ-5U-yvP" secondAttribute="bottom" constant="7" id="ztr-fl-HDB"/>
@@ -103,7 +104,7 @@
     <resources>
         <image name="btnBack" width="54" height="54"/>
         <image name="btnNext" width="54" height="54"/>
-        <image name="imgMockup1" width="328" height="522"/>
+        <image name="imgMockup2" width="280" height="504"/>
         <namedColor name="mainSky">
             <color red="0.49799999594688416" green="0.85900002717971802" blue="0.93699997663497925" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -83,5 +83,6 @@ struct ImageName {
     static let mockImageSecond = "imgMockup2"
     static let mockImageThird = "imgMockup3"
     static let mockImageFourth = "imgMockup4"
+    static let mockImageLast = "imgMockup5"
     
 }

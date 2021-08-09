@@ -18,6 +18,8 @@ final class OnboardingVC: UIViewController {
         self.setupCollectionView()
         self.bindButtons()
         self.observeViewModel()
+        
+        PolarisUserManager.shared.updateOnboardingExperienceStatus()
     }
     
     private func layoutCollectionView() {
@@ -57,6 +59,10 @@ final class OnboardingVC: UIViewController {
     private func bindButtons() {
         self.backButton.rx.tap.observeOnMain(onNext: { [weak self] in
             self?.viewModel.updateCurrnetPage(.fourth)
+        }).disposed(by: self.disposeBag)
+        
+        self.skipButton.rx.tap.observeOnMain(onNext: { [weak self] in
+            self?.dismiss(animated: true, completion: nil)
         }).disposed(by: self.disposeBag)
     }
     
@@ -124,7 +130,7 @@ extension OnboardingVC {
             case .second:   return UIImage(named: ImageName.mockImageSecond)
             case .third:    return UIImage(named: ImageName.mockImageThird)
             case .fourth:   return UIImage(named: ImageName.mockImageFourth)
-            case .last:    return UIImage(named: ImageName.mockImageFourth)
+            case .last:     return UIImage(named: ImageName.mockImageLast)
             }
         }
     }
@@ -150,7 +156,7 @@ extension OnboardingVC: OnboardingCollectionViewCellDelegate {
     }
     
     func onboardingCollectionViewCellDidTapStart(_ cell: OnboardingCollectionViewCell) {
-        
+        self.dismiss(animated: true, completion: nil)
     }
     
 }
