@@ -12,9 +12,9 @@ import RxCocoa
 
 class TodoDateTVCViewModel {
     let id: IndexPath
-    let todoModel: TodoModel
+    let todoModel: WeekTodo
     
-    init(id: IndexPath,todoModel: TodoModel) {
+    init(id: IndexPath,todoModel: WeekTodo) {
         self.id = id
         self.todoModel = todoModel
     }

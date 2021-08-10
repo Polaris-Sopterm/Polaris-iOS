@@ -20,18 +20,38 @@ class MainTodoCVC: UICollectionViewCell {
     @IBOutlet var upperLabels: [UILabel]!
     
     private var colorNames = ["lightblue","bubblegumPink"]
-    private var labelTexts = ["성장","도전"]
+    private let tempColor: UIColor = .black
+    private var circleColors: [UIColor] = [] {
+        didSet{
+            if circleColors.count > 1 {
+                for (idx,color) in upperColors.enumerated() {
+                    color.backgroundColor = circleColors[idx]
+                }
+            }
+        }
+    }
+    private var labelTexts: [String] = [] {
+        didSet{
+            if labelTexts.count > 1 {
+                self.upperLabels[0].text = self.labelTexts[0]
+                self.upperLabels[1].text = self.labelTexts[1]
+                self.circleColors = [tempColor.changeJourneyToColor(journeyName: self.labelTexts[0]),tempColor.changeJourneyToColor(journeyName: self.labelTexts[1])]
+            }
+        }
+    }
     
     var disposeBag = DisposeBag()
     
     var viewModel: MainTodoCVCViewModel? {
         didSet{
+            self.labelTexts = viewModel?.valueRelay.value ?? []
+            self.titleLabel.text = viewModel?.journeyNameRelay.value.last ?? ""
             self.viewModel?.todoListRelay.bind(to: todoTV.rx.items) { tableView, index, item in
+
                 let identifier = String(describing: MainTodoTVC.self)
                 let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: IndexPath(item: index, section: 0)) as! MainTodoTVC
-                
-                cell.tvcViewModel = MainTodoTVCViewModel(id: IndexPath(item: index, section: 0), todoModel: item.todoModel)
-                cell.setUIs(todoModel: item.todoModel)
+                cell.tvcViewModel = item
+//                cell.setUIs(todoModel: item[index])
                 return cell
             }.disposed(by: disposeBag)
         }
@@ -48,6 +68,7 @@ class MainTodoCVC: UICollectionViewCell {
         // Initialization code
     
     }
+    
 
     private func setUIs(){
         self.upperView.backgroundColor = .white70
@@ -55,10 +76,7 @@ class MainTodoCVC: UICollectionViewCell {
         self.backgroundColor = .clear
         self.todoTV.backgroundColor = .clear
         self.todoTV.delegate = self
-        
         self.todoTV.registerCell(cell: MainTodoTVC.self)
-        
-        self.titleLabel.text = "폴라리스"
         self.titleLabel.font = UIFont.systemFont(ofSize: 18,weight: .light)
         self.titleLabel.textColor = .maintext
         
@@ -67,19 +85,14 @@ class MainTodoCVC: UICollectionViewCell {
             info.backgroundColor = UIColor(red: 64, green: 64, blue: 140, alpha: 0.1)
             
         }
-        
         for (idx,color) in self.upperColors.enumerated() {
             color.backgroundColor = .bubblegumPink
             color.makeRounded(cornerRadius: 6)
         }
-        
         for (idx,label) in self.upperLabels.enumerated() {
-            print(idx)
-            label.text = self.labelTexts[idx]
             label.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
             label.textColor = .maintext
         }
-        
     }
 }
 

@@ -19,7 +19,7 @@ class MainTodoTVC: UITableViewCell {
     
     var tvcViewModel: MainTodoTVCViewModel?{
         didSet{
-
+            self.titleLabel.text = tvcViewModel?.weekTodos.title
         }
     }
     
@@ -34,14 +34,14 @@ class MainTodoTVC: UITableViewCell {
     }
     
     
-    func setUIs(todoModel: TodoModel){
+    func setUIs(todoModel: WeekTodo){
         self.backgroundColor = .clear
         self.titleLabel.textColor = .white
         self.subLabel.textColor = .white
         self.titleLabel.font = UIFont.systemFont(ofSize: 16,weight: .bold)
         self.subLabel.font = UIFont.systemFont(ofSize: 11,weight: .medium)
         
-        if todoModel.checked {
+        if todoModel.isDone == "Done" {
             self.checkButton.setImage(UIImage(named: ImageName.btnCheck), for: .normal)
             self.titleLabel.alpha = 0.35
             self.subLabel.alpha = 0.35
@@ -50,14 +50,14 @@ class MainTodoTVC: UITableViewCell {
         else {
             self.checkButton.setImage(UIImage(named: ImageName.btnUncheck), for: .normal)
         }
-        if todoModel.fixed {
+        if todoModel.isTop! {
             self.fixedImage.alpha = 1
         }
         else {
             self.fixedImage.alpha = 0
         }
-        self.titleLabel.text = todoModel.todoTitle
-        self.subLabel.text = todoModel.todoSubtitle
+        self.titleLabel.text = todoModel.title
+        self.subLabel.text = todoModel.date
         self.lineView.backgroundColor = .inactivePurple
     }
     

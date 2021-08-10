@@ -18,7 +18,7 @@ struct WeekModel: Codable {
 
 struct WeekJourneyModel: Codable {
     let idx: Int?
-    let title, year, month, weekNo: String?
+    let title, year, month, weekNo: String
     let userIdx: Int?
     let value1, value2: String?
     let toDos: [WeekTodo]?

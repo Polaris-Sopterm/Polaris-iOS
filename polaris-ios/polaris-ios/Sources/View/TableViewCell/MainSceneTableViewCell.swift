@@ -33,7 +33,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
     private var currentIndex: CGFloat = 0
     private var viewState = StarCollectionViewState.showStar
     private var lookBackState = MainLookBackCellState.lookback
-    private let viewModel = MainSceneViewModel()
+    private var viewModel = MainSceneViewModel()
     private var starTVCViewModel: MainStarTVCViewModel?
     private var dataDriver: Driver<[MainStarCVCViewModel]>?
     private var homeModel: HomeModel?
@@ -89,12 +89,9 @@ final class MainSceneTableViewCell: MainTableViewCell {
             self.pageControl.backgroundStyle = .minimal
             self.pageControl.allowsContinuousInteraction = false
         }
-        
-        
-        
-        
-        
     }
+    
+    
     
     func setStarCollectionView() {
         self.starCV.delegate = self
@@ -156,8 +153,6 @@ final class MainSceneTableViewCell: MainTableViewCell {
                 cell.cvcViewModel = item
                 self.setTitle(stars: self.starList.count,lookBackState: self.lookBackState)
                 return cell
-                self.weekContainView.isHidden = false
-                
             }.disposed(by: disposeBag)
             
         default :
@@ -174,7 +169,6 @@ final class MainSceneTableViewCell: MainTableViewCell {
                 
                 return cell
             }.disposed(by: disposeBag)
-            
         }
         
         output.todoStarList.bind(to: todoCV.rx.items) { collectionView, index, item in

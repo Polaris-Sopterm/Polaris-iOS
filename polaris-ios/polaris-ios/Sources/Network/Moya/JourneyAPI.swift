@@ -10,12 +10,6 @@ import Moya
 
 enum JourneyAPI {
     case getWeekJourney(year: Int, month: Int, weekNo: Int)
-    func getPath() -> String {
-        switch(self){
-        case let .getWeekJourney(year,month,weekNo):
-            return "/journey/v0?year="+String(year)+"&month="+String(month)+"&weekNo="+String(weekNo)
-        }
-    }
 }
 
 extension JourneyAPI: TargetType {
@@ -25,9 +19,7 @@ extension JourneyAPI: TargetType {
     }
     
     var path: String {
-        switch self {
-        case .getWeekJourney: return JourneyAPI.getPath(self)()
-        }
+        return "/journey/v0"
     }
     
     var method: Moya.Method {
@@ -40,9 +32,8 @@ extension JourneyAPI: TargetType {
     
     var task: Task {
         switch self {
-        case .getWeekJourney:
-            print(self.getPath())
-            return .requestParameters(parameters: [:], encoding: URLEncoding.queryString)
+        case .getWeekJourney(let year, let month, let weekNo):
+            return .requestParameters(parameters: ["year":year,"month":month,"weekNo":weekNo], encoding: URLEncoding.queryString)
         }
     }
     

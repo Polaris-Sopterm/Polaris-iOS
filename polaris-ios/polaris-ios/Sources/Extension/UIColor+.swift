@@ -35,6 +35,31 @@ extension UIColor {
                   blue: CGFloat(blue) / 255.0,
                   alpha: alpha)
     }
+    
+    public func changeJourneyToColor(journeyName: String) -> UIColor {
+        switch journeyName {
+        case "행복":
+            return .peachyPink
+        case "절제":
+            return .peachyPink2
+        case "감사":
+            return .maize
+        case "휴식":
+            return .lightGreen
+        case "건강":
+            return .seafoamBlue
+        case "성장":
+            return .seafoamBlue2
+        case "변화":
+            return .cornflower
+        case "극복":
+            return .liliac
+        case "도전":
+            return .bubblegumPink
+        default:
+            return .black
+        }
+    }
 }
 
 extension UIColor {
@@ -97,7 +122,34 @@ extension UIColor {
         return UIColor(white: 1.0, alpha: 0.6)
     }
     @nonobjc class var white40: UIColor {
-      return UIColor(white: 1.0, alpha: 0.4)
+        return UIColor(white: 1.0, alpha: 0.4)
+    }
+    @nonobjc class var peachyPink: UIColor {
+        return UIColor(red: 1.0, green: 136.0 / 255.0, blue: 136.0 / 255.0, alpha: 1.0)
     }
     
+    @nonobjc class var peachyPink2: UIColor {
+        return UIColor(red: 1.0, green: 160.0 / 255.0, blue: 130.0 / 255.0, alpha: 1.0)
+    }
+    
+    @nonobjc class var maize: UIColor {
+        return UIColor(red: 249.0 / 255.0, green: 209.0 / 255.0, blue: 69.0 / 255.0, alpha: 1.0)
+    }
+    
+    @nonobjc class var lightGreen: UIColor {
+        return UIColor(red: 162.0 / 255.0, green: 234.0 / 255.0, blue: 137.0 / 255.0, alpha: 1.0)
+    }
+    
+    @nonobjc class var seafoamBlue: UIColor {
+        return UIColor(red: 108.0 / 255.0, green: 214.0 / 255.0, blue: 175.0 / 255.0, alpha: 1.0)
+    }
+    @nonobjc class var seafoamBlue2: UIColor {
+      return UIColor(red: 117.0 / 255.0, green: 187.0 / 255.0, blue: 217.0 / 255.0, alpha: 1.0)
+    }
+    @nonobjc class var cornflower: UIColor {
+        return UIColor(red: 119.0 / 255.0, green: 116.0 / 255.0, blue: 1.0, alpha: 1.0)
+    }
+    @nonobjc class var liliac: UIColor {
+      return UIColor(red: 185.0 / 255.0, green: 141.0 / 255.0, blue: 1.0, alpha: 1.0)
+    }
 }
