@@ -16,11 +16,12 @@ struct TodoDayModel: Codable {
     let todoList: [TodoDayPerModel]?
 }
 
-struct TodoDayPerModel: Codable {
+struct TodoDayPerModel: Codable, TodoListModelProtocol {
     let idx: Int?
     let title: String?
     let isTop: Bool?
     let isDone: Bool?
     let date: String?
     let createdAt: String?
+    let journey: JourneyTitleModel?
 }

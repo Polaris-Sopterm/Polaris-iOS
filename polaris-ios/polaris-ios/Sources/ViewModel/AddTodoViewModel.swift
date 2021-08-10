@@ -13,7 +13,7 @@ class AddTodoViewModel {
     let addListTypes      = BehaviorSubject<[AddTodoTableViewCellProtocol.Type]>(value: [])
     
     let addTextSubject    = BehaviorSubject<String?>(value: nil)
-    let dropdownSubject   = BehaviorSubject<String?>(value: nil)
+    let dropdownSubject   = BehaviorSubject<JourneyTitleModel?>(value: nil)
     let fixOnTopSubject   = BehaviorSubject<Bool?>(value: nil)
     let selectDaySubject  = BehaviorSubject<(weekday: Date.WeekDay, day: Int)?>(value: nil)
     let selectStarSubject = BehaviorSubject<Set<PolarisStar>?>(value: nil)
@@ -37,7 +37,7 @@ class AddTodoViewModel {
         if self.currentAddOption == .perDayAddTodo {
             self.requestAddTodoDay()
         } else if self.currentAddOption == .perJourneyAddTodo {
-            
+            self.requestAddJourney()
         }
     }
     
@@ -46,15 +46,28 @@ class AddTodoViewModel {
         guard let fixOnTop = try? self.fixOnTopSubject.value()  else { return }
         guard let addTodoDate = self.addTodoDate                else { return }
         
-        let createTodoAPI = TodoAPI.createToDo(title: addText, date: addTodoDate.convertToString(), isTop: fixOnTop)
+        #warning("여기 정해지면 default 어떻게 처리할지 정리 필요")
+        var journeyTitle: String = "default"
+        var journeyIdx: Int?     = nil
+        if let dropdownMenu = try? self.dropdownSubject.value(),
+           let title = dropdownMenu.title,
+           let idx = dropdownMenu.idx {
+            journeyTitle = title
+            journeyIdx   = idx
+        }
+        
+        let createTodoAPI = TodoAPI.createToDo(title: addText, date: addTodoDate.convertToString(),
+                                               journeyTitle: journeyTitle, journeyIdx: journeyIdx, isTop: fixOnTop)
         NetworkManager.request(apiType: createTodoAPI).subscribe(onSuccess: { (responseModel: AddTodoResponseModel) in
             self.completeAddTodoSubject.onNext(())
             self.loadingSubject.onNext(false)
         }, onFailure: { error in
-            #warning("Error에 관한 처리 필요 - 팝업(?)")
-            print(error.localizedDescription)
             self.loadingSubject.onNext(false)
         }).disposed(by: self.disposeBag)
+    }
+    
+    private func requestAddJourney() {
+        
     }
     
     private func bindEnableFlag(by addOptions: AddTodoVC.AddOptions) {
@@ -92,10 +105,6 @@ class AddTodoViewModel {
                 })
                 .disposed(by: self.disposeBag)
         }
-    }
-    
-    private func requestAddTodoJourney() {
-        
     }
     
     private let disposeBag = DisposeBag()

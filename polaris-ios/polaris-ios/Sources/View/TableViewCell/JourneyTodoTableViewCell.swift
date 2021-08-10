@@ -9,13 +9,19 @@ import RxCocoa
 import RxSwift
 import UIKit
 
-protocol JourneyTodoTableViewDelegate: AnyObject {
+protocol JourneyTodoTableViewDelegate: TodoCategoryCellDelegate {
     func journeyTodoTableViewCell(_ journeyTodoTableViewCell: JourneyTodoTableViewCell, didTapCheck todo: String)
 }
 
 class JourneyTodoTableViewCell: TodoCategoryCell {
     
-    weak var delegate: JourneyTodoTableViewDelegate?
+    override var delegate: TodoCategoryCellDelegate? {
+        didSet {
+            self._delegate = delegate as? JourneyTodoTableViewDelegate
+        }
+    }
+    
+    weak var _delegate: JourneyTodoTableViewDelegate?
     
     override static var cellHeight: CGFloat { return 63 * self.screenRatio }
 
@@ -36,7 +42,7 @@ class JourneyTodoTableViewCell: TodoCategoryCell {
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
                 
-                self.delegate?.journeyTodoTableViewCell(self, didTapCheck: "")
+                self._delegate?.journeyTodoTableViewCell(self, didTapCheck: "")
             })
             .disposed(by: self.disposeBag)
     }

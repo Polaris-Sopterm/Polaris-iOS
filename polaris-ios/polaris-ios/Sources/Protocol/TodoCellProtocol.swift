@@ -10,6 +10,7 @@ import UIKit
 protocol TodoListModelProtocol { }
 
 protocol TodoHeaderViewDelegate: AnyObject { }
+protocol TodoCategoryCellDelegate: AnyObject { }
 
 class TodoHeaderView: UIView {
     
@@ -20,6 +21,7 @@ class TodoHeaderView: UIView {
 
 class TodoCategoryCell: UITableViewCell {
     
+    weak var delegate: TodoCategoryCellDelegate?
     class var cellHeight: CGFloat { return 0 }
     
     func configure(_ todoListModel: TodoListModelProtocol) {}

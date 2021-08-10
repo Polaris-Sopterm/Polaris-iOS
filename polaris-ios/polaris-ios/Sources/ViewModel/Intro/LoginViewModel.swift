@@ -8,7 +8,7 @@
 import Foundation
 import RxSwift
 
-class LoginViewModel {
+final class LoginViewModel {
     
     let idSubject = BehaviorSubject<String>(value: "")
     let pwSubject = BehaviorSubject<String>(value: "")
