@@ -33,7 +33,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
     private var currentIndex: CGFloat = 0
     private var viewState = StarCollectionViewState.showStar
     private var lookBackState = MainLookBackCellState.lookback
-    private var viewModel = MainSceneViewModel()
+    private let viewModel = MainSceneViewModel()
     private var starTVCViewModel: MainStarTVCViewModel?
     private var dataDriver: Driver<[MainStarCVCViewModel]>?
     private var homeModel: HomeModel?

@@ -12,7 +12,7 @@ enum HomeAPI {
     case getHomeBanner(isSkipped: Bool)
     
     func getPath() -> String {
-        switch(self){
+        switch self {
         case let .getHomeBanner(isSkipped):
             return "/home/v0/banner/"+String(isSkipped)
             

@@ -38,7 +38,6 @@
 		CE2952E52687940100E21871 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2952E42687940100E21871 /* UIButton+.swift */; };
 		CE2952E62687940100E21871 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2952E42687940100E21871 /* UIButton+.swift */; };
 		CE2952EE2687A0A500E21871 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE573C262A952100C39358 /* NetworkManager.swift */; };
-		CE2952EF2687A0A500E21871 /* TodoDateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA4941B262819D300CC2EB8 /* TodoDateVC.swift */; };
 		CE2952F02687A0A500E21871 /* AddTodoDropdownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE57A3262C297700C39358 /* AddTodoDropdownTableViewCell.swift */; };
 		CE2952F12687A0A500E21871 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA49485262DC17A00CC2EB8 /* UILabel+.swift */; };
 		CE2952F22687A0A500E21871 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA44E58267B386800A05650 /* MainVC.swift */; };
@@ -163,7 +162,6 @@
 		CE29536E2687A0A500E21871 /* MainTodoHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECDC5A5B2636A13600A1B5A9 /* MainTodoHeaderView.xib */; };
 		CE37CC6D265A7674004F327E /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37CC6C265A7674004F327E /* SignupViewModel.swift */; };
 		CE43D02426613D66003126F2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE573C262A952100C39358 /* NetworkManager.swift */; };
-		CE43D02526613D66003126F2 /* TodoDateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA4941B262819D300CC2EB8 /* TodoDateVC.swift */; };
 		CE43D02626613D66003126F2 /* AddTodoDropdownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE57A3262C297700C39358 /* AddTodoDropdownTableViewCell.swift */; };
 		CE43D02726613D66003126F2 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA49485262DC17A00CC2EB8 /* UILabel+.swift */; };
 		CE43D02826613D66003126F2 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A0692623528B007C98E2 /* UIViewController+.swift */; };
@@ -388,7 +386,6 @@
 		ECA0EEE826B3ED530040F42C /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA0EEE726B3ED530040F42C /* HomeModel.swift */; };
 		ECA0EEEA26B3ED730040F42C /* HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA0EEE926B3ED730040F42C /* HomeAPI.swift */; };
 		ECA49419262817D500CC2EB8 /* TodoDate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECA49418262817D500CC2EB8 /* TodoDate.storyboard */; };
-		ECA4941C262819D300CC2EB8 /* TodoDateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA4941B262819D300CC2EB8 /* TodoDateVC.swift */; };
 		ECA494232628223200CC2EB8 /* TodoDateTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA494212628223200CC2EB8 /* TodoDateTVC.swift */; };
 		ECA494242628223200CC2EB8 /* TodoDateTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECA494222628223200CC2EB8 /* TodoDateTVC.xib */; };
 		ECA494292628298B00CC2EB8 /* TodoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA494282628298B00CC2EB8 /* TodoModel.swift */; };
@@ -591,7 +588,6 @@
 		ECA0EEE726B3ED530040F42C /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		ECA0EEE926B3ED730040F42C /* HomeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAPI.swift; sourceTree = "<group>"; };
 		ECA49418262817D500CC2EB8 /* TodoDate.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TodoDate.storyboard; sourceTree = "<group>"; };
-		ECA4941B262819D300CC2EB8 /* TodoDateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TodoDateVC.swift; path = "polaris-ios/Sources/ViewController/TodoDateVC.swift"; sourceTree = SOURCE_ROOT; };
 		ECA494212628223200CC2EB8 /* TodoDateTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDateTVC.swift; sourceTree = "<group>"; };
 		ECA494222628223200CC2EB8 /* TodoDateTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodoDateTVC.xib; sourceTree = "<group>"; };
 		ECA494282628298B00CC2EB8 /* TodoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TodoModel.swift; path = "polaris-ios/Sources/Model/TodoModel.swift"; sourceTree = SOURCE_ROOT; };
@@ -1026,7 +1022,6 @@
 			isa = PBXGroup;
 			children = (
 				CEA3CFE326A8695200577DA4 /* Common */,
-				ECA4941B262819D300CC2EB8 /* TodoDateVC.swift */,
 				CEEE574F262A965400C39358 /* HalfModalVC.swift */,
 				CEEE575F262AD62C00C39358 /* AddTodoVC.swift */,
 				CE574DA7263555330046D20A /* AddTodoVC+Delegate.swift */,
@@ -1441,7 +1436,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEEE573E262A952100C39358 /* NetworkManager.swift in Sources */,
-				ECA4941C262819D300CC2EB8 /* TodoDateVC.swift in Sources */,
 				ECA0EEE826B3ED530040F42C /* HomeModel.swift in Sources */,
 				CEEE57A5262C297700C39358 /* AddTodoDropdownTableViewCell.swift in Sources */,
 				ECA49486262DC17A00CC2EB8 /* UILabel+.swift in Sources */,
@@ -1550,7 +1544,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE2952EE2687A0A500E21871 /* NetworkManager.swift in Sources */,
-				CE2952EF2687A0A500E21871 /* TodoDateVC.swift in Sources */,
 				CE2952F02687A0A500E21871 /* AddTodoDropdownTableViewCell.swift in Sources */,
 				CE2952F12687A0A500E21871 /* UILabel+.swift in Sources */,
 				CE2952F22687A0A500E21871 /* MainVC.swift in Sources */,
@@ -1659,7 +1652,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE43D02426613D66003126F2 /* NetworkManager.swift in Sources */,
-				CE43D02526613D66003126F2 /* TodoDateVC.swift in Sources */,
 				CE43D02626613D66003126F2 /* AddTodoDropdownTableViewCell.swift in Sources */,
 				CE43D02726613D66003126F2 /* UILabel+.swift in Sources */,
 				CEA44E5A267B386800A05650 /* MainVC.swift in Sources */,

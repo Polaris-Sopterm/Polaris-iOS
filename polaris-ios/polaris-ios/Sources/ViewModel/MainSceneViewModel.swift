@@ -46,7 +46,7 @@ struct MainSceneViewModel {
         }
 
         let homeAPI = HomeAPI.getHomeBanner(isSkipped: false)
-        let _ = NetworkManager.request(apiType: homeAPI)
+        let bannerNetworking = NetworkManager.request(apiType: homeAPI)
             .subscribe(onSuccess: { (homeModel: HomeModel) in
                 print(homeModel)
                 homeModelRelay.accept([homeModel])
@@ -79,7 +79,7 @@ struct MainSceneViewModel {
         var weekJourneyModels: [WeekJourneyModel] = []
         
         
-        let _ = NetworkManager.request(apiType: journeyAPI)
+        let todoNetworking = NetworkManager.request(apiType: journeyAPI)
             .subscribe(onSuccess: { (journeyModel: JourneyWeekListModel) in
                 print(journeyModel)
                 weekJourneyModels = journeyModel.journeys!

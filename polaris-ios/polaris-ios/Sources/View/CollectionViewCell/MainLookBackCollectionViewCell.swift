@@ -43,7 +43,7 @@ class MainLookBackCollectionViewCell: UICollectionViewCell {
         self.lookBackButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
     }
     
-    func setState(state: MainLookBackCellState,bannerTitle: String?, bannerText: String?, buttonText: String?) {
+    func setState(state: MainLookBackCellState, bannerTitle: String?, bannerText: String?, buttonText: String?) {
         self.titleLabel.text = bannerTitle ?? ""
         self.subTitleLabel.text = bannerText ?? ""
         self.lookBackButton.setTitle(buttonText ?? "", for: .normal)
