@@ -414,9 +414,9 @@
 		ECD002A626B5229C005F733C /* JourneyWeekListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD002A526B5229C005F733C /* JourneyWeekListModel.swift */; };
 		ECD002A726B5229C005F733C /* JourneyWeekListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD002A526B5229C005F733C /* JourneyWeekListModel.swift */; };
 		ECD002A826B5229C005F733C /* JourneyWeekListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD002A526B5229C005F733C /* JourneyWeekListModel.swift */; };
-		ECD002AA26B524D0005F733C /* JourneyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD002A926B524D0005F733C /* JourneyAPI.swift */; };
-		ECD002AB26B524D0005F733C /* JourneyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD002A926B524D0005F733C /* JourneyAPI.swift */; };
-		ECD002AC26B524D0005F733C /* JourneyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD002A926B524D0005F733C /* JourneyAPI.swift */; };
+		ECD002AA26B524D0005F733C /* JourneyAPI2.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD002A926B524D0005F733C /* JourneyAPI2.swift */; };
+		ECD002AB26B524D0005F733C /* JourneyAPI2.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD002A926B524D0005F733C /* JourneyAPI2.swift */; };
+		ECD002AC26B524D0005F733C /* JourneyAPI2.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD002A926B524D0005F733C /* JourneyAPI2.swift */; };
 		ECDC5A47263552A700A1B5A9 /* MainTodoTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDC5A45263552A700A1B5A9 /* MainTodoTVC.swift */; };
 		ECDC5A48263552A700A1B5A9 /* MainTodoTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECDC5A46263552A700A1B5A9 /* MainTodoTVC.xib */; };
 		ECDC5A4D2635530300A1B5A9 /* MainTodoCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDC5A4B2635530300A1B5A9 /* MainTodoCVC.swift */; };
@@ -610,7 +610,7 @@
 		ECA49485262DC17A00CC2EB8 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		ECA49488262DC40F00CC2EB8 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		ECD002A526B5229C005F733C /* JourneyWeekListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyWeekListModel.swift; sourceTree = "<group>"; };
-		ECD002A926B524D0005F733C /* JourneyAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyAPI.swift; sourceTree = "<group>"; };
+		ECD002A926B524D0005F733C /* JourneyAPI2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyAPI2.swift; sourceTree = "<group>"; };
 		ECDC5A45263552A700A1B5A9 /* MainTodoTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTodoTVC.swift; sourceTree = "<group>"; };
 		ECDC5A46263552A700A1B5A9 /* MainTodoTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainTodoTVC.xib; sourceTree = "<group>"; };
 		ECDC5A4B2635530300A1B5A9 /* MainTodoCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTodoCVC.swift; sourceTree = "<group>"; };
@@ -844,7 +844,7 @@
 				CE63050A2667E36E00EBC1D4 /* UserAPI.swift */,
 				CE2952E12687893000E21871 /* TodoAPI.swift */,
 				ECA0EEE926B3ED730040F42C /* HomeAPI.swift */,
-				ECD002A926B524D0005F733C /* JourneyAPI.swift */,
+				ECD002A926B524D0005F733C /* JourneyAPI2.swift */,
 			);
 			path = Moya;
 			sourceTree = "<group>";
@@ -1531,7 +1531,7 @@
 				CE574D97263517B60046D20A /* AddTodoSelectStarTableViewCell.swift in Sources */,
 				CE2952E52687940100E21871 /* UIButton+.swift in Sources */,
 				CE04A05D26234606007C98E2 /* UIColor+.swift in Sources */,
-				ECD002AA26B524D0005F733C /* JourneyAPI.swift in Sources */,
+				ECD002AA26B524D0005F733C /* JourneyAPI2.swift in Sources */,
 				CE04A06326234701007C98E2 /* UIView+.swift in Sources */,
 				ECA4947B262C48BB00CC2EB8 /* MainStarCVCViewModel.swift in Sources */,
 				ECA494232628223200CC2EB8 /* TodoDateTVC.swift in Sources */,
@@ -1639,7 +1639,7 @@
 				CE2953432687A0A500E21871 /* UIButton+.swift in Sources */,
 				CE2953442687A0A500E21871 /* UIColor+.swift in Sources */,
 				ECD002A226B3EFCE005F733C /* HomeAPI.swift in Sources */,
-				ECD002AB26B524D0005F733C /* JourneyAPI.swift in Sources */,
+				ECD002AB26B524D0005F733C /* JourneyAPI2.swift in Sources */,
 				CE2953452687A0A500E21871 /* UIView+.swift in Sources */,
 				CE2953462687A0A500E21871 /* MainStarCVCViewModel.swift in Sources */,
 				CE2953472687A0A500E21871 /* TodoDateTVC.swift in Sources */,
@@ -1747,7 +1747,7 @@
 				CE2952E62687940100E21871 /* UIButton+.swift in Sources */,
 				CE43D06726613D66003126F2 /* UIColor+.swift in Sources */,
 				ECD002A126B3EFCE005F733C /* HomeAPI.swift in Sources */,
-				ECD002AC26B524D0005F733C /* JourneyAPI.swift in Sources */,
+				ECD002AC26B524D0005F733C /* JourneyAPI2.swift in Sources */,
 				CE43D06826613D66003126F2 /* UIView+.swift in Sources */,
 				CE43D06926613D66003126F2 /* MainStarCVCViewModel.swift in Sources */,
 				CE43D06A26613D66003126F2 /* TodoDateTVC.swift in Sources */,

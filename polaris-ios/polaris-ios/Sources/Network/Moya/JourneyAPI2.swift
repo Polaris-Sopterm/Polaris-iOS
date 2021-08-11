@@ -8,11 +8,11 @@
 import Foundation
 import Moya
 
-enum JourneyAPI {
+enum JourneyAPI2 {
     case getWeekJourney(year: Int, month: Int, weekNo: Int)
 }
 
-extension JourneyAPI: TargetType {
+extension JourneyAPI2: TargetType {
     
     var baseURL: URL {
         return URL(string: ServerHost.main)!

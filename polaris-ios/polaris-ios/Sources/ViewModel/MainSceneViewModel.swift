@@ -75,7 +75,7 @@ class MainSceneViewModel {
             .disposed(by: self.disposeBag)
         let todoStarList: BehaviorRelay<[MainTodoCVCViewModel]> = BehaviorRelay(value: [])
         
-        let journeyAPI = JourneyAPI.getWeekJourney(year: 2021, month: 7, weekNo: 3)
+        let journeyAPI = JourneyAPI2.getWeekJourney(year: 2021, month: 7, weekNo: 3)
         var weekJourneyModels: [WeekJourneyModel] = []
         
         
