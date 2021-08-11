@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-struct MainSceneViewModel {
+class MainSceneViewModel {
     
     var heightRatio = CGFloat(DeviceInfo.screenHeight/812.0)
     var heightList: [CGFloat] = [CGFloat(52.0),CGFloat(93.0),CGFloat(52.0),CGFloat(87.0),CGFloat(28.0),CGFloat(71),CGFloat(34),CGFloat(86),CGFloat(58)]
@@ -58,7 +58,7 @@ struct MainSceneViewModel {
                 case "journey_complete":
                     state.accept([StarCollectionViewState.showStar])
                     lookBackState.accept([.build])
-                    starList.accept(convertStarCVCViewModel(mainStarModels: mainStarModels))
+                    starList.accept(self.convertStarCVCViewModel(mainStarModels: mainStarModels))
                 case "journey_incomplete":
                     state.accept([StarCollectionViewState.showIncomplete])
                     lookBackState.accept([.build])

@@ -9,6 +9,6 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-struct MainStarTVCViewModel {
+class MainStarTVCViewModel {
     var starListRelay: BehaviorRelay<[MainStarCVCViewModel]> = BehaviorRelay(value: [])
 }
