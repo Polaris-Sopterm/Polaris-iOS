@@ -10,7 +10,7 @@ import RxSwift
 import RxRelay
 import OSLog
 
-class SignupViewModel {
+final class SignupViewModel {
     
     let stepRelay = BehaviorRelay<SignupVC.InputOptions>(value: .firstStep)
     

@@ -9,15 +9,13 @@ import UIKit
 
 class DropdownItemTableViewCell: UITableViewCell {
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-        self.backgroundColor = .clear
+    func configure(by journeyModel: JourneyTitleModel) {
+        self.journeyModel = journeyModel
+        
+        self.menuLabel.text = journeyModel.displayTitle
     }
     
-    func configure(by menu: String) {
-        self.menuLabel.text = menu
-    }
+    private var journeyModel: JourneyTitleModel?
     
     @IBOutlet private weak var menuLabel: UILabel!
     

@@ -9,7 +9,7 @@ import RxCocoa
 import RxSwift
 import UIKit
 
-class LoginVC: UIViewController {
+final class LoginVC: UIViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent

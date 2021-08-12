@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="OnboardingCollectionViewCell" customModule="Polaris" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="679"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="679"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="당신의 일상," textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jyJ-5U-yvP">
+                        <rect key="frame" x="21" y="0.0" width="111" height="27.5"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
+                        <color key="textColor" name="mainSky"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="어떤 별을 위한 여정을 떠나볼까요?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qmO-Yl-ZSF">
+                        <rect key="frame" x="21" y="34.5" width="333" height="27.5"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="일주일의 목표를 미리 세워보며 당신이 추구하는" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="17C-ra-lIf">
+                        <rect key="frame" x="21" y="77" width="333" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgMockup2" translatesAutoresizingMaskIntoConstraints="NO" id="WZs-2n-KFM">
+                        <rect key="frame" x="48" y="146" width="279" height="533"/>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8uJ-9v-jVa">
+                        <rect key="frame" x="23" y="588" width="54" height="54"/>
+                        <state key="normal" image="btnBack"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7CT-d4-ubY">
+                        <rect key="frame" x="298" y="588" width="54" height="54"/>
+                        <state key="normal" image="btnNext"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PTm-F7-3Yn">
+                        <rect key="frame" x="23" y="588" width="329" height="54"/>
+                        <color key="backgroundColor" name="mainSky"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="PTm-F7-3Yn" secondAttribute="height" multiplier="329:54" id="oRI-xM-tf0"/>
+                        </constraints>
+                        <state key="normal" title="폴라리스 시작하기">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="18"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </button>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="qmO-Yl-ZSF" secondAttribute="trailing" constant="21" id="C4G-2p-x0H"/>
+                <constraint firstItem="WZs-2n-KFM" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="48" id="FVq-YB-dl0"/>
+                <constraint firstItem="WZs-2n-KFM" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="H7T-fa-WZ9"/>
+                <constraint firstItem="jyJ-5U-yvP" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="21" id="Hvb-ew-I9G"/>
+                <constraint firstItem="8uJ-9v-jVa" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="23" id="O3H-1l-JtD"/>
+                <constraint firstAttribute="bottom" secondItem="PTm-F7-3Yn" secondAttribute="bottom" constant="37" id="Or8-iR-Isl"/>
+                <constraint firstAttribute="bottom" secondItem="WZs-2n-KFM" secondAttribute="bottom" id="Q5S-gr-mf2"/>
+                <constraint firstAttribute="trailing" secondItem="17C-ra-lIf" secondAttribute="trailing" constant="21" id="QWr-s3-WlY"/>
+                <constraint firstItem="qmO-Yl-ZSF" firstAttribute="leading" secondItem="jyJ-5U-yvP" secondAttribute="leading" id="Qqr-qy-XZf"/>
+                <constraint firstAttribute="trailing" secondItem="WZs-2n-KFM" secondAttribute="trailing" constant="48" id="TjH-sA-KP6"/>
+                <constraint firstAttribute="trailing" secondItem="7CT-d4-ubY" secondAttribute="trailing" constant="23" id="ahh-0N-q7T"/>
+                <constraint firstItem="PTm-F7-3Yn" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="23" id="f4q-T9-sVg"/>
+                <constraint firstItem="17C-ra-lIf" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="21" id="fuD-vx-5rw"/>
+                <constraint firstAttribute="trailing" secondItem="PTm-F7-3Yn" secondAttribute="trailing" constant="23" id="hzu-QV-sKf"/>
+                <constraint firstItem="jyJ-5U-yvP" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="klx-qV-ayh"/>
+                <constraint firstAttribute="bottom" secondItem="8uJ-9v-jVa" secondAttribute="bottom" constant="37" id="lhB-ey-ieX"/>
+                <constraint firstItem="WZs-2n-KFM" firstAttribute="top" secondItem="17C-ra-lIf" secondAttribute="bottom" constant="51" id="sDG-nb-6j8"/>
+                <constraint firstItem="17C-ra-lIf" firstAttribute="top" secondItem="qmO-Yl-ZSF" secondAttribute="bottom" constant="15" id="wd9-z6-QlN"/>
+                <constraint firstAttribute="bottom" secondItem="7CT-d4-ubY" secondAttribute="bottom" constant="37" id="ziW-Oe-VlA"/>
+                <constraint firstItem="qmO-Yl-ZSF" firstAttribute="top" secondItem="jyJ-5U-yvP" secondAttribute="bottom" constant="7" id="ztr-fl-HDB"/>
+            </constraints>
+            <connections>
+                <outlet property="descriptionLabel" destination="17C-ra-lIf" id="sxP-UR-LTZ"/>
+                <outlet property="nextButton" destination="7CT-d4-ubY" id="mHD-jx-1FG"/>
+                <outlet property="nextLabelBottomConstraint" destination="ziW-Oe-VlA" id="daT-B4-gsa"/>
+                <outlet property="onboardingImageView" destination="WZs-2n-KFM" id="g2T-2E-QyD"/>
+                <outlet property="previousBottomConstraint" destination="lhB-ey-ieX" id="OfT-iJ-Jau"/>
+                <outlet property="previousButton" destination="8uJ-9v-jVa" id="BYH-ja-Ba8"/>
+                <outlet property="startBottomConstraint" destination="Or8-iR-Isl" id="xfJ-mV-PNq"/>
+                <outlet property="startButton" destination="PTm-F7-3Yn" id="iEe-UE-jQc"/>
+                <outlet property="subTitleLabel" destination="qmO-Yl-ZSF" id="Tgj-8i-QlA"/>
+                <outlet property="titleLabel" destination="jyJ-5U-yvP" id="H1R-zU-a6q"/>
+            </connections>
+            <point key="canvasLocation" x="136.95652173913044" y="152.34375"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="btnBack" width="54" height="54"/>
+        <image name="btnNext" width="54" height="54"/>
+        <image name="imgMockup2" width="280" height="504"/>
+        <namedColor name="mainSky">
+            <color red="0.49799999594688416" green="0.85900002717971802" blue="0.93699997663497925" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

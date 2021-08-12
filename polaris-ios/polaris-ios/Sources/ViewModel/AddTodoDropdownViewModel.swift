@@ -7,9 +7,24 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 class AddTodoDropdownViewModel {
-    var isExpanded      = BehaviorSubject<Bool>(value: false)
-    var selectedMenu    = BehaviorSubject<String?>(value: nil)
-    var menus           = BehaviorSubject<[String]>(value: ["폴라리스 그리기", "포트폴리오 만들기", "등등", "이것도 저것도", "만들어 보자", "너도", "등등", "더있나"])
+    let isExpanded       = BehaviorSubject<Bool>(value: false)
+    let selectedMenu     = BehaviorSubject<JourneyTitleModel?>(value: nil)
+    let journeyListRelay = BehaviorRelay<[JourneyTitleModel]>(value: [])
+    
+    func requestJourneyList(_ date: Date?) {
+        guard let date = date else { return }
+        
+        let journeyListAPI = JourneyAPI.jouneyTitleList(date: date.convertToString())
+        NetworkManager.request(apiType: journeyListAPI).subscribe(onSuccess: { [weak self] (journeyListModel: [JourneyTitleModel]) in
+            self?.journeyListRelay.accept(journeyListModel)
+        }, onFailure: { [weak self] _ in
+            self?.journeyListRelay.accept([])
+        }).disposed(by: self.disposeBag)
+    }
+    
+    private let disposeBag = DisposeBag()
+    
 }

@@ -18,11 +18,10 @@ class PolarisToastView: UIView {
         super.awakeFromNib()
         self.backgroundView.makeRounded(cornerRadius: 17)
         self.makeShadow(color: UIColor.maintext.withAlphaComponent(0.45))
-        self.alpha = 0
     }
     
     // MARK: - Set Up
-    func setupToastView(text: String, touchHandler: TouchHandler? = nil) {
+    func configure(text: String, touchHandler: TouchHandler? = nil) {
         self.toastLabel.text = text
         self.touchHandler    = touchHandler
         
@@ -34,22 +33,22 @@ class PolarisToastView: UIView {
     func didTapToast(_ recognizer: UITapGestureRecognizer) {
         guard let touchHandler = self.touchHandler else { return }
         touchHandler()
-        self.dismissWithAnimation()
+        self.hide()
     }
     
-    func presentWithAnimation() {
+    func show() {
+        self.alpha = 0
         UIView.animate(withDuration: self.duration, animations: { [weak self] in
             self?.alpha = 1
-        }, completion: { [weak self] isFinished in
+        }, completion: { [weak self] _ in
             guard let self = self else  { return }
-            guard isFinished else       { return }
             DispatchQueue.main.asyncAfter(deadline: .now() + self.duration) { [weak self] in
-                self?.dismissWithAnimation()
+                self?.hide()
             }
         })
     }
     
-    func dismissWithAnimation() {
+    func hide() {
         UIView.animate(withDuration: self.duration, animations: {
             self.alpha = 0
         }, completion: { [weak self] isFinished in

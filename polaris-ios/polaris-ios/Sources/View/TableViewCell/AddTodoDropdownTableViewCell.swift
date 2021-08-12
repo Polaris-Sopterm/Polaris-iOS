@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 protocol AddTodoDropdownTableViewCellDelegate: AddTodoTableViewCellDelegate {
-    func addTodoDropdownTableViewCell(_ addTodoDropdownTableViewCell: AddTodoDropdownTableViewCell, didSelectedMenu menu: String)
+    func addTodoDropdownTableViewCell(_ addTodoDropdownTableViewCell: AddTodoDropdownTableViewCell, didSelectedJourney journey: JourneyTitleModel)
 }
 
 class AddTodoDropdownTableViewCell: AddTodoTableViewCell {
@@ -30,6 +30,10 @@ class AddTodoDropdownTableViewCell: AddTodoTableViewCell {
         self.bindTableView()
     }
     
+    override func configure(by addOptions: AddTodoVC.AddOptions, date: Date? = nil) {
+        self.viewModel.requestJourneyList(date)
+    }
+    
     // MARK: - Set Up
     private func setupContainerView() {
         self.containerView.makeRounded(cornerRadius: 16)
@@ -41,19 +45,17 @@ class AddTodoDropdownTableViewCell: AddTodoTableViewCell {
     
     // MARK: - Bind
     private func bindLabel() {
-        self.viewModel.selectedMenu
-            .distinctUntilChanged()
-            .subscribe(onNext: { [weak self] selectedMenu in
-                guard let self = self else { return }
-                
-                if let selectedMenu = selectedMenu {
-                    self.selectedLabel.text = selectedMenu
-                    self._delegate?.addTodoDropdownTableViewCell(self, didSelectedMenu: selectedMenu)
-                } else {
-                    self.selectedLabel.text = "선택 안함"
-                }
-            })
-            .disposed(by: self.disposeBag)
+        self.viewModel.selectedMenu.observeOnMain(onNext: { [weak self] selectedMenu in
+            guard let self = self else { return }
+            
+            if let selectedMenu = selectedMenu {
+                self.selectedLabel.text = selectedMenu.displayTitle
+                self._delegate?.addTodoDropdownTableViewCell(self, didSelectedJourney: selectedMenu)
+            } else {
+                self.selectedLabel.text = "선택 안함"
+            }
+        })
+        .disposed(by: self.disposeBag)
     }
     
     private func bindButton() {
@@ -104,13 +106,15 @@ class AddTodoDropdownTableViewCell: AddTodoTableViewCell {
         self.tableView.rx.setDelegate(self)
             .disposed(by: self.disposeBag)
         
-        self.viewModel.menus
-            .bind(to: self.tableView.rx.items) { tableView, index, item in
-                guard let dropdownCell = tableView.dequeueReusableCell(cell: DropdownItemTableViewCell.self, forIndexPath: IndexPath(row: index, section: 0)) else { return UITableViewCell() }
-                dropdownCell.configure(by: item)
-                return dropdownCell
-            }
-            .disposed(by: self.disposeBag)
+        self.viewModel.journeyListRelay.bind(to: self.tableView.rx.items) { tableView, index, item in
+            let indexPath = IndexPath(row: index, section: 0)
+            let cell      = tableView.dequeueReusableCell(cell: DropdownItemTableViewCell.self, forIndexPath: indexPath)
+            
+            guard let dropdownCell = cell else { return UITableViewCell() }
+            dropdownCell.configure(by: item)
+            return dropdownCell
+        }
+        .disposed(by: self.disposeBag)
     }
     
     private static let duration: TimeInterval       = 0.2
@@ -135,7 +139,7 @@ extension AddTodoDropdownTableViewCell: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let selectedMenu = try? self.viewModel.menus.value()[indexPath.row] else { return }
+        guard let selectedMenu = self.viewModel.journeyListRelay.value[safe: indexPath.row] else { return }
         self.viewModel.isExpanded.onNext(false)
         self.viewModel.selectedMenu.onNext(selectedMenu)
         
