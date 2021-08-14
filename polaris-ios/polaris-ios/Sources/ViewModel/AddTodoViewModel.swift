@@ -45,19 +45,10 @@ class AddTodoViewModel {
         guard let addText = try? self.addTextSubject.value()    else { return }
         guard let fixOnTop = try? self.fixOnTopSubject.value()  else { return }
         guard let addTodoDate = self.addTodoDate                else { return }
-        
-        #warning("여기 정해지면 default 어떻게 처리할지 정리 필요")
-        var journeyTitle: String = "default"
-        var journeyIdx: Int?     = nil
-        if let dropdownMenu = try? self.dropdownSubject.value(),
-           let title = dropdownMenu.title,
-           let idx = dropdownMenu.idx {
-            journeyTitle = title
-            journeyIdx   = idx
-        }
+        guard let journey = try? self.dropdownSubject.value()   else { return }
         
         let createTodoAPI = TodoAPI.createToDo(title: addText, date: addTodoDate.convertToString(),
-                                               journeyTitle: journeyTitle, journeyIdx: journeyIdx, isTop: fixOnTop)
+                                               journeyTitle: journey.title ?? "default", journeyIdx: journey.idx, isTop: fixOnTop)
         NetworkManager.request(apiType: createTodoAPI).subscribe(onSuccess: { (responseModel: AddTodoResponseModel) in
             self.completeAddTodoSubject.onNext(())
             self.loadingSubject.onNext(false)

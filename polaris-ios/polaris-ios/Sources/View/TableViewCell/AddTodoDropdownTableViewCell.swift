@@ -46,14 +46,11 @@ class AddTodoDropdownTableViewCell: AddTodoTableViewCell {
     // MARK: - Bind
     private func bindLabel() {
         self.viewModel.selectedMenu.observeOnMain(onNext: { [weak self] selectedMenu in
-            guard let self = self else { return }
+            guard let self = self                 else { return }
+            guard let selectedMenu = selectedMenu else { return }
             
-            if let selectedMenu = selectedMenu {
-                self.selectedLabel.text = selectedMenu.displayTitle
-                self._delegate?.addTodoDropdownTableViewCell(self, didSelectedJourney: selectedMenu)
-            } else {
-                self.selectedLabel.text = "선택 안함"
-            }
+            self.selectedLabel.text = selectedMenu.displayTitle
+            self._delegate?.addTodoDropdownTableViewCell(self, didSelectedJourney: selectedMenu)
         })
         .disposed(by: self.disposeBag)
     }
