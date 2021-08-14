@@ -9,11 +9,29 @@ import RxCocoa
 import RxSwift
 import UIKit
 
-protocol DayTodoTableViewCellDelegate: TodoCategoryCellDelegate {
-    func dayTodoTableViewCell(_ dayTodoTableViewCell: DayTodoTableViewCell, didTapCheck todo: TodoDayPerModel)
+final class CustomPanGesture: UIPanGestureRecognizer, UIGestureRecognizerDelegate {
+    
+    func setDelegate() {
+        self.delegate = self
+    }
+    
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        guard let panGesture = gestureRecognizer as? UIPanGestureRecognizer else { return true }
+        let velocity = panGesture.velocity(in: UIApplication.shared.windows.first(where: { $0.isKeyWindow }))
+        
+        guard abs(velocity.x) > abs(velocity.y) else { return false }
+        return true
+    }
+    
 }
 
-class DayTodoTableViewCell: TodoCategoryCell {
+protocol DayTodoTableViewCellDelegate: TodoCategoryCellDelegate {
+    func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, didTapCheck todo: TodoDayPerModel)
+    func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, didTapEdit todo: TodoDayPerModel)
+    func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, didTapDelete todo: TodoDayPerModel)
+}
+
+final class DayTodoTableViewCell: TodoCategoryCell {
     
     override static var cellHeight: CGFloat { return 63 * self.screenRatio }
     
@@ -27,7 +45,7 @@ class DayTodoTableViewCell: TodoCategoryCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.bindCheckButton()
+        self.bindButtons()
         self.bindPanGesture()
     }
     
@@ -65,7 +83,7 @@ class DayTodoTableViewCell: TodoCategoryCell {
         }
     }
     
-    private func bindCheckButton() {
+    private func bindButtons() {
         self.checkButton.rx.tap
             .throttle(.milliseconds(500), latest: false, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
@@ -75,16 +93,34 @@ class DayTodoTableViewCell: TodoCategoryCell {
                 self._delegate?.dayTodoTableViewCell(self, didTapCheck: todoModel)
             })
             .disposed(by: self.disposeBag)
+        
+        self.editButton.rx.tap.subscribe(onNext: { [weak self] in
+            guard let self = self                else { return }
+            guard let todoModel = self.todoModel else { return }
+            
+            self.animateToInitial()
+            self._delegate?.dayTodoTableViewCell(self, didTapEdit: todoModel)
+        }).disposed(by: self.disposeBag)
+        
+        self.deleteButton.rx.tap.subscribe(onNext: { [weak self] in
+            guard let self = self                else { return }
+            guard let todoModel = self.todoModel else { return }
+            
+            self.animateToInitial()
+            self._delegate?.dayTodoTableViewCell(self, didTapDelete: todoModel)
+        }).disposed(by: self.disposeBag)
     }
     
     private func bindPanGesture() {
-        let panGesture = UIPanGestureRecognizer()
+        let panGesture = CustomPanGesture()
+        panGesture.setDelegate()
+
         panGesture.rx.event.observeOnMain(onNext: { [weak self] panGesture in
             guard let self = self else { return }
-            
+
             let transition = panGesture.translation(in: self)
             let changedY   = transition.x + self.contentViewLeadingConstraint.constant
-            
+
             switch panGesture.state {
             case .cancelled, .ended, .failed:
                 if changedY <= -56 { self.animateToExpanding() }
@@ -95,7 +131,7 @@ class DayTodoTableViewCell: TodoCategoryCell {
             default:
                 break
             }
-            
+
             panGesture.setTranslation(.zero, in: self)
         }).disposed(by: self.disposeBag)
         self.addGestureRecognizer(panGesture)
@@ -103,14 +139,14 @@ class DayTodoTableViewCell: TodoCategoryCell {
     
     private func animateToExpanding() {
         self.contentViewLeadingConstraint.constant = -112
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, animations: {
+        UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, animations: {
             self.layoutIfNeeded()
         }, completion: nil)
     }
     
     private func animateToInitial() {
         self.contentViewLeadingConstraint.constant = 0
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, animations: {
+        UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, animations: {
             self.layoutIfNeeded()
         }, completion: nil)
     }
@@ -124,6 +160,8 @@ class DayTodoTableViewCell: TodoCategoryCell {
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var subTitleLabel: UILabel!
     @IBOutlet private weak var checkButton: UIButton!
+    @IBOutlet private weak var editButton: UIButton!
+    @IBOutlet private weak var deleteButton: UIButton!
     
     @IBOutlet private weak var contentViewLeadingConstraint: NSLayoutConstraint!
     

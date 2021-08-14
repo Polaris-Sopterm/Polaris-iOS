@@ -240,8 +240,16 @@ extension TodoTableViewCell: JourneyTodoHeaderViewDelegate {
 
 extension TodoTableViewCell: DayTodoTableViewCellDelegate {
     
-    func dayTodoTableViewCell(_ dayTodoTableViewCell: DayTodoTableViewCell, didTapCheck todo: TodoDayPerModel) {
+    func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, didTapCheck todo: TodoDayPerModel) {
         print(todo)
+    }
+    
+    func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, didTapEdit todo: TodoDayPerModel) {
+        print("Edit Todo")
+    }
+    
+    func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, didTapDelete todo: TodoDayPerModel) {
+        print("Delete Todo")
     }
     
 }
