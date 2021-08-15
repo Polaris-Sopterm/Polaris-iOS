@@ -9,7 +9,7 @@ import RxCocoa
 import RxSwift
 import UIKit
 
-final class CustomPanGesture: UIPanGestureRecognizer, UIGestureRecognizerDelegate {
+final class HorizonPanableGesture: UIPanGestureRecognizer, UIGestureRecognizerDelegate {
     
     func setDelegate() {
         self.delegate = self
@@ -29,6 +29,7 @@ protocol DayTodoTableViewCellDelegate: TodoCategoryCellDelegate {
     func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, didTapCheck todo: TodoDayPerModel)
     func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, didTapEdit todo: TodoDayPerModel)
     func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, didTapDelete todo: TodoDayPerModel)
+    func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, isExpaned: Bool, forRowAt indexPath: IndexPath)
 }
 
 final class DayTodoTableViewCell: TodoCategoryCell {
@@ -59,6 +60,10 @@ final class DayTodoTableViewCell: TodoCategoryCell {
         self.fixImageView.isHidden  = todoPerModel.isTop == false
         
         self.updateUI(as: todoPerModel.isDone)
+    }
+    
+    override func expandCell(isExpaned: Bool, animated: Bool) {
+        self.layoutForExpaned(isExpaned: isExpaned, animated: animated)
     }
     
     func updateUI(as checkStatus: Bool?) {
@@ -97,34 +102,43 @@ final class DayTodoTableViewCell: TodoCategoryCell {
         self.editButton.rx.tap.subscribe(onNext: { [weak self] in
             guard let self = self                else { return }
             guard let todoModel = self.todoModel else { return }
+            guard let indexPath = self.indexPath else { return }
             
-            self.animateToInitial()
+            self.layoutForExpaned(isExpaned: false, animated: true)
+            self._delegate?.dayTodoTableViewCell(self, isExpaned: false, forRowAt: indexPath)
             self._delegate?.dayTodoTableViewCell(self, didTapEdit: todoModel)
         }).disposed(by: self.disposeBag)
         
         self.deleteButton.rx.tap.subscribe(onNext: { [weak self] in
             guard let self = self                else { return }
             guard let todoModel = self.todoModel else { return }
+            guard let indexPath = self.indexPath else { return }
             
-            self.animateToInitial()
+            self.layoutForExpaned(isExpaned: false, animated: true)
+            self._delegate?.dayTodoTableViewCell(self, isExpaned: false, forRowAt: indexPath)
             self._delegate?.dayTodoTableViewCell(self, didTapDelete: todoModel)
         }).disposed(by: self.disposeBag)
     }
     
     private func bindPanGesture() {
-        let panGesture = CustomPanGesture()
+        let panGesture = HorizonPanableGesture()
         panGesture.setDelegate()
 
         panGesture.rx.event.observeOnMain(onNext: { [weak self] panGesture in
-            guard let self = self else { return }
+            guard let self = self                else { return }
+            guard let indexPath = self.indexPath else { return }
 
             let transition = panGesture.translation(in: self)
             let changedY   = transition.x + self.contentViewLeadingConstraint.constant
 
             switch panGesture.state {
             case .cancelled, .ended, .failed:
-                if changedY <= -56 { self.animateToExpanding() }
-                else               { self.animateToInitial() }
+                if changedY <= (type(of: self).expanededConstant / 2) {
+                    self._delegate?.dayTodoTableViewCell(self, isExpaned: true, forRowAt: indexPath)
+                    self.layoutForExpaned(isExpaned: true)
+                } else {
+                    self.layoutForExpaned(isExpaned: false)
+                }
             case .changed:
                 guard changedY >= -112 && changedY <= 0 else { return }
                 self.contentViewLeadingConstraint.constant = changedY
@@ -137,21 +151,17 @@ final class DayTodoTableViewCell: TodoCategoryCell {
         self.addGestureRecognizer(panGesture)
     }
     
-    private func animateToExpanding() {
-        self.contentViewLeadingConstraint.constant = -112
+    private func layoutForExpaned(isExpaned: Bool, animated: Bool = true) {
+        self.contentViewLeadingConstraint.constant = isExpaned ? type(of: self).expanededConstant : 0
+        
+        guard animated == true else { self.layoutIfNeeded(); return }
         UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, animations: {
             self.layoutIfNeeded()
         }, completion: nil)
     }
     
-    private func animateToInitial() {
-        self.contentViewLeadingConstraint.constant = 0
-        UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0, animations: {
-            self.layoutIfNeeded()
-        }, completion: nil)
-    }
-    
-    private static let screenRatio: CGFloat = DeviceInfo.screenWidth / 375
+    private static let expanededConstant: CGFloat = -112
+    private static let screenRatio: CGFloat       = DeviceInfo.screenWidth / 375
     
     private let disposeBag = DisposeBag()
     private var todoModel: TodoDayPerModel?

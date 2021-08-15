@@ -78,6 +78,13 @@ class TodoViewModel {
         }
     }
     
+    func expanedCellIndexPath(of tab: TodoCategory) -> IndexPath? {
+        switch tab {
+        case .day:     return self.dayExpanedIndexPath
+        case .journey: return nil
+        }
+    }
+    
     func requestTodoDayList() {
         let todoListAPI = TodoAPI.listTodoByDate()
         NetworkManager.request(apiType: todoListAPI).subscribe(onSuccess: { [weak self] (todoListModel: TodoDayListModel) in
@@ -87,6 +94,10 @@ class TodoViewModel {
     
     func updateCurrentTab(_ tab: TodoCategory) {
         self.currentTabRelay.accept(tab)
+    }
+    
+    func updateDayExpanedStatus(forRowAt indexPath: IndexPath, isExpaned: Bool) {
+        self.dayExpanedIndexPath = isExpaned ? indexPath : nil
     }
     
     private func updateTodoDayListModel(_ todoListModel: TodoDayListModel) {
@@ -100,7 +111,11 @@ class TodoViewModel {
         self.reloadSubject.onNext(())
     }
     
-    // Date 업데이트 시킬 때, 12:00:00으로 맞추어서 Normalized 시킴
+    /*
+     날짜별 할일 보여줄 때, 사용하는 Property
+     - Date 업데이트 시킬 때, 12:00:00으로 맞추어서 Normalized 시킴
+     */
+    private(set) var dayExpanedIndexPath: IndexPath?
     private(set) var todoDayHeadersInform: [Date]
     private(set) var todoDayListTable: [Date: [TodoDayPerModel]] = [:]
     

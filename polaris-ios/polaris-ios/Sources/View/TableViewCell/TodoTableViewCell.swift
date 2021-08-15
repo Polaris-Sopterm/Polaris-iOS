@@ -121,6 +121,11 @@ class TodoTableViewCell: MainTableViewCell {
                                    animated: false)
     }
     
+    private func todoCategoryCell(at indexPath: IndexPath) -> TodoCategoryCell? {
+        guard let cell = tableView.cellForRow(at: indexPath) else { return nil }
+        return cell as? TodoCategoryCell
+    }
+    
     private static var navigationHeight: CGFloat { return 51 + DeviceInfo.topSafeAreaInset }
     
     private let viewModel  = TodoViewModel()
@@ -154,15 +159,18 @@ extension TodoTableViewCell: UITableViewDataSource {
             return emptyCell
         }
         
-        let currentTab = self.viewModel.currentTabRelay.value
-        let todoList   = self.viewModel.todoDayList(at: indexPath.section)
-        let cell       = tableView.dequeueReusableCell(cell: currentTab.cellType, forIndexPath: indexPath)
+        let currentTab       = self.viewModel.currentTabRelay.value
+        let todoList         = self.viewModel.todoDayList(at: indexPath.section)
+        let cell             = tableView.dequeueReusableCell(cell: currentTab.cellType, forIndexPath: indexPath)
+        let expanedIndexPath = self.viewModel.expanedCellIndexPath(of: currentTab)
         
         guard let todoCell = cell                           else { return UITableViewCell() }
         guard let todoModel = todoList[safe: indexPath.row] else { return UITableViewCell() }
         
-        todoCell.delegate = self
+        todoCell.delegate  = self
+        todoCell.indexPath = indexPath
         todoCell.configure(todoModel)
+        todoCell.expandCell(isExpaned: indexPath == expanedIndexPath, animated: false)
         return todoCell
     }
     
@@ -250,6 +258,16 @@ extension TodoTableViewCell: DayTodoTableViewCellDelegate {
     
     func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, didTapDelete todo: TodoDayPerModel) {
         print("Delete Todo")
+    }
+
+    func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, isExpaned: Bool, forRowAt indexPath: IndexPath) {
+        guard self.viewModel.currentTabRelay.value == .day else { return }
+        
+        defer { self.viewModel.updateDayExpanedStatus(forRowAt: indexPath, isExpaned: isExpaned) }
+        
+        guard isExpaned == true                                               else { return }
+        guard let currentExpanedInexPath = self.viewModel.dayExpanedIndexPath else { return }
+        self.todoCategoryCell(at: currentExpanedInexPath)?.expandCell(isExpaned: false, animated: true)
     }
     
 }
