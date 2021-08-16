@@ -115,8 +115,7 @@ class TodoViewModel {
     }
     
     func updateDoneStatus(_ todoModel: TodoDayPerModel) {
-        guard let todoIdx = todoModel.idx                                  else { return }
-        guard let header = todoModel.date?.convertToDate()?.normalizedDate else { return }
+        guard let todoIdx = todoModel.idx else { return }
         
         let edittedIsDone = todoModel.isDone == nil ? true : false
         let todoEditAPI = TodoAPI.editTodo(idx: todoIdx, isDone: edittedIsDone)
