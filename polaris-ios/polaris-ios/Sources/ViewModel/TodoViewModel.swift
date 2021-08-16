@@ -37,6 +37,7 @@ enum TodoCategory {
 
 class TodoViewModel {
     
+    // Should Scroll 포함해서 Scroll 해야하는 경우
     let reloadSubject   = PublishSubject<Bool>()
     let currentTabRelay = BehaviorRelay<TodoCategory>(value: .day)
     
@@ -94,15 +95,21 @@ class TodoViewModel {
     }
     
     func requestDeleteTodoDay(_ todoIdx: Int) {
-        #warning("여기에 서버에서 업데이트 해주는 모델 추가해서 받기")
         let todoDayDeleteAPI = TodoAPI.deleteTodo(idx: todoIdx)
-        NetworkManager.request(apiType: todoDayDeleteAPI).subscribe(onSuccess: { [weak self] (result: String) in
-            guard let self = self else { return }
+        NetworkManager.request(apiType: todoDayDeleteAPI).subscribe(onSuccess: { [weak self] (successModel: SuccessModel) in
+            guard let self = self                else { return }
+            guard successModel.isSuccess == true else { return }
             
-            self.requestTodoDayList(shouldScroll: false)
-        }, onFailure: { error in
-            #warning("여기 지워야 함 - Reponse Model 나오면")
-            self.requestTodoDayList(shouldScroll: false)
+            let keyValue = self.todoDayListTable.first(where: { _, todoList in
+                return todoList.contains(where: { $0.idx == todoIdx })
+            })
+            
+            guard let key = keyValue?.key                                             else { return }
+            guard let removedTodoList = keyValue?.value.filter({ $0.idx != todoIdx }) else { return }
+            self.todoDayListTable.updateValue(removedTodoList, forKey: key)
+            
+            // 삭제 되는 경우는 Should Scroll = false
+            self.reloadSubject.onNext(false)
         }).disposed(by: self.disposeBag)
     }
     

@@ -352,6 +352,9 @@
 		CEC74B13267F9842002AFF18 /* PolarisPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC74B11267F9842002AFF18 /* PolarisPopupView.swift */; };
 		CEC74B17267F984E002AFF18 /* PolarisPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC74B16267F984E002AFF18 /* PolarisPopupView.xib */; };
 		CEC74B18267F984E002AFF18 /* PolarisPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC74B16267F984E002AFF18 /* PolarisPopupView.xib */; };
+		CED6B6DB26CAC1F900D37647 /* SuccessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED6B6DA26CAC1F900D37647 /* SuccessModel.swift */; };
+		CED6B6DC26CAC1F900D37647 /* SuccessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED6B6DA26CAC1F900D37647 /* SuccessModel.swift */; };
+		CED6B6DD26CAC1F900D37647 /* SuccessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED6B6DA26CAC1F900D37647 /* SuccessModel.swift */; };
 		CEDB478426AEF7520024ABD4 /* AddTodoResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDB478326AEF7520024ABD4 /* AddTodoResponseModel.swift */; };
 		CEDB478526AEF7CE0024ABD4 /* AddTodoResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDB478326AEF7520024ABD4 /* AddTodoResponseModel.swift */; };
 		CEDB478626AEF7CE0024ABD4 /* AddTodoResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDB478326AEF7520024ABD4 /* AddTodoResponseModel.swift */; };
@@ -560,6 +563,7 @@
 		CEC48ED8262DCD2A00FD887F /* AddTodoDropdownViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoDropdownViewModel.swift; sourceTree = "<group>"; };
 		CEC74B11267F9842002AFF18 /* PolarisPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarisPopupView.swift; sourceTree = "<group>"; };
 		CEC74B16267F984E002AFF18 /* PolarisPopupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PolarisPopupView.xib; sourceTree = "<group>"; };
+		CED6B6DA26CAC1F900D37647 /* SuccessModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessModel.swift; sourceTree = "<group>"; };
 		CEDB478326AEF7520024ABD4 /* AddTodoResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoResponseModel.swift; sourceTree = "<group>"; };
 		CEDB478826AF26610024ABD4 /* TodoListEmptyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListEmptyTableViewCell.swift; sourceTree = "<group>"; };
 		CEDB478926AF26610024ABD4 /* TodoListEmptyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodoListEmptyTableViewCell.xib; sourceTree = "<group>"; };
@@ -1044,6 +1048,7 @@
 				ECA494282628298B00CC2EB8 /* TodoModel.swift */,
 				ECA494462629729000CC2EB8 /* TodoDateModel.swift */,
 				ECA49474262C461700CC2EB8 /* MainStarModel.swift */,
+				CED6B6DA26CAC1F900D37647 /* SuccessModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1476,6 +1481,7 @@
 				CEEE5766262ADBA200C39358 /* PolarisButton.swift in Sources */,
 				CEEE5782262C018F00C39358 /* AddTodoViewModel.swift in Sources */,
 				CEEE5786262C112E00C39358 /* AddTodoFixOnTopTableViewCell.swift in Sources */,
+				CED6B6DB26CAC1F900D37647 /* SuccessModel.swift in Sources */,
 				CEEE574A262A95BD00C39358 /* UserDefaultWrapper.swift in Sources */,
 				CE574000267C8E9900665933 /* TodoViewModel.swift in Sources */,
 				CE40B3EF26C00F790000151F /* JourneyTitleListModel.swift in Sources */,
@@ -1586,6 +1592,7 @@
 				CE2952F82687A0A500E21871 /* PolarisButton.swift in Sources */,
 				CE2952F92687A0A500E21871 /* AddTodoViewModel.swift in Sources */,
 				CE2952FA2687A0A500E21871 /* AddTodoFixOnTopTableViewCell.swift in Sources */,
+				CED6B6DC26CAC1F900D37647 /* SuccessModel.swift in Sources */,
 				CE2952FB2687A0A500E21871 /* UserDefaultWrapper.swift in Sources */,
 				CE2952FC2687A0A500E21871 /* TodoViewModel.swift in Sources */,
 				CE40B3F026C00F790000151F /* JourneyTitleListModel.swift in Sources */,
@@ -1696,6 +1703,7 @@
 				CE43D02B26613D66003126F2 /* PolarisButton.swift in Sources */,
 				CE43D02C26613D66003126F2 /* AddTodoViewModel.swift in Sources */,
 				CE43D02D26613D66003126F2 /* AddTodoFixOnTopTableViewCell.swift in Sources */,
+				CED6B6DD26CAC1F900D37647 /* SuccessModel.swift in Sources */,
 				CE43D02E26613D66003126F2 /* UserDefaultWrapper.swift in Sources */,
 				CE574001267C8E9900665933 /* TodoViewModel.swift in Sources */,
 				CE40B3F126C00F790000151F /* JourneyTitleListModel.swift in Sources */,
