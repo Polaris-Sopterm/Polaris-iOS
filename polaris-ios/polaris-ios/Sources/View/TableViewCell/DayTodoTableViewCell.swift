@@ -66,16 +66,14 @@ final class DayTodoTableViewCell: TodoCategoryCell {
         self.layoutForExpaned(isExpaned: isExpaned, animated: animated)
     }
     
-    func updateUI(as checkStatus: Bool?) {
-        guard let checkStatus = checkStatus else { return }
-        
+    func updateUI(as checkStatus: String?) {
         let checkImage: UIImage?   = #imageLiteral(resourceName: "btnCheck")
         let uncheckImage: UIImage? = #imageLiteral(resourceName: "btnUncheck")
         
         let checkTextColor: UIColor   = .inactiveTextPurple
         let uncheckTextColor: UIColor = .maintext
         
-        if checkStatus == true {
+        if checkStatus != nil {
             self.titleLabel.textColor    = checkTextColor
             self.subTitleLabel.textColor = checkTextColor
             self.fixImageView.alpha      = 0.5

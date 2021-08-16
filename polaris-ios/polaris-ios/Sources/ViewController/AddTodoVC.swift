@@ -130,6 +130,7 @@ class AddTodoVC: HalfModalVC {
         }).disposed(by: self.disposeBag)
         
         self.viewModel.loadingSubject.observeOnMain(onNext: { [weak self] isLoading in
+            self?.addButton.isUserInteractionEnabled = isLoading == false
             isLoading ? self?.startLoadingIndicator() : self?.stopLoadingIndicator()
         }).disposed(by: self.disposeBag)
     }

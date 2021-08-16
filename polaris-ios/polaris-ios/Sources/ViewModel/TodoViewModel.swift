@@ -92,12 +92,65 @@ class TodoViewModel {
         }).disposed(by: self.disposeBag)
     }
     
+    func requestDeleteTodoDay(_ todoIdx: Int, completion: @escaping (Bool) -> Void) {
+        #warning("여기에 서버에서 업데이트 해주는 모델 추가해서 받기")
+        let todoDayDeleteAPI = TodoAPI.deleteTodo(idx: todoIdx)
+        NetworkManager.request(apiType: todoDayDeleteAPI).subscribe(onSuccess: { [weak self] (result: String) in
+            guard let self = self else { return }
+            
+            guard let dayListContainIdx = self.todoDayListTable.first(where: { _, todoDayList in
+                return todoDayList.contains(where: { $0.idx == todoIdx })
+            }) else { return }
+            
+            let dayListKey        = dayListContainIdx.key
+            let dayListRemovedIdx = dayListContainIdx.value.filter { $0.idx != todoIdx }
+            self.todoDayListTable.updateValue(dayListRemovedIdx, forKey: dayListKey)
+            completion(true)
+        }, onFailure: { error in
+            print(error.localizedDescription)
+            
+            #warning("임시로 넣음")
+            guard let dayListContainIdx = self.todoDayListTable.first(where: { _, todoDayList in
+                return todoDayList.contains(where: { $0.idx == todoIdx })
+            }) else { return }
+            
+            let dayListKey        = dayListContainIdx.key
+            let dayListRemovedIdx = dayListContainIdx.value.filter { $0.idx != todoIdx }
+            self.todoDayListTable.updateValue(dayListRemovedIdx, forKey: dayListKey)
+            completion(true)
+        }).disposed(by: self.disposeBag)
+    }
+    
     func updateCurrentTab(_ tab: TodoCategory) {
         self.currentTabRelay.accept(tab)
     }
     
     func updateDayExpanedStatus(forRowAt indexPath: IndexPath, isExpaned: Bool) {
         self.dayExpanedIndexPath = isExpaned ? indexPath : nil
+    }
+    
+    func updateDoneStatus(_ todoModel: TodoDayPerModel, completion: @escaping (Bool) -> Void) {
+        guard let todoIdx = todoModel.idx                                  else { return }
+        guard let header = todoModel.date?.convertToDate()?.normalizedDate else { return }
+        
+        let edittedIsDone = todoModel.isDone == nil ? true : false
+        let todoEditAPI = TodoAPI.editTodo(idx: todoIdx, isDone: edittedIsDone)
+        
+        NetworkManager.request(apiType: todoEditAPI).subscribe(onSuccess: { [weak self] (responseModel: TodoDayPerModel) in
+            guard let self = self else { return }
+            
+            let edittedIndex = self.todoDayListTable[header]?.firstIndex(where: { $0.idx == todoModel.idx })
+            
+            guard let edittedIndex = edittedIndex              else { return }
+            guard var todoList = self.todoDayListTable[header] else { return }
+            
+            var edittedModel = todoList[edittedIndex]
+            edittedModel.isDone = responseModel.isDone
+            
+            todoList.replaceSubrange(edittedIndex...edittedIndex, with: [edittedModel])
+            self.todoDayListTable.updateValue(todoList, forKey: header)
+            completion(true)
+        }).disposed(by: self.disposeBag)
     }
     
     private func updateTodoDayListModel(_ todoListModel: TodoDayListModel) {

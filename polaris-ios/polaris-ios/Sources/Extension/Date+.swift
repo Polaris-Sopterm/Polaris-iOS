@@ -72,7 +72,7 @@ extension Date {
         }
         
         distancesBetweenWeekDay.forEach { distance in
-            guard let calculatedDate = Calendar.current.date(byAdding: .day, value: distance, to: normalizedCurrent) else { return }
+            guard let calculatedDate = Calendar.current.date(byAdding: .day, value: distance, to: self.normalizedCurrent) else { return }
             thisWeekDates.append(calculatedDate)
         }
         return thisWeekDates

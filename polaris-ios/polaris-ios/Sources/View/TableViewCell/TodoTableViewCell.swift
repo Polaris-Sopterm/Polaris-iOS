@@ -249,7 +249,10 @@ extension TodoTableViewCell: JourneyTodoHeaderViewDelegate {
 extension TodoTableViewCell: DayTodoTableViewCellDelegate {
     
     func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, didTapCheck todo: TodoDayPerModel) {
-        print(todo)
+        self.viewModel.updateDoneStatus(todo) { [weak self] isSuccess in
+            guard isSuccess == true else { return }
+            self?.tableView.reloadData()
+        }
     }
     
     func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, didTapEdit todo: TodoDayPerModel) {
@@ -257,7 +260,12 @@ extension TodoTableViewCell: DayTodoTableViewCellDelegate {
     }
     
     func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, didTapDelete todo: TodoDayPerModel) {
-        print("Delete Todo")
+        guard let todoIdx = todo.idx else { return }
+        
+        self.viewModel.requestDeleteTodoDay(todoIdx) { [weak self] isSuccess in
+            guard isSuccess == true else { return }
+            self?.tableView.reloadData()
+        }
     }
 
     func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, isExpaned: Bool, forRowAt indexPath: IndexPath) {
