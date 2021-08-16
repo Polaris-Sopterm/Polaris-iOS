@@ -13,6 +13,7 @@ enum UserAPI {
     case checkEmail(email: String)
     case auth(email: String, password: String)
     case reauth(refreshToken: String)
+    case logout
 }
 
 extension UserAPI: TargetType {
@@ -26,12 +27,14 @@ extension UserAPI: TargetType {
         case .createUser: return "/user/v0"
         case .checkEmail: return "/user/v0/checkEmail"
         case .auth:       fallthrough
-        case .reauth:     return "/auth/v0"
+        case .reauth:     fallthrough
+        case .logout:     return "/auth/v0"
         }
     }
     
     var method: Moya.Method {
         if case .reauth = self { return .put }
+        if case .logout = self { return .delete }
         return .post
     }
     
@@ -49,6 +52,8 @@ extension UserAPI: TargetType {
             return .requestParameters(parameters: ["email": email, "password": password], encoding: JSONEncoding.default)
         case .reauth(let refreshToken):
             return .requestParameters(parameters: ["refreshToken": refreshToken], encoding: JSONEncoding.default)
+        case .logout:
+            return .requestPlain
         }
     }
     

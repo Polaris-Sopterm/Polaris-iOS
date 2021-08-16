@@ -56,7 +56,7 @@ final class DayTodoTableViewCell: TodoCategoryCell {
         
         self.titleLabel.text        = todoPerModel.title
         self.subTitleLabel.text     = todoPerModel.journey?.title
-        self.subTitleLabel.isHidden = todoPerModel.journey == nil
+        self.subTitleLabel.isHidden = todoPerModel.journey?.title == "default"
         self.fixImageView.isHidden  = todoPerModel.isTop == false
         
         self.updateUI(as: todoPerModel.isDone)
