@@ -9,6 +9,12 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+struct DateInfo {
+    let year: Int
+    let month: Int
+    let weekNo: Int
+}
+
 class MainSceneViewModel {
     
     var heightRatio = CGFloat(DeviceInfo.screenHeight/812.0)
@@ -19,7 +25,10 @@ class MainSceneViewModel {
     var month = 7
     var weekNo = 3
     
-    struct Input{    }
+    struct Input{
+        let forceToShowStar: Bool
+        let dateInfo: DateInfo
+    }
     
     struct Output{
         let starList: BehaviorRelay<[MainStarCVCViewModel]>
@@ -28,7 +37,6 @@ class MainSceneViewModel {
         let lookBackState: BehaviorRelay<[MainLookBackCellState]>
         let mainTextRelay: BehaviorRelay<String>
         let homeModelRelay: BehaviorRelay<[HomeModel]>
-        
     }
     func connect(input: Input) -> Output{
         
@@ -45,7 +53,7 @@ class MainSceneViewModel {
             print(PolarisUserManager.shared.authToken)
         }
 
-        let homeAPI = HomeAPI.getHomeBanner(isSkipped: false)
+        let homeAPI = HomeAPI.getHomeBanner(isSkipped: input.forceToShowStar)
         let bannerNetworking = NetworkManager.request(apiType: homeAPI)
             .subscribe(onSuccess: { (homeModel: HomeModel) in
                 print(homeModel)
@@ -95,7 +103,7 @@ class MainSceneViewModel {
         } else {
             state.accept([StarCollectionViewState.showStar])
         }
-
+        
         starList.accept(self.convertStarCVCViewModel(mainStarModels: mainStarModels))
         todoStarList.accept(self.convertTodoCVCViewModel(weekJourneyModels: weekJourneyModels))
         return Output(starList: starList,todoStarList: todoStarList,state: state,lookBackState: lookBackState,mainTextRelay: mainTextRelay,homeModelRelay: homeModelRelay)

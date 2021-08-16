@@ -44,14 +44,16 @@ final class MainSceneTableViewCell: MainTableViewCell {
     }
     private let disposeBag = DisposeBag()
     private let starTVCHeight = 212*(DeviceInfo.screenHeight/812.0)
+    private var dateInfo = DateInfo(year: Date.currentYear, month: Date.currentMonth, weekNo: Date.currentWeekNoOfMonth)
     override static var cellHeight: CGFloat { return DeviceInfo.screenHeight }
+    private let weekDict = [1:"첫째주",2:"둘째주",3:"셋째주",4:"넷째주",5:"다섯째주"]
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.setUIs()
         self.setStarCollectionView()
         self.setTodoCollectionView()
-        self.bindViewModel()
+        self.bindViewModel(forceToShowStar: false, dateInfo: self.dateInfo)
         self.setupDimView()
     }
     
@@ -71,7 +73,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
     
     private var dimView: UIView = UIView(frame: .zero)
     
-    func setUIs(){
+    private func setUIs(){
         for _ in 0...2{
             self.cometAnimation()
         }
@@ -79,6 +81,10 @@ final class MainSceneTableViewCell: MainTableViewCell {
         self.weekContainView.setBorder(borderColor: .white, borderWidth: 1.0)
         self.weekContainView.makeRounded(cornerRadius: 9)
         self.weekLabel.font = UIFont.systemFont(ofSize: 13,weight: .bold)
+        self.weekLabel.addCharacterSpacing(kernValue: -0.39)
+        if let weekText = self.weekDict[Date.currentWeekNoOfMonth] {
+            self.weekLabel.text = String(Date.currentYear)+"년 "+String(Date.currentMonth)+"월"+weekText
+        }
         self.weekLabel.textColor = .white
         self.nowLabel.font = UIFont.systemFont(ofSize: 16,weight: .bold)
         self.nowLabel.textColor = .white
@@ -89,18 +95,17 @@ final class MainSceneTableViewCell: MainTableViewCell {
             self.pageControl.backgroundStyle = .minimal
             self.pageControl.allowsContinuousInteraction = false
         }
+        self.pageControl.isUserInteractionEnabled = false
     }
     
-    
-    
-    func setStarCollectionView() {
+    private func setStarCollectionView() {
         self.starCV.delegate = self
         self.starCV.registerCell(cell: MainStarCVC.self)
         self.starCV.registerCell(cell: MainLookBackCollectionViewCell.self)
         self.starCV.backgroundColor = .clear
     }
     
-    func setTodoCollectionView() {
+    private func setTodoCollectionView() {
         self.todoCV.registerCell(cell: MainTodoCVC.self)
         self.todoCV.backgroundColor = .clear
         self.todoCV.delegate = self
@@ -109,12 +114,12 @@ final class MainSceneTableViewCell: MainTableViewCell {
         layout.itemSize = CGSize(width: DeviceInfo.screenWidth, height: DeviceInfo.screenHeight-285*(DeviceInfo.screenHeight/812.0))
     }
     
-    func setTitle(stars: Int,lookBackState: MainLookBackCellState) {
+    private func setTitle(stars: Int,lookBackState: MainLookBackCellState) {
         self.titleLabel.setPartialBold(originalText: "어제는\n\(stars)개의 별을 발견했어요.", boldText: "\(stars)개의 별", fontSize: 23, boldFontSize: 23)
     }
     
-    private func bindViewModel(){
-        let input = MainSceneViewModel.Input()
+    private func bindViewModel(forceToShowStar: Bool,dateInfo: DateInfo){
+        let input = MainSceneViewModel.Input(forceToShowStar: forceToShowStar,dateInfo: dateInfo)
         let output = viewModel.connect(input: input)
         output.homeModelRelay.subscribe(onNext: { homeModel in
             self.homeModel = homeModel.last
@@ -140,13 +145,10 @@ final class MainSceneTableViewCell: MainTableViewCell {
             self.viewState = state[0]
         }).disposed(by: disposeBag)
         
-        output.mainTextRelay.subscribe(onNext: { text in
-            self.titleLabel.setPartialBold(originalText: text, boldText: "", fontSize: 23, boldFontSize: 23)
-        })
-        .disposed(by: disposeBag)
         
         switch output.state.value[0] {
         case StarCollectionViewState.showStar:
+            self.weekContainView.alpha = 1
             output.starList.bind(to: starCV.rx.items) { collectionView, index, item in
                 let identifier = String(describing: MainStarCVC.self)
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: IndexPath(item: index, section: 0)) as! MainStarCVC
@@ -156,17 +158,20 @@ final class MainSceneTableViewCell: MainTableViewCell {
             }.disposed(by: disposeBag)
             
         default :
-            print(output.state.value)
-//            self.setTitle(stars: self.starList.count,lookBackState: self.lookBackState)
             output.state.bind(to: starCV.rx.items){ collectionView, index, item in
                 let identifier = String(describing: MainLookBackCollectionViewCell.self)
                 let cell = self.starCV.dequeueReusableCell(withReuseIdentifier: identifier, for: IndexPath(item: index, section: 0)) as! MainLookBackCollectionViewCell
-                
+                cell.delegate = self
                 if self.homeModel != nil {
                     cell.setState(state: self.lookBackState, bannerTitle: self.homeModel!.bannerTitle, bannerText: self.homeModel!.bannerText, buttonText: self.homeModel!.buttonText)
                 }
-                self.weekContainView.isHidden = true
                 
+                #warning("원래 여기는 0으로 만들어줘야 하는데 테스트 용으로 임시로 주석처리")
+//                self.weekContainView.alpha = 0
+                output.mainTextRelay.subscribe(onNext: { text in
+                    self.titleLabel.setPartialBold(originalText: text, boldText: "", fontSize: 23, boldFontSize: 23)
+                })
+                .disposed(by: self.disposeBag)
                 return cell
             }.disposed(by: disposeBag)
         }
@@ -216,8 +221,33 @@ final class MainSceneTableViewCell: MainTableViewCell {
             comet.removeFromSuperview()
             self.cometAnimation()
         })
+    }
+    
+    @objc private func showWeekPicker(){
+        guard let weekPickerVC = WeekPickerVC.instantiateFromStoryboard(StoryboardName.weekPicker),
+              let visibleController = UIViewController.getVisibleController() else { return }
+        weekPickerVC.weekDelegate = self
+        weekPickerVC.presentWithAnimation(from: visibleController)
         
     }
+    
+    @IBAction func settingButtonAction(_ sender: Any) {
+        #warning("Setting button 동작 추가 필요")
+    }
+    
+    
+    @IBAction func scrollButtonAction(_ sender: Any) {
+        #warning("밑으로 스크롤하는 버튼 동작 추가 필요")
+    }
+    
+    @IBAction func weekButtonAction(_ sender: Any) {
+        self.showWeekPicker()
+    }
+    
+    @IBAction func addNewJourneyButton(_ sender: Any) {
+        #warning("동민 - Journey 추가 버튼")
+    }
+    
     
 }
 
@@ -246,7 +276,6 @@ extension MainSceneTableViewCell: UICollectionViewDelegateFlowLayout {
             if self.viewState == StarCollectionViewState.showStar {
                 return 15
             }
-            
         }
         return 0
     }
@@ -278,7 +307,6 @@ extension MainSceneTableViewCell: UIScrollViewDelegate {
         if scrollView == self.todoCV {
             let layout = self.todoCV.collectionViewLayout as! UICollectionViewFlowLayout
             let cellWidthIncludingSpacing = layout.itemSize.width + layout.minimumLineSpacing
-            
             var offset = targetContentOffset.pointee
             let index = (offset.x + scrollView.contentInset.left) / cellWidthIncludingSpacing
             var roundedIndex = round(index)
@@ -303,11 +331,27 @@ extension MainSceneTableViewCell: UIScrollViewDelegate {
             self.pageControl.currentPage = Int(self.currentIndex)
         }
     }
-    
-    
-    
 }
 
 
+extension MainSceneTableViewCell: LookBackCloseDelegate {
+    func close() {
+        self.bindViewModel(forceToShowStar: true, dateInfo: self.dateInfo)
+    }
+    func apply(isLookBack: Bool) {
+        if isLookBack {
+            #warning("재은 - 여정 돌아보기(회고) 버튼")
+        }
+        else {
+            #warning("동민 - Journey 추가 버튼")
+        }
+    }
+}
 
+extension MainSceneTableViewCell: WeekPickerDelegate {
+    func apply(year: Int, month: Int, weekNo: Int, weekText: String) {
+        self.weekLabel.text = weekText
+        self.bindViewModel(forceToShowStar: true, dateInfo: DateInfo(year: year, month: month, weekNo: weekNo))
+    }
 
+}

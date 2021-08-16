@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 enum MainLookBackCellState {
     case build
@@ -24,10 +26,10 @@ class MainLookBackCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var titleLabelTopConstraint: NSLayoutConstraint!
     
     private var state: MainLookBackCellState = .lookback
+    internal var delegate: LookBackCloseDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         self.setUIs()
     }
     
@@ -51,20 +53,28 @@ class MainLookBackCollectionViewCell: UICollectionViewCell {
         case .build :
             self.closeButton.isHidden = true
             self.titleLabelTopConstraint.constant = 34
-
         default :
             self.closeButton.isHidden = false
             self.titleLabelTopConstraint.constant = 39
-
         }
-        
-        
     }
-    
     
     func setTitles(title: String, subTitle: String){
         self.titleLabel.text = title
         self.subTitleLabel.text = subTitle
     }
+    
+    @IBAction func closeButtonAction(_ sender: Any) {
+        self.delegate?.close()
+    }
+    
+    @IBAction func lookBackButtonAction(_ sender: Any) {
+        delegate?.apply(isLookBack: self.lookBackButton.titleLabel?.text == "여정 돌아보기")
+    }
+    
+}
 
+protocol LookBackCloseDelegate {
+    func close()
+    func apply(isLookBack: Bool)
 }
