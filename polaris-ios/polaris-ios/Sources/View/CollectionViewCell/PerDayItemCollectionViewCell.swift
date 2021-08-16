@@ -8,6 +8,7 @@
 import UIKit
 
 class PerDayItemCollectionViewCell: UICollectionViewCell {
+    
     override var isSelected: Bool { didSet { self.update(by: self.isSelected) } }
     
     @IBOutlet weak var dayLabel: UILabel!
@@ -16,18 +17,14 @@ class PerDayItemCollectionViewCell: UICollectionViewCell {
     // MARK: - Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        self.setupInit()
+        self.update(by: false)
     }
 
-    // MARK: - Set Up
-    private func setupInit() {
-        self.update(by: false)
-        self.makeRounded(cornerRadius: 15)
-    }
-    
-    func configure(weekday: Date.WeekDay, day: Int) {
-        self.dayLabel.text       = weekday.korWeekday
+    func configure(_ date: Date) {
+       let weekDay = Calendar.current.component(.weekday, from: date)
+        let day    = Calendar.current.component(.day, from: date)
+        
+        self.dayLabel.text       = Date.WeekDay(rawValue: weekDay)?.korWeekday
         self.dayNumberLabel.text = "\(day)"
     }
     

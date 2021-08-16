@@ -16,8 +16,8 @@ extension AddTodoVC: AddTodoTextTableViewCellDelegate {
 }
 
 extension AddTodoVC: AddTodoDayTableViewCellDelegate {
-    func addTodoDayTableViewCell(_ addTodoDayTableViewCell: AddTodoDayTableViewCell, didSelectDay day: Int, didSelectWeekday weekday: Date.WeekDay) {
-        self.viewModel.selectDaySubject.onNext((weekday, day))
+    func addTodoDayTableViewCell(_ addTodoDayTableViewCell: AddTodoDayTableViewCell, didSelectDate date: Date) {
+        self.viewModel.selectDateSubject.onNext(date)
     }
 }
 

@@ -25,16 +25,16 @@ class AddTodoVC: HalfModalVC {
         self.halfModalView = self.addTodoHalfModalView
         self.setupLoadingIndicator()
         self.setupTitleLabel()
-        self.setupTableView()
         self.registerCell()
+        self.setupTableView()
         self.bindButtons()
         self.bindEnableButton()
-        self.bindTableView()
         self.observeViewModel()
+        self.setupCurrentTodo()
     }
     
     // MARK: - Set Up
-    func setAddOptions(_ options: AddOptions, _ addTodoDate: Date? = nil) {
+    func setAddOptions(_ options: AddOptions) {
         self.viewModel.setViewModel(by: options)
     }
     
@@ -42,14 +42,42 @@ class AddTodoVC: HalfModalVC {
         self.viewModel.setAddTodoDate(date)
     }
     
+    func setEditTodo(_ todo: TodoDayPerModel) {
+        self.viewModel.setEditTodoModel(todo)
+    }
+    
     private func setupTitleLabel() {
         if self.viewModel.currentAddOption == .perDayAddTodo {
-            guard let date = self.viewModel.addTodoDate else { return }
+            guard let date = self.viewModel.currentDate else { return }
             self.titleLabel.text = date.convertToString(using: "M월 d일") + "의 할 일"
         } else if self.viewModel.currentAddOption == .perJourneyAddTodo {
             self.titleLabel.text = "폴라리스의 할 일"
-        } else {
+        } else if self.viewModel.currentAddOption == .addJourney {
             self.titleLabel.text = "여정 추가하기"
+        } else {
+            self.titleLabel.text = "일정 수정"
+        }
+    }
+    
+    private func setupCurrentTodo() {
+        guard self.viewModel.currentAddOption == .edittedTodo else { return }
+        guard let todoModel = self.viewModel.todoDayModel     else { return }
+        
+        for index in 0..<self.viewModel.addOptionCount {
+            let indexPath = IndexPath(row: index, section: 0)
+            guard let cell = self.tableView.cellForRow(at: indexPath) else { continue }
+            
+            if let addTextCell = cell as? AddTodoTextTableViewCell {
+                addTextCell.updateAddText(todoModel.title ?? "")
+            } else if let dropdownCell = cell as? AddTodoDropdownTableViewCell {
+                dropdownCell.updateSelectedJourney(todoModel.journey ?? JourneyTitleModel(idx: nil, title: "default",
+                                                                                          year: nil, month: nil,
+                                                                                          weekNo: nil, userIdx: nil))
+            } else if let selectDayCell = cell as? AddTodoDayTableViewCell {
+                print(selectDayCell)
+            } else if let fixOnTopCell = cell as? AddTodoFixOnTopTableViewCell {
+                fixOnTopCell.updateFix(todoModel.isTop ?? false)
+            }
         }
     }
     
@@ -65,6 +93,25 @@ class AddTodoVC: HalfModalVC {
         self.tableView.allowsSelection     = false
         self.tableView.separatorStyle      = .none
         self.tableView.keyboardDismissMode = .onDrag
+        
+        self.tableView.rx.setDelegate(self)
+            .disposed(by: self.disposeBag)
+        
+        self.viewModel.addListTypes
+            .bind(to: self.tableView.rx.items) { [weak self] tableView, index, item in
+                guard let self = self else { return UITableViewCell() }
+                
+                let indexPath = IndexPath(row: index, section: 0)
+                let cell      = tableView.dequeueReusableCell(cell: item, forIndexPath: indexPath)
+                
+                guard let addTodoCell = cell as? AddTodoTableViewCellProtocol else { return UITableViewCell() }
+                guard let currentAddOption = self.viewModel.currentAddOption  else { return UITableViewCell() }
+                
+                addTodoCell.delegate = self
+                addTodoCell.configure(by: currentAddOption, date: self.viewModel.currentDate)
+                return addTodoCell
+            }
+            .disposed(by: self.disposeBag)
     }
     
     private func registerCell() {
@@ -97,28 +144,7 @@ class AddTodoVC: HalfModalVC {
             })
             .disposed(by: self.disposeBag)
     }
-    
-    private func bindTableView() {
-        self.tableView.rx.setDelegate(self)
-            .disposed(by: self.disposeBag)
-        
-        self.viewModel.addListTypes
-            .bind(to: self.tableView.rx.items) { [weak self] tableView, index, item in
-                guard let self = self else { return UITableViewCell() }
-                
-                let indexPath = IndexPath(row: index, section: 0)
-                let cell      = tableView.dequeueReusableCell(cell: item, forIndexPath: indexPath)
-                
-                guard let addTodoCell = cell as? AddTodoTableViewCellProtocol else { return UITableViewCell() }
-                guard let currentAddOption = self.viewModel.currentAddOption  else { return UITableViewCell() }
-                
-                addTodoCell.delegate = self
-                addTodoCell.configure(by: currentAddOption, date: self.viewModel.addTodoDate)
-                return addTodoCell
-            }
-            .disposed(by: self.disposeBag)
-    }
-    
+
     private func observeViewModel() {
         self.viewModel.completeAddTodoSubject.observeOnMain(onNext: { [weak self] in
             guard let self = self                                     else { return }
@@ -144,8 +170,8 @@ class AddTodoVC: HalfModalVC {
         self.loadingIndicatorView.isHidden = true
         self.loadingIndicatorView.stopAnimating()
     }
-    
-    private let disposeBag  = DisposeBag()
+
+    private let disposeBag = DisposeBag()
     
     private let loadingIndicatorView = UIActivityIndicatorView(style: .medium)
     
@@ -182,6 +208,7 @@ extension AddTodoVC {
         static let perDayAddTodo: AddOptions     = [.addText, dropdownMenu, fixOnTop]
         static let perJourneyAddTodo: AddOptions = [.addText, .selectDay, .fixOnTop]
         static let addJourney: AddOptions        = [.addText, .selectStar]
+        static let edittedTodo: AddOptions       = [.addText, .dropdownMenu, .selectDay, .fixOnTop]
         
         var addCellTypes: [AddTodoTableViewCellProtocol.Type] {
             var cellTypes = [AddTodoTableViewCellProtocol.Type]()

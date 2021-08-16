@@ -256,7 +256,13 @@ extension TodoTableViewCell: DayTodoTableViewCellDelegate {
     }
     
     func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, didTapEdit todo: TodoDayPerModel) {
-        print("Edit Todo")
+        guard let addTodoVC = AddTodoVC.instantiateFromStoryboard(StoryboardName.addTodo),
+              let visibleController = UIViewController.getVisibleController() else { return }
+        
+        addTodoVC.setAddOptions(.edittedTodo)
+        addTodoVC.setEditTodo(todo)
+        addTodoVC.delegate = self
+        addTodoVC.presentWithAnimation(from: visibleController)
     }
     
     func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, didTapDelete todo: TodoDayPerModel) {
