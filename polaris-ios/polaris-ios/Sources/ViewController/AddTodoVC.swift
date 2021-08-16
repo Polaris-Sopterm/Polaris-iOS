@@ -73,8 +73,9 @@ class AddTodoVC: HalfModalVC {
                 dropdownCell.updateSelectedJourney(todoModel.journey ?? JourneyTitleModel(idx: nil, title: "default",
                                                                                           year: nil, month: nil,
                                                                                           weekNo: nil, userIdx: nil))
-            } else if let selectDayCell = cell as? AddTodoDayTableViewCell {
-                print(selectDayCell)
+            } else if let selectDayCell = cell as? AddTodoDayTableViewCell,
+                      let selectDate = todoModel.date?.convertToDate()?.normalizedDate {
+                selectDayCell.updateSelectDate(selectDate)
             } else if let fixOnTopCell = cell as? AddTodoFixOnTopTableViewCell {
                 fixOnTopCell.updateFix(todoModel.isTop ?? false)
             }
@@ -136,7 +137,6 @@ class AddTodoVC: HalfModalVC {
     
     private func bindEnableButton() {
         self.viewModel.addEnableFlagSubject
-            .distinctUntilChanged()
             .subscribe(onNext: { [weak self] isEnable in
                 guard let self = self else { return }
                 if isEnable == true { self.addButton.enable = true }

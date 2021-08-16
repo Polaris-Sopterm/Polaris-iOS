@@ -31,6 +31,13 @@ class AddTodoDropdownViewModel {
     }
     
     private func updateJourneyList(_ list: [JourneyTitleModel]) {
+        defer {
+            if self.selectedMenu.value == nil {
+                let defaultJourney = self.journeyListRelay.value.first(where: { $0.title == "default" })
+                self.selectedMenu.accept(defaultJourney)
+            }
+        }
+        
         guard list.isEmpty == true else { self.journeyListRelay.accept(list); return }
         
         // 리스트가 비어 있는 경우 임의로 Default 여정 만들어서 보여주기 - 서버 : 이현주와 협의

@@ -7,10 +7,11 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 class AddTodoDayViewModel {
     
-    let datesSubject        = BehaviorSubject<[Date]>(value: Date.datesIncludedThisWeek)
+    let datesRelay        = BehaviorRelay<[Date]>(value: Date.datesIncludedThisWeek)
     let selectedDateSubject = BehaviorSubject<Date?>(value: nil)
     
 }

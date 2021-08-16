@@ -43,7 +43,7 @@ class TodoTableViewCell: MainTableViewCell {
         self.bindButtons()
         self.observeViewModel()
         
-        self.viewModel.requestTodoDayList()
+        self.viewModel.requestTodoDayList(shouldScroll: true)
     }
     
     override func prepareForReuse() {
@@ -101,10 +101,10 @@ class TodoTableViewCell: MainTableViewCell {
             })
             .disposed(by: self.disposeBag)
         
-        self.viewModel.reloadSubject.observeOnMain(onNext: { [weak self] in
+        self.viewModel.reloadSubject.observeOnMain(onNext: { [weak self] shouldScroll in
             self?.tableView.reloadData()
             
-            if self?.viewModel.currentTabRelay.value == .day { self?.scrollToCurrentDay() }
+            if self?.viewModel.currentTabRelay.value == .day && shouldScroll { self?.scrollToCurrentDay() }
         }).disposed(by: self.disposeBag)
     }
     
@@ -249,10 +249,7 @@ extension TodoTableViewCell: JourneyTodoHeaderViewDelegate {
 extension TodoTableViewCell: DayTodoTableViewCellDelegate {
     
     func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, didTapCheck todo: TodoDayPerModel) {
-        self.viewModel.updateDoneStatus(todo) { [weak self] isSuccess in
-            guard isSuccess == true else { return }
-            self?.tableView.reloadData()
-        }
+        self.viewModel.updateDoneStatus(todo)
     }
     
     func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, didTapEdit todo: TodoDayPerModel) {
@@ -267,11 +264,7 @@ extension TodoTableViewCell: DayTodoTableViewCellDelegate {
     
     func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, didTapDelete todo: TodoDayPerModel) {
         guard let todoIdx = todo.idx else { return }
-        
-        self.viewModel.requestDeleteTodoDay(todoIdx) { [weak self] isSuccess in
-            guard isSuccess == true else { return }
-            self?.tableView.reloadData()
-        }
+        self.viewModel.requestDeleteTodoDay(todoIdx)
     }
 
     func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, isExpaned: Bool, forRowAt indexPath: IndexPath) {
@@ -290,9 +283,11 @@ extension TodoTableViewCell: AddTodoViewControllerDelegate {
     
     func addTodoViewController(_ viewController: AddTodoVC, didCompleteAddOption option: AddTodoVC.AddOptions) {
         if option == .perDayAddTodo {
-            self.viewModel.requestTodoDayList()
+            self.viewModel.requestTodoDayList(shouldScroll: false)
         } else if option == .perJourneyAddTodo {
             #warning("여정별 할일 받아오는 것 추가")
+        } else if option == .edittedTodo {
+            self.viewModel.requestTodoDayList(shouldScroll: false)
         }
     }
     

@@ -37,7 +37,7 @@ enum TodoCategory {
 
 class TodoViewModel {
     
-    let reloadSubject   = PublishSubject<Void>()
+    let reloadSubject   = PublishSubject<Bool>()
     let currentTabRelay = BehaviorRelay<TodoCategory>(value: .day)
     
     init() {
@@ -85,39 +85,24 @@ class TodoViewModel {
         }
     }
     
-    func requestTodoDayList() {
+    func requestTodoDayList(shouldScroll: Bool) {
         let todoListAPI = TodoAPI.listTodoByDate()
         NetworkManager.request(apiType: todoListAPI).subscribe(onSuccess: { [weak self] (todoListModel: TodoDayListModel) in
             self?.updateTodoDayListModel(todoListModel)
+            self?.reloadSubject.onNext(shouldScroll)
         }).disposed(by: self.disposeBag)
     }
     
-    func requestDeleteTodoDay(_ todoIdx: Int, completion: @escaping (Bool) -> Void) {
+    func requestDeleteTodoDay(_ todoIdx: Int) {
         #warning("여기에 서버에서 업데이트 해주는 모델 추가해서 받기")
         let todoDayDeleteAPI = TodoAPI.deleteTodo(idx: todoIdx)
         NetworkManager.request(apiType: todoDayDeleteAPI).subscribe(onSuccess: { [weak self] (result: String) in
             guard let self = self else { return }
             
-            guard let dayListContainIdx = self.todoDayListTable.first(where: { _, todoDayList in
-                return todoDayList.contains(where: { $0.idx == todoIdx })
-            }) else { return }
-            
-            let dayListKey        = dayListContainIdx.key
-            let dayListRemovedIdx = dayListContainIdx.value.filter { $0.idx != todoIdx }
-            self.todoDayListTable.updateValue(dayListRemovedIdx, forKey: dayListKey)
-            completion(true)
+            self.requestTodoDayList(shouldScroll: false)
         }, onFailure: { error in
-            print(error.localizedDescription)
-            
-            #warning("임시로 넣음")
-            guard let dayListContainIdx = self.todoDayListTable.first(where: { _, todoDayList in
-                return todoDayList.contains(where: { $0.idx == todoIdx })
-            }) else { return }
-            
-            let dayListKey        = dayListContainIdx.key
-            let dayListRemovedIdx = dayListContainIdx.value.filter { $0.idx != todoIdx }
-            self.todoDayListTable.updateValue(dayListRemovedIdx, forKey: dayListKey)
-            completion(true)
+            #warning("여기 지워야 함 - Reponse Model 나오면")
+            self.requestTodoDayList(shouldScroll: false)
         }).disposed(by: self.disposeBag)
     }
     
@@ -129,7 +114,7 @@ class TodoViewModel {
         self.dayExpanedIndexPath = isExpaned ? indexPath : nil
     }
     
-    func updateDoneStatus(_ todoModel: TodoDayPerModel, completion: @escaping (Bool) -> Void) {
+    func updateDoneStatus(_ todoModel: TodoDayPerModel) {
         guard let todoIdx = todoModel.idx                                  else { return }
         guard let header = todoModel.date?.convertToDate()?.normalizedDate else { return }
         
@@ -138,18 +123,7 @@ class TodoViewModel {
         
         NetworkManager.request(apiType: todoEditAPI).subscribe(onSuccess: { [weak self] (responseModel: TodoDayPerModel) in
             guard let self = self else { return }
-            
-            let edittedIndex = self.todoDayListTable[header]?.firstIndex(where: { $0.idx == todoModel.idx })
-            
-            guard let edittedIndex = edittedIndex              else { return }
-            guard var todoList = self.todoDayListTable[header] else { return }
-            
-            var edittedModel = todoList[edittedIndex]
-            edittedModel.isDone = responseModel.isDone
-            
-            todoList.replaceSubrange(edittedIndex...edittedIndex, with: [edittedModel])
-            self.todoDayListTable.updateValue(todoList, forKey: header)
-            completion(true)
+            self.requestTodoDayList(shouldScroll: false)
         }).disposed(by: self.disposeBag)
     }
     
@@ -161,7 +135,6 @@ class TodoViewModel {
             guard todoDayListTable[normalizedDate] != nil         else { return }
             todoDayListTable[normalizedDate] = todoList.todoList
         }
-        self.reloadSubject.onNext(())
     }
     
     /*
