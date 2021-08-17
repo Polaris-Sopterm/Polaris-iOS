@@ -14,6 +14,7 @@ class PolarisWebViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setupCancelButton()
         self.setupWebView()
         self.bindButtons()
     }
@@ -37,9 +38,21 @@ class PolarisWebViewController: UIViewController {
         self.polarisWebView.load(webViewRequest)
     }
     
+    private func setupCancelButton() {
+        if self.navigationController != nil {
+            self.cancelButton.setImage(#imageLiteral(resourceName: "btnBackLookBack").withTintColor(.maintext), for: .normal)
+        } else {
+            self.cancelButton.setImage(#imageLiteral(resourceName: "btnCloseJoin"), for: .normal)
+        }
+    }
+    
     private func bindButtons() {
         self.cancelButton.rx.tap.observeOnMain(onNext: { [weak self] in
-            self?.dismiss(animated: true, completion: nil)
+            if let navigationController = self?.navigationController {
+                navigationController.popViewController(animated: true)
+            } else {
+                self?.dismiss(animated: true, completion: nil)
+            }
         }).disposed(by: self.disposeBag)
     }
     

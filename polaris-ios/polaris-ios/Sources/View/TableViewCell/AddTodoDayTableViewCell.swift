@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 
 protocol AddTodoDayTableViewCellDelegate: AddTodoTableViewCellDelegate {
-    func addTodoDayTableViewCell(_ addTodoDayTableViewCell: AddTodoDayTableViewCell, didSelectDay day: Int, didSelectWeekday weekday: Date.WeekDay)
+    func addTodoDayTableViewCell(_ addTodoDayTableViewCell: AddTodoDayTableViewCell, didSelectDate date: Date)
 }
 
 class AddTodoDayTableViewCell: AddTodoTableViewCell {
@@ -31,6 +31,13 @@ class AddTodoDayTableViewCell: AddTodoTableViewCell {
         self.bindCollectionView()
     }
     
+    func updateSelectDate(_ date: Date) {
+        guard let selectedDateIndex = self.viewModel.datesRelay.value.firstIndex(of: date) else { return }
+        let indexPath = IndexPath(item: selectedDateIndex, section: 0)
+        self.collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
+        self.viewModel.selectedDateSubject.onNext(date)
+    }
+    
     // MARK: - Set Up
     private func registerCell() {
         self.collectionView.registerCell(cell: PerDayItemCollectionViewCell.self)
@@ -48,31 +55,30 @@ class AddTodoDayTableViewCell: AddTodoTableViewCell {
     
     // MARK: - Bind
     private func bindCollectionView() {
-        self.viewModel.daysSubject
-            .bind(to: self.collectionView.rx.items) { collectionView, index, item in
-                guard let perDayCell = collectionView.dequeueReusableCell(cell: PerDayItemCollectionViewCell.self, forIndexPath: IndexPath(row: index, section: 0)) else { return UICollectionViewCell() }
-                
-                perDayCell.configure(weekday: item.weekday, day: item.day)
-                return perDayCell
-            }
-            .disposed(by: self.disposeBag)
+        self.viewModel.datesRelay.bind(to: self.collectionView.rx.items) { collectionView, index, item in
+            let indexPath = IndexPath(item: index, section: 0)
+            let cell      = collectionView.dequeueReusableCell(cell: PerDayItemCollectionViewCell.self, forIndexPath: indexPath)
+            
+            guard let perDayCell = cell else { return UICollectionViewCell() }
+            perDayCell.configure(item)
+            return perDayCell
+        }.disposed(by: self.disposeBag)
         
         self.collectionView.rx.itemSelected
             .subscribe(onNext: { [weak self] indexPath in
                 guard let self = self else { return }
-                guard let selectedDay = try? self.viewModel.daysSubject.value()[safe: indexPath.row] else { return }
-                self.viewModel.selectedDaySubject.onNext(selectedDay)
+                guard let selectedDate = self.viewModel.datesRelay.value[safe: indexPath.row] else { return }
+                self.viewModel.selectedDateSubject.onNext(selectedDate)
             })
             .disposed(by: self.disposeBag)
         
-        self.viewModel.selectedDaySubject
-            .subscribe(onNext: { [weak self] selectedDay in
-                guard let self = self else { return }
-                guard let selectedDay = selectedDay else { return }
+        self.viewModel.selectedDateSubject
+            .subscribe(onNext: { [weak self] selectedDate in
+                guard let self = self                 else { return }
+                guard let selectedDate = selectedDate else { return }
                 
-                self._delegate?.addTodoDayTableViewCell(self, didSelectDay: selectedDay.day, didSelectWeekday: selectedDay.weekday)
-            })
-            .disposed(by: self.disposeBag)
+                self._delegate?.addTodoDayTableViewCell(self, didSelectDate: selectedDate)
+            }).disposed(by: self.disposeBag)
     }
     
     private static let horizontalInset: CGFloat     = 23

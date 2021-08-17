@@ -16,8 +16,7 @@ class PolarisToastView: UIView {
     // MARK: - Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.backgroundView.makeRounded(cornerRadius: 17)
-        self.makeShadow(color: UIColor.maintext.withAlphaComponent(0.45))
+        self.backgroundView.makeShadow(color: .maintext, opacity: 0.45)
     }
     
     // MARK: - Set Up

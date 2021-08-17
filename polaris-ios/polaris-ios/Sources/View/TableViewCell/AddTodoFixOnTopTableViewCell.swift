@@ -32,6 +32,11 @@ class AddTodoFixOnTopTableViewCell: AddTodoTableViewCell {
         self.bindUI()
     }
     
+    func updateFix(_ fix: Bool) {
+        fix ? self.setFixSelected() : self.setNotFixSelected()
+        self._delegate?.addTodoFixOnTopTableViewCell(self, shouldFixed: fix)
+    }
+    
     // MARK: - Set Up
     private func setupButtons() {
         self.notFixBackgroundView.makeRounded(cornerRadius: 15)

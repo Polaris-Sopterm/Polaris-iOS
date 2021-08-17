@@ -27,15 +27,7 @@ class AddTodoTextTableViewCell: AddTodoTableViewCell {
     // MARK: - Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         self.setupTextFieldView()
-    }
-    
-    // MARK: - Set Up
-    private func setupTextFieldView() {
-        guard let polarisMarginTextFieldView = self.polarisMarginTextFieldView else { return }
-        self.textFieldContainerView.addSubview(polarisMarginTextFieldView)
-        self.polarisMarginTextFieldView?.delegate = self
     }
     
     override func configure(by addOptions: AddTodoVC.AddOptions, date: Date?) {
@@ -47,7 +39,19 @@ class AddTodoTextTableViewCell: AddTodoTableViewCell {
         }
         
         self.titleLabel.text = addTodoCategory.title
-        self.polarisMarginTextFieldView?.setupPlaceholder(text: addTodoCategory.placeHolder)
+        self.polarisMarginTextFieldView?.setPlaceholder(text: addTodoCategory.placeHolder)
+    }
+    
+    func updateAddText(_ addText: String) {
+        self.polarisMarginTextFieldView?.setText(addText)
+        self._delegate?.addTodoTextTableViewCell(self, didChangeText: addText)
+    }
+    
+    // MARK: - Set Up
+    private func setupTextFieldView() {
+        guard let polarisMarginTextFieldView = self.polarisMarginTextFieldView else { return }
+        self.textFieldContainerView.addSubview(polarisMarginTextFieldView)
+        self.polarisMarginTextFieldView?.delegate = self
     }
     
     private static let screenRaito: CGFloat         = DeviceInfo.screenWidth / 375
