@@ -18,6 +18,8 @@ class NetworkManager {
             let request = provider.request(apiType) { result in
                 switch result {
                 case .success(let response):
+                    self.printForDebug(apiType, response)
+                    
                     if let polarisError = response.polarisErrorModel?.polarisError {
                         self.handlePolarisError(polarisError)
                         single(.failure(polarisError))
@@ -59,6 +61,19 @@ class NetworkManager {
         case .login_Info_Incorrect: self.handleLoginError()
         default:                    return
         }
+    }
+    
+    private static func printForDebug(_ api: TargetType, _ response: Moya.Response) {
+        #if DEV
+        guard let mapJSONString = try? response.mapString() else { return }
+        
+        print("")
+        print("----------------------------DEBUG----------------------------")
+        print("REQUEST API : \(String(describing: api.self))")
+        print("RESPONSE JSON : \(mapJSONString)")
+        print("----------------------------DEBUG----------------------------")
+        print("")
+        #endif
     }
     
 }

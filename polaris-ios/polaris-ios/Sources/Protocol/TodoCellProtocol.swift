@@ -21,9 +21,12 @@ class TodoHeaderView: UIView {
 
 class TodoCategoryCell: UITableViewCell {
     
-    weak var delegate: TodoCategoryCellDelegate?
     class var cellHeight: CGFloat { return 0 }
+    weak var delegate: TodoCategoryCellDelegate?
+    
+    var indexPath: IndexPath?
     
     func configure(_ todoListModel: TodoListModelProtocol) {}
+    func expandCell(isExpaned: Bool, animated: Bool) {}
     
 }

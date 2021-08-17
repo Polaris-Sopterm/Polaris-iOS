@@ -226,12 +226,12 @@ final class LoginVC: UIViewController {
                 else                 { self.loginButton.enable = false }
             }).disposed(by: self.disposeBag)
         
-        self.viewModel.completeLoginSubject
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: {
-                guard let mainVC = MainVC.instantiateFromStoryboard(StoryboardName.main) else { return }
-                UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController = mainVC
-            }).disposed(by: self.disposeBag)
+        self.viewModel.completeLoginSubject.observeOnMain(onNext: {
+            guard let mainVC = MainVC.instantiateFromStoryboard(StoryboardName.main) else { return }
+            let navigationController = UINavigationController(rootViewController: mainVC)
+            navigationController.setNavigationBarHidden(true, animated: false)
+            UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController = navigationController
+        }).disposed(by: self.disposeBag)
         
         self.viewModel.loadingSubject.observeOnMain(onNext: { [weak self] loading in
             loading ? self?.startLoadingIndicator() : self?.stopLoadingIndicator()

@@ -22,8 +22,10 @@ extension SceneDelegate {
     
     func setInitRootViewController() {
         if PolarisUserManager.shared.hasToken == true {
-            guard let mainSceneVC = MainVC.instantiateFromStoryboard(StoryboardName.main) else { return }
-            self.window?.rootViewController = mainSceneVC
+            guard let mainVC = MainVC.instantiateFromStoryboard(StoryboardName.main) else { return }
+            let navigationController = UINavigationController(rootViewController: mainVC)
+            navigationController.setNavigationBarHidden(true, animated: false)
+            self.window?.rootViewController = navigationController
             self.window?.makeKeyAndVisible()
         } else {
             guard let loginVC = LoginVC.instantiateFromStoryboard(StoryboardName.intro) else { return }
