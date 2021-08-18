@@ -34,6 +34,10 @@ class AddTodoDropdownTableViewCell: AddTodoTableViewCell {
         self.viewModel.requestJourneyList(date)
     }
     
+    func updateSelectedJourney(_ journey: JourneyTitleModel) {
+        self.viewModel.updateSelectedMenu(journey)
+    }
+    
     // MARK: - Set Up
     private func setupContainerView() {
         self.containerView.makeRounded(cornerRadius: 16)
@@ -46,14 +50,11 @@ class AddTodoDropdownTableViewCell: AddTodoTableViewCell {
     // MARK: - Bind
     private func bindLabel() {
         self.viewModel.selectedMenu.observeOnMain(onNext: { [weak self] selectedMenu in
-            guard let self = self else { return }
+            guard let self = self                 else { return }
+            guard let selectedMenu = selectedMenu else { return }
             
-            if let selectedMenu = selectedMenu {
-                self.selectedLabel.text = selectedMenu.displayTitle
-                self._delegate?.addTodoDropdownTableViewCell(self, didSelectedJourney: selectedMenu)
-            } else {
-                self.selectedLabel.text = "선택 안함"
-            }
+            self.selectedLabel.text = selectedMenu.displayTitle
+            self._delegate?.addTodoDropdownTableViewCell(self, didSelectedJourney: selectedMenu)
         })
         .disposed(by: self.disposeBag)
     }
@@ -141,7 +142,7 @@ extension AddTodoDropdownTableViewCell: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let selectedMenu = self.viewModel.journeyListRelay.value[safe: indexPath.row] else { return }
         self.viewModel.isExpanded.onNext(false)
-        self.viewModel.selectedMenu.onNext(selectedMenu)
+        self.viewModel.updateSelectedMenu(selectedMenu)
         
         self.tableView.deselectRow(at: indexPath, animated: false)
     }

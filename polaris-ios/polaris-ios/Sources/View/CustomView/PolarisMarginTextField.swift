@@ -28,17 +28,13 @@ class PolarisMarginTextField: UIView {
         self.bindTextField()
     }
     
-    // MARK: - Set Up
-    private func setupMarginView() {
-        self.clipsToBounds      = true
-        self.layer.borderWidth  = 1
-        self.layer.borderColor  = self.unselectedBorderColor.cgColor
-        self.layer.cornerRadius = 16
-    }
-    
-    func setupPlaceholder(text: String) {
+    func setPlaceholder(text: String) {
         self.textField.attributedPlaceholder = NSMutableAttributedString(string: text,
                                                                          attributes: [.foregroundColor: UIColor.inactiveTextPurple, .font: UIFont.systemFont(ofSize: 16, weight: .medium)])
+    }
+    
+    func setText(_ text: String) {
+        self.textField.text = text
     }
     
     func setScure(_ isSecure: Bool) {
@@ -59,6 +55,14 @@ class PolarisMarginTextField: UIView {
     
     func resignKeyboardFirstResponder() {
         self.textField.resignFirstResponder()
+    }
+    
+    // MARK: - Set Up
+    private func setupMarginView() {
+        self.clipsToBounds      = true
+        self.layer.borderWidth  = 1
+        self.layer.borderColor  = self.unselectedBorderColor.cgColor
+        self.layer.cornerRadius = 16
     }
     
     // MARK: - Bind

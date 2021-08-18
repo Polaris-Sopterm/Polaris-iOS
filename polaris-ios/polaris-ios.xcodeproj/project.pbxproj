@@ -350,6 +350,24 @@
 		CEC74B13267F9842002AFF18 /* PolarisPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC74B11267F9842002AFF18 /* PolarisPopupView.swift */; };
 		CEC74B17267F984E002AFF18 /* PolarisPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC74B16267F984E002AFF18 /* PolarisPopupView.xib */; };
 		CEC74B18267F984E002AFF18 /* PolarisPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC74B16267F984E002AFF18 /* PolarisPopupView.xib */; };
+		CED6B6DB26CAC1F900D37647 /* SuccessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED6B6DA26CAC1F900D37647 /* SuccessModel.swift */; };
+		CED6B6DC26CAC1F900D37647 /* SuccessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED6B6DA26CAC1F900D37647 /* SuccessModel.swift */; };
+		CED6B6DD26CAC1F900D37647 /* SuccessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED6B6DA26CAC1F900D37647 /* SuccessModel.swift */; };
+		CED6B6DF26CACCEF00D37647 /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CED6B6DE26CACCEF00D37647 /* Setting.storyboard */; };
+		CED6B6E026CACCEF00D37647 /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CED6B6DE26CACCEF00D37647 /* Setting.storyboard */; };
+		CED6B6E126CACCEF00D37647 /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CED6B6DE26CACCEF00D37647 /* Setting.storyboard */; };
+		CED6B6E326CACE8F00D37647 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED6B6E226CACE8F00D37647 /* SettingVC.swift */; };
+		CED6B6E426CACE8F00D37647 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED6B6E226CACE8F00D37647 /* SettingVC.swift */; };
+		CED6B6E526CACE8F00D37647 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED6B6E226CACE8F00D37647 /* SettingVC.swift */; };
+		CED6B6E826CAD10300D37647 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED6B6E726CAD10300D37647 /* SettingViewModel.swift */; };
+		CED6B6E926CAD10300D37647 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED6B6E726CAD10300D37647 /* SettingViewModel.swift */; };
+		CED6B6EA26CAD10300D37647 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED6B6E726CAD10300D37647 /* SettingViewModel.swift */; };
+		CED6B6ED26CAD29200D37647 /* SettingMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED6B6EB26CAD29200D37647 /* SettingMenuTableViewCell.swift */; };
+		CED6B6EE26CAD29200D37647 /* SettingMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED6B6EB26CAD29200D37647 /* SettingMenuTableViewCell.swift */; };
+		CED6B6EF26CAD29200D37647 /* SettingMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED6B6EB26CAD29200D37647 /* SettingMenuTableViewCell.swift */; };
+		CED6B6F026CAD29200D37647 /* SettingMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CED6B6EC26CAD29200D37647 /* SettingMenuTableViewCell.xib */; };
+		CED6B6F126CAD29200D37647 /* SettingMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CED6B6EC26CAD29200D37647 /* SettingMenuTableViewCell.xib */; };
+		CED6B6F226CAD29200D37647 /* SettingMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CED6B6EC26CAD29200D37647 /* SettingMenuTableViewCell.xib */; };
 		CEDB478426AEF7520024ABD4 /* AddTodoResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDB478326AEF7520024ABD4 /* AddTodoResponseModel.swift */; };
 		CEDB478526AEF7CE0024ABD4 /* AddTodoResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDB478326AEF7520024ABD4 /* AddTodoResponseModel.swift */; };
 		CEDB478626AEF7CE0024ABD4 /* AddTodoResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDB478326AEF7520024ABD4 /* AddTodoResponseModel.swift */; };
@@ -575,6 +593,12 @@
 		CEC48ED8262DCD2A00FD887F /* AddTodoDropdownViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoDropdownViewModel.swift; sourceTree = "<group>"; };
 		CEC74B11267F9842002AFF18 /* PolarisPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarisPopupView.swift; sourceTree = "<group>"; };
 		CEC74B16267F984E002AFF18 /* PolarisPopupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PolarisPopupView.xib; sourceTree = "<group>"; };
+		CED6B6DA26CAC1F900D37647 /* SuccessModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessModel.swift; sourceTree = "<group>"; };
+		CED6B6DE26CACCEF00D37647 /* Setting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
+		CED6B6E226CACE8F00D37647 /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
+		CED6B6E726CAD10300D37647 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
+		CED6B6EB26CAD29200D37647 /* SettingMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingMenuTableViewCell.swift; sourceTree = "<group>"; };
+		CED6B6EC26CAD29200D37647 /* SettingMenuTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingMenuTableViewCell.xib; sourceTree = "<group>"; };
 		CEDB478326AEF7520024ABD4 /* AddTodoResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoResponseModel.swift; sourceTree = "<group>"; };
 		CEDB478826AF26610024ABD4 /* TodoListEmptyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListEmptyTableViewCell.swift; sourceTree = "<group>"; };
 		CEDB478926AF26610024ABD4 /* TodoListEmptyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodoListEmptyTableViewCell.xib; sourceTree = "<group>"; };
@@ -776,20 +800,18 @@
 		CE04A04C26234107007C98E2 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				CED6B6E626CAD0DA00D37647 /* AddTodo */,
 				CE40B3F726C0408B0000151F /* Intro */,
 				ECA4942B262829EA00CC2EB8 /* TodoDateViewModel.swift */,
 				ECA4944326296F6E00CC2EB8 /* TodoDateTVCViewModel.swift */,
-				CEEE5781262C018F00C39358 /* AddTodoViewModel.swift */,
-				CEC48ED8262DCD2A00FD887F /* AddTodoDropdownViewModel.swift */,
 				ECA49477262C46BB00CC2EB8 /* MainSceneViewModel.swift */,
 				ECA4947A262C48BB00CC2EB8 /* MainStarCVCViewModel.swift */,
 				ECA4947D262C670000CC2EB8 /* MainStarTVCViewModel.swift */,
-				CEE574E826307B4400EA64B7 /* AddTodoDayViewModel.swift */,
-				CE574DA426352CB60046D20A /* AddTodoSelectStarViewModel.swift */,
 				EC7A3BF426394C3400B59C98 /* TodoStarModel.swift */,
 				EC7A3BF726394CC900B59C98 /* MainTodoCVCViewModel.swift */,
 				EC7A3BFA2639537A00B59C98 /* MainTodoTVCViewModel.swift */,
 				CE573FFF267C8E9900665933 /* TodoViewModel.swift */,
+				CED6B6E726CAD10300D37647 /* SettingViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -814,6 +836,7 @@
 				CE132139265A14E8001E3C1F /* Intro.storyboard */,
 				CEA3CFDF26A868C000577DA4 /* Common.storyboard */,
 				EC8C688526CA1BFB003CFA71 /* WeekPicker.storyboard */,
+				CED6B6DE26CACCEF00D37647 /* Setting.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -927,6 +950,17 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		CED6B6E626CAD0DA00D37647 /* AddTodo */ = {
+			isa = PBXGroup;
+			children = (
+				CEEE5781262C018F00C39358 /* AddTodoViewModel.swift */,
+				CEC48ED8262DCD2A00FD887F /* AddTodoDropdownViewModel.swift */,
+				CEE574E826307B4400EA64B7 /* AddTodoDayViewModel.swift */,
+				CE574DA426352CB60046D20A /* AddTodoSelectStarViewModel.swift */,
+			);
+			path = AddTodo;
+			sourceTree = "<group>";
+		};
 		CEDB478026AEF7050024ABD4 /* AddTodo */ = {
 			isa = PBXGroup;
 			children = (
@@ -1023,6 +1057,7 @@
 				CEA44E5E267B398100A05650 /* MainSceneTableViewCell.xib */,
 				CEA44E6D267B3BE300A05650 /* TodoTableViewCell.xib */,
 				CEDB478926AF26610024ABD4 /* TodoListEmptyTableViewCell.xib */,
+				CED6B6EC26CAD29200D37647 /* SettingMenuTableViewCell.xib */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -1069,6 +1104,7 @@
 				ECA494282628298B00CC2EB8 /* TodoModel.swift */,
 				ECA494462629729000CC2EB8 /* TodoDateModel.swift */,
 				ECA49474262C461700CC2EB8 /* MainStarModel.swift */,
+				CED6B6DA26CAC1F900D37647 /* SuccessModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1091,6 +1127,7 @@
 				CE574DA7263555330046D20A /* AddTodoVC+Delegate.swift */,
 				CEA44E58267B386800A05650 /* MainVC.swift */,
 				EC8C688926CA1C46003CFA71 /* WeekPickerVC.swift */,
+				CED6B6E226CACE8F00D37647 /* SettingVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1104,7 +1141,6 @@
 				CEEE576C262AE6F400C39358 /* AddTodoTextTableViewCell.swift */,
 				CEEE5784262C112D00C39358 /* AddTodoFixOnTopTableViewCell.swift */,
 				CEEE57A3262C297700C39358 /* AddTodoDropdownTableViewCell.swift */,
-				CEC48ED2262DCA9100FD887F /* DropdownItemTableViewCell.swift */,
 				CEE574D62630422600EA64B7 /* AddTodoDayTableViewCell.swift */,
 				ECA49464262C2C7700CC2EB8 /* MainStarTVC.swift */,
 				ECDC5A45263552A700A1B5A9 /* MainTodoTVC.swift */,
@@ -1116,6 +1152,8 @@
 				CEA44E67267B3B8100A05650 /* MainTableViewCell.swift */,
 				CEA44E6C267B3BE300A05650 /* TodoTableViewCell.swift */,
 				CEDB478826AF26610024ABD4 /* TodoListEmptyTableViewCell.swift */,
+				CEC48ED2262DCA9100FD887F /* DropdownItemTableViewCell.swift */,
+				CED6B6EB26CAD29200D37647 /* SettingMenuTableViewCell.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -1280,9 +1318,11 @@
 				CEC19AEC265103AA00DA747C /* DayTodoTableViewCell.xib in Resources */,
 				EC8C688626CA1BFB003CFA71 /* WeekPicker.storyboard in Resources */,
 				ECA4944026284B0B00CC2EB8 /* TodoDateHeaderView.xib in Resources */,
+				CED6B6F026CAD29200D37647 /* SettingMenuTableViewCell.xib in Resources */,
 				CEEE577A262BE54900C39358 /* PolarisMarginTextField.xib in Resources */,
 				CEA44E70267B3BE300A05650 /* TodoTableViewCell.xib in Resources */,
 				ECDC5A5D2636A13600A1B5A9 /* MainTodoHeaderView.xib in Resources */,
+				CED6B6DF26CACCEF00D37647 /* Setting.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1326,9 +1366,11 @@
 				CE29536A2687A0A500E21871 /* DayTodoTableViewCell.xib in Resources */,
 				EC8C688726CA1BFB003CFA71 /* WeekPicker.storyboard in Resources */,
 				CE29536B2687A0A500E21871 /* TodoDateHeaderView.xib in Resources */,
+				CED6B6F126CAD29200D37647 /* SettingMenuTableViewCell.xib in Resources */,
 				CE29536C2687A0A500E21871 /* PolarisMarginTextField.xib in Resources */,
 				CE29536D2687A0A500E21871 /* TodoTableViewCell.xib in Resources */,
 				CE29536E2687A0A500E21871 /* MainTodoHeaderView.xib in Resources */,
+				CED6B6E026CACCEF00D37647 /* Setting.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1372,9 +1414,11 @@
 				CE43D08626613D66003126F2 /* DayTodoTableViewCell.xib in Resources */,
 				EC8C688826CA1BFB003CFA71 /* WeekPicker.storyboard in Resources */,
 				CE43D08726613D66003126F2 /* TodoDateHeaderView.xib in Resources */,
+				CED6B6F226CAD29200D37647 /* SettingMenuTableViewCell.xib in Resources */,
 				CE43D08826613D66003126F2 /* PolarisMarginTextField.xib in Resources */,
 				CEA44E71267B3BE300A05650 /* TodoTableViewCell.xib in Resources */,
 				CE43D08A26613D66003126F2 /* MainTodoHeaderView.xib in Resources */,
+				CED6B6E126CACCEF00D37647 /* Setting.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1521,12 +1565,14 @@
 				CEEE5782262C018F00C39358 /* AddTodoViewModel.swift in Sources */,
 				CEEE5786262C112E00C39358 /* AddTodoFixOnTopTableViewCell.swift in Sources */,
 				EC8C688A26CA1C46003CFA71 /* WeekPickerVC.swift in Sources */,
+				CED6B6DB26CAC1F900D37647 /* SuccessModel.swift in Sources */,
 				CEEE574A262A95BD00C39358 /* UserDefaultWrapper.swift in Sources */,
 				CE574000267C8E9900665933 /* TodoViewModel.swift in Sources */,
 				CE40B3EF26C00F790000151F /* JourneyTitleListModel.swift in Sources */,
 				CE207B892661CBC7009A812A /* ServerHost.swift in Sources */,
 				CEC48ED4262DCA9100FD887F /* DropdownItemTableViewCell.swift in Sources */,
 				ECA4944426296F6E00CC2EB8 /* TodoDateTVCViewModel.swift in Sources */,
+				CED6B6E326CACE8F00D37647 /* SettingVC.swift in Sources */,
 				CEE574F5263092A400EA64B7 /* Date+.swift in Sources */,
 				CEA44E68267B3B8100A05650 /* MainTableViewCell.swift in Sources */,
 				CE207B842661CADE009A812A /* BuildPhase.swift in Sources */,
@@ -1561,6 +1607,7 @@
 				CE04A038262340D1007C98E2 /* SceneDelegate.swift in Sources */,
 				CE04A060262346C9007C98E2 /* UICollectionView+.swift in Sources */,
 				ECDC5A4D2635530300A1B5A9 /* MainTodoCVC.swift in Sources */,
+				CED6B6E826CAD10300D37647 /* SettingViewModel.swift in Sources */,
 				CE574DC1263589180046D20A /* PolarisToastView.swift in Sources */,
 				CEC19AE72650F87400DA747C /* DayTodoHeaderView.swift in Sources */,
 				CE40B3FE26C041630000151F /* OnboardingCollectionViewCell.swift in Sources */,
@@ -1612,6 +1659,7 @@
 				ECA4947B262C48BB00CC2EB8 /* MainStarCVCViewModel.swift in Sources */,
 				ECA494232628223200CC2EB8 /* TodoDateTVC.swift in Sources */,
 				CE13213D265A1519001E3C1F /* LoginVC.swift in Sources */,
+				CED6B6ED26CAD29200D37647 /* SettingMenuTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1633,6 +1681,7 @@
 				CE2952F82687A0A500E21871 /* PolarisButton.swift in Sources */,
 				CE2952F92687A0A500E21871 /* AddTodoViewModel.swift in Sources */,
 				CE2952FA2687A0A500E21871 /* AddTodoFixOnTopTableViewCell.swift in Sources */,
+				CED6B6DC26CAC1F900D37647 /* SuccessModel.swift in Sources */,
 				CE2952FB2687A0A500E21871 /* UserDefaultWrapper.swift in Sources */,
 				EC8C688B26CA1C46003CFA71 /* WeekPickerVC.swift in Sources */,
 				CE2952FC2687A0A500E21871 /* TodoViewModel.swift in Sources */,
@@ -1640,6 +1689,7 @@
 				CE2952FD2687A0A500E21871 /* ServerHost.swift in Sources */,
 				CE2952FE2687A0A500E21871 /* DropdownItemTableViewCell.swift in Sources */,
 				CE2952FF2687A0A500E21871 /* TodoDateTVCViewModel.swift in Sources */,
+				CED6B6E426CACE8F00D37647 /* SettingVC.swift in Sources */,
 				CE2953002687A0A500E21871 /* Date+.swift in Sources */,
 				CE2953012687A0A500E21871 /* MainTableViewCell.swift in Sources */,
 				CE2953022687A0A500E21871 /* BuildPhase.swift in Sources */,
@@ -1675,6 +1725,7 @@
 				CE29531C2687A0A500E21871 /* SceneDelegate.swift in Sources */,
 				CE29531D2687A0A500E21871 /* UICollectionView+.swift in Sources */,
 				CE29531E2687A0A500E21871 /* MainTodoCVC.swift in Sources */,
+				CED6B6E926CAD10300D37647 /* SettingViewModel.swift in Sources */,
 				CE29531F2687A0A500E21871 /* PolarisToastView.swift in Sources */,
 				CE2953202687A0A500E21871 /* DayTodoHeaderView.swift in Sources */,
 				CE40B3FF26C041630000151F /* OnboardingCollectionViewCell.swift in Sources */,
@@ -1726,6 +1777,7 @@
 				CE2953462687A0A500E21871 /* MainStarCVCViewModel.swift in Sources */,
 				CE2953472687A0A500E21871 /* TodoDateTVC.swift in Sources */,
 				CE2953482687A0A500E21871 /* LoginVC.swift in Sources */,
+				CED6B6EE26CAD29200D37647 /* SettingMenuTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1747,6 +1799,7 @@
 				CE43D02B26613D66003126F2 /* PolarisButton.swift in Sources */,
 				CE43D02C26613D66003126F2 /* AddTodoViewModel.swift in Sources */,
 				CE43D02D26613D66003126F2 /* AddTodoFixOnTopTableViewCell.swift in Sources */,
+				CED6B6DD26CAC1F900D37647 /* SuccessModel.swift in Sources */,
 				CE43D02E26613D66003126F2 /* UserDefaultWrapper.swift in Sources */,
 				EC8C688C26CA1C46003CFA71 /* WeekPickerVC.swift in Sources */,
 				CE574001267C8E9900665933 /* TodoViewModel.swift in Sources */,
@@ -1754,6 +1807,7 @@
 				CE207B8A2661CBC7009A812A /* ServerHost.swift in Sources */,
 				CE43D02F26613D66003126F2 /* DropdownItemTableViewCell.swift in Sources */,
 				CE43D03026613D66003126F2 /* TodoDateTVCViewModel.swift in Sources */,
+				CED6B6E526CACE8F00D37647 /* SettingVC.swift in Sources */,
 				CE43D03126613D66003126F2 /* Date+.swift in Sources */,
 				CEA44E69267B3B8100A05650 /* MainTableViewCell.swift in Sources */,
 				CE207B852661CADE009A812A /* BuildPhase.swift in Sources */,
@@ -1789,6 +1843,7 @@
 				CE43D04426613D66003126F2 /* SceneDelegate.swift in Sources */,
 				CE43D04526613D66003126F2 /* UICollectionView+.swift in Sources */,
 				CE43D04626613D66003126F2 /* MainTodoCVC.swift in Sources */,
+				CED6B6EA26CAD10300D37647 /* SettingViewModel.swift in Sources */,
 				CE43D04726613D66003126F2 /* PolarisToastView.swift in Sources */,
 				CE43D04826613D66003126F2 /* DayTodoHeaderView.swift in Sources */,
 				CE40B40026C041630000151F /* OnboardingCollectionViewCell.swift in Sources */,
@@ -1840,6 +1895,7 @@
 				CE43D06926613D66003126F2 /* MainStarCVCViewModel.swift in Sources */,
 				CE43D06A26613D66003126F2 /* TodoDateTVC.swift in Sources */,
 				CE43D06B26613D66003126F2 /* LoginVC.swift in Sources */,
+				CED6B6EF26CAD29200D37647 /* SettingMenuTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
