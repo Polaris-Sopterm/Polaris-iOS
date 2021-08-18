@@ -69,7 +69,7 @@ class MainLookBackCollectionViewCell: UICollectionViewCell {
     }
     
     @IBAction func lookBackButtonAction(_ sender: Any) {
-        delegate?.apply(isLookBack: self.lookBackButton.titleLabel?.text == "여정 돌아보기")
+        self.delegate?.apply(isLookBack: self.lookBackButton.titleLabel?.text == "여정 돌아보기")
     }
     
 }

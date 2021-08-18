@@ -55,7 +55,7 @@ class MainSceneViewModel {
 
         let homeAPI = HomeAPI.getHomeBanner(isSkipped: input.forceToShowStar)
         let bannerNetworking = NetworkManager.request(apiType: homeAPI)
-            .subscribe(onSuccess: { (homeModel: HomeModel) in
+            .subscribe(onSuccess: { [weak self] (homeModel: HomeModel) in
                 print(homeModel)
                 homeModelRelay.accept([homeModel])
                 for star in homeModel.starList {
@@ -66,7 +66,7 @@ class MainSceneViewModel {
                 case "journey_complete":
                     state.accept([StarCollectionViewState.showStar])
                     lookBackState.accept([.build])
-                    starList.accept(self.convertStarCVCViewModel(mainStarModels: mainStarModels))
+                    starList.accept(self?.convertStarCVCViewModel(mainStarModels: mainStarModels) ?? [])
                 case "journey_incomplete":
                     state.accept([StarCollectionViewState.showIncomplete])
                     lookBackState.accept([.build])
@@ -88,10 +88,10 @@ class MainSceneViewModel {
         
         
         let todoNetworking = NetworkManager.request(apiType: journeyAPI)
-            .subscribe(onSuccess: { (journeyModel: JourneyWeekListModel) in
+            .subscribe(onSuccess: { [weak self] (journeyModel: JourneyWeekListModel) in
                 print(journeyModel)
                 weekJourneyModels = journeyModel.journeys!
-                todoStarList.accept(self.convertTodoCVCViewModel(weekJourneyModels: weekJourneyModels))
+                todoStarList.accept(self?.convertTodoCVCViewModel(weekJourneyModels: weekJourneyModels) ?? [])
             }, onFailure: { error in
                 print(String(describing: error))
             })

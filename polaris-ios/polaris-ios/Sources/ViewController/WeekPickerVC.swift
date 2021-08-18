@@ -33,7 +33,7 @@ class WeekPickerVC: HalfModalVC {
     private var numberOfWeeks = 5
     
     private let weekDict = [1:"첫째주",2:"둘째주",3:"셋째주",4:"넷째주",5:"다섯째주"]
-    internal var weekDelegate: WeekPickerDelegate?
+    internal weak var weekDelegate: WeekPickerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -122,6 +122,6 @@ extension WeekPickerVC: UIPickerViewDelegate {
     
 }
 
-protocol WeekPickerDelegate {
+protocol WeekPickerDelegate: AnyObject {
     func apply(year: Int, month: Int, weekNo: Int, weekText: String)
 }

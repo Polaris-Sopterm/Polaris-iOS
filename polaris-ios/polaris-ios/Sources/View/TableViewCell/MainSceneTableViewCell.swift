@@ -121,28 +121,28 @@ final class MainSceneTableViewCell: MainTableViewCell {
     private func bindViewModel(forceToShowStar: Bool,dateInfo: DateInfo){
         let input = MainSceneViewModel.Input(forceToShowStar: forceToShowStar,dateInfo: dateInfo)
         let output = viewModel.connect(input: input)
-        output.homeModelRelay.subscribe(onNext: { homeModel in
-            self.homeModel = homeModel.last
+        output.homeModelRelay.subscribe(onNext: { [weak self] homeModel in
+            self?.homeModel = homeModel.last
         })
         .disposed(by: disposeBag)
         
-        output.starList.subscribe(onNext: { item in
-            self.starList = item
+        output.starList.subscribe(onNext: { [weak self] item in
+            self?.starList = item
         })
         .disposed(by: disposeBag)
     
-        output.state.subscribe(onNext: { value in
-            self.viewState = value[0]
+        output.state.subscribe(onNext: { [weak self] value in
+            self?.viewState = value[0]
         })
         .disposed(by: disposeBag)
         
-        output.lookBackState.subscribe(onNext: { value in
-            self.lookBackState = value[0]
+        output.lookBackState.subscribe(onNext: { [weak self] value in
+            self?.lookBackState = value[0]
         })
         .disposed(by: disposeBag)
     
-        output.state.subscribe(onNext: { state in
-            self.viewState = state[0]
+        output.state.subscribe(onNext: { [weak self] state in
+            self?.viewState = state[0]
         }).disposed(by: disposeBag)
         
         
