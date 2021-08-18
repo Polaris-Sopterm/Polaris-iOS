@@ -39,10 +39,8 @@ class TodoDateTVC: UITableViewCell {
 
     }
     
-    func setUIs(todoModel: TodoModel){
-        
-        
-        if todoModel.checked {
+    func setUIs(todoModel: WeekTodo){
+        if todoModel.isDone! == "Done" {
             self.checkButton.setImage(UIImage(named: ImageName.btnCheck), for: .normal)
             
             self.todoTitleLabel.textColor = .inactiveTextPurple
@@ -53,14 +51,14 @@ class TodoDateTVC: UITableViewCell {
             self.todoTitleLabel.textColor = .maintext
             self.todoSubLabel.textColor = .maintext
         }
-        if todoModel.fixed {
+        if todoModel.isTop! {
             self.fixImageView.alpha = 1
         }
         else {
             self.fixImageView.alpha = 0
         }
-        self.todoTitleLabel.text = todoModel.todoTitle
-        self.todoSubLabel.text = todoModel.todoSubtitle
+        self.todoTitleLabel.text = todoModel.title
+        self.todoSubLabel.text = todoModel.date
         self.lineView.backgroundColor = .inactivePurple
     }
     

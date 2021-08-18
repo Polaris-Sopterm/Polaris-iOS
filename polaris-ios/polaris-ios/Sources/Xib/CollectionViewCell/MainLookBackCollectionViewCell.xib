@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -41,6 +40,9 @@
                                 <state key="normal" title="여정 돌아보기">
                                     <color key="titleColor" red="0.91380763050000002" green="0.91315567490000005" blue="0.96078437569999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
+                                <connections>
+                                    <action selector="lookBackButtonAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="6be-Vd-1SD"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1hx-4P-uoC">
                                 <rect key="frame" x="352" y="13" width="40" height="40"/>
@@ -49,6 +51,9 @@
                                     <constraint firstAttribute="height" constant="40" id="owd-uS-0dP"/>
                                 </constraints>
                                 <state key="normal" image="btnClose"/>
+                                <connections>
+                                    <action selector="closeButtonAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="8Bh-7f-sGQ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>

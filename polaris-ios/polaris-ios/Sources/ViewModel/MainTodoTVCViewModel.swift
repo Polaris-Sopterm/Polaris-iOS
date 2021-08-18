@@ -8,11 +8,11 @@
 import Foundation
 struct MainTodoTVCViewModel {
     var id: IndexPath
-    var todoModel: TodoModel
+    var weekTodos: WeekTodo
     
-    init(id: IndexPath,todoModel: TodoModel) {
+    init(id: IndexPath,weekTodo: WeekTodo) {
         self.id = id
-        self.todoModel = todoModel
+        self.weekTodos = weekTodo
     }
     
 }

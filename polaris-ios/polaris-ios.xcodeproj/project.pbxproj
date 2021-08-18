@@ -38,7 +38,6 @@
 		CE2952E52687940100E21871 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2952E42687940100E21871 /* UIButton+.swift */; };
 		CE2952E62687940100E21871 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2952E42687940100E21871 /* UIButton+.swift */; };
 		CE2952EE2687A0A500E21871 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE573C262A952100C39358 /* NetworkManager.swift */; };
-		CE2952EF2687A0A500E21871 /* TodoDateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA4941B262819D300CC2EB8 /* TodoDateVC.swift */; };
 		CE2952F02687A0A500E21871 /* AddTodoDropdownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE57A3262C297700C39358 /* AddTodoDropdownTableViewCell.swift */; };
 		CE2952F12687A0A500E21871 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA49485262DC17A00CC2EB8 /* UILabel+.swift */; };
 		CE2952F22687A0A500E21871 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA44E58267B386800A05650 /* MainVC.swift */; };
@@ -181,7 +180,6 @@
 		CE40B40226C041630000151F /* OnboardingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE40B3FD26C041630000151F /* OnboardingCollectionViewCell.xib */; };
 		CE40B40326C041630000151F /* OnboardingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE40B3FD26C041630000151F /* OnboardingCollectionViewCell.xib */; };
 		CE43D02426613D66003126F2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE573C262A952100C39358 /* NetworkManager.swift */; };
-		CE43D02526613D66003126F2 /* TodoDateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA4941B262819D300CC2EB8 /* TodoDateVC.swift */; };
 		CE43D02626613D66003126F2 /* AddTodoDropdownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE57A3262C297700C39358 /* AddTodoDropdownTableViewCell.swift */; };
 		CE43D02726613D66003126F2 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA49485262DC17A00CC2EB8 /* UILabel+.swift */; };
 		CE43D02826613D66003126F2 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A0692623528B007C98E2 /* UIViewController+.swift */; };
@@ -421,8 +419,15 @@
 		EC7A3BF526394C3400B59C98 /* TodoStarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7A3BF426394C3400B59C98 /* TodoStarModel.swift */; };
 		EC7A3BF826394CC900B59C98 /* MainTodoCVCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7A3BF726394CC900B59C98 /* MainTodoCVCViewModel.swift */; };
 		EC7A3BFB2639537A00B59C98 /* MainTodoTVCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7A3BFA2639537A00B59C98 /* MainTodoTVCViewModel.swift */; };
+		EC8C688626CA1BFB003CFA71 /* WeekPicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC8C688526CA1BFB003CFA71 /* WeekPicker.storyboard */; };
+		EC8C688726CA1BFB003CFA71 /* WeekPicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC8C688526CA1BFB003CFA71 /* WeekPicker.storyboard */; };
+		EC8C688826CA1BFB003CFA71 /* WeekPicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC8C688526CA1BFB003CFA71 /* WeekPicker.storyboard */; };
+		EC8C688A26CA1C46003CFA71 /* WeekPickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8C688926CA1C46003CFA71 /* WeekPickerVC.swift */; };
+		EC8C688B26CA1C46003CFA71 /* WeekPickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8C688926CA1C46003CFA71 /* WeekPickerVC.swift */; };
+		EC8C688C26CA1C46003CFA71 /* WeekPickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8C688926CA1C46003CFA71 /* WeekPickerVC.swift */; };
+		ECA0EEE826B3ED530040F42C /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA0EEE726B3ED530040F42C /* HomeModel.swift */; };
+		ECA0EEEA26B3ED730040F42C /* HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA0EEE926B3ED730040F42C /* HomeAPI.swift */; };
 		ECA49419262817D500CC2EB8 /* TodoDate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECA49418262817D500CC2EB8 /* TodoDate.storyboard */; };
-		ECA4941C262819D300CC2EB8 /* TodoDateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA4941B262819D300CC2EB8 /* TodoDateVC.swift */; };
 		ECA494232628223200CC2EB8 /* TodoDateTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA494212628223200CC2EB8 /* TodoDateTVC.swift */; };
 		ECA494242628223200CC2EB8 /* TodoDateTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECA494222628223200CC2EB8 /* TodoDateTVC.xib */; };
 		ECA494292628298B00CC2EB8 /* TodoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA494282628298B00CC2EB8 /* TodoModel.swift */; };
@@ -444,6 +449,16 @@
 		ECA4947E262C670000CC2EB8 /* MainStarTVCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA4947D262C670000CC2EB8 /* MainStarTVCViewModel.swift */; };
 		ECA49486262DC17A00CC2EB8 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA49485262DC17A00CC2EB8 /* UILabel+.swift */; };
 		ECA49489262DC40F00CC2EB8 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA49488262DC40F00CC2EB8 /* String+.swift */; };
+		ECD002A126B3EFCE005F733C /* HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA0EEE926B3ED730040F42C /* HomeAPI.swift */; };
+		ECD002A226B3EFCE005F733C /* HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA0EEE926B3ED730040F42C /* HomeAPI.swift */; };
+		ECD002A326B3EFD5005F733C /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA0EEE726B3ED530040F42C /* HomeModel.swift */; };
+		ECD002A426B3EFD6005F733C /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA0EEE726B3ED530040F42C /* HomeModel.swift */; };
+		ECD002A626B5229C005F733C /* JourneyWeekListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD002A526B5229C005F733C /* JourneyWeekListModel.swift */; };
+		ECD002A726B5229C005F733C /* JourneyWeekListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD002A526B5229C005F733C /* JourneyWeekListModel.swift */; };
+		ECD002A826B5229C005F733C /* JourneyWeekListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD002A526B5229C005F733C /* JourneyWeekListModel.swift */; };
+		ECD002AA26B524D0005F733C /* JourneyAPI2.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD002A926B524D0005F733C /* JourneyAPI2.swift */; };
+		ECD002AB26B524D0005F733C /* JourneyAPI2.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD002A926B524D0005F733C /* JourneyAPI2.swift */; };
+		ECD002AC26B524D0005F733C /* JourneyAPI2.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD002A926B524D0005F733C /* JourneyAPI2.swift */; };
 		ECDC5A47263552A700A1B5A9 /* MainTodoTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDC5A45263552A700A1B5A9 /* MainTodoTVC.swift */; };
 		ECDC5A48263552A700A1B5A9 /* MainTodoTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECDC5A46263552A700A1B5A9 /* MainTodoTVC.xib */; };
 		ECDC5A4D2635530300A1B5A9 /* MainTodoCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDC5A4B2635530300A1B5A9 /* MainTodoCVC.swift */; };
@@ -624,8 +639,11 @@
 		EC7A3BF426394C3400B59C98 /* TodoStarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoStarModel.swift; sourceTree = "<group>"; };
 		EC7A3BF726394CC900B59C98 /* MainTodoCVCViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTodoCVCViewModel.swift; sourceTree = "<group>"; };
 		EC7A3BFA2639537A00B59C98 /* MainTodoTVCViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTodoTVCViewModel.swift; sourceTree = "<group>"; };
+		EC8C688526CA1BFB003CFA71 /* WeekPicker.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WeekPicker.storyboard; sourceTree = "<group>"; };
+		EC8C688926CA1C46003CFA71 /* WeekPickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekPickerVC.swift; sourceTree = "<group>"; };
+		ECA0EEE726B3ED530040F42C /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
+		ECA0EEE926B3ED730040F42C /* HomeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAPI.swift; sourceTree = "<group>"; };
 		ECA49418262817D500CC2EB8 /* TodoDate.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TodoDate.storyboard; sourceTree = "<group>"; };
-		ECA4941B262819D300CC2EB8 /* TodoDateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TodoDateVC.swift; path = "polaris-ios/Sources/ViewController/TodoDateVC.swift"; sourceTree = SOURCE_ROOT; };
 		ECA494212628223200CC2EB8 /* TodoDateTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDateTVC.swift; sourceTree = "<group>"; };
 		ECA494222628223200CC2EB8 /* TodoDateTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodoDateTVC.xib; sourceTree = "<group>"; };
 		ECA494282628298B00CC2EB8 /* TodoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TodoModel.swift; path = "polaris-ios/Sources/Model/TodoModel.swift"; sourceTree = SOURCE_ROOT; };
@@ -647,6 +665,8 @@
 		ECA4947D262C670000CC2EB8 /* MainStarTVCViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainStarTVCViewModel.swift; sourceTree = "<group>"; };
 		ECA49485262DC17A00CC2EB8 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		ECA49488262DC40F00CC2EB8 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		ECD002A526B5229C005F733C /* JourneyWeekListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyWeekListModel.swift; sourceTree = "<group>"; };
+		ECD002A926B524D0005F733C /* JourneyAPI2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyAPI2.swift; sourceTree = "<group>"; };
 		ECDC5A45263552A700A1B5A9 /* MainTodoTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTodoTVC.swift; sourceTree = "<group>"; };
 		ECDC5A46263552A700A1B5A9 /* MainTodoTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainTodoTVC.xib; sourceTree = "<group>"; };
 		ECDC5A4B2635530300A1B5A9 /* MainTodoCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTodoCVC.swift; sourceTree = "<group>"; };
@@ -815,6 +835,7 @@
 				CEEE575C262AD5FA00C39358 /* AddTodo.storyboard */,
 				CE132139265A14E8001E3C1F /* Intro.storyboard */,
 				CEA3CFDF26A868C000577DA4 /* Common.storyboard */,
+				EC8C688526CA1BFB003CFA71 /* WeekPicker.storyboard */,
 				CED6B6DE26CACCEF00D37647 /* Setting.storyboard */,
 			);
 			path = Storyboard;
@@ -905,6 +926,8 @@
 			children = (
 				CE63050A2667E36E00EBC1D4 /* UserAPI.swift */,
 				CE2952E12687893000E21871 /* TodoAPI.swift */,
+				ECA0EEE926B3ED730040F42C /* HomeAPI.swift */,
+				ECD002A926B524D0005F733C /* JourneyAPI2.swift */,
 				CE40B3E826C00E4E0000151F /* JourneyAPI.swift */,
 			);
 			path = Moya;
@@ -1071,6 +1094,8 @@
 		CEF055EA2667EB20000E34A0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				ECD002AD26B52C12005F733C /* Journey */,
+				ECA0EEE626B3ED440040F42C /* Home */,
 				CE40B3ED26C00F650000151F /* Journey */,
 				CEDB478726AF25080024ABD4 /* TodoList */,
 				CEDB478126AEF7100024ABD4 /* Common */,
@@ -1084,16 +1109,24 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		ECA0EEE626B3ED440040F42C /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				ECA0EEE726B3ED530040F42C /* HomeModel.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		ECA4941E26281FA800CC2EB8 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
 				CE40B3F226C03ED70000151F /* Intro */,
 				CEA3CFE326A8695200577DA4 /* Common */,
-				ECA4941B262819D300CC2EB8 /* TodoDateVC.swift */,
 				CEEE574F262A965400C39358 /* HalfModalVC.swift */,
 				CEEE575F262AD62C00C39358 /* AddTodoVC.swift */,
 				CE574DA7263555330046D20A /* AddTodoVC+Delegate.swift */,
 				CEA44E58267B386800A05650 /* MainVC.swift */,
+				EC8C688926CA1C46003CFA71 /* WeekPickerVC.swift */,
 				CED6B6E226CACE8F00D37647 /* SettingVC.swift */,
 			);
 			path = ViewController;
@@ -1137,6 +1170,14 @@
 				CE40B3FC26C041630000151F /* OnboardingCollectionViewCell.swift */,
 			);
 			path = CollectionViewCell;
+			sourceTree = "<group>";
+		};
+		ECD002AD26B52C12005F733C /* Journey */ = {
+			isa = PBXGroup;
+			children = (
+				ECD002A526B5229C005F733C /* JourneyWeekListModel.swift */,
+			);
+			path = Journey;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1275,6 +1316,7 @@
 				CEC48ED5262DCA9100FD887F /* DropdownItemTableViewCell.xib in Resources */,
 				CEC74B17267F984E002AFF18 /* PolarisPopupView.xib in Resources */,
 				CEC19AEC265103AA00DA747C /* DayTodoTableViewCell.xib in Resources */,
+				EC8C688626CA1BFB003CFA71 /* WeekPicker.storyboard in Resources */,
 				ECA4944026284B0B00CC2EB8 /* TodoDateHeaderView.xib in Resources */,
 				CED6B6F026CAD29200D37647 /* SettingMenuTableViewCell.xib in Resources */,
 				CEEE577A262BE54900C39358 /* PolarisMarginTextField.xib in Resources */,
@@ -1322,6 +1364,7 @@
 				CE2953672687A0A500E21871 /* DropdownItemTableViewCell.xib in Resources */,
 				CE2953682687A0A500E21871 /* PolarisPopupView.xib in Resources */,
 				CE29536A2687A0A500E21871 /* DayTodoTableViewCell.xib in Resources */,
+				EC8C688726CA1BFB003CFA71 /* WeekPicker.storyboard in Resources */,
 				CE29536B2687A0A500E21871 /* TodoDateHeaderView.xib in Resources */,
 				CED6B6F126CAD29200D37647 /* SettingMenuTableViewCell.xib in Resources */,
 				CE29536C2687A0A500E21871 /* PolarisMarginTextField.xib in Resources */,
@@ -1369,6 +1412,7 @@
 				CE43D08526613D66003126F2 /* DropdownItemTableViewCell.xib in Resources */,
 				CEC74B18267F984E002AFF18 /* PolarisPopupView.xib in Resources */,
 				CE43D08626613D66003126F2 /* DayTodoTableViewCell.xib in Resources */,
+				EC8C688826CA1BFB003CFA71 /* WeekPicker.storyboard in Resources */,
 				CE43D08726613D66003126F2 /* TodoDateHeaderView.xib in Resources */,
 				CED6B6F226CAD29200D37647 /* SettingMenuTableViewCell.xib in Resources */,
 				CE43D08826613D66003126F2 /* PolarisMarginTextField.xib in Resources */,
@@ -1506,7 +1550,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEEE573E262A952100C39358 /* NetworkManager.swift in Sources */,
-				ECA4941C262819D300CC2EB8 /* TodoDateVC.swift in Sources */,
+				ECA0EEE826B3ED530040F42C /* HomeModel.swift in Sources */,
 				CEEE57A5262C297700C39358 /* AddTodoDropdownTableViewCell.swift in Sources */,
 				ECA49486262DC17A00CC2EB8 /* UILabel+.swift in Sources */,
 				CE40B3E926C00E4E0000151F /* JourneyAPI.swift in Sources */,
@@ -1520,6 +1564,7 @@
 				CEEE5766262ADBA200C39358 /* PolarisButton.swift in Sources */,
 				CEEE5782262C018F00C39358 /* AddTodoViewModel.swift in Sources */,
 				CEEE5786262C112E00C39358 /* AddTodoFixOnTopTableViewCell.swift in Sources */,
+				EC8C688A26CA1C46003CFA71 /* WeekPickerVC.swift in Sources */,
 				CED6B6DB26CAC1F900D37647 /* SuccessModel.swift in Sources */,
 				CEEE574A262A95BD00C39358 /* UserDefaultWrapper.swift in Sources */,
 				CE574000267C8E9900665933 /* TodoViewModel.swift in Sources */,
@@ -1592,6 +1637,7 @@
 				CE132144265A5CD1001E3C1F /* SignupVC.swift in Sources */,
 				ECDC5A47263552A700A1B5A9 /* MainTodoTVC.swift in Sources */,
 				CEEE5760262AD62C00C39358 /* AddTodoVC.swift in Sources */,
+				ECD002A626B5229C005F733C /* JourneyWeekListModel.swift in Sources */,
 				CE40B3F426C03EE70000151F /* OnboardingVC.swift in Sources */,
 				CE574D9D263524140046D20A /* SelectStarItemCollectionViewCell.swift in Sources */,
 				CEEE576E262AE6F400C39358 /* AddTodoTextTableViewCell.swift in Sources */,
@@ -1599,6 +1645,7 @@
 				CEEE5777262BE51C00C39358 /* PolarisMarginTextField.swift in Sources */,
 				ECA4943F26284B0B00CC2EB8 /* TodoDateHeaderView.swift in Sources */,
 				CE574DBB26357CBC0046D20A /* PolarisToastManager.swift in Sources */,
+				ECA0EEEA26B3ED730040F42C /* HomeAPI.swift in Sources */,
 				EC7A3BF826394CC900B59C98 /* MainTodoCVCViewModel.swift in Sources */,
 				CEA44E5F267B398100A05650 /* MainSceneTableViewCell.swift in Sources */,
 				EC7A3BFB2639537A00B59C98 /* MainTodoTVCViewModel.swift in Sources */,
@@ -1607,6 +1654,7 @@
 				CE574D97263517B60046D20A /* AddTodoSelectStarTableViewCell.swift in Sources */,
 				CE2952E52687940100E21871 /* UIButton+.swift in Sources */,
 				CE04A05D26234606007C98E2 /* UIColor+.swift in Sources */,
+				ECD002AA26B524D0005F733C /* JourneyAPI2.swift in Sources */,
 				CE04A06326234701007C98E2 /* UIView+.swift in Sources */,
 				ECA4947B262C48BB00CC2EB8 /* MainStarCVCViewModel.swift in Sources */,
 				ECA494232628223200CC2EB8 /* TodoDateTVC.swift in Sources */,
@@ -1620,7 +1668,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE2952EE2687A0A500E21871 /* NetworkManager.swift in Sources */,
-				CE2952EF2687A0A500E21871 /* TodoDateVC.swift in Sources */,
 				CE2952F02687A0A500E21871 /* AddTodoDropdownTableViewCell.swift in Sources */,
 				CE2952F12687A0A500E21871 /* UILabel+.swift in Sources */,
 				CE40B3EA26C00E4E0000151F /* JourneyAPI.swift in Sources */,
@@ -1636,6 +1683,7 @@
 				CE2952FA2687A0A500E21871 /* AddTodoFixOnTopTableViewCell.swift in Sources */,
 				CED6B6DC26CAC1F900D37647 /* SuccessModel.swift in Sources */,
 				CE2952FB2687A0A500E21871 /* UserDefaultWrapper.swift in Sources */,
+				EC8C688B26CA1C46003CFA71 /* WeekPickerVC.swift in Sources */,
 				CE2952FC2687A0A500E21871 /* TodoViewModel.swift in Sources */,
 				CE40B3F026C00F790000151F /* JourneyTitleListModel.swift in Sources */,
 				CE2952FD2687A0A500E21871 /* ServerHost.swift in Sources */,
@@ -1672,6 +1720,7 @@
 				CE2953182687A0A500E21871 /* HalfModalVC.swift in Sources */,
 				CE2953192687A0A500E21871 /* MainTodoContentTVC.swift in Sources */,
 				CE29531A2687A0A500E21871 /* ImageName.swift in Sources */,
+				ECD002A426B3EFD6005F733C /* HomeModel.swift in Sources */,
 				CE29531B2687A0A500E21871 /* AppDelegate.swift in Sources */,
 				CE29531C2687A0A500E21871 /* SceneDelegate.swift in Sources */,
 				CE29531D2687A0A500E21871 /* UICollectionView+.swift in Sources */,
@@ -1706,6 +1755,7 @@
 				CE2953342687A0A500E21871 /* SignupVC.swift in Sources */,
 				CE2953352687A0A500E21871 /* MainTodoTVC.swift in Sources */,
 				CE2953362687A0A500E21871 /* AddTodoVC.swift in Sources */,
+				ECD002A726B5229C005F733C /* JourneyWeekListModel.swift in Sources */,
 				CE40B3F526C03EE70000151F /* OnboardingVC.swift in Sources */,
 				CE2953372687A0A500E21871 /* SelectStarItemCollectionViewCell.swift in Sources */,
 				CE2953382687A0A500E21871 /* AddTodoTextTableViewCell.swift in Sources */,
@@ -1721,6 +1771,8 @@
 				CE2953422687A0A500E21871 /* AddTodoSelectStarTableViewCell.swift in Sources */,
 				CE2953432687A0A500E21871 /* UIButton+.swift in Sources */,
 				CE2953442687A0A500E21871 /* UIColor+.swift in Sources */,
+				ECD002A226B3EFCE005F733C /* HomeAPI.swift in Sources */,
+				ECD002AB26B524D0005F733C /* JourneyAPI2.swift in Sources */,
 				CE2953452687A0A500E21871 /* UIView+.swift in Sources */,
 				CE2953462687A0A500E21871 /* MainStarCVCViewModel.swift in Sources */,
 				CE2953472687A0A500E21871 /* TodoDateTVC.swift in Sources */,
@@ -1734,7 +1786,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE43D02426613D66003126F2 /* NetworkManager.swift in Sources */,
-				CE43D02526613D66003126F2 /* TodoDateVC.swift in Sources */,
 				CE43D02626613D66003126F2 /* AddTodoDropdownTableViewCell.swift in Sources */,
 				CE43D02726613D66003126F2 /* UILabel+.swift in Sources */,
 				CE40B3EB26C00E4E0000151F /* JourneyAPI.swift in Sources */,
@@ -1750,6 +1801,7 @@
 				CE43D02D26613D66003126F2 /* AddTodoFixOnTopTableViewCell.swift in Sources */,
 				CED6B6DD26CAC1F900D37647 /* SuccessModel.swift in Sources */,
 				CE43D02E26613D66003126F2 /* UserDefaultWrapper.swift in Sources */,
+				EC8C688C26CA1C46003CFA71 /* WeekPickerVC.swift in Sources */,
 				CE574001267C8E9900665933 /* TodoViewModel.swift in Sources */,
 				CE40B3F126C00F790000151F /* JourneyTitleListModel.swift in Sources */,
 				CE207B8A2661CBC7009A812A /* ServerHost.swift in Sources */,
@@ -1786,6 +1838,7 @@
 				CE43D04026613D66003126F2 /* HalfModalVC.swift in Sources */,
 				CE43D04126613D66003126F2 /* MainTodoContentTVC.swift in Sources */,
 				CE43D04226613D66003126F2 /* ImageName.swift in Sources */,
+				ECD002A326B3EFD5005F733C /* HomeModel.swift in Sources */,
 				CE43D04326613D66003126F2 /* AppDelegate.swift in Sources */,
 				CE43D04426613D66003126F2 /* SceneDelegate.swift in Sources */,
 				CE43D04526613D66003126F2 /* UICollectionView+.swift in Sources */,
@@ -1820,6 +1873,7 @@
 				CE43D05726613D66003126F2 /* SignupVC.swift in Sources */,
 				CE43D05826613D66003126F2 /* MainTodoTVC.swift in Sources */,
 				CE43D05926613D66003126F2 /* AddTodoVC.swift in Sources */,
+				ECD002A826B5229C005F733C /* JourneyWeekListModel.swift in Sources */,
 				CE40B3F626C03EE70000151F /* OnboardingVC.swift in Sources */,
 				CE43D05A26613D66003126F2 /* SelectStarItemCollectionViewCell.swift in Sources */,
 				CE43D05C26613D66003126F2 /* AddTodoTextTableViewCell.swift in Sources */,
@@ -1835,6 +1889,8 @@
 				CE43D06626613D66003126F2 /* AddTodoSelectStarTableViewCell.swift in Sources */,
 				CE2952E62687940100E21871 /* UIButton+.swift in Sources */,
 				CE43D06726613D66003126F2 /* UIColor+.swift in Sources */,
+				ECD002A126B3EFCE005F733C /* HomeAPI.swift in Sources */,
+				ECD002AC26B524D0005F733C /* JourneyAPI2.swift in Sources */,
 				CE43D06826613D66003126F2 /* UIView+.swift in Sources */,
 				CE43D06926613D66003126F2 /* MainStarCVCViewModel.swift in Sources */,
 				CE43D06A26613D66003126F2 /* TodoDateTVC.swift in Sources */,

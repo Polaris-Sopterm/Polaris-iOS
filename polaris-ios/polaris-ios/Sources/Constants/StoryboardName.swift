@@ -16,5 +16,6 @@ struct StoryboardName {
     static let mainSceneVC  = "MainScene"
     static let intro        = "Intro"
     static let common       = "Common"
+    static let weekPicker   = "WeekPicker"
     static let setting      = "Setting"
 }

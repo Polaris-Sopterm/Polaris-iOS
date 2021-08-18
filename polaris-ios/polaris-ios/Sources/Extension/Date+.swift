@@ -116,6 +116,34 @@ extension Date {
         return formatter.string(from: self)
     }
     
+    static var currentWeekNoOfMonth: Int {
+        return Calendar.current.component(.weekOfMonth, from: self.normalizedCurrent)
+    }
+    static var currentMonth: Int {
+        return Calendar.current.component(.month, from: self.normalizedCurrent)
+    }
+    static var currentYear: Int {
+        return Calendar.current.component(.year, from: self.normalizedCurrent)
+    }
+    static func numberOfMondaysInMonth(_ month: Int, forYear year: Int) -> Int? {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.firstWeekday = 2 // 2 == Monday
+        // First monday in month:
+        var comps = DateComponents(year: year, month: month,
+                                   weekday: calendar.firstWeekday, weekdayOrdinal: 1)
+        guard let first = calendar.date(from: comps)  else {
+            return nil
+        }
+        // Last monday in month:
+        comps.weekdayOrdinal = -1
+        guard let last = calendar.date(from: comps)  else {
+            return nil
+        }
+        // Difference in weeks:
+        let weeks = calendar.dateComponents([.weekOfMonth], from: first, to: last)
+        return weeks.weekOfMonth! + 1
+    }
+
 }
 
 extension Date {

@@ -10,9 +10,7 @@ import RxSwift
 import RxCocoa
 
 struct MainTodoCVCViewModel {
-
     var todoListRelay: BehaviorRelay<[MainTodoTVCViewModel]> = BehaviorRelay(value: [])
-    var starName: BehaviorRelay<String> = BehaviorRelay(value: "")
-    
-    
+    var journeyNameRelay: BehaviorRelay<[String]> = BehaviorRelay(value: [])
+    var valueRelay: BehaviorRelay<[String]> = BehaviorRelay(value: [])
 }
