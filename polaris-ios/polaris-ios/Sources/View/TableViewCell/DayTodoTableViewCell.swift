@@ -50,8 +50,8 @@ final class DayTodoTableViewCell: TodoCategoryCell {
         self.bindPanGesture()
     }
     
-    override func configure(_ todoListModel: TodoListModelProtocol) {
-        guard let todoPerModel = todoListModel as? TodoDayPerModel else { return }
+    override func configure(_ todoModel: TodoModelProtocol) {
+        guard let todoPerModel = todoModel as? TodoDayPerModel else { return }
         self.todoModel = todoPerModel
         
         self.titleLabel.text        = todoPerModel.title

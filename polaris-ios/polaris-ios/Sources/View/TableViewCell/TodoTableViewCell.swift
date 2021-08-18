@@ -96,7 +96,7 @@ class TodoTableViewCell: MainTableViewCell {
                 if self.viewModel.currentTabRelay.value == .day {
                     self.scrollToCurrentDay()
                 } else {
-                    self.tableView.setContentOffset(CGPoint(x: 0, y: -type(of: self).navigationHeight), animated: false)
+                    self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
                 }
                 self.updateCategoryButton(as: currentTab == .day ? .journey : .day)
             })
@@ -144,7 +144,7 @@ extension TodoTableViewCell: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         let currentTab = self.viewModel.currentTabRelay.value
         if currentTab == .day { return Date.WeekDay.allCases.count }
-        else                  { return 0 }
+        else                  { return self.viewModel.todoJourneyList.count }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -200,8 +200,10 @@ extension TodoTableViewCell: UITableViewDelegate {
             dayHeaderView.configure(date)
             todoHeaderView = dayHeaderView
         } else {
-            guard let journeyHeaderView: JourneyTodoHeaderView = UIView.fromNib() else { return nil }
+            guard let journeyHeaderView: JourneyTodoHeaderView = UIView.fromNib()  else { return nil }
+            guard let journeyModel = self.viewModel.todoJourneyList[safe: section] else { return nil }
             todoHeaderView = journeyHeaderView
+            journeyHeaderView.configure(journeyModel)
         }
         
         todoHeaderView.delegate = self

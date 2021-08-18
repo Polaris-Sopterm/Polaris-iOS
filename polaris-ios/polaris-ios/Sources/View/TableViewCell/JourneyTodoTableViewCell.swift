@@ -30,11 +30,21 @@ class JourneyTodoTableViewCell: TodoCategoryCell {
         self.bindButtons()
     }
     
-    func updateUI(as checkState: Bool) {
-        self.todoLabel.textColor = checkState ? .inactiveTextPurple : .maintext
-        self.dayLabel.textColor  = checkState ? .inactiveTextPurple : .maintext
-        self.checkButton.setImage(checkState ? #imageLiteral(resourceName: "btnCheck") : #imageLiteral(resourceName: "btnUncheck"), for: .normal)
-        self.fixedImageView.alpha = checkState ? 0.5 : 1.0
+    override func configure(_ todoModel: TodoModelProtocol) {
+        guard let journeyTodoModel = todoModel as? WeekTodo else { return }
+        
+        self.todoLabel.text          = journeyTodoModel.title
+        self.dayLabel.text           = journeyTodoModel.date
+        self.fixedImageView.isHidden = journeyTodoModel.isTop == false
+        
+        self.updateUI(as: journeyTodoModel.isDone)
+    }
+    
+    func updateUI(as checkState: String?) {
+        self.todoLabel.textColor = checkState != nil ? .inactiveTextPurple : .maintext
+        self.dayLabel.textColor  = checkState != nil ? .inactiveTextPurple : .maintext
+        self.checkButton.setImage(checkState != nil ? #imageLiteral(resourceName: "btnCheck") : #imageLiteral(resourceName: "btnUncheck"), for: .normal)
+        self.fixedImageView.alpha = checkState != nil ? 0.5 : 1.0
     }
     
     private func bindButtons() {

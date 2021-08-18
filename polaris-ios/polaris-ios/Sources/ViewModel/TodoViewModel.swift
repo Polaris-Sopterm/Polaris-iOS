@@ -49,12 +49,9 @@ class TodoViewModel {
     func isEmptySection(at section: Int) -> Bool {
         let currentTab = self.currentTabRelay.value
         
-        if currentTab == .day {
-            let todoDayList = self.todoDayList(at: section)
-            return todoDayList.count == 0 ? true : false
-        } else {
-            return false
-        }
+        guard currentTab == .day else { return false }
+        let todoDayList = self.todoDayList(at: section)
+        return todoDayList.count == 0 ? true : false
     }
     
     // 전부 현재 Selected Tab 기준으로 받아옴
@@ -64,25 +61,29 @@ class TodoViewModel {
             guard let todoList = self.todoDayListTable[todoDate]          else { return 1 }
             return todoList.count != 0 ? todoList.count : 1
         } else {
-            return 0
+            guard let todoJoruney = self.todoJourneyList[safe: section] else { return 0 }
+            guard let todoList = todoJoruney.toDos else                      { return 0 }
+            return todoList.count
         }
     }
     
     // 전부 현재 Selected Tab 기준으로 받아옴
-    func todoDayList(at section: Int) -> [TodoListModelProtocol] {
+    func todoDayList(at section: Int) -> [TodoModelProtocol] {
         if self.currentTabRelay.value == .day {
             guard let todoDate = self.todoDayHeadersInform[safe: section] else { return [] }
             guard let todoList = self.todoDayListTable[todoDate]          else { return [] }
             return todoList
         } else {
-            return []
+            guard let todoJoruney = self.todoJourneyList[safe: section] else { return [] }
+            guard let todoList = todoJoruney.toDos else                      { return [] }
+            return todoList
         }
     }
     
     func expanedCellIndexPath(of tab: TodoCategory) -> IndexPath? {
         switch tab {
         case .day:     return self.dayExpanedIndexPath
-        case .journey: return nil
+        case .journey: return self.journeyExpanedIndexPath
         }
     }
     
@@ -90,16 +91,22 @@ class TodoViewModel {
         let todoListAPI = TodoAPI.listTodoByJourney(year: Date.currentYear,
                                                     month: Date.currentMonth,
                                                     weekNo: Date.currentWeekNoOfMonth)
-        NetworkManager.request(apiType: todoListAPI).subscribe(onSuccess: { (todoListModel: [WeekJourneyModel]) in
+        NetworkManager.request(apiType: todoListAPI).subscribe(onSuccess: { [weak self] (todoListModel: [WeekJourneyModel]) in
+            self?.todoJourneyList = todoListModel
             
-            
+            guard self?.currentTabRelay.value == .journey else { return }
+            self?.reloadSubject.onNext(false)
         }).disposed(by: self.disposeBag)
     }
     
     func requestTodoDayList(shouldScroll: Bool) {
-        let todoListAPI = TodoAPI.listTodoByDate()
+        let todoListAPI = TodoAPI.listTodoByDate(year: Date.currentYear,
+                                                 month: Date.currentMonth,
+                                                 weekNo: Date.currentWeekNoOfMonth)
         NetworkManager.request(apiType: todoListAPI).subscribe(onSuccess: { [weak self] (todoListModel: TodoDayListModel) in
             self?.updateTodoDayListModel(todoListModel)
+            
+            guard self?.currentTabRelay.value == .day else { return }
             self?.reloadSubject.onNext(shouldScroll)
         }).disposed(by: self.disposeBag)
     }
@@ -159,12 +166,13 @@ class TodoViewModel {
      */
     private(set) var dayExpanedIndexPath: IndexPath?
     private(set) var todoDayHeadersInform: [Date]
-    private(set) var todoDayListTable: [Date: [TodoDayPerModel]] = [:]
+    private(set) var todoDayListTable = [Date: [TodoDayPerModel]]()
     
     /*
      여정별 할일 보여줄 때, 사용하는 Property
      */
-    private(set) var todoJourneyList: [WeekJourneyModel] = []
+    private(set) var journeyExpanedIndexPath: IndexPath?
+    private(set) var todoJourneyList = [WeekJourneyModel]()
     
     
     private let disposeBag = DisposeBag()

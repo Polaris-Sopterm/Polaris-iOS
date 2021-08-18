@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol TodoListModelProtocol { }
+protocol TodoModelProtocol { }
 
 protocol TodoHeaderViewDelegate: AnyObject { }
 protocol TodoCategoryCellDelegate: AnyObject { }
@@ -26,7 +26,7 @@ class TodoCategoryCell: UITableViewCell {
     
     var indexPath: IndexPath?
     
-    func configure(_ todoListModel: TodoListModelProtocol) {}
+    func configure(_ todoModel: TodoModelProtocol) {}
     func expandCell(isExpaned: Bool, animated: Bool) {}
     
 }

@@ -10,7 +10,7 @@ import RxCocoa
 import RxSwift
 
 protocol AddTodoSelectStarTableViewCellDelegate: AddTodoTableViewCellDelegate {
-    func addTodoSelectStarTableViewCell(_ addTodoSelectStarTableViewCell: AddTodoSelectStarTableViewCell, didSelectedStars stars: Set<PolarisStar>)
+    func addTodoSelectStarTableViewCell(_ addTodoSelectStarTableViewCell: AddTodoSelectStarTableViewCell, didSelectedStars stars: Set<Journey>)
 }
 
 class AddTodoSelectStarTableViewCell: AddTodoTableViewCell {
@@ -49,7 +49,8 @@ class AddTodoSelectStarTableViewCell: AddTodoTableViewCell {
     // MARK: - Bind
     private func bindCollectionView() {
         self.viewModel.starsSubject
-            .bind(to: self.collectionView.rx.items) { collectionView, index, item in
+            .bind(to: self.collectionView.rx.items) { [weak self] collectionView, index, item in
+                guard let self = self else { return UICollectionViewCell() }
                 guard let starItemCell = collectionView.dequeueReusableCell(cell: SelectStarItemCollectionViewCell.self, forIndexPath: IndexPath(row: index
                                                                                                                                                  , section: 0)) else { return UICollectionViewCell() }
                 

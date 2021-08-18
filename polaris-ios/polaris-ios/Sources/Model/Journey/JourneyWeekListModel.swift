@@ -25,7 +25,7 @@ struct WeekJourneyModel: Codable {
     let toDos: [WeekTodo]?
 }
 
-struct WeekTodo: Codable {
+struct WeekTodo: Codable, TodoModelProtocol {
     let idx: Int?
     let title, date: String?
     let isTop: Bool?
@@ -33,4 +33,16 @@ struct WeekTodo: Codable {
     let createdAt: String?
 }
 
-
+extension WeekJourneyModel {
+    
+    var firstValueJourney: Journey? {
+        guard let value = self.value1 else { return nil }
+        return Journey(rawValue: value)
+    }
+    
+    var secondValueJourney: Journey? {
+        guard let value = self.value2 else { return nil }
+        return Journey(rawValue: value)
+    }
+    
+}

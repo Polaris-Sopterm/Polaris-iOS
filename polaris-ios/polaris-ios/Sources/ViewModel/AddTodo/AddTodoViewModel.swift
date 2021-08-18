@@ -30,7 +30,7 @@ class AddTodoViewModel {
     let dropdownSubject   = BehaviorSubject<JourneyTitleModel?>(value: nil)
     let fixOnTopSubject   = BehaviorSubject<Bool?>(value: nil)
     let selectDateSubject = BehaviorSubject<Date?>(value: nil)
-    let selectStarSubject = BehaviorSubject<Set<PolarisStar>?>(value: nil)
+    let selectStarSubject = BehaviorSubject<Set<Journey>?>(value: nil)
     
     let addEnableFlagSubject   = BehaviorSubject<Bool>(value: false)
     let completeAddTodoSubject = PublishSubject<Void>()

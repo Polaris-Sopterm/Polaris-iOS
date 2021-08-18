@@ -177,6 +177,7 @@
                 <outlet property="secondCategoryColorView" destination="Irb-hZ-dNx" id="723-hE-Qn2"/>
                 <outlet property="secondCategoryLabel" destination="i4n-Gv-u9s" id="uvg-7u-r9c"/>
                 <outlet property="secondStarCategoryView" destination="ASb-F3-ubv" id="yAQ-qv-cMS"/>
+                <outlet property="titleLabel" destination="XLw-qC-iTF" id="tkK-wy-Pfi"/>
             </connections>
             <point key="canvasLocation" x="-171.73913043478262" y="374.66517857142856"/>
         </view>
