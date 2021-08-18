@@ -44,6 +44,7 @@ class TodoTableViewCell: MainTableViewCell {
         self.observeViewModel()
         
         self.viewModel.requestTodoDayList(shouldScroll: true)
+        self.viewModel.requestTodoJourneyList()
     }
     
     override func prepareForReuse() {

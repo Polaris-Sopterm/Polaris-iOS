@@ -18,7 +18,8 @@ struct WeekModel: Codable {
 
 struct WeekJourneyModel: Codable {
     let idx: Int?
-    let title, year, month, weekNo: String
+    let title: String?
+    let year, month, weekNo: Int?
     let userIdx: Int?
     let value1, value2: String?
     let toDos: [WeekTodo]?
@@ -29,6 +30,7 @@ struct WeekTodo: Codable {
     let title, date: String?
     let isTop: Bool?
     let isDone: String?
+    let createdAt: String?
 }
 
 

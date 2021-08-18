@@ -11,6 +11,7 @@ import Moya
 enum JourneyAPI {
     case jouneyTitleList(date: String)
     case createJourney(title: String, value1: String, value2: String? = nil, date: String)
+    case getWeekJourney(year: Int, month: Int, weekNo: Int)
 }
 
 extension JourneyAPI: TargetType {
@@ -22,7 +23,8 @@ extension JourneyAPI: TargetType {
     var path: String {
         switch self {
         case .jouneyTitleList: return "/journey/v0/title"
-        case .createJourney:   return "/journey/v0"
+        case .createJourney:   fallthrough
+        case .getWeekJourney:  return "/journey/v0"
         }
     }
     
@@ -30,6 +32,7 @@ extension JourneyAPI: TargetType {
         switch self {
         case .jouneyTitleList: return .get
         case .createJourney:   return .post
+        case .getWeekJourney:  return .get
         }
     }
     
@@ -45,6 +48,8 @@ extension JourneyAPI: TargetType {
             var parameters: [String: Any] = ["title": title, "value1": value1, "date": date]
             if let value2 = value2 { parameters["value2"] = value2 }
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
+        case .getWeekJourney(let year, let month, let weekNo):
+            return .requestParameters(parameters: ["year":year, "month":month, "weekNo":weekNo], encoding: URLEncoding.queryString)
         }
     }
     

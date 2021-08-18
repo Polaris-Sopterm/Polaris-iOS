@@ -83,11 +83,11 @@ class MainSceneViewModel {
             .disposed(by: self.disposeBag)
         let todoStarList: BehaviorRelay<[MainTodoCVCViewModel]> = BehaviorRelay(value: [])
         
-        let journeyAPI = JourneyAPI2.getWeekJourney(year: 2021, month: 7, weekNo: 3)
+        let journeyAPI = JourneyAPI.getWeekJourney(year: 2021, month: 7, weekNo: 3)
         var weekJourneyModels: [WeekJourneyModel] = []
         
         
-        let todoNetworking = NetworkManager.request(apiType: journeyAPI)
+        NetworkManager.request(apiType: journeyAPI)
             .subscribe(onSuccess: { [weak self] (journeyModel: JourneyWeekListModel) in
                 print(journeyModel)
                 weekJourneyModels = journeyModel.journeys!
@@ -143,7 +143,10 @@ class MainSceneViewModel {
         var thisWeekJouneyModels: [WeekJourneyModel] = []
         // 이번주에 해당하는 Model 추출
         for weekJourneyModel in weekJourneyModels {
-            if Int(weekJourneyModel.year) == self.year && Int(weekJourneyModel.month) == self.month && Int(weekJourneyModel.weekNo) == self.weekNo {
+            guard let year = weekJourneyModel.year     else { continue }
+            guard let month = weekJourneyModel.month   else { continue }
+            guard let weekNo = weekJourneyModel.weekNo else { continue }
+            if year == self.year && month == self.month && weekNo == self.weekNo {
                 thisWeekJouneyModels.append(weekJourneyModel)
             }
         }
@@ -160,7 +163,7 @@ class MainSceneViewModel {
             }
             valueNames.append(thisWeekjourney.value1!)
             valueNames.append(thisWeekjourney.value2!)
-            journeyTitles.append(thisWeekjourney.title)
+            journeyTitles.append(thisWeekjourney.title ?? "")
             let todoListRelay:BehaviorRelay<[MainTodoTVCViewModel]> = BehaviorRelay(value: tvcModels)
             let journeyNameRelay:BehaviorRelay<[String]> = BehaviorRelay(value: journeyTitles)
             let valueNameRelay:BehaviorRelay<[String]> = BehaviorRelay(value: valueNames)

@@ -86,6 +86,16 @@ class TodoViewModel {
         }
     }
     
+    func requestTodoJourneyList() {
+        let todoListAPI = TodoAPI.listTodoByJourney(year: Date.currentYear,
+                                                    month: Date.currentMonth,
+                                                    weekNo: Date.currentWeekNoOfMonth)
+        NetworkManager.request(apiType: todoListAPI).subscribe(onSuccess: { (todoListModel: [WeekJourneyModel]) in
+            
+            
+        }).disposed(by: self.disposeBag)
+    }
+    
     func requestTodoDayList(shouldScroll: Bool) {
         let todoListAPI = TodoAPI.listTodoByDate()
         NetworkManager.request(apiType: todoListAPI).subscribe(onSuccess: { [weak self] (todoListModel: TodoDayListModel) in
@@ -150,6 +160,12 @@ class TodoViewModel {
     private(set) var dayExpanedIndexPath: IndexPath?
     private(set) var todoDayHeadersInform: [Date]
     private(set) var todoDayListTable: [Date: [TodoDayPerModel]] = [:]
+    
+    /*
+     여정별 할일 보여줄 때, 사용하는 Property
+     */
+    private(set) var todoJourneyList: [WeekJourneyModel] = []
+    
     
     private let disposeBag = DisposeBag()
     
