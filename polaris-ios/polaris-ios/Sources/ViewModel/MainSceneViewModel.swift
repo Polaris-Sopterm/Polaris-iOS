@@ -153,21 +153,31 @@ class MainSceneViewModel {
 
         for thisWeekjourney in thisWeekJouneyModels {
             var tvcModels: [MainTodoTVCViewModel] = []
-            var journeyTitles: [String] = []
-            var valueNames: [String] = []
-            var tvcModelTemp: [MainTodoTVCViewModel] = []
+            var journeyTitle: String
+            var journeyValues: [Journey] = []
+            
             if thisWeekjourney.toDos != nil {
                 for (idx,model) in thisWeekjourney.toDos!.enumerated() {
                     tvcModels.append(MainTodoTVCViewModel(id: IndexPath(row: idx, section: 0), weekTodo: model))
                 }
             }
-            valueNames.append(thisWeekjourney.value1!)
-            valueNames.append(thisWeekjourney.value2!)
-            journeyTitles.append(thisWeekjourney.title ?? "")
+            
+            if let firstValue = thisWeekjourney.value1,
+               let firstValueJourney = Journey(rawValue: firstValue) {
+                journeyValues.append(firstValueJourney)
+            }
+            
+            if let secondValue = thisWeekjourney.value2,
+               let secondValueJourney = Journey(rawValue: secondValue) {
+                journeyValues.append(secondValueJourney)
+            }
+            
+            journeyTitle = thisWeekjourney.title ?? ""
+            
             let todoListRelay:BehaviorRelay<[MainTodoTVCViewModel]> = BehaviorRelay(value: tvcModels)
-            let journeyNameRelay:BehaviorRelay<[String]> = BehaviorRelay(value: journeyTitles)
-            let valueNameRelay:BehaviorRelay<[String]> = BehaviorRelay(value: valueNames)
-            resultList.append(MainTodoCVCViewModel(todoListRelay: todoListRelay,journeyNameRelay: journeyNameRelay,valueRelay: valueNameRelay))
+            resultList.append(MainTodoCVCViewModel(journeyTitle: journeyTitle,
+                                                   journeyValues: journeyValues,
+                                                   todoListRelay: todoListRelay))
 
         }
         return resultList

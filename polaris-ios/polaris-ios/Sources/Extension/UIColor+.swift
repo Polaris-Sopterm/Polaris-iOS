@@ -8,6 +8,7 @@
 import UIKit
 
 extension UIColor {
+    
     convenience init(hexString: String, alpha: CGFloat = 1.0) {
         var hexString: String = hexString.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         if hexString.hasPrefix("#") { hexString.removeFirst() }
@@ -35,31 +36,7 @@ extension UIColor {
                   blue: CGFloat(blue) / 255.0,
                   alpha: alpha)
     }
-    
-    public func changeJourneyToColor(journeyName: String) -> UIColor {
-        switch journeyName {
-        case "행복":
-            return .peachyPink
-        case "절제":
-            return .peachyPink2
-        case "감사":
-            return .maize
-        case "휴식":
-            return .lightGreen
-        case "건강":
-            return .seafoamBlue
-        case "성장":
-            return .seafoamBlue2
-        case "변화":
-            return .cornflower
-        case "극복":
-            return .liliac
-        case "도전":
-            return .bubblegumPink
-        default:
-            return .black
-        }
-    }
+
 }
 
 extension UIColor {
