@@ -259,7 +259,10 @@ final class MainSceneTableViewCell: MainTableViewCell {
     
     
     @IBAction func scrollButtonAction(_ sender: Any) {
-        #warning("밑으로 스크롤하는 버튼 동작 추가 필요")
+        guard let visibleController = UIViewController.getVisibleController() else { return }
+        guard let mainVC = visibleController as? MainVC                       else { return }
+        
+        mainVC.scrollToTodoListCell()
     }
     
     @IBAction func weekButtonAction(_ sender: Any) {
@@ -269,7 +272,6 @@ final class MainSceneTableViewCell: MainTableViewCell {
     @IBAction func addNewJourneyButton(_ sender: Any) {
         #warning("동민 - Journey 추가 버튼")
     }
-    
     
 }
 

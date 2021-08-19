@@ -17,6 +17,11 @@ class MainVC: UIViewController {
         self.setupTableView()
     }
     
+    func scrollToTodoListCell() {
+        let indexPath = IndexPath(row: 1, section: 0)
+        self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+    }
+    
     private func registerCell() {
         MainSceneCellType.allCases.forEach { self.tableView.registerCell(cell: $0.cellType) }
     }
@@ -62,7 +67,7 @@ extension MainVC: UITableViewDelegate {
         
         guard let mainSceneCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? MainSceneTableViewCell else { return }
         
-        let alpha = scrollView.contentOffset.y/(firstCellRange.upperBound - firstCellRange.lowerBound)
+        let alpha = scrollView.contentOffset.y / (firstCellRange.upperBound - firstCellRange.lowerBound)
         mainSceneCell.updateDimView(alpha: alpha)
     }
     
