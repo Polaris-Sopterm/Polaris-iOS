@@ -235,7 +235,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
         
         UIView.animate(withDuration: duration,delay:0.0, options:.curveEaseIn,animations: {
             comet.transform = CGAffineTransform(translationX: -DeviceInfo.screenWidth-120, y: DeviceInfo.screenWidth+120.0)
-        },completion: { finished in
+        }, completion: { finished in
             comet.removeFromSuperview()
             self.cometAnimation()
         })
@@ -270,7 +270,12 @@ final class MainSceneTableViewCell: MainTableViewCell {
     }
     
     @IBAction func addNewJourneyButton(_ sender: Any) {
-        #warning("동민 - Journey 추가 버튼")
+        let viewController = AddTodoVC.instantiateFromStoryboard(StoryboardName.addTodo)
+        
+        guard let visibleController = UIViewController.getVisibleController() else { return }
+        guard let addTodoVC = viewController                                  else { return }
+        addTodoVC.setAddOptions(.addJourney)
+        addTodoVC.presentWithAnimation(from: visibleController)
     }
     
 }

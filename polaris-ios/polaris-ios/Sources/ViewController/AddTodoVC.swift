@@ -90,7 +90,10 @@ class AddTodoVC: HalfModalVC {
     }
     
     private func setupTableView() {
-        self.tableView.contentInset        = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
+        let screenRatio: CGFloat  = (DeviceInfo.screenWidth / 375)
+        let buttonHeight: CGFloat = 54 * screenRatio
+        let bottomInset: CGFloat  = 37 + buttonHeight + 20
+        self.tableView.contentInset        = UIEdgeInsets(top: 20, left: 0, bottom: bottomInset, right: 0)
         self.tableView.allowsSelection     = false
         self.tableView.separatorStyle      = .none
         self.tableView.keyboardDismissMode = .onDrag
