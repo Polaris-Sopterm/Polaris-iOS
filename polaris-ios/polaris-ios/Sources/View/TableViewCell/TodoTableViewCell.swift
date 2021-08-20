@@ -283,7 +283,7 @@ extension TodoTableViewCell: DayTodoTableViewCellDelegate {
     
     func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, didTapDelete todo: TodoDayPerModel) {
         guard let todoIdx = todo.idx else { return }
-        self.viewModel.requestDeleteTodoDay(todoIdx)
+        self.viewModel.requestDeleteTodo(todoIdx)
     }
     
 }
@@ -295,11 +295,17 @@ extension TodoTableViewCell: JourneyTodoTableViewDelegate {
     }
     
     func journeyTodoTableViewCell(_ cell: JourneyTodoTableViewCell, didTapEdit todo: WeekTodo) {
+        guard let addTodoVC = AddTodoVC.instantiateFromStoryboard(StoryboardName.addTodo),
+              let visibleController = UIViewController.getVisibleController() else { return }
         
+        addTodoVC.setAddOptions(.edittedTodo)
+        addTodoVC.delegate = self
+        addTodoVC.presentWithAnimation(from: visibleController)
     }
     
     func journeyTodoTableViewCell(_ cell: JourneyTodoTableViewCell, didTapDelete todo: WeekTodo) {
-        
+        guard let todoIdx = todo.idx else { return }
+        self.viewModel.requestDeleteTodo(todoIdx)
     }
     
 }
@@ -309,10 +315,12 @@ extension TodoTableViewCell: AddTodoViewControllerDelegate {
     func addTodoViewController(_ viewController: AddTodoVC, didCompleteAddOption option: AddTodoVC.AddOptions) {
         if option == .perDayAddTodo {
             self.viewModel.requestTodoDayList(shouldScroll: false)
+            self.viewModel.requestTodoJourneyList()
         } else if option == .perJourneyAddTodo {
             #warning("여정별 할일 받아오는 것 추가")
         } else if option == .edittedTodo {
             self.viewModel.requestTodoDayList(shouldScroll: false)
+            self.viewModel.requestTodoJourneyList()
         }
     }
     

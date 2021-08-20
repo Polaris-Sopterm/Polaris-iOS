@@ -111,22 +111,14 @@ class TodoViewModel {
         }).disposed(by: self.disposeBag)
     }
     
-    func requestDeleteTodoDay(_ todoIdx: Int) {
+    func requestDeleteTodo(_ todoIdx: Int) {
         let todoDayDeleteAPI = TodoAPI.deleteTodo(idx: todoIdx)
         NetworkManager.request(apiType: todoDayDeleteAPI).subscribe(onSuccess: { [weak self] (successModel: SuccessModel) in
             guard let self = self                else { return }
             guard successModel.isSuccess == true else { return }
             
-            let keyValue = self.todoDayListTable.first(where: { _, todoList in
-                return todoList.contains(where: { $0.idx == todoIdx })
-            })
-            
-            guard let key = keyValue?.key                                             else { return }
-            guard let removedTodoList = keyValue?.value.filter({ $0.idx != todoIdx }) else { return }
-            self.todoDayListTable.updateValue(removedTodoList, forKey: key)
-            
-            // 삭제 되는 경우는 Should Scroll = false
-            self.reloadSubject.onNext(false)
+            self.requestTodoJourneyList()
+            self.requestTodoDayList(shouldScroll: false)
         }).disposed(by: self.disposeBag)
     }
     
@@ -154,12 +146,13 @@ class TodoViewModel {
     }
     
     private func updateTodoDayListModel(_ todoListModel: TodoDayListModel) {
-        todoListModel.data?.forEach { todoList in
-            guard let day = todoList.day                          else { return }
-            guard let convertDate = day.convertToDate()           else { return }
-            guard let normalizedDate = convertDate.normalizedDate else { return }
-            guard todoDayListTable[normalizedDate] != nil         else { return }
-            todoDayListTable[normalizedDate] = todoList.todoList
+        self.todoDayHeadersInform.forEach { todoHeader in
+            let todoModelForHeader = todoListModel.data?.first(where: { todoModel in
+                guard let todoDate = todoModel.day?.convertToDate()?.normalizedDate else { return false }
+                return todoDate == todoHeader
+            })
+            
+            self.todoDayListTable[todoHeader] = todoModelForHeader?.todoList ?? []
         }
     }
     
