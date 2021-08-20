@@ -46,7 +46,7 @@ class TodoViewModel {
         self.todoDayHeadersInform.forEach { self.todoDayListTable.updateValue([], forKey: $0) }
     }
     
-    func isEmptySection(at section: Int) -> Bool {
+    func isEmptyDayTodoSection(at section: Int) -> Bool {
         let currentTab = self.currentTabRelay.value
         
         guard currentTab == .day else { return false }

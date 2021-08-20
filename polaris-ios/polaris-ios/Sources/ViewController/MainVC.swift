@@ -27,8 +27,9 @@ class MainVC: UIViewController {
     }
     
     private func setupTableView() {
-        self.tableView.dataSource = self
-        self.tableView.delegate   = self
+        self.tableView.scrollsToTop = false
+        self.tableView.dataSource   = self
+        self.tableView.delegate     = self
         self.tableView.decelerationRate               = .fast
         self.tableView.contentInsetAdjustmentBehavior = .never
     }

@@ -87,8 +87,7 @@ class TodoTableViewCell: MainTableViewCell {
     private func observeViewModel() {
         self.viewModel.currentTabRelay
             .distinctUntilChanged()
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] currentTab in
+            .observeOnMain(onNext: { [weak self] currentTab in
                 guard let self = self else { return }
                 
                 self.tableView.reloadData()
@@ -96,7 +95,9 @@ class TodoTableViewCell: MainTableViewCell {
                 if self.viewModel.currentTabRelay.value == .day {
                     self.scrollToCurrentDay()
                 } else {
-                    self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+                    self.viewModel.todoJourneyList.isEmpty ?
+                        self.tableView.setContentOffset(CGPoint(x: 0, y: type(of: self).navigationHeight), animated: false) :
+                        self.tableView.scrollToRow(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
                 }
                 self.updateCategoryButton(as: currentTab == .day ? .journey : .day)
             })
@@ -152,7 +153,7 @@ extension TodoTableViewCell: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if self.viewModel.isEmptySection(at: indexPath.section) {
+        if self.viewModel.isEmptyDayTodoSection(at: indexPath.section) {
             guard let emptyCell = tableView.dequeueReusableCell(cell: TodoListEmptyTableViewCell.self,
                                                                 forIndexPath: indexPath) else {
                 return UITableViewCell()
@@ -180,7 +181,7 @@ extension TodoTableViewCell: UITableViewDataSource {
 extension TodoTableViewCell: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if self.viewModel.isEmptySection(at: indexPath.section) { return TodoListEmptyTableViewCell.cellHeight }
+        if self.viewModel.isEmptyDayTodoSection(at: indexPath.section) { return TodoListEmptyTableViewCell.cellHeight }
         let currentCellType = self.viewModel.currentTabRelay.value.cellType
         return currentCellType.cellHeight
     }
