@@ -171,7 +171,7 @@ extension TodoTableViewCell: UITableViewDataSource {
         todoCell.delegate  = self
         todoCell.indexPath = indexPath
         todoCell.configure(todoModel)
-        todoCell.expandCell(isExpaned: indexPath == expanedIndexPath, animated: false)
+        todoCell.expandCell(isExpanded: indexPath == expanedIndexPath, animated: false)
         return todoCell
     }
     
@@ -202,8 +202,8 @@ extension TodoTableViewCell: UITableViewDelegate {
         } else {
             guard let journeyHeaderView: JourneyTodoHeaderView = UIView.fromNib()  else { return nil }
             guard let journeyModel = self.viewModel.todoJourneyList[safe: section] else { return nil }
-            todoHeaderView = journeyHeaderView
             journeyHeaderView.configure(journeyModel)
+            todoHeaderView = journeyHeaderView
         }
         
         todoHeaderView.delegate = self
@@ -249,6 +249,21 @@ extension TodoTableViewCell: JourneyTodoHeaderViewDelegate {
     
 }
 
+extension TodoTableViewCell: TodoCategoryCellDelegate {
+    
+    func todoCategoryCell(_ cell: TodoCategoryCell, category: TodoCategory, isExpanded: Bool, forRowAt indexPath: IndexPath) {
+        guard self.viewModel.currentTabRelay.value == category else { return }
+        
+        defer { self.viewModel.updateExpanedStatus(category: category, forRowAt: indexPath, isExpanded: isExpanded) }
+        
+        guard isExpanded == true else { return }
+        guard let currentExpandedIndexPath
+                = category == .day ? self.viewModel.dayExpanedIndexPath : self.viewModel.journeyExpanedIndexPath else { return }
+        self.todoCategoryCell(at: currentExpandedIndexPath)?.expandCell(isExpanded: false, animated: true)
+    }
+
+}
+
 extension TodoTableViewCell: DayTodoTableViewCellDelegate {
     
     func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, didTapCheck todo: TodoDayPerModel) {
@@ -269,15 +284,21 @@ extension TodoTableViewCell: DayTodoTableViewCellDelegate {
         guard let todoIdx = todo.idx else { return }
         self.viewModel.requestDeleteTodoDay(todoIdx)
     }
+    
+}
 
-    func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, isExpaned: Bool, forRowAt indexPath: IndexPath) {
-        guard self.viewModel.currentTabRelay.value == .day else { return }
+extension TodoTableViewCell: JourneyTodoTableViewDelegate {
+    
+    func journeyTodoTableViewCell(_ cell: JourneyTodoTableViewCell, didTapCheck todo: WeekTodo) {
         
-        defer { self.viewModel.updateDayExpanedStatus(forRowAt: indexPath, isExpaned: isExpaned) }
+    }
+    
+    func journeyTodoTableViewCell(_ cell: JourneyTodoTableViewCell, didTapEdit todo: WeekTodo) {
         
-        guard isExpaned == true                                               else { return }
-        guard let currentExpanedInexPath = self.viewModel.dayExpanedIndexPath else { return }
-        self.todoCategoryCell(at: currentExpanedInexPath)?.expandCell(isExpaned: false, animated: true)
+    }
+    
+    func journeyTodoTableViewCell(_ cell: JourneyTodoTableViewCell, didTapDelete todo: WeekTodo) {
+        
     }
     
 }

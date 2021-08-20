@@ -32,11 +32,16 @@ class PolarisUserManager {
     
     func requestAccessTokenUsingRefreshToken() {
         guard let refreshToken = self.refreshToken else { return }
+        guard self.requestingAccessToken == false  else { return }
+            
+        self.requestingAccessToken = true
         
         let reauthAPI = UserAPI.reauth(refreshToken: refreshToken)
         NetworkManager.request(apiType: reauthAPI).subscribe(onSuccess: { (authModel: AuthModel) in
+            self.requestingAccessToken = false
             self.updateAuthToken(authModel.accessToken, authModel.refreshToken)
         }, onFailure: { error in
+            self.requestingAccessToken = false
             print(error.localizedDescription)
         })
         .disposed(by: self.disposeBag)
@@ -48,6 +53,7 @@ class PolarisUserManager {
     
     private let disposeBag = DisposeBag()
     
+    private var requestingAccessToken: Bool = false
     private(set) var user: PolarisUser?
     
     @UserDefaultWrapper<Bool>(key: UserDefaultsKey.isInitialMember) private(set) var isInitialMember

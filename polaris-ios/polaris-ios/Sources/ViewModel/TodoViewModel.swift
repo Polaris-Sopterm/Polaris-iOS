@@ -134,8 +134,11 @@ class TodoViewModel {
         self.currentTabRelay.accept(tab)
     }
     
-    func updateDayExpanedStatus(forRowAt indexPath: IndexPath, isExpaned: Bool) {
-        self.dayExpanedIndexPath = isExpaned ? indexPath : nil
+    func updateExpanedStatus(category: TodoCategory, forRowAt indexPath: IndexPath, isExpanded: Bool) {
+        switch category {
+        case .day:     self.dayExpanedIndexPath = isExpanded ? indexPath : nil
+        case .journey: self.journeyExpanedIndexPath = isExpanded ? indexPath : nil
+        }
     }
     
     func updateDoneStatus(_ todoModel: TodoDayPerModel) {
@@ -173,7 +176,6 @@ class TodoViewModel {
      */
     private(set) var journeyExpanedIndexPath: IndexPath?
     private(set) var todoJourneyList = [WeekJourneyModel]()
-    
     
     private let disposeBag = DisposeBag()
     
