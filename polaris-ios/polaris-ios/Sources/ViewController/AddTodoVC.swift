@@ -125,27 +125,21 @@ class AddTodoVC: HalfModalVC {
     
     // MARK: - Bind
     private func bindButtons() {
-        self.cancelButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.dismissWithAnimation()
-            })
-            .disposed(by: self.disposeBag)
+        self.cancelButton.rx.tap.subscribe(onNext: { [weak self] in
+            self?.dismissWithAnimation()
+        }).disposed(by: self.disposeBag)
         
-        self.addButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.viewModel.requestAddTodo()
-            })
-            .disposed(by: self.disposeBag)
+        self.addButton.rx.tap.subscribe(onNext: { [weak self] in
+            self?.viewModel.requestAddTodo()
+        }).disposed(by: self.disposeBag)
     }
     
     private func bindEnableButton() {
-        self.viewModel.addEnableFlagSubject
-            .subscribe(onNext: { [weak self] isEnable in
-                guard let self = self else { return }
-                if isEnable == true { self.addButton.enable = true }
-                else                { self.addButton.enable = false }
-            })
-            .disposed(by: self.disposeBag)
+        self.viewModel.addEnableFlagSubject.subscribe(onNext: { [weak self] isEnable in
+            guard let self = self else { return }
+            if isEnable == true { self.addButton.enable = true }
+            else                { self.addButton.enable = false }
+        }).disposed(by: self.disposeBag)
     }
 
     private func observeViewModel() {
