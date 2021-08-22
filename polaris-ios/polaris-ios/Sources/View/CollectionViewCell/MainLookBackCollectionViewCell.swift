@@ -59,8 +59,8 @@ class MainLookBackCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func setTitles(title: String, subTitle: String){
-        self.titleLabel.text = title
+    func setTitles(title: String, boldText: String, subTitle: String){
+        self.titleLabel.setPartialBold(originalText: title, boldText: boldText, fontSize: 16.0, boldFontSize: 16.0)
         self.subTitleLabel.text = subTitle
     }
     

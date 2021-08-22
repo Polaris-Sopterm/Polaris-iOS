@@ -118,6 +118,10 @@ final class MainSceneTableViewCell: MainTableViewCell {
         self.titleLabel.setPartialBold(originalText: "어제는\n\(stars)개의 별을 발견했어요.", boldText: "\(stars)개의 별", fontSize: 23, boldFontSize: 23)
     }
     
+    private func setTitleLabel(text: String, boldText: String) {
+        self.titleLabel.setPartialBold(originalText: text, boldText: boldText, fontSize: 23, boldFontSize: 23)
+    }
+    
     private func bindViewModel(forceToShowStar: Bool,dateInfo: DateInfo){
         let input = MainSceneViewModel.Input(forceToShowStar: forceToShowStar,dateInfo: dateInfo)
         let output = viewModel.connect(input: input)
@@ -153,7 +157,6 @@ final class MainSceneTableViewCell: MainTableViewCell {
                 let identifier = String(describing: MainStarCVC.self)
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: IndexPath(item: index, section: 0)) as! MainStarCVC
                 cell.cvcViewModel = item
-                self.setTitle(stars: self.starList.count,lookBackState: self.lookBackState)
                 return cell
             }.disposed(by: disposeBag)
             
@@ -166,10 +169,10 @@ final class MainSceneTableViewCell: MainTableViewCell {
                     cell.setState(state: self.lookBackState, bannerTitle: self.homeModel!.bannerTitle, bannerText: self.homeModel!.bannerText, buttonText: self.homeModel!.buttonText)
                 }
                 
-                #warning("원래 여기는 0으로 만들어줘야 하는데 테스트 용으로 임시로 주석처리")
-//                self.weekContainView.alpha = 0
-                output.mainTextRelay.subscribe(onNext: { text in
-                    self.titleLabel.setPartialBold(originalText: text, boldText: "", fontSize: 23, boldFontSize: 23)
+                output.mainTextRelay.subscribe(onNext: { texts in
+                    if !texts.isEmpty {
+                        self.titleLabel.setPartialBold(originalText: texts[0], boldText: texts[1], fontSize: 23, boldFontSize: 23)
+                    }
                 })
                 .disposed(by: self.disposeBag)
                 return cell

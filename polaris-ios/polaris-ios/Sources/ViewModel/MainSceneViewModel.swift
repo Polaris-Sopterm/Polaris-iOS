@@ -35,7 +35,7 @@ class MainSceneViewModel {
         let todoStarList: BehaviorRelay<[MainTodoCVCViewModel]>
         let state: BehaviorRelay<[StarCollectionViewState]>
         let lookBackState: BehaviorRelay<[MainLookBackCellState]>
-        let mainTextRelay: BehaviorRelay<String>
+        let mainTextRelay: BehaviorRelay<[String]>
         let homeModelRelay: BehaviorRelay<[HomeModel]>
     }
     func connect(input: Input) -> Output{
@@ -44,7 +44,7 @@ class MainSceneViewModel {
         let starList: BehaviorRelay<[MainStarCVCViewModel]> = BehaviorRelay(value: [])
         let state: BehaviorRelay<[StarCollectionViewState]> = BehaviorRelay(value: [])
         let lookBackState: BehaviorRelay<[MainLookBackCellState]> = BehaviorRelay(value: [])
-        let mainTextRelay: BehaviorRelay<String> = BehaviorRelay(value: "")
+        let mainTextRelay: BehaviorRelay<[String]> = BehaviorRelay(value: [])
         let homeModelRelay: BehaviorRelay<[HomeModel]> = BehaviorRelay(value: [])
         var mainStarModels: [MainStarModel] = []
         var mainStarModelRelay: BehaviorRelay<[MainStarModel]> = BehaviorRelay(value: [])
@@ -74,7 +74,7 @@ class MainSceneViewModel {
                     state.accept([StarCollectionViewState.showLookBack])
                     lookBackState.accept([.lookback])
                 }
-                mainTextRelay.accept(homeModel.mainText)
+                mainTextRelay.accept([homeModel.mainText,homeModel.boldText])
                 mainStarModelRelay.accept(mainStarModels)
                 
             }, onFailure: { error in
@@ -83,7 +83,7 @@ class MainSceneViewModel {
             .disposed(by: self.disposeBag)
         let todoStarList: BehaviorRelay<[MainTodoCVCViewModel]> = BehaviorRelay(value: [])
         
-        let journeyAPI = JourneyAPI2.getWeekJourney(year: 2021, month: 7, weekNo: 3)
+        let journeyAPI = JourneyAPI2.getWeekJourney(year: input.dateInfo.year, month: input.dateInfo.month, weekNo: input.dateInfo.weekNo)
         var weekJourneyModels: [WeekJourneyModel] = []
         
         

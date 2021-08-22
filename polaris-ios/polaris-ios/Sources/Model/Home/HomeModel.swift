@@ -12,11 +12,12 @@ struct HomeModel: Codable {
     let homeModelCase: String
     let starList: [StarList]
     let mainText: String
+    let boldText: String
     let bannerTitle, bannerText, buttonText: String?
 
     enum CodingKeys: String, CodingKey {
         case homeModelCase = "case"
-        case starList, mainText, bannerTitle, bannerText, buttonText
+        case starList, mainText, boldText, bannerTitle, bannerText, buttonText
     }
 }
 
