@@ -18,36 +18,17 @@ class MainTodoCVC: UICollectionViewCell {
     @IBOutlet var upperInfos: [UIView]!
     @IBOutlet var upperColors: [UIView]!
     @IBOutlet var upperLabels: [UILabel]!
-    
-    private var colorNames = ["lightblue","bubblegumPink"]
-    private let tempColor: UIColor = .black
-    private var circleColors: [UIColor] = [] {
-        didSet{
-            if circleColors.count > 1 {
-                for (idx,color) in upperColors.enumerated() {
-                    color.backgroundColor = circleColors[idx]
-                }
-            }
-        }
-    }
-    private var labelTexts: [String] = [] {
-        didSet{
-            if labelTexts.count > 1 {
-                self.upperLabels[0].text = self.labelTexts[0]
-                self.upperLabels[1].text = self.labelTexts[1]
-                self.circleColors = [tempColor.changeJourneyToColor(journeyName: self.labelTexts[0]),tempColor.changeJourneyToColor(journeyName: self.labelTexts[1])]
-            }
-        }
-    }
-    
-    var disposeBag = DisposeBag()
+
+    private var disposeBag = DisposeBag()
     
     var viewModel: MainTodoCVCViewModel? {
         didSet{
-            self.labelTexts = viewModel?.valueRelay.value ?? []
-            self.titleLabel.text = viewModel?.journeyNameRelay.value.last ?? ""
-            self.viewModel?.todoListRelay.bind(to: todoTV.rx.items) { tableView, index, item in
-
+            guard let viewModel = self.viewModel else { return }
+            
+            self.updateJourneyUI(viewModel.journeyValues)
+            self.titleLabel.text = viewModel.journeyTitle
+            
+            viewModel.todoListRelay.bind(to: todoTV.rx.items) { tableView, index, item in
                 let identifier = String(describing: MainTodoTVC.self)
                 let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: IndexPath(item: index, section: 0)) as! MainTodoTVC
                 cell.tvcViewModel = item
@@ -64,9 +45,6 @@ class MainTodoCVC: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.setUIs()
-        self.disposeBag = DisposeBag()
-        // Initialization code
-    
     }
     
 
@@ -85,13 +63,27 @@ class MainTodoCVC: UICollectionViewCell {
             info.backgroundColor = UIColor(red: 64, green: 64, blue: 140, alpha: 0.1)
             
         }
-        for (idx,color) in self.upperColors.enumerated() {
+        for (_, color) in self.upperColors.enumerated() {
             color.backgroundColor = .bubblegumPink
             color.makeRounded(cornerRadius: 6)
         }
-        for (idx,label) in self.upperLabels.enumerated() {
+        for (_, label) in self.upperLabels.enumerated() {
             label.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
             label.textColor = .maintext
+        }
+    }
+    
+    private func updateJourneyUI(_ journey: [Journey]) {
+        self.upperInfos[safe: 1]?.isHidden = journey.count == 1
+        
+        if let firstJourney = journey[safe: 0] {
+            self.upperLabels[safe: 0]?.text            = firstJourney.rawValue
+            self.upperColors[safe: 0]?.backgroundColor = firstJourney.color
+        }
+        
+        if let secondJourney = journey[safe: 1] {
+            self.upperLabels[safe: 1]?.text            = secondJourney.rawValue
+            self.upperColors[safe: 1]?.backgroundColor = secondJourney.color
         }
     }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="aax-zc-RC4">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -9,60 +9,19 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Sample View Controller-->
-        <scene sceneID="eUh-zb-ygY">
-            <objects>
-                <viewController storyboardIdentifier="SampleViewController" id="aax-zc-RC4" customClass="SampleViewController" customModule="Polaris" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Z73-I2-ndk">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tsv-zT-lus">
-                                <rect key="frame" x="20" y="742" width="122" height="47"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="PerDayAddTodo"/>
-                                <connections>
-                                    <action selector="next:" destination="aax-zc-RC4" eventType="touchUpInside" id="K48-Fe-1F9"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SEC-wb-blJ">
-                                <rect key="frame" x="168" y="750" width="78" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="PerJourney"/>
-                                <connections>
-                                    <action selector="nextPerJourney:" destination="aax-zc-RC4" eventType="touchUpInside" id="aMB-xa-NVW"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VgX-lW-LeH">
-                                <rect key="frame" x="288" y="750" width="82" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="addJourney"/>
-                                <connections>
-                                    <action selector="nextAddJourney:" destination="aax-zc-RC4" eventType="touchUpInside" id="kHU-DQ-R6C"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="f5l-Z2-YON"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6tU-f8-wBQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1349.2753623188407" y="162.72321428571428"/>
-        </scene>
         <!--Add TodoVC-->
         <scene sceneID="5C9-zQ-jaD">
             <objects>
                 <viewController storyboardIdentifier="AddTodoVC" id="5Dd-ww-2k7" customClass="AddTodoVC" customModule="Polaris" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UgI-fC-jDp">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3EH-GP-kQ8">
-                                <rect key="frame" x="0.0" y="65" width="414" height="831"/>
+                                <rect key="frame" x="0.0" y="65" width="375" height="747"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R7J-9n-pIF">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="68"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="68"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gqL-fC-gRl">
                                                 <rect key="frame" x="23" y="21" width="26" height="26"/>
@@ -78,7 +37,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fFJ-bK-g1Z">
-                                                <rect key="frame" x="88" y="23.5" width="238" height="21"/>
+                                                <rect key="frame" x="88" y="23.666666666666671" width="199" height="21"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                 <color key="textColor" name="mainText"/>
                                                 <nil key="highlightedColor"/>
@@ -95,21 +54,21 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yCN-Ub-pZD">
-                                        <rect key="frame" x="0.0" y="68" width="414" height="1"/>
+                                        <rect key="frame" x="0.0" y="68" width="375" height="1"/>
                                         <color key="backgroundColor" name="inactivePurple"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="cPw-Vp-GQB"/>
                                         </constraints>
                                     </view>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uK1-zG-Czz">
-                                        <rect key="frame" x="0.0" y="69" width="414" height="762"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uK1-zG-Czz">
+                                        <rect key="frame" x="0.0" y="69" width="375" height="678"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TJC-DY-0Z3" customClass="PolarisButton" customModule="Polaris" customModuleProvider="target">
-                                        <rect key="frame" x="23" y="740" width="368" height="54"/>
+                                        <rect key="frame" x="23" y="656" width="329" height="54"/>
                                         <color key="backgroundColor" name="inactiveBtn"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="TJC-DY-0Z3" secondAttribute="height" multiplier="184:27" id="j2m-ti-QhH"/>
+                                            <constraint firstAttribute="width" secondItem="TJC-DY-0Z3" secondAttribute="height" multiplier="329:54" id="3Th-Ce-wAW"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" title="추가하기">

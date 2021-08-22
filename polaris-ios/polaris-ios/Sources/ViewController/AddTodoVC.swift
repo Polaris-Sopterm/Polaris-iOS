@@ -90,7 +90,10 @@ class AddTodoVC: HalfModalVC {
     }
     
     private func setupTableView() {
-        self.tableView.contentInset        = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
+        let screenRatio: CGFloat  = (DeviceInfo.screenWidth / 375)
+        let buttonHeight: CGFloat = 54 * screenRatio
+        let bottomInset: CGFloat  = 37 + buttonHeight + 20
+        self.tableView.contentInset        = UIEdgeInsets(top: 20, left: 0, bottom: bottomInset, right: 0)
         self.tableView.allowsSelection     = false
         self.tableView.separatorStyle      = .none
         self.tableView.keyboardDismissMode = .onDrag
@@ -122,27 +125,21 @@ class AddTodoVC: HalfModalVC {
     
     // MARK: - Bind
     private func bindButtons() {
-        self.cancelButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.dismissWithAnimation()
-            })
-            .disposed(by: self.disposeBag)
+        self.cancelButton.rx.tap.subscribe(onNext: { [weak self] in
+            self?.dismissWithAnimation()
+        }).disposed(by: self.disposeBag)
         
-        self.addButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.viewModel.requestAddTodo()
-            })
-            .disposed(by: self.disposeBag)
+        self.addButton.rx.tap.subscribe(onNext: { [weak self] in
+            self?.viewModel.requestAddTodo()
+        }).disposed(by: self.disposeBag)
     }
     
     private func bindEnableButton() {
-        self.viewModel.addEnableFlagSubject
-            .subscribe(onNext: { [weak self] isEnable in
-                guard let self = self else { return }
-                if isEnable == true { self.addButton.enable = true }
-                else                { self.addButton.enable = false }
-            })
-            .disposed(by: self.disposeBag)
+        self.viewModel.addEnableFlagSubject.subscribe(onNext: { [weak self] isEnable in
+            guard let self = self else { return }
+            if isEnable == true { self.addButton.enable = true }
+            else                { self.addButton.enable = false }
+        }).disposed(by: self.disposeBag)
     }
 
     private func observeViewModel() {

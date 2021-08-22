@@ -119,12 +119,15 @@ extension Date {
     static var currentWeekNoOfMonth: Int {
         return Calendar.current.component(.weekOfMonth, from: self.normalizedCurrent)
     }
+    
     static var currentMonth: Int {
         return Calendar.current.component(.month, from: self.normalizedCurrent)
     }
+    
     static var currentYear: Int {
         return Calendar.current.component(.year, from: self.normalizedCurrent)
     }
+    
     static func numberOfMondaysInMonth(_ month: Int, forYear year: Int) -> Int? {
         var calendar = Calendar(identifier: .gregorian)
         calendar.firstWeekday = 2 // 2 == Monday

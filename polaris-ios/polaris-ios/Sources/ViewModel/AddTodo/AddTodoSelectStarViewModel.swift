@@ -9,16 +9,16 @@ import Foundation
 import RxSwift
 
 class AddTodoSelectStarViewModel {
-    lazy var starsSubject   = BehaviorSubject<[PolarisStar]>(value: self.initPolarisStars())
+    lazy var starsSubject   = BehaviorSubject<[Journey]>(value: self.initJourneys())
     
-    var selectedFlagSubject = PublishSubject<PolarisStar>()
-    var selectedStarsSet    = Set<PolarisStar>()
+    var selectedFlagSubject = PublishSubject<Journey>()
+    var selectedStarsSet    = Set<Journey>()
     
     init() {
         _ = self.selectedFlagSubject
             .subscribe(onNext: { [weak self] selectedStar in
                 guard let self = self else { return }
-                defer { self.starsSubject.onNext(self.initPolarisStars()) }
+                defer { self.starsSubject.onNext(self.initJourneys()) }
                 
                 if self.selectedStarsSet.contains(selectedStar) { self.selectedStarsSet.remove(selectedStar); return }
                 if self.selectedStarsSet.count >= self.selectedMaxCount { return }
@@ -27,10 +27,10 @@ class AddTodoSelectStarViewModel {
             })
     }
     
-    private func initPolarisStars() -> [PolarisStar] {
-        var stars: [PolarisStar] = []
-        PolarisStar.allCases.forEach { star in stars.append(star) }
-        return stars
+    private func initJourneys() -> [Journey] {
+        var journeys: [Journey] = []
+        Journey.allCases.forEach { star in journeys.append(star) }
+        return journeys
     }
     
     private let selectedMaxCount = 2

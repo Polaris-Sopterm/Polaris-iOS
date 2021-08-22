@@ -119,7 +119,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="checkButton" destination="I6I-b7-zGX" id="Svk-VL-O2n"/>
-                <outlet property="contentViewLeadingConstraint" destination="dXW-sd-FHC" id="4wC-Zi-u6u"/>
+                <outlet property="contentViewLeadingConstraint" destination="dXW-sd-FHC" id="BNf-bq-ElS"/>
                 <outlet property="deleteButton" destination="Yl2-IT-09F" id="Fno-2n-58t"/>
                 <outlet property="editButton" destination="5TA-K2-lOa" id="RoU-D5-r1n"/>
                 <outlet property="fixImageView" destination="yvm-0y-cLm" id="HsW-MR-XMU"/>

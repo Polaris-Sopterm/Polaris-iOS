@@ -83,11 +83,11 @@ class MainSceneViewModel {
             .disposed(by: self.disposeBag)
         let todoStarList: BehaviorRelay<[MainTodoCVCViewModel]> = BehaviorRelay(value: [])
         
-        let journeyAPI = JourneyAPI2.getWeekJourney(year: 2021, month: 7, weekNo: 3)
+        let journeyAPI = JourneyAPI.getWeekJourney(year: 2021, month: 7, weekNo: 3)
         var weekJourneyModels: [WeekJourneyModel] = []
         
         
-        let todoNetworking = NetworkManager.request(apiType: journeyAPI)
+        NetworkManager.request(apiType: journeyAPI)
             .subscribe(onSuccess: { [weak self] (journeyModel: JourneyWeekListModel) in
                 print(journeyModel)
                 weekJourneyModels = journeyModel.journeys!
@@ -143,28 +143,41 @@ class MainSceneViewModel {
         var thisWeekJouneyModels: [WeekJourneyModel] = []
         // 이번주에 해당하는 Model 추출
         for weekJourneyModel in weekJourneyModels {
-            if Int(weekJourneyModel.year) == self.year && Int(weekJourneyModel.month) == self.month && Int(weekJourneyModel.weekNo) == self.weekNo {
+            guard let year = weekJourneyModel.year     else { continue }
+            guard let month = weekJourneyModel.month   else { continue }
+            guard let weekNo = weekJourneyModel.weekNo else { continue }
+            if year == self.year && month == self.month && weekNo == self.weekNo {
                 thisWeekJouneyModels.append(weekJourneyModel)
             }
         }
 
         for thisWeekjourney in thisWeekJouneyModels {
             var tvcModels: [MainTodoTVCViewModel] = []
-            var journeyTitles: [String] = []
-            var valueNames: [String] = []
-            var tvcModelTemp: [MainTodoTVCViewModel] = []
+            var journeyTitle: String
+            var journeyValues: [Journey] = []
+            
             if thisWeekjourney.toDos != nil {
                 for (idx,model) in thisWeekjourney.toDos!.enumerated() {
                     tvcModels.append(MainTodoTVCViewModel(id: IndexPath(row: idx, section: 0), weekTodo: model))
                 }
             }
-            valueNames.append(thisWeekjourney.value1!)
-            valueNames.append(thisWeekjourney.value2!)
-            journeyTitles.append(thisWeekjourney.title)
+            
+            if let firstValue = thisWeekjourney.value1,
+               let firstValueJourney = Journey(rawValue: firstValue) {
+                journeyValues.append(firstValueJourney)
+            }
+            
+            if let secondValue = thisWeekjourney.value2,
+               let secondValueJourney = Journey(rawValue: secondValue) {
+                journeyValues.append(secondValueJourney)
+            }
+            
+            journeyTitle = thisWeekjourney.title ?? ""
+            
             let todoListRelay:BehaviorRelay<[MainTodoTVCViewModel]> = BehaviorRelay(value: tvcModels)
-            let journeyNameRelay:BehaviorRelay<[String]> = BehaviorRelay(value: journeyTitles)
-            let valueNameRelay:BehaviorRelay<[String]> = BehaviorRelay(value: valueNames)
-            resultList.append(MainTodoCVCViewModel(todoListRelay: todoListRelay,journeyNameRelay: journeyNameRelay,valueRelay: valueNameRelay))
+            resultList.append(MainTodoCVCViewModel(journeyTitle: journeyTitle,
+                                                   journeyValues: journeyValues,
+                                                   todoListRelay: todoListRelay))
 
         }
         return resultList
