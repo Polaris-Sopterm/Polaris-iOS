@@ -237,13 +237,14 @@ extension TodoTableViewCell: DayTodoHeaderViewDelegate {
 
 extension TodoTableViewCell: JourneyTodoHeaderViewDelegate {
     
-    func journeyTodoHeaderView(_ journeyTodoHeaderView: JourneyTodoHeaderView, didTapEdit todo: String) {
+    func journeyTodoHeaderView(_ journeyTodoHeaderView: JourneyTodoHeaderView, didTapEdit todo: WeekJourneyModel) {
     }
     
-    func journeyTodoHeaderView(_ journeyTodoHeaderView: JourneyTodoHeaderView, didTapAdd todo: String) {
+    func journeyTodoHeaderView(_ journeyTodoHeaderView: JourneyTodoHeaderView, didTapAdd todo: WeekJourneyModel) {
         guard let addTodoVC = AddTodoVC.instantiateFromStoryboard(StoryboardName.addTodo),
               let visibleController = UIViewController.getVisibleController() else { return }
         addTodoVC.setAddOptions(.perJourneyAddTodo)
+        addTodoVC.setAddTodoJourney(todo)
         addTodoVC.delegate = self
         addTodoVC.presentWithAnimation(from: visibleController)
     }
@@ -317,7 +318,8 @@ extension TodoTableViewCell: AddTodoViewControllerDelegate {
             self.viewModel.requestTodoDayList(shouldScroll: false)
             self.viewModel.requestTodoJourneyList()
         } else if option == .perJourneyAddTodo {
-            #warning("여정별 할일 받아오는 것 추가")
+            self.viewModel.requestTodoDayList(shouldScroll: false)
+            self.viewModel.requestTodoJourneyList()
         } else if option == .edittedTodo {
             self.viewModel.requestTodoDayList(shouldScroll: false)
             self.viewModel.requestTodoJourneyList()

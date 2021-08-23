@@ -51,12 +51,16 @@ class AddTodoViewModel {
         self.todoDayModel = todo
     }
     
+    func setAddTodoJourney(_ journeyModel: WeekJourneyModel) {
+        self.addTodoJourney = journeyModel
+    }
+    
     func requestAddTodo() {
         self.loadingSubject.onNext(true)
         if self.currentAddOption == .perDayAddTodo {
             self.requestAddTodoDay()
         } else if self.currentAddOption == .perJourneyAddTodo {
-            self.requestAddJourney()
+            self.requestAddTodoJourney()
         } else if self.currentAddOption == .edittedTodo {
             self.requestEditTodo()
         }
@@ -82,9 +86,16 @@ class AddTodoViewModel {
         guard let addText = self.addTextRelay.value        else { return }
         guard let addTodoDate = self.selectDateRelay.value else { return }
         guard let fixOnTop = self.fixOnTopRelay.value      else { return }
-        
+        guard let journey = self.addTodoJourney            else { return }
+
         let createTodoAPI = TodoAPI.createToDo(title: addText, date: addTodoDate.convertToString(),
-                                               journeyTitle: <#T##String#>, journeyIdx: <#T##Int?#>, isTop: <#T##Bool#>)
+                                               journeyTitle: journey.title, journeyIdx: journey.idx, isTop: fixOnTop)
+        NetworkManager.request(apiType: createTodoAPI).subscribe(onSuccess: { [weak self] (responseModel: AddTodoResponseModel) in
+            self?.completeAddTodoSubject.onNext(())
+            self?.loadingSubject.onNext(false)
+        }, onFailure: { [weak self] error in
+            self?.loadingSubject.onNext(false)
+        }).disposed(by: self.disposeBag)
     }
     
     private func requestAddJourney() {
@@ -170,6 +181,9 @@ class AddTodoViewModel {
     
     // 날짜에 더할때만 씀 - Day Todo
     private(set) var addTodoDate: Date?
+    
+    // 여정별 할 일 더할 때만 씀 - Journey Todo
+    private(set) var addTodoJourney: WeekJourneyModel?
     
     // 일정 수정할 때 씀 - Edit Todo
     private(set) var todoDayModel: TodoDayPerModel?
