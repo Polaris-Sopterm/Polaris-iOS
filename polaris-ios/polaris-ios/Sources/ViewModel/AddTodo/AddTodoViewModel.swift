@@ -7,6 +7,7 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 class AddTodoViewModel {
     
@@ -26,11 +27,11 @@ class AddTodoViewModel {
     
     let addListTypes      = BehaviorSubject<[AddTodoTableViewCellProtocol.Type]>(value: [])
     
-    let addTextSubject    = BehaviorSubject<String?>(value: nil)
-    let dropdownSubject   = BehaviorSubject<JourneyTitleModel?>(value: nil)
-    let fixOnTopSubject   = BehaviorSubject<Bool?>(value: nil)
-    let selectDateSubject = BehaviorSubject<Date?>(value: nil)
-    let selectStarSubject = BehaviorSubject<Set<PolarisStar>?>(value: nil)
+    let addTextRelay    = BehaviorRelay<String?>(value: nil)
+    let dropdownRelay   = BehaviorRelay<JourneyTitleModel?>(value: nil)
+    let fixOnTopRelay   = BehaviorRelay<Bool?>(value: nil)
+    let selectDateRelay = BehaviorRelay<Date?>(value: nil)
+    let selectStarRelay = BehaviorRelay<Set<Journey>?>(value: nil)
     
     let addEnableFlagSubject   = BehaviorSubject<Bool>(value: false)
     let completeAddTodoSubject = PublishSubject<Void>()
@@ -62,10 +63,10 @@ class AddTodoViewModel {
     }
     
     private func requestAddTodoDay() {
-        guard let addText = try? self.addTextSubject.value()    else { return }
-        guard let fixOnTop = try? self.fixOnTopSubject.value()  else { return }
-        guard let addTodoDate = self.currentDate                else { return }
-        guard let journey = try? self.dropdownSubject.value()   else { return }
+        guard let addText = self.addTextRelay.value   else { return }
+        guard let fixOnTop = self.fixOnTopRelay.value else { return }
+        guard let addTodoDate = self.currentDate      else { return }
+        guard let journey = self.dropdownRelay.value  else { return }
         
         let createTodoAPI = TodoAPI.createToDo(title: addText, date: addTodoDate.convertToString(),
                                                journeyTitle: journey.title ?? "default", journeyIdx: journey.idx, isTop: fixOnTop)
@@ -77,6 +78,15 @@ class AddTodoViewModel {
         }).disposed(by: self.disposeBag)
     }
     
+    private func requestAddTodoJourney() {
+        guard let addText = self.addTextRelay.value        else { return }
+        guard let addTodoDate = self.selectDateRelay.value else { return }
+        guard let fixOnTop = self.fixOnTopRelay.value      else { return }
+        
+//        let createTodoAPI = TodoAPI.createToDo(title: addText, date: addTodoDate.convertToString(),
+//                                               journeyTitle: <#T##String#>, journeyIdx: <#T##Int?#>, isTop: <#T##Bool#>)
+    }
+    
     private func requestAddJourney() {
         
     }
@@ -85,14 +95,13 @@ class AddTodoViewModel {
         guard let todoModel = self.todoDayModel else { return }
         guard let idx = todoModel.idx           else { return }
         
-        guard let edittedText = try? self.addTextSubject.value()      else { return }
-        guard let edittedDate = try? self.selectDateSubject.value()   else { return }
-        guard let edittedJourney = try? self.dropdownSubject.value()  else { return }
-        guard let edittedFixOnTop = try? self.fixOnTopSubject.value() else { return }
+        guard let edittedText = self.addTextRelay.value      else { return }
+        guard let edittedDate = self.selectDateRelay.value   else { return }
+        guard let edittedJourney = self.dropdownRelay.value  else { return }
+        guard let edittedFixOnTop = self.fixOnTopRelay.value else { return }
         
         let todoEditAPI = TodoAPI.editTodo(idx: idx, title: edittedText, date: edittedDate.convertToString(),
                                            journeyIdx: edittedJourney.idx, isTop: edittedFixOnTop)
-        
         NetworkManager.request(apiType: todoEditAPI).subscribe(onSuccess: { [weak self] (responseModel: TodoDayPerModel)  in
             self?.completeAddTodoSubject.onNext(())
             self?.loadingSubject.onNext(false)
@@ -103,7 +112,7 @@ class AddTodoViewModel {
     
     private func bindEnableFlag(by addOptions: AddTodoVC.AddOptions) {
         if addOptions == .perDayAddTodo {
-            Observable.combineLatest(self.addTextSubject, self.dropdownSubject, self.fixOnTopSubject)
+            Observable.combineLatest(self.addTextRelay, self.dropdownRelay, self.fixOnTopRelay)
                 .subscribe(onNext: { [weak self] addText, dropdownMenu, fixOnTop in
                     guard let self = self else { return }
                     guard let addText = addText, !addText.isEmpty, fixOnTop != nil else {
@@ -115,7 +124,7 @@ class AddTodoViewModel {
                 })
                 .disposed(by: self.disposeBag)
         } else if addOptions == .perJourneyAddTodo {
-            Observable.combineLatest(self.addTextSubject, self.selectDateSubject, self.fixOnTopSubject)
+            Observable.combineLatest(self.addTextRelay, self.selectDateRelay, self.fixOnTopRelay)
                 .subscribe(onNext: { [weak self] addText, selectDate, fixOnTop in
                     guard let self = self else { return }
                     guard let addText = addText, !addText.isEmpty,
@@ -129,7 +138,7 @@ class AddTodoViewModel {
                 })
                 .disposed(by: self.disposeBag)
         } else if addOptions == .addJourney {
-            Observable.combineLatest(self.addTextSubject, self.selectStarSubject)
+            Observable.combineLatest(self.addTextRelay, self.selectStarRelay)
                 .subscribe(onNext: { [weak self] addText, selectStar in
                     guard let self = self else { return }
                     guard let addText    = addText, !addText.isEmpty,
@@ -142,7 +151,7 @@ class AddTodoViewModel {
                 })
                 .disposed(by: self.disposeBag)
         } else if addOptions == .edittedTodo {
-            Observable.combineLatest(self.addTextSubject, self.dropdownSubject, self.selectDateSubject, self.fixOnTopSubject)
+            Observable.combineLatest(self.addTextRelay, self.dropdownRelay, self.selectDateRelay, self.fixOnTopRelay)
                 .subscribe(onNext: { [weak self] addText, dropdownMenu, selectDate, fixOnTop in
                     guard let self = self else { return }
                     guard addText?.isEmpty == false, selectDate != nil,

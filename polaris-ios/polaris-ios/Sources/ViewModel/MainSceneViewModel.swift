@@ -21,13 +21,10 @@ class MainSceneViewModel {
     var heightList: [CGFloat] = [CGFloat(52.0),CGFloat(93.0),CGFloat(52.0),CGFloat(87.0),CGFloat(28.0),CGFloat(71),CGFloat(34),CGFloat(86),CGFloat(58)]
     
     private var disposeBag = DisposeBag()
-    var year = 2021
-    var month = 7
-    var weekNo = 3
     
     struct Input{
-        let forceToShowStar: Bool
-        let dateInfo: DateInfo
+        let forceToShowStar: BehaviorRelay<Bool>
+        let dateInfo: BehaviorRelay<DateInfo>
     }
     
     struct Output{
@@ -40,7 +37,7 @@ class MainSceneViewModel {
     }
     func connect(input: Input) -> Output{
         
-
+        
         let starList: BehaviorRelay<[MainStarCVCViewModel]> = BehaviorRelay(value: [])
         let state: BehaviorRelay<[StarCollectionViewState]> = BehaviorRelay(value: [])
         let lookBackState: BehaviorRelay<[MainLookBackCellState]> = BehaviorRelay(value: [])
@@ -48,54 +45,65 @@ class MainSceneViewModel {
         let homeModelRelay: BehaviorRelay<[HomeModel]> = BehaviorRelay(value: [])
         var mainStarModels: [MainStarModel] = []
         var mainStarModelRelay: BehaviorRelay<[MainStarModel]> = BehaviorRelay(value: [])
-
+        
         if PolarisUserManager.shared.hasToken{
             print(PolarisUserManager.shared.authToken)
         }
-
-        let homeAPI = HomeAPI.getHomeBanner(isSkipped: input.forceToShowStar)
-        let bannerNetworking = NetworkManager.request(apiType: homeAPI)
-            .subscribe(onSuccess: { [weak self] (homeModel: HomeModel) in
-                print(homeModel)
-                homeModelRelay.accept([homeModel])
-                for star in homeModel.starList {
-                    mainStarModels.append(MainStarModel(starName: star.name, starLevel: star.level))
-                }
-                
-                switch homeModel.homeModelCase {
-                case "journey_complete":
-                    state.accept([StarCollectionViewState.showStar])
-                    lookBackState.accept([.build])
-                    starList.accept(self?.convertStarCVCViewModel(mainStarModels: mainStarModels) ?? [])
-                case "journey_incomplete":
-                    state.accept([StarCollectionViewState.showIncomplete])
-                    lookBackState.accept([.build])
-                default:
-                    state.accept([StarCollectionViewState.showLookBack])
-                    lookBackState.accept([.lookback])
-                }
-                mainTextRelay.accept([homeModel.mainText,homeModel.boldText])
-                mainStarModelRelay.accept(mainStarModels)
-                
-            }, onFailure: { error in
-                print(error.localizedDescription)
-            })
-            .disposed(by: self.disposeBag)
+        
+        input.forceToShowStar.subscribe(onNext: { force in
+            let homeAPI = HomeAPI.getHomeBanner(isSkipped: force)
+            let bannerNetworking = NetworkManager.request(apiType: homeAPI)
+                .subscribe(onSuccess: { [weak self] (homeModel: HomeModel) in
+                    print(homeModel)
+                    homeModelRelay.accept([homeModel])
+                    for star in homeModel.starList {
+                        mainStarModels.append(MainStarModel(starName: star.name, starLevel: star.level))
+                    }
+                    
+                    switch homeModel.homeModelCase {
+                    case "journey_complete":
+                        state.accept([StarCollectionViewState.showStar])
+                        lookBackState.accept([.build])
+                        starList.accept(self?.convertStarCVCViewModel(mainStarModels: mainStarModels) ?? [])
+                    case "journey_incomplete":
+                        state.accept([StarCollectionViewState.showIncomplete])
+                        lookBackState.accept([.build])
+                    default:
+                        state.accept([StarCollectionViewState.showLookBack])
+                        lookBackState.accept([.lookback])
+                    }
+                    mainTextRelay.accept([homeModel.mainText,homeModel.boldText])
+                    mainStarModelRelay.accept(mainStarModels)
+                    mainStarModels = []
+                }, onFailure: { error in
+                    print(error.localizedDescription)
+                })
+                .disposed(by: self.disposeBag)
+            
+        })
+        .disposed(by: self.disposeBag)
+        
+        
         let todoStarList: BehaviorRelay<[MainTodoCVCViewModel]> = BehaviorRelay(value: [])
         
-        let journeyAPI = JourneyAPI2.getWeekJourney(year: input.dateInfo.year, month: input.dateInfo.month, weekNo: input.dateInfo.weekNo)
-        var weekJourneyModels: [WeekJourneyModel] = []
+        input.dateInfo.subscribe(onNext: { date in
+            let journeyAPI = JourneyAPI.getWeekJourney(year: date.year, month: date.month, weekNo: date.weekNo)
+            var weekJourneyModels: [WeekJourneyModel] = []
+            NetworkManager.request(apiType: journeyAPI)
+                .subscribe(onSuccess: { [weak self] (journeyModel: JourneyWeekListModel) in
+                    print(journeyModel)
+                    weekJourneyModels = journeyModel.journeys!
+                    todoStarList.accept(self?.convertTodoCVCViewModel(weekJourneyModels: weekJourneyModels,dateInfo: date) ?? [])
+                }, onFailure: { error in
+                    print(String(describing: error))
+                })
+                .disposed(by: self.disposeBag)
+//            todoStarList.accept(self.convertTodoCVCViewModel(weekJourneyModels: weekJourneyModels))
+        })
+        .disposed(by: self.disposeBag)
         
+       
         
-        let todoNetworking = NetworkManager.request(apiType: journeyAPI)
-            .subscribe(onSuccess: { [weak self] (journeyModel: JourneyWeekListModel) in
-                print(journeyModel)
-                weekJourneyModels = journeyModel.journeys!
-                todoStarList.accept(self?.convertTodoCVCViewModel(weekJourneyModels: weekJourneyModels) ?? [])
-            }, onFailure: { error in
-                print(String(describing: error))
-            })
-            .disposed(by: disposeBag)
         
         lookBackState.accept([.build])
         if mainStarModels.count == 0 {
@@ -105,19 +113,19 @@ class MainSceneViewModel {
         }
         
         starList.accept(self.convertStarCVCViewModel(mainStarModels: mainStarModels))
-        todoStarList.accept(self.convertTodoCVCViewModel(weekJourneyModels: weekJourneyModels))
+       
         return Output(starList: starList,todoStarList: todoStarList,state: state,lookBackState: lookBackState,mainTextRelay: mainTextRelay,homeModelRelay: homeModelRelay)
     }
     
     func convertStarCVCViewModel(mainStarModels: [MainStarModel]) -> [MainStarCVCViewModel]{
         var resultList: [MainStarCVCViewModel] = []
-
+        
         switch mainStarModels.count {
         case 1:
             let height = CGFloat(70.0)
             
             resultList.append(MainStarCVCViewModel(starModel: mainStarModels[0], starImgName:  changeToImgName(starName: mainStarModels[0].starName, level: mainStarModels[0].starLevel), cellWidth: DeviceInfo.screenWidth, starHeight: height*self.heightRatio))
-        
+            
         case 2 :
             let height = CGFloat(70.0)
             for model in mainStarModels {
@@ -138,34 +146,47 @@ class MainSceneViewModel {
         return resultList
     }
     
-    func convertTodoCVCViewModel(weekJourneyModels: [WeekJourneyModel]) -> [MainTodoCVCViewModel]{
+    func convertTodoCVCViewModel(weekJourneyModels: [WeekJourneyModel],dateInfo: DateInfo) -> [MainTodoCVCViewModel]{
         var resultList: [MainTodoCVCViewModel] = []
         var thisWeekJouneyModels: [WeekJourneyModel] = []
         // 이번주에 해당하는 Model 추출
         for weekJourneyModel in weekJourneyModels {
-            if Int(weekJourneyModel.year) == self.year && Int(weekJourneyModel.month) == self.month && Int(weekJourneyModel.weekNo) == self.weekNo {
+            guard let year = weekJourneyModel.year     else { continue }
+            guard let month = weekJourneyModel.month   else { continue }
+            guard let weekNo = weekJourneyModel.weekNo else { continue }
+            if year == dateInfo.year && month == dateInfo.month && weekNo == dateInfo.weekNo {
                 thisWeekJouneyModels.append(weekJourneyModel)
             }
         }
-
+        
         for thisWeekjourney in thisWeekJouneyModels {
             var tvcModels: [MainTodoTVCViewModel] = []
-            var journeyTitles: [String] = []
-            var valueNames: [String] = []
-            var tvcModelTemp: [MainTodoTVCViewModel] = []
+            var journeyTitle: String
+            var journeyValues: [Journey] = []
+            
             if thisWeekjourney.toDos != nil {
                 for (idx,model) in thisWeekjourney.toDos!.enumerated() {
                     tvcModels.append(MainTodoTVCViewModel(id: IndexPath(row: idx, section: 0), weekTodo: model))
                 }
             }
-            valueNames.append(thisWeekjourney.value1!)
-            valueNames.append(thisWeekjourney.value2!)
-            journeyTitles.append(thisWeekjourney.title)
+            
+            if let firstValue = thisWeekjourney.value1,
+               let firstValueJourney = Journey(rawValue: firstValue) {
+                journeyValues.append(firstValueJourney)
+            }
+            
+            if let secondValue = thisWeekjourney.value2,
+               let secondValueJourney = Journey(rawValue: secondValue) {
+                journeyValues.append(secondValueJourney)
+            }
+            
+            journeyTitle = thisWeekjourney.title ?? ""
+            
             let todoListRelay:BehaviorRelay<[MainTodoTVCViewModel]> = BehaviorRelay(value: tvcModels)
-            let journeyNameRelay:BehaviorRelay<[String]> = BehaviorRelay(value: journeyTitles)
-            let valueNameRelay:BehaviorRelay<[String]> = BehaviorRelay(value: valueNames)
-            resultList.append(MainTodoCVCViewModel(todoListRelay: todoListRelay,journeyNameRelay: journeyNameRelay,valueRelay: valueNameRelay))
-
+            resultList.append(MainTodoCVCViewModel(journeyTitle: journeyTitle,
+                                                   journeyValues: journeyValues,
+                                                   todoListRelay: todoListRelay))
+            
         }
         return resultList
     }

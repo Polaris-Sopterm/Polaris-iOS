@@ -20,15 +20,15 @@ enum StarCollectionViewState: Int, CaseIterable {
 
 final class MainSceneTableViewCell: MainTableViewCell {
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var starCVCHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var starCV: UICollectionView!
-    @IBOutlet weak var weekContainView: UIView!
-    @IBOutlet weak var weekLabel: UILabel!
-    @IBOutlet weak var nowLabel: UILabel!
-    @IBOutlet weak var addButton: UIButton!
-    @IBOutlet weak var pageControl: UIPageControl!
-    @IBOutlet weak var todoCV: UICollectionView!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var starCVCHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var starCV: UICollectionView!
+    @IBOutlet private weak var weekContainView: UIView!
+    @IBOutlet private weak var weekLabel: UILabel!
+    @IBOutlet private weak var nowLabel: UILabel!
+    @IBOutlet private weak var addButton: UIButton!
+    @IBOutlet private weak var pageControl: UIPageControl!
+    @IBOutlet private weak var todoCV: UICollectionView!
     
     private var currentIndex: CGFloat = 0
     private var viewState = StarCollectionViewState.showStar
@@ -48,12 +48,16 @@ final class MainSceneTableViewCell: MainTableViewCell {
     override static var cellHeight: CGFloat { return DeviceInfo.screenHeight }
     private let weekDict = [1:"첫째주",2:"둘째주",3:"셋째주",4:"넷째주",5:"다섯째주"]
     
+    private let forceToShowStarRelay: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    private let dateInfoRelay: BehaviorRelay<DateInfo> = BehaviorRelay(value: DateInfo(year: Date.currentYear, month: Date.currentMonth, weekNo: Date.currentWeekNoOfMonth))
+
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.setUIs()
         self.setStarCollectionView()
         self.setTodoCollectionView()
-        self.bindViewModel(forceToShowStar: false, dateInfo: self.dateInfo)
+        self.bindViewModel()
         self.setupDimView()
     }
     
@@ -108,6 +112,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
     private func setTodoCollectionView() {
         self.todoCV.registerCell(cell: MainTodoCVC.self)
         self.todoCV.backgroundColor = .clear
+        self.todoCV.decelerationRate = .fast
         self.todoCV.delegate = self
         let layout = self.todoCV.collectionViewLayout as! UICollectionViewFlowLayout
         layout.minimumLineSpacing = 0
@@ -122,8 +127,8 @@ final class MainSceneTableViewCell: MainTableViewCell {
         self.titleLabel.setPartialBold(originalText: text, boldText: boldText, fontSize: 23, boldFontSize: 23)
     }
     
-    private func bindViewModel(forceToShowStar: Bool,dateInfo: DateInfo){
-        let input = MainSceneViewModel.Input(forceToShowStar: forceToShowStar,dateInfo: dateInfo)
+    private func bindViewModel(){
+        let input = MainSceneViewModel.Input(forceToShowStar: self.forceToShowStarRelay,dateInfo: self.dateInfoRelay)
         let output = viewModel.connect(input: input)
         output.homeModelRelay.subscribe(onNext: { [weak self] homeModel in
             self?.homeModel = homeModel.last
@@ -144,48 +149,107 @@ final class MainSceneTableViewCell: MainTableViewCell {
             self?.lookBackState = value[0]
         })
         .disposed(by: disposeBag)
+
     
         output.state.subscribe(onNext: { [weak self] state in
             self?.viewState = state[0]
-        }).disposed(by: disposeBag)
-        
-        
-        switch output.state.value[0] {
-        case StarCollectionViewState.showStar:
-            self.weekContainView.alpha = 1
-            output.starList.bind(to: starCV.rx.items) { collectionView, index, item in
-                let identifier = String(describing: MainStarCVC.self)
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: IndexPath(item: index, section: 0)) as! MainStarCVC
-                cell.cvcViewModel = item
-                return cell
-            }.disposed(by: disposeBag)
-            
-        default :
-            output.state.bind(to: starCV.rx.items){ collectionView, index, item in
-                let identifier = String(describing: MainLookBackCollectionViewCell.self)
-                let cell = self.starCV.dequeueReusableCell(withReuseIdentifier: identifier, for: IndexPath(item: index, section: 0)) as! MainLookBackCollectionViewCell
-                cell.delegate = self
-                if self.homeModel != nil {
-                    cell.setState(state: self.lookBackState, bannerTitle: self.homeModel!.bannerTitle, bannerText: self.homeModel!.bannerText, buttonText: self.homeModel!.buttonText)
-                }
+            switch output.state.value[0] {
+            case StarCollectionViewState.showStar:
+                guard let self = self else { return }
+                output.starList.bind(to: self.starCV.rx.items) { [weak self] collectionView, index, item in
+                    guard let self = self else { return UICollectionViewCell() }
+                    let indexPath  = IndexPath(item: index, section: 0)
+                    let cell = collectionView.dequeueReusableCell(cell: MainStarCVC.self, forIndexPath: indexPath)
+                    guard let mainStarCell = cell else { return UICollectionViewCell() }
+                    mainStarCell.cvcViewModel = item
+                    return mainStarCell
+                }.disposed(by: self.disposeBag)
                 
-                output.mainTextRelay.subscribe(onNext: { texts in
-                    if !texts.isEmpty {
-                        self.titleLabel.setPartialBold(originalText: texts[0], boldText: texts[1], fontSize: 23, boldFontSize: 23)
+            default :
+                guard let self = self else { return }
+                output.state.bind(to: self.starCV.rx.items){ [weak self] collectionView, index, item in
+                    guard let self = self else { return UICollectionViewCell() }
+                    
+                    let indexPath = IndexPath(item: index, section: 0)
+                    let cell      = collectionView.dequeueReusableCell(cell: MainLookBackCollectionViewCell.self,
+                                                                       forIndexPath: indexPath)
+
+                    guard let lookbackCell = cell else { return UICollectionViewCell() }
+                    lookbackCell.delegate = self
+                    
+                    if self.homeModel != nil {
+                        lookbackCell.setState(state: self.lookBackState, bannerTitle: self.homeModel!.bannerTitle, bannerText: self.homeModel!.bannerText, buttonText: self.homeModel!.buttonText)
                     }
-                })
-                .disposed(by: self.disposeBag)
-                return cell
-            }.disposed(by: disposeBag)
-        }
+
+                    output.mainTextRelay.subscribe(onNext: { [weak self] texts in
+                        guard let self = self else { return }
+                        if texts.count > 1 {
+                            self.titleLabel.setPartialBold(originalText: texts[0], boldText: texts[1], fontSize: 23, boldFontSize: 23)
+                        }
+                    })
+                    .disposed(by: self.disposeBag)
+                    return lookbackCell
+                }.disposed(by: self.disposeBag)
+            }
+        }).disposed(by: self.disposeBag)
         
-        output.todoStarList.bind(to: todoCV.rx.items) { collectionView, index, item in
-            let identifier = String(describing: MainTodoCVC.self)
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: IndexPath(item: index, section: 0)) as! MainTodoCVC
-            cell.viewModel = item
-            self.pageControl.numberOfPages = output.todoStarList.value.count
-            return cell
-        }.disposed(by: disposeBag)
+        
+//        switch output.state.value[0] {
+//        case StarCollectionViewState.showStar:
+//            output.starList.bind(to: self.starCV.rx.items) { [weak self] collectionView, index, item in
+//                guard let self = self else { return UICollectionViewCell() }
+//                let indexPath  = IndexPath(item: index, section: 0)
+//                let cell = collectionView.dequeueReusableCell(cell: MainStarCVC.self, forIndexPath: indexPath)
+//
+//                guard let mainStarCell = cell else { return UICollectionViewCell() }
+//                mainStarCell.cvcViewModel = item
+//                self.setTitle(stars: self.starList.count,lookBackState: self.lookBackState)
+//                return mainStarCell
+//            }.disposed(by: disposeBag)
+//
+//        default :
+//            output.state.bind(to: self.starCV.rx.items){ [weak self] collectionView, index, item in
+//                guard let self = self else { return UICollectionViewCell() }
+//
+//                let indexPath = IndexPath(item: index, section: 0)
+//                let cell      = collectionView.dequeueReusableCell(cell: MainLookBackCollectionViewCell.self,
+//                                                                   forIndexPath: indexPath)
+//
+//
+//                guard let lookbackCell = cell else { return UICollectionViewCell() }
+//                lookbackCell.delegate = self
+//
+//                if self.homeModel != nil {
+//                    lookbackCell.setState(state: self.lookBackState, bannerTitle: self.homeModel!.bannerTitle, bannerText: self.homeModel!.bannerText, buttonText: self.homeModel!.buttonText)
+//                }
+//
+//                output.mainTextRelay.subscribe(onNext: { [weak self] texts in
+//                    guard let self = self else { return }
+//                    if texts.count > 1 {
+//                        self.titleLabel.setPartialBold(originalText: texts[0], boldText: texts[1], fontSize: 23, boldFontSize: 23)
+//                    }
+//                })
+//                .disposed(by: self.disposeBag)
+//                return lookbackCell
+//            }.disposed(by: disposeBag)
+//        }
+
+      
+        output.todoStarList.subscribe(onNext: { [weak self] todoStarList in
+            guard let self = self else { return }
+            output.todoStarList.bind(to: self.todoCV.rx.items) { [weak self] collectionView, index, item in
+                guard let self = self else { return UICollectionViewCell() }
+                let indexPath = IndexPath(item: index, section: 0)
+                let cell      = collectionView.dequeueReusableCell(cell: MainTodoCVC.self, forIndexPath: indexPath)
+                guard let mainTodoCell = cell else { return UICollectionViewCell() }
+                mainTodoCell.viewModel = item
+                self.pageControl.numberOfPages = output.todoStarList.value.count
+                return mainTodoCell
+            }.disposed(by: self.disposeBag)
+        })
+        .disposed(by: self.disposeBag)
+        
+        
     }
     
     private func setCometLayout(comet: UIImageView,size: Int) {
@@ -220,7 +284,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
         
         UIView.animate(withDuration: duration,delay:0.0, options:.curveEaseIn,animations: {
             comet.transform = CGAffineTransform(translationX: -DeviceInfo.screenWidth-120, y: DeviceInfo.screenWidth+120.0)
-        },completion: { finished in
+        }, completion: { finished in
             comet.removeFromSuperview()
             self.cometAnimation()
         })
@@ -235,12 +299,19 @@ final class MainSceneTableViewCell: MainTableViewCell {
     }
     
     @IBAction func settingButtonAction(_ sender: Any) {
-        #warning("Setting button 동작 추가 필요")
+        let viewController = SettingVC.instantiateFromStoryboard(StoryboardName.setting)
+        
+        guard let visibleController = UIViewController.getVisibleController() else { return }
+        guard let settingController = viewController                          else { return }
+        visibleController.navigationController?.pushViewController(settingController, animated: true)
     }
     
     
     @IBAction func scrollButtonAction(_ sender: Any) {
-        #warning("밑으로 스크롤하는 버튼 동작 추가 필요")
+        guard let visibleController = UIViewController.getVisibleController() else { return }
+        guard let mainVC = visibleController as? MainVC                       else { return }
+        
+        mainVC.scrollToTodoListCell()
     }
     
     @IBAction func weekButtonAction(_ sender: Any) {
@@ -248,9 +319,13 @@ final class MainSceneTableViewCell: MainTableViewCell {
     }
     
     @IBAction func addNewJourneyButton(_ sender: Any) {
-        #warning("동민 - Journey 추가 버튼")
+        let viewController = AddTodoVC.instantiateFromStoryboard(StoryboardName.addTodo)
+        
+        guard let visibleController = UIViewController.getVisibleController() else { return }
+        guard let addTodoVC = viewController                                  else { return }
+        addTodoVC.setAddOptions(.addJourney)
+        addTodoVC.presentWithAnimation(from: visibleController)
     }
-    
     
 }
 
@@ -285,7 +360,6 @@ extension MainSceneTableViewCell: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         if collectionView == self.starCV && self.viewState == StarCollectionViewState.showStar {
-            
             switch self.starList.count {
             case 1 :
                 return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 30)
@@ -307,39 +381,40 @@ extension MainSceneTableViewCell: UICollectionViewDelegateFlowLayout {
 
 extension MainSceneTableViewCell: UIScrollViewDelegate {
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        if scrollView == self.todoCV {
-            let layout = self.todoCV.collectionViewLayout as! UICollectionViewFlowLayout
-            let cellWidthIncludingSpacing = layout.itemSize.width + layout.minimumLineSpacing
-            var offset = targetContentOffset.pointee
-            let index = (offset.x + scrollView.contentInset.left) / cellWidthIncludingSpacing
-            var roundedIndex = round(index)
-            
-            if scrollView.contentOffset.x > targetContentOffset.pointee.x {
-                roundedIndex = floor(index)
-            } else if scrollView.contentOffset.x < targetContentOffset.pointee.x {
-                roundedIndex = ceil(index)
-            } else {
-                roundedIndex = round(index)
-            }
-            
-            if currentIndex > roundedIndex {
-                currentIndex -= 1
-                roundedIndex = currentIndex
-            } else if currentIndex < roundedIndex {
-                currentIndex += 1
-                roundedIndex = currentIndex
-            }
-            offset = CGPoint(x: roundedIndex * cellWidthIncludingSpacing - scrollView.contentInset.left, y: -scrollView.contentInset.top)
-            targetContentOffset.pointee = offset
-            self.pageControl.currentPage = Int(self.currentIndex)
+        guard scrollView == self.todoCV else { return }
+        
+        let layout = self.todoCV.collectionViewLayout as! UICollectionViewFlowLayout
+        let cellWidthIncludingSpacing = layout.itemSize.width + layout.minimumLineSpacing
+        var offset = targetContentOffset.pointee
+        let index = (offset.x + scrollView.contentInset.left) / cellWidthIncludingSpacing
+        var roundedIndex = round(index)
+        
+        if scrollView.contentOffset.x > targetContentOffset.pointee.x {
+            roundedIndex = floor(index)
+        } else if scrollView.contentOffset.x < targetContentOffset.pointee.x {
+            roundedIndex = ceil(index)
+        } else {
+            roundedIndex = round(index)
         }
+        
+        if currentIndex > roundedIndex {
+            currentIndex -= 1
+            roundedIndex = currentIndex
+        } else if currentIndex < roundedIndex {
+            currentIndex += 1
+            roundedIndex = currentIndex
+        }
+        offset = CGPoint(x: roundedIndex * cellWidthIncludingSpacing - scrollView.contentInset.left, y: -scrollView.contentInset.top)
+        targetContentOffset.pointee = offset
+        self.pageControl.currentPage = Int(self.currentIndex)
     }
 }
 
 
 extension MainSceneTableViewCell: LookBackCloseDelegate {
     func close() {
-        self.bindViewModel(forceToShowStar: true, dateInfo: self.dateInfo)
+        self.forceToShowStarRelay.accept(true)
+//        self.bindViewModel(forceToShowStar: true, dateInfo: self.dateInfo)
     }
     func apply(isLookBack: Bool) {
         if isLookBack {
@@ -354,7 +429,9 @@ extension MainSceneTableViewCell: LookBackCloseDelegate {
 extension MainSceneTableViewCell: WeekPickerDelegate {
     func apply(year: Int, month: Int, weekNo: Int, weekText: String) {
         self.weekLabel.text = weekText
-        self.bindViewModel(forceToShowStar: true, dateInfo: DateInfo(year: year, month: month, weekNo: weekNo))
+        self.forceToShowStarRelay.accept(true)
+        self.dateInfoRelay.accept(DateInfo(year: year, month: month, weekNo: weekNo))
+//        self.bindViewModel(forceToShowStar: true, dateInfo: DateInfo(year: year, month: month, weekNo: weekNo))
     }
 
 }

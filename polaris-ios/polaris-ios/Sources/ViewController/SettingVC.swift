@@ -67,6 +67,8 @@ final class SettingVC: UIViewController {
         switch menu {
         case .editNickname:
             #warning("여기에 윤재가 별명 변경하기로 연결되는 부분 추가")
+            guard let nickVC = UIStoryboard(name: "NickChange", bundle: nil).instantiateViewController(withIdentifier: "NickChangeVC") as? NickChangeVC else { break }
+            self.navigationController?.pushViewController(nickVC, animated: true)
             break
         case .personalInformation:
             self.pushTermsWebViewController(.personal)

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Nick ChangeVC-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="NickChangeVC" id="Y6W-OH-hqX" customClass="NickChangeVC" customModule="Polaris" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pFS-rF-Huo">
+                                <rect key="frame" x="9" y="56" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="48" id="iIs-EY-MoL"/>
+                                    <constraint firstAttribute="height" constant="48" id="zyY-n4-BYE"/>
+                                </constraints>
+                                <state key="normal" image="btnBackLookBack" backgroundImage="btnBackLookBack"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="imageTintColor">
+                                        <color key="value" name="mainText"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="backButtonAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="0gp-W3-pzo"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BJN-dq-bfV">
+                                <rect key="frame" x="24" y="107" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EB0-F7-sqL">
+                                <rect key="frame" x="23" y="172" width="368" height="53"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="53" id="LdC-aL-qBB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="59P-Y6-8sE">
+                                <rect key="frame" x="23" y="805" width="368" height="54"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="54" id="t07-Mm-d6e"/>
+                                </constraints>
+                                <state key="normal" image="btnChangeNick"/>
+                                <connections>
+                                    <action selector="changeButtonAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="JCz-tH-M4m"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="EB0-F7-sqL" secondAttribute="trailing" constant="23" id="BML-Zc-Hkd"/>
+                            <constraint firstItem="BJN-dq-bfV" firstAttribute="top" secondItem="pFS-rF-Huo" secondAttribute="bottom" constant="3" id="JAi-zf-5hA"/>
+                            <constraint firstItem="pFS-rF-Huo" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" constant="56" id="MDr-HG-3K8"/>
+                            <constraint firstItem="EB0-F7-sqL" firstAttribute="top" secondItem="BJN-dq-bfV" secondAttribute="bottom" constant="65" id="N86-2k-EFW"/>
+                            <constraint firstItem="pFS-rF-Huo" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="9" id="P5d-Xn-jDd"/>
+                            <constraint firstItem="EB0-F7-sqL" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="23" id="WZR-1R-AwW"/>
+                            <constraint firstItem="BJN-dq-bfV" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="24" id="ann-2T-Wnu"/>
+                            <constraint firstItem="59P-Y6-8sE" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="23" id="dSW-Fr-UCc"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="59P-Y6-8sE" secondAttribute="trailing" constant="23" id="f0G-tL-TOI"/>
+                            <constraint firstAttribute="bottom" secondItem="59P-Y6-8sE" secondAttribute="bottom" constant="37" id="fXf-me-LzB"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backButton" destination="pFS-rF-Huo" id="dGb-8w-xnH"/>
+                        <outlet property="changeButton" destination="59P-Y6-8sE" id="HZY-Ov-bQ0"/>
+                        <outlet property="nickTextField" destination="EB0-F7-sqL" id="Hwh-aA-DrI"/>
+                        <outlet property="titleLabel" destination="BJN-dq-bfV" id="Qr4-X3-13L"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="139" y="63"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="btnBackLookBack" width="48" height="48"/>
+        <image name="btnChangeNick" width="329" height="54"/>
+        <namedColor name="mainText">
+            <color red="0.25099998712539673" green="0.25099998712539673" blue="0.54900002479553223" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

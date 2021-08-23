@@ -26,6 +26,17 @@ class JourneyTodoHeaderView: TodoHeaderView {
         self.bindButtons()
     }
     
+    func configure(_ journeyModel: WeekJourneyModel) {
+        self.titleLabel.text = journeyModel.title != "default" ? journeyModel.title : "여정이 없는 할 일"
+        
+        self.firstCategoryLabel.text                 = journeyModel.value1
+        self.firstCategoryColorView.backgroundColor  = journeyModel.firstValueJourney?.color
+        
+        self.secondStarCategoryView.isHidden         = journeyModel.value2 == nil
+        self.secondCategoryLabel.text                = journeyModel.value2
+        self.secondCategoryColorView.backgroundColor = journeyModel.secondValueJourney?.color
+    }
+    
     private func bindButtons() {
         self.editButton.rx.tap
             .subscribe(onNext: { [weak self] in
@@ -47,6 +58,8 @@ class JourneyTodoHeaderView: TodoHeaderView {
     private let disposeBag = DisposeBag()
 
     private weak var _delegate: JourneyTodoHeaderViewDelegate?
+    
+    @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var editButton: UIButton!
     @IBOutlet private weak var addButton: UIButton!
     

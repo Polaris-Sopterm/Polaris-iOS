@@ -21,9 +21,9 @@ class SelectStarItemCollectionViewCell: UICollectionViewCell {
     }
 
     // MARK: - Set Up
-    func configure(by star: PolarisStar, _ isSelected: Bool = false) {
-        self.starImageView.image = star.getImage()
-        self.starLabel.text      = star.title
+    func configure(by journey: Journey, _ isSelected: Bool = false) {
+        self.starImageView.image = journey.getImage()
+        self.starLabel.text      = journey.rawValue
         self.update(by: isSelected)
     }
     

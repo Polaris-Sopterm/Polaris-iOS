@@ -46,15 +46,12 @@ class TodoViewModel {
         self.todoDayHeadersInform.forEach { self.todoDayListTable.updateValue([], forKey: $0) }
     }
     
-    func isEmptySection(at section: Int) -> Bool {
+    func isEmptyDayTodoSection(at section: Int) -> Bool {
         let currentTab = self.currentTabRelay.value
         
-        if currentTab == .day {
-            let todoDayList = self.todoDayList(at: section)
-            return todoDayList.count == 0 ? true : false
-        } else {
-            return false
-        }
+        guard currentTab == .day else { return false }
+        let todoDayList = self.todoDayList(at: section)
+        return todoDayList.count == 0 ? true : false
     }
     
     // 전부 현재 Selected Tab 기준으로 받아옴
@@ -64,52 +61,64 @@ class TodoViewModel {
             guard let todoList = self.todoDayListTable[todoDate]          else { return 1 }
             return todoList.count != 0 ? todoList.count : 1
         } else {
-            return 0
+            guard let todoJoruney = self.todoJourneyList[safe: section] else { return 0 }
+            guard let todoList = todoJoruney.toDos else                      { return 0 }
+            return todoList.count
         }
     }
     
     // 전부 현재 Selected Tab 기준으로 받아옴
-    func todoDayList(at section: Int) -> [TodoListModelProtocol] {
+    func todoDayList(at section: Int) -> [TodoModelProtocol] {
         if self.currentTabRelay.value == .day {
             guard let todoDate = self.todoDayHeadersInform[safe: section] else { return [] }
             guard let todoList = self.todoDayListTable[todoDate]          else { return [] }
             return todoList
         } else {
-            return []
+            guard let todoJoruney = self.todoJourneyList[safe: section] else { return [] }
+            guard let todoList = todoJoruney.toDos else                      { return [] }
+            return todoList
         }
     }
     
     func expanedCellIndexPath(of tab: TodoCategory) -> IndexPath? {
         switch tab {
         case .day:     return self.dayExpanedIndexPath
-        case .journey: return nil
+        case .journey: return self.journeyExpanedIndexPath
         }
     }
     
+    func requestTodoJourneyList() {
+        let todoListAPI = TodoAPI.listTodoByJourney(year: Date.currentYear,
+                                                    month: Date.currentMonth,
+                                                    weekNo: Date.currentWeekNoOfMonth)
+        NetworkManager.request(apiType: todoListAPI).subscribe(onSuccess: { [weak self] (todoListModel: [WeekJourneyModel]) in
+            self?.todoJourneyList = todoListModel
+            
+            guard self?.currentTabRelay.value == .journey else { return }
+            self?.reloadSubject.onNext(false)
+        }).disposed(by: self.disposeBag)
+    }
+    
     func requestTodoDayList(shouldScroll: Bool) {
-        let todoListAPI = TodoAPI.listTodoByDate()
+        let todoListAPI = TodoAPI.listTodoByDate(year: Date.currentYear,
+                                                 month: Date.currentMonth,
+                                                 weekNo: Date.currentWeekNoOfMonth)
         NetworkManager.request(apiType: todoListAPI).subscribe(onSuccess: { [weak self] (todoListModel: TodoDayListModel) in
             self?.updateTodoDayListModel(todoListModel)
+            
+            guard self?.currentTabRelay.value == .day else { return }
             self?.reloadSubject.onNext(shouldScroll)
         }).disposed(by: self.disposeBag)
     }
     
-    func requestDeleteTodoDay(_ todoIdx: Int) {
+    func requestDeleteTodo(_ todoIdx: Int) {
         let todoDayDeleteAPI = TodoAPI.deleteTodo(idx: todoIdx)
         NetworkManager.request(apiType: todoDayDeleteAPI).subscribe(onSuccess: { [weak self] (successModel: SuccessModel) in
             guard let self = self                else { return }
             guard successModel.isSuccess == true else { return }
             
-            let keyValue = self.todoDayListTable.first(where: { _, todoList in
-                return todoList.contains(where: { $0.idx == todoIdx })
-            })
-            
-            guard let key = keyValue?.key                                             else { return }
-            guard let removedTodoList = keyValue?.value.filter({ $0.idx != todoIdx }) else { return }
-            self.todoDayListTable.updateValue(removedTodoList, forKey: key)
-            
-            // 삭제 되는 경우는 Should Scroll = false
-            self.reloadSubject.onNext(false)
+            self.requestTodoJourneyList()
+            self.requestTodoDayList(shouldScroll: false)
         }).disposed(by: self.disposeBag)
     }
     
@@ -117,8 +126,11 @@ class TodoViewModel {
         self.currentTabRelay.accept(tab)
     }
     
-    func updateDayExpanedStatus(forRowAt indexPath: IndexPath, isExpaned: Bool) {
-        self.dayExpanedIndexPath = isExpaned ? indexPath : nil
+    func updateExpanedStatus(category: TodoCategory, forRowAt indexPath: IndexPath, isExpanded: Bool) {
+        switch category {
+        case .day:     self.dayExpanedIndexPath = isExpanded ? indexPath : nil
+        case .journey: self.journeyExpanedIndexPath = isExpanded ? indexPath : nil
+        }
     }
     
     func updateDoneStatus(_ todoModel: TodoDayPerModel) {
@@ -134,12 +146,13 @@ class TodoViewModel {
     }
     
     private func updateTodoDayListModel(_ todoListModel: TodoDayListModel) {
-        todoListModel.data?.forEach { todoList in
-            guard let day = todoList.day                          else { return }
-            guard let convertDate = day.convertToDate()           else { return }
-            guard let normalizedDate = convertDate.normalizedDate else { return }
-            guard todoDayListTable[normalizedDate] != nil         else { return }
-            todoDayListTable[normalizedDate] = todoList.todoList
+        self.todoDayHeadersInform.forEach { todoHeader in
+            let todoModelForHeader = todoListModel.data?.first(where: { todoModel in
+                guard let todoDate = todoModel.day?.convertToDate()?.normalizedDate else { return false }
+                return todoDate == todoHeader
+            })
+            
+            self.todoDayListTable[todoHeader] = todoModelForHeader?.todoList ?? []
         }
     }
     
@@ -149,7 +162,13 @@ class TodoViewModel {
      */
     private(set) var dayExpanedIndexPath: IndexPath?
     private(set) var todoDayHeadersInform: [Date]
-    private(set) var todoDayListTable: [Date: [TodoDayPerModel]] = [:]
+    private(set) var todoDayListTable = [Date: [TodoDayPerModel]]()
+    
+    /*
+     여정별 할일 보여줄 때, 사용하는 Property
+     */
+    private(set) var journeyExpanedIndexPath: IndexPath?
+    private(set) var todoJourneyList = [WeekJourneyModel]()
     
     private let disposeBag = DisposeBag()
     
