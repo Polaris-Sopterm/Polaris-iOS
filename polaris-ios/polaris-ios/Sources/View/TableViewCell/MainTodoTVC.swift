@@ -31,8 +31,16 @@ class MainTodoTVC: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        if let model = tvcModel {
+            self.setUIs(todoModel: model)
+        }
         // Initialization code
+    }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        if let model = tvcModel {
+            self.setUIs(todoModel: model)
+        }
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

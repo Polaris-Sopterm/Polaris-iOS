@@ -37,11 +37,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
     private var starTVCViewModel: MainStarTVCViewModel?
     private var dataDriver: Driver<[MainStarCVCViewModel]>?
     private var homeModel: HomeModel?
-    private var starList: [MainStarCVCViewModel] = [] {
-        didSet{
-            self.setTitle(stars: self.starList.count,lookBackState: self.lookBackState)
-        }
-    }
+    private var starList: [MainStarCVCViewModel] = []
     private let disposeBag = DisposeBag()
     private let starTVCHeight = 212*(DeviceInfo.screenHeight/812.0)
     private var dateInfo = DateInfo(year: Date.currentYear, month: Date.currentMonth, weekNo: Date.currentWeekNoOfMonth)
@@ -131,8 +127,11 @@ final class MainSceneTableViewCell: MainTableViewCell {
         let output = viewModel.connect(input: input)
         output.homeModelRelay.subscribe(onNext: { [weak self] homeModel in
             self?.homeModel = homeModel.last
+            print(homeModel)
+
         })
         .disposed(by: disposeBag)
+        
         
         output.starList.subscribe(onNext: { [weak self] item in
             self?.starList = item
@@ -140,57 +139,52 @@ final class MainSceneTableViewCell: MainTableViewCell {
         .disposed(by: disposeBag)
     
         output.state.subscribe(onNext: { [weak self] value in
-            self?.viewState = value[0]
+            if value.count > 0 {
+                self?.viewState = value[0]
+            }
+            
         })
         .disposed(by: disposeBag)
         
         output.lookBackState.subscribe(onNext: { [weak self] value in
-            self?.lookBackState = value[0]
+            if value.count > 0 {
+                self?.lookBackState = value[0]
+            }
         })
         .disposed(by: disposeBag)
-
-    
-        output.state.subscribe(onNext: { [weak self] state in
-            self?.viewState = state[0]
-            switch output.state.value[0] {
-            case StarCollectionViewState.showStar:
-                guard let self = self else { return }
-                output.starList.bind(to: self.starCV.rx.items) { [weak self] collectionView, index, item in
-                    guard let self = self else { return UICollectionViewCell() }
-                    let indexPath  = IndexPath(item: index, section: 0)
-                    let cell = collectionView.dequeueReusableCell(cell: MainStarCVC.self, forIndexPath: indexPath)
-                    guard let mainStarCell = cell else { return UICollectionViewCell() }
-                    mainStarCell.cvcViewModel = item
-                    return mainStarCell
-                }.disposed(by: self.disposeBag)
-                
-            default :
-                guard let self = self else { return }
-                output.state.bind(to: self.starCV.rx.items){ [weak self] collectionView, index, item in
-                    guard let self = self else { return UICollectionViewCell() }
-                    
-                    let indexPath = IndexPath(item: index, section: 0)
-                    let cell      = collectionView.dequeueReusableCell(cell: MainLookBackCollectionViewCell.self,
-                                                                       forIndexPath: indexPath)
-
-                    guard let lookbackCell = cell else { return UICollectionViewCell() }
-                    lookbackCell.delegate = self
-                    
-                    if self.homeModel != nil {
-                        lookbackCell.setState(state: self.lookBackState, bannerTitle: self.homeModel!.bannerTitle, bannerText: self.homeModel!.bannerText, buttonText: self.homeModel!.buttonText)
-                    }
-
-                    output.mainTextRelay.subscribe(onNext: { [weak self] texts in
-                        guard let self = self else { return }
-                        if texts.count > 1 {
-                            self.titleLabel.setPartialBold(originalText: texts[0], boldText: texts[1], fontSize: 23, boldFontSize: 23)
-                        }
-                    })
-                    .disposed(by: self.disposeBag)
-                    return lookbackCell
-                }.disposed(by: self.disposeBag)
+        
+        output.mainTextRelay.subscribe(onNext: { [weak self] texts in
+            guard let self = self else { return }
+            if texts.count > 1 {
+                self.titleLabel.setPartialBold(originalText: texts[0], boldText: texts[1], fontSize: 23, boldFontSize: 23)
             }
-        }).disposed(by: self.disposeBag)
+        })
+        .disposed(by: self.disposeBag)
+        
+        output.starList.bind(to: self.starCV.rx.items) { [weak self] collectionView, index, item in
+            if output.starList.value.last?.starModel.starName != "lookback" {
+                let indexPath  = IndexPath(item: index, section: 0)
+                let cell = collectionView.dequeueReusableCell(cell: MainStarCVC.self, forIndexPath: indexPath)
+                guard let mainStarCell = cell else { return UICollectionViewCell() }
+                mainStarCell.cvcViewModel = item
+                return mainStarCell
+            }
+            else {
+                guard let self = self else { return UICollectionViewCell() }
+                
+                let indexPath = IndexPath(item: index, section: 0)
+                let cell      = collectionView.dequeueReusableCell(cell: MainLookBackCollectionViewCell.self,
+                                                                   forIndexPath: indexPath)
+
+                guard let lookbackCell = cell else { return UICollectionViewCell() }
+                lookbackCell.delegate = self
+                if self.homeModel != nil {
+                    lookbackCell.setState(state: self.lookBackState, bannerTitle: self.homeModel!.bannerTitle, bannerText: self.homeModel!.bannerText, buttonText: self.homeModel!.buttonText)
+                }
+                return lookbackCell
+            }
+          
+        }.disposed(by: self.disposeBag)
     
         output.todoStarList.subscribe(onNext: { [weak self] todoStarList in
             guard let self = self else { return }

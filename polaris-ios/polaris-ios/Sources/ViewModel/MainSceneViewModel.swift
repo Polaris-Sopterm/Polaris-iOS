@@ -54,7 +54,6 @@ class MainSceneViewModel {
                     for star in homeModel.starList {
                         mainStarModels.append(MainStarModel(starName: star.name, starLevel: star.level))
                     }
-                    
                     switch homeModel.homeModelCase {
                     case "journey_complete":
                         state.accept([StarCollectionViewState.showStar])
@@ -63,22 +62,22 @@ class MainSceneViewModel {
                     case "journey_incomplete":
                         state.accept([StarCollectionViewState.showIncomplete])
                         lookBackState.accept([.build])
+                        starList.accept([MainStarCVCViewModel(starModel: MainStarModel(starName: "lookback", starLevel: 0), starImgName: "123", cellWidth: 123, starHeight: 123)])
                     default:
                         state.accept([StarCollectionViewState.showLookBack])
                         lookBackState.accept([.lookback])
+                        starList.accept([MainStarCVCViewModel(starModel: MainStarModel(starName: "lookback", starLevel: 0), starImgName: "123", cellWidth: 123, starHeight: 123)])
                     }
                     mainTextRelay.accept([homeModel.mainText,homeModel.boldText])
                     mainStarModelRelay.accept(mainStarModels)
                     mainStarModels = []
                 })
                 .disposed(by: self.disposeBag)
-            
         })
         .disposed(by: self.disposeBag)
         
         
         let todoStarList: BehaviorRelay<[MainTodoCVCViewModel]> = BehaviorRelay(value: [])
-        
         input.dateInfo.subscribe(onNext: { date in
             let journeyAPI = JourneyAPI.getWeekJourney(year: date.year, month: date.month, weekNo: date.weekNo)
             var weekJourneyModels: [WeekJourneyModel] = []
@@ -92,11 +91,6 @@ class MainSceneViewModel {
         .disposed(by: self.disposeBag)
         
         lookBackState.accept([.build])
-        if mainStarModels.count == 0 {
-            state.accept([StarCollectionViewState.showLookBack])
-        } else {
-            state.accept([StarCollectionViewState.showStar])
-        }
         starList.accept(self.convertStarCVCViewModel(mainStarModels: mainStarModels))
        
         return Output(starList: starList,todoStarList: todoStarList,state: state,lookBackState: lookBackState,mainTextRelay: mainTextRelay,homeModelRelay: homeModelRelay)
