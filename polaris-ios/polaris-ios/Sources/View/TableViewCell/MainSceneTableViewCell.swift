@@ -127,8 +127,6 @@ final class MainSceneTableViewCell: MainTableViewCell {
         let output = viewModel.connect(input: input)
         output.homeModelRelay.subscribe(onNext: { [weak self] homeModel in
             self?.homeModel = homeModel.last
-            print(homeModel)
-
         })
         .disposed(by: disposeBag)
         
@@ -142,7 +140,6 @@ final class MainSceneTableViewCell: MainTableViewCell {
             if value.count > 0 {
                 self?.viewState = value[0]
             }
-            
         })
         .disposed(by: disposeBag)
         
