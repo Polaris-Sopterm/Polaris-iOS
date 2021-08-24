@@ -46,15 +46,10 @@ class MainSceneViewModel {
         var mainStarModels: [MainStarModel] = []
         var mainStarModelRelay: BehaviorRelay<[MainStarModel]> = BehaviorRelay(value: [])
         
-        if PolarisUserManager.shared.hasToken{
-            print(PolarisUserManager.shared.authToken)
-        }
-        
         input.forceToShowStar.subscribe(onNext: { force in
             let homeAPI = HomeAPI.getHomeBanner(isSkipped: force)
             let bannerNetworking = NetworkManager.request(apiType: homeAPI)
                 .subscribe(onSuccess: { [weak self] (homeModel: HomeModel) in
-                    print(homeModel)
                     homeModelRelay.accept([homeModel])
                     for star in homeModel.starList {
                         mainStarModels.append(MainStarModel(starName: star.name, starLevel: star.level))
@@ -75,8 +70,6 @@ class MainSceneViewModel {
                     mainTextRelay.accept([homeModel.mainText,homeModel.boldText])
                     mainStarModelRelay.accept(mainStarModels)
                     mainStarModels = []
-                }, onFailure: { error in
-                    print(error.localizedDescription)
                 })
                 .disposed(by: self.disposeBag)
             
@@ -91,19 +84,12 @@ class MainSceneViewModel {
             var weekJourneyModels: [WeekJourneyModel] = []
             NetworkManager.request(apiType: journeyAPI)
                 .subscribe(onSuccess: { [weak self] (journeyModel: JourneyWeekListModel) in
-                    print(journeyModel)
                     weekJourneyModels = journeyModel.journeys!
                     todoStarList.accept(self?.convertTodoCVCViewModel(weekJourneyModels: weekJourneyModels,dateInfo: date) ?? [])
-                }, onFailure: { error in
-                    print(String(describing: error))
                 })
                 .disposed(by: self.disposeBag)
-//            todoStarList.accept(self.convertTodoCVCViewModel(weekJourneyModels: weekJourneyModels))
         })
         .disposed(by: self.disposeBag)
-        
-       
-        
         
         lookBackState.accept([.build])
         if mainStarModels.count == 0 {
@@ -111,7 +97,6 @@ class MainSceneViewModel {
         } else {
             state.accept([StarCollectionViewState.showStar])
         }
-        
         starList.accept(self.convertStarCVCViewModel(mainStarModels: mainStarModels))
        
         return Output(starList: starList,todoStarList: todoStarList,state: state,lookBackState: lookBackState,mainTextRelay: mainTextRelay,homeModelRelay: homeModelRelay)

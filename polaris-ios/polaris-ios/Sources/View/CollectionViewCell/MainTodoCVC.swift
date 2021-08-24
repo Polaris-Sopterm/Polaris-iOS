@@ -31,7 +31,6 @@ class MainTodoCVC: UICollectionViewCell {
                 let identifier = String(describing: MainTodoTVC.self)
                 let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: IndexPath(item: index, section: 0)) as! MainTodoTVC
                 cell.tvcModel = item.weekTodos
-//                cell.setUIs(todoModel: item[index])
                 return cell
             }.disposed(by: disposeBag)
         }

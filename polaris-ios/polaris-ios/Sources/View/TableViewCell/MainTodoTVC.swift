@@ -34,7 +34,7 @@ class MainTodoTVC: UITableViewCell {
         
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
@@ -47,12 +47,12 @@ class MainTodoTVC: UITableViewCell {
         self.subLabel.textColor = .white
         self.titleLabel.font = UIFont.systemFont(ofSize: 16,weight: .bold)
         self.subLabel.font = UIFont.systemFont(ofSize: 11,weight: .medium)
-
+        
         if let _ = todoModel.isDone {
             self.checkButtonImage.image = UIImage(named: ImageName.btnCheck)
             self.titleLabel.alpha = 0.35
             self.subLabel.alpha = 0.35
-           
+            
         }
         else {
             self.checkButtonImage.image = UIImage(named: ImageName.btnUncheck)
@@ -73,24 +73,24 @@ class MainTodoTVC: UITableViewCell {
     
     @IBAction func checkButtonAction(_ sender: Any) {
         
-        if let idx = tvcModel?.idx{
-            if let _ = tvcModel?.isDone {
-                let todoEditAPI = TodoAPI.editTodo(idx: idx, isDone: false)
-                NetworkManager.request(apiType: todoEditAPI).subscribe(onSuccess: { [weak self] (responseModel: TodoDayPerModel) in
-                    guard let self = self else { return }
-                    self.tvcModel = WeekTodo(idx: responseModel.idx, title: responseModel.title, date: responseModel.date, isTop: responseModel.isTop, isDone: responseModel.isDone, createdAt: responseModel.createdAt)
-                }).disposed(by: self.disposeBag)
-            }
-            else {
-                let todoEditAPI = TodoAPI.editTodo(idx: idx, isDone: true)
-                NetworkManager.request(apiType: todoEditAPI).subscribe(onSuccess: { [weak self] (responseModel: TodoDayPerModel) in
-                    guard let self = self else { return }
-                    self.tvcModel = WeekTodo(idx: responseModel.idx, title: responseModel.title, date: responseModel.date, isTop: responseModel.isTop, isDone: responseModel.isDone, createdAt: responseModel.createdAt)
-                }).disposed(by: self.disposeBag)
-            }
+        guard let idx = tvcModel?.idx else { return }
+        if let _ = tvcModel?.isDone {
+            let todoEditAPI = TodoAPI.editTodo(idx: idx, isDone: false)
+            NetworkManager.request(apiType: todoEditAPI).subscribe(onSuccess: { [weak self] (responseModel: TodoDayPerModel) in
+                guard let self = self else { return }
+                self.tvcModel = WeekTodo(idx: responseModel.idx, title: responseModel.title, date: responseModel.date, isTop: responseModel.isTop, isDone: responseModel.isDone, createdAt: responseModel.createdAt)
+            }).disposed(by: self.disposeBag)
         }
-        
+        else {
+            let todoEditAPI = TodoAPI.editTodo(idx: idx, isDone: true)
+            NetworkManager.request(apiType: todoEditAPI).subscribe(onSuccess: { [weak self] (responseModel: TodoDayPerModel) in
+                guard let self = self else { return }
+                self.tvcModel = WeekTodo(idx: responseModel.idx, title: responseModel.title, date: responseModel.date, isTop: responseModel.isTop, isDone: responseModel.isDone, createdAt: responseModel.createdAt)
+            }).disposed(by: self.disposeBag)
+        }
     }
+    
+    
     
     
 }

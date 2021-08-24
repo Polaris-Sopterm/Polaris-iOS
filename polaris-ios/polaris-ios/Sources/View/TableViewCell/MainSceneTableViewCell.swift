@@ -94,7 +94,6 @@ final class MainSceneTableViewCell: MainTableViewCell {
         self.nowLabel.textColor = .white
         
         self.titleLabel.textColor = .white
-        //        self.pageControl.frame.size.width = CGFloat(5) * 5 - 14
         if #available(iOS 14.0, *) {
             self.pageControl.backgroundStyle = .minimal
             self.pageControl.allowsContinuousInteraction = false
@@ -192,49 +191,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
                 }.disposed(by: self.disposeBag)
             }
         }).disposed(by: self.disposeBag)
-        
-        
-//        switch output.state.value[0] {
-//        case StarCollectionViewState.showStar:
-//            output.starList.bind(to: self.starCV.rx.items) { [weak self] collectionView, index, item in
-//                guard let self = self else { return UICollectionViewCell() }
-//                let indexPath  = IndexPath(item: index, section: 0)
-//                let cell = collectionView.dequeueReusableCell(cell: MainStarCVC.self, forIndexPath: indexPath)
-//
-//                guard let mainStarCell = cell else { return UICollectionViewCell() }
-//                mainStarCell.cvcViewModel = item
-//                self.setTitle(stars: self.starList.count,lookBackState: self.lookBackState)
-//                return mainStarCell
-//            }.disposed(by: disposeBag)
-//
-//        default :
-//            output.state.bind(to: self.starCV.rx.items){ [weak self] collectionView, index, item in
-//                guard let self = self else { return UICollectionViewCell() }
-//
-//                let indexPath = IndexPath(item: index, section: 0)
-//                let cell      = collectionView.dequeueReusableCell(cell: MainLookBackCollectionViewCell.self,
-//                                                                   forIndexPath: indexPath)
-//
-//
-//                guard let lookbackCell = cell else { return UICollectionViewCell() }
-//                lookbackCell.delegate = self
-//
-//                if self.homeModel != nil {
-//                    lookbackCell.setState(state: self.lookBackState, bannerTitle: self.homeModel!.bannerTitle, bannerText: self.homeModel!.bannerText, buttonText: self.homeModel!.buttonText)
-//                }
-//
-//                output.mainTextRelay.subscribe(onNext: { [weak self] texts in
-//                    guard let self = self else { return }
-//                    if texts.count > 1 {
-//                        self.titleLabel.setPartialBold(originalText: texts[0], boldText: texts[1], fontSize: 23, boldFontSize: 23)
-//                    }
-//                })
-//                .disposed(by: self.disposeBag)
-//                return lookbackCell
-//            }.disposed(by: disposeBag)
-//        }
-
-      
+    
         output.todoStarList.subscribe(onNext: { [weak self] todoStarList in
             guard let self = self else { return }
             output.todoStarList.bind(to: self.todoCV.rx.items) { [weak self] collectionView, index, item in
@@ -414,7 +371,6 @@ extension MainSceneTableViewCell: UIScrollViewDelegate {
 extension MainSceneTableViewCell: LookBackCloseDelegate {
     func close() {
         self.forceToShowStarRelay.accept(true)
-//        self.bindViewModel(forceToShowStar: true, dateInfo: self.dateInfo)
     }
     func apply(isLookBack: Bool) {
         if isLookBack {
@@ -431,7 +387,6 @@ extension MainSceneTableViewCell: WeekPickerDelegate {
         self.weekLabel.text = weekText
         self.forceToShowStarRelay.accept(true)
         self.dateInfoRelay.accept(DateInfo(year: year, month: month, weekNo: weekNo))
-//        self.bindViewModel(forceToShowStar: true, dateInfo: DateInfo(year: year, month: month, weekNo: weekNo))
     }
 
 }
