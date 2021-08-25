@@ -182,22 +182,16 @@ final class MainSceneTableViewCell: MainTableViewCell {
             }
           
         }.disposed(by: self.disposeBag)
-    
-        output.todoStarList.subscribe(onNext: { [weak self] todoStarList in
-            guard let self = self else { return }
-            output.todoStarList.bind(to: self.todoCV.rx.items) { [weak self] collectionView, index, item in
-                guard let self = self else { return UICollectionViewCell() }
-                let indexPath = IndexPath(item: index, section: 0)
-                let cell      = collectionView.dequeueReusableCell(cell: MainTodoCVC.self, forIndexPath: indexPath)
-                guard let mainTodoCell = cell else { return UICollectionViewCell() }
-                mainTodoCell.viewModel = item
-                self.pageControl.numberOfPages = output.todoStarList.value.count
-                return mainTodoCell
-            }.disposed(by: self.disposeBag)
-        })
-        .disposed(by: self.disposeBag)
         
-        
+        output.todoStarList.bind(to: self.todoCV.rx.items) { [weak self] collectionView, index, item in
+            guard let self = self else { return UICollectionViewCell() }
+            let indexPath = IndexPath(item: index, section: 0)
+            let cell      = collectionView.dequeueReusableCell(cell: MainTodoCVC.self, forIndexPath: indexPath)
+            guard let mainTodoCell = cell else { return UICollectionViewCell() }
+            mainTodoCell.viewModel = item
+            self.pageControl.numberOfPages = output.todoStarList.value.count
+            return mainTodoCell
+        }.disposed(by: self.disposeBag)
     }
     
     private func setCometLayout(comet: UIImageView,size: Int) {
