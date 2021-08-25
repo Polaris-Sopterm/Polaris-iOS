@@ -24,15 +24,13 @@ class MainTodoCVC: UICollectionViewCell {
     var viewModel: MainTodoCVCViewModel? {
         didSet{
             guard let viewModel = self.viewModel else { return }
-            
             self.updateJourneyUI(viewModel.journeyValues)
             self.titleLabel.text = viewModel.journeyTitle
             
             viewModel.todoListRelay.bind(to: todoTV.rx.items) { tableView, index, item in
                 let identifier = String(describing: MainTodoTVC.self)
                 let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: IndexPath(item: index, section: 0)) as! MainTodoTVC
-                cell.tvcViewModel = item
-//                cell.setUIs(todoModel: item[index])
+                cell.tvcModel = item.weekTodos
                 return cell
             }.disposed(by: disposeBag)
         }

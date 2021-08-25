@@ -83,8 +83,8 @@ class AddTodoViewModel {
         guard let addTodoDate = self.selectDateRelay.value else { return }
         guard let fixOnTop = self.fixOnTopRelay.value      else { return }
         
-        let createTodoAPI = TodoAPI.createToDo(title: addText, date: addTodoDate.convertToString(),
-                                               journeyTitle: <#T##String#>, journeyIdx: <#T##Int?#>, isTop: <#T##Bool#>)
+//        let createTodoAPI = TodoAPI.createToDo(title: addText, date: addTodoDate.convertToString(),
+//                                               journeyTitle: <#T##String#>, journeyIdx: <#T##Int?#>, isTop: <#T##Bool#>)
     }
     
     private func requestAddJourney() {

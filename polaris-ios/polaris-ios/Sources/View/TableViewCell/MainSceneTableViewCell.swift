@@ -37,23 +37,23 @@ final class MainSceneTableViewCell: MainTableViewCell {
     private var starTVCViewModel: MainStarTVCViewModel?
     private var dataDriver: Driver<[MainStarCVCViewModel]>?
     private var homeModel: HomeModel?
-    private var starList: [MainStarCVCViewModel] = [] {
-        didSet{
-            self.setTitle(stars: self.starList.count,lookBackState: self.lookBackState)
-        }
-    }
+    private var starList: [MainStarCVCViewModel] = []
     private let disposeBag = DisposeBag()
     private let starTVCHeight = 212*(DeviceInfo.screenHeight/812.0)
     private var dateInfo = DateInfo(year: Date.currentYear, month: Date.currentMonth, weekNo: Date.currentWeekNoOfMonth)
     override static var cellHeight: CGFloat { return DeviceInfo.screenHeight }
     private let weekDict = [1:"첫째주",2:"둘째주",3:"셋째주",4:"넷째주",5:"다섯째주"]
     
+    private let forceToShowStarRelay: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    private let dateInfoRelay: BehaviorRelay<DateInfo> = BehaviorRelay(value: DateInfo(year: Date.currentYear, month: Date.currentMonth, weekNo: Date.currentWeekNoOfMonth))
+
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.setUIs()
         self.setStarCollectionView()
         self.setTodoCollectionView()
-        self.bindViewModel(forceToShowStar: false, dateInfo: self.dateInfo)
+        self.bindViewModel()
         self.setupDimView()
     }
     
@@ -90,7 +90,6 @@ final class MainSceneTableViewCell: MainTableViewCell {
         self.nowLabel.textColor = .white
         
         self.titleLabel.textColor = .white
-        //        self.pageControl.frame.size.width = CGFloat(5) * 5 - 14
         if #available(iOS 14.0, *) {
             self.pageControl.backgroundStyle = .minimal
             self.pageControl.allowsContinuousInteraction = false
@@ -119,13 +118,18 @@ final class MainSceneTableViewCell: MainTableViewCell {
         self.titleLabel.setPartialBold(originalText: "어제는\n\(stars)개의 별을 발견했어요.", boldText: "\(stars)개의 별", fontSize: 23, boldFontSize: 23)
     }
     
-    private func bindViewModel(forceToShowStar: Bool,dateInfo: DateInfo){
-        let input = MainSceneViewModel.Input(forceToShowStar: forceToShowStar,dateInfo: dateInfo)
+    private func setTitleLabel(text: String, boldText: String) {
+        self.titleLabel.setPartialBold(originalText: text, boldText: boldText, fontSize: 23, boldFontSize: 23)
+    }
+    
+    private func bindViewModel(){
+        let input = MainSceneViewModel.Input(forceToShowStar: self.forceToShowStarRelay,dateInfo: self.dateInfoRelay)
         let output = viewModel.connect(input: input)
         output.homeModelRelay.subscribe(onNext: { [weak self] homeModel in
             self?.homeModel = homeModel.last
         })
         .disposed(by: disposeBag)
+        
         
         output.starList.subscribe(onNext: { [weak self] item in
             self?.starList = item
@@ -133,75 +137,61 @@ final class MainSceneTableViewCell: MainTableViewCell {
         .disposed(by: disposeBag)
     
         output.state.subscribe(onNext: { [weak self] value in
-            self?.viewState = value[0]
+            if value.count > 0 {
+                self?.viewState = value[0]
+            }
         })
         .disposed(by: disposeBag)
         
         output.lookBackState.subscribe(onNext: { [weak self] value in
-            self?.lookBackState = value[0]
+            if value.count > 0 {
+                self?.lookBackState = value[0]
+            }
         })
         .disposed(by: disposeBag)
-    
-        output.state.subscribe(onNext: { [weak self] state in
-            self?.viewState = state[0]
-        }).disposed(by: disposeBag)
         
+        output.mainTextRelay.subscribe(onNext: { [weak self] texts in
+            guard let self = self else { return }
+            if texts.count > 1 {
+                self.titleLabel.setPartialBold(originalText: texts[0], boldText: texts[1], fontSize: 23, boldFontSize: 23)
+            }
+        })
+        .disposed(by: self.disposeBag)
         
-        switch output.state.value[0] {
-        case StarCollectionViewState.showStar:
-            self.weekContainView.alpha = 1
-            output.starList.bind(to: self.starCV.rx.items) { [weak self] collectionView, index, item in
-                guard let self = self else { return UICollectionViewCell() }
-                
+        output.starList.bind(to: self.starCV.rx.items) { [weak self] collectionView, index, item in
+            if output.starList.value.last?.starModel.starName != "lookback" {
                 let indexPath  = IndexPath(item: index, section: 0)
                 let cell = collectionView.dequeueReusableCell(cell: MainStarCVC.self, forIndexPath: indexPath)
-                
                 guard let mainStarCell = cell else { return UICollectionViewCell() }
                 mainStarCell.cvcViewModel = item
-                self.setTitle(stars: self.starList.count,lookBackState: self.lookBackState)
                 return mainStarCell
-            }.disposed(by: disposeBag)
-            
-        default :
-            output.state.bind(to: self.starCV.rx.items){ [weak self] collectionView, index, item in
+            }
+            else {
                 guard let self = self else { return UICollectionViewCell() }
                 
                 let indexPath = IndexPath(item: index, section: 0)
                 let cell      = collectionView.dequeueReusableCell(cell: MainLookBackCollectionViewCell.self,
                                                                    forIndexPath: indexPath)
-                
-                
+
                 guard let lookbackCell = cell else { return UICollectionViewCell() }
                 lookbackCell.delegate = self
-                
                 if self.homeModel != nil {
                     lookbackCell.setState(state: self.lookBackState, bannerTitle: self.homeModel!.bannerTitle, bannerText: self.homeModel!.bannerText, buttonText: self.homeModel!.buttonText)
                 }
-                
-                #warning("원래 여기는 0으로 만들어줘야 하는데 테스트 용으로 임시로 주석처리")
-//                self.weekContainView.alpha = 0
-                output.mainTextRelay.subscribe(onNext: { [weak self] text in
-                    guard let self = self else { return }
-                    
-                    self.titleLabel.setPartialBold(originalText: text, boldText: "", fontSize: 23, boldFontSize: 23)
-                })
-                .disposed(by: self.disposeBag)
                 return lookbackCell
-            }.disposed(by: disposeBag)
-        }
+            }
+          
+        }.disposed(by: self.disposeBag)
         
-        output.todoStarList.bind(to: todoCV.rx.items) { [weak self] collectionView, index, item in
+        output.todoStarList.bind(to: self.todoCV.rx.items) { [weak self] collectionView, index, item in
             guard let self = self else { return UICollectionViewCell() }
-            
             let indexPath = IndexPath(item: index, section: 0)
             let cell      = collectionView.dequeueReusableCell(cell: MainTodoCVC.self, forIndexPath: indexPath)
-
             guard let mainTodoCell = cell else { return UICollectionViewCell() }
             mainTodoCell.viewModel = item
-            
             self.pageControl.numberOfPages = output.todoStarList.value.count
             return mainTodoCell
-        }.disposed(by: disposeBag)
+        }.disposed(by: self.disposeBag)
     }
     
     private func setCometLayout(comet: UIImageView,size: Int) {
@@ -312,7 +302,6 @@ extension MainSceneTableViewCell: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         if collectionView == self.starCV && self.viewState == StarCollectionViewState.showStar {
-            
             switch self.starList.count {
             case 1 :
                 return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 30)
@@ -366,7 +355,7 @@ extension MainSceneTableViewCell: UIScrollViewDelegate {
 
 extension MainSceneTableViewCell: LookBackCloseDelegate {
     func close() {
-        self.bindViewModel(forceToShowStar: true, dateInfo: self.dateInfo)
+        self.forceToShowStarRelay.accept(true)
     }
     func apply(isLookBack: Bool) {
         if isLookBack {
@@ -381,7 +370,8 @@ extension MainSceneTableViewCell: LookBackCloseDelegate {
 extension MainSceneTableViewCell: WeekPickerDelegate {
     func apply(year: Int, month: Int, weekNo: Int, weekText: String) {
         self.weekLabel.text = weekText
-        self.bindViewModel(forceToShowStar: true, dateInfo: DateInfo(year: year, month: month, weekNo: weekNo))
+        self.forceToShowStarRelay.accept(true)
+        self.dateInfoRelay.accept(DateInfo(year: year, month: month, weekNo: weekNo))
     }
 
 }

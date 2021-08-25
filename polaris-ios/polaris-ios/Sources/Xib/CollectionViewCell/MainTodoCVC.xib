@@ -94,9 +94,8 @@
                             <constraint firstItem="hFB-K4-wkT" firstAttribute="centerY" secondItem="utt-mg-5NA" secondAttribute="centerY" id="zcG-Ip-0Rw"/>
                         </constraints>
                     </view>
-                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="l6y-eQ-iGt">
+                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="l6y-eQ-iGt">
                         <rect key="frame" x="29" y="85" width="324" height="231"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </tableView>
                 </subviews>
             </view>

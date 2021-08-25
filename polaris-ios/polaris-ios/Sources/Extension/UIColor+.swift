@@ -129,4 +129,7 @@ extension UIColor {
     @nonobjc class var liliac: UIColor {
       return UIColor(red: 185.0 / 255.0, green: 141.0 / 255.0, blue: 1.0, alpha: 1.0)
     }
+    @nonobjc class var mainSky15: UIColor {
+        return UIColor(red: 127.0 / 255.0, green: 219.0 / 255.0, blue: 239.0 / 255.0, alpha: 0.15)
+    }
 }
