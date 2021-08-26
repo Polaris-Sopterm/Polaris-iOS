@@ -53,7 +53,8 @@ class AddTodoDropdownTableViewCell: AddTodoTableViewCell {
             guard let self = self                 else { return }
             guard let selectedMenu = selectedMenu else { return }
             
-            self.selectedLabel.text = selectedMenu.displayTitle
+            let title = selectedMenu.title == "default" ? "선택 안함" : selectedMenu.title
+            self.selectedLabel.text = title
             self._delegate?.addTodoDropdownTableViewCell(self, didSelectedJourney: selectedMenu)
         })
         .disposed(by: self.disposeBag)

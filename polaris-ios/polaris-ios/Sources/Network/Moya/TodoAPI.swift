@@ -9,7 +9,7 @@ import Foundation
 import Moya
 
 enum TodoAPI {
-    case createToDo(title: String, date: String, journeyTitle: String? = nil, journeyIdx: Int? = nil, isTop: Bool)
+    case createToDo(title: String, date: String, journeyIdx: Int? = nil, isTop: Bool)
     case editTodo(idx: Int, title: String? = nil, date: String? = nil, journeyIdx: Int? = nil, isTop: Bool? = nil, isDone: Bool? = nil)
     case deleteTodo(idx: Int)
     case createJourney(title: String, date: String, journeyIdx: Int, isTop: Bool)
@@ -50,10 +50,9 @@ extension TodoAPI: TargetType {
     
     var task: Task {
         switch self {
-        case .createToDo(let title, let date, let journeyTitle, let journeyIdx, let isTop):
+        case .createToDo(let title, let date, let journeyIdx, let isTop):
             var params: [String: Any] = ["title": title, "date": date, "isTop": isTop]
-            if let journeyIdx = journeyIdx     { params["journeyIdx"] = journeyIdx }
-            if let journeyTitle = journeyTitle { params["journeyTitle"] = journeyTitle }
+            if let journeyIdx = journeyIdx { params["journeyIdx"] = journeyIdx }
             return .requestParameters(parameters: params, encoding: JSONEncoding.default)
         case .editTodo(_, let title, let date, let journeyIdx, let isTop, let isDone):
             var parameters = [String: Any]()

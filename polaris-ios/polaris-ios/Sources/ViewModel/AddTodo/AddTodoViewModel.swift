@@ -73,7 +73,7 @@ class AddTodoViewModel {
         guard let journey = self.dropdownRelay.value  else { return }
         
         let createTodoAPI = TodoAPI.createToDo(title: addText, date: addTodoDate.convertToString(),
-                                               journeyTitle: journey.title ?? "default", journeyIdx: journey.idx, isTop: fixOnTop)
+                                               journeyIdx: journey.idx, isTop: fixOnTop)
         NetworkManager.request(apiType: createTodoAPI).subscribe(onSuccess: { [weak self] (responseModel: AddTodoResponseModel) in
             self?.completeAddTodoSubject.onNext(())
             self?.loadingSubject.onNext(false)
@@ -89,7 +89,7 @@ class AddTodoViewModel {
         guard let journey = self.addTodoJourney            else { return }
 
         let createTodoAPI = TodoAPI.createToDo(title: addText, date: addTodoDate.convertToString(),
-                                               journeyTitle: journey.title, journeyIdx: journey.idx, isTop: fixOnTop)
+                                               journeyIdx: journey.idx, isTop: fixOnTop)
         NetworkManager.request(apiType: createTodoAPI).subscribe(onSuccess: { [weak self] (responseModel: AddTodoResponseModel) in
             self?.completeAddTodoSubject.onNext(())
             self?.loadingSubject.onNext(false)
