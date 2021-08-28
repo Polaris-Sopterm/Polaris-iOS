@@ -47,7 +47,7 @@ class AddTodoViewModel {
         self.addTodoDate = date
     }
     
-    func setEditTodoModel(_ todo: TodoDayPerModel) {
+    func setEditTodoModel(_ todo: TodoModel) {
         self.todoDayModel = todo
     }
     
@@ -113,7 +113,7 @@ class AddTodoViewModel {
         
         let todoEditAPI = TodoAPI.editTodo(idx: idx, title: edittedText, date: edittedDate.convertToString(),
                                            journeyIdx: edittedJourney.idx, isTop: edittedFixOnTop)
-        NetworkManager.request(apiType: todoEditAPI).subscribe(onSuccess: { [weak self] (responseModel: TodoDayPerModel)  in
+        NetworkManager.request(apiType: todoEditAPI).subscribe(onSuccess: { [weak self] (responseModel: TodoModel)  in
             self?.completeAddTodoSubject.onNext(())
             self?.loadingSubject.onNext(false)
         }, onFailure: { [weak self] _ in
@@ -186,7 +186,7 @@ class AddTodoViewModel {
     private(set) var addTodoJourney: WeekJourneyModel?
     
     // 일정 수정할 때 씀 - Edit Todo
-    private(set) var todoDayModel: TodoDayPerModel?
+    private(set) var todoDayModel: TodoModel?
     
     private(set) var currentAddOption: AddTodoVC.AddOptions?
     

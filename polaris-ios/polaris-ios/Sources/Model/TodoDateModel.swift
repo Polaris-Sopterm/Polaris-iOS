@@ -9,9 +9,9 @@ import Foundation
 
 struct TodoDateModel {
     var date: String
-    var todos: [TodoModel]
+    var todos: [TodoDisplayModel]
     
-    init(date: String, todos: [TodoModel]) {
+    init(date: String, todos: [TodoDisplayModel]) {
         self.date = date
         self.todos = todos
     }

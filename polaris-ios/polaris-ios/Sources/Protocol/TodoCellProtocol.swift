@@ -39,7 +39,7 @@ class TodoCategoryCell: UITableViewCell {
         self.bindPanGesture()
     }
     
-    func configure(_ todoModel: TodoModelProtocol) {}
+    func configure(_ todoModel: TodoModel) {}
     
     func expandCell(isExpanded: Bool, animated: Bool) {
         self.layoutForExpaned(isExpaned: isExpanded, animated: animated)

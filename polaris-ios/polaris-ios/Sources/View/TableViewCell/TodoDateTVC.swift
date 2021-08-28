@@ -31,6 +31,7 @@ class TodoDateTVC: UITableViewCell {
        
     }
     override func prepareForReuse() {
+        super.prepareForReuse()
         self.disposebag = DisposeBag()
     }
     
@@ -39,8 +40,8 @@ class TodoDateTVC: UITableViewCell {
 
     }
     
-    func setUIs(todoModel: WeekTodo){
-        if todoModel.isDone! == "Done" {
+    func setUIs(todoModel: TodoModel){
+        if todoModel.isDone != nil {
             self.checkButton.setImage(UIImage(named: ImageName.btnCheck), for: .normal)
             
             self.todoTitleLabel.textColor = .inactiveTextPurple
@@ -51,7 +52,8 @@ class TodoDateTVC: UITableViewCell {
             self.todoTitleLabel.textColor = .maintext
             self.todoSubLabel.textColor = .maintext
         }
-        if todoModel.isTop! {
+        
+        if todoModel.isTop == true {
             self.fixImageView.alpha = 1
         }
         else {

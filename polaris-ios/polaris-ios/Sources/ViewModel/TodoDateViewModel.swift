@@ -17,7 +17,7 @@ class TodoDateViewModel {
     
     
     var dates: [String] = []
-    var todos: [[TodoModel]] = []
+    var todos: [[TodoDisplayModel]] = []
     var disposeBag = DisposeBag()
     var todoDateModels: [TodoDateModel] = []
     
@@ -33,7 +33,7 @@ class TodoDateViewModel {
    
 
     func connect(input: Input) -> Output {
-        todoDateModels = [TodoDateModel(date: "4월 12일 월요일", todos: [TodoModel(todoTitle: "메인화면 완성하기", todoSubtitle: "폴라리스", fixed: true,checked: false),TodoModel(todoTitle: "메인화면 완성하기", todoSubtitle: "폴라리스", fixed: false,checked: false)]),TodoDateModel(date: "4월 13일 화요일", todos: [TodoModel(todoTitle: "2_1", todoSubtitle: "0.1", fixed: true,checked: false),TodoModel(todoTitle: "2_2", todoSubtitle: "0.2", fixed: false,checked: false)]),TodoDateModel(date: "4월 14일 수요일", todos: [TodoModel(todoTitle: "3_1", todoSubtitle: "0.1", fixed: true,checked: false),TodoModel(todoTitle: "3_2", todoSubtitle: "0.2", fixed: false,checked: false)]),TodoDateModel(date: "4월 15일 목요일", todos: [TodoModel(todoTitle: "4_1", todoSubtitle: "0.1", fixed: true,checked: false),TodoModel(todoTitle: "4_2", todoSubtitle: "0.2", fixed: false,checked: false)])]
+        todoDateModels = [TodoDateModel(date: "4월 12일 월요일", todos: [TodoDisplayModel(todoTitle: "메인화면 완성하기", todoSubtitle: "폴라리스", fixed: true,checked: false),TodoDisplayModel(todoTitle: "메인화면 완성하기", todoSubtitle: "폴라리스", fixed: false,checked: false)]),TodoDateModel(date: "4월 13일 화요일", todos: [TodoDisplayModel(todoTitle: "2_1", todoSubtitle: "0.1", fixed: true,checked: false),TodoDisplayModel(todoTitle: "2_2", todoSubtitle: "0.2", fixed: false,checked: false)]),TodoDateModel(date: "4월 14일 수요일", todos: [TodoDisplayModel(todoTitle: "3_1", todoSubtitle: "0.1", fixed: true,checked: false),TodoDisplayModel(todoTitle: "3_2", todoSubtitle: "0.2", fixed: false,checked: false)]),TodoDateModel(date: "4월 15일 목요일", todos: [TodoDisplayModel(todoTitle: "4_1", todoSubtitle: "0.1", fixed: true,checked: false),TodoDisplayModel(todoTitle: "4_2", todoSubtitle: "0.2", fixed: false,checked: false)])]
         let dataDriver: Driver<[TodoDateModel]> = Observable.of(todoDateModels).asDriver(onErrorJustReturn: [])
       
         input.checkButtonClicked.flatMapLatest{

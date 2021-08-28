@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TodoModel {
+struct TodoDisplayModel {
     var todoTitle: String
     var todoSubtitle: String
     var fixed: Bool

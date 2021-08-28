@@ -73,15 +73,13 @@ class TodoTableViewCell: MainTableViewCell {
     }
     
     private func bindButtons() {
-        self.categoryButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                guard let self = self else { return }
-                
-                let currentTab               = self.viewModel.currentTabRelay.value
-                let changedTab: TodoCategory = currentTab == .day ? .journey : .day
-                self.viewModel.updateCurrentTab(changedTab)
-            })
-            .disposed(by: self.disposeBag)
+        self.categoryButton.rx.tap.subscribe(onNext: { [weak self] in
+            guard let self = self else { return }
+            
+            let currentTab               = self.viewModel.currentTabRelay.value
+            let changedTab: TodoCategory = currentTab == .day ? .journey : .day
+            self.viewModel.updateCurrentTab(changedTab)
+        }).disposed(by: self.disposeBag)
     }
     
     private func observeViewModel() {
@@ -162,7 +160,7 @@ extension TodoTableViewCell: UITableViewDataSource {
         }
         
         let currentTab       = self.viewModel.currentTabRelay.value
-        let todoList         = self.viewModel.todoDayList(at: indexPath.section)
+        let todoList         = self.viewModel.todoList(at: indexPath.section)
         let cell             = tableView.dequeueReusableCell(cell: currentTab.cellType, forIndexPath: indexPath)
         let expanedIndexPath = self.viewModel.expanedCellIndexPath(of: currentTab)
         
@@ -268,11 +266,11 @@ extension TodoTableViewCell: TodoCategoryCellDelegate {
 
 extension TodoTableViewCell: DayTodoTableViewCellDelegate {
     
-    func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, didTapCheck todo: TodoDayPerModel) {
+    func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, didTapCheck todo: TodoModel) {
         self.viewModel.updateDoneStatus(todo)
     }
     
-    func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, didTapEdit todo: TodoDayPerModel) {
+    func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, didTapEdit todo: TodoModel) {
         guard let addTodoVC = AddTodoVC.instantiateFromStoryboard(StoryboardName.addTodo),
               let visibleController = UIViewController.getVisibleController() else { return }
         
@@ -282,7 +280,7 @@ extension TodoTableViewCell: DayTodoTableViewCellDelegate {
         addTodoVC.presentWithAnimation(from: visibleController)
     }
     
-    func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, didTapDelete todo: TodoDayPerModel) {
+    func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, didTapDelete todo: TodoModel) {
         guard let todoIdx = todo.idx else { return }
         self.viewModel.requestDeleteTodo(todoIdx)
     }
@@ -291,20 +289,21 @@ extension TodoTableViewCell: DayTodoTableViewCellDelegate {
 
 extension TodoTableViewCell: JourneyTodoTableViewDelegate {
     
-    func journeyTodoTableViewCell(_ cell: JourneyTodoTableViewCell, didTapCheck todo: WeekTodo) {
+    func journeyTodoTableViewCell(_ cell: JourneyTodoTableViewCell, didTapCheck todo: TodoModel) {
         
     }
     
-    func journeyTodoTableViewCell(_ cell: JourneyTodoTableViewCell, didTapEdit todo: WeekTodo) {
+    func journeyTodoTableViewCell(_ cell: JourneyTodoTableViewCell, didTapEdit todo: TodoModel) {
         guard let addTodoVC = AddTodoVC.instantiateFromStoryboard(StoryboardName.addTodo),
               let visibleController = UIViewController.getVisibleController() else { return }
         
         addTodoVC.setAddOptions(.edittedTodo)
+        addTodoVC.setEditTodo(todo)
         addTodoVC.delegate = self
         addTodoVC.presentWithAnimation(from: visibleController)
     }
     
-    func journeyTodoTableViewCell(_ cell: JourneyTodoTableViewCell, didTapDelete todo: WeekTodo) {
+    func journeyTodoTableViewCell(_ cell: JourneyTodoTableViewCell, didTapDelete todo: TodoModel) {
         guard let todoIdx = todo.idx else { return }
         self.viewModel.requestDeleteTodo(todoIdx)
     }

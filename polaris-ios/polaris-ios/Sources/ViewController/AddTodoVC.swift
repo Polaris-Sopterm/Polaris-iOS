@@ -46,7 +46,7 @@ class AddTodoVC: HalfModalVC {
         self.viewModel.setAddTodoJourney(journeyModel)
     }
     
-    func setEditTodo(_ todo: TodoDayPerModel) {
+    func setEditTodo(_ todo: TodoModel) {
         self.viewModel.setEditTodoModel(todo)
     }
     

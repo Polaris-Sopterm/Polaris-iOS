@@ -34,14 +34,14 @@ class MainTodoTVC: UITableViewCell {
     }
     
     
-    func setUIs(todoModel: WeekTodo){
+    func setUIs(todoModel: TodoModel){
         self.backgroundColor = .clear
         self.titleLabel.textColor = .white
         self.subLabel.textColor = .white
         self.titleLabel.font = UIFont.systemFont(ofSize: 16,weight: .bold)
         self.subLabel.font = UIFont.systemFont(ofSize: 11,weight: .medium)
         
-        if todoModel.isDone == "Done" {
+        if todoModel.isDone != nil {
             self.checkButton.setImage(UIImage(named: ImageName.btnCheck), for: .normal)
             self.titleLabel.alpha = 0.35
             self.subLabel.alpha = 0.35
@@ -50,7 +50,7 @@ class MainTodoTVC: UITableViewCell {
         else {
             self.checkButton.setImage(UIImage(named: ImageName.btnUncheck), for: .normal)
         }
-        if todoModel.isTop! {
+        if todoModel.isTop == true {
             self.fixedImage.alpha = 1
         }
         else {

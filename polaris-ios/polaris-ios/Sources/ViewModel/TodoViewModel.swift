@@ -50,7 +50,7 @@ class TodoViewModel {
         let currentTab = self.currentTabRelay.value
         
         guard currentTab == .day else { return false }
-        let todoDayList = self.todoDayList(at: section)
+        let todoDayList = self.todoList(at: section)
         return todoDayList.count == 0 ? true : false
     }
     
@@ -68,7 +68,7 @@ class TodoViewModel {
     }
     
     // 전부 현재 Selected Tab 기준으로 받아옴
-    func todoDayList(at section: Int) -> [TodoModelProtocol] {
+    func todoList(at section: Int) -> [TodoModel] {
         if self.currentTabRelay.value == .day {
             guard let todoDate = self.todoDayHeadersInform[safe: section] else { return [] }
             guard let todoList = self.todoDayListTable[todoDate]          else { return [] }
@@ -133,13 +133,13 @@ class TodoViewModel {
         }
     }
     
-    func updateDoneStatus(_ todoModel: TodoDayPerModel) {
+    func updateDoneStatus(_ todoModel: TodoModel) {
         guard let todoIdx = todoModel.idx else { return }
         
         let edittedIsDone = todoModel.isDone == nil ? true : false
         let todoEditAPI = TodoAPI.editTodo(idx: todoIdx, isDone: edittedIsDone)
         
-        NetworkManager.request(apiType: todoEditAPI).subscribe(onSuccess: { [weak self] (responseModel: TodoDayPerModel) in
+        NetworkManager.request(apiType: todoEditAPI).subscribe(onSuccess: { [weak self] (responseModel: TodoModel) in
             guard let self = self else { return }
             self.requestTodoDayList(shouldScroll: false)
         }).disposed(by: self.disposeBag)
@@ -162,7 +162,7 @@ class TodoViewModel {
      */
     private(set) var dayExpanedIndexPath: IndexPath?
     private(set) var todoDayHeadersInform: [Date]
-    private(set) var todoDayListTable = [Date: [TodoDayPerModel]]()
+    private(set) var todoDayListTable = [Date: [TodoModel]]()
     
     /*
      여정별 할일 보여줄 때, 사용하는 Property
