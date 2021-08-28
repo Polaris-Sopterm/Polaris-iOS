@@ -16,15 +16,20 @@ class PolarisToastManager {
         guard let toastView: PolarisToastView = PolarisToastView.fromNib()                  else { return }
         guard let keyWindow = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first else { return }
         
-        toastView.frame = CGRect(x: 23, y: DeviceInfo.screenHeight - 51 - type(of: self).toastHeight,
-                                 width: type(of: self).toastWidth, height: type(of: self).toastHeight)
         toastView.configure(text: text, touchHandler: touchHandler)
         toastView.duration = duration
         
         keyWindow.addSubview(toastView)
+        toastView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(23)
+            make.trailing.equalToSuperview().offset(-23)
+            make.bottom.equalToSuperview().offset(-51)
+            make.height.equalTo(48)
+        }
+        
         toastView.show()
     }
     
-    private static let toastHeight: CGFloat = 48
-    private static let toastWidth: CGFloat  = DeviceInfo.screenWidth - (23 * 2)
+    private init() { }
+    
 }

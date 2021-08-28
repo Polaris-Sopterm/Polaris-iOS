@@ -154,6 +154,7 @@ class AddTodoVC: HalfModalVC {
             self.delegate?.addTodoViewController(self, didCompleteAddOption: currentOption)
             self.dismissWithAnimation()
             
+            guard currentOption == .perDayAddTodo || currentOption == .perJourneyAddTodo else { return }
             PolarisToastManager.shared.showToast(with: "할 일이 추가되었어요.")
         }).disposed(by: self.disposeBag)
         

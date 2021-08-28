@@ -87,6 +87,19 @@ class TodoViewModel {
         }
     }
     
+    func requestAddTodo(_ todoModel: TodoModel) {
+        guard let title = todoModel.title             else { return }
+        guard let date = todoModel.date               else { return }
+        guard let isTop = todoModel.isTop             else { return }
+        let journeyIdx = todoModel.journey?.idx
+        
+        let createTodoAPI = TodoAPI.createToDo(title: title, date: date, journeyIdx: journeyIdx, isTop: isTop)
+        NetworkManager.request(apiType: createTodoAPI).subscribe(onSuccess: { [weak self] (responseModel: AddTodoResponseModel) in
+            self?.requestTodoJourneyList()
+            self?.requestTodoDayList(shouldScroll: false)
+        }).disposed(by: self.disposeBag)
+    }
+    
     func requestTodoJourneyList() {
         let todoListAPI = TodoAPI.listTodoByJourney(year: Date.currentYear,
                                                     month: Date.currentMonth,
@@ -111,14 +124,27 @@ class TodoViewModel {
         }).disposed(by: self.disposeBag)
     }
     
-    func requestDeleteTodo(_ todoIdx: Int) {
+    func requestDeleteTodo(_ todoIdx: Int, completion: @escaping (Bool) -> Void) {
+        guard self.requestingDelete == false else { return }
+        
         let todoDayDeleteAPI = TodoAPI.deleteTodo(idx: todoIdx)
+        
+        self.requestingDelete = true
         NetworkManager.request(apiType: todoDayDeleteAPI).subscribe(onSuccess: { [weak self] (successModel: SuccessModel) in
-            guard let self = self                else { return }
+            guard let self = self else { return }
+            self.requestingDelete = false
+            
+            var isSuccess: Bool = false
+            defer { completion(isSuccess) }
+
             guard successModel.isSuccess == true else { return }
             
+            isSuccess = true
             self.requestTodoJourneyList()
             self.requestTodoDayList(shouldScroll: false)
+        }, onFailure: { [weak self] _ in
+            completion(false)
+            self?.requestingDelete = false
         }).disposed(by: self.disposeBag)
     }
     
@@ -163,7 +189,8 @@ class TodoViewModel {
         }
     }
     
-    private var requestingDone: Bool = false
+    private var requestingDelete: Bool = false
+    private var requestingDone: Bool   = false
     
     /*
      날짜별 할일 보여줄 때, 사용하는 Property

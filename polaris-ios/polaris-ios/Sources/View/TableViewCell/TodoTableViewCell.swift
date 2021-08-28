@@ -93,9 +93,7 @@ class TodoTableViewCell: MainTableViewCell {
                 if self.viewModel.currentTabRelay.value == .day {
                     self.scrollToCurrentDay()
                 } else {
-                    self.viewModel.todoJourneyList.isEmpty ?
-                        self.tableView.setContentOffset(CGPoint(x: 0, y: type(of: self).navigationHeight), animated: false) :
-                        self.tableView.scrollToRow(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
+                    self.tableView.setContentOffset(CGPoint(x: 0, y: type(of: self).navigationHeight), animated: false)
                 }
                 self.updateCategoryButton(as: currentTab == .day ? .journey : .day)
             })
@@ -282,7 +280,12 @@ extension TodoTableViewCell: DayTodoTableViewCellDelegate {
     
     func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, didTapDelete todo: TodoModel) {
         guard let todoIdx = todo.idx else { return }
-        self.viewModel.requestDeleteTodo(todoIdx)
+        self.viewModel.requestDeleteTodo(todoIdx) { isSuccess in
+            guard isSuccess == true else { return }
+            PolarisToastManager.shared.showToast(with: "할 일이 삭제되었어요. 되돌리려면 눌러주세요.") { [weak self] in
+                self?.viewModel.requestAddTodo(todo)
+            }
+        }
     }
     
 }
@@ -305,7 +308,12 @@ extension TodoTableViewCell: JourneyTodoTableViewDelegate {
     
     func journeyTodoTableViewCell(_ cell: JourneyTodoTableViewCell, didTapDelete todo: TodoModel) {
         guard let todoIdx = todo.idx else { return }
-        self.viewModel.requestDeleteTodo(todoIdx)
+        self.viewModel.requestDeleteTodo(todoIdx) { isSuccess in
+            guard isSuccess == true else { return }
+            PolarisToastManager.shared.showToast(with: "할 일이 삭제되었어요. 되돌리려면 눌러주세요.") { [weak self] in
+                self?.viewModel.requestAddTodo(todo)
+            }
+        }
     }
     
 }
