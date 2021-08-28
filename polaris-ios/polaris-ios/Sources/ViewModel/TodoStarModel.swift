@@ -15,6 +15,4 @@ struct TodoStarModel {
         self.star = star
         self.todos = todos
     }
-    
-    
 }

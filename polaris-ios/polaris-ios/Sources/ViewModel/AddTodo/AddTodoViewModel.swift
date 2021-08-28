@@ -25,7 +25,7 @@ class AddTodoViewModel {
         return (try? self.addListTypes.value().count) ?? 0
     }
     
-    let addListTypes      = BehaviorSubject<[AddTodoTableViewCellProtocol.Type]>(value: [])
+    let addListTypes    = BehaviorSubject<[AddTodoTableViewCellProtocol.Type]>(value: [])
     
     let addTextRelay    = BehaviorRelay<String?>(value: nil)
     let dropdownRelay   = BehaviorRelay<JourneyTitleModel?>(value: nil)

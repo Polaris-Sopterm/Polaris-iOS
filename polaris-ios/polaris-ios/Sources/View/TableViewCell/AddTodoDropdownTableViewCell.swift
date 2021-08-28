@@ -22,7 +22,6 @@ class AddTodoDropdownTableViewCell: AddTodoTableViewCell {
     // MARK: - Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         self.registerCell()
         self.setupContainerView()
         self.bindLabel()
@@ -56,8 +55,7 @@ class AddTodoDropdownTableViewCell: AddTodoTableViewCell {
             let title = selectedMenu.title == "default" ? "선택 안함" : selectedMenu.title
             self.selectedLabel.text = title
             self._delegate?.addTodoDropdownTableViewCell(self, didSelectedJourney: selectedMenu)
-        })
-        .disposed(by: self.disposeBag)
+        }).disposed(by: self.disposeBag)
     }
     
     private func bindButton() {
@@ -67,8 +65,7 @@ class AddTodoDropdownTableViewCell: AddTodoTableViewCell {
                 guard let expaned = try? self.viewModel.isExpanded.value() else { return }
                 
                 self.viewModel.isExpanded.onNext(!expaned)
-            })
-            .disposed(by: self.disposeBag)
+            }).disposed(by: self.disposeBag)
         
         self.viewModel.isExpanded
             .distinctUntilChanged()
@@ -100,8 +97,7 @@ class AddTodoDropdownTableViewCell: AddTodoTableViewCell {
                 
                 (self.superview as? UITableView)?.beginUpdates()
                 (self.superview as? UITableView)?.endUpdates()
-            })
-            .disposed(by: self.disposeBag)
+            }).disposed(by: self.disposeBag)
     }
     
     private func bindTableView() {
@@ -115,8 +111,7 @@ class AddTodoDropdownTableViewCell: AddTodoTableViewCell {
             guard let dropdownCell = cell else { return UITableViewCell() }
             dropdownCell.configure(by: item)
             return dropdownCell
-        }
-        .disposed(by: self.disposeBag)
+        }.disposed(by: self.disposeBag)
     }
     
     private static let duration: TimeInterval       = 0.2

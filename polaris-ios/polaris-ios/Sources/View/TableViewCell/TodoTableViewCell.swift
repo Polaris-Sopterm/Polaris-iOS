@@ -290,7 +290,7 @@ extension TodoTableViewCell: DayTodoTableViewCellDelegate {
 extension TodoTableViewCell: JourneyTodoTableViewDelegate {
     
     func journeyTodoTableViewCell(_ cell: JourneyTodoTableViewCell, didTapCheck todo: TodoModel) {
-        
+        self.viewModel.updateDoneStatus(todo)
     }
     
     func journeyTodoTableViewCell(_ cell: JourneyTodoTableViewCell, didTapEdit todo: TodoModel) {

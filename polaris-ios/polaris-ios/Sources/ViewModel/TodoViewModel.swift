@@ -134,14 +134,21 @@ class TodoViewModel {
     }
     
     func updateDoneStatus(_ todoModel: TodoModel) {
-        guard let todoIdx = todoModel.idx else { return }
+        guard self.requestingDone == false else { return }
+        guard let todoIdx = todoModel.idx  else { return }
         
         let edittedIsDone = todoModel.isDone == nil ? true : false
-        let todoEditAPI = TodoAPI.editTodo(idx: todoIdx, isDone: edittedIsDone)
+        let todoEditAPI   = TodoAPI.editTodo(idx: todoIdx, isDone: edittedIsDone)
         
+        self.requestingDone = true
         NetworkManager.request(apiType: todoEditAPI).subscribe(onSuccess: { [weak self] (responseModel: TodoModel) in
             guard let self = self else { return }
+            self.requestingDone = true
+            
             self.requestTodoDayList(shouldScroll: false)
+            self.requestTodoJourneyList()
+        }, onFailure: { [weak self] _ in
+            self?.requestingDone = false
         }).disposed(by: self.disposeBag)
     }
     
@@ -155,6 +162,8 @@ class TodoViewModel {
             self.todoDayListTable[todoHeader] = todoModelForHeader?.todoList ?? []
         }
     }
+    
+    private var requestingDone: Bool = false
     
     /*
      날짜별 할일 보여줄 때, 사용하는 Property
