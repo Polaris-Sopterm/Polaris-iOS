@@ -71,9 +71,94 @@
             </objects>
             <point key="canvasLocation" x="139" y="131"/>
         </scene>
+        <!--Sign OutVC-->
+        <scene sceneID="Qfd-KU-Lh2">
+            <objects>
+                <viewController storyboardIdentifier="SignOutVC" id="pqm-My-uDu" customClass="SignOutVC" customModule="Polaris" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="J8e-OZ-dJT">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9HO-BZ-TLi">
+                                <rect key="frame" x="0.0" y="44" width="414" height="60"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rpq-DT-Ovq">
+                                        <rect key="frame" x="9" y="6" width="48" height="48"/>
+                                        <state key="normal" image="btnBackLookBack"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="imageTintColor">
+                                                <color key="value" name="mainText"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="6Ov-Tf-BCr"/>
+                                    <constraint firstItem="Rpq-DT-Ovq" firstAttribute="centerY" secondItem="9HO-BZ-TLi" secondAttribute="centerY" id="8c4-Es-fy2"/>
+                                    <constraint firstItem="Rpq-DT-Ovq" firstAttribute="leading" secondItem="9HO-BZ-TLi" secondAttribute="leading" constant="9" id="K2c-sJ-ohL"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="정말 탈퇴하시겠어요?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JhV-EQ-iI0">
+                                <rect key="frame" x="24" y="107" width="204.5" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <color key="textColor" name="mainText"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="탈퇴하면 되돌릴 수 없어요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Xd-ET-QH8">
+                                <rect key="frame" x="24" y="149" width="159.5" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" name="mainText"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QPh-Ls-mlk">
+                                <rect key="frame" x="23" y="805" width="368" height="54"/>
+                                <color key="backgroundColor" name="mainSky"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="QPh-Ls-mlk" secondAttribute="height" multiplier="184:27" id="CpH-DT-QVW"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                <state key="normal" title="탈퇴하기">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="4Vb-KH-gZk"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="7Xd-ET-QH8" firstAttribute="leading" secondItem="4Vb-KH-gZk" secondAttribute="leading" constant="24" id="0sI-42-phR"/>
+                            <constraint firstItem="7Xd-ET-QH8" firstAttribute="top" secondItem="JhV-EQ-iI0" secondAttribute="bottom" constant="13" id="3hf-bn-Occ"/>
+                            <constraint firstItem="9HO-BZ-TLi" firstAttribute="top" secondItem="4Vb-KH-gZk" secondAttribute="top" id="5SE-NU-atk"/>
+                            <constraint firstAttribute="bottom" secondItem="QPh-Ls-mlk" secondAttribute="bottom" constant="37" id="D7n-si-QUe"/>
+                            <constraint firstItem="JhV-EQ-iI0" firstAttribute="top" secondItem="9HO-BZ-TLi" secondAttribute="bottom" constant="3" id="Gxz-KJ-JxP"/>
+                            <constraint firstItem="4Vb-KH-gZk" firstAttribute="trailing" secondItem="QPh-Ls-mlk" secondAttribute="trailing" constant="23" id="JXa-vP-XLH"/>
+                            <constraint firstItem="9HO-BZ-TLi" firstAttribute="leading" secondItem="4Vb-KH-gZk" secondAttribute="leading" id="MIT-vr-tj3"/>
+                            <constraint firstItem="JhV-EQ-iI0" firstAttribute="leading" secondItem="4Vb-KH-gZk" secondAttribute="leading" constant="24" id="P5d-yd-fvv"/>
+                            <constraint firstItem="9HO-BZ-TLi" firstAttribute="trailing" secondItem="4Vb-KH-gZk" secondAttribute="trailing" id="SiU-nG-mfs"/>
+                            <constraint firstItem="QPh-Ls-mlk" firstAttribute="leading" secondItem="4Vb-KH-gZk" secondAttribute="leading" constant="23" id="kTd-xE-0J7"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backButton" destination="Rpq-DT-Ovq" id="pqA-w0-9G2"/>
+                        <outlet property="signoutButton" destination="QPh-Ls-mlk" id="gcP-TI-Znf"/>
+                        <outlet property="titleLabel" destination="JhV-EQ-iI0" id="vFZ-C4-NDg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EbO-20-GN0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="138" y="800"/>
+        </scene>
     </scenes>
     <resources>
         <image name="btnBackLookBack" width="48" height="48"/>
+        <namedColor name="mainSky">
+            <color red="0.49799999594688416" green="0.85900002717971802" blue="0.93699997663497925" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="mainText">
             <color red="0.25099998712539673" green="0.25099998712539673" blue="0.54900002479553223" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

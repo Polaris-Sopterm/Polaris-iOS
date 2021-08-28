@@ -384,6 +384,12 @@
 		CEE574F026307D7C00EA64B7 /* PerDayItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE574EE26307D7C00EA64B7 /* PerDayItemCollectionViewCell.swift */; };
 		CEE574F126307D7C00EA64B7 /* PerDayItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE574EF26307D7C00EA64B7 /* PerDayItemCollectionViewCell.xib */; };
 		CEE574F5263092A400EA64B7 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE574F4263092A400EA64B7 /* Date+.swift */; };
+		CEEBE6CD26DA1FBA004A54BA /* SignOutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEBE6CC26DA1FBA004A54BA /* SignOutVC.swift */; };
+		CEEBE6CE26DA1FBA004A54BA /* SignOutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEBE6CC26DA1FBA004A54BA /* SignOutVC.swift */; };
+		CEEBE6CF26DA1FBA004A54BA /* SignOutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEBE6CC26DA1FBA004A54BA /* SignOutVC.swift */; };
+		CEEBE6D226DA25A0004A54BA /* SignoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEBE6D126DA25A0004A54BA /* SignoutViewModel.swift */; };
+		CEEBE6D326DA25A0004A54BA /* SignoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEBE6D126DA25A0004A54BA /* SignoutViewModel.swift */; };
+		CEEBE6D426DA25A0004A54BA /* SignoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEBE6D126DA25A0004A54BA /* SignoutViewModel.swift */; };
 		CEEE573D262A952100C39358 /* MockProviderFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE573B262A952000C39358 /* MockProviderFactory.swift */; };
 		CEEE573E262A952100C39358 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE573C262A952100C39358 /* NetworkManager.swift */; };
 		CEEE5743262A955D00C39358 /* PolarisUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE5742262A955D00C39358 /* PolarisUserManager.swift */; };
@@ -606,6 +612,8 @@
 		CEE574EE26307D7C00EA64B7 /* PerDayItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PerDayItemCollectionViewCell.swift; path = "polaris-ios/Sources/View/CollectionViewCell/PerDayItemCollectionViewCell.swift"; sourceTree = SOURCE_ROOT; };
 		CEE574EF26307D7C00EA64B7 /* PerDayItemCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = PerDayItemCollectionViewCell.xib; path = "polaris-ios/Sources/Xib/CollectionViewCell/PerDayItemCollectionViewCell.xib"; sourceTree = SOURCE_ROOT; };
 		CEE574F4263092A400EA64B7 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
+		CEEBE6CC26DA1FBA004A54BA /* SignOutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutVC.swift; sourceTree = "<group>"; };
+		CEEBE6D126DA25A0004A54BA /* SignoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignoutViewModel.swift; sourceTree = "<group>"; };
 		CEEE573B262A952000C39358 /* MockProviderFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockProviderFactory.swift; sourceTree = "<group>"; };
 		CEEE573C262A952100C39358 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		CEEE5742262A955D00C39358 /* PolarisUserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolarisUserManager.swift; sourceTree = "<group>"; };
@@ -796,6 +804,7 @@
 		CE04A04C26234107007C98E2 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				CEEBE6D026DA2594004A54BA /* Setting */,
 				CED6B6E626CAD0DA00D37647 /* AddTodo */,
 				CE40B3F726C0408B0000151F /* Intro */,
 				ECA4942B262829EA00CC2EB8 /* TodoDateViewModel.swift */,
@@ -807,7 +816,6 @@
 				EC7A3BF726394CC900B59C98 /* MainTodoCVCViewModel.swift */,
 				EC7A3BFA2639537A00B59C98 /* MainTodoTVCViewModel.swift */,
 				CE573FFF267C8E9900665933 /* TodoViewModel.swift */,
-				CED6B6E726CAD10300D37647 /* SettingViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -990,6 +998,24 @@
 			path = TodoList;
 			sourceTree = "<group>";
 		};
+		CEEBE6CB26DA1FA3004A54BA /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				CED6B6E226CACE8F00D37647 /* SettingVC.swift */,
+				CEEBE6CC26DA1FBA004A54BA /* SignOutVC.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		CEEBE6D026DA2594004A54BA /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				CED6B6E726CAD10300D37647 /* SettingViewModel.swift */,
+				CEEBE6D126DA25A0004A54BA /* SignoutViewModel.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
 		CEEE5741262A954F00C39358 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
@@ -1115,6 +1141,7 @@
 		ECA4941E26281FA800CC2EB8 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				CEEBE6CB26DA1FA3004A54BA /* Setting */,
 				CE40B3F226C03ED70000151F /* Intro */,
 				CEA3CFE326A8695200577DA4 /* Common */,
 				CEEE574F262A965400C39358 /* HalfModalVC.swift */,
@@ -1122,7 +1149,6 @@
 				CE574DA7263555330046D20A /* AddTodoVC+Delegate.swift */,
 				CEA44E58267B386800A05650 /* MainVC.swift */,
 				EC8C688926CA1C46003CFA71 /* WeekPickerVC.swift */,
-				CED6B6E226CACE8F00D37647 /* SettingVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1588,6 +1614,7 @@
 				CE574019267CB1B700665933 /* TodoCellProtocol.swift in Sources */,
 				CEA3CFE526A8696400577DA4 /* PolarisWebViewController.swift in Sources */,
 				CEAC5990266F9F210092A255 /* AuthModel.swift in Sources */,
+				CEEBE6CD26DA1FBA004A54BA /* SignOutVC.swift in Sources */,
 				ECA49478262C46BB00CC2EB8 /* MainSceneViewModel.swift in Sources */,
 				CE40B3F926C040A10000151F /* OnboardingViewModel.swift in Sources */,
 				ECA49470262C2DD200CC2EB8 /* MainStarCVC.swift in Sources */,
@@ -1645,6 +1672,7 @@
 				CEA44E5F267B398100A05650 /* MainSceneTableViewCell.swift in Sources */,
 				EC7A3BFB2639537A00B59C98 /* MainTodoTVCViewModel.swift in Sources */,
 				EC49B959262EAF3D0080F8C3 /* StarNames.swift in Sources */,
+				CEEBE6D226DA25A0004A54BA /* SignoutViewModel.swift in Sources */,
 				ECA4942C262829EA00CC2EB8 /* TodoDateViewModel.swift in Sources */,
 				CE574D97263517B60046D20A /* AddTodoSelectStarTableViewCell.swift in Sources */,
 				CE2952E52687940100E21871 /* UIButton+.swift in Sources */,
@@ -1705,6 +1733,7 @@
 				CEA3CFE626A8696400577DA4 /* PolarisWebViewController.swift in Sources */,
 				CE2953122687A0A500E21871 /* AuthModel.swift in Sources */,
 				CE2953132687A0A500E21871 /* MainSceneViewModel.swift in Sources */,
+				CEEBE6CE26DA1FBA004A54BA /* SignOutVC.swift in Sources */,
 				CE40B3FA26C040A10000151F /* OnboardingViewModel.swift in Sources */,
 				CE2953142687A0A500E21871 /* MainStarCVC.swift in Sources */,
 				CE2953152687A0A500E21871 /* AddTodoVC+Delegate.swift in Sources */,
@@ -1762,6 +1791,7 @@
 				CE29533F2687A0A500E21871 /* MainTodoTVCViewModel.swift in Sources */,
 				CE2953402687A0A500E21871 /* StarNames.swift in Sources */,
 				CE2953412687A0A500E21871 /* TodoDateViewModel.swift in Sources */,
+				CEEBE6D326DA25A0004A54BA /* SignoutViewModel.swift in Sources */,
 				CE2953422687A0A500E21871 /* AddTodoSelectStarTableViewCell.swift in Sources */,
 				CE2953432687A0A500E21871 /* UIButton+.swift in Sources */,
 				CE2953442687A0A500E21871 /* UIColor+.swift in Sources */,
@@ -1822,6 +1852,7 @@
 				CEA3CFE726A8696400577DA4 /* PolarisWebViewController.swift in Sources */,
 				CEAC5991266F9F210092A255 /* AuthModel.swift in Sources */,
 				CE43D03D26613D66003126F2 /* MainSceneViewModel.swift in Sources */,
+				CEEBE6CF26DA1FBA004A54BA /* SignOutVC.swift in Sources */,
 				CE40B3FB26C040A10000151F /* OnboardingViewModel.swift in Sources */,
 				CE43D03E26613D66003126F2 /* MainStarCVC.swift in Sources */,
 				CE43D03F26613D66003126F2 /* AddTodoVC+Delegate.swift in Sources */,
@@ -1879,6 +1910,7 @@
 				CE43D06326613D66003126F2 /* MainTodoTVCViewModel.swift in Sources */,
 				CE43D06426613D66003126F2 /* StarNames.swift in Sources */,
 				CE43D06526613D66003126F2 /* TodoDateViewModel.swift in Sources */,
+				CEEBE6D426DA25A0004A54BA /* SignoutViewModel.swift in Sources */,
 				CE43D06626613D66003126F2 /* AddTodoSelectStarTableViewCell.swift in Sources */,
 				CE2952E62687940100E21871 /* UIButton+.swift in Sources */,
 				CE43D06726613D66003126F2 /* UIColor+.swift in Sources */,

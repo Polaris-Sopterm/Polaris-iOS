@@ -25,9 +25,12 @@ class PolarisUserManager {
         self.isInitialMember = false
     }
     
-    func resetUserInfo() {
-        self.authToken    = nil
-        self.refreshToken = nil
+    func processClearUserInformation() {
+        self.resetUserInfo()
+        
+        let viewController = LoginVC.instantiateFromStoryboard(StoryboardName.intro)
+        guard let loginVieController = viewController else { return }
+        UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController = loginVieController
     }
     
     func requestAccessTokenUsingRefreshToken() {
@@ -42,13 +45,16 @@ class PolarisUserManager {
             self.updateAuthToken(authModel.accessToken, authModel.refreshToken)
         }, onFailure: { error in
             self.requestingAccessToken = false
-            print(error.localizedDescription)
-        })
-        .disposed(by: self.disposeBag)
+        }).disposed(by: self.disposeBag)
     }
     
     func updateUser(_ polarisUser: PolarisUser) {
         self.user = polarisUser
+    }
+    
+    private func resetUserInfo() {
+        self.authToken    = nil
+        self.refreshToken = nil
     }
     
     private let disposeBag = DisposeBag()

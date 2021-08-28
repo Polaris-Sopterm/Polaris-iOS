@@ -13,7 +13,7 @@ enum SettingMenu: Int, CaseIterable {
     case personalInformation
     case serviceOfTerms
     case logout
-    case withdrawal
+    case signout
     
     var title: String {
         switch self {
@@ -21,7 +21,7 @@ enum SettingMenu: Int, CaseIterable {
         case .personalInformation: return "개인정보 수집 이용 안내"
         case .serviceOfTerms:      return "서비스 이용약관 안내"
         case .logout:              return "로그아웃"
-        case .withdrawal:          return "서비스 탈퇴"
+        case .signout:             return "서비스 탈퇴"
         }
     }
 }

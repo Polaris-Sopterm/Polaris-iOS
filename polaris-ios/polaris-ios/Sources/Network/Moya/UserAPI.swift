@@ -14,6 +14,7 @@ enum UserAPI {
     case auth(email: String, password: String)
     case reauth(refreshToken: String)
     case logout
+    case signout
 }
 
 extension UserAPI: TargetType {
@@ -29,12 +30,14 @@ extension UserAPI: TargetType {
         case .auth:       fallthrough
         case .reauth:     fallthrough
         case .logout:     return "/auth/v0"
+        case .signout:    return "/user/v0"
         }
     }
     
     var method: Moya.Method {
-        if case .reauth = self { return .put }
-        if case .logout = self { return .delete }
+        if case .reauth = self  { return .put }
+        if case .logout = self  { return .delete }
+        if case .signout = self { return .delete }
         return .post
     }
     
@@ -53,6 +56,8 @@ extension UserAPI: TargetType {
         case .reauth(let refreshToken):
             return .requestParameters(parameters: ["refreshToken": refreshToken], encoding: JSONEncoding.default)
         case .logout:
+            return .requestPlain
+        case .signout:
             return .requestPlain
         }
     }

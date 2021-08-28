@@ -74,21 +74,23 @@ final class SettingVC: UIViewController {
             self.pushTermsWebViewController(.service)
         case .logout:
             self.handleLogout()
-        case .withdrawal:
-            #warning("회원 탈퇴 연결")
-            break
+        case .signout:
+            self.pushSignoOutViewController()
         }
     }
     
     private func handleLogout() {
-        self.viewModel.requestLogout { isSuccess in
-            guard isSuccess == true else { return }
-            PolarisUserManager.shared.resetUserInfo()
+        guard let confirmPopupView: PolarisPopupView = UIView.fromNib() else { return }
+        
+        confirmPopupView.configure(title: "로그아웃할까요?", confirmHandler:  { [weak self] in
+            guard let self = self else { return }
             
-            let viewController = LoginVC.instantiateFromStoryboard(StoryboardName.intro)
-            guard let loginVieController = viewController else { return }
-            UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController = loginVieController
-        }
+            self.viewModel.requestLogout { isSuccess in
+                guard isSuccess == true else { return }
+                PolarisUserManager.shared.processClearUserInformation()
+            }
+        })
+        confirmPopupView.show(in: self.view)
     }
     
     private func pushTermsWebViewController(_ termsKind: ServiceTermKind) {
@@ -98,6 +100,13 @@ final class SettingVC: UIViewController {
         webViewController.setWebViewTitle(termsKind.title)
         webViewController.setWebViewURL(termsKind.url)
         self.navigationController?.pushViewController(webViewController, animated: true)
+    }
+    
+    private func pushSignoOutViewController() {
+        let viewController = SignOutVC.instantiateFromStoryboard(StoryboardName.setting)
+        
+        guard let signOutViewController = viewController else { return }
+        self.navigationController?.pushViewController(signOutViewController, animated: true)
     }
     
     private let disposeBag = DisposeBag()
