@@ -192,6 +192,8 @@ final class MainSceneTableViewCell: MainTableViewCell {
             self.pageControl.numberOfPages = output.todoStarList.value.count
             return mainTodoCell
         }.disposed(by: self.disposeBag)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadTodos), name: NSNotification.Name("checkButton"), object: nil)
     }
     
     private func setCometLayout(comet: UIImageView,size: Int) {
@@ -267,6 +269,11 @@ final class MainSceneTableViewCell: MainTableViewCell {
         guard let addTodoVC = viewController                                  else { return }
         addTodoVC.setAddOptions(.addJourney)
         addTodoVC.presentWithAnimation(from: visibleController)
+    }
+    
+    @objc private func reloadTodos(){
+        let dateInfo = self.dateInfoRelay.value
+        self.dateInfoRelay.accept(DateInfo(year: dateInfo.year, month: dateInfo.month, weekNo: dateInfo.weekNo))
     }
     
 }

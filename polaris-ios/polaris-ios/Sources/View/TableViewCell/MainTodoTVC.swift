@@ -96,6 +96,9 @@ class MainTodoTVC: UITableViewCell {
                 self.tvcModel = WeekTodo(idx: responseModel.idx, title: responseModel.title, date: responseModel.date, isTop: responseModel.isTop, isDone: responseModel.isDone, createdAt: responseModel.createdAt)
             }).disposed(by: self.disposeBag)
         }
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "checkButton"), object: nil)
+        
     }
     
     
