@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class NickChangeVC: UIViewController {
     
@@ -13,6 +15,8 @@ class NickChangeVC: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var nickTextField: UITextField!
     @IBOutlet weak var changeButton: UIButton!
+    
+    private var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +42,12 @@ class NickChangeVC: UIViewController {
     }
     
     @IBAction func changeButtonAction(_ sender: Any) {
-        #warning("서버 아직 안나왔나?")
+        if let newNickname = self.nickTextField.text {
+            let userAPI = UserAPI.updateUser(nickname: newNickname)
+            let some = NetworkManager.request(apiType: userAPI).subscribe(onSuccess: { [weak self] (polarisUser: PolarisUser) in
+                #warning("닉변 완료 알려주기")
+            })
+            .disposed(by: self.disposeBag)
+        }
     }
 }
