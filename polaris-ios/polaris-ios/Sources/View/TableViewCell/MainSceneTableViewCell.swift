@@ -390,7 +390,7 @@ extension MainSceneTableViewCell: WeekPickerDelegate {
 extension MainSceneTableViewCell: AddTodoViewControllerDelegate {
     
     func addTodoViewController(_ viewController: AddTodoVC, didCompleteAddOption option: AddTodoVC.AddOptions) {
-        <#code#>
+        
     }
     
 }

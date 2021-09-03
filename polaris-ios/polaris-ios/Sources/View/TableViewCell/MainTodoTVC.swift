@@ -20,9 +20,9 @@ class MainTodoTVC: UITableViewCell {
     @IBOutlet weak var checkButtonImage: UIImageView!
     private var disposeBag = DisposeBag()
     
-    var tvcModel: WeekTodo? {
+    var tvcModel: TodoModel? {
         didSet{
-            self.titleLabel.text = tvcModel?.title
+            self.titleLabel.text = self.tvcModel?.title
             if let model = self.tvcModel {
                 self.setUIs(todoModel: model)
             }
@@ -31,14 +31,13 @@ class MainTodoTVC: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        if let model = tvcModel {
+        if let model = self.tvcModel {
             self.setUIs(todoModel: model)
         }
-        // Initialization code
     }
     override func prepareForReuse() {
         super.prepareForReuse()
-        if let model = tvcModel {
+        if let model = self.tvcModel {
             self.setUIs(todoModel: model)
         }
     }
@@ -61,39 +60,39 @@ class MainTodoTVC: UITableViewCell {
             self.titleLabel.alpha = 0.35
             self.subLabel.alpha = 0.35
             
-        }
-        else {
+        } else {
             self.checkButtonImage.image = UIImage(named: ImageName.btnUncheck)
             self.titleLabel.alpha = 1.0
             self.subLabel.alpha = 1.0
         }
+        
         if todoModel.isTop == true {
             self.fixedImage.alpha = 1
-        }
-        else {
+        } else {
             self.fixedImage.alpha = 0
         }
+        
         self.titleLabel.text = todoModel.title
         self.subLabel.text = todoModel.date
         self.lineView.backgroundColor = .inactivePurple
     }
-    
     
     @IBAction func checkButtonAction(_ sender: Any) {
         
         guard let idx = tvcModel?.idx else { return }
         if let _ = tvcModel?.isDone {
             let todoEditAPI = TodoAPI.editTodo(idx: idx, isDone: false)
-            NetworkManager.request(apiType: todoEditAPI).subscribe(onSuccess: { [weak self] (responseModel: TodoDayPerModel) in
+            NetworkManager.request(apiType: todoEditAPI).subscribe(onSuccess: { [weak self] (responseModel: TodoModel) in
                 guard let self = self else { return }
-                self.tvcModel = WeekTodo(idx: responseModel.idx, title: responseModel.title, date: responseModel.date, isTop: responseModel.isTop, isDone: responseModel.isDone, createdAt: responseModel.createdAt)
+                
+                self.tvcModel = TodoModel(idx: responseModel.idx, title: responseModel.title, isTop: responseModel.isTop, isDone: responseModel.isDone, date: responseModel.date, createdAt: responseModel.createdAt, journey: responseModel.journey)
             }).disposed(by: self.disposeBag)
         }
         else {
             let todoEditAPI = TodoAPI.editTodo(idx: idx, isDone: true)
-            NetworkManager.request(apiType: todoEditAPI).subscribe(onSuccess: { [weak self] (responseModel: TodoDayPerModel) in
+            NetworkManager.request(apiType: todoEditAPI).subscribe(onSuccess: { [weak self] (responseModel: TodoModel) in
                 guard let self = self else { return }
-                self.tvcModel = WeekTodo(idx: responseModel.idx, title: responseModel.title, date: responseModel.date, isTop: responseModel.isTop, isDone: responseModel.isDone, createdAt: responseModel.createdAt)
+                self.tvcModel = TodoModel(idx: responseModel.idx, title: responseModel.title, isTop: responseModel.isTop, isDone: responseModel.isDone, date: responseModel.date, createdAt: responseModel.createdAt, journey: responseModel.journey)
             }).disposed(by: self.disposeBag)
         }
         
