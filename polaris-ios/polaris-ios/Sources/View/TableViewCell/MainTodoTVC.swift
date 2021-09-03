@@ -17,7 +17,7 @@ class MainTodoTVC: UITableViewCell {
     
     @IBOutlet weak var lineView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var subLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var fixedImage: UIImageView!
     
     @IBOutlet weak var checkButton: UIButton!
@@ -44,18 +44,18 @@ class MainTodoTVC: UITableViewCell {
     func setUIs(todoModel: TodoModel){
         self.backgroundColor = .clear
         self.titleLabel.textColor = .white
-        self.subLabel.textColor = .white
+        self.dateLabel.textColor = .white
         self.titleLabel.font = UIFont.systemFont(ofSize: 16,weight: .bold)
-        self.subLabel.font = UIFont.systemFont(ofSize: 11,weight: .medium)
+        self.dateLabel.font = UIFont.systemFont(ofSize: 11,weight: .medium)
         
         if todoModel.isDone != nil {
             self.checkButtonImage.image = UIImage(named: ImageName.btnCheck)
             self.titleLabel.alpha = 0.35
-            self.subLabel.alpha = 0.35
+            self.dateLabel.alpha = 0.35
         } else {
             self.checkButtonImage.image = UIImage(named: ImageName.btnUncheck)
             self.titleLabel.alpha = 1.0
-            self.subLabel.alpha = 1.0
+            self.dateLabel.alpha = 1.0
         }
         
         if todoModel.isTop == true {
@@ -65,7 +65,7 @@ class MainTodoTVC: UITableViewCell {
         }
         
         self.titleLabel.text = todoModel.title
-        self.subLabel.text = todoModel.date
+        self.dateLabel.text = todoModel.date?.convertToDate()?.convertToString(using: "M월 d일 EEEE")
         self.lineView.backgroundColor = .inactivePurple
     }
     
