@@ -276,6 +276,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
         guard let visibleController = UIViewController.getVisibleController() else { return }
         guard let addTodoVC = viewController                                  else { return }
         addTodoVC.setAddOptions(.addJourney)
+        addTodoVC.delegate = self
         addTodoVC.presentWithAnimation(from: visibleController)
     }
     
@@ -365,23 +366,34 @@ extension MainSceneTableViewCell: UIScrollViewDelegate {
 
 
 extension MainSceneTableViewCell: LookBackCloseDelegate {
+    
     func close() {
         self.bindViewModel(forceToShowStar: true, dateInfo: self.dateInfo)
     }
+    
     func apply(isLookBack: Bool) {
         if isLookBack {
             #warning("재은 - 여정 돌아보기(회고) 버튼")
-        }
-        else {
+        } else {
             #warning("동민 - Journey 추가 버튼")
         }
     }
+    
 }
 
 extension MainSceneTableViewCell: WeekPickerDelegate {
+    
     func apply(year: Int, month: Int, weekNo: Int, weekText: String) {
         self.weekLabel.text = weekText
         self.bindViewModel(forceToShowStar: true, dateInfo: DateInfo(year: year, month: month, weekNo: weekNo))
     }
 
+}
+
+extension MainSceneTableViewCell: AddTodoViewControllerDelegate {
+    
+    func addTodoViewController(_ viewController: AddTodoVC, didCompleteAddOption option: AddTodoVC.AddOptions) {
+        <#code#>
+    }
+    
 }

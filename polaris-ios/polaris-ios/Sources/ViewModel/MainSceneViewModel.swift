@@ -20,10 +20,7 @@ class MainSceneViewModel {
     var heightRatio = CGFloat(DeviceInfo.screenHeight/812.0)
     var heightList: [CGFloat] = [CGFloat(52.0),CGFloat(93.0),CGFloat(52.0),CGFloat(87.0),CGFloat(28.0),CGFloat(71),CGFloat(34),CGFloat(86),CGFloat(58)]
     
-    private var disposeBag = DisposeBag()
-    var year = 2021
-    var month = 7
-    var weekNo = 3
+    private let disposeBag = DisposeBag()
     
     struct Input{
         let forceToShowStar: Bool
@@ -38,9 +35,8 @@ class MainSceneViewModel {
         let mainTextRelay: BehaviorRelay<String>
         let homeModelRelay: BehaviorRelay<[HomeModel]>
     }
+    
     func connect(input: Input) -> Output{
-        
-
         let starList: BehaviorRelay<[MainStarCVCViewModel]> = BehaviorRelay(value: [])
         let state: BehaviorRelay<[StarCollectionViewState]> = BehaviorRelay(value: [])
         let lookBackState: BehaviorRelay<[MainLookBackCellState]> = BehaviorRelay(value: [])

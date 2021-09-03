@@ -321,16 +321,8 @@ extension TodoTableViewCell: JourneyTodoTableViewDelegate {
 extension TodoTableViewCell: AddTodoViewControllerDelegate {
     
     func addTodoViewController(_ viewController: AddTodoVC, didCompleteAddOption option: AddTodoVC.AddOptions) {
-        if option == .perDayAddTodo {
-            self.viewModel.requestTodoDayList(shouldScroll: false)
-            self.viewModel.requestTodoJourneyList()
-        } else if option == .perJourneyAddTodo {
-            self.viewModel.requestTodoDayList(shouldScroll: false)
-            self.viewModel.requestTodoJourneyList()
-        } else if option == .edittedTodo {
-            self.viewModel.requestTodoDayList(shouldScroll: false)
-            self.viewModel.requestTodoJourneyList()
-        }
+        self.viewModel.requestTodoDayList(shouldScroll: false)
+        self.viewModel.requestTodoJourneyList()
     }
     
 }
