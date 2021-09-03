@@ -777,6 +777,7 @@
 		CE04A04A262340EA007C98E2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CE04A05A262345EC007C98E2 /* Extension */,
 				CE04A03E262340D3007C98E2 /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -794,7 +795,6 @@
 				CE04A07026235A4A007C98E2 /* Network */,
 				CEEE5741262A954F00C39358 /* Manager */,
 				CE04A06C2623584F007C98E2 /* Util */,
-				CE04A05A262345EC007C98E2 /* Extension */,
 				CE04A050262341E1007C98E2 /* Xib */,
 				CEF055EA2667EB20000E34A0 /* Model */,
 				CE04A04F262341B9007C98E2 /* Storyboard */,
