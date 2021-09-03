@@ -27,11 +27,11 @@ class AddTodoViewModel {
     
     let addListTypes    = BehaviorSubject<[AddTodoTableViewCellProtocol.Type]>(value: [])
     
-    let addTextRelay    = BehaviorRelay<String?>(value: nil)
-    let dropdownRelay   = BehaviorRelay<JourneyTitleModel?>(value: nil)
-    let fixOnTopRelay   = BehaviorRelay<Bool?>(value: nil)
-    let selectDateRelay = BehaviorRelay<Date?>(value: nil)
-    let selectStarRelay = BehaviorRelay<Set<Journey>?>(value: nil)
+    let addTextRelay       = BehaviorRelay<String?>(value: nil)
+    let dropdownRelay      = BehaviorRelay<JourneyTitleModel?>(value: nil)
+    let fixOnTopRelay      = BehaviorRelay<Bool?>(value: nil)
+    let selectDateRelay    = BehaviorRelay<Date?>(value: nil)
+    let selectJourneyRelay = BehaviorRelay<Set<Journey>?>(value: nil)
     
     let addEnableFlagSubject   = BehaviorSubject<Bool>(value: false)
     let completeAddTodoSubject = PublishSubject<Void>()
@@ -99,7 +99,8 @@ class AddTodoViewModel {
     }
     
     private func requestAddJourney() {
-        
+        guard let addText = self.addTextRelay.value          else { return }
+        guard let journeySet = self.selectJourneyRelay.value else { return }
     }
     
     private func requestEditTodo() {
@@ -149,7 +150,7 @@ class AddTodoViewModel {
                 })
                 .disposed(by: self.disposeBag)
         } else if addOptions == .addJourney {
-            Observable.combineLatest(self.addTextRelay, self.selectStarRelay)
+            Observable.combineLatest(self.addTextRelay, self.selectJourneyRelay)
                 .subscribe(onNext: { [weak self] addText, selectStar in
                     guard let self = self else { return }
                     guard let addText    = addText, !addText.isEmpty,

@@ -35,6 +35,6 @@ extension AddTodoVC: AddTodoDropdownTableViewCellDelegate {
 
 extension AddTodoVC: AddTodoSelectStarTableViewCellDelegate {
     func addTodoSelectStarTableViewCell(_ addTodoSelectStarTableViewCell: AddTodoSelectStarTableViewCell, didSelectedStars stars: Set<Journey>) {
-        self.viewModel.selectStarRelay.accept(stars)
+        self.viewModel.selectJourneyRelay.accept(stars)
     }
 }

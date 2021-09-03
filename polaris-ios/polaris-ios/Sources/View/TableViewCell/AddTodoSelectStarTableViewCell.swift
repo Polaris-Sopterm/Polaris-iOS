@@ -48,27 +48,23 @@ class AddTodoSelectStarTableViewCell: AddTodoTableViewCell {
     
     // MARK: - Bind
     private func bindCollectionView() {
-        self.viewModel.starsSubject
-            .bind(to: self.collectionView.rx.items) { [weak self] collectionView, index, item in
-                guard let self = self else { return UICollectionViewCell() }
-                guard let starItemCell = collectionView.dequeueReusableCell(cell: SelectStarItemCollectionViewCell.self, forIndexPath: IndexPath(row: index
-                                                                                                                                                 , section: 0)) else { return UICollectionViewCell() }
-                
-                let isSelected = self.viewModel.selectedStarsSet.contains(item)
-                starItemCell.configure(by: item, isSelected)
-                return starItemCell
-            }
-            .disposed(by: self.disposeBag)
+        self.viewModel.jounreysSubject.bind(to: self.collectionView.rx.items) { [weak self] collectionView, index, item in
+            guard let self = self else { return UICollectionViewCell() }
+            guard let starItemCell = collectionView.dequeueReusableCell(cell: SelectStarItemCollectionViewCell.self, forIndexPath: IndexPath(row: index
+                                                                                                                                             , section: 0)) else { return UICollectionViewCell() }
+            
+            let isSelected = self.viewModel.selectedStarsSet.contains(item)
+            starItemCell.configure(by: item, isSelected)
+            return starItemCell
+        }.disposed(by: self.disposeBag)
         
-        self.collectionView.rx.itemSelected
-            .subscribe(onNext: { [weak self] indexPath in
-                guard let self = self else { return }
-                guard let selectedStar = try? self.viewModel.starsSubject.value()[safe: indexPath.row] else { return }
-                
-                self.viewModel.selectedFlagSubject.onNext(selectedStar)
-                self._delegate?.addTodoSelectStarTableViewCell(self, didSelectedStars: self.viewModel.selectedStarsSet)
-            })
-            .disposed(by: self.disposeBag)
+        self.collectionView.rx.itemSelected.subscribe(onNext: { [weak self] indexPath in
+            guard let self = self else { return }
+            guard let selectedStar = try? self.viewModel.jounreysSubject.value()[safe: indexPath.row] else { return }
+            
+            self.viewModel.selectedFlagSubject.onNext(selectedStar)
+            self._delegate?.addTodoSelectStarTableViewCell(self, didSelectedStars: self.viewModel.selectedStarsSet)
+        }).disposed(by: self.disposeBag)
     }
     
     private static let screenRatio: CGFloat         = DeviceInfo.screenWidth / 375

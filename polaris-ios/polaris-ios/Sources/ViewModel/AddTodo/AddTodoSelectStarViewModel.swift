@@ -9,28 +9,31 @@ import Foundation
 import RxSwift
 
 class AddTodoSelectStarViewModel {
-    lazy var starsSubject   = BehaviorSubject<[Journey]>(value: self.initJourneys())
-    
-    var selectedFlagSubject = PublishSubject<Journey>()
+    let jounreysSubject     = BehaviorSubject<[Journey]>(value: Journey.allCases)
+    let selectedFlagSubject = PublishSubject<Journey>()
     var selectedStarsSet    = Set<Journey>()
     
     init() {
         _ = self.selectedFlagSubject
             .subscribe(onNext: { [weak self] selectedStar in
-                guard let self = self else { return }
-                defer { self.starsSubject.onNext(self.initJourneys()) }
+                guard let self = self                                       else { return }
+                guard self.selectedStarsSet.contains(selectedStar) == false else {
+                    self.selectedStarsSet.remove(selectedStar)
+                    return
+                }
                 
-                if self.selectedStarsSet.contains(selectedStar) { self.selectedStarsSet.remove(selectedStar); return }
-                if self.selectedStarsSet.count >= self.selectedMaxCount { return }
-                
+                guard self.selectedStarsSet.count < self.selectedMaxCount else { return }
                 self.selectedStarsSet.insert(selectedStar)
             })
     }
     
-    private func initJourneys() -> [Journey] {
-        var journeys: [Journey] = []
-        Journey.allCases.forEach { star in journeys.append(star) }
-        return journeys
+    func selectJourney(_ selectedJourney: Journey) {
+        guard self.selectedStarsSet.contains(selectedJourney) == false else {
+            self.selectedStarsSet.remove(selectedJourney)
+            return
+        }
+        guard self.selectedStarsSet.count <= self.selectedMaxCount else { return }
+        self.selectedStarsSet.insert(selectedJourney)
     }
     
     private let selectedMaxCount = 2
