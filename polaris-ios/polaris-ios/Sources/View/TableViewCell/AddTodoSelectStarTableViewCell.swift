@@ -19,13 +19,10 @@ class AddTodoSelectStarTableViewCell: AddTodoTableViewCell {
     
     override weak var delegate: AddTodoTableViewCellDelegate? { didSet { self._delegate = self.delegate as? AddTodoSelectStarTableViewCellDelegate } }
     weak var _delegate: AddTodoSelectStarTableViewCellDelegate?
-
-    @IBOutlet weak var collectionView: UICollectionView!
     
     // MARK: - Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         self.registerCell()
         self.layoutCollectionView()
         self.bindCollectionView()
@@ -48,33 +45,39 @@ class AddTodoSelectStarTableViewCell: AddTodoTableViewCell {
     
     // MARK: - Bind
     private func bindCollectionView() {
-        self.viewModel.jounreysSubject.bind(to: self.collectionView.rx.items) { [weak self] collectionView, index, item in
+        self.viewModel.journeysSubject.bind(to: self.collectionView.rx.items) { [weak self] collectionView, index, item in
             guard let self = self else { return UICollectionViewCell() }
-            guard let starItemCell = collectionView.dequeueReusableCell(cell: SelectStarItemCollectionViewCell.self, forIndexPath: IndexPath(row: index
-                                                                                                                                             , section: 0)) else { return UICollectionViewCell() }
+            
+            let indexPath = IndexPath(item: index, section: 0)
+            let cell      = collectionView.dequeueReusableCell(cell: SelectStarItemCollectionViewCell.self,
+                                                               forIndexPath: indexPath)
+            
+            guard let journeyItemCell = cell else { return UICollectionViewCell() }
             
             let isSelected = self.viewModel.selectedStarsSet.contains(item)
-            starItemCell.configure(by: item, isSelected)
-            return starItemCell
+            journeyItemCell.configure(by: item, isSelected)
+            return journeyItemCell
         }.disposed(by: self.disposeBag)
         
         self.collectionView.rx.itemSelected.subscribe(onNext: { [weak self] indexPath in
-            guard let self = self else { return }
-            guard let selectedStar = try? self.viewModel.jounreysSubject.value()[safe: indexPath.row] else { return }
+            guard let self = self                                                              else { return }
+            guard let selectedStar = self.viewModel.journeysSubject.value[safe: indexPath.row] else { return }
             
-            self.viewModel.selectedFlagSubject.onNext(selectedStar)
+            self.viewModel.selectJourney(selectedStar)
             self._delegate?.addTodoSelectStarTableViewCell(self, didSelectedStars: self.viewModel.selectedStarsSet)
         }).disposed(by: self.disposeBag)
     }
     
-    private static let screenRatio: CGFloat         = DeviceInfo.screenWidth / 375
-    private static let verticalInset: CGFloat       = 10
-    private static let horizontalInset: CGFloat     = 23
-    private static let itemSpacing: CGFloat         = 8
-    private static let starCellWidth: CGFloat       = (DeviceInfo.screenWidth - (2 * horizontalInset) - (2 * itemSpacing)) / 3
-    private static let starCellHeight: CGFloat      = starCellWidth
+    private static let screenRatio: CGFloat     = DeviceInfo.screenWidth / 375
+    private static let verticalInset: CGFloat   = 10
+    private static let horizontalInset: CGFloat = 23
+    private static let itemSpacing: CGFloat     = 8
+    private static let starCellWidth: CGFloat   = (DeviceInfo.screenWidth - (2 * horizontalInset) - (2 * itemSpacing)) / 3
+    private static let starCellHeight: CGFloat  = starCellWidth
     
-    private var disposeBag = DisposeBag()
-    private var viewModel  = AddTodoSelectStarViewModel()
+    private let disposeBag = DisposeBag()
+    private let viewModel  = AddTodoSelectStarViewModel()
+    
+    @IBOutlet private weak var collectionView: UICollectionView!
     
 }

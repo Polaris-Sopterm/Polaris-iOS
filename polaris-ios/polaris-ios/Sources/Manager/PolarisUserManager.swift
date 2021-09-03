@@ -29,8 +29,8 @@ class PolarisUserManager {
         self.resetUserInfo()
         
         let viewController = LoginVC.instantiateFromStoryboard(StoryboardName.intro)
-        guard let loginVieController = viewController else { return }
-        UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController = loginVieController
+        guard let loginViewController = viewController else { return }
+        UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController = loginViewController
     }
     
     func requestAccessTokenUsingRefreshToken() {

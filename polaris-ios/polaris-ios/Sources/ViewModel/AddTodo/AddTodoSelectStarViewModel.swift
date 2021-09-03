@@ -7,33 +7,23 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 class AddTodoSelectStarViewModel {
-    let jounreysSubject     = BehaviorSubject<[Journey]>(value: Journey.allCases)
-    let selectedFlagSubject = PublishSubject<Journey>()
-    var selectedStarsSet    = Set<Journey>()
     
-    init() {
-        _ = self.selectedFlagSubject
-            .subscribe(onNext: { [weak self] selectedStar in
-                guard let self = self                                       else { return }
-                guard self.selectedStarsSet.contains(selectedStar) == false else {
-                    self.selectedStarsSet.remove(selectedStar)
-                    return
-                }
-                
-                guard self.selectedStarsSet.count < self.selectedMaxCount else { return }
-                self.selectedStarsSet.insert(selectedStar)
-            })
-    }
+    let journeysSubject  = BehaviorRelay<[Journey]>(value: Journey.allCases)
+    var selectedStarsSet = Set<Journey>()
     
-    func selectJourney(_ selectedJourney: Journey) {
-        guard self.selectedStarsSet.contains(selectedJourney) == false else {
-            self.selectedStarsSet.remove(selectedJourney)
+    func selectJourney(_ journey: Journey) {
+        defer { self.journeysSubject.accept(Journey.allCases) }
+        
+        guard self.selectedStarsSet.contains(journey) == false else {
+            self.selectedStarsSet.remove(journey)
             return
         }
-        guard self.selectedStarsSet.count <= self.selectedMaxCount else { return }
-        self.selectedStarsSet.insert(selectedJourney)
+        
+        guard self.selectedStarsSet.count < self.selectedMaxCount else { return }
+        self.selectedStarsSet.insert(journey)
     }
     
     private let selectedMaxCount = 2
