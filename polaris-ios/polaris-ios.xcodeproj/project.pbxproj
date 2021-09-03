@@ -461,6 +461,15 @@
 		ECA4947E262C670000CC2EB8 /* MainStarTVCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA4947D262C670000CC2EB8 /* MainStarTVCViewModel.swift */; };
 		ECA49486262DC17A00CC2EB8 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA49485262DC17A00CC2EB8 /* UILabel+.swift */; };
 		ECA49489262DC40F00CC2EB8 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA49488262DC40F00CC2EB8 /* String+.swift */; };
+		ECB5442F26D3C9F400FA4C50 /* NickChange.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECB5442E26D3C9F400FA4C50 /* NickChange.storyboard */; };
+		ECB5443026D3C9F400FA4C50 /* NickChange.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECB5442E26D3C9F400FA4C50 /* NickChange.storyboard */; };
+		ECB5443126D3C9F400FA4C50 /* NickChange.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECB5442E26D3C9F400FA4C50 /* NickChange.storyboard */; };
+		ECB5443326D3CA0500FA4C50 /* NickChangeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5443226D3CA0500FA4C50 /* NickChangeVC.swift */; };
+		ECB5443426D3CA0500FA4C50 /* NickChangeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5443226D3CA0500FA4C50 /* NickChangeVC.swift */; };
+		ECB5443526D3CA0500FA4C50 /* NickChangeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5443226D3CA0500FA4C50 /* NickChangeVC.swift */; };
+		ECB5443726D3D0CA00FA4C50 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5443626D3D0CA00FA4C50 /* UITextField+.swift */; };
+		ECB5443826D3D0CA00FA4C50 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5443626D3D0CA00FA4C50 /* UITextField+.swift */; };
+		ECB5443926D3D0CA00FA4C50 /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5443626D3D0CA00FA4C50 /* UITextField+.swift */; };
 		ECD002A126B3EFCE005F733C /* HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA0EEE926B3ED730040F42C /* HomeAPI.swift */; };
 		ECD002A226B3EFCE005F733C /* HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA0EEE926B3ED730040F42C /* HomeAPI.swift */; };
 		ECD002A326B3EFD5005F733C /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA0EEE726B3ED530040F42C /* HomeModel.swift */; };
@@ -678,6 +687,9 @@
 		ECA4947D262C670000CC2EB8 /* MainStarTVCViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainStarTVCViewModel.swift; sourceTree = "<group>"; };
 		ECA49485262DC17A00CC2EB8 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		ECA49488262DC40F00CC2EB8 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		ECB5442E26D3C9F400FA4C50 /* NickChange.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NickChange.storyboard; sourceTree = "<group>"; };
+		ECB5443226D3CA0500FA4C50 /* NickChangeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickChangeVC.swift; sourceTree = "<group>"; };
+		ECB5443626D3D0CA00FA4C50 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		ECD002A526B5229C005F733C /* JourneyWeekListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyWeekListModel.swift; sourceTree = "<group>"; };
 		ECDC5A45263552A700A1B5A9 /* MainTodoTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTodoTVC.swift; sourceTree = "<group>"; };
 		ECDC5A46263552A700A1B5A9 /* MainTodoTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainTodoTVC.xib; sourceTree = "<group>"; };
@@ -781,6 +793,7 @@
 		CE04A04A262340EA007C98E2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CE04A05A262345EC007C98E2 /* Extension */,
 				CE04A03E262340D3007C98E2 /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -798,7 +811,6 @@
 				CE04A07026235A4A007C98E2 /* Network */,
 				CEEE5741262A954F00C39358 /* Manager */,
 				CE04A06C2623584F007C98E2 /* Util */,
-				CE04A05A262345EC007C98E2 /* Extension */,
 				CE04A050262341E1007C98E2 /* Xib */,
 				CEF055EA2667EB20000E34A0 /* Model */,
 				CE04A04F262341B9007C98E2 /* Storyboard */,
@@ -849,6 +861,7 @@
 				CEA3CFDF26A868C000577DA4 /* Common.storyboard */,
 				EC8C688526CA1BFB003CFA71 /* WeekPicker.storyboard */,
 				CED6B6DE26CACCEF00D37647 /* Setting.storyboard */,
+				ECB5442E26D3C9F400FA4C50 /* NickChange.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -877,6 +890,7 @@
 				CEE574F4263092A400EA64B7 /* Date+.swift */,
 				CE2952E42687940100E21871 /* UIButton+.swift */,
 				CEA3CFE826A869D200577DA4 /* ObservableType+.swift */,
+				ECB5443626D3D0CA00FA4C50 /* UITextField+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1009,7 +1023,6 @@
 		CEEBE6CB26DA1FA3004A54BA /* Setting */ = {
 			isa = PBXGroup;
 			children = (
-				CED6B6E226CACE8F00D37647 /* SettingVC.swift */,
 				CEEBE6CC26DA1FBA004A54BA /* SignOutVC.swift */,
 			);
 			path = Setting;
@@ -1159,6 +1172,8 @@
 				CE574DA7263555330046D20A /* AddTodoVC+Delegate.swift */,
 				CEA44E58267B386800A05650 /* MainVC.swift */,
 				EC8C688926CA1C46003CFA71 /* WeekPickerVC.swift */,
+				CED6B6E226CACE8F00D37647 /* SettingVC.swift */,
+				ECB5443226D3CA0500FA4C50 /* NickChangeVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1345,6 +1360,7 @@
 				ECDC5A48263552A700A1B5A9 /* MainTodoTVC.xib in Resources */,
 				CEC19AE42650F86100DA747C /* DayTodoHeaderView.xib in Resources */,
 				ECDC5A4E2635530300A1B5A9 /* MainTodoCVC.xib in Resources */,
+				ECB5442F26D3C9F400FA4C50 /* NickChange.storyboard in Resources */,
 				CEC48ED5262DCA9100FD887F /* DropdownItemTableViewCell.xib in Resources */,
 				CEC74B17267F984E002AFF18 /* PolarisPopupView.xib in Resources */,
 				CEC19AEC265103AA00DA747C /* DayTodoTableViewCell.xib in Resources */,
@@ -1394,6 +1410,7 @@
 				CE2953642687A0A500E21871 /* MainTodoTVC.xib in Resources */,
 				CE2953652687A0A500E21871 /* DayTodoHeaderView.xib in Resources */,
 				CE2953662687A0A500E21871 /* MainTodoCVC.xib in Resources */,
+				ECB5443026D3C9F400FA4C50 /* NickChange.storyboard in Resources */,
 				CE2953672687A0A500E21871 /* DropdownItemTableViewCell.xib in Resources */,
 				CE2953682687A0A500E21871 /* PolarisPopupView.xib in Resources */,
 				CE29536A2687A0A500E21871 /* DayTodoTableViewCell.xib in Resources */,
@@ -1443,6 +1460,7 @@
 				CE43D08226613D66003126F2 /* MainTodoTVC.xib in Resources */,
 				CE43D08326613D66003126F2 /* DayTodoHeaderView.xib in Resources */,
 				CE43D08426613D66003126F2 /* MainTodoCVC.xib in Resources */,
+				ECB5443126D3C9F400FA4C50 /* NickChange.storyboard in Resources */,
 				CE43D08526613D66003126F2 /* DropdownItemTableViewCell.xib in Resources */,
 				CEC74B18267F984E002AFF18 /* PolarisPopupView.xib in Resources */,
 				CE43D08626613D66003126F2 /* DayTodoTableViewCell.xib in Resources */,
@@ -1606,6 +1624,7 @@
 				CE207B892661CBC7009A812A /* ServerHost.swift in Sources */,
 				CE6CE90E26E25E4800BDDB6C /* ConfirmPopupView.swift in Sources */,
 				CEC48ED4262DCA9100FD887F /* DropdownItemTableViewCell.swift in Sources */,
+				ECB5443326D3CA0500FA4C50 /* NickChangeVC.swift in Sources */,
 				ECA4944426296F6E00CC2EB8 /* TodoDateTVCViewModel.swift in Sources */,
 				CED6B6E326CACE8F00D37647 /* SettingVC.swift in Sources */,
 				CEE574F5263092A400EA64B7 /* Date+.swift in Sources */,
@@ -1663,6 +1682,7 @@
 				CEC19AEB265103AA00DA747C /* DayTodoTableViewCell.swift in Sources */,
 				CEA44E6E267B3BE300A05650 /* TodoTableViewCell.swift in Sources */,
 				ECA494472629729000CC2EB8 /* TodoDateModel.swift in Sources */,
+				ECB5443726D3D0CA00FA4C50 /* UITextField+.swift in Sources */,
 				CE132141265A408F001E3C1F /* LoginViewModel.swift in Sources */,
 				CEAC5995266FBEA50092A255 /* PolarisErrorModel.swift in Sources */,
 				EC08F3D0267DD24100F915F3 /* MainLookBackCollectionViewCell.swift in Sources */,
@@ -1726,6 +1746,7 @@
 				CE2952FE2687A0A500E21871 /* DropdownItemTableViewCell.swift in Sources */,
 				CE6CE90F26E25E4800BDDB6C /* ConfirmPopupView.swift in Sources */,
 				CE2952FF2687A0A500E21871 /* TodoDateTVCViewModel.swift in Sources */,
+				ECB5443426D3CA0500FA4C50 /* NickChangeVC.swift in Sources */,
 				CED6B6E426CACE8F00D37647 /* SettingVC.swift in Sources */,
 				CE2953002687A0A500E21871 /* Date+.swift in Sources */,
 				CE2953012687A0A500E21871 /* MainTableViewCell.swift in Sources */,
@@ -1783,6 +1804,7 @@
 				CE29532C2687A0A500E21871 /* DayTodoTableViewCell.swift in Sources */,
 				CE29532D2687A0A500E21871 /* TodoTableViewCell.swift in Sources */,
 				CE29532E2687A0A500E21871 /* TodoDateModel.swift in Sources */,
+				ECB5443826D3D0CA00FA4C50 /* UITextField+.swift in Sources */,
 				CE29532F2687A0A500E21871 /* LoginViewModel.swift in Sources */,
 				CE2953302687A0A500E21871 /* PolarisErrorModel.swift in Sources */,
 				CE2953312687A0A500E21871 /* MainLookBackCollectionViewCell.swift in Sources */,
@@ -1846,6 +1868,7 @@
 				CE43D02F26613D66003126F2 /* DropdownItemTableViewCell.swift in Sources */,
 				CE6CE91026E25E4800BDDB6C /* ConfirmPopupView.swift in Sources */,
 				CE43D03026613D66003126F2 /* TodoDateTVCViewModel.swift in Sources */,
+				ECB5443526D3CA0500FA4C50 /* NickChangeVC.swift in Sources */,
 				CED6B6E526CACE8F00D37647 /* SettingVC.swift in Sources */,
 				CE43D03126613D66003126F2 /* Date+.swift in Sources */,
 				CEA44E69267B3B8100A05650 /* MainTableViewCell.swift in Sources */,
@@ -1903,6 +1926,7 @@
 				CE43D05326613D66003126F2 /* DayTodoTableViewCell.swift in Sources */,
 				CEA44E6F267B3BE300A05650 /* TodoTableViewCell.swift in Sources */,
 				CE43D05426613D66003126F2 /* TodoDateModel.swift in Sources */,
+				ECB5443926D3D0CA00FA4C50 /* UITextField+.swift in Sources */,
 				CE43D05526613D66003126F2 /* LoginViewModel.swift in Sources */,
 				CEAC5996266FBEA50092A255 /* PolarisErrorModel.swift in Sources */,
 				EC08F3D1267DD24100F915F3 /* MainLookBackCollectionViewCell.swift in Sources */,

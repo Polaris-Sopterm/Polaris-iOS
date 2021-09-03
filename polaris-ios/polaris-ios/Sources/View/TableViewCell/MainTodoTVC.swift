@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class MainTodoTVC: UITableViewCell {
     
@@ -16,18 +18,31 @@ class MainTodoTVC: UITableViewCell {
     
     @IBOutlet weak var checkButton: UIButton!
     @IBOutlet weak var checkButtonImage: UIImageView!
+    private var disposeBag = DisposeBag()
     
-    var tvcViewModel: MainTodoTVCViewModel?{
+    var tvcModel: WeekTodo? {
         didSet{
-            self.titleLabel.text = tvcViewModel?.weekTodos.title
+            self.titleLabel.text = tvcModel?.title
+            if let model = self.tvcModel {
+                self.setUIs(todoModel: model)
+            }
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        if let model = tvcModel {
+            self.setUIs(todoModel: model)
+        }
         // Initialization code
     }
-
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        if let model = tvcModel {
+            self.setUIs(todoModel: model)
+        }
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
@@ -45,10 +60,12 @@ class MainTodoTVC: UITableViewCell {
             self.checkButton.setImage(UIImage(named: ImageName.btnCheck), for: .normal)
             self.titleLabel.alpha = 0.35
             self.subLabel.alpha = 0.35
-           
+            
         }
         else {
-            self.checkButton.setImage(UIImage(named: ImageName.btnUncheck), for: .normal)
+            self.checkButtonImage.image = UIImage(named: ImageName.btnUncheck)
+            self.titleLabel.alpha = 1.0
+            self.subLabel.alpha = 1.0
         }
         if todoModel.isTop == true {
             self.fixedImage.alpha = 1
@@ -60,6 +77,31 @@ class MainTodoTVC: UITableViewCell {
         self.subLabel.text = todoModel.date
         self.lineView.backgroundColor = .inactivePurple
     }
+    
+    
+    @IBAction func checkButtonAction(_ sender: Any) {
+        
+        guard let idx = tvcModel?.idx else { return }
+        if let _ = tvcModel?.isDone {
+            let todoEditAPI = TodoAPI.editTodo(idx: idx, isDone: false)
+            NetworkManager.request(apiType: todoEditAPI).subscribe(onSuccess: { [weak self] (responseModel: TodoDayPerModel) in
+                guard let self = self else { return }
+                self.tvcModel = WeekTodo(idx: responseModel.idx, title: responseModel.title, date: responseModel.date, isTop: responseModel.isTop, isDone: responseModel.isDone, createdAt: responseModel.createdAt)
+            }).disposed(by: self.disposeBag)
+        }
+        else {
+            let todoEditAPI = TodoAPI.editTodo(idx: idx, isDone: true)
+            NetworkManager.request(apiType: todoEditAPI).subscribe(onSuccess: { [weak self] (responseModel: TodoDayPerModel) in
+                guard let self = self else { return }
+                self.tvcModel = WeekTodo(idx: responseModel.idx, title: responseModel.title, date: responseModel.date, isTop: responseModel.isTop, isDone: responseModel.isDone, createdAt: responseModel.createdAt)
+            }).disposed(by: self.disposeBag)
+        }
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "checkButton"), object: nil)
+        
+    }
+    
+    
     
     
 }

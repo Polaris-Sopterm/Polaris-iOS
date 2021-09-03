@@ -100,6 +100,7 @@ extension WeekPickerVC: UIPickerViewDelegate {
         33
     }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        pickerView.subviews[1].backgroundColor = .mainSky15
         switch component {
         case 0:
             return String(self.yearList[row])+"년"
@@ -110,6 +111,7 @@ extension WeekPickerVC: UIPickerViewDelegate {
         }
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
         switch component {
         case 0:
             self.year = yearList[row]

@@ -39,11 +39,9 @@ class TodoDateViewModel {
         input.checkButtonClicked.flatMapLatest{
             return Observable.of($0)
         }.subscribe(onNext: { indexPath in
-            print(indexPath)
              self.todoDateModels[indexPath.section].todos[indexPath.row].checked = !self.todoDateModels[indexPath.section].todos[indexPath.row].checked
              self.todoFetchFinished.onNext(())
         },onDisposed: {
-            print("disposed")
             
         })
     
