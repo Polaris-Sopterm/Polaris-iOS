@@ -83,7 +83,7 @@ class MainSceneViewModel {
             NetworkManager.request(apiType: journeyAPI)
                 .subscribe(onSuccess: { [weak self] (journeyModel: JourneyWeekListModel) in
                     weekJourneyModels = journeyModel.journeys!
-                    todoStarList.accept(self?.convertTodoCVCViewModel(weekJourneyModels: weekJourneyModels,dateInfo: date) ?? [])
+                    todoStarList.accept(self?.convertTodoCVCViewModel(weekJourneyModels: weekJourneyModels, dateInfo: date) ?? [])
                 })
                 .disposed(by: self.disposeBag)
         })
@@ -186,6 +186,8 @@ class MainSceneViewModel {
         NetworkManager.request(apiType: todoEditAPI).subscribe(onSuccess: { [weak self] (responseModel: TodoModel) in
             guard let self = self else { return }
             self.updateDateInfo(self.dateInfoRelay.value)
+            
+            NotificationCenter.default.post(name: .didUpdateTodo, object: MainSceneCellType.main.sceneIdentifier)
         }).disposed(by: self.disposeBag)
     }
     

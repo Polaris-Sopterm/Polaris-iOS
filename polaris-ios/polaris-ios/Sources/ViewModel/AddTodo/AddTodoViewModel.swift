@@ -72,10 +72,11 @@ class AddTodoViewModel {
         guard let addText = self.addTextRelay.value   else { return }
         guard let fixOnTop = self.fixOnTopRelay.value else { return }
         guard let addTodoDate = self.currentDate      else { return }
-        guard let journey = self.dropdownRelay.value  else { return }
+        
+        let journey = self.dropdownRelay.value
         
         let createTodoAPI = TodoAPI.createToDo(title: addText, date: addTodoDate.convertToString(),
-                                               journeyIdx: journey.idx, isTop: fixOnTop)
+                                               journeyIdx: journey?.idx, isTop: fixOnTop)
         NetworkManager.request(apiType: createTodoAPI).subscribe(onSuccess: { [weak self] (responseModel: AddTodoResponseModel) in
             self?.completeAddTodoSubject.onNext(())
             self?.loadingSubject.onNext(false)

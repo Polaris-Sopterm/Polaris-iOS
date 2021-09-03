@@ -46,6 +46,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.addObservers()
         self.setUIs()
         self.setStarCollectionView()
         self.setTodoCollectionView()
@@ -59,6 +60,11 @@ final class MainSceneTableViewCell: MainTableViewCell {
         else          { self.dimView.isHidden = false }
     }
     
+    private func addObservers() {
+        let center = NotificationCenter.default
+        center.addObserver(self, selector: #selector(self.didUpdateTodo(_:)), name: .didUpdateTodo, object: nil)
+    }
+    
     private func setupDimView() {
         self.dimView.frame           = CGRect(x: 0, y: 0,
                                               width: DeviceInfo.screenWidth, height: type(of: self).cellHeight)
@@ -66,8 +72,6 @@ final class MainSceneTableViewCell: MainTableViewCell {
         self.dimView.alpha           = 0.0
         self.contentView.addSubview(self.dimView)
     }
-    
-    private var dimView: UIView = UIView(frame: .zero)
     
     private func setUIs(){
         for _ in 0...2{
@@ -270,6 +274,14 @@ final class MainSceneTableViewCell: MainTableViewCell {
         addTodoVC.presentWithAnimation(from: visibleController)
     }
     
+    @objc private func didUpdateTodo(_ notification: Notification) {
+        guard let sceneIdentifier = notification.object as? String      else { return }
+        guard sceneIdentifier != MainSceneCellType.main.sceneIdentifier else { return }
+        self.viewModel.updateDateInfo(self.viewModel.dateInfoRelay.value)
+    }
+    
+    private var dimView: UIView = UIView(frame: .zero)
+    
 }
 
 extension MainSceneTableViewCell: UICollectionViewDelegateFlowLayout {
@@ -362,9 +374,9 @@ extension MainSceneTableViewCell: LookBackCloseDelegate {
     
     func apply(isLookBack: Bool) {
         if isLookBack {
-            #warning("재은 - 여정 돌아보기(회고) 버튼")
+            #warning("회고 리포트")
         } else {
-            #warning("동민 - Journey 추가 버튼")
+            #warning("여장 추가하기")
         }
     }
     

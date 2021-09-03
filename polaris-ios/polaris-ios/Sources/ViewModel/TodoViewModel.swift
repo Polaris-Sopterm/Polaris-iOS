@@ -46,6 +46,10 @@ class TodoViewModel {
         self.todoDayHeadersInform.forEach { self.todoDayListTable.updateValue([], forKey: $0) }
     }
     
+    func updateCurrentTab(_ tab: TodoCategory) {
+        self.currentTabRelay.accept(tab)
+    }
+    
     func isEmptyDayTodoSection(at section: Int) -> Bool {
         let currentTab = self.currentTabRelay.value
         
@@ -87,6 +91,13 @@ class TodoViewModel {
         }
     }
     
+    func updateExpanedStatus(category: TodoCategory, forRowAt indexPath: IndexPath, isExpanded: Bool) {
+        switch category {
+        case .day:     self.dayExpanedIndexPath = isExpanded ? indexPath : nil
+        case .journey: self.journeyExpanedIndexPath = isExpanded ? indexPath : nil
+        }
+    }
+    
     func requestAddTodo(_ todoModel: TodoModel) {
         guard let title = todoModel.title             else { return }
         guard let date = todoModel.date               else { return }
@@ -97,6 +108,8 @@ class TodoViewModel {
         NetworkManager.request(apiType: createTodoAPI).subscribe(onSuccess: { [weak self] (responseModel: AddTodoResponseModel) in
             self?.requestTodoJourneyList()
             self?.requestTodoDayList(shouldScroll: false)
+            
+            NotificationCenter.default.post(name: .didUpdateTodo, object: MainSceneCellType.todoList.sceneIdentifier)
         }).disposed(by: self.disposeBag)
     }
     
@@ -124,7 +137,7 @@ class TodoViewModel {
         }).disposed(by: self.disposeBag)
     }
     
-    func requestDeleteTodo(_ todoIdx: Int, completion: @escaping (Bool) -> Void) {
+    func requestDeleteTodo(_ todoIdx: Int, completion: @escaping () -> Void) {
         guard self.requestingDelete == false else { return }
         
         let todoDayDeleteAPI = TodoAPI.deleteTodo(idx: todoIdx)
@@ -134,29 +147,16 @@ class TodoViewModel {
             guard let self = self else { return }
             self.requestingDelete = false
             
-            var isSuccess: Bool = false
-            defer { completion(isSuccess) }
-
             guard successModel.isSuccess == true else { return }
             
-            isSuccess = true
             self.requestTodoJourneyList()
             self.requestTodoDayList(shouldScroll: false)
+            completion()
+            
+            NotificationCenter.default.post(name: .didUpdateTodo, object: MainSceneCellType.todoList.sceneIdentifier)
         }, onFailure: { [weak self] _ in
-            completion(false)
             self?.requestingDelete = false
         }).disposed(by: self.disposeBag)
-    }
-    
-    func updateCurrentTab(_ tab: TodoCategory) {
-        self.currentTabRelay.accept(tab)
-    }
-    
-    func updateExpanedStatus(category: TodoCategory, forRowAt indexPath: IndexPath, isExpanded: Bool) {
-        switch category {
-        case .day:     self.dayExpanedIndexPath = isExpanded ? indexPath : nil
-        case .journey: self.journeyExpanedIndexPath = isExpanded ? indexPath : nil
-        }
     }
     
     func updateDoneStatus(_ todoModel: TodoModel) {
@@ -173,6 +173,8 @@ class TodoViewModel {
             
             self.requestTodoDayList(shouldScroll: false)
             self.requestTodoJourneyList()
+            
+            NotificationCenter.default.post(name: .didUpdateTodo, object: MainSceneCellType.todoList.sceneIdentifier)
         }, onFailure: { [weak self] _ in
             self?.requestingDone = false
         }).disposed(by: self.disposeBag)

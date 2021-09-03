@@ -38,6 +38,7 @@ class TodoTableViewCell: MainTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.navigationHeightConstraint.constant = type(of: self).navigationHeight
+        self.addObservers()
         self.registerCell()
         self.setupTableView()
         self.bindButtons()
@@ -50,6 +51,11 @@ class TodoTableViewCell: MainTableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         self.setupSuperTableView()
+    }
+    
+    private func addObservers() {
+        let center = NotificationCenter.default
+        center.addObserver(self, selector: #selector(self.didUpdateTodo(_:)), name: .didUpdateTodo, object: nil)
     }
     
     private func setupSuperTableView() {
@@ -70,6 +76,14 @@ class TodoTableViewCell: MainTableViewCell {
                                                                      left: 0,
                                                                      bottom: 0,
                                                                      right: 0)
+    }
+    
+    @objc private func didUpdateTodo(_ notification: Notification) {
+        guard let sceneIdentifier = notification.object as? String          else { return }
+        guard sceneIdentifier != MainSceneCellType.todoList.sceneIdentifier else { return }
+        
+        self.viewModel.requestTodoDayList(shouldScroll: false)
+        self.viewModel.requestTodoJourneyList()
     }
     
     private func bindButtons() {
@@ -280,8 +294,7 @@ extension TodoTableViewCell: DayTodoTableViewCellDelegate {
     
     func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, didTapDelete todo: TodoModel) {
         guard let todoIdx = todo.idx else { return }
-        self.viewModel.requestDeleteTodo(todoIdx) { isSuccess in
-            guard isSuccess == true else { return }
+        self.viewModel.requestDeleteTodo(todoIdx) {
             PolarisToastManager.shared.showToast(with: "할 일이 삭제되었어요. 되돌리려면 눌러주세요.") { [weak self] in
                 self?.viewModel.requestAddTodo(todo)
             }
@@ -308,8 +321,7 @@ extension TodoTableViewCell: JourneyTodoTableViewDelegate {
     
     func journeyTodoTableViewCell(_ cell: JourneyTodoTableViewCell, didTapDelete todo: TodoModel) {
         guard let todoIdx = todo.idx else { return }
-        self.viewModel.requestDeleteTodo(todoIdx) { isSuccess in
-            guard isSuccess == true else { return }
+        self.viewModel.requestDeleteTodo(todoIdx) {
             PolarisToastManager.shared.showToast(with: "할 일이 삭제되었어요. 되돌리려면 눌러주세요.") { [weak self] in
                 self?.viewModel.requestAddTodo(todo)
             }

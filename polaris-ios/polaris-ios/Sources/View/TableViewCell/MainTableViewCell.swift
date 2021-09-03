@@ -8,14 +8,22 @@
 import UIKit
 
 enum MainSceneCellType: Int, CaseIterable {
-    case main = 0, todoByDay
+    case main = 0, todoList
     
     var cellType: MainTableViewCell.Type {
         switch self {
         case .main:      return MainSceneTableViewCell.self
-        case .todoByDay: return TodoTableViewCell.self
+        case .todoList: return TodoTableViewCell.self
         }
     }
+    
+    var sceneIdentifier: String {
+        switch self {
+        case .main:     return "Main"
+        case .todoList: return "TodoList"
+        }
+    }
+    
 }
 
 
