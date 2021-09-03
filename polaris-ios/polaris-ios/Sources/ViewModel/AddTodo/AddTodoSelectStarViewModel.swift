@@ -27,4 +27,5 @@ class AddTodoSelectStarViewModel {
     }
     
     private let selectedMaxCount = 2
+    
 }

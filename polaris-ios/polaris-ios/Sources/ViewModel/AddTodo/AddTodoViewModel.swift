@@ -63,6 +63,8 @@ class AddTodoViewModel {
             self.requestAddTodoJourney()
         } else if self.currentAddOption == .edittedTodo {
             self.requestEditTodo()
+        } else if self.currentAddOption == .addJourney {
+            self.requestAddJourney()
         }
     }
     
@@ -100,7 +102,22 @@ class AddTodoViewModel {
     
     private func requestAddJourney() {
         guard let addText = self.addTextRelay.value          else { return }
-        guard let journeySet = self.selectJourneyRelay.value else { return }
+        guard var journeySet = self.selectJourneyRelay.value else { return }
+        
+        let firstJourney: Journey   = journeySet.removeFirst()
+        let secondJourney: Journey? = journeySet.isEmpty == false ? journeySet.removeFirst() : nil
+        
+        let createJourney = JourneyAPI.createJourney(title: addText,
+                                                     value1: firstJourney.rawValue,
+                                                     value2: secondJourney?.rawValue,
+                                                     date: Date.normalizedCurrent.convertToString())
+        
+        NetworkManager.request(apiType: createJourney).subscribe(onSuccess: { [weak self] (journeyModel: WeekJourneyModel) in
+            self?.completeAddTodoSubject.onNext(())
+            self?.loadingSubject.onNext(false)
+        }, onFailure: { [weak self] error in
+            self?.loadingSubject.onNext(false)
+        }).disposed(by: self.disposeBag)
     }
     
     private func requestEditTodo() {
