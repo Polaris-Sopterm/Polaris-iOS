@@ -43,11 +43,11 @@ class MainSceneViewModel {
         let mainTextRelay: BehaviorRelay<[String]> = BehaviorRelay(value: [])
         let homeModelRelay: BehaviorRelay<[HomeModel]> = BehaviorRelay(value: [])
         var mainStarModels: [MainStarModel] = []
-        var mainStarModelRelay: BehaviorRelay<[MainStarModel]> = BehaviorRelay(value: [])
+        let mainStarModelRelay: BehaviorRelay<[MainStarModel]> = BehaviorRelay(value: [])
         
         input.forceToShowStar.subscribe(onNext: { force in
             let homeAPI = HomeAPI.getHomeBanner(isSkipped: force)
-            let bannerNetworking = NetworkManager.request(apiType: homeAPI)
+            NetworkManager.request(apiType: homeAPI)
                 .subscribe(onSuccess: { [weak self] (homeModel: HomeModel) in
                     homeModelRelay.accept([homeModel])
                     for star in homeModel.starList {
@@ -169,11 +169,33 @@ class MainSceneViewModel {
         return resultList
     }
     
-    func changeToImgName(starName: String,level: Int)-> String {
-        return "".makeStarImageName(starName: starName, level: level)
+    func updateStarList(isSkipped: Bool) {
+        self.forceToShowStarRelay.accept(isSkipped)
     }
     
+    func updateDateInfo(_ dateInfo: DateInfo) {
+        self.dateInfoRelay.accept(dateInfo)
+    }
     
+    func updateDoneStatus(_ todoModel: TodoModel) {
+        guard let todoIdx = todoModel.idx else { return }
+        
+        let edittedIsDone = todoModel.isDone == nil ? true : false
+        let todoEditAPI   = TodoAPI.editTodo(idx: todoIdx, isDone: edittedIsDone)
+        
+        NetworkManager.request(apiType: todoEditAPI).subscribe(onSuccess: { [weak self] (responseModel: TodoModel) in
+            guard let self = self else { return }
+            self.updateDateInfo(self.dateInfoRelay.value)
+        }).disposed(by: self.disposeBag)
+    }
     
+    func changeToImgName(starName: String, level: Int)-> String {
+        return String.makeStarImageName(starName: starName, level: level)
+    }
+    
+    private(set) var forceToShowStarRelay = BehaviorRelay(value: false)
+    private(set) var dateInfoRelay        = BehaviorRelay<DateInfo>(value: DateInfo(year: Date.currentYear,
+                                                                                    month: Date.currentMonth,
+                                                                                    weekNo: Date.currentWeekNoOfMonth))
     
 }

@@ -9,6 +9,10 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+protocol MainTodoTableViewCellDelegate: AnyObject {
+    func mainTodoTableViewCell(_ cell: MainTodoTVC, didTapDone todo: TodoModel)
+}
+
 class MainTodoTVC: UITableViewCell {
     
     @IBOutlet weak var lineView: UIView!
@@ -18,35 +22,24 @@ class MainTodoTVC: UITableViewCell {
     
     @IBOutlet weak var checkButton: UIButton!
     @IBOutlet weak var checkButtonImage: UIImageView!
-    private var disposeBag = DisposeBag()
     
-    var tvcModel: TodoModel? {
+    weak var delegate: MainTodoTableViewCellDelegate?
+    
+    var todoModel: TodoModel? {
         didSet{
-            self.titleLabel.text = self.tvcModel?.title
-            if let model = self.tvcModel {
-                self.setUIs(todoModel: model)
-            }
-        }
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        if let model = self.tvcModel {
+            self.titleLabel.text = self.todoModel?.title
+            
+            guard let model = self.todoModel else { return }
             self.setUIs(todoModel: model)
         }
     }
+    
     override func prepareForReuse() {
         super.prepareForReuse()
-        if let model = self.tvcModel {
+        if let model = self.todoModel {
             self.setUIs(todoModel: model)
         }
     }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
-    }
-    
     
     func setUIs(todoModel: TodoModel){
         self.backgroundColor = .clear
@@ -56,10 +49,9 @@ class MainTodoTVC: UITableViewCell {
         self.subLabel.font = UIFont.systemFont(ofSize: 11,weight: .medium)
         
         if todoModel.isDone != nil {
-            self.checkButton.setImage(UIImage(named: ImageName.btnCheck), for: .normal)
+            self.checkButtonImage.image = UIImage(named: ImageName.btnCheck)
             self.titleLabel.alpha = 0.35
             self.subLabel.alpha = 0.35
-            
         } else {
             self.checkButtonImage.image = UIImage(named: ImageName.btnUncheck)
             self.titleLabel.alpha = 1.0
@@ -78,30 +70,11 @@ class MainTodoTVC: UITableViewCell {
     }
     
     @IBAction func checkButtonAction(_ sender: Any) {
-        
-        guard let idx = tvcModel?.idx else { return }
-        if let _ = tvcModel?.isDone {
-            let todoEditAPI = TodoAPI.editTodo(idx: idx, isDone: false)
-            NetworkManager.request(apiType: todoEditAPI).subscribe(onSuccess: { [weak self] (responseModel: TodoModel) in
-                guard let self = self else { return }
-                
-                self.tvcModel = TodoModel(idx: responseModel.idx, title: responseModel.title, isTop: responseModel.isTop, isDone: responseModel.isDone, date: responseModel.date, createdAt: responseModel.createdAt, journey: responseModel.journey)
-            }).disposed(by: self.disposeBag)
-        }
-        else {
-            let todoEditAPI = TodoAPI.editTodo(idx: idx, isDone: true)
-            NetworkManager.request(apiType: todoEditAPI).subscribe(onSuccess: { [weak self] (responseModel: TodoModel) in
-                guard let self = self else { return }
-                self.tvcModel = TodoModel(idx: responseModel.idx, title: responseModel.title, isTop: responseModel.isTop, isDone: responseModel.isDone, date: responseModel.date, createdAt: responseModel.createdAt, journey: responseModel.journey)
-            }).disposed(by: self.disposeBag)
-        }
-        
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "checkButton"), object: nil)
-        
+        guard let todoModel = self.todoModel else { return }
+        self.delegate?.mainTodoTableViewCell(self, didTapDone: todoModel)
     }
     
-    
-    
+    private let disposeBag = DisposeBag()
     
 }
 

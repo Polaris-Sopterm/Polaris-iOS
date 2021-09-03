@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -27,12 +28,12 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="utt-mg-5NA">
-                                <rect key="frame" x="22" y="45" width="44" height="20"/>
+                                <rect key="frame" x="22" y="45" width="55.5" height="20"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bQ9-yZ-Ubc">
-                                        <rect key="frame" x="18" y="0.0" width="41" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <rect key="frame" x="18" y="3" width="32.5" height="14.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                        <color key="textColor" name="mainText"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dk6-Yb-YF6">
@@ -46,21 +47,21 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="44" id="1ay-93-LOf"/>
                                     <constraint firstItem="bQ9-yZ-Ubc" firstAttribute="leading" secondItem="dk6-Yb-YF6" secondAttribute="trailing" constant="2" id="5wE-Zy-UCB"/>
                                     <constraint firstAttribute="height" constant="20" id="KnA-hg-phO"/>
+                                    <constraint firstAttribute="trailing" secondItem="bQ9-yZ-Ubc" secondAttribute="trailing" constant="5" id="TsH-Ju-60W"/>
                                     <constraint firstItem="bQ9-yZ-Ubc" firstAttribute="centerY" secondItem="dk6-Yb-YF6" secondAttribute="centerY" id="WKz-6z-vaV"/>
                                     <constraint firstItem="dk6-Yb-YF6" firstAttribute="top" secondItem="utt-mg-5NA" secondAttribute="top" constant="4" id="WLv-jw-NWm"/>
                                     <constraint firstItem="dk6-Yb-YF6" firstAttribute="leading" secondItem="utt-mg-5NA" secondAttribute="leading" constant="4" id="lf2-aW-B3S"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hFB-K4-wkT">
-                                <rect key="frame" x="73" y="45" width="44" height="20"/>
+                                <rect key="frame" x="84.5" y="45" width="55.5" height="20"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aka-Q8-p8G">
-                                        <rect key="frame" x="18" y="0.0" width="41" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <rect key="frame" x="18" y="3" width="32.5" height="14.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                        <color key="textColor" name="mainText"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eX6-dj-7Ke">
@@ -74,9 +75,9 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="44" id="8lY-kG-LNP"/>
                                     <constraint firstItem="eX6-dj-7Ke" firstAttribute="leading" secondItem="hFB-K4-wkT" secondAttribute="leading" constant="4" id="91l-NN-9AS"/>
                                     <constraint firstItem="Aka-Q8-p8G" firstAttribute="leading" secondItem="eX6-dj-7Ke" secondAttribute="trailing" constant="2" id="NsS-N5-qP7"/>
+                                    <constraint firstAttribute="trailing" secondItem="Aka-Q8-p8G" secondAttribute="trailing" constant="5" id="OzF-Px-YXt"/>
                                     <constraint firstAttribute="height" constant="20" id="R1H-73-JOV"/>
                                     <constraint firstItem="Aka-Q8-p8G" firstAttribute="centerY" secondItem="eX6-dj-7Ke" secondAttribute="centerY" id="SWK-Wx-5Oc"/>
                                     <constraint firstItem="eX6-dj-7Ke" firstAttribute="top" secondItem="hFB-K4-wkT" secondAttribute="top" constant="4" id="ZQp-uo-tVI"/>
@@ -114,17 +115,20 @@
                 <outlet property="titleLabel" destination="eWw-WN-DrU" id="FIy-MY-vqN"/>
                 <outlet property="todoTV" destination="l6y-eQ-iGt" id="04k-hK-bl0"/>
                 <outlet property="upperView" destination="PLG-1N-H2A" id="7IK-HU-F1H"/>
-                <outletCollection property="upperColors" destination="dk6-Yb-YF6" collectionClass="NSMutableArray" id="ZMR-ve-fRD"/>
-                <outletCollection property="upperColors" destination="eX6-dj-7Ke" collectionClass="NSMutableArray" id="57N-pr-uLc"/>
-                <outletCollection property="upperLabels" destination="bQ9-yZ-Ubc" collectionClass="NSMutableArray" id="Z9e-le-dPn"/>
-                <outletCollection property="upperLabels" destination="Aka-Q8-p8G" collectionClass="NSMutableArray" id="kAU-Tx-D73"/>
-                <outletCollection property="upperInfos" destination="utt-mg-5NA" collectionClass="NSMutableArray" id="2y6-u0-NEt"/>
-                <outletCollection property="upperInfos" destination="hFB-K4-wkT" collectionClass="NSMutableArray" id="3G3-9v-prF"/>
+                <outletCollection property="journeyColorViews" destination="dk6-Yb-YF6" collectionClass="NSMutableArray" id="ZMR-ve-fRD"/>
+                <outletCollection property="journeyColorViews" destination="eX6-dj-7Ke" collectionClass="NSMutableArray" id="57N-pr-uLc"/>
+                <outletCollection property="journeyValueLabels" destination="bQ9-yZ-Ubc" collectionClass="NSMutableArray" id="Z9e-le-dPn"/>
+                <outletCollection property="journeyValueLabels" destination="Aka-Q8-p8G" collectionClass="NSMutableArray" id="kAU-Tx-D73"/>
+                <outletCollection property="journeyInfoViews" destination="utt-mg-5NA" collectionClass="NSMutableArray" id="2y6-u0-NEt"/>
+                <outletCollection property="journeyInfoViews" destination="hFB-K4-wkT" collectionClass="NSMutableArray" id="3G3-9v-prF"/>
             </connections>
             <point key="canvasLocation" x="208.69565217391306" y="40.848214285714285"/>
         </collectionViewCell>
     </objects>
     <resources>
+        <namedColor name="mainText">
+            <color red="0.25099998712539673" green="0.25099998712539673" blue="0.54900002479553223" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="opaqueSeparatorColor">
             <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

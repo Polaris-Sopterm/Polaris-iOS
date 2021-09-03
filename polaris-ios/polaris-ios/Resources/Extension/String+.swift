@@ -9,13 +9,13 @@ import UIKit
 
 extension String {
     
-    func subRange(of text: String) -> NSRange {
-        return (self as NSString).range(of: text)
-    }
-   
-    func makeStarImageName(starName: String,level: Int) -> String{
+    static func makeStarImageName(starName: String, level: Int) -> String{
         let category = StarNames.starDict[starName] ?? "Happiness"
         return "img"+category+"0"+String(level)
+    }
+    
+    func subRange(of text: String) -> NSRange {
+        return (self as NSString).range(of: text)
     }
     
     func attributeString(font: UIFont?, textColor: UIColor?) -> NSAttributedString {

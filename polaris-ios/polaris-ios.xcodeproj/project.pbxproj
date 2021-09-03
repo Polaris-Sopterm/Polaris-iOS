@@ -307,6 +307,9 @@
 		CE6CE91226E27E7500BDDB6C /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE91126E27E7500BDDB6C /* SettingVC.swift */; };
 		CE6CE91326E27E7500BDDB6C /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE91126E27E7500BDDB6C /* SettingVC.swift */; };
 		CE6CE91426E27E7500BDDB6C /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE91126E27E7500BDDB6C /* SettingVC.swift */; };
+		CE6CE91626E2850300BDDB6C /* NSNotification+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE91526E2850300BDDB6C /* NSNotification+Name.swift */; };
+		CE6CE91726E2850300BDDB6C /* NSNotification+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE91526E2850300BDDB6C /* NSNotification+Name.swift */; };
+		CE6CE91826E2850300BDDB6C /* NSNotification+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE91526E2850300BDDB6C /* NSNotification+Name.swift */; };
 		CE8F719F266BDA3500D4FDD7 /* TermsOfServiceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8F719E266BDA3500D4FDD7 /* TermsOfServiceView.xib */; };
 		CE8F71A0266BDA3500D4FDD7 /* TermsOfServiceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8F719E266BDA3500D4FDD7 /* TermsOfServiceView.xib */; };
 		CE8F71A4266BDA4D00D4FDD7 /* TermsOfServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F71A3266BDA4D00D4FDD7 /* TermsOfServiceView.swift */; };
@@ -586,6 +589,7 @@
 		CE6CE90926E25E3300BDDB6C /* ConfirmPopupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConfirmPopupView.xib; sourceTree = "<group>"; };
 		CE6CE90D26E25E4800BDDB6C /* ConfirmPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmPopupView.swift; sourceTree = "<group>"; };
 		CE6CE91126E27E7500BDDB6C /* SettingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
+		CE6CE91526E2850300BDDB6C /* NSNotification+Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotification+Name.swift"; sourceTree = "<group>"; };
 		CE82B9382661D2FF004B6D81 /* Moya.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Moya.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE82B9AC2661DA11004B6D81 /* polaris-ios.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "polaris-ios.plist"; sourceTree = "<group>"; };
 		CE8F719E266BDA3500D4FDD7 /* TermsOfServiceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TermsOfServiceView.xib; sourceTree = "<group>"; };
@@ -891,6 +895,7 @@
 				CE2952E42687940100E21871 /* UIButton+.swift */,
 				CEA3CFE826A869D200577DA4 /* ObservableType+.swift */,
 				ECB5443626D3D0CA00FA4C50 /* UITextField+.swift */,
+				CE6CE91526E2850300BDDB6C /* NSNotification+Name.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1705,6 +1710,7 @@
 				EC7A3BF826394CC900B59C98 /* MainTodoCVCViewModel.swift in Sources */,
 				CEA44E5F267B398100A05650 /* MainSceneTableViewCell.swift in Sources */,
 				EC7A3BFB2639537A00B59C98 /* MainTodoTVCViewModel.swift in Sources */,
+				CE6CE91626E2850300BDDB6C /* NSNotification+Name.swift in Sources */,
 				EC49B959262EAF3D0080F8C3 /* StarNames.swift in Sources */,
 				CEEBE6D226DA25A0004A54BA /* SignoutViewModel.swift in Sources */,
 				ECA4942C262829EA00CC2EB8 /* TodoDateViewModel.swift in Sources */,
@@ -1827,6 +1833,7 @@
 				CE29533E2687A0A500E21871 /* MainSceneTableViewCell.swift in Sources */,
 				CE29533F2687A0A500E21871 /* MainTodoTVCViewModel.swift in Sources */,
 				CE2953402687A0A500E21871 /* StarNames.swift in Sources */,
+				CE6CE91726E2850300BDDB6C /* NSNotification+Name.swift in Sources */,
 				CE2953412687A0A500E21871 /* TodoDateViewModel.swift in Sources */,
 				CEEBE6D326DA25A0004A54BA /* SignoutViewModel.swift in Sources */,
 				CE2953422687A0A500E21871 /* AddTodoSelectStarTableViewCell.swift in Sources */,
@@ -1949,6 +1956,7 @@
 				CEA44E60267B398100A05650 /* MainSceneTableViewCell.swift in Sources */,
 				CE43D06326613D66003126F2 /* MainTodoTVCViewModel.swift in Sources */,
 				CE43D06426613D66003126F2 /* StarNames.swift in Sources */,
+				CE6CE91826E2850300BDDB6C /* NSNotification+Name.swift in Sources */,
 				CE43D06526613D66003126F2 /* TodoDateViewModel.swift in Sources */,
 				CEEBE6D426DA25A0004A54BA /* SignoutViewModel.swift in Sources */,
 				CE43D06626613D66003126F2 /* AddTodoSelectStarTableViewCell.swift in Sources */,
