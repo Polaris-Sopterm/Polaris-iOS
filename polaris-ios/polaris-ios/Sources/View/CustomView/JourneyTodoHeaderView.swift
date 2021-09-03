@@ -31,6 +31,7 @@ class JourneyTodoHeaderView: TodoHeaderView {
         
         self.titleLabel.text = journeyModel.title != "default" ? journeyModel.title : "여정이 없는 할 일"
         
+        self.firstStarCategoryView.isHidden          = journeyModel.value1 == nil
         self.firstCategoryLabel.text                 = journeyModel.value1
         self.firstCategoryColorView.backgroundColor  = journeyModel.firstValueJourney?.color
         

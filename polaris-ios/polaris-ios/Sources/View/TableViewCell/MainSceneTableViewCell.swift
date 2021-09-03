@@ -376,7 +376,13 @@ extension MainSceneTableViewCell: LookBackCloseDelegate {
         if isLookBack {
             #warning("회고 리포트")
         } else {
-            #warning("여장 추가하기")
+            let viewController = AddTodoVC.instantiateFromStoryboard(StoryboardName.addTodo)
+            
+            guard let visibleController = UIViewController.getVisibleController() else { return }
+            guard let addTodoVC = viewController                                  else { return }
+            addTodoVC.setAddOptions(.addJourney)
+            addTodoVC.delegate = self
+            addTodoVC.presentWithAnimation(from: visibleController)
         }
     }
     
@@ -397,7 +403,10 @@ extension MainSceneTableViewCell: WeekPickerDelegate {
 extension MainSceneTableViewCell: AddTodoViewControllerDelegate {
     
     func addTodoViewController(_ viewController: AddTodoVC, didCompleteAddOption option: AddTodoVC.AddOptions) {
+        self.viewModel.updateDateInfo(self.viewModel.dateInfoRelay.value)
+        self.viewModel.updateStarList(isSkipped: true)
         
+        NotificationCenter.default.post(name: .didUpdateTodo, object: MainSceneCellType.main.sceneIdentifier)
     }
     
 }
