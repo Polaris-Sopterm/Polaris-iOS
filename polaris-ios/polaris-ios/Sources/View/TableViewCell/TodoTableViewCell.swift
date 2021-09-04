@@ -14,7 +14,7 @@ class TodoCustomTableView: UITableView, UIGestureRecognizerDelegate {
     override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         guard let velocity = (gestureRecognizer as? UIPanGestureRecognizer)?.velocity(in: self) else { return true }
         guard self.contentOffset.y == -(51 + DeviceInfo.topSafeAreaInset) else { return true }
-        if velocity.y < 0 { return true }
+        if velocity.y < 0 { return true  }
         else              { return false }
     }
     
@@ -23,7 +23,7 @@ class TodoCustomTableView: UITableView, UIGestureRecognizerDelegate {
         
         if self.contentOffset.y <= -(51 + DeviceInfo.topSafeAreaInset) {
             if panGesture.velocity(in: self).y < 0 { return false }
-            else                                   { return true }
+            else                                   { return true  }
         } else {
             return false
         }
@@ -94,6 +94,16 @@ class TodoTableViewCell: MainTableViewCell {
             let changedTab: TodoCategory = currentTab == .day ? .journey : .day
             self.viewModel.updateCurrentTab(changedTab)
         }).disposed(by: self.disposeBag)
+        
+        self.addJourneyButton.rx.tap.observeOnMain(onNext: { [weak self] in            
+            let viewController = AddTodoVC.instantiateFromStoryboard(StoryboardName.addTodo)
+            
+            guard let visibleController = UIViewController.getVisibleController() else { return }
+            guard let addTodoVC = viewController                                  else { return }
+            addTodoVC.setAddOptions(.addJourney)
+            addTodoVC.delegate = self
+            addTodoVC.presentWithAnimation(from: visibleController)
+        }).disposed(by: self.disposeBag)
     }
     
     private func observeViewModel() {
@@ -105,8 +115,10 @@ class TodoTableViewCell: MainTableViewCell {
                 self.tableView.reloadData()
                 
                 if self.viewModel.currentTabRelay.value == .day {
+                    self.journeyEmptyView.isHidden = true
                     self.scrollToCurrentDay()
                 } else {
+                    self.journeyEmptyView.isHidden = self.viewModel.todoJourneyList.isEmpty == false
                     self.tableView.setContentOffset(CGPoint(x: 0, y: type(of: self).navigationHeight), animated: false)
                 }
                 self.updateCategoryButton(as: currentTab == .day ? .journey : .day)
@@ -114,9 +126,16 @@ class TodoTableViewCell: MainTableViewCell {
             .disposed(by: self.disposeBag)
         
         self.viewModel.reloadSubject.observeOnMain(onNext: { [weak self] shouldScroll in
-            self?.tableView.reloadData()
+            guard let self = self else { return }
+            self.tableView.reloadData()
             
-            if self?.viewModel.currentTabRelay.value == .day && shouldScroll { self?.scrollToCurrentDay() }
+            if self.viewModel.currentTabRelay.value == .day && shouldScroll {
+                self.scrollToCurrentDay()
+            }
+            
+            if self.viewModel.currentTabRelay.value == .journey {
+                self.journeyEmptyView.isHidden = self.viewModel.todoJourneyList.isEmpty == false
+            }
         }).disposed(by: self.disposeBag)
     }
     
@@ -147,6 +166,8 @@ class TodoTableViewCell: MainTableViewCell {
     @IBOutlet private weak var navigationHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var tableView: TodoCustomTableView!
     @IBOutlet private weak var categoryButton: UIButton!
+    @IBOutlet private weak var journeyEmptyView: UIView!
+    @IBOutlet private weak var addJourneyButton: UIButton!
     
 }
 
