@@ -17,7 +17,10 @@ class AddTodoSelectStarTableViewCell: AddTodoTableViewCell {
     
     override class var cellHeight: CGFloat { return 397 * screenRatio }
     
-    override weak var delegate: AddTodoTableViewCellDelegate? { didSet { self._delegate = self.delegate as? AddTodoSelectStarTableViewCellDelegate } }
+    override weak var delegate: AddTodoTableViewCellDelegate? {
+        didSet { self._delegate = self.delegate as? AddTodoSelectStarTableViewCellDelegate }
+    }
+    
     weak var _delegate: AddTodoSelectStarTableViewCellDelegate?
     
     // MARK: - Life Cycle
@@ -26,6 +29,12 @@ class AddTodoSelectStarTableViewCell: AddTodoTableViewCell {
         self.registerCell()
         self.layoutCollectionView()
         self.bindCollectionView()
+    }
+    
+    func updateSelectJourney(_ journeys: Set<Journey>) {
+        self._delegate?.addTodoSelectStarTableViewCell(self, didSelectedStars: journeys)
+        
+        journeys.forEach { journey in self.viewModel.selectJourney(journey) }
     }
     
     // MARK: - Set Up

@@ -15,7 +15,7 @@ class AddTodoViewModel {
         if self.currentAddOption == .perDayAddTodo {
             return self.addTodoDate
         } else if self.currentAddOption == .edittedTodo {
-            return self.todoDayModel?.date?.convertToDate()?.normalizedDate
+            return self.todoModel?.date?.convertToDate()?.normalizedDate
         } else {
             return nil
         }
@@ -34,7 +34,7 @@ class AddTodoViewModel {
     let selectJourneyRelay = BehaviorRelay<Set<Journey>?>(value: nil)
     
     let addEnableFlagSubject   = BehaviorSubject<Bool>(value: false)
-    let completeAddTodoSubject = PublishSubject<Void>()
+    let completeRequestSubject = PublishSubject<Void>()
     let loadingSubject         = BehaviorSubject<Bool>(value: false)
     
     func setViewModel(by addOptions: AddTodoVC.AddOptions) {
@@ -48,11 +48,11 @@ class AddTodoViewModel {
     }
     
     func setEditTodoModel(_ todo: TodoModel) {
-        self.todoDayModel = todo
+        self.todoModel = todo
     }
     
-    func setAddTodoJourney(_ journeyModel: WeekJourneyModel) {
-        self.addTodoJourney = journeyModel
+    func setJourneyModel(_ journeyModel: WeekJourneyModel) {
+        self.journeyModel = journeyModel
     }
     
     func requestAddTodo() {
@@ -68,6 +68,23 @@ class AddTodoViewModel {
         }
     }
     
+    func requestDeleteJourney() {
+        guard let journey = self.journeyModel else { return }
+        guard let idx = journey.idx           else { return }
+        
+        self.loadingSubject.onNext(true)
+        let deleteJourneyAPI = JourneyAPI.deleteJourney(idx: idx)
+        NetworkManager.request(apiType: deleteJourneyAPI).subscribe(onSuccess: { [weak self] (successModel: SuccessModel) in
+            guard let self = self else { return }
+            self.loadingSubject.onNext(false)
+            
+            guard successModel.isSuccess == true else { return }
+            self.completeRequestSubject.onNext(())
+        }, onFailure: { [weak self] _ in
+            self?.loadingSubject.onNext(false)
+        }).disposed(by: self.disposeBag)
+    }
+    
     private func requestAddTodoDay() {
         guard let addText = self.addTextRelay.value   else { return }
         guard let fixOnTop = self.fixOnTopRelay.value else { return }
@@ -78,7 +95,7 @@ class AddTodoViewModel {
         let createTodoAPI = TodoAPI.createToDo(title: addText, date: addTodoDate.convertToString(),
                                                journeyIdx: journey?.idx, isTop: fixOnTop)
         NetworkManager.request(apiType: createTodoAPI).subscribe(onSuccess: { [weak self] (responseModel: AddTodoResponseModel) in
-            self?.completeAddTodoSubject.onNext(())
+            self?.completeRequestSubject.onNext(())
             self?.loadingSubject.onNext(false)
         }, onFailure: { [weak self] error in
             self?.loadingSubject.onNext(false)
@@ -89,12 +106,12 @@ class AddTodoViewModel {
         guard let addText = self.addTextRelay.value        else { return }
         guard let addTodoDate = self.selectDateRelay.value else { return }
         guard let fixOnTop = self.fixOnTopRelay.value      else { return }
-        guard let journey = self.addTodoJourney            else { return }
+        guard let journey = self.journeyModel            else { return }
 
         let createTodoAPI = TodoAPI.createToDo(title: addText, date: addTodoDate.convertToString(),
                                                journeyIdx: journey.idx, isTop: fixOnTop)
         NetworkManager.request(apiType: createTodoAPI).subscribe(onSuccess: { [weak self] (responseModel: AddTodoResponseModel) in
-            self?.completeAddTodoSubject.onNext(())
+            self?.completeRequestSubject.onNext(())
             self?.loadingSubject.onNext(false)
         }, onFailure: { [weak self] error in
             self?.loadingSubject.onNext(false)
@@ -114,7 +131,7 @@ class AddTodoViewModel {
                                                      date: Date.normalizedCurrent.convertToString())
         
         NetworkManager.request(apiType: createJourney).subscribe(onSuccess: { [weak self] (journeyModel: WeekJourneyModel) in
-            self?.completeAddTodoSubject.onNext(())
+            self?.completeRequestSubject.onNext(())
             self?.loadingSubject.onNext(false)
         }, onFailure: { [weak self] error in
             self?.loadingSubject.onNext(false)
@@ -122,7 +139,7 @@ class AddTodoViewModel {
     }
     
     private func requestEditTodo() {
-        guard let todoModel = self.todoDayModel else { return }
+        guard let todoModel = self.todoModel else { return }
         guard let idx = todoModel.idx           else { return }
         
         guard let edittedText = self.addTextRelay.value      else { return }
@@ -133,7 +150,7 @@ class AddTodoViewModel {
         let todoEditAPI = TodoAPI.editTodo(idx: idx, title: edittedText, date: edittedDate.convertToString(),
                                            journeyIdx: edittedJourney.idx, isTop: edittedFixOnTop)
         NetworkManager.request(apiType: todoEditAPI).subscribe(onSuccess: { [weak self] (responseModel: TodoModel)  in
-            self?.completeAddTodoSubject.onNext(())
+            self?.completeRequestSubject.onNext(())
             self?.loadingSubject.onNext(false)
         }, onFailure: { [weak self] _ in
             self?.loadingSubject.onNext(false)
@@ -202,10 +219,10 @@ class AddTodoViewModel {
     private(set) var addTodoDate: Date?
     
     // 여정별 할 일 더할 때만 씀 - Journey Todo
-    private(set) var addTodoJourney: WeekJourneyModel?
+    private(set) var journeyModel: WeekJourneyModel?
     
     // 일정 수정할 때 씀 - Edit Todo
-    private(set) var todoDayModel: TodoModel?
+    private(set) var todoModel: TodoModel?
     
     private(set) var currentAddOption: AddTodoVC.AddOptions?
     

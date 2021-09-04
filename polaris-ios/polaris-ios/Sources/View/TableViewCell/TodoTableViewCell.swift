@@ -248,13 +248,19 @@ extension TodoTableViewCell: DayTodoHeaderViewDelegate {
 extension TodoTableViewCell: JourneyTodoHeaderViewDelegate {
     
     func journeyTodoHeaderView(_ journeyTodoHeaderView: JourneyTodoHeaderView, didTapEdit todo: WeekJourneyModel) {
+        guard let addTodoVC = AddTodoVC.instantiateFromStoryboard(StoryboardName.addTodo),
+              let visibleController = UIViewController.getVisibleController() else { return }
+        addTodoVC.setJourneyModel(todo)
+        addTodoVC.setAddOptions(.edittedJourney)
+        addTodoVC.delegate = self
+        addTodoVC.presentWithAnimation(from: visibleController)
     }
     
     func journeyTodoHeaderView(_ journeyTodoHeaderView: JourneyTodoHeaderView, didTapAdd todo: WeekJourneyModel) {
         guard let addTodoVC = AddTodoVC.instantiateFromStoryboard(StoryboardName.addTodo),
               let visibleController = UIViewController.getVisibleController() else { return }
         addTodoVC.setAddOptions(.perJourneyAddTodo)
-        addTodoVC.setAddTodoJourney(todo)
+        addTodoVC.setJourneyModel(todo)
         addTodoVC.delegate = self
         addTodoVC.presentWithAnimation(from: visibleController)
     }

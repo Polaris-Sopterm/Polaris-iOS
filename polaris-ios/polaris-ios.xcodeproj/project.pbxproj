@@ -310,6 +310,12 @@
 		CE6CE91626E2850300BDDB6C /* NSNotification+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE91526E2850300BDDB6C /* NSNotification+Name.swift */; };
 		CE6CE91726E2850300BDDB6C /* NSNotification+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE91526E2850300BDDB6C /* NSNotification+Name.swift */; };
 		CE6CE91826E2850300BDDB6C /* NSNotification+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE91526E2850300BDDB6C /* NSNotification+Name.swift */; };
+		CE6CE91B26E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE91926E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.swift */; };
+		CE6CE91C26E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE91926E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.swift */; };
+		CE6CE91D26E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE91926E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.swift */; };
+		CE6CE91E26E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6CE91A26E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.xib */; };
+		CE6CE91F26E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6CE91A26E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.xib */; };
+		CE6CE92026E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6CE91A26E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.xib */; };
 		CE8F719F266BDA3500D4FDD7 /* TermsOfServiceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8F719E266BDA3500D4FDD7 /* TermsOfServiceView.xib */; };
 		CE8F71A0266BDA3500D4FDD7 /* TermsOfServiceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8F719E266BDA3500D4FDD7 /* TermsOfServiceView.xib */; };
 		CE8F71A4266BDA4D00D4FDD7 /* TermsOfServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F71A3266BDA4D00D4FDD7 /* TermsOfServiceView.swift */; };
@@ -590,6 +596,8 @@
 		CE6CE90D26E25E4800BDDB6C /* ConfirmPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmPopupView.swift; sourceTree = "<group>"; };
 		CE6CE91126E27E7500BDDB6C /* SettingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
 		CE6CE91526E2850300BDDB6C /* NSNotification+Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotification+Name.swift"; sourceTree = "<group>"; };
+		CE6CE91926E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoDeleteJourneyTableViewCell.swift; sourceTree = "<group>"; };
+		CE6CE91A26E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTodoDeleteJourneyTableViewCell.xib; sourceTree = "<group>"; };
 		CE82B9382661D2FF004B6D81 /* Moya.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Moya.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE82B9AC2661DA11004B6D81 /* polaris-ios.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "polaris-ios.plist"; sourceTree = "<group>"; };
 		CE8F719E266BDA3500D4FDD7 /* TermsOfServiceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TermsOfServiceView.xib; sourceTree = "<group>"; };
@@ -1107,6 +1115,7 @@
 				CEA44E6D267B3BE300A05650 /* TodoTableViewCell.xib */,
 				CEDB478926AF26610024ABD4 /* TodoListEmptyTableViewCell.xib */,
 				CED6B6EC26CAD29200D37647 /* SettingMenuTableViewCell.xib */,
+				CE6CE91A26E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.xib */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -1205,6 +1214,7 @@
 				CEDB478826AF26610024ABD4 /* TodoListEmptyTableViewCell.swift */,
 				CEC48ED2262DCA9100FD887F /* DropdownItemTableViewCell.swift */,
 				CED6B6EB26CAD29200D37647 /* SettingMenuTableViewCell.swift */,
+				CE6CE91926E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -1336,6 +1346,7 @@
 				CE6CE90A26E25E3300BDDB6C /* ConfirmPopupView.xib in Resources */,
 				CEE574D92630422600EA64B7 /* AddTodoDayTableViewCell.xib in Resources */,
 				CE8F719F266BDA3500D4FDD7 /* TermsOfServiceView.xib in Resources */,
+				CE6CE91E26E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.xib in Resources */,
 				ECA49471262C2DD200CC2EB8 /* MainStarCVC.xib in Resources */,
 				CEEE575D262AD5FA00C39358 /* AddTodo.storyboard in Resources */,
 				ECA494242628223200CC2EB8 /* TodoDateTVC.xib in Resources */,
@@ -1386,6 +1397,7 @@
 				CE6CE90B26E25E3300BDDB6C /* ConfirmPopupView.xib in Resources */,
 				CE29534C2687A0A500E21871 /* AddTodoDayTableViewCell.xib in Resources */,
 				CE29534D2687A0A500E21871 /* TermsOfServiceView.xib in Resources */,
+				CE6CE91F26E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.xib in Resources */,
 				CE29534E2687A0A500E21871 /* MainStarCVC.xib in Resources */,
 				CE29534F2687A0A500E21871 /* AddTodo.storyboard in Resources */,
 				CE2953502687A0A500E21871 /* TodoDateTVC.xib in Resources */,
@@ -1436,6 +1448,7 @@
 				CE6CE90C26E25E3300BDDB6C /* ConfirmPopupView.xib in Resources */,
 				CE43D06F26613D66003126F2 /* AddTodoDayTableViewCell.xib in Resources */,
 				CE8F71A0266BDA3500D4FDD7 /* TermsOfServiceView.xib in Resources */,
+				CE6CE92026E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.xib in Resources */,
 				CE43D07026613D66003126F2 /* MainStarCVC.xib in Resources */,
 				CE43D07126613D66003126F2 /* AddTodo.storyboard in Resources */,
 				CE43D07226613D66003126F2 /* TodoDateTVC.xib in Resources */,
@@ -1622,6 +1635,7 @@
 				CEEE5782262C018F00C39358 /* AddTodoViewModel.swift in Sources */,
 				CEEE5786262C112E00C39358 /* AddTodoFixOnTopTableViewCell.swift in Sources */,
 				EC8C688A26CA1C46003CFA71 /* WeekPickerVC.swift in Sources */,
+				CE6CE91B26E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.swift in Sources */,
 				CED6B6DB26CAC1F900D37647 /* SuccessModel.swift in Sources */,
 				CEEE574A262A95BD00C39358 /* UserDefaultWrapper.swift in Sources */,
 				CE574000267C8E9900665933 /* TodoViewModel.swift in Sources */,
@@ -1745,6 +1759,7 @@
 				CE2952FA2687A0A500E21871 /* AddTodoFixOnTopTableViewCell.swift in Sources */,
 				CED6B6DC26CAC1F900D37647 /* SuccessModel.swift in Sources */,
 				CE2952FB2687A0A500E21871 /* UserDefaultWrapper.swift in Sources */,
+				CE6CE91C26E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.swift in Sources */,
 				EC8C688B26CA1C46003CFA71 /* WeekPickerVC.swift in Sources */,
 				CE2952FC2687A0A500E21871 /* TodoViewModel.swift in Sources */,
 				CE40B3F026C00F790000151F /* JourneyTitleListModel.swift in Sources */,
@@ -1868,6 +1883,7 @@
 				CE43D02D26613D66003126F2 /* AddTodoFixOnTopTableViewCell.swift in Sources */,
 				CED6B6DD26CAC1F900D37647 /* SuccessModel.swift in Sources */,
 				CE43D02E26613D66003126F2 /* UserDefaultWrapper.swift in Sources */,
+				CE6CE91D26E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.swift in Sources */,
 				EC8C688C26CA1C46003CFA71 /* WeekPickerVC.swift in Sources */,
 				CE574001267C8E9900665933 /* TodoViewModel.swift in Sources */,
 				CE40B3F126C00F790000151F /* JourneyTitleListModel.swift in Sources */,
