@@ -61,10 +61,12 @@ class AddTodoViewModel {
             self.requestAddTodoDay()
         } else if self.currentAddOption == .perJourneyAddTodo {
             self.requestAddTodoJourney()
-        } else if self.currentAddOption == .edittedTodo {
-            self.requestEditTodo()
         } else if self.currentAddOption == .addJourney {
             self.requestAddJourney()
+        } else if self.currentAddOption == .edittedTodo {
+            self.requestEditTodo()
+        } else if self.currentAddOption == .edittedJourney {
+            self.requestEditJourney()
         }
     }
     
@@ -140,7 +142,7 @@ class AddTodoViewModel {
     
     private func requestEditTodo() {
         guard let todoModel = self.todoModel else { return }
-        guard let idx = todoModel.idx           else { return }
+        guard let idx = todoModel.idx        else { return }
         
         guard let edittedText = self.addTextRelay.value      else { return }
         guard let edittedDate = self.selectDateRelay.value   else { return }
@@ -152,6 +154,27 @@ class AddTodoViewModel {
         NetworkManager.request(apiType: todoEditAPI).subscribe(onSuccess: { [weak self] (responseModel: TodoModel)  in
             self?.completeRequestSubject.onNext(())
             self?.loadingSubject.onNext(false)
+        }, onFailure: { [weak self] _ in
+            self?.loadingSubject.onNext(false)
+        }).disposed(by: self.disposeBag)
+    }
+    
+    private func requestEditJourney() {
+        guard let journeyModel = self.journeyModel else { return }
+        guard let idx = journeyModel.idx           else { return }
+        
+        guard let edittedText = self.addTextRelay.value      else { return }
+        guard var journeySet = self.selectJourneyRelay.value else { return }
+        
+        let firstJourney  = journeySet.removeFirst().rawValue
+        let secondJourney = journeySet.isEmpty == false ? journeySet.removeFirst().rawValue : nil
+        
+        let journeyEditAPI = JourneyAPI.edittedJourney(idx: idx, title: edittedText,
+                                                       value1: firstJourney, value: secondJourney)
+        NetworkManager.request(apiType: journeyEditAPI).subscribe(onSuccess: { [weak self] (journey: WeekJourneyModel) in
+            guard let self = self else { return }
+            self.loadingSubject.onNext(false)
+            self.completeRequestSubject.onNext(())
         }, onFailure: { [weak self] _ in
             self?.loadingSubject.onNext(false)
         }).disposed(by: self.disposeBag)
@@ -184,7 +207,7 @@ class AddTodoViewModel {
                     self.addEnableFlagSubject.onNext(true)
                 })
                 .disposed(by: self.disposeBag)
-        } else if addOptions == .addJourney {
+        } else if addOptions == .addJourney || addOptions == .edittedJourney {
             Observable.combineLatest(self.addTextRelay, self.selectJourneyRelay)
                 .subscribe(onNext: { [weak self] addText, selectStar in
                     guard let self = self else { return }
