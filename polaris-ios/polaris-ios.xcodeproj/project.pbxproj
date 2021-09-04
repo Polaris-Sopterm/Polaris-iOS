@@ -316,9 +316,9 @@
 		CE6CE91E26E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6CE91A26E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.xib */; };
 		CE6CE91F26E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6CE91A26E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.xib */; };
 		CE6CE92026E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6CE91A26E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.xib */; };
-		CE6CE92626E3497800BDDB6C /* PolarisMakersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE92526E3497800BDDB6C /* PolarisMakersViewController.swift */; };
-		CE6CE92726E3497800BDDB6C /* PolarisMakersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE92526E3497800BDDB6C /* PolarisMakersViewController.swift */; };
-		CE6CE92826E3497800BDDB6C /* PolarisMakersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE92526E3497800BDDB6C /* PolarisMakersViewController.swift */; };
+		CE6CE92626E3497800BDDB6C /* PolarisMakersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE92526E3497800BDDB6C /* PolarisMakersVC.swift */; };
+		CE6CE92726E3497800BDDB6C /* PolarisMakersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE92526E3497800BDDB6C /* PolarisMakersVC.swift */; };
+		CE6CE92826E3497800BDDB6C /* PolarisMakersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE92526E3497800BDDB6C /* PolarisMakersVC.swift */; };
 		CE6CE92B26E362B100BDDB6C /* PolarisMakerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE92926E362B100BDDB6C /* PolarisMakerCollectionViewCell.swift */; };
 		CE6CE92C26E362B100BDDB6C /* PolarisMakerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE92926E362B100BDDB6C /* PolarisMakerCollectionViewCell.swift */; };
 		CE6CE92D26E362B100BDDB6C /* PolarisMakerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE92926E362B100BDDB6C /* PolarisMakerCollectionViewCell.swift */; };
@@ -328,6 +328,9 @@
 		CE6CE93226E3654A00BDDB6C /* PolarisMakerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE93126E3654A00BDDB6C /* PolarisMakerViewModel.swift */; };
 		CE6CE93326E3654A00BDDB6C /* PolarisMakerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE93126E3654A00BDDB6C /* PolarisMakerViewModel.swift */; };
 		CE6CE93426E3654A00BDDB6C /* PolarisMakerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE93126E3654A00BDDB6C /* PolarisMakerViewModel.swift */; };
+		CE6CE93626E36A0400BDDB6C /* PolarisStoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE93526E36A0400BDDB6C /* PolarisStoryVC.swift */; };
+		CE6CE93726E36A0400BDDB6C /* PolarisStoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE93526E36A0400BDDB6C /* PolarisStoryVC.swift */; };
+		CE6CE93826E36A0500BDDB6C /* PolarisStoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE93526E36A0400BDDB6C /* PolarisStoryVC.swift */; };
 		CE8F719F266BDA3500D4FDD7 /* TermsOfServiceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8F719E266BDA3500D4FDD7 /* TermsOfServiceView.xib */; };
 		CE8F71A0266BDA3500D4FDD7 /* TermsOfServiceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8F719E266BDA3500D4FDD7 /* TermsOfServiceView.xib */; };
 		CE8F71A4266BDA4D00D4FDD7 /* TermsOfServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F71A3266BDA4D00D4FDD7 /* TermsOfServiceView.swift */; };
@@ -607,10 +610,11 @@
 		CE6CE91526E2850300BDDB6C /* NSNotification+Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotification+Name.swift"; sourceTree = "<group>"; };
 		CE6CE91926E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoDeleteJourneyTableViewCell.swift; sourceTree = "<group>"; };
 		CE6CE91A26E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTodoDeleteJourneyTableViewCell.xib; sourceTree = "<group>"; };
-		CE6CE92526E3497800BDDB6C /* PolarisMakersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarisMakersViewController.swift; sourceTree = "<group>"; };
+		CE6CE92526E3497800BDDB6C /* PolarisMakersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarisMakersVC.swift; sourceTree = "<group>"; };
 		CE6CE92926E362B100BDDB6C /* PolarisMakerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarisMakerCollectionViewCell.swift; sourceTree = "<group>"; };
 		CE6CE92A26E362B100BDDB6C /* PolarisMakerCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PolarisMakerCollectionViewCell.xib; sourceTree = "<group>"; };
 		CE6CE93126E3654A00BDDB6C /* PolarisMakerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarisMakerViewModel.swift; sourceTree = "<group>"; };
+		CE6CE93526E36A0400BDDB6C /* PolarisStoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarisStoryVC.swift; sourceTree = "<group>"; };
 		CE82B9382661D2FF004B6D81 /* Moya.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Moya.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE82B9AC2661DA11004B6D81 /* polaris-ios.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "polaris-ios.plist"; sourceTree = "<group>"; };
 		CE8F719E266BDA3500D4FDD7 /* TermsOfServiceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TermsOfServiceView.xib; sourceTree = "<group>"; };
@@ -1049,7 +1053,8 @@
 			children = (
 				CEEBE6CC26DA1FBA004A54BA /* SignOutVC.swift */,
 				CE6CE91126E27E7500BDDB6C /* SettingVC.swift */,
-				CE6CE92526E3497800BDDB6C /* PolarisMakersViewController.swift */,
+				CE6CE92526E3497800BDDB6C /* PolarisMakersVC.swift */,
+				CE6CE93526E36A0400BDDB6C /* PolarisStoryVC.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -1640,7 +1645,7 @@
 				ECA49486262DC17A00CC2EB8 /* UILabel+.swift in Sources */,
 				CE40B3E926C00E4E0000151F /* JourneyAPI.swift in Sources */,
 				CEA44E59267B386800A05650 /* MainVC.swift in Sources */,
-				CE6CE92626E3497800BDDB6C /* PolarisMakersViewController.swift in Sources */,
+				CE6CE92626E3497800BDDB6C /* PolarisMakersVC.swift in Sources */,
 				CE04A06A2623528C007C98E2 /* UIViewController+.swift in Sources */,
 				CEDB478A26AF26610024ABD4 /* TodoListEmptyTableViewCell.swift in Sources */,
 				CE2952E22687893000E21871 /* TodoAPI.swift in Sources */,
@@ -1663,6 +1668,7 @@
 				ECA4944426296F6E00CC2EB8 /* TodoDateTVCViewModel.swift in Sources */,
 				CEE574F5263092A400EA64B7 /* Date+.swift in Sources */,
 				CEA44E68267B3B8100A05650 /* MainTableViewCell.swift in Sources */,
+				CE6CE93626E36A0400BDDB6C /* PolarisStoryVC.swift in Sources */,
 				CE207B842661CADE009A812A /* BuildPhase.swift in Sources */,
 				CEEE573D262A952100C39358 /* MockProviderFactory.swift in Sources */,
 				CEE574EC26307C4D00EA64B7 /* Array+.swift in Sources */,
@@ -1767,7 +1773,7 @@
 				CE40B3EA26C00E4E0000151F /* JourneyAPI.swift in Sources */,
 				CE2952F22687A0A500E21871 /* MainVC.swift in Sources */,
 				CE2952F32687A0A500E21871 /* UIViewController+.swift in Sources */,
-				CE6CE92726E3497800BDDB6C /* PolarisMakersViewController.swift in Sources */,
+				CE6CE92726E3497800BDDB6C /* PolarisMakersVC.swift in Sources */,
 				CEDB478E26AF27DA0024ABD4 /* TodoListEmptyTableViewCell.swift in Sources */,
 				CE2952F42687A0A500E21871 /* TodoAPI.swift in Sources */,
 				CE2952F52687A0A500E21871 /* MainTodoHeaderView.swift in Sources */,
@@ -1790,6 +1796,7 @@
 				CE2953002687A0A500E21871 /* Date+.swift in Sources */,
 				CE2953012687A0A500E21871 /* MainTableViewCell.swift in Sources */,
 				CE2953022687A0A500E21871 /* BuildPhase.swift in Sources */,
+				CE6CE93726E36A0400BDDB6C /* PolarisStoryVC.swift in Sources */,
 				CE2953032687A0A500E21871 /* MockProviderFactory.swift in Sources */,
 				CE2953052687A0A500E21871 /* Array+.swift in Sources */,
 				CEA3CFEE26A8766700577DA4 /* ServiceTermKind.swift in Sources */,
@@ -1894,7 +1901,7 @@
 				CE40B3EB26C00E4E0000151F /* JourneyAPI.swift in Sources */,
 				CEA44E5A267B386800A05650 /* MainVC.swift in Sources */,
 				CE43D02826613D66003126F2 /* UIViewController+.swift in Sources */,
-				CE6CE92826E3497800BDDB6C /* PolarisMakersViewController.swift in Sources */,
+				CE6CE92826E3497800BDDB6C /* PolarisMakersVC.swift in Sources */,
 				CEDB478F26AF27DA0024ABD4 /* TodoListEmptyTableViewCell.swift in Sources */,
 				CE2952E32687893000E21871 /* TodoAPI.swift in Sources */,
 				CE43D02926613D66003126F2 /* MainTodoHeaderView.swift in Sources */,
@@ -1917,6 +1924,7 @@
 				CE43D03126613D66003126F2 /* Date+.swift in Sources */,
 				CEA44E69267B3B8100A05650 /* MainTableViewCell.swift in Sources */,
 				CE207B852661CADE009A812A /* BuildPhase.swift in Sources */,
+				CE6CE93826E36A0500BDDB6C /* PolarisStoryVC.swift in Sources */,
 				CE43D03226613D66003126F2 /* MockProviderFactory.swift in Sources */,
 				CE43D03426613D66003126F2 /* Array+.swift in Sources */,
 				CEA3CFEF26A8766700577DA4 /* ServiceTermKind.swift in Sources */,

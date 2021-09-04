@@ -104,10 +104,10 @@ final class SettingVC: UIViewController {
     }
     
     private func pushPolarisMakerViewController() {
-        let viewController = PolarisMakersViewController.instantiateFromStoryboard(StoryboardName.setting)
+        let viewController = PolarisStoryVC.instantiateFromStoryboard(StoryboardName.setting)
         
-        guard let polarisMakerViewController = viewController else { return }
-        self.navigationController?.pushViewController(polarisMakerViewController, animated: true)
+        guard let polarisStoryVC = viewController else { return }
+        self.navigationController?.pushViewController(polarisStoryVC, animated: true)
     }
     
     private func pushSignoOutViewController() {

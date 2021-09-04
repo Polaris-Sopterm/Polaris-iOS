@@ -9,7 +9,7 @@ import RxSwift
 import RxCocoa
 import UIKit
 
-final class PolarisMakersViewController: UIViewController {
+final class PolarisMakersVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,7 +74,7 @@ final class PolarisMakersViewController: UIViewController {
     
 }
 
-extension PolarisMakersViewController: UICollectionViewDelegate {
+extension PolarisMakersVC: UICollectionViewDelegate {
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let targetOffsetX = targetContentOffset.pointee.x

@@ -153,10 +153,113 @@
             </objects>
             <point key="canvasLocation" x="138" y="800"/>
         </scene>
-        <!--Polaris Makers View Controller-->
+        <!--Polaris StoryVC-->
+        <scene sceneID="xMg-9g-3VZ">
+            <objects>
+                <viewController storyboardIdentifier="PolarisStoryVC" id="D0w-Za-cRc" customClass="PolarisStoryVC" customModule="Polaris" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="meR-pT-1Fp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboarding_bg" translatesAutoresizingMaskIntoConstraints="NO" id="Kki-hh-0Cj">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Yf-bH-4ar">
+                                <rect key="frame" x="0.0" y="44" width="375" height="60"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p0h-yP-eNo">
+                                        <rect key="frame" x="9" y="6" width="48" height="48"/>
+                                        <state key="normal" image="btnBackLookBack"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="p0h-yP-eNo" firstAttribute="centerY" secondItem="6Yf-bH-4ar" secondAttribute="centerY" id="Opr-gb-oBp"/>
+                                    <constraint firstItem="p0h-yP-eNo" firstAttribute="leading" secondItem="6Yf-bH-4ar" secondAttribute="leading" constant="9" id="Wel-Sn-gXY"/>
+                                    <constraint firstAttribute="height" constant="60" id="k5s-T4-Sb3"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hh5-TW-AkZ">
+                                <rect key="frame" x="54" y="321.66666666666669" width="267" height="179"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgPolarisStar" translatesAutoresizingMaskIntoConstraints="NO" id="vUO-Gt-4UX">
+                                        <rect key="frame" x="101" y="0.0" width="65" height="65"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="65" id="Nht-lZ-zMJ"/>
+                                            <constraint firstAttribute="width" constant="65" id="qew-Lu-QsY"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Navigate your Polaris!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GxI-Js-CHc">
+                                        <rect key="frame" x="45.666666666666686" y="76" width="176" height="31"/>
+                                        <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="23"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" text="우리는 일상 속에서 수많은 계획을 세웁니다." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4Z-EV-VpO">
+                                        <rect key="frame" x="0.0" y="161" width="267" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="X4Z-EV-VpO" firstAttribute="top" secondItem="GxI-Js-CHc" secondAttribute="bottom" constant="54" id="52h-aj-Tig"/>
+                                    <constraint firstAttribute="trailing" secondItem="X4Z-EV-VpO" secondAttribute="trailing" id="7wB-Rq-oLh"/>
+                                    <constraint firstItem="vUO-Gt-4UX" firstAttribute="top" secondItem="Hh5-TW-AkZ" secondAttribute="top" id="9YT-Li-mhQ"/>
+                                    <constraint firstAttribute="bottom" secondItem="X4Z-EV-VpO" secondAttribute="bottom" id="A6x-Id-uWx"/>
+                                    <constraint firstItem="GxI-Js-CHc" firstAttribute="centerX" secondItem="Hh5-TW-AkZ" secondAttribute="centerX" id="M8p-BK-ejy"/>
+                                    <constraint firstItem="vUO-Gt-4UX" firstAttribute="centerX" secondItem="Hh5-TW-AkZ" secondAttribute="centerX" id="OIY-EM-jFW"/>
+                                    <constraint firstItem="X4Z-EV-VpO" firstAttribute="leading" secondItem="Hh5-TW-AkZ" secondAttribute="leading" id="xRc-4T-0gR"/>
+                                    <constraint firstItem="GxI-Js-CHc" firstAttribute="top" secondItem="vUO-Gt-4UX" secondAttribute="bottom" constant="11" id="yDe-db-h59"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ejL-2i-PXt">
+                                <rect key="frame" x="343" y="736" width="9" height="22"/>
+                                <state key="normal" image="btnNextMakers"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XxK-v7-aYn">
+                                <rect key="frame" x="188" y="731" width="147" height="32"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="폴라리스를 만든 사람들">
+                                    <color key="titleColor" name="mainSky"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="S2g-nm-S3c"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Kki-hh-0Cj" firstAttribute="trailing" secondItem="S2g-nm-S3c" secondAttribute="trailing" id="0lg-cr-wMu"/>
+                            <constraint firstItem="6Yf-bH-4ar" firstAttribute="leading" secondItem="S2g-nm-S3c" secondAttribute="leading" id="6O3-uc-zKw"/>
+                            <constraint firstItem="S2g-nm-S3c" firstAttribute="trailing" secondItem="Hh5-TW-AkZ" secondAttribute="trailing" constant="54" id="71Z-eX-Ma7"/>
+                            <constraint firstItem="Hh5-TW-AkZ" firstAttribute="leading" secondItem="S2g-nm-S3c" secondAttribute="leading" constant="54" id="GeA-bg-tvZ"/>
+                            <constraint firstItem="Kki-hh-0Cj" firstAttribute="top" secondItem="meR-pT-1Fp" secondAttribute="top" id="JBF-nl-ccC"/>
+                            <constraint firstAttribute="bottom" secondItem="ejL-2i-PXt" secondAttribute="bottom" constant="54" id="Mn5-mR-uTF"/>
+                            <constraint firstAttribute="trailing" secondItem="ejL-2i-PXt" secondAttribute="trailing" constant="23" id="YQJ-Ya-hf1"/>
+                            <constraint firstItem="6Yf-bH-4ar" firstAttribute="top" secondItem="S2g-nm-S3c" secondAttribute="top" id="ZeH-bu-MkD"/>
+                            <constraint firstItem="Kki-hh-0Cj" firstAttribute="leading" secondItem="S2g-nm-S3c" secondAttribute="leading" id="e2g-b5-Xxc"/>
+                            <constraint firstItem="6Yf-bH-4ar" firstAttribute="trailing" secondItem="S2g-nm-S3c" secondAttribute="trailing" id="eoT-Yc-fTo"/>
+                            <constraint firstItem="Hh5-TW-AkZ" firstAttribute="centerY" secondItem="S2g-nm-S3c" secondAttribute="centerY" id="hjC-YM-2sz"/>
+                            <constraint firstItem="ejL-2i-PXt" firstAttribute="leading" secondItem="XxK-v7-aYn" secondAttribute="trailing" constant="8" id="m3A-nI-V0R"/>
+                            <constraint firstItem="XxK-v7-aYn" firstAttribute="centerY" secondItem="ejL-2i-PXt" secondAttribute="centerY" id="qHM-bE-it3"/>
+                            <constraint firstAttribute="bottom" secondItem="Kki-hh-0Cj" secondAttribute="bottom" id="rqG-4T-6c0"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backButton" destination="p0h-yP-eNo" id="MC7-vj-fHZ"/>
+                        <outlet property="makeButton" destination="ejL-2i-PXt" id="UIh-Ft-Ecs"/>
+                        <outlet property="makeTextButton" destination="XxK-v7-aYn" id="m6t-bS-d5Z"/>
+                        <outlet property="titleLabel" destination="X4Z-EV-VpO" id="abL-yu-NTF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4qv-fy-Y2x" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="900" y="799.50738916256159"/>
+        </scene>
+        <!--Polaris MakersVC-->
         <scene sceneID="4Fk-kE-Vs1">
             <objects>
-                <viewController storyboardIdentifier="PolarisMakersViewController" id="91v-uw-Gak" customClass="PolarisMakersViewController" customModule="Polaris" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PolarisMakersVC" id="91v-uw-Gak" customClass="PolarisMakersVC" customModule="Polaris" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Uhi-ge-XOn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -229,7 +332,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H8h-DO-xuQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="900" y="799.50738916256159"/>
+            <point key="canvasLocation" x="1662" y="800"/>
         </scene>
         <!--Nick ChangeVC-->
         <scene sceneID="kh5-0V-bPN">
@@ -318,6 +421,8 @@
     </scenes>
     <resources>
         <image name="btnBackLookBack" width="48" height="48"/>
+        <image name="btnNextMakers" width="9" height="14"/>
+        <image name="imgPolarisStar" width="55" height="55"/>
         <image name="onboarding_bg" width="375" height="812"/>
         <namedColor name="mainSky">
             <color red="0.49799999594688416" green="0.85900002717971802" blue="0.93699997663497925" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
