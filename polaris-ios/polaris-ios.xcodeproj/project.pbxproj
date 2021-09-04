@@ -316,6 +316,18 @@
 		CE6CE91E26E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6CE91A26E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.xib */; };
 		CE6CE91F26E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6CE91A26E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.xib */; };
 		CE6CE92026E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6CE91A26E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.xib */; };
+		CE6CE92626E3497800BDDB6C /* PolarisMakersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE92526E3497800BDDB6C /* PolarisMakersViewController.swift */; };
+		CE6CE92726E3497800BDDB6C /* PolarisMakersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE92526E3497800BDDB6C /* PolarisMakersViewController.swift */; };
+		CE6CE92826E3497800BDDB6C /* PolarisMakersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE92526E3497800BDDB6C /* PolarisMakersViewController.swift */; };
+		CE6CE92B26E362B100BDDB6C /* PolarisMakerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE92926E362B100BDDB6C /* PolarisMakerCollectionViewCell.swift */; };
+		CE6CE92C26E362B100BDDB6C /* PolarisMakerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE92926E362B100BDDB6C /* PolarisMakerCollectionViewCell.swift */; };
+		CE6CE92D26E362B100BDDB6C /* PolarisMakerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE92926E362B100BDDB6C /* PolarisMakerCollectionViewCell.swift */; };
+		CE6CE92E26E362B100BDDB6C /* PolarisMakerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6CE92A26E362B100BDDB6C /* PolarisMakerCollectionViewCell.xib */; };
+		CE6CE92F26E362B100BDDB6C /* PolarisMakerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6CE92A26E362B100BDDB6C /* PolarisMakerCollectionViewCell.xib */; };
+		CE6CE93026E362B100BDDB6C /* PolarisMakerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6CE92A26E362B100BDDB6C /* PolarisMakerCollectionViewCell.xib */; };
+		CE6CE93226E3654A00BDDB6C /* PolarisMakerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE93126E3654A00BDDB6C /* PolarisMakerViewModel.swift */; };
+		CE6CE93326E3654A00BDDB6C /* PolarisMakerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE93126E3654A00BDDB6C /* PolarisMakerViewModel.swift */; };
+		CE6CE93426E3654A00BDDB6C /* PolarisMakerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE93126E3654A00BDDB6C /* PolarisMakerViewModel.swift */; };
 		CE8F719F266BDA3500D4FDD7 /* TermsOfServiceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8F719E266BDA3500D4FDD7 /* TermsOfServiceView.xib */; };
 		CE8F71A0266BDA3500D4FDD7 /* TermsOfServiceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8F719E266BDA3500D4FDD7 /* TermsOfServiceView.xib */; };
 		CE8F71A4266BDA4D00D4FDD7 /* TermsOfServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F71A3266BDA4D00D4FDD7 /* TermsOfServiceView.swift */; };
@@ -595,6 +607,10 @@
 		CE6CE91526E2850300BDDB6C /* NSNotification+Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotification+Name.swift"; sourceTree = "<group>"; };
 		CE6CE91926E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoDeleteJourneyTableViewCell.swift; sourceTree = "<group>"; };
 		CE6CE91A26E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTodoDeleteJourneyTableViewCell.xib; sourceTree = "<group>"; };
+		CE6CE92526E3497800BDDB6C /* PolarisMakersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarisMakersViewController.swift; sourceTree = "<group>"; };
+		CE6CE92926E362B100BDDB6C /* PolarisMakerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarisMakerCollectionViewCell.swift; sourceTree = "<group>"; };
+		CE6CE92A26E362B100BDDB6C /* PolarisMakerCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PolarisMakerCollectionViewCell.xib; sourceTree = "<group>"; };
+		CE6CE93126E3654A00BDDB6C /* PolarisMakerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarisMakerViewModel.swift; sourceTree = "<group>"; };
 		CE82B9382661D2FF004B6D81 /* Moya.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Moya.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE82B9AC2661DA11004B6D81 /* polaris-ios.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "polaris-ios.plist"; sourceTree = "<group>"; };
 		CE8F719E266BDA3500D4FDD7 /* TermsOfServiceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TermsOfServiceView.xib; sourceTree = "<group>"; };
@@ -1033,6 +1049,7 @@
 			children = (
 				CEEBE6CC26DA1FBA004A54BA /* SignOutVC.swift */,
 				CE6CE91126E27E7500BDDB6C /* SettingVC.swift */,
+				CE6CE92526E3497800BDDB6C /* PolarisMakersViewController.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -1042,6 +1059,7 @@
 			children = (
 				CED6B6E726CAD10300D37647 /* SettingViewModel.swift */,
 				CEEBE6D126DA25A0004A54BA /* SignoutViewModel.swift */,
+				CE6CE93126E3654A00BDDB6C /* PolarisMakerViewModel.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -1127,6 +1145,7 @@
 				CE574D9C263524140046D20A /* SelectStarItemCollectionViewCell.xib */,
 				EC08F3CF267DD24100F915F3 /* MainLookBackCollectionViewCell.xib */,
 				CE40B3FD26C041630000151F /* OnboardingCollectionViewCell.xib */,
+				CE6CE92A26E362B100BDDB6C /* PolarisMakerCollectionViewCell.xib */,
 			);
 			path = CollectionViewCell;
 			sourceTree = "<group>";
@@ -1224,6 +1243,7 @@
 				CE574D9B263524140046D20A /* SelectStarItemCollectionViewCell.swift */,
 				EC08F3CE267DD24100F915F3 /* MainLookBackCollectionViewCell.swift */,
 				CE40B3FC26C041630000151F /* OnboardingCollectionViewCell.swift */,
+				CE6CE92926E362B100BDDB6C /* PolarisMakerCollectionViewCell.swift */,
 			);
 			path = CollectionViewCell;
 			sourceTree = "<group>";
@@ -1378,6 +1398,7 @@
 				ECA4944026284B0B00CC2EB8 /* TodoDateHeaderView.xib in Resources */,
 				CED6B6F026CAD29200D37647 /* SettingMenuTableViewCell.xib in Resources */,
 				CEEE577A262BE54900C39358 /* PolarisMarginTextField.xib in Resources */,
+				CE6CE92E26E362B100BDDB6C /* PolarisMakerCollectionViewCell.xib in Resources */,
 				CEA44E70267B3BE300A05650 /* TodoTableViewCell.xib in Resources */,
 				ECDC5A5D2636A13600A1B5A9 /* MainTodoHeaderView.xib in Resources */,
 				CED6B6DF26CACCEF00D37647 /* Setting.storyboard in Resources */,
@@ -1428,6 +1449,7 @@
 				CE29536B2687A0A500E21871 /* TodoDateHeaderView.xib in Resources */,
 				CED6B6F126CAD29200D37647 /* SettingMenuTableViewCell.xib in Resources */,
 				CE29536C2687A0A500E21871 /* PolarisMarginTextField.xib in Resources */,
+				CE6CE92F26E362B100BDDB6C /* PolarisMakerCollectionViewCell.xib in Resources */,
 				CE29536D2687A0A500E21871 /* TodoTableViewCell.xib in Resources */,
 				CE29536E2687A0A500E21871 /* MainTodoHeaderView.xib in Resources */,
 				CED6B6E026CACCEF00D37647 /* Setting.storyboard in Resources */,
@@ -1478,6 +1500,7 @@
 				CE43D08726613D66003126F2 /* TodoDateHeaderView.xib in Resources */,
 				CED6B6F226CAD29200D37647 /* SettingMenuTableViewCell.xib in Resources */,
 				CE43D08826613D66003126F2 /* PolarisMarginTextField.xib in Resources */,
+				CE6CE93026E362B100BDDB6C /* PolarisMakerCollectionViewCell.xib in Resources */,
 				CEA44E71267B3BE300A05650 /* TodoTableViewCell.xib in Resources */,
 				CE43D08A26613D66003126F2 /* MainTodoHeaderView.xib in Resources */,
 				CED6B6E126CACCEF00D37647 /* Setting.storyboard in Resources */,
@@ -1617,6 +1640,7 @@
 				ECA49486262DC17A00CC2EB8 /* UILabel+.swift in Sources */,
 				CE40B3E926C00E4E0000151F /* JourneyAPI.swift in Sources */,
 				CEA44E59267B386800A05650 /* MainVC.swift in Sources */,
+				CE6CE92626E3497800BDDB6C /* PolarisMakersViewController.swift in Sources */,
 				CE04A06A2623528C007C98E2 /* UIViewController+.swift in Sources */,
 				CEDB478A26AF26610024ABD4 /* TodoListEmptyTableViewCell.swift in Sources */,
 				CE2952E22687893000E21871 /* TodoAPI.swift in Sources */,
@@ -1648,6 +1672,7 @@
 				CE37CC6D265A7674004F327E /* SignupViewModel.swift in Sources */,
 				CEEE5743262A955D00C39358 /* PolarisUserManager.swift in Sources */,
 				CEF055F32667ED81000E34A0 /* PolarisUser.swift in Sources */,
+				CE6CE92B26E362B100BDDB6C /* PolarisMakerCollectionViewCell.swift in Sources */,
 				CE63050B2667E36E00EBC1D4 /* UserAPI.swift in Sources */,
 				CE04A06E2623595D007C98E2 /* StoryboardName.swift in Sources */,
 				CE57400E267C903700665933 /* JourneyTodoTableViewCell.swift in Sources */,
@@ -1685,6 +1710,7 @@
 				CE574DA526352CB60046D20A /* AddTodoSelectStarViewModel.swift in Sources */,
 				CEEE5774262BE1DE00C39358 /* AddTodoTableViewCellProtocol.swift in Sources */,
 				CEC74B12267F9842002AFF18 /* PolarisPopupView.swift in Sources */,
+				CE6CE93226E3654A00BDDB6C /* PolarisMakerViewModel.swift in Sources */,
 				CEEE574D262A963D00C39358 /* DeviceInfo.swift in Sources */,
 				ECA4947E262C670000CC2EB8 /* MainStarTVCViewModel.swift in Sources */,
 				CEA3CFF126A92B8900577DA4 /* TodoDayListModel.swift in Sources */,
@@ -1741,6 +1767,7 @@
 				CE40B3EA26C00E4E0000151F /* JourneyAPI.swift in Sources */,
 				CE2952F22687A0A500E21871 /* MainVC.swift in Sources */,
 				CE2952F32687A0A500E21871 /* UIViewController+.swift in Sources */,
+				CE6CE92726E3497800BDDB6C /* PolarisMakersViewController.swift in Sources */,
 				CEDB478E26AF27DA0024ABD4 /* TodoListEmptyTableViewCell.swift in Sources */,
 				CE2952F42687A0A500E21871 /* TodoAPI.swift in Sources */,
 				CE2952F52687A0A500E21871 /* MainTodoHeaderView.swift in Sources */,
@@ -1772,6 +1799,7 @@
 				CE2953082687A0A500E21871 /* PolarisUserManager.swift in Sources */,
 				CE29530A2687A0A500E21871 /* PolarisUser.swift in Sources */,
 				CE29530B2687A0A500E21871 /* UserAPI.swift in Sources */,
+				CE6CE92C26E362B100BDDB6C /* PolarisMakerCollectionViewCell.swift in Sources */,
 				CE29530C2687A0A500E21871 /* StoryboardName.swift in Sources */,
 				CE29530D2687A0A500E21871 /* JourneyTodoTableViewCell.swift in Sources */,
 				CE29530E2687A0A500E21871 /* AddTodoDropdownViewModel.swift in Sources */,
@@ -1809,6 +1837,7 @@
 				CE2953272687A0A500E21871 /* AddTodoSelectStarViewModel.swift in Sources */,
 				CE2953282687A0A500E21871 /* AddTodoTableViewCellProtocol.swift in Sources */,
 				CE2953292687A0A500E21871 /* PolarisPopupView.swift in Sources */,
+				CE6CE93326E3654A00BDDB6C /* PolarisMakerViewModel.swift in Sources */,
 				CE29532A2687A0A500E21871 /* DeviceInfo.swift in Sources */,
 				CE29532B2687A0A500E21871 /* MainStarTVCViewModel.swift in Sources */,
 				CEA3CFF226A92B8900577DA4 /* TodoDayListModel.swift in Sources */,
@@ -1865,6 +1894,7 @@
 				CE40B3EB26C00E4E0000151F /* JourneyAPI.swift in Sources */,
 				CEA44E5A267B386800A05650 /* MainVC.swift in Sources */,
 				CE43D02826613D66003126F2 /* UIViewController+.swift in Sources */,
+				CE6CE92826E3497800BDDB6C /* PolarisMakersViewController.swift in Sources */,
 				CEDB478F26AF27DA0024ABD4 /* TodoListEmptyTableViewCell.swift in Sources */,
 				CE2952E32687893000E21871 /* TodoAPI.swift in Sources */,
 				CE43D02926613D66003126F2 /* MainTodoHeaderView.swift in Sources */,
@@ -1896,6 +1926,7 @@
 				CE43D03726613D66003126F2 /* PolarisUserManager.swift in Sources */,
 				CEF055F42667ED81000E34A0 /* PolarisUser.swift in Sources */,
 				CEF055D22667E9D4000E34A0 /* UserAPI.swift in Sources */,
+				CE6CE92D26E362B100BDDB6C /* PolarisMakerCollectionViewCell.swift in Sources */,
 				CE43D03926613D66003126F2 /* StoryboardName.swift in Sources */,
 				CE57400F267C903700665933 /* JourneyTodoTableViewCell.swift in Sources */,
 				CE43D03A26613D66003126F2 /* AddTodoDropdownViewModel.swift in Sources */,
@@ -1933,6 +1964,7 @@
 				CE43D04F26613D66003126F2 /* AddTodoSelectStarViewModel.swift in Sources */,
 				CE43D05026613D66003126F2 /* AddTodoTableViewCellProtocol.swift in Sources */,
 				CEC74B13267F9842002AFF18 /* PolarisPopupView.swift in Sources */,
+				CE6CE93426E3654A00BDDB6C /* PolarisMakerViewModel.swift in Sources */,
 				CE43D05126613D66003126F2 /* DeviceInfo.swift in Sources */,
 				CE43D05226613D66003126F2 /* MainStarTVCViewModel.swift in Sources */,
 				CEA3CFF326A92B8900577DA4 /* TodoDayListModel.swift in Sources */,

@@ -66,11 +66,13 @@ final class SettingVC: UIViewController {
     private func handleSettingMenuEvent(_ menu: SettingMenu) {
         switch menu {
         case .editNickname:
-            self.pushEditNicknameController()
+            self.pushEditNicknameViewController()
         case .personalInformation:
             self.pushTermsWebViewController(.personal)
         case .serviceOfTerms:
             self.pushTermsWebViewController(.service)
+        case .makerPolaris:
+            self.pushPolarisMakerViewController()
         case .logout:
             self.handleLogout()
         case .signout:
@@ -101,6 +103,13 @@ final class SettingVC: UIViewController {
         self.navigationController?.pushViewController(webViewController, animated: true)
     }
     
+    private func pushPolarisMakerViewController() {
+        let viewController = PolarisMakersViewController.instantiateFromStoryboard(StoryboardName.setting)
+        
+        guard let polarisMakerViewController = viewController else { return }
+        self.navigationController?.pushViewController(polarisMakerViewController, animated: true)
+    }
+    
     private func pushSignoOutViewController() {
         let viewController = SignOutVC.instantiateFromStoryboard(StoryboardName.setting)
         
@@ -108,7 +117,7 @@ final class SettingVC: UIViewController {
         self.navigationController?.pushViewController(signOutViewController, animated: true)
     }
     
-    private func pushEditNicknameController() {
+    private func pushEditNicknameViewController() {
         guard let nickVC = NickChangeVC.instantiateFromStoryboard(StoryboardName.setting) else { return }
         self.navigationController?.pushViewController(nickVC, animated: true)
     }
