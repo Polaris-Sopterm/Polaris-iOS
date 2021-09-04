@@ -470,9 +470,6 @@
 		ECA4947E262C670000CC2EB8 /* MainStarTVCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA4947D262C670000CC2EB8 /* MainStarTVCViewModel.swift */; };
 		ECA49486262DC17A00CC2EB8 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA49485262DC17A00CC2EB8 /* UILabel+.swift */; };
 		ECA49489262DC40F00CC2EB8 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA49488262DC40F00CC2EB8 /* String+.swift */; };
-		ECB5442F26D3C9F400FA4C50 /* NickChange.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECB5442E26D3C9F400FA4C50 /* NickChange.storyboard */; };
-		ECB5443026D3C9F400FA4C50 /* NickChange.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECB5442E26D3C9F400FA4C50 /* NickChange.storyboard */; };
-		ECB5443126D3C9F400FA4C50 /* NickChange.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECB5442E26D3C9F400FA4C50 /* NickChange.storyboard */; };
 		ECB5443326D3CA0500FA4C50 /* NickChangeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5443226D3CA0500FA4C50 /* NickChangeVC.swift */; };
 		ECB5443426D3CA0500FA4C50 /* NickChangeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5443226D3CA0500FA4C50 /* NickChangeVC.swift */; };
 		ECB5443526D3CA0500FA4C50 /* NickChangeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5443226D3CA0500FA4C50 /* NickChangeVC.swift */; };
@@ -699,7 +696,6 @@
 		ECA4947D262C670000CC2EB8 /* MainStarTVCViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainStarTVCViewModel.swift; sourceTree = "<group>"; };
 		ECA49485262DC17A00CC2EB8 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		ECA49488262DC40F00CC2EB8 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
-		ECB5442E26D3C9F400FA4C50 /* NickChange.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NickChange.storyboard; sourceTree = "<group>"; };
 		ECB5443226D3CA0500FA4C50 /* NickChangeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickChangeVC.swift; sourceTree = "<group>"; };
 		ECB5443626D3D0CA00FA4C50 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		ECD002A526B5229C005F733C /* JourneyWeekListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyWeekListModel.swift; sourceTree = "<group>"; };
@@ -873,7 +869,6 @@
 				CEA3CFDF26A868C000577DA4 /* Common.storyboard */,
 				EC8C688526CA1BFB003CFA71 /* WeekPicker.storyboard */,
 				CED6B6DE26CACCEF00D37647 /* Setting.storyboard */,
-				ECB5442E26D3C9F400FA4C50 /* NickChange.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -1376,7 +1371,6 @@
 				ECDC5A48263552A700A1B5A9 /* MainTodoTVC.xib in Resources */,
 				CEC19AE42650F86100DA747C /* DayTodoHeaderView.xib in Resources */,
 				ECDC5A4E2635530300A1B5A9 /* MainTodoCVC.xib in Resources */,
-				ECB5442F26D3C9F400FA4C50 /* NickChange.storyboard in Resources */,
 				CEC48ED5262DCA9100FD887F /* DropdownItemTableViewCell.xib in Resources */,
 				CEC74B17267F984E002AFF18 /* PolarisPopupView.xib in Resources */,
 				CEC19AEC265103AA00DA747C /* DayTodoTableViewCell.xib in Resources */,
@@ -1427,7 +1421,6 @@
 				CE2953642687A0A500E21871 /* MainTodoTVC.xib in Resources */,
 				CE2953652687A0A500E21871 /* DayTodoHeaderView.xib in Resources */,
 				CE2953662687A0A500E21871 /* MainTodoCVC.xib in Resources */,
-				ECB5443026D3C9F400FA4C50 /* NickChange.storyboard in Resources */,
 				CE2953672687A0A500E21871 /* DropdownItemTableViewCell.xib in Resources */,
 				CE2953682687A0A500E21871 /* PolarisPopupView.xib in Resources */,
 				CE29536A2687A0A500E21871 /* DayTodoTableViewCell.xib in Resources */,
@@ -1478,7 +1471,6 @@
 				CE43D08226613D66003126F2 /* MainTodoTVC.xib in Resources */,
 				CE43D08326613D66003126F2 /* DayTodoHeaderView.xib in Resources */,
 				CE43D08426613D66003126F2 /* MainTodoCVC.xib in Resources */,
-				ECB5443126D3C9F400FA4C50 /* NickChange.storyboard in Resources */,
 				CE43D08526613D66003126F2 /* DropdownItemTableViewCell.xib in Resources */,
 				CEC74B18267F984E002AFF18 /* PolarisPopupView.xib in Resources */,
 				CE43D08626613D66003126F2 /* DayTodoTableViewCell.xib in Resources */,

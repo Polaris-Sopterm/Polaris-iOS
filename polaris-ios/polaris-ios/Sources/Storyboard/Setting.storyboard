@@ -153,6 +153,90 @@
             </objects>
             <point key="canvasLocation" x="138" y="800"/>
         </scene>
+        <!--Nick ChangeVC-->
+        <scene sceneID="kh5-0V-bPN">
+            <objects>
+                <viewController storyboardIdentifier="NickChangeVC" id="cVb-GK-eAb" customClass="NickChangeVC" customModule="Polaris" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="RIU-Np-HM0">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Luh-CH-gvl">
+                                <rect key="frame" x="9" y="56" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="48" id="88e-p3-r3g"/>
+                                    <constraint firstAttribute="height" constant="48" id="D4X-w3-s9s"/>
+                                </constraints>
+                                <state key="normal" image="btnBackLookBack" backgroundImage="btnBackLookBack"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="imageTintColor">
+                                        <color key="value" name="mainText"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="backButtonAction:" destination="cVb-GK-eAb" eventType="touchUpInside" id="dZn-Hh-izy"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="96a-Wv-xdO">
+                                <rect key="frame" x="24" y="107" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6EQ-04-dEf">
+                                <rect key="frame" x="23" y="172" width="368" height="53"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="53" id="rqI-w5-r8e"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M5h-yR-jjg">
+                                <rect key="frame" x="23" y="805" width="368" height="54"/>
+                                <color key="backgroundColor" name="mainSky"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="M5h-yR-jjg" secondAttribute="height" multiplier="184:27" id="U6l-T1-4RV"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                <state key="normal" title="변경하기">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="changeButtonAction:" destination="cVb-GK-eAb" eventType="touchUpInside" id="Gyy-dQ-Z3Q"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="WhI-7M-bdz"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="96a-Wv-xdO" firstAttribute="leading" secondItem="WhI-7M-bdz" secondAttribute="leading" constant="24" id="0ar-8S-ucC"/>
+                            <constraint firstItem="WhI-7M-bdz" firstAttribute="trailing" secondItem="6EQ-04-dEf" secondAttribute="trailing" constant="23" id="7Ck-7X-40A"/>
+                            <constraint firstAttribute="bottom" secondItem="M5h-yR-jjg" secondAttribute="bottom" constant="37" id="CkC-Mm-E9F"/>
+                            <constraint firstItem="6EQ-04-dEf" firstAttribute="top" secondItem="96a-Wv-xdO" secondAttribute="bottom" constant="65" id="EmD-LB-HNN"/>
+                            <constraint firstItem="6EQ-04-dEf" firstAttribute="leading" secondItem="WhI-7M-bdz" secondAttribute="leading" constant="23" id="FNq-r2-YAH"/>
+                            <constraint firstItem="Luh-CH-gvl" firstAttribute="leading" secondItem="WhI-7M-bdz" secondAttribute="leading" constant="9" id="Jbj-3h-tzr"/>
+                            <constraint firstItem="96a-Wv-xdO" firstAttribute="top" secondItem="Luh-CH-gvl" secondAttribute="bottom" constant="3" id="N1M-H9-zTN"/>
+                            <constraint firstItem="Luh-CH-gvl" firstAttribute="top" secondItem="RIU-Np-HM0" secondAttribute="top" constant="56" id="QMA-IF-FLf"/>
+                            <constraint firstItem="M5h-yR-jjg" firstAttribute="width" secondItem="M5h-yR-jjg" secondAttribute="height" multiplier="184:27" id="Qhm-RV-82Q"/>
+                            <constraint firstItem="M5h-yR-jjg" firstAttribute="leading" secondItem="WhI-7M-bdz" secondAttribute="leading" constant="23" id="ekc-Gh-g4Z"/>
+                            <constraint firstItem="WhI-7M-bdz" firstAttribute="trailing" secondItem="M5h-yR-jjg" secondAttribute="trailing" constant="23" id="reu-na-WQ2"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backButton" destination="Luh-CH-gvl" id="zYK-eU-G54"/>
+                        <outlet property="nickTextField" destination="6EQ-04-dEf" id="cOV-iy-Hme"/>
+                        <outlet property="titleLabel" destination="96a-Wv-xdO" id="wPi-EL-4qP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dtR-78-bxL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="901" y="131"/>
+        </scene>
     </scenes>
     <resources>
         <image name="btnBackLookBack" width="48" height="48"/>

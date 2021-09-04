@@ -66,10 +66,7 @@ final class SettingVC: UIViewController {
     private func handleSettingMenuEvent(_ menu: SettingMenu) {
         switch menu {
         case .editNickname:
-            #warning("여기에 윤재가 별명 변경하기로 연결되는 부분 추가")
-            guard let nickVC =  NickChangeVC.instantiateFromStoryboard("NickChange") else { break }
-            self.navigationController?.pushViewController(nickVC, animated: true)
-            break
+            self.pushEditNicknameController()
         case .personalInformation:
             self.pushTermsWebViewController(.personal)
         case .serviceOfTerms:
@@ -84,7 +81,7 @@ final class SettingVC: UIViewController {
     private func handleLogout() {
         guard let confirmPopupView: PolarisPopupView = UIView.fromNib() else { return }
         
-        confirmPopupView.configure(title: "로그아웃할까요?", confirmHandler:  { [weak self] in
+        confirmPopupView.configure(title: "로그아웃할까요?", confirmTitle: "로그아웃", confirmHandler:  { [weak self] in
             guard let self = self else { return }
             
             self.viewModel.requestLogout { isSuccess in
@@ -109,6 +106,11 @@ final class SettingVC: UIViewController {
         
         guard let signOutViewController = viewController else { return }
         self.navigationController?.pushViewController(signOutViewController, animated: true)
+    }
+    
+    private func pushEditNicknameController() {
+        guard let nickVC = NickChangeVC.instantiateFromStoryboard(StoryboardName.setting) else { return }
+        self.navigationController?.pushViewController(nickVC, animated: true)
     }
     
     private let disposeBag = DisposeBag()
