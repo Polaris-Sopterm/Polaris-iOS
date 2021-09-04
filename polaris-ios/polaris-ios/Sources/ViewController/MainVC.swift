@@ -17,9 +17,26 @@ class MainVC: UIViewController {
         self.setupTableView()
     }
     
-    func scrollToTodoListCell() {
-        let indexPath = IndexPath(row: 1, section: 0)
-        self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        guard self.isMovingToParent || self.isBeingPresented else { return }
+        self.scrollToMainSceneCell(animated: false)
+    }
+    
+    func scrollToTodoListCell(animated: Bool = true) {
+        let indexPath = IndexPath(row: MainSceneCellType.todoList.rawValue, section: 0)
+        self.tableView.scrollToRow(at: indexPath, at: .top, animated: animated)
+    }
+    
+    func scrollToRetrospectCell(animated: Bool = true) {
+        let indexPath = IndexPath(row: MainSceneCellType.retrospect.rawValue, section: 0)
+        self.tableView.scrollToRow(at: indexPath, at: .top, animated: animated)
+    }
+    
+    func scrollToMainSceneCell(animated: Bool = true) {
+        let indexPath = IndexPath(row: MainSceneCellType.main.rawValue, section: 0)
+        self.tableView.scrollToRow(at: indexPath, at: .top, animated: animated)
     }
     
     private func registerCell() {
@@ -63,12 +80,10 @@ extension MainVC: UITableViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let firstCellRange = 0...MainSceneTableViewCell.cellHeight
-        guard firstCellRange ~= scrollView.contentOffset.y else { return }
+        let indexPath = IndexPath(row: MainSceneCellType.main.rawValue, section: 0)
         
-        guard let mainSceneCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? MainSceneTableViewCell else { return }
-        
-        let alpha = scrollView.contentOffset.y / (firstCellRange.upperBound - firstCellRange.lowerBound)
+        guard let mainSceneCell = self.tableView.cellForRow(at: indexPath) as? MainSceneTableViewCell else { return }
+        let alpha = abs(DeviceInfo.screenHeight - scrollView.contentOffset.y) / DeviceInfo.screenHeight
         mainSceneCell.updateDimView(alpha: alpha)
     }
     

@@ -257,7 +257,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
         guard let visibleController = UIViewController.getVisibleController() else { return }
         guard let mainVC = visibleController as? MainVC                       else { return }
         
-        mainVC.scrollToTodoListCell()
+        mainVC.scrollToRetrospectCell()
     }
     
     @IBAction func weekButtonAction(_ sender: Any) {

@@ -331,6 +331,12 @@
 		CE6CE93626E36A0400BDDB6C /* PolarisStoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE93526E36A0400BDDB6C /* PolarisStoryVC.swift */; };
 		CE6CE93726E36A0400BDDB6C /* PolarisStoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE93526E36A0400BDDB6C /* PolarisStoryVC.swift */; };
 		CE6CE93826E36A0500BDDB6C /* PolarisStoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE93526E36A0400BDDB6C /* PolarisStoryVC.swift */; };
+		CE6CE93B26E3AC7A00BDDB6C /* RetrospectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE93926E3AC7A00BDDB6C /* RetrospectTableViewCell.swift */; };
+		CE6CE93C26E3AC7A00BDDB6C /* RetrospectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE93926E3AC7A00BDDB6C /* RetrospectTableViewCell.swift */; };
+		CE6CE93D26E3AC7A00BDDB6C /* RetrospectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CE93926E3AC7A00BDDB6C /* RetrospectTableViewCell.swift */; };
+		CE6CE93E26E3AC7A00BDDB6C /* RetrospectTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6CE93A26E3AC7A00BDDB6C /* RetrospectTableViewCell.xib */; };
+		CE6CE93F26E3AC7A00BDDB6C /* RetrospectTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6CE93A26E3AC7A00BDDB6C /* RetrospectTableViewCell.xib */; };
+		CE6CE94026E3AC7A00BDDB6C /* RetrospectTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6CE93A26E3AC7A00BDDB6C /* RetrospectTableViewCell.xib */; };
 		CE8F719F266BDA3500D4FDD7 /* TermsOfServiceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8F719E266BDA3500D4FDD7 /* TermsOfServiceView.xib */; };
 		CE8F71A0266BDA3500D4FDD7 /* TermsOfServiceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8F719E266BDA3500D4FDD7 /* TermsOfServiceView.xib */; };
 		CE8F71A4266BDA4D00D4FDD7 /* TermsOfServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F71A3266BDA4D00D4FDD7 /* TermsOfServiceView.swift */; };
@@ -615,6 +621,8 @@
 		CE6CE92A26E362B100BDDB6C /* PolarisMakerCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PolarisMakerCollectionViewCell.xib; sourceTree = "<group>"; };
 		CE6CE93126E3654A00BDDB6C /* PolarisMakerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarisMakerViewModel.swift; sourceTree = "<group>"; };
 		CE6CE93526E36A0400BDDB6C /* PolarisStoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarisStoryVC.swift; sourceTree = "<group>"; };
+		CE6CE93926E3AC7A00BDDB6C /* RetrospectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrospectTableViewCell.swift; sourceTree = "<group>"; };
+		CE6CE93A26E3AC7A00BDDB6C /* RetrospectTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RetrospectTableViewCell.xib; sourceTree = "<group>"; };
 		CE82B9382661D2FF004B6D81 /* Moya.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Moya.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE82B9AC2661DA11004B6D81 /* polaris-ios.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "polaris-ios.plist"; sourceTree = "<group>"; };
 		CE8F719E266BDA3500D4FDD7 /* TermsOfServiceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TermsOfServiceView.xib; sourceTree = "<group>"; };
@@ -1134,6 +1142,7 @@
 				CEDB478926AF26610024ABD4 /* TodoListEmptyTableViewCell.xib */,
 				CED6B6EC26CAD29200D37647 /* SettingMenuTableViewCell.xib */,
 				CE6CE91A26E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.xib */,
+				CE6CE93A26E3AC7A00BDDB6C /* RetrospectTableViewCell.xib */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -1234,6 +1243,7 @@
 				CEC48ED2262DCA9100FD887F /* DropdownItemTableViewCell.swift */,
 				CED6B6EB26CAD29200D37647 /* SettingMenuTableViewCell.swift */,
 				CE6CE91926E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.swift */,
+				CE6CE93926E3AC7A00BDDB6C /* RetrospectTableViewCell.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -1364,6 +1374,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE6CE90A26E25E3300BDDB6C /* ConfirmPopupView.xib in Resources */,
+				CE6CE93E26E3AC7A00BDDB6C /* RetrospectTableViewCell.xib in Resources */,
 				CEE574D92630422600EA64B7 /* AddTodoDayTableViewCell.xib in Resources */,
 				CE8F719F266BDA3500D4FDD7 /* TermsOfServiceView.xib in Resources */,
 				CE6CE91E26E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.xib in Resources */,
@@ -1415,6 +1426,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE6CE90B26E25E3300BDDB6C /* ConfirmPopupView.xib in Resources */,
+				CE6CE93F26E3AC7A00BDDB6C /* RetrospectTableViewCell.xib in Resources */,
 				CE29534C2687A0A500E21871 /* AddTodoDayTableViewCell.xib in Resources */,
 				CE29534D2687A0A500E21871 /* TermsOfServiceView.xib in Resources */,
 				CE6CE91F26E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.xib in Resources */,
@@ -1466,6 +1478,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE6CE90C26E25E3300BDDB6C /* ConfirmPopupView.xib in Resources */,
+				CE6CE94026E3AC7A00BDDB6C /* RetrospectTableViewCell.xib in Resources */,
 				CE43D06F26613D66003126F2 /* AddTodoDayTableViewCell.xib in Resources */,
 				CE8F71A0266BDA3500D4FDD7 /* TermsOfServiceView.xib in Resources */,
 				CE6CE92026E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.xib in Resources */,
@@ -1733,6 +1746,7 @@
 				CEF055EE2667EB38000E34A0 /* CheckEmailModel.swift in Sources */,
 				CEA3CFDC26A85E7600577DA4 /* PolarisWebView.swift in Sources */,
 				CE132144265A5CD1001E3C1F /* SignupVC.swift in Sources */,
+				CE6CE93B26E3AC7A00BDDB6C /* RetrospectTableViewCell.swift in Sources */,
 				ECDC5A47263552A700A1B5A9 /* MainTodoTVC.swift in Sources */,
 				CE38762E26CD695E003BDCCA /* Journey.swift in Sources */,
 				CEEE5760262AD62C00C39358 /* AddTodoVC.swift in Sources */,
@@ -1861,6 +1875,7 @@
 				CE2953332687A0A500E21871 /* CheckEmailModel.swift in Sources */,
 				CEA3CFDD26A860F700577DA4 /* PolarisWebView.swift in Sources */,
 				CE2953342687A0A500E21871 /* SignupVC.swift in Sources */,
+				CE6CE93C26E3AC7A00BDDB6C /* RetrospectTableViewCell.swift in Sources */,
 				CE2953352687A0A500E21871 /* MainTodoTVC.swift in Sources */,
 				CE38762F26CD695E003BDCCA /* Journey.swift in Sources */,
 				CE2953362687A0A500E21871 /* AddTodoVC.swift in Sources */,
@@ -1989,6 +2004,7 @@
 				CEF055EF2667EB38000E34A0 /* CheckEmailModel.swift in Sources */,
 				CEA3CFDE26A860F700577DA4 /* PolarisWebView.swift in Sources */,
 				CE43D05726613D66003126F2 /* SignupVC.swift in Sources */,
+				CE6CE93D26E3AC7A00BDDB6C /* RetrospectTableViewCell.swift in Sources */,
 				CE43D05826613D66003126F2 /* MainTodoTVC.swift in Sources */,
 				CE38763026CD695E003BDCCA /* Journey.swift in Sources */,
 				CE43D05926613D66003126F2 /* AddTodoVC.swift in Sources */,
