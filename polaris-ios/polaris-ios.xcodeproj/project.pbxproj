@@ -26,9 +26,6 @@
 		CE13213D265A1519001E3C1F /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13213C265A1519001E3C1F /* LoginVC.swift */; };
 		CE132141265A408F001E3C1F /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE132140265A408E001E3C1F /* LoginViewModel.swift */; };
 		CE132144265A5CD1001E3C1F /* SignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE132143265A5CD1001E3C1F /* SignupVC.swift */; };
-		CE16C26026A84F9100D87096 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE16C25F26A84F9100D87096 /* GoogleService-Info.plist */; };
-		CE16C26126A84F9100D87096 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE16C25F26A84F9100D87096 /* GoogleService-Info.plist */; };
-		CE16C26226A84F9100D87096 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE16C25F26A84F9100D87096 /* GoogleService-Info.plist */; };
 		CE207B842661CADE009A812A /* BuildPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE207B832661CADE009A812A /* BuildPhase.swift */; };
 		CE207B852661CADE009A812A /* BuildPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE207B832661CADE009A812A /* BuildPhase.swift */; };
 		CE207B892661CBC7009A812A /* ServerHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE207B882661CBC7009A812A /* ServerHost.swift */; };
@@ -576,12 +573,10 @@
 		CE13213C265A1519001E3C1F /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		CE132140265A408E001E3C1F /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		CE132143265A5CD1001E3C1F /* SignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupVC.swift; sourceTree = "<group>"; };
-		CE16C25F26A84F9100D87096 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = "GoogleService-Info.plist"; path = "polaris-ios/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		CE207B832661CADE009A812A /* BuildPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildPhase.swift; sourceTree = "<group>"; };
 		CE207B882661CBC7009A812A /* ServerHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerHost.swift; sourceTree = "<group>"; };
 		CE2952E12687893000E21871 /* TodoAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoAPI.swift; sourceTree = "<group>"; };
 		CE2952E42687940100E21871 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
-		CE2952EA26879C1200E21871 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CE2953752687A0A500E21871 /* Polaris Alpha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Polaris Alpha.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE2953882687A30F00E21871 /* polaris-alpha-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "polaris-alpha-Info.plist"; sourceTree = "<group>"; };
 		CE37CC6C265A7674004F327E /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
@@ -623,6 +618,7 @@
 		CE6CE93526E36A0400BDDB6C /* PolarisStoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarisStoryVC.swift; sourceTree = "<group>"; };
 		CE6CE93926E3AC7A00BDDB6C /* RetrospectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrospectTableViewCell.swift; sourceTree = "<group>"; };
 		CE6CE93A26E3AC7A00BDDB6C /* RetrospectTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RetrospectTableViewCell.xib; sourceTree = "<group>"; };
+		CE6CE94126E4F13B00BDDB6C /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CE82B9382661D2FF004B6D81 /* Moya.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Moya.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE82B9AC2661DA11004B6D81 /* polaris-ios.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "polaris-ios.plist"; sourceTree = "<group>"; };
 		CE8F719E266BDA3500D4FDD7 /* TermsOfServiceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TermsOfServiceView.xib; sourceTree = "<group>"; };
@@ -818,10 +814,10 @@
 			children = (
 				CE04A04A262340EA007C98E2 /* Resources */,
 				CE04A04B262340F1007C98E2 /* Sources */,
-				CE2952EA26879C1200E21871 /* GoogleService-Info.plist */,
 				CE04A043262340D3007C98E2 /* polaris-AppStore-Info.plist */,
 				CE2953882687A30F00E21871 /* polaris-alpha-Info.plist */,
 				CE82B9AC2661DA11004B6D81 /* polaris-ios.plist */,
+				CE6CE94126E4F13B00BDDB6C /* GoogleService-Info.plist */,
 			);
 			path = "polaris-ios";
 			sourceTree = "<group>";
@@ -838,7 +834,6 @@
 		CE04A04B262340F1007C98E2 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				CE16C25F26A84F9100D87096 /* GoogleService-Info.plist */,
 				CE04A035262340D1007C98E2 /* AppDelegate.swift */,
 				CE04A037262340D1007C98E2 /* SceneDelegate.swift */,
 				CEA3CFD526A85C3D00577DA4 /* Enum */,
@@ -1382,7 +1377,6 @@
 				CEEE575D262AD5FA00C39358 /* AddTodo.storyboard in Resources */,
 				ECA494242628223200CC2EB8 /* TodoDateTVC.xib in Resources */,
 				CEE574F126307D7C00EA64B7 /* PerDayItemCollectionViewCell.xib in Resources */,
-				CE16C26026A84F9100D87096 /* GoogleService-Info.plist in Resources */,
 				CE574D98263517B60046D20A /* AddTodoSelectStarTableViewCell.xib in Resources */,
 				CE04A042262340D3007C98E2 /* LaunchScreen.storyboard in Resources */,
 				CE04A03F262340D3007C98E2 /* Assets.xcassets in Resources */,
@@ -1434,7 +1428,6 @@
 				CE29534F2687A0A500E21871 /* AddTodo.storyboard in Resources */,
 				CE2953502687A0A500E21871 /* TodoDateTVC.xib in Resources */,
 				CE2953512687A0A500E21871 /* PerDayItemCollectionViewCell.xib in Resources */,
-				CE16C26126A84F9100D87096 /* GoogleService-Info.plist in Resources */,
 				CE2953522687A0A500E21871 /* AddTodoSelectStarTableViewCell.xib in Resources */,
 				CE2953532687A0A500E21871 /* LaunchScreen.storyboard in Resources */,
 				CE2953542687A0A500E21871 /* Assets.xcassets in Resources */,
@@ -1486,7 +1479,6 @@
 				CE43D07126613D66003126F2 /* AddTodo.storyboard in Resources */,
 				CE43D07226613D66003126F2 /* TodoDateTVC.xib in Resources */,
 				CE43D07326613D66003126F2 /* PerDayItemCollectionViewCell.xib in Resources */,
-				CE16C26226A84F9100D87096 /* GoogleService-Info.plist in Resources */,
 				CE43D07426613D66003126F2 /* AddTodoSelectStarTableViewCell.xib in Resources */,
 				CE43D07526613D66003126F2 /* LaunchScreen.storyboard in Resources */,
 				CE43D07626613D66003126F2 /* Assets.xcassets in Resources */,
@@ -2190,7 +2182,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.polaris.main;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Polaris Main";
@@ -2216,7 +2208,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.polaris.main;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Polaris Main";
@@ -2242,7 +2234,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.polaris.alpha.main;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Polaris Alpha";
@@ -2268,7 +2260,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.polaris.alpha.main;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Polaris Alpha";
@@ -2294,7 +2286,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.polaris.beta.main;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2320,7 +2312,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.polaris.beta.main;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
