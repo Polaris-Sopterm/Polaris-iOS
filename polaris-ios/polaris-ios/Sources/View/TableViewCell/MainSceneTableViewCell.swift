@@ -374,7 +374,10 @@ extension MainSceneTableViewCell: LookBackCloseDelegate {
     
     func apply(isLookBack: Bool) {
         if isLookBack {
-            #warning("회고 리포트")
+            guard let visibleController = UIViewController.getVisibleController() else { return }
+            guard let mainVC = visibleController as? MainVC                       else { return }
+            
+            mainVC.scrollToRetrospectCell()
         } else {
             let viewController = AddTodoVC.instantiateFromStoryboard(StoryboardName.addTodo)
             
