@@ -55,14 +55,15 @@ class TodoCategoryCell: UITableViewCell {
 
             let transition = panGesture.translation(in: self)
             let changedY   = transition.x + self.contentViewLeadingConstraint.constant
+            let category: TodoCategory = self is DayTodoTableViewCell ? .day : .journey
 
             switch panGesture.state {
             case .cancelled, .ended, .failed:
                 if changedY <= (type(of: self).expandedConstant / 2) {
-                    let category: TodoCategory = self is DayTodoTableViewCell ? .day : .journey
                     self.delegate?.todoCategoryCell(self, category: category, isExpanded: true, forRowAt: indexPath)
                     self.layoutForExpaned(isExpaned: true)
                 } else {
+                    self.delegate?.todoCategoryCell(self, category: category, isExpanded: false, forRowAt: indexPath)
                     self.layoutForExpaned(isExpaned: false)
                 }
             case .changed:
