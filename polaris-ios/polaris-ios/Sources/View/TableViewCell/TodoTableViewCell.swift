@@ -195,7 +195,8 @@ extension TodoTableViewCell: UITableViewDataSource {
         let currentTab       = self.viewModel.currentTabRelay.value
         let todoList         = self.viewModel.todoList(at: indexPath.section)
         let cell             = tableView.dequeueReusableCell(cell: currentTab.cellType, forIndexPath: indexPath)
-        let expanedIndexPath = self.viewModel.expanedCellIndexPath(of: currentTab)
+        let expanedIndexPath =
+            currentTab == .day ? self.viewModel.dayExpandedTodoIndexPath : self.viewModel.journeyExpandedTodoIndexPath
         
         guard let todoCell = cell                           else { return UITableViewCell() }
         guard let todoModel = todoList[safe: indexPath.row] else { return UITableViewCell() }
@@ -290,14 +291,14 @@ extension TodoTableViewCell: JourneyTodoHeaderViewDelegate {
 
 extension TodoTableViewCell: TodoCategoryCellDelegate {
     
-    func todoCategoryCell(_ cell: TodoCategoryCell, category: TodoCategory, isExpanded: Bool, forRowAt indexPath: IndexPath) {
+    func todoCategoryCell(_ cell: TodoCategoryCell, category: TodoCategory, isExpanded: Bool, forTodo todo: TodoModel) {
         guard self.viewModel.currentTabRelay.value == category else { return }
         
-        defer { self.viewModel.updateExpanedStatus(category: category, forRowAt: indexPath, isExpanded: isExpanded) }
+        defer { self.viewModel.updateExpandedStatus(category: category, forTodo: todo, isExpanded: isExpanded) }
         
         guard isExpanded == true else { return }
-        guard let currentExpandedIndexPath
-                = category == .day ? self.viewModel.dayExpanedIndexPath : self.viewModel.journeyExpanedIndexPath else { return }
+        guard let currentExpandedIndexPath = category == .day ?
+                self.viewModel.dayExpandedTodoIndexPath : self.viewModel.journeyExpandedTodoIndexPath else { return }
         self.todoCategoryCell(at: currentExpandedIndexPath)?.expandCell(isExpanded: false, animated: true)
     }
 

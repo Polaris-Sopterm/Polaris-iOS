@@ -13,7 +13,7 @@ protocol TodoModelProtocol { }
 protocol TodoHeaderViewDelegate: AnyObject { }
 
 protocol TodoCategoryCellDelegate: AnyObject {
-    func todoCategoryCell(_ cell: TodoCategoryCell, category: TodoCategory, isExpanded: Bool, forRowAt indexPath: IndexPath)
+    func todoCategoryCell(_ cell: TodoCategoryCell, category: TodoCategory, isExpanded: Bool, forTodo todo: TodoModel)
 }
 
 class TodoHeaderView: UIView {
@@ -33,13 +33,16 @@ class TodoCategoryCell: UITableViewCell {
     weak var delegate: TodoCategoryCellDelegate?
     
     var indexPath: IndexPath?
+    var todoModel: TodoModel?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.bindPanGesture()
     }
     
-    func configure(_ todoModel: TodoModel) {}
+    func configure(_ todoModel: TodoModel) {
+        self.todoModel = todoModel
+    }
     
     func expandCell(isExpanded: Bool, animated: Bool) {
         self.layoutForExpaned(isExpaned: isExpanded, animated: animated)
@@ -51,7 +54,7 @@ class TodoCategoryCell: UITableViewCell {
 
         panGesture.rx.event.observeOnMain(onNext: { [weak self] panGesture in
             guard let self = self                else { return }
-            guard let indexPath = self.indexPath else { return }
+            guard let todoModel = self.todoModel else { return }
 
             let transition = panGesture.translation(in: self)
             let changedY   = transition.x + self.contentViewLeadingConstraint.constant
@@ -60,10 +63,10 @@ class TodoCategoryCell: UITableViewCell {
             switch panGesture.state {
             case .cancelled, .ended, .failed:
                 if changedY <= (type(of: self).expandedConstant / 2) {
-                    self.delegate?.todoCategoryCell(self, category: category, isExpanded: true, forRowAt: indexPath)
+                    self.delegate?.todoCategoryCell(self, category: category, isExpanded: true, forTodo: todoModel)
                     self.layoutForExpaned(isExpaned: true)
                 } else {
-                    self.delegate?.todoCategoryCell(self, category: category, isExpanded: false, forRowAt: indexPath)
+                    self.delegate?.todoCategoryCell(self, category: category, isExpanded: false, forTodo: todoModel)
                     self.layoutForExpaned(isExpaned: false)
                 }
             case .changed:

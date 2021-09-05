@@ -34,7 +34,7 @@ class JourneyTodoTableViewCell: TodoCategoryCell {
     }
     
     override func configure(_ todoModel: TodoModel) {
-        self.todoModel = todoModel
+        super.configure(todoModel)
         
         self.todoLabel.text          = todoModel.title
         self.dayLabel.text           = todoModel.date
@@ -68,7 +68,7 @@ class JourneyTodoTableViewCell: TodoCategoryCell {
             
             self.layoutForExpaned(isExpaned: false, animated: true)
             self._delegate?.journeyTodoTableViewCell(self, didTapEdit: todoModel)
-            self.delegate?.todoCategoryCell(self, category: .journey, isExpanded: false, forRowAt: indexPath)
+            self.delegate?.todoCategoryCell(self, category: .journey, isExpanded: false, forTodo: todoModel)
         }).disposed(by: self.disposeBag)
         
         self.deleteButton.rx.tap.observeOnMain(onNext: { [weak self] in
@@ -78,14 +78,13 @@ class JourneyTodoTableViewCell: TodoCategoryCell {
             
             self.layoutForExpaned(isExpaned: false, animated: true)
             self._delegate?.journeyTodoTableViewCell(self, didTapDelete: todoModel)
-            self.delegate?.todoCategoryCell(self, category: .journey, isExpanded: false, forRowAt: indexPath)
+            self.delegate?.todoCategoryCell(self, category: .journey, isExpanded: false, forTodo: todoModel)
         }).disposed(by: self.disposeBag)
     }
     
     private static let screenRatio: CGFloat = DeviceInfo.screenWidth / 375
     
     private let disposeBag = DisposeBag()
-    private var todoModel: TodoModel?
     
     @IBOutlet private weak var checkButton: UIButton!
     @IBOutlet private weak var fixedImageView: UIImageView!

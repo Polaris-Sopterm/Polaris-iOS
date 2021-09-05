@@ -50,7 +50,7 @@ final class DayTodoTableViewCell: TodoCategoryCell {
     }
     
     override func configure(_ todoModel: TodoModel) {
-        self.todoModel = todoModel
+        super.configure(todoModel)
         
         self.titleLabel.text        = todoModel.title
         self.subTitleLabel.text     = todoModel.journey?.title
@@ -97,7 +97,7 @@ final class DayTodoTableViewCell: TodoCategoryCell {
             guard let indexPath = self.indexPath else { return }
             
             self.layoutForExpaned(isExpaned: false, animated: true)
-            self.delegate?.todoCategoryCell(self, category: .day, isExpanded: false, forRowAt: indexPath)
+            self.delegate?.todoCategoryCell(self, category: .day, isExpanded: false, forTodo: todoModel)
             self._delegate?.dayTodoTableViewCell(self, didTapEdit: todoModel)
         }).disposed(by: self.disposeBag)
         
@@ -107,7 +107,7 @@ final class DayTodoTableViewCell: TodoCategoryCell {
             guard let indexPath = self.indexPath else { return }
             
             self.layoutForExpaned(isExpaned: false, animated: true)
-            self.delegate?.todoCategoryCell(self, category: .day, isExpanded: false, forRowAt: indexPath)
+            self.delegate?.todoCategoryCell(self, category: .day, isExpanded: false, forTodo: todoModel)
             self._delegate?.dayTodoTableViewCell(self, didTapDelete: todoModel)
         }).disposed(by: self.disposeBag)
     }
@@ -115,7 +115,6 @@ final class DayTodoTableViewCell: TodoCategoryCell {
     private static let screenRatio: CGFloat = DeviceInfo.screenWidth / 375
     
     private let disposeBag = DisposeBag()
-    private var todoModel: TodoModel?
     
     @IBOutlet private weak var fixImageView: UIImageView!
     @IBOutlet private weak var titleLabel: UILabel!

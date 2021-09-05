@@ -37,6 +37,24 @@ enum TodoCategory {
 
 class TodoViewModel {
     
+    var dayExpandedTodoIndexPath: IndexPath? {
+        guard let date = self.dayExpandedTodo?.date?.convertToDate()?.normalizedDate        else { return nil }
+        guard let section = self.todoDayHeadersInform.firstIndex(of: date)                  else { return nil }
+        guard let todoList = self.todoDayListTable[date]                                    else { return nil }
+        guard let row = todoList.firstIndex(where: { $0.idx == self.dayExpandedTodo?.idx }) else { return nil }
+        return IndexPath(row: row, section: section)
+    }
+    
+    var journeyExpandedTodoIndexPath: IndexPath? {
+        guard let expandedTodo = self.journeyExpandedTodo else { return nil }
+        guard let section = expandedTodo.journey?.idx == nil ?
+                self.todoJourneyList.firstIndex(where: { $0.title == "default" }) :
+                self.todoJourneyList.firstIndex(where: { $0.idx == expandedTodo.idx})        else { return nil }
+        guard let todos = self.todoJourneyList[safe: section]?.toDos                         else { return nil }
+        guard let row = todos.firstIndex(where: { $0.idx == self.journeyExpandedTodo?.idx }) else { return nil }
+        return IndexPath(row: row, section: section)
+    }
+    
     // Should Scroll 포함해서 Scroll 해야하는 경우
     let reloadSubject   = PublishSubject<Bool>()
     let currentTabRelay = BehaviorRelay<TodoCategory>(value: .day)
@@ -84,17 +102,10 @@ class TodoViewModel {
         }
     }
     
-    func expanedCellIndexPath(of tab: TodoCategory) -> IndexPath? {
-        switch tab {
-        case .day:     return self.dayExpanedIndexPath
-        case .journey: return self.journeyExpanedIndexPath
-        }
-    }
-    
-    func updateExpanedStatus(category: TodoCategory, forRowAt indexPath: IndexPath, isExpanded: Bool) {
+    func updateExpandedStatus(category: TodoCategory, forTodo todo: TodoModel, isExpanded: Bool) {
         switch category {
-        case .day:     self.dayExpanedIndexPath = isExpanded ? indexPath : nil
-        case .journey: self.journeyExpanedIndexPath = isExpanded ? indexPath : nil
+        case .day:     self.dayExpandedTodo = isExpanded ? todo : nil
+        case .journey: self.journeyExpandedTodo = isExpanded ? todo : nil
         }
     }
     
@@ -198,14 +209,14 @@ class TodoViewModel {
      날짜별 할일 보여줄 때, 사용하는 Property
      - Date 업데이트 시킬 때, 12:00:00으로 맞추어서 Normalized 시킴
      */
-    private(set) var dayExpanedIndexPath: IndexPath?
+    private(set) var dayExpandedTodo: TodoModel?
     private(set) var todoDayHeadersInform: [Date]
     private(set) var todoDayListTable = [Date: [TodoModel]]()
     
     /*
      여정별 할일 보여줄 때, 사용하는 Property
      */
-    private(set) var journeyExpanedIndexPath: IndexPath?
+    private(set) var journeyExpandedTodo: TodoModel?
     private(set) var todoJourneyList = [WeekJourneyModel]()
     
     private let disposeBag = DisposeBag()
