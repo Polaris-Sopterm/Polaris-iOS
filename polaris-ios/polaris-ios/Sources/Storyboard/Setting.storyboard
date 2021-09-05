@@ -267,6 +267,17 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboarding_bg" translatesAutoresizingMaskIntoConstraints="NO" id="ZgA-Me-NxZ">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wpT-2y-G0Y">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="vFA-CN-rGK">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RXJ-wV-9DT">
                                 <rect key="frame" x="0.0" y="44" width="375" height="60"/>
                                 <subviews>
@@ -290,17 +301,6 @@
                                     <constraint firstAttribute="height" constant="60" id="soZ-Xp-JrU"/>
                                 </constraints>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wpT-2y-G0Y">
-                                <rect key="frame" x="0.0" y="104" width="375" height="708"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="vFA-CN-rGK">
-                                    <size key="itemSize" width="128" height="128"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells/>
-                            </collectionView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="oci-kn-Wes">
                                 <rect key="frame" x="118" y="745" width="139" height="27"/>
                                 <color key="currentPageIndicatorTintColor" name="mainSky"/>
@@ -315,12 +315,12 @@
                             <constraint firstItem="RXJ-wV-9DT" firstAttribute="trailing" secondItem="Sb9-1J-Wdc" secondAttribute="trailing" id="I3Q-cB-7BU"/>
                             <constraint firstItem="ZgA-Me-NxZ" firstAttribute="trailing" secondItem="Sb9-1J-Wdc" secondAttribute="trailing" id="IYC-mW-Hdd"/>
                             <constraint firstAttribute="bottom" secondItem="wpT-2y-G0Y" secondAttribute="bottom" id="Mve-0J-uKN"/>
-                            <constraint firstItem="wpT-2y-G0Y" firstAttribute="top" secondItem="RXJ-wV-9DT" secondAttribute="bottom" id="ORV-0K-ZQB"/>
                             <constraint firstItem="ZgA-Me-NxZ" firstAttribute="leading" secondItem="Uhi-ge-XOn" secondAttribute="leading" id="StM-4j-Kn1"/>
                             <constraint firstAttribute="bottom" secondItem="ZgA-Me-NxZ" secondAttribute="bottom" id="VsK-na-SXN"/>
                             <constraint firstItem="Sb9-1J-Wdc" firstAttribute="trailing" secondItem="wpT-2y-G0Y" secondAttribute="trailing" id="YSj-PC-Gap"/>
                             <constraint firstItem="wpT-2y-G0Y" firstAttribute="leading" secondItem="Sb9-1J-Wdc" secondAttribute="leading" id="aK7-LF-97Y"/>
                             <constraint firstItem="oci-kn-Wes" firstAttribute="centerX" secondItem="Sb9-1J-Wdc" secondAttribute="centerX" id="cBa-gq-dMb"/>
+                            <constraint firstItem="wpT-2y-G0Y" firstAttribute="top" secondItem="Uhi-ge-XOn" secondAttribute="top" id="gqK-zr-G84"/>
                             <constraint firstItem="ZgA-Me-NxZ" firstAttribute="top" secondItem="Uhi-ge-XOn" secondAttribute="top" id="ofR-1n-hgx"/>
                         </constraints>
                     </view>
@@ -332,7 +332,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H8h-DO-xuQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1662" y="800"/>
+            <point key="canvasLocation" x="1661.5999999999999" y="799.50738916256159"/>
         </scene>
         <!--Nick ChangeVC-->
         <scene sceneID="kh5-0V-bPN">

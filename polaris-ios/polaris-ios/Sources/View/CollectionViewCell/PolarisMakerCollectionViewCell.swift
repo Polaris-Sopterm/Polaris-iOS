@@ -12,13 +12,15 @@ import UIKit
 class PolarisMakerCollectionViewCell: UICollectionViewCell {
     
     func configure(_ maker: PolarisMaker) {
-        self.titleLabel.text = maker.title
-        self.imageView.image = maker.image
+        self.titleLabel.text         = maker.title
+        self.imageView.image         = maker.memberImage
+        self.backMoonImageView.image = maker.backgroundMoonImage
     }
     
     private let disposeBag = DisposeBag()
 
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var imageView: UIImageView!
+    @IBOutlet private weak var backMoonImageView: UIImageView!
     
 }

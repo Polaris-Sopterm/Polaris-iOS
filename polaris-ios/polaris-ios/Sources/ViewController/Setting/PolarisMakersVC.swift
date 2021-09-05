@@ -33,7 +33,7 @@ final class PolarisMakersVC: UIViewController {
         
         guard let flowLayout = layout as? UICollectionViewFlowLayout else { return }
         let cellWidth: CGFloat  = DeviceInfo.screenWidth
-        let cellHeight: CGFloat = DeviceInfo.screenHeight - DeviceInfo.topSafeAreaInset - 60
+        let cellHeight: CGFloat = DeviceInfo.screenHeight
         
         flowLayout.itemSize                = CGSize(width: cellWidth, height: cellHeight)
         flowLayout.minimumInteritemSpacing = 0
@@ -104,8 +104,22 @@ extension PolarisMaker {
         }
     }
     
-    var image: UIImage? {
-        return nil
+    var backgroundMoonImage: UIImage? {
+        switch self {
+        case .productManager:   return UIImage(named: ImageName.plannerBackMoon)
+        case .designer:         return UIImage(named: ImageName.designerBackMoon)
+        case .iosDeveloper:     return UIImage(named: ImageName.iosBackMoon)
+        case .serverDeveloper:  return UIImage(named: ImageName.serverBackMoon)
+        }
+    }
+    
+    var memberImage: UIImage? {
+        switch self {
+        case .productManager:   return UIImage(named: ImageName.plannerMember)
+        case .designer:         return UIImage(named: ImageName.designerMember)
+        case .iosDeveloper:     return UIImage(named: ImageName.iosMember)
+        case .serverDeveloper:  return UIImage(named: ImageName.serverMember)
+        }
     }
     
 }
