@@ -105,9 +105,7 @@ final class LoginVC: UIViewController {
 
         UIView.animate(withDuration: duration, delay: 0, options: .curveEaseIn, animations: {
             cometImageView.transform = CGAffineTransform(translationX: -DeviceInfo.screenWidth - 120, y: DeviceInfo.screenWidth + 120)
-        }, completion: { [weak self] finished in
-            guard finished == true else { return }
-            
+        }, completion: { [weak self] _ in
             cometImageView.removeFromSuperview()
             self?.startCometAnimation()
         })
