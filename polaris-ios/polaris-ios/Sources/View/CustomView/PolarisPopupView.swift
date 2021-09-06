@@ -18,10 +18,10 @@ class PolarisPopupView: UIView {
         self.bindButtons()
     }
     
-    func configure(title: String, subTitle: String,
+    func configure(title: String, subTitle: String? = nil,
                    cancelTitle: String = "취소", confirmTitle: String = "확인",
                    confirmHandler: Handler? = nil, cancelHandler: Handler? = nil) {
-        self.titleLabel.text = title
+        self.titleLabel.text    = title
         self.subTitleLabel.text = subTitle
         self.confirmButton.setTitle(confirmTitle, for: .normal)
         self.cancelButton.setTitle(cancelTitle, for: .normal)
@@ -42,7 +42,7 @@ class PolarisPopupView: UIView {
         }
     }
     
-    private func animateForDismiss(completion: Handler? = nil) {
+    private func animateForHide(completion: Handler? = nil) {
         UIView.animate(withDuration: 0.2, animations: {
             self.alpha = 0
         }) { _ in
@@ -52,19 +52,13 @@ class PolarisPopupView: UIView {
     }
     
     private func bindButtons() {
-        self.confirmButton.rx.tap
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] in
-                self?.animateForDismiss(completion: self?.confirmHandler)
-            })
-            .disposed(by: self.disposeBag)
+        self.confirmButton.rx.tap.observeOnMain(onNext: { [weak self] in
+            self?.animateForHide(completion: self?.confirmHandler)
+        }).disposed(by: self.disposeBag)
         
-        self.cancelButton.rx.tap
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] in
-                self?.animateForDismiss(completion: self?.cancelHandler)
-            })
-            .disposed(by: self.disposeBag)
+        self.cancelButton.rx.tap.observeOnMain(onNext: { [weak self] in
+            self?.animateForHide(completion: self?.cancelHandler)
+        }).disposed(by: self.disposeBag)
     }
     
     private let disposeBag = DisposeBag()

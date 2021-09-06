@@ -10,9 +10,9 @@ import RxSwift
 import UIKit
 
 protocol JourneyTodoTableViewDelegate: TodoCategoryCellDelegate {
-    func journeyTodoTableViewCell(_ cell: JourneyTodoTableViewCell, didTapCheck todo: WeekTodo)
-    func journeyTodoTableViewCell(_ cell: JourneyTodoTableViewCell, didTapEdit todo: WeekTodo)
-    func journeyTodoTableViewCell(_ cell: JourneyTodoTableViewCell, didTapDelete todo: WeekTodo)
+    func journeyTodoTableViewCell(_ cell: JourneyTodoTableViewCell, didTapCheck todo: TodoModel)
+    func journeyTodoTableViewCell(_ cell: JourneyTodoTableViewCell, didTapEdit todo: TodoModel)
+    func journeyTodoTableViewCell(_ cell: JourneyTodoTableViewCell, didTapDelete todo: TodoModel)
 }
 
 class JourneyTodoTableViewCell: TodoCategoryCell {
@@ -33,15 +33,14 @@ class JourneyTodoTableViewCell: TodoCategoryCell {
         self.bindButtons()
     }
     
-    override func configure(_ todoModel: TodoModelProtocol) {
-        guard let journeyTodoModel = todoModel as? WeekTodo else { return }
-        self.todoModel = journeyTodoModel
+    override func configure(_ todoModel: TodoModel) {
+        super.configure(todoModel)
         
-        self.todoLabel.text          = journeyTodoModel.title
-        self.dayLabel.text           = journeyTodoModel.date
-        self.fixedImageView.isHidden = journeyTodoModel.isTop == false
+        self.todoLabel.text          = todoModel.title
+        self.dayLabel.text           = todoModel.date
+        self.fixedImageView.isHidden = todoModel.isTop == false
         
-        self.updateUI(as: journeyTodoModel.isDone)
+        self.updateUI(as: todoModel.isDone)
     }
     
     func updateUI(as checkState: String?) {
@@ -69,7 +68,7 @@ class JourneyTodoTableViewCell: TodoCategoryCell {
             
             self.layoutForExpaned(isExpaned: false, animated: true)
             self._delegate?.journeyTodoTableViewCell(self, didTapEdit: todoModel)
-            self.delegate?.todoCategoryCell(self, category: .journey, isExpanded: false, forRowAt: indexPath)
+            self.delegate?.todoCategoryCell(self, category: .journey, isExpanded: false, forTodo: todoModel)
         }).disposed(by: self.disposeBag)
         
         self.deleteButton.rx.tap.observeOnMain(onNext: { [weak self] in
@@ -79,14 +78,13 @@ class JourneyTodoTableViewCell: TodoCategoryCell {
             
             self.layoutForExpaned(isExpaned: false, animated: true)
             self._delegate?.journeyTodoTableViewCell(self, didTapDelete: todoModel)
-            self.delegate?.todoCategoryCell(self, category: .journey, isExpanded: false, forRowAt: indexPath)
+            self.delegate?.todoCategoryCell(self, category: .journey, isExpanded: false, forTodo: todoModel)
         }).disposed(by: self.disposeBag)
     }
     
     private static let screenRatio: CGFloat = DeviceInfo.screenWidth / 375
     
     private let disposeBag = DisposeBag()
-    private var todoModel: WeekTodo?
     
     @IBOutlet private weak var checkButton: UIButton!
     @IBOutlet private weak var fixedImageView: UIImageView!

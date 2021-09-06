@@ -8,15 +8,15 @@
 import Foundation
 
 struct TodoDayListModel: Codable {
-    let data: [TodoDayModel]?
+    let data: [TodoDaySectionModel]?
 }
 
-struct TodoDayModel: Codable {
+struct TodoDaySectionModel: Codable {
     let day: String?
-    let todoList: [TodoDayPerModel]?
+    let todoList: [TodoModel]?
 }
 
-struct TodoDayPerModel: Codable, TodoModelProtocol {
+struct TodoModel: Codable {
     let idx: Int?
     let title: String?
     let isTop: Bool?

@@ -81,9 +81,9 @@
             <connections>
                 <outlet property="checkButton" destination="qgR-gl-Apb" id="UAq-hs-aar"/>
                 <outlet property="checkButtonImage" destination="eHT-Fe-pVp" id="iN7-NB-FPk"/>
+                <outlet property="dateLabel" destination="0NV-qS-MUS" id="sb0-sd-l8L"/>
                 <outlet property="fixedImage" destination="OB5-Ws-8rP" id="X03-Kl-jOK"/>
                 <outlet property="lineView" destination="l4J-vU-sKr" id="Nk5-7q-HKb"/>
-                <outlet property="subLabel" destination="0NV-qS-MUS" id="sb0-sd-l8L"/>
                 <outlet property="titleLabel" destination="D7E-Jg-ktf" id="ONk-Ac-yTg"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="62.276785714285708"/>

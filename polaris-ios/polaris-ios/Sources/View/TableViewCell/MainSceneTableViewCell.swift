@@ -40,16 +40,13 @@ final class MainSceneTableViewCell: MainTableViewCell {
     private var starList: [MainStarCVCViewModel] = []
     private let disposeBag = DisposeBag()
     private let starTVCHeight = 212*(DeviceInfo.screenHeight/812.0)
-    private var dateInfo = DateInfo(year: Date.currentYear, month: Date.currentMonth, weekNo: Date.currentWeekNoOfMonth)
+    
     override static var cellHeight: CGFloat { return DeviceInfo.screenHeight }
     private let weekDict = [1:"첫째주",2:"둘째주",3:"셋째주",4:"넷째주",5:"다섯째주"]
     
-    private let forceToShowStarRelay: BehaviorRelay<Bool> = BehaviorRelay(value: false)
-    private let dateInfoRelay: BehaviorRelay<DateInfo> = BehaviorRelay(value: DateInfo(year: Date.currentYear, month: Date.currentMonth, weekNo: Date.currentWeekNoOfMonth))
-
-    
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.addObservers()
         self.setUIs()
         self.setStarCollectionView()
         self.setTodoCollectionView()
@@ -63,6 +60,11 @@ final class MainSceneTableViewCell: MainTableViewCell {
         else          { self.dimView.isHidden = false }
     }
     
+    private func addObservers() {
+        let center = NotificationCenter.default
+        center.addObserver(self, selector: #selector(self.didUpdateTodo(_:)), name: .didUpdateTodo, object: nil)
+    }
+    
     private func setupDimView() {
         self.dimView.frame           = CGRect(x: 0, y: 0,
                                               width: DeviceInfo.screenWidth, height: type(of: self).cellHeight)
@@ -70,8 +72,6 @@ final class MainSceneTableViewCell: MainTableViewCell {
         self.dimView.alpha           = 0.0
         self.contentView.addSubview(self.dimView)
     }
-    
-    private var dimView: UIView = UIView(frame: .zero)
     
     private func setUIs(){
         for _ in 0...2{
@@ -123,8 +123,10 @@ final class MainSceneTableViewCell: MainTableViewCell {
     }
     
     private func bindViewModel(){
-        let input = MainSceneViewModel.Input(forceToShowStar: self.forceToShowStarRelay,dateInfo: self.dateInfoRelay)
+        let input = MainSceneViewModel.Input(forceToShowStar: self.viewModel.forceToShowStarRelay,
+                                             dateInfo: self.viewModel.dateInfoRelay)
         let output = viewModel.connect(input: input)
+        
         output.homeModelRelay.subscribe(onNext: { [weak self] homeModel in
             self?.homeModel = homeModel.last
         })
@@ -172,7 +174,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
                 let indexPath = IndexPath(item: index, section: 0)
                 let cell      = collectionView.dequeueReusableCell(cell: MainLookBackCollectionViewCell.self,
                                                                    forIndexPath: indexPath)
-
+                
                 guard let lookbackCell = cell else { return UICollectionViewCell() }
                 lookbackCell.delegate = self
                 if self.homeModel != nil {
@@ -180,20 +182,20 @@ final class MainSceneTableViewCell: MainTableViewCell {
                 }
                 return lookbackCell
             }
-          
         }.disposed(by: self.disposeBag)
         
         output.todoStarList.bind(to: self.todoCV.rx.items) { [weak self] collectionView, index, item in
             guard let self = self else { return UICollectionViewCell() }
+            
             let indexPath = IndexPath(item: index, section: 0)
             let cell      = collectionView.dequeueReusableCell(cell: MainTodoCVC.self, forIndexPath: indexPath)
+            
             guard let mainTodoCell = cell else { return UICollectionViewCell() }
             mainTodoCell.viewModel = item
+            mainTodoCell.delegate  = self
             self.pageControl.numberOfPages = output.todoStarList.value.count
             return mainTodoCell
         }.disposed(by: self.disposeBag)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadTodos), name: NSNotification.Name("checkButton"), object: nil)
     }
     
     private func setCometLayout(comet: UIImageView,size: Int) {
@@ -255,7 +257,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
         guard let visibleController = UIViewController.getVisibleController() else { return }
         guard let mainVC = visibleController as? MainVC                       else { return }
         
-        mainVC.scrollToTodoListCell()
+        mainVC.scrollToRetrospectCell()
     }
     
     @IBAction func weekButtonAction(_ sender: Any) {
@@ -268,13 +270,17 @@ final class MainSceneTableViewCell: MainTableViewCell {
         guard let visibleController = UIViewController.getVisibleController() else { return }
         guard let addTodoVC = viewController                                  else { return }
         addTodoVC.setAddOptions(.addJourney)
+        addTodoVC.delegate = self
         addTodoVC.presentWithAnimation(from: visibleController)
     }
     
-    @objc private func reloadTodos(){
-        let dateInfo = self.dateInfoRelay.value
-        self.dateInfoRelay.accept(DateInfo(year: dateInfo.year, month: dateInfo.month, weekNo: dateInfo.weekNo))
+    @objc private func didUpdateTodo(_ notification: Notification) {
+        guard let sceneIdentifier = notification.object as? String      else { return }
+        guard sceneIdentifier != MainSceneCellType.main.sceneIdentifier else { return }
+        self.viewModel.updateDateInfo(self.viewModel.dateInfoRelay.value)
     }
+    
+    private var dimView: UIView = UIView(frame: .zero)
     
 }
 
@@ -361,24 +367,57 @@ extension MainSceneTableViewCell: UIScrollViewDelegate {
 
 
 extension MainSceneTableViewCell: LookBackCloseDelegate {
+    
     func close() {
-        self.forceToShowStarRelay.accept(true)
+        self.viewModel.updateStarList(isSkipped: true)
     }
+    
     func apply(isLookBack: Bool) {
         if isLookBack {
-            #warning("재은 - 여정 돌아보기(회고) 버튼")
-        }
-        else {
-            #warning("동민 - Journey 추가 버튼")
+            guard let visibleController = UIViewController.getVisibleController() else { return }
+            guard let mainVC = visibleController as? MainVC                       else { return }
+            
+            mainVC.scrollToRetrospectCell()
+        } else {
+            let viewController = AddTodoVC.instantiateFromStoryboard(StoryboardName.addTodo)
+            
+            guard let visibleController = UIViewController.getVisibleController() else { return }
+            guard let addTodoVC = viewController                                  else { return }
+            addTodoVC.setAddOptions(.addJourney)
+            addTodoVC.delegate = self
+            addTodoVC.presentWithAnimation(from: visibleController)
         }
     }
+    
 }
 
 extension MainSceneTableViewCell: WeekPickerDelegate {
+    
     func apply(year: Int, month: Int, weekNo: Int, weekText: String) {
         self.weekLabel.text = weekText
-        self.forceToShowStarRelay.accept(true)
-        self.dateInfoRelay.accept(DateInfo(year: year, month: month, weekNo: weekNo))
+        self.viewModel.updateStarList(isSkipped: true)
+        
+        let dateInfo = DateInfo(year: year, month: month, weekNo: weekNo)
+        self.viewModel.updateDateInfo(dateInfo)
     }
 
+}
+
+extension MainSceneTableViewCell: AddTodoViewControllerDelegate {
+    
+    func addTodoViewController(_ viewController: AddTodoVC, didCompleteAddOption option: AddTodoVC.AddOptions) {
+        self.viewModel.updateDateInfo(self.viewModel.dateInfoRelay.value)
+        self.viewModel.updateStarList(isSkipped: true)
+        
+        NotificationCenter.default.post(name: .didUpdateTodo, object: MainSceneCellType.main.sceneIdentifier)
+    }
+    
+}
+
+extension MainSceneTableViewCell: MainTodoCollectionViewCellDelegate {
+    
+    func mainTodoCollectionViewCell(_ cell: MainTodoCVC, didTapDone todo: TodoModel) {
+        self.viewModel.updateDoneStatus(todo)
+    }
+    
 }

@@ -15,11 +15,3 @@ struct JourneyTitleModel: Codable {
     let weekNo: Int?
     let userIdx: Int?
 }
-
-extension JourneyTitleModel {
-    
-    var displayTitle: String? {
-        return title == "default" ? "선택 안함" : self.title
-    }
-    
-}

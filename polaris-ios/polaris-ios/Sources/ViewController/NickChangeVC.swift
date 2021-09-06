@@ -9,19 +9,18 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class NickChangeVC: UIViewController {
+final class NickChangeVC: UIViewController {
     
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var nickTextField: UITextField!
     @IBOutlet weak var changeButton: UIButton!
     
-    private var disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setUIs()
-        // Do any additional setup after loading the view.
     }
     
     private func setUIs() {
@@ -44,7 +43,7 @@ class NickChangeVC: UIViewController {
     @IBAction func changeButtonAction(_ sender: Any) {
         if let newNickname = self.nickTextField.text {
             let userAPI = UserAPI.updateUser(nickname: newNickname)
-            let some = NetworkManager.request(apiType: userAPI).subscribe(onSuccess: { [weak self] (polarisUser: PolarisUser) in
+            NetworkManager.request(apiType: userAPI).subscribe(onSuccess: { [weak self] (polarisUser: PolarisUser) in
                 #warning("닉변 완료 알려주기")
             })
             .disposed(by: self.disposeBag)

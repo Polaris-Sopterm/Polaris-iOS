@@ -15,6 +15,11 @@ class AddTodoDropdownViewModel {
     let selectedMenu     = BehaviorRelay<JourneyTitleModel?>(value: nil)
     let journeyListRelay = BehaviorRelay<[JourneyTitleModel]>(value: [])
     
+    init() {
+        self.selectedMenu.accept(type(of: self).defaultJourney)
+        self.journeyListRelay.accept([type(of: self).defaultJourney])
+    }
+    
     func requestJourneyList(_ date: Date?) {
         guard let date = date else { return }
         
@@ -31,19 +36,12 @@ class AddTodoDropdownViewModel {
     }
     
     private func updateJourneyList(_ list: [JourneyTitleModel]) {
-        defer {
-            if self.selectedMenu.value == nil {
-                let defaultJourney = self.journeyListRelay.value.first(where: { $0.title == "default" })
-                self.selectedMenu.accept(defaultJourney)
-            }
-        }
-        
-        guard list.isEmpty == true else { self.journeyListRelay.accept(list); return }
-        
-        // 리스트가 비어 있는 경우 임의로 Default 여정 만들어서 보여주기 - 서버 : 이현주와 협의
-        let defaultList = [JourneyTitleModel(idx: nil, title: "default", year: nil, month: nil, weekNo: nil, userIdx: nil)]
-        self.journeyListRelay.accept(defaultList)
+        let journeyList = list.isEmpty ? [type(of: self).defaultJourney] : list
+        self.journeyListRelay.accept(journeyList)
     }
+    
+    private static let defaultJourney = JourneyTitleModel(idx: nil, title: "선택 안함",
+                                                          year: nil, month: nil, weekNo: nil, userIdx: nil)
     
     private let disposeBag = DisposeBag()
     

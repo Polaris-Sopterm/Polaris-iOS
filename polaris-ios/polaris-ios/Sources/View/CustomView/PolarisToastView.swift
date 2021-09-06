@@ -37,7 +37,7 @@ class PolarisToastView: UIView {
     
     func show() {
         self.alpha = 0
-        UIView.animate(withDuration: self.duration, animations: { [weak self] in
+        UIView.animate(withDuration: 0.5, animations: { [weak self] in
             self?.alpha = 1
         }, completion: { [weak self] _ in
             guard let self = self else  { return }
@@ -48,7 +48,7 @@ class PolarisToastView: UIView {
     }
     
     func hide() {
-        UIView.animate(withDuration: self.duration, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
             self.alpha = 0
         }, completion: { [weak self] isFinished in
             self?.removeFromSuperview()

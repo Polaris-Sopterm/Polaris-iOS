@@ -1,5 +1,8 @@
 # Uncomment the next line to define a global platform for your project
 
+# add pods for desired Firebase products
+# https://firebase.google.com/docs/ios/setup#available-pods
+
 platform :ios, '13.0'
 inhibit_all_warnings!
 

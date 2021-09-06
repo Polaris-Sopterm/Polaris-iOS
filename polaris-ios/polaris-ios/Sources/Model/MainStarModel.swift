@@ -18,7 +18,4 @@ struct MainStarModel {
         self.starLevel = starLevel
     }
     
-    
-    
-    
 }

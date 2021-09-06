@@ -105,9 +105,7 @@ final class LoginVC: UIViewController {
 
         UIView.animate(withDuration: duration, delay: 0, options: .curveEaseIn, animations: {
             cometImageView.transform = CGAffineTransform(translationX: -DeviceInfo.screenWidth - 120, y: DeviceInfo.screenWidth + 120)
-        }, completion: { [weak self] finished in
-            guard finished == true else { return }
-            
+        }, completion: { [weak self] _ in
             cometImageView.removeFromSuperview()
             self?.startCometAnimation()
         })
@@ -201,18 +199,21 @@ final class LoginVC: UIViewController {
     }
     
     private func bindButtons() {
-        self.signupButton.rx.tap
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] in
-                self?.presentSignup()
-            })
-            .disposed(by: self.disposeBag)
+        self.signupButton.rx.tap.observeOnMain(onNext: { [weak self] in
+            self?.presentSignup()
+        }).disposed(by: self.disposeBag)
         
-        self.loginButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.viewModel.requestLogin()
-            })
-            .disposed(by: self.disposeBag)
+        self.loginButton.rx.tap.observeOnMain(onNext: { [weak self] in
+            self?.viewModel.requestLogin()
+        }).disposed(by: self.disposeBag)
+
+        self.forgetPwButton.rx.tap.observeOnMain(onNext: { [weak self] in
+            guard let self = self                                    else { return }
+            guard let popupView: ConfirmPopupView = UIView.fromNib() else { return }
+            
+            popupView.configure(title: "계정 찾기는 메일로 문의해주세요.", subTitle: "polaris.diary@gmail.com으로\n문의 메일 부탁드립니다.")
+            popupView.show(in: self.view)
+        }).disposed(by: self.disposeBag)
     }
     
     private func observeViewModel() {
@@ -251,8 +252,8 @@ final class LoginVC: UIViewController {
     private static let logoTopConstraintValue: CGFloat      = 72 + DeviceInfo.topSafeAreaInset
     private static let textFieldTopConstraintValue: CGFloat = 77
     
-    private var disposeBag = DisposeBag()
-    private var viewModel  = LoginViewModel()
+    private let disposeBag = DisposeBag()
+    private let viewModel  = LoginViewModel()
     
     private let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(style: .medium)
     private let loadingView: UIView                       = UIView(frame: .zero)

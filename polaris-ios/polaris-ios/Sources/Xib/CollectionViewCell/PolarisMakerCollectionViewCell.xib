@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="PolarisMakerCollectionViewCell" customModule="Polaris" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="683"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="683"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lookBackIllust_Planner" translatesAutoresizingMaskIntoConstraints="NO" id="L2e-mc-3Jd">
+                        <rect key="frame" x="2.5" y="-105.5" width="370" height="364"/>
+                    </imageView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgMember_Planner" translatesAutoresizingMaskIntoConstraints="NO" id="q1I-0r-A0j">
+                        <rect key="frame" x="0.0" y="200" width="375" height="483"/>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bEX-Go-yGx">
+                        <rect key="frame" x="105.5" y="76" width="164.5" height="41"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iOS Developers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1HE-Kh-bCG">
+                                <rect key="frame" x="18" y="4" width="128.5" height="33"/>
+                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="24"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" name="mainPurple"/>
+                        <constraints>
+                            <constraint firstItem="1HE-Kh-bCG" firstAttribute="top" secondItem="bEX-Go-yGx" secondAttribute="top" constant="4" id="09Z-l4-IGT"/>
+                            <constraint firstAttribute="bottom" secondItem="1HE-Kh-bCG" secondAttribute="bottom" constant="4" id="12g-Mu-TlK"/>
+                            <constraint firstAttribute="trailing" secondItem="1HE-Kh-bCG" secondAttribute="trailing" constant="18" id="XrD-Rr-5iI"/>
+                            <constraint firstItem="1HE-Kh-bCG" firstAttribute="leading" secondItem="bEX-Go-yGx" secondAttribute="leading" constant="18" id="eGr-c9-udu"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="12"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="q1I-0r-A0j" firstAttribute="top" secondItem="bEX-Go-yGx" secondAttribute="bottom" constant="83" id="Hz2-BF-wWF"/>
+                <constraint firstItem="bEX-Go-yGx" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="SMp-YM-8Qp"/>
+                <constraint firstAttribute="trailing" secondItem="q1I-0r-A0j" secondAttribute="trailing" id="TXP-oA-lDv"/>
+                <constraint firstItem="q1I-0r-A0j" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Xi5-Zd-DdG"/>
+                <constraint firstAttribute="bottom" secondItem="q1I-0r-A0j" secondAttribute="bottom" id="bUy-Rd-Ws3"/>
+                <constraint firstItem="L2e-mc-3Jd" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="mwT-2W-k7f"/>
+                <constraint firstItem="L2e-mc-3Jd" firstAttribute="centerY" secondItem="bEX-Go-yGx" secondAttribute="centerY" constant="-20" id="yCL-aj-Ewe"/>
+            </constraints>
+            <size key="customSize" width="413" height="683"/>
+            <connections>
+                <outlet property="backMoonImageView" destination="L2e-mc-3Jd" id="lt3-mw-x1C"/>
+                <outlet property="imageView" destination="q1I-0r-A0j" id="LWR-Ab-CZw"/>
+                <outlet property="titleLabel" destination="1HE-Kh-bCG" id="iPM-2V-1UD"/>
+            </connections>
+            <point key="canvasLocation" x="400.72463768115944" y="193.19196428571428"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="imgMember_Planner" width="375" height="483"/>
+        <image name="lookBackIllust_Planner" width="370" height="363.5"/>
+        <namedColor name="mainPurple">
+            <color red="0.41200000047683716" green="0.41200000047683716" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

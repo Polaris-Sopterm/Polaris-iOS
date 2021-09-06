@@ -30,7 +30,7 @@ class AddTodoVC: HalfModalVC {
         self.bindButtons()
         self.bindEnableButton()
         self.observeViewModel()
-        self.setupCurrentTodo()
+        self.setupCurrentUIAsOption()
     }
     
     // MARK: - Set Up
@@ -42,7 +42,11 @@ class AddTodoVC: HalfModalVC {
         self.viewModel.setAddTodoDate(date)
     }
     
-    func setEditTodo(_ todo: TodoDayPerModel) {
+    func setJourneyModel(_ journeyModel: WeekJourneyModel) {
+        self.viewModel.setJourneyModel(journeyModel)
+    }
+    
+    func setEditTodo(_ todo: TodoModel) {
         self.viewModel.setEditTodoModel(todo)
     }
     
@@ -51,17 +55,29 @@ class AddTodoVC: HalfModalVC {
             guard let date = self.viewModel.currentDate else { return }
             self.titleLabel.text = date.convertToString(using: "M월 d일") + "의 할 일"
         } else if self.viewModel.currentAddOption == .perJourneyAddTodo {
-            self.titleLabel.text = "폴라리스의 할 일"
+            guard let journeyTitle = self.viewModel.journeyModel?.title else { return }
+            self.titleLabel.text = journeyTitle == "default" ? "여정이 없는 할 일" : String(format: "%@의 할 일", journeyTitle)
         } else if self.viewModel.currentAddOption == .addJourney {
             self.titleLabel.text = "여정 추가하기"
-        } else {
-            self.titleLabel.text = "일정 수정"
+        } else if self.viewModel.currentAddOption == .edittedTodo {
+            self.titleLabel.text = "일정 수정하기"
+        } else if self.viewModel.currentAddOption == .edittedJourney {
+            self.titleLabel.text = "여정 수정하기"
         }
     }
     
-    private func setupCurrentTodo() {
-        guard self.viewModel.currentAddOption == .edittedTodo else { return }
-        guard let todoModel = self.viewModel.todoDayModel     else { return }
+    private func setupCurrentUIAsOption() {
+        guard let currentAddOption = self.viewModel.currentAddOption else { return }
+            
+        if currentAddOption == .edittedTodo {
+            self.setupEdittedTodoUI()
+        } else if currentAddOption == .edittedJourney {
+            self.setupEdittedJourneyUI()
+        }
+    }
+    
+    private func setupEdittedTodoUI() {
+        guard let todoModel = self.viewModel.todoModel else { return }
         
         for index in 0..<self.viewModel.addOptionCount {
             let indexPath = IndexPath(row: index, section: 0)
@@ -78,6 +94,24 @@ class AddTodoVC: HalfModalVC {
                 selectDayCell.updateSelectDate(selectDate)
             } else if let fixOnTopCell = cell as? AddTodoFixOnTopTableViewCell {
                 fixOnTopCell.updateFix(todoModel.isTop ?? false)
+            }
+        }
+    }
+    
+    private func setupEdittedJourneyUI() {
+        guard let journeyModel = self.viewModel.journeyModel else { return }
+        
+        for index in 0..<self.viewModel.addOptionCount {
+            let indexPath = IndexPath(row: index, section: 0)
+            guard let cell = self.tableView.cellForRow(at: indexPath) else { continue }
+            
+            if let addTextCell = cell as? AddTodoTextTableViewCell {
+                addTextCell.updateAddText(journeyModel.title ?? "")
+            } else if let selectJourneyCell = cell as? AddTodoSelectStarTableViewCell {
+                var journeySet: Set<Journey> = []
+                if let firstJourney = journeyModel.firstValueJourney   { journeySet.insert(firstJourney) }
+                if let secondJourney = journeyModel.secondValueJourney { journeySet.insert(secondJourney) }
+                selectJourneyCell.updateSelectJourney(journeySet)
             }
         }
     }
@@ -143,13 +177,17 @@ class AddTodoVC: HalfModalVC {
     }
 
     private func observeViewModel() {
-        self.viewModel.completeAddTodoSubject.observeOnMain(onNext: { [weak self] in
+        self.viewModel.completeRequestSubject.observeOnMain(onNext: { [weak self] in
             guard let self = self                                     else { return }
             guard let currentOption = self.viewModel.currentAddOption else { return }
             self.delegate?.addTodoViewController(self, didCompleteAddOption: currentOption)
             self.dismissWithAnimation()
             
-            PolarisToastManager.shared.showToast(with: "할 일이 추가되었어요.")
+            if currentOption == .perDayAddTodo || currentOption == .perJourneyAddTodo {
+                PolarisToastManager.shared.showToast(with: "할 일이 추가되었어요.")
+            } else if currentOption == .addJourney {
+                PolarisToastManager.shared.showToast(with: "여정이 추가되었어요.")
+            }
         }).disposed(by: self.disposeBag)
         
         self.viewModel.loadingSubject.observeOnMain(onNext: { [weak self] isLoading in
@@ -196,34 +234,28 @@ extension AddTodoVC {
     struct AddOptions: OptionSet {
         let rawValue: Int
         
-        static let addText          = AddOptions(rawValue: 1 << 0)
-        static let selectDay        = AddOptions(rawValue: 1 << 1)
-        static let fixOnTop         = AddOptions(rawValue: 1 << 2)
-        static let dropdownMenu     = AddOptions(rawValue: 1 << 3)
-        static let selectStar       = AddOptions(rawValue: 1 << 4)
+        static let addText       = AddOptions(rawValue: 1 << 0)
+        static let selectDay     = AddOptions(rawValue: 1 << 1)
+        static let fixOnTop      = AddOptions(rawValue: 1 << 2)
+        static let dropdownMenu  = AddOptions(rawValue: 1 << 3)
+        static let selectJourney = AddOptions(rawValue: 1 << 4)
+        static let deleteJourney = AddOptions(rawValue: 1 << 5)
         
         static let perDayAddTodo: AddOptions     = [.addText, dropdownMenu, fixOnTop]
         static let perJourneyAddTodo: AddOptions = [.addText, .selectDay, .fixOnTop]
-        static let addJourney: AddOptions        = [.addText, .selectStar]
+        static let addJourney: AddOptions        = [.addText, .selectJourney]
         static let edittedTodo: AddOptions       = [.addText, .dropdownMenu, .selectDay, .fixOnTop]
+        static let edittedJourney: AddOptions    = [.addText, .selectJourney, .deleteJourney]
         
         var addCellTypes: [AddTodoTableViewCellProtocol.Type] {
             var cellTypes = [AddTodoTableViewCellProtocol.Type]()
-            if self.contains(.addText)       { cellTypes.append(AddTodoTextTableViewCell.self) }
-            if self.contains(.dropdownMenu)  { cellTypes.append(AddTodoDropdownTableViewCell.self) }
-            if self.contains(.selectDay)     { cellTypes.append(AddTodoDayTableViewCell.self) }
-            if self.contains(.fixOnTop)      { cellTypes.append(AddTodoFixOnTopTableViewCell.self) }
-            if self.contains(.selectStar)    { cellTypes.append(AddTodoSelectStarTableViewCell.self) }
+            if self.contains(.addText)       { cellTypes.append(AddTodoTextTableViewCell.self)          }
+            if self.contains(.dropdownMenu)  { cellTypes.append(AddTodoDropdownTableViewCell.self)      }
+            if self.contains(.selectDay)     { cellTypes.append(AddTodoDayTableViewCell.self)           }
+            if self.contains(.fixOnTop)      { cellTypes.append(AddTodoFixOnTopTableViewCell.self)      }
+            if self.contains(.selectJourney) { cellTypes.append(AddTodoSelectStarTableViewCell.self)    }
+            if self.contains(.deleteJourney) { cellTypes.append(AddTodoDeleteJourneyTableViewCell.self) }
             return cellTypes
-        }
-        
-        var menuKey: String? {
-            if self == .addText           { return "ADD_TEXT" }
-            else if self == .selectDay    { return "SELECT_DAY" }
-            else if self == .fixOnTop     { return "FIX_ON_TOP" }
-            else if self == .dropdownMenu { return "DROPDOWN_MENU" }
-            else if self == .selectStar   { return "SELECT_STAR" }
-            else                          { return nil }
         }
     }
 }

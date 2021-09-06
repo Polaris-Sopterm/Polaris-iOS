@@ -39,6 +39,26 @@ extension UIView {
         return nib.first as? T
     }
     
+    func showCrossDissolve(duration: TimeInterval = 0.2, completion: (() -> Void)? = nil) {
+        self.isHidden = false
+        self.alpha    = 0
+        
+        UIView.animate(withDuration: duration, animations: {
+            self.alpha = 1
+        }, completion: { _ in
+            completion?()
+        })
+    }
+    
+    func hideCrossDissolve(duration: TimeInterval = 0.2, completion: (() -> Void)? = nil) {
+        UIView.animate(withDuration: duration, animations: {
+            self.alpha = 0
+        }, completion: { _ in
+            self.isHidden = false
+            completion?()
+        })
+    }
+ 
     func makeRounded(cornerRadius : CGFloat?){
         if let cornerRadius_ = cornerRadius {
             self.layer.cornerRadius = cornerRadius_

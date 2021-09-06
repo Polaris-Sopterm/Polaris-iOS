@@ -10,8 +10,8 @@ import RxSwift
 import UIKit
 
 protocol JourneyTodoHeaderViewDelegate: TodoHeaderViewDelegate {
-    func journeyTodoHeaderView(_ journeyTodoHeaderView: JourneyTodoHeaderView, didTapEdit todo: String)
-    func journeyTodoHeaderView(_ journeyTodoHeaderView: JourneyTodoHeaderView, didTapAdd todo: String)
+    func journeyTodoHeaderView(_ journeyTodoHeaderView: JourneyTodoHeaderView, didTapEdit todo: WeekJourneyModel)
+    func journeyTodoHeaderView(_ journeyTodoHeaderView: JourneyTodoHeaderView, didTapAdd todo: WeekJourneyModel)
 }
 
 class JourneyTodoHeaderView: TodoHeaderView {
@@ -27,8 +27,11 @@ class JourneyTodoHeaderView: TodoHeaderView {
     }
     
     func configure(_ journeyModel: WeekJourneyModel) {
+        self.journeyModel = journeyModel
+        
         self.titleLabel.text = journeyModel.title != "default" ? journeyModel.title : "여정이 없는 할 일"
         
+        self.firstStarCategoryView.isHidden          = journeyModel.value1 == nil
         self.firstCategoryLabel.text                 = journeyModel.value1
         self.firstCategoryColorView.backgroundColor  = journeyModel.firstValueJourney?.color
         
@@ -38,24 +41,23 @@ class JourneyTodoHeaderView: TodoHeaderView {
     }
     
     private func bindButtons() {
-        self.editButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                guard let self = self else { return }
-                self._delegate?.journeyTodoHeaderView(self, didTapEdit: "")
-            })
-            .disposed(by: self.disposeBag)
+        self.editButton.rx.tap.subscribe(onNext: { [weak self] in
+            guard let self = self                      else { return }
+            guard let journeyModel = self.journeyModel else { return }
+            self._delegate?.journeyTodoHeaderView(self, didTapEdit: journeyModel)
+        }).disposed(by: self.disposeBag)
         
-        self.addButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                guard let self = self else { return }
-                self._delegate?.journeyTodoHeaderView(self, didTapAdd: "")
-            })
-            .disposed(by: self.disposeBag)
+        self.addButton.rx.tap.subscribe(onNext: { [weak self] in
+            guard let self = self                      else { return }
+            guard let journeyModel = self.journeyModel else { return }
+            self._delegate?.journeyTodoHeaderView(self, didTapAdd: journeyModel)
+        }).disposed(by: self.disposeBag)
     }
     
     private static var screenRatio: CGFloat { return DeviceInfo.screenWidth / 375 }
     
     private let disposeBag = DisposeBag()
+    private var journeyModel: WeekJourneyModel?
 
     private weak var _delegate: JourneyTodoHeaderViewDelegate?
     

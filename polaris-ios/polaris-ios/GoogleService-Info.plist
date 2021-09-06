@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>245040646735-pgm9o0t7m2g4766kfk0v9sl4kms0a2m2.apps.googleusercontent.com</string>
+	<string>245040646735-r0rouav9uj97nv2h5k6ir2ocidrrkuka.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.245040646735-pgm9o0t7m2g4766kfk0v9sl4kms0a2m2</string>
+	<string>com.googleusercontent.apps.245040646735-r0rouav9uj97nv2h5k6ir2ocidrrkuka</string>
 	<key>API_KEY</key>
 	<string>AIzaSyC_-mT_k6HLTJC1FpNHcDWwU1eu8lsC4rM</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.polaris.dev.main</string>
+	<string>com.polaris.alpha.main</string>
 	<key>PROJECT_ID</key>
 	<string>polaris-82e26</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:245040646735:ios:0e857c9cf5a593e9e4783a</string>
+	<string>1:245040646735:ios:c7eaabcc5d80b83ee4783a</string>
 </dict>
 </plist>

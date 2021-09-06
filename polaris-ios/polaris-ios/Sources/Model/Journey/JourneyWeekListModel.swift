@@ -22,15 +22,7 @@ struct WeekJourneyModel: Codable {
     let year, month, weekNo: Int?
     let userIdx: Int?
     let value1, value2: String?
-    let toDos: [WeekTodo]?
-}
-
-struct WeekTodo: Codable, TodoModelProtocol {
-    let idx: Int?
-    let title, date: String?
-    let isTop: Bool?
-    let isDone: String?
-    let createdAt: String?
+    let toDos: [TodoModel]?
 }
 
 extension WeekJourneyModel {

@@ -26,9 +26,9 @@ final class HorizonPanableGesture: UIPanGestureRecognizer, UIGestureRecognizerDe
 }
 
 protocol DayTodoTableViewCellDelegate: TodoCategoryCellDelegate {
-    func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, didTapCheck todo: TodoDayPerModel)
-    func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, didTapEdit todo: TodoDayPerModel)
-    func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, didTapDelete todo: TodoDayPerModel)
+    func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, didTapCheck todo: TodoModel)
+    func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, didTapEdit todo: TodoModel)
+    func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, didTapDelete todo: TodoModel)
 }
 
 final class DayTodoTableViewCell: TodoCategoryCell {
@@ -49,16 +49,15 @@ final class DayTodoTableViewCell: TodoCategoryCell {
         self.bindButtons()
     }
     
-    override func configure(_ todoModel: TodoModelProtocol) {
-        guard let todoPerModel = todoModel as? TodoDayPerModel else { return }
-        self.todoModel = todoPerModel
+    override func configure(_ todoModel: TodoModel) {
+        super.configure(todoModel)
         
-        self.titleLabel.text        = todoPerModel.title
-        self.subTitleLabel.text     = todoPerModel.journey?.title
-        self.subTitleLabel.isHidden = todoPerModel.journey?.title == "default"
-        self.fixImageView.isHidden  = todoPerModel.isTop == false
+        self.titleLabel.text        = todoModel.title
+        self.subTitleLabel.text     = todoModel.journey?.title
+        self.subTitleLabel.isHidden = todoModel.journey?.title == "default"
+        self.fixImageView.isHidden  = todoModel.isTop == false
         
-        self.updateUI(as: todoPerModel.isDone)
+        self.updateUI(as: todoModel.isDone)
     }
 
     func updateUI(as checkStatus: String?) {
@@ -98,7 +97,7 @@ final class DayTodoTableViewCell: TodoCategoryCell {
             guard let indexPath = self.indexPath else { return }
             
             self.layoutForExpaned(isExpaned: false, animated: true)
-            self.delegate?.todoCategoryCell(self, category: .day, isExpanded: false, forRowAt: indexPath)
+            self.delegate?.todoCategoryCell(self, category: .day, isExpanded: false, forTodo: todoModel)
             self._delegate?.dayTodoTableViewCell(self, didTapEdit: todoModel)
         }).disposed(by: self.disposeBag)
         
@@ -108,7 +107,7 @@ final class DayTodoTableViewCell: TodoCategoryCell {
             guard let indexPath = self.indexPath else { return }
             
             self.layoutForExpaned(isExpaned: false, animated: true)
-            self.delegate?.todoCategoryCell(self, category: .day, isExpanded: false, forRowAt: indexPath)
+            self.delegate?.todoCategoryCell(self, category: .day, isExpanded: false, forTodo: todoModel)
             self._delegate?.dayTodoTableViewCell(self, didTapDelete: todoModel)
         }).disposed(by: self.disposeBag)
     }
@@ -116,7 +115,6 @@ final class DayTodoTableViewCell: TodoCategoryCell {
     private static let screenRatio: CGFloat = DeviceInfo.screenWidth / 375
     
     private let disposeBag = DisposeBag()
-    private var todoModel: TodoDayPerModel?
     
     @IBOutlet private weak var fixImageView: UIImageView!
     @IBOutlet private weak var titleLabel: UILabel!

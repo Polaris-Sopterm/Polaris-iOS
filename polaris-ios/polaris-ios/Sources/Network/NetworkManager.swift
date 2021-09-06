@@ -87,19 +87,15 @@ extension NetworkManager {
     
     // Access Token, Refresh Token 모두 만료된 경우
     private static func handleExpiredRefreshTokenError() {
-        PolarisUserManager.shared.resetUserInfo()
-        guard let loginViewController = LoginVC.instantiateFromStoryboard(StoryboardName.intro) else { return }
-        UIApplication.shared.windows
-            .filter({ $0.isKeyWindow }).first?.rootViewController = loginViewController
+        PolarisUserManager.shared.processClearUserInformation()
     }
     
     private static func handleLoginError() {
         guard let visibleController = UIViewController.getVisibleController() else { return }
         guard visibleController is LoginVC                                    else { return }
         
-        guard let popupView: PolarisPopupView = UIView.fromNib() else { return }
-        #warning("확인형 팝업으로 바꿔야함")
-        popupView.configure(title: "로그인에 실패했어요.", subTitle: "실패했습니다.")
+        guard let popupView: ConfirmPopupView = UIView.fromNib() else { return }
+        popupView.configure(title: "로그인에 실패했어요.")
         popupView.show(in: visibleController.view)
     }
     

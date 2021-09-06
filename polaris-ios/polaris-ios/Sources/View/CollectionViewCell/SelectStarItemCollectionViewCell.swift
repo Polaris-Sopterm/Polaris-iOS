@@ -8,14 +8,10 @@
 import UIKit
 
 class SelectStarItemCollectionViewCell: UICollectionViewCell {
-    
-    @IBOutlet weak var starImageView: UIImageView!
-    @IBOutlet weak var starLabel: UILabel!
         
     // MARK: - Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         self.backgroundColor = .field
         self.makeRounded(cornerRadius: 20)
     }
@@ -49,5 +45,8 @@ class SelectStarItemCollectionViewCell: UICollectionViewCell {
     
     private static let selectedTextColor: UIColor           = .textSky
     private static let unselectedTextColor: UIColor         = .inactiveText
+    
+    @IBOutlet private weak var starImageView: UIImageView!
+    @IBOutlet private weak var starLabel: UILabel!
     
 }

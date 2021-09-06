@@ -13,14 +13,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let _ = (scene as? UIWindowScene) else { return }
-        self.setInitRootViewController()
+        
+        self.decideRootViewController()
+        if #available(iOS 13.0, *) { self.window?.overrideUserInterfaceStyle = .light }
     }
     
 }
 
 extension SceneDelegate {
     
-    func setInitRootViewController() {
+    func decideRootViewController() {
         if PolarisUserManager.shared.hasToken == true {
             guard let mainVC = MainVC.instantiateFromStoryboard(StoryboardName.main) else { return }
             let navigationController = UINavigationController(rootViewController: mainVC)

@@ -9,10 +9,9 @@ import Foundation
 import Moya
 
 enum TodoAPI {
-    case createToDo(title: String, date: String, journeyTitle: String = "default", journeyIdx: Int? = nil, isTop: Bool)
+    case createToDo(title: String, date: String, journeyIdx: Int? = nil, isTop: Bool)
     case editTodo(idx: Int, title: String? = nil, date: String? = nil, journeyIdx: Int? = nil, isTop: Bool? = nil, isDone: Bool? = nil)
     case deleteTodo(idx: Int)
-    case createJourney(title: String, date: String, journeyIdx: Int, isTop: Bool)
     case listTodoByDate(year: Int? = nil, month: Int? = nil, weekNo: Int? = nil)
     case listTodoByJourney(year: Int? = nil, month: Int? = nil, weekNo: Int? = nil)
 }
@@ -27,8 +26,7 @@ extension TodoAPI: TargetType {
         switch self {
         case .deleteTodo(let idx):              return "/toDo/v0/\(idx)"
         case .editTodo(let idx, _, _, _, _, _): return "/toDo/v0/\(idx)"
-        case .createToDo:                       fallthrough
-        case .createJourney:                    return "/toDo/v0"
+        case .createToDo:                       return "/toDo/v0"
         case .listTodoByDate:                   return "/toDo/v0/date"
         case .listTodoByJourney:                return "/toDo/v0/journey"
         }
@@ -50,8 +48,8 @@ extension TodoAPI: TargetType {
     
     var task: Task {
         switch self {
-        case .createToDo(let title, let date, let journeyTitle, let journeyIdx, let isTop):
-            var params: [String: Any] = ["title": title, "date": date, "journeyTitle": journeyTitle, "isTop": isTop]
+        case .createToDo(let title, let date, let journeyIdx, let isTop):
+            var params: [String: Any] = ["title": title, "date": date, "isTop": isTop]
             if let journeyIdx = journeyIdx { params["journeyIdx"] = journeyIdx }
             return .requestParameters(parameters: params, encoding: JSONEncoding.default)
         case .editTodo(_, let title, let date, let journeyIdx, let isTop, let isDone):
@@ -62,8 +60,6 @@ extension TodoAPI: TargetType {
             if let isTop = isTop           { parameters["isTop"] = isTop }
             if let isDone = isDone         { parameters["isDone"] = isDone }
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
-        case .createJourney(let title, let date, let journeyIdx, let isTop):
-            return .requestParameters(parameters: ["title": title, "date": date, "journeyIdx": journeyIdx, "isTop": isTop], encoding: JSONEncoding.default)
         case .listTodoByDate(let year, let month, let weekNo):
             var params = [String: Any]()
             if let year = year      { params["year"] = year }

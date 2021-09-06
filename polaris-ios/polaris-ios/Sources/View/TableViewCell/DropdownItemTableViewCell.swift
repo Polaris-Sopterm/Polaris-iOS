@@ -12,7 +12,7 @@ class DropdownItemTableViewCell: UITableViewCell {
     func configure(by journeyModel: JourneyTitleModel) {
         self.journeyModel = journeyModel
         
-        self.menuLabel.text = journeyModel.displayTitle
+        self.menuLabel.text = journeyModel.title == "default" ? "선택 안함" : journeyModel.title
     }
     
     private var journeyModel: JourneyTitleModel?

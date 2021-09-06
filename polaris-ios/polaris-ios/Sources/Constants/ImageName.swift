@@ -85,4 +85,14 @@ struct ImageName {
     static let mockImageFourth = "imgMockup4"
     static let mockImageLast = "imgMockup5"
     
+    static let plannerBackMoon = "lookBackIllust_Planner"
+    static let designerBackMoon = "lookBackIllust_Designer"
+    static let iosBackMoon = "lookBackIllust_iOS"
+    static let serverBackMoon = "lookBackIllust_Server"
+    
+    static let plannerMember = "imgMember_Planner"
+    static let designerMember = "imgMember_Designer"
+    static let iosMember = "imgMember_iOS"
+    static let serverMember = "imgMember_Server"
+    
 }

@@ -26,3 +26,23 @@ extension UILabel {
     }
     
 }
+
+extension NSMutableAttributedString {
+    
+    func setLineHeight(_ lineHeight: CGFloat, _ font: UIFont, _ textAlignment: NSTextAlignment) {
+        let paragraphStyle = NSMutableParagraphStyle()
+        
+        paragraphStyle.maximumLineHeight = lineHeight
+        paragraphStyle.minimumLineHeight = lineHeight
+        paragraphStyle.alignment         = textAlignment
+        
+        let attributes: [NSAttributedString.Key: Any] = [
+            .paragraphStyle: paragraphStyle,
+            .baselineOffset: (lineHeight - font.lineHeight) / 4
+        ]
+        
+        let range = NSRange(location: 0, length: self.mutableString.length)
+        self.addAttributes(attributes, range: range)
+    }
+    
+}

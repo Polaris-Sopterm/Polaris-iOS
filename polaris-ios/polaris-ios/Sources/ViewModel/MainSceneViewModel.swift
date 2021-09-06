@@ -20,7 +20,7 @@ class MainSceneViewModel {
     var heightRatio = CGFloat(DeviceInfo.screenHeight/812.0)
     var heightList: [CGFloat] = [CGFloat(52.0),CGFloat(93.0),CGFloat(52.0),CGFloat(87.0),CGFloat(28.0),CGFloat(71),CGFloat(34),CGFloat(86),CGFloat(58)]
     
-    private var disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
     struct Input{
         let forceToShowStar: BehaviorRelay<Bool>
@@ -35,20 +35,19 @@ class MainSceneViewModel {
         let mainTextRelay: BehaviorRelay<[String]>
         let homeModelRelay: BehaviorRelay<[HomeModel]>
     }
+    
     func connect(input: Input) -> Output{
-        
-        
         let starList: BehaviorRelay<[MainStarCVCViewModel]> = BehaviorRelay(value: [])
         let state: BehaviorRelay<[StarCollectionViewState]> = BehaviorRelay(value: [])
         let lookBackState: BehaviorRelay<[MainLookBackCellState]> = BehaviorRelay(value: [])
         let mainTextRelay: BehaviorRelay<[String]> = BehaviorRelay(value: [])
         let homeModelRelay: BehaviorRelay<[HomeModel]> = BehaviorRelay(value: [])
         var mainStarModels: [MainStarModel] = []
-        var mainStarModelRelay: BehaviorRelay<[MainStarModel]> = BehaviorRelay(value: [])
+        let mainStarModelRelay: BehaviorRelay<[MainStarModel]> = BehaviorRelay(value: [])
         
         input.forceToShowStar.subscribe(onNext: { force in
             let homeAPI = HomeAPI.getHomeBanner(isSkipped: force)
-            let bannerNetworking = NetworkManager.request(apiType: homeAPI)
+            NetworkManager.request(apiType: homeAPI)
                 .subscribe(onSuccess: { [weak self] (homeModel: HomeModel) in
                     homeModelRelay.accept([homeModel])
                     for star in homeModel.starList {
@@ -84,7 +83,7 @@ class MainSceneViewModel {
             NetworkManager.request(apiType: journeyAPI)
                 .subscribe(onSuccess: { [weak self] (journeyModel: JourneyWeekListModel) in
                     weekJourneyModels = journeyModel.journeys!
-                    todoStarList.accept(self?.convertTodoCVCViewModel(weekJourneyModels: weekJourneyModels,dateInfo: date) ?? [])
+                    todoStarList.accept(self?.convertTodoCVCViewModel(weekJourneyModels: weekJourneyModels, dateInfo: date) ?? [])
                 })
                 .disposed(by: self.disposeBag)
         })
@@ -170,11 +169,35 @@ class MainSceneViewModel {
         return resultList
     }
     
-    func changeToImgName(starName: String,level: Int)-> String {
-        return "".makeStarImageName(starName: starName, level: level)
+    func updateStarList(isSkipped: Bool) {
+        self.forceToShowStarRelay.accept(isSkipped)
     }
     
+    func updateDateInfo(_ dateInfo: DateInfo) {
+        self.dateInfoRelay.accept(dateInfo)
+    }
     
+    func updateDoneStatus(_ todoModel: TodoModel) {
+        guard let todoIdx = todoModel.idx else { return }
+        
+        let edittedIsDone = todoModel.isDone == nil ? true : false
+        let todoEditAPI   = TodoAPI.editTodo(idx: todoIdx, isDone: edittedIsDone)
+        
+        NetworkManager.request(apiType: todoEditAPI).subscribe(onSuccess: { [weak self] (responseModel: TodoModel) in
+            guard let self = self else { return }
+            self.updateDateInfo(self.dateInfoRelay.value)
+            
+            NotificationCenter.default.post(name: .didUpdateTodo, object: MainSceneCellType.main.sceneIdentifier)
+        }).disposed(by: self.disposeBag)
+    }
     
+    func changeToImgName(starName: String, level: Int)-> String {
+        return String.makeStarImageName(starName: starName, level: level)
+    }
+    
+    private(set) var forceToShowStarRelay = BehaviorRelay(value: false)
+    private(set) var dateInfoRelay        = BehaviorRelay<DateInfo>(value: DateInfo(year: Date.currentYear,
+                                                                                    month: Date.currentMonth,
+                                                                                    weekNo: Date.currentWeekNoOfMonth))
     
 }

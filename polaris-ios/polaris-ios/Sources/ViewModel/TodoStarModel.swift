@@ -9,12 +9,10 @@ import Foundation
 
 struct TodoStarModel {
     var star: String
-    var todos: [TodoModel]
+    var todos: [TodoDisplayModel]
     
-    init(star: String, todos: [TodoModel]) {
+    init(star: String, todos: [TodoDisplayModel]) {
         self.star = star
         self.todos = todos
     }
-    
-    
 }
