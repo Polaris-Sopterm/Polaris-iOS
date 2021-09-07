@@ -363,6 +363,8 @@ extension TodoTableViewCell: AddTodoViewControllerDelegate {
     func addTodoViewController(_ viewController: AddTodoVC, didCompleteAddOption option: AddTodoVC.AddOptions) {
         self.viewModel.requestTodoDayList(shouldScroll: false)
         self.viewModel.requestTodoJourneyList()
+        
+        NotificationCenter.default.post(name: .didUpdateTodo, object: MainSceneCellType.todoList.sceneIdentifier)
     }
     
 }

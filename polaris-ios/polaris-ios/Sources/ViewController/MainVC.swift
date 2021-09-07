@@ -39,6 +39,13 @@ class MainVC: UIViewController {
         self.tableView.scrollToRow(at: indexPath, at: .top, animated: animated)
     }
     
+    func pushRetrospectViewController() {
+        let viewController = RetrospectReportVC.instantiateFromStoryboard(StoryboardName.main)
+        
+        guard let retropectVC = viewController else { return }
+        self.navigationController?.pushViewController(retropectVC, animated: true)
+    }
+    
     private func registerCell() {
         MainSceneCellType.allCases.forEach { self.tableView.registerCell(cell: $0.cellType) }
     }
