@@ -29,6 +29,10 @@ final class MainSceneTableViewCell: MainTableViewCell {
     @IBOutlet private weak var addButton: UIButton!
     @IBOutlet private weak var pageControl: UIPageControl!
     @IBOutlet private weak var todoCV: UICollectionView!
+    @IBOutlet weak var starLoadingIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var todoLoadingIndicator: UIActivityIndicatorView!
+    
+    @IBOutlet weak var topButtonTopConstraint: NSLayoutConstraint!
     
     private var currentIndex: CGFloat = 0
     private var viewState = StarCollectionViewState.showStar
@@ -52,6 +56,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
         self.setTodoCollectionView()
         self.bindViewModel()
         self.setupDimView()
+        
     }
     
     func updateDimView(alpha: CGFloat) {
@@ -95,7 +100,9 @@ final class MainSceneTableViewCell: MainTableViewCell {
             self.pageControl.allowsContinuousInteraction = false
         }
         self.pageControl.isUserInteractionEnabled = false
+        self.topButtonTopConstraint.constant = 48*(DeviceInfo.screenHeight/812.0)
     }
+    
     
     private func setStarCollectionView() {
         self.starCV.delegate = self
@@ -123,6 +130,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
     }
     
     private func bindViewModel(){
+        
         let input = MainSceneViewModel.Input(forceToShowStar: self.viewModel.forceToShowStarRelay,
                                              dateInfo: self.viewModel.dateInfoRelay)
         let output = viewModel.connect(input: input)
@@ -132,12 +140,11 @@ final class MainSceneTableViewCell: MainTableViewCell {
         })
         .disposed(by: disposeBag)
         
-        
         output.starList.subscribe(onNext: { [weak self] item in
             self?.starList = item
         })
         .disposed(by: disposeBag)
-    
+        
         output.state.subscribe(onNext: { [weak self] value in
             if value.count > 0 {
                 self?.viewState = value[0]
@@ -160,7 +167,18 @@ final class MainSceneTableViewCell: MainTableViewCell {
         })
         .disposed(by: self.disposeBag)
         
+        output.starLoadingRelay.subscribe(onNext: { [weak self] loading in
+            loading ? self?.starLoadingIndicator.startAnimating() : self?.starLoadingIndicator.stopAnimating()
+        })
+        .disposed(by: self.disposeBag)
+        
+        output.todoLoadingRelay.subscribe(onNext: { [weak self] loading in
+            loading ? self?.todoLoadingIndicator.startAnimating() : self?.todoLoadingIndicator.stopAnimating()
+        })
+        .disposed(by: self.disposeBag)
+        
         output.starList.bind(to: self.starCV.rx.items) { [weak self] collectionView, index, item in
+            //            self?.stopStarLoadingIndicator()
             if output.starList.value.last?.starModel.starName != "lookback" {
                 let indexPath  = IndexPath(item: index, section: 0)
                 let cell = collectionView.dequeueReusableCell(cell: MainStarCVC.self, forIndexPath: indexPath)
@@ -196,6 +214,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
             self.pageControl.numberOfPages = output.todoStarList.value.count
             return mainTodoCell
         }.disposed(by: self.disposeBag)
+        
     }
     
     private func setCometLayout(comet: UIImageView,size: Int) {
@@ -394,13 +413,10 @@ extension MainSceneTableViewCell: LookBackCloseDelegate {
 extension MainSceneTableViewCell: WeekPickerDelegate {
     
     func apply(year: Int, month: Int, weekNo: Int, weekText: String) {
-        self.weekLabel.text = weekText
-        self.viewModel.updateStarList(isSkipped: true)
-        
         let dateInfo = DateInfo(year: year, month: month, weekNo: weekNo)
         self.viewModel.updateDateInfo(dateInfo)
     }
-
+    
 }
 
 extension MainSceneTableViewCell: AddTodoViewControllerDelegate {
