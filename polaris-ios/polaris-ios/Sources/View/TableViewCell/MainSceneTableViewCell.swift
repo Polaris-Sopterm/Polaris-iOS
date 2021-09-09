@@ -365,7 +365,6 @@ extension MainSceneTableViewCell: UIScrollViewDelegate {
     }
 }
 
-
 extension MainSceneTableViewCell: LookBackCloseDelegate {
     
     func close() {

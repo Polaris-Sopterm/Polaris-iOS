@@ -308,6 +308,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="navigationHeightConstraint" destination="EaG-XQ-KT4" id="8od-X2-jKN"/>
+                <outlet property="seeReportButton" destination="nhp-Rp-FoC" id="RHF-FD-eVl"/>
                 <outlet property="titleLabel" destination="oTZ-hh-uJ7" id="JaI-tB-7eD"/>
             </connections>
             <point key="canvasLocation" x="138.40000000000001" y="152.95566502463055"/>
