@@ -34,6 +34,8 @@ class MainSceneViewModel {
         let lookBackState: BehaviorRelay<[MainLookBackCellState]>
         let mainTextRelay: BehaviorRelay<[String]>
         let homeModelRelay: BehaviorRelay<[HomeModel]>
+        let starLoadingRelay: BehaviorRelay<Bool>
+        let todoLoadingRelay: BehaviorRelay<Bool>
     }
     
     func connect(input: Input) -> Output{
@@ -44,12 +46,16 @@ class MainSceneViewModel {
         let homeModelRelay: BehaviorRelay<[HomeModel]> = BehaviorRelay(value: [])
         var mainStarModels: [MainStarModel] = []
         let mainStarModelRelay: BehaviorRelay<[MainStarModel]> = BehaviorRelay(value: [])
+        let starLoadingRelay: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+        let todoLoadingRelay: BehaviorRelay<Bool> = BehaviorRelay(value: false)
         
         input.forceToShowStar.subscribe(onNext: { force in
+            starLoadingRelay.accept(true)
             let homeAPI = HomeAPI.getHomeBanner(isSkipped: force)
             NetworkManager.request(apiType: homeAPI)
                 .subscribe(onSuccess: { [weak self] (homeModel: HomeModel) in
                     homeModelRelay.accept([homeModel])
+                    starLoadingRelay.accept(false)
                     for star in homeModel.starList {
                         mainStarModels.append(MainStarModel(starName: star.name, starLevel: star.level))
                     }
@@ -70,6 +76,7 @@ class MainSceneViewModel {
                     mainTextRelay.accept([homeModel.mainText,homeModel.boldText])
                     mainStarModelRelay.accept(mainStarModels)
                     mainStarModels = []
+                    
                 })
                 .disposed(by: self.disposeBag)
         })
@@ -78,11 +85,13 @@ class MainSceneViewModel {
         
         let todoStarList: BehaviorRelay<[MainTodoCVCViewModel]> = BehaviorRelay(value: [])
         input.dateInfo.subscribe(onNext: { date in
+            todoLoadingRelay.accept(true)
             let journeyAPI = JourneyAPI.getWeekJourney(year: date.year, month: date.month, weekNo: date.weekNo)
             var weekJourneyModels: [WeekJourneyModel] = []
             NetworkManager.request(apiType: journeyAPI)
                 .subscribe(onSuccess: { [weak self] (journeyModel: JourneyWeekListModel) in
                     weekJourneyModels = journeyModel.journeys!
+                    todoLoadingRelay.accept(false)
                     todoStarList.accept(self?.convertTodoCVCViewModel(weekJourneyModels: weekJourneyModels, dateInfo: date) ?? [])
                 })
                 .disposed(by: self.disposeBag)
@@ -92,7 +101,7 @@ class MainSceneViewModel {
         lookBackState.accept([.build])
         starList.accept(self.convertStarCVCViewModel(mainStarModels: mainStarModels))
        
-        return Output(starList: starList,todoStarList: todoStarList,state: state,lookBackState: lookBackState,mainTextRelay: mainTextRelay,homeModelRelay: homeModelRelay)
+        return Output(starList: starList,todoStarList: todoStarList,state: state,lookBackState: lookBackState,mainTextRelay: mainTextRelay,homeModelRelay: homeModelRelay, starLoadingRelay: starLoadingRelay, todoLoadingRelay: todoLoadingRelay)
     }
     
     func convertStarCVCViewModel(mainStarModels: [MainStarModel]) -> [MainStarCVCViewModel]{
