@@ -5,6 +5,8 @@
 //  Created by Dongmin on 2021/09/04.
 //
 
+import RxCocoa
+import RxSwift
 import UIKit
 
 class RetrospectTableViewCell: MainTableViewCell {
@@ -16,6 +18,7 @@ class RetrospectTableViewCell: MainTableViewCell {
         self.navigationHeightConstraint.constant = type(of: self).navigationHeight
         self.setupLabels()
         self.setupCometAnimation()
+        self.bindButtons()
     }
     
     private func setupLabels() {
@@ -55,11 +58,23 @@ class RetrospectTableViewCell: MainTableViewCell {
         })
     }
     
+    private func bindButtons() {
+        self.seeReportButton.rx.tap.observeOnMain(onNext: {
+            guard let visibleController = UIViewController.getVisibleController() else { return }
+            guard let mainVC = visibleController as? MainVC                       else { return }
+            
+            mainVC.pushRetrospectViewController()
+        }).disposed(by: self.disposeBag)
+    }
+    
     private static var navigationHeight: CGFloat {
         return 51 + DeviceInfo.topSafeAreaInset
     }
+    
+    private let disposeBag = DisposeBag()
 
     @IBOutlet private weak var navigationHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var seeReportButton: UIButton!
     
 }
