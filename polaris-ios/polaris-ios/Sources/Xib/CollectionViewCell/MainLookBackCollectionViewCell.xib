@@ -33,7 +33,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pLa-Z6-saO">
-                                <rect key="frame" x="20" y="160" width="367" height="47"/>
+                                <rect key="frame" x="20" y="75" width="367" height="47"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="47" id="7Od-9P-RoV"/>
                                 </constraints>
@@ -60,13 +60,13 @@
                         <constraints>
                             <constraint firstItem="1hx-4P-uoC" firstAttribute="top" secondItem="Oiq-GO-jIo" secondAttribute="top" constant="13" id="5lr-ri-ilA"/>
                             <constraint firstItem="o1h-e8-c4O" firstAttribute="leading" secondItem="Oiq-GO-jIo" secondAttribute="leading" constant="28" id="FhX-lZ-K4O"/>
-                            <constraint firstAttribute="bottom" secondItem="pLa-Z6-saO" secondAttribute="bottom" constant="22" id="Gfd-wl-Ues"/>
                             <constraint firstItem="pLa-Z6-saO" firstAttribute="leading" secondItem="Oiq-GO-jIo" secondAttribute="leading" constant="20" id="SJO-pS-AHO"/>
                             <constraint firstItem="xvQ-rl-Bet" firstAttribute="top" secondItem="o1h-e8-c4O" secondAttribute="bottom" constant="12" id="cM6-rT-Eva"/>
                             <constraint firstAttribute="trailing" secondItem="pLa-Z6-saO" secondAttribute="trailing" constant="20" id="ein-ah-l5E"/>
                             <constraint firstItem="o1h-e8-c4O" firstAttribute="top" secondItem="Oiq-GO-jIo" secondAttribute="top" constant="39" id="g5F-xD-KkJ"/>
                             <constraint firstAttribute="trailing" secondItem="1hx-4P-uoC" secondAttribute="trailing" constant="15" id="jBs-t8-5SK"/>
                             <constraint firstItem="xvQ-rl-Bet" firstAttribute="leading" secondItem="o1h-e8-c4O" secondAttribute="leading" id="rV8-2D-96t"/>
+                            <constraint firstItem="pLa-Z6-saO" firstAttribute="top" secondItem="xvQ-rl-Bet" secondAttribute="bottom" constant="24" id="uZC-dX-hoL"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -85,7 +85,12 @@
                 <outlet property="lookBackButton" destination="pLa-Z6-saO" id="1vr-xc-75J"/>
                 <outlet property="subTitleLabel" destination="xvQ-rl-Bet" id="Jee-aT-KLx"/>
                 <outlet property="titleLabel" destination="o1h-e8-c4O" id="oWA-93-Zul"/>
-                <outlet property="titleLabelTopConstraint" destination="g5F-xD-KkJ" id="Hwg-UV-sbz"/>
+                <outlet property="titleLabelTopConstraint" destination="g5F-xD-KkJ" id="DNX-FD-DdK"/>
+                <outletCollection property="yDiffConstraints" destination="g5F-xD-KkJ" collectionClass="NSMutableArray" id="zbE-Jy-lM4"/>
+                <outletCollection property="yDiffConstraints" destination="cM6-rT-Eva" collectionClass="NSMutableArray" id="npS-y7-5f7"/>
+                <outletCollection property="yDiffConstraints" destination="uZC-dX-hoL" collectionClass="NSMutableArray" id="vIT-kS-HYb"/>
+                <outletCollection property="yDiffConstraints" destination="5lr-ri-ilA" collectionClass="NSMutableArray" id="GGk-ow-9Lu"/>
+                <outletCollection property="heightConstraints" destination="7Od-9P-RoV" collectionClass="NSMutableArray" id="smp-y9-ZTY"/>
             </connections>
             <point key="canvasLocation" x="429.71014492753625" y="172.09821428571428"/>
         </collectionViewCell>

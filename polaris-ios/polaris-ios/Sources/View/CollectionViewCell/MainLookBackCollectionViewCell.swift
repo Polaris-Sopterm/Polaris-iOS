@@ -25,8 +25,16 @@ class MainLookBackCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var titleLabelTopConstraint: NSLayoutConstraint!
     
+    
+    @IBOutlet var yDiffConstraints: [NSLayoutConstraint]!
+    @IBOutlet var heightConstraints: [NSLayoutConstraint]!
+    
+    
     private var state: MainLookBackCellState = .lookback
     internal var delegate: LookBackCloseDelegate?
+    private let deviceRatio = DeviceInfo.screenHeight/812.0
+    private let deviceRatioSquare = DeviceInfo.screenHeight/812.0*DeviceInfo.screenHeight/812.0*DeviceInfo.screenHeight/812.0*DeviceInfo.screenHeight/812.0
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,7 +43,7 @@ class MainLookBackCollectionViewCell: UICollectionViewCell {
     
     func setUIs() {
         self.containView.backgroundColor = .white40
-        self.containView.makeRounded(cornerRadius: 12)
+        self.containView.makeRounded(cornerRadius: 12*deviceRatio)
         self.titleLabel.textColor = .maintext
         self.titleLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         self.subTitleLabel.textColor = .white
@@ -43,6 +51,12 @@ class MainLookBackCollectionViewCell: UICollectionViewCell {
         self.lookBackButton.backgroundColor = .mainSky
         self.lookBackButton.makeRounded(cornerRadius: 18)
         self.lookBackButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        for constraint in self.yDiffConstraints {
+            constraint.constant *= self.deviceRatioSquare
+        }
+        for constraint in self.heightConstraints {
+            constraint.constant *= self.deviceRatio
+        }
     }
     
     func setState(state: MainLookBackCellState, bannerTitle: String?, bannerText: String?, buttonText: String?) {
@@ -52,10 +66,10 @@ class MainLookBackCollectionViewCell: UICollectionViewCell {
         switch state {
         case .build :
             self.closeButton.isHidden = true
-            self.titleLabelTopConstraint.constant = 34
+            self.titleLabelTopConstraint.constant = 34*self.deviceRatio
         default :
             self.closeButton.isHidden = false
-            self.titleLabelTopConstraint.constant = 39
+            self.titleLabelTopConstraint.constant = 39*self.deviceRatio
         }
     }
     

@@ -22,6 +22,13 @@ class MainTodoCVC: UICollectionViewCell {
     @IBOutlet var journeyColorViews: [UIView]!
     @IBOutlet var journeyValueLabels: [UILabel]!
     
+    @IBOutlet var heightConstraints: [NSLayoutConstraint]!
+    @IBOutlet var ydiffConstraints: [NSLayoutConstraint]!
+    
+    private let deviceRatio = DeviceInfo.screenHeight/812.0
+    private let deviceRatioSquare = DeviceInfo.screenHeight/812.0*DeviceInfo.screenHeight/812.0
+    
+    
     weak var delegate: MainTodoCollectionViewCellDelegate?
     
     var viewModel: MainTodoCVCViewModel? {
@@ -76,6 +83,14 @@ class MainTodoCVC: UICollectionViewCell {
             label.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
             label.textColor = .maintext
         }
+        
+        for constraint in self.ydiffConstraints {
+            constraint.constant *= deviceRatioSquare
+        }
+        for constraint in self.heightConstraints {
+            constraint.constant *= deviceRatio
+        }
+        
     }
     
     private func updateJourneyUI(_ journey: [Journey]) {

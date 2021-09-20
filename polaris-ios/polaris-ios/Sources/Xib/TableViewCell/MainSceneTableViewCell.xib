@@ -150,11 +150,11 @@
                                     <action selector="settingButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="z4M-OB-QqL"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="f3m-vK-74O">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="f3m-vK-74O">
                                 <rect key="frame" x="177" y="267" width="20" height="20"/>
                                 <color key="color" red="0.91380763050000002" green="0.91315567490000005" blue="0.96078437569999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </activityIndicatorView>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="ulR-tq-5Hk">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="ulR-tq-5Hk">
                                 <rect key="frame" x="187" y="632" width="20" height="20"/>
                                 <color key="color" red="0.90989881750000001" green="0.90913724900000004" blue="0.96470707649999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </activityIndicatorView>
@@ -213,7 +213,7 @@
                 <outlet property="nowLabel" destination="gmU-qj-7Vu" id="0QQ-MU-Qs6"/>
                 <outlet property="pageControl" destination="jY3-pg-gEc" id="jX6-ga-CDF"/>
                 <outlet property="starCV" destination="cSs-CY-hwA" id="C8I-vi-Iv2"/>
-                <outlet property="starCVCHeightConstraint" destination="y9l-cZ-YM7" id="kp8-XQ-dVc"/>
+                <outlet property="starCVCHeightConstraint" destination="y9l-cZ-YM7" id="6eB-fv-0PF"/>
                 <outlet property="starLoadingIndicator" destination="f3m-vK-74O" id="kec-eF-1ze"/>
                 <outlet property="titleLabel" destination="h4F-pq-O1l" id="DM1-l5-rBv"/>
                 <outlet property="todoCV" destination="0n5-IU-kY6" id="gdo-6K-PjL"/>
@@ -221,6 +221,10 @@
                 <outlet property="topButtonTopConstraint" destination="7Aa-x6-dTa" id="bEM-Dy-hQw"/>
                 <outlet property="weekContainView" destination="81g-Yb-oX0" id="oIO-Fq-wdC"/>
                 <outlet property="weekLabel" destination="bdx-wR-V45" id="bMA-gu-0d1"/>
+                <outletCollection property="yDiffConstraints" destination="0ps-qs-yNH" collectionClass="NSMutableArray" id="XrJ-TI-8rC"/>
+                <outletCollection property="yDiffConstraints" destination="LDA-Zj-WKz" collectionClass="NSMutableArray" id="ycc-Ui-AC7"/>
+                <outletCollection property="heightConstarints" destination="xPz-d7-1Z5" collectionClass="NSMutableArray" id="rm9-ts-biX"/>
+                <outletCollection property="yDiffConstraints" destination="EaA-Cg-wIe" collectionClass="NSMutableArray" id="u2E-kP-Glp"/>
             </connections>
             <point key="canvasLocation" x="139.85507246376812" y="101.11607142857143"/>
         </tableViewCell>

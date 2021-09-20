@@ -121,6 +121,8 @@
                 <outletCollection property="journeyValueLabels" destination="Aka-Q8-p8G" collectionClass="NSMutableArray" id="kAU-Tx-D73"/>
                 <outletCollection property="journeyInfoViews" destination="utt-mg-5NA" collectionClass="NSMutableArray" id="2y6-u0-NEt"/>
                 <outletCollection property="journeyInfoViews" destination="hFB-K4-wkT" collectionClass="NSMutableArray" id="3G3-9v-prF"/>
+                <outletCollection property="heightConstraints" destination="zXs-OQ-NZj" collectionClass="NSMutableArray" id="0iS-od-JHz"/>
+                <outletCollection property="ydiffConstraints" destination="VQ0-53-abn" collectionClass="NSMutableArray" id="6Vd-L8-dVC"/>
             </connections>
             <point key="canvasLocation" x="208.69565217391306" y="40.848214285714285"/>
         </collectionViewCell>

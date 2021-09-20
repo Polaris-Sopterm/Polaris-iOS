@@ -34,6 +34,12 @@ final class MainSceneTableViewCell: MainTableViewCell {
     
     @IBOutlet weak var topButtonTopConstraint: NSLayoutConstraint!
     
+
+    @IBOutlet var heightConstarints: [NSLayoutConstraint]!
+    
+
+    @IBOutlet var yDiffConstraints: [NSLayoutConstraint]!
+    
     private var currentIndex: CGFloat = 0
     private var viewState = StarCollectionViewState.showStar
     private var lookBackState = MainLookBackCellState.lookback
@@ -43,6 +49,8 @@ final class MainSceneTableViewCell: MainTableViewCell {
     private var homeModel: HomeModel?
     private var starList: [MainStarCVCViewModel] = []
     private let disposeBag = DisposeBag()
+    private let deviceRatio = DeviceInfo.screenHeight/812.0
+    private let deviceRatioSquare = DeviceInfo.screenHeight/812.0*DeviceInfo.screenHeight/812.0
     private let starTVCHeight = 212*(DeviceInfo.screenHeight/812.0)
     
     override static var cellHeight: CGFloat { return DeviceInfo.screenHeight }
@@ -101,9 +109,17 @@ final class MainSceneTableViewCell: MainTableViewCell {
         }
         self.pageControl.isUserInteractionEnabled = false
         self.topButtonTopConstraint.constant = 48*(DeviceInfo.screenHeight/812.0)
+        for ydiffConstraint in self.yDiffConstraints {
+            ydiffConstraint.constant *= self.deviceRatioSquare
+        }
+        
+        self.starCVCHeightConstraint.constant *= self.deviceRatio
+        for constraint in self.heightConstarints {
+            constraint.constant *= self.deviceRatio
+        }
+        
     }
-    
-    
+
     private func setStarCollectionView() {
         self.starCV.delegate = self
         self.starCV.registerCell(cell: MainStarCVC.self)
@@ -122,11 +138,11 @@ final class MainSceneTableViewCell: MainTableViewCell {
     }
     
     private func setTitle(stars: Int,lookBackState: MainLookBackCellState) {
-        self.titleLabel.setPartialBold(originalText: "어제는\n\(stars)개의 별을 발견했어요.", boldText: "\(stars)개의 별", fontSize: 23, boldFontSize: 23)
+        self.titleLabel.setPartialBold(originalText: "어제는\n\(stars)개의 별을 발견했어요.", boldText: "\(stars)개의 별", fontSize: 23*deviceRatio, boldFontSize: 23*deviceRatio)
     }
     
     private func setTitleLabel(text: String, boldText: String) {
-        self.titleLabel.setPartialBold(originalText: text, boldText: boldText, fontSize: 23, boldFontSize: 23)
+        self.titleLabel.setPartialBold(originalText: text, boldText: boldText, fontSize: 23*deviceRatio, boldFontSize: 23*deviceRatio)
     }
     
     private func bindViewModel(){
@@ -162,7 +178,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
         output.mainTextRelay.subscribe(onNext: { [weak self] texts in
             guard let self = self else { return }
             if texts.count > 1 {
-                self.titleLabel.setPartialBold(originalText: texts[0], boldText: texts[1], fontSize: 23, boldFontSize: 23)
+                self.titleLabel.setPartialBold(originalText: texts[0], boldText: texts[1], fontSize: 23*self.deviceRatio, boldFontSize: 23*self.deviceRatio)
             }
         })
         .disposed(by: self.disposeBag)
@@ -413,6 +429,7 @@ extension MainSceneTableViewCell: WeekPickerDelegate {
     
     func apply(year: Int, month: Int, weekNo: Int, weekText: String) {
         let dateInfo = DateInfo(year: year, month: month, weekNo: weekNo)
+        self.weekLabel.text = weekText
         self.viewModel.updateDateInfo(dateInfo)
     }
     

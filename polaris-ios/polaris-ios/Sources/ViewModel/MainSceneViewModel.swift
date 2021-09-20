@@ -21,7 +21,7 @@ class MainSceneViewModel {
     var heightList: [CGFloat] = [CGFloat(52.0),CGFloat(93.0),CGFloat(52.0),CGFloat(87.0),CGFloat(28.0),CGFloat(71),CGFloat(34),CGFloat(86),CGFloat(58)]
     
     private let disposeBag = DisposeBag()
-    
+    private let deviceRatio = DeviceInfo.screenHeight/812.0
     struct Input{
         let forceToShowStar: BehaviorRelay<Bool>
         let dateInfo: BehaviorRelay<DateInfo>
