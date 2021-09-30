@@ -33,11 +33,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
     @IBOutlet weak var todoLoadingIndicator: UIActivityIndicatorView!
     
     @IBOutlet weak var topButtonTopConstraint: NSLayoutConstraint!
-    
-
     @IBOutlet var heightConstarints: [NSLayoutConstraint]!
-    
-
     @IBOutlet var yDiffConstraints: [NSLayoutConstraint]!
     
     private var currentIndex: CGFloat = 0
