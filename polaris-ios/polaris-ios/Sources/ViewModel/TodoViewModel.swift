@@ -180,7 +180,7 @@ class TodoViewModel {
         self.requestingDone = true
         NetworkManager.request(apiType: todoEditAPI).subscribe(onSuccess: { [weak self] (responseModel: TodoModel) in
             guard let self = self else { return }
-            self.requestingDone = true
+            self.requestingDone = false
             
             self.requestTodoDayList(shouldScroll: false)
             self.requestTodoJourneyList()
