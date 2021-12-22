@@ -17,16 +17,20 @@ class WeekPickerVC: HalfModalVC {
     @IBOutlet weak var weekPicker: UIPickerView!
     
     private var year = Date.currentYear{
-        didSet{
-            self.weekPicker.reloadComponent(2)
+        didSet {
+            self.weekPicker.reloadComponent(0)
         }
     }
     private var month = Date.currentMonth{
-        didSet{
+        didSet {
+            self.weekPicker.reloadComponent(1)
+        }
+    }
+    private var weekNo = Date.currentWeekNoOfMonth {
+        didSet {
             self.weekPicker.reloadComponent(2)
         }
     }
-    private var weekNo = Date.currentWeekNoOfMonth
     
     private var yearList: [Int] = [Date.currentYear-2,Date.currentYear-1,Date.currentYear,Date.currentYear+1,Date.currentYear+2]
     private var monthList = [1,2,3,4,5,6,7,8,9,10,11,12]
