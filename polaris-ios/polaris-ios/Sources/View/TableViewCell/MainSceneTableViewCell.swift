@@ -52,6 +52,8 @@ final class MainSceneTableViewCell: MainTableViewCell {
     override static var cellHeight: CGFloat { return DeviceInfo.screenHeight }
     private let weekDict = [1:"첫째주",2:"둘째주",3:"셋째주",4:"넷째주",5:"다섯째주"]
     
+    private var dateInfo = DateInfo(year: Date.currentYear, month: Date.currentMonth, weekNo: Date.currentWeekNoOfMonth)
+
     override func awakeFromNib() {
         super.awakeFromNib()
         self.addObservers()
@@ -271,6 +273,11 @@ final class MainSceneTableViewCell: MainTableViewCell {
         guard let weekPickerVC = WeekPickerVC.instantiateFromStoryboard(StoryboardName.weekPicker),
               let visibleController = UIViewController.getVisibleController() else { return }
         weekPickerVC.weekDelegate = self
+        weekPickerVC.setWeekInfo(
+            year: self.viewModel.dateInfoRelay.value.year,
+            month: self.viewModel.dateInfoRelay.value.month,
+            weekNo: self.viewModel.dateInfoRelay.value.weekNo
+        )
         weekPickerVC.presentWithAnimation(from: visibleController)
         
     }
