@@ -156,6 +156,9 @@
 		CE29536C2687A0A500E21871 /* PolarisMarginTextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEE5779262BE54900C39358 /* PolarisMarginTextField.xib */; };
 		CE29536D2687A0A500E21871 /* TodoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA44E6D267B3BE300A05650 /* TodoTableViewCell.xib */; };
 		CE29536E2687A0A500E21871 /* MainTodoHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECDC5A5B2636A13600A1B5A9 /* MainTodoHeaderView.xib */; };
+		CE2DE7DD2773593D00AE4C66 /* Emotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2DE7DC2773593D00AE4C66 /* Emotion.swift */; };
+		CE2DE7DE2773593D00AE4C66 /* Emotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2DE7DC2773593D00AE4C66 /* Emotion.swift */; };
+		CE2DE7DF2773593D00AE4C66 /* Emotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2DE7DC2773593D00AE4C66 /* Emotion.swift */; };
 		CE3168B026E5DD870032A947 /* RetrospectReportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3168AF26E5DD870032A947 /* RetrospectReportVC.swift */; };
 		CE3168B126E5DD870032A947 /* RetrospectReportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3168AF26E5DD870032A947 /* RetrospectReportVC.swift */; };
 		CE3168B226E5DD870032A947 /* RetrospectReportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3168AF26E5DD870032A947 /* RetrospectReportVC.swift */; };
@@ -582,6 +585,7 @@
 		CE2952E42687940100E21871 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		CE2953752687A0A500E21871 /* Polaris Alpha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Polaris Alpha.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE2953882687A30F00E21871 /* polaris-alpha-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "polaris-alpha-Info.plist"; sourceTree = "<group>"; };
+		CE2DE7DC2773593D00AE4C66 /* Emotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emotion.swift; sourceTree = "<group>"; };
 		CE3168AF26E5DD870032A947 /* RetrospectReportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrospectReportVC.swift; sourceTree = "<group>"; };
 		CE37CC6C265A7674004F327E /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
 		CE38762D26CD695E003BDCCA /* Journey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Journey.swift; sourceTree = "<group>"; };
@@ -998,6 +1002,7 @@
 				CEA3CFD626A85C4B00577DA4 /* ShootingComet.swift */,
 				CEA3CFEC26A8766700577DA4 /* ServiceTermKind.swift */,
 				CE38762D26CD695E003BDCCA /* Journey.swift */,
+				CE2DE7DC2773593D00AE4C66 /* Emotion.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -1744,6 +1749,7 @@
 				CEF055EE2667EB38000E34A0 /* CheckEmailModel.swift in Sources */,
 				CEA3CFDC26A85E7600577DA4 /* PolarisWebView.swift in Sources */,
 				CE132144265A5CD1001E3C1F /* SignupVC.swift in Sources */,
+				CE2DE7DD2773593D00AE4C66 /* Emotion.swift in Sources */,
 				CE6CE93B26E3AC7A00BDDB6C /* RetrospectTableViewCell.swift in Sources */,
 				ECDC5A47263552A700A1B5A9 /* MainTodoTVC.swift in Sources */,
 				CE38762E26CD695E003BDCCA /* Journey.swift in Sources */,
@@ -1874,6 +1880,7 @@
 				CE2953332687A0A500E21871 /* CheckEmailModel.swift in Sources */,
 				CEA3CFDD26A860F700577DA4 /* PolarisWebView.swift in Sources */,
 				CE2953342687A0A500E21871 /* SignupVC.swift in Sources */,
+				CE2DE7DE2773593D00AE4C66 /* Emotion.swift in Sources */,
 				CE6CE93C26E3AC7A00BDDB6C /* RetrospectTableViewCell.swift in Sources */,
 				CE2953352687A0A500E21871 /* MainTodoTVC.swift in Sources */,
 				CE38762F26CD695E003BDCCA /* Journey.swift in Sources */,
@@ -2004,6 +2011,7 @@
 				CEF055EF2667EB38000E34A0 /* CheckEmailModel.swift in Sources */,
 				CEA3CFDE26A860F700577DA4 /* PolarisWebView.swift in Sources */,
 				CE43D05726613D66003126F2 /* SignupVC.swift in Sources */,
+				CE2DE7DF2773593D00AE4C66 /* Emotion.swift in Sources */,
 				CE6CE93D26E3AC7A00BDDB6C /* RetrospectTableViewCell.swift in Sources */,
 				CE43D05826613D66003126F2 /* MainTodoTVC.swift in Sources */,
 				CE38763026CD695E003BDCCA /* Journey.swift in Sources */,

@@ -30,10 +30,9 @@ class WeekPickerVC: HalfModalVC {
     
     private var yearList: [Int] = [Date.currentYear-2,Date.currentYear-1,Date.currentYear,Date.currentYear+1,Date.currentYear+2]
     private var monthList = [1,2,3,4,5,6,7,8,9,10,11,12]
-    private var numberOfWeeks = 5
     
     private let weekDict = [1:"첫째주",2:"둘째주",3:"셋째주",4:"넷째주",5:"다섯째주"]
-    internal weak var weekDelegate: WeekPickerDelegate?
+    weak var weekDelegate: WeekPickerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,21 +83,22 @@ extension WeekPickerVC: UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch component {
         case 0:
-            return 5
+            return self.yearList.count
         case 1:
-            return 12
+            return self.monthList.count
         default:
-            self.numberOfWeeks = Date.numberOfMondaysInMonth(self.month, forYear: self.year) ?? 4
-            return self.numberOfWeeks
+            return Date.numberOfMondaysInMonth(self.month, forYear: self.year) ?? 4
         }
     }
     
 }
 
 extension WeekPickerVC: UIPickerViewDelegate {
+    
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
         33
     }
+    
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         pickerView.subviews[1].backgroundColor = .mainSky15
         switch component {
@@ -110,8 +110,8 @@ extension WeekPickerVC: UIPickerViewDelegate {
             return weekDict[row+1]
         }
     }
+    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
         switch component {
         case 0:
             self.year = yearList[row]
