@@ -117,7 +117,11 @@ extension Date {
     }
     
     static var currentWeekNoOfMonth: Int {
-        return Calendar.current.component(.weekOfMonth, from: self.normalizedCurrent)
+        var weekNo = Calendar.current.component(.weekOfMonth, from: self.normalizedCurrent) - 1
+        if Calendar.current.dateComponents([.calendar, .year,.month], from: normalizedCurrent).weekdayOrdinal == 2 {
+            weekNo += 1
+        }
+        return weekNo
     }
     
     static var currentMonth: Int {
