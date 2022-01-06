@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -39,102 +40,8 @@
             </objects>
             <point key="canvasLocation" x="739.13043478260875" y="93.75"/>
         </scene>
-        <!--Retrospect ReportVC-->
-        <scene sceneID="iW7-ch-9LE">
-            <objects>
-                <viewController storyboardIdentifier="RetrospectReportVC" id="bcK-KF-4o9" customClass="RetrospectReportVC" customModule="Polaris" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="BG1-B6-qzR">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="1500"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="never" translatesAutoresizingMaskIntoConstraints="NO" id="6Z7-6Z-siw">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="1500"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eEo-w1-dl6">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1613"/>
-                                        <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboarding_bg" translatesAutoresizingMaskIntoConstraints="NO" id="89D-LL-eYV">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="1613"/>
-                                            </imageView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IMz-9V-hOf">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GXn-0V-Gte">
-                                                        <rect key="frame" x="9" y="6" width="48" height="48"/>
-                                                        <state key="normal" image="btnBackLookBack"/>
-                                                    </button>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="폴라리스를 만든 사람들" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ptt-eI-7zQ">
-                                                        <rect key="frame" x="125.00000000000001" y="19.666666666666668" width="164.33333333333337" height="21.000000000000004"/>
-                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="60" id="FCT-d9-NDi"/>
-                                                    <constraint firstItem="GXn-0V-Gte" firstAttribute="centerY" secondItem="IMz-9V-hOf" secondAttribute="centerY" id="GQz-Tp-ok8"/>
-                                                    <constraint firstItem="Ptt-eI-7zQ" firstAttribute="centerY" secondItem="IMz-9V-hOf" secondAttribute="centerY" id="e67-0A-qnq"/>
-                                                    <constraint firstItem="Ptt-eI-7zQ" firstAttribute="centerX" secondItem="IMz-9V-hOf" secondAttribute="centerX" id="fmd-7l-SJn"/>
-                                                    <constraint firstItem="GXn-0V-Gte" firstAttribute="leading" secondItem="IMz-9V-hOf" secondAttribute="leading" constant="9" id="sTp-pY-xjA"/>
-                                                </constraints>
-                                            </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cp0-dx-Mjw">
-                                                <rect key="frame" x="0.0" y="260" width="414" height="0.0"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstItem="89D-LL-eYV" firstAttribute="top" secondItem="eEo-w1-dl6" secondAttribute="top" id="0WM-cI-wrD"/>
-                                            <constraint firstItem="89D-LL-eYV" firstAttribute="leading" secondItem="eEo-w1-dl6" secondAttribute="leading" id="8zI-UR-raJ"/>
-                                            <constraint firstItem="IMz-9V-hOf" firstAttribute="top" secondItem="eEo-w1-dl6" secondAttribute="top" id="AJM-3H-nlm"/>
-                                            <constraint firstAttribute="bottom" secondItem="89D-LL-eYV" secondAttribute="bottom" id="C7q-tG-eHX"/>
-                                            <constraint firstItem="cp0-dx-Mjw" firstAttribute="leading" secondItem="eEo-w1-dl6" secondAttribute="leading" id="RSP-Ng-1sU"/>
-                                            <constraint firstAttribute="trailing" secondItem="cp0-dx-Mjw" secondAttribute="trailing" id="U7w-a1-DJC"/>
-                                            <constraint firstItem="cp0-dx-Mjw" firstAttribute="top" secondItem="IMz-9V-hOf" secondAttribute="bottom" constant="200" id="WMa-8j-dIR"/>
-                                            <constraint firstAttribute="bottom" secondItem="cp0-dx-Mjw" secondAttribute="bottom" constant="1353" id="Y2V-ZA-qzp"/>
-                                            <constraint firstItem="IMz-9V-hOf" firstAttribute="leading" secondItem="eEo-w1-dl6" secondAttribute="leading" id="bOq-iU-QW1"/>
-                                            <constraint firstAttribute="trailing" secondItem="IMz-9V-hOf" secondAttribute="trailing" id="jKR-q5-5DE"/>
-                                            <constraint firstAttribute="trailing" secondItem="89D-LL-eYV" secondAttribute="trailing" id="nei-2D-0qG"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="eEo-w1-dl6" firstAttribute="height" secondItem="6Z7-6Z-siw" secondAttribute="height" priority="750" id="2XG-3Q-Z7J"/>
-                                    <constraint firstItem="eEo-w1-dl6" firstAttribute="top" secondItem="6Z7-6Z-siw" secondAttribute="top" id="SFY-PS-6Vo"/>
-                                    <constraint firstItem="eEo-w1-dl6" firstAttribute="leading" secondItem="6Z7-6Z-siw" secondAttribute="leading" id="h7Y-5j-8PA"/>
-                                    <constraint firstItem="eEo-w1-dl6" firstAttribute="width" secondItem="6Z7-6Z-siw" secondAttribute="width" id="kr4-LQ-Y9T"/>
-                                    <constraint firstAttribute="bottom" secondItem="eEo-w1-dl6" secondAttribute="bottom" id="qBZ-yb-29d"/>
-                                    <constraint firstAttribute="trailing" secondItem="eEo-w1-dl6" secondAttribute="trailing" id="u1Q-mg-DD2"/>
-                                </constraints>
-                            </scrollView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="bgM-vd-81T"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="6Z7-6Z-siw" firstAttribute="top" secondItem="BG1-B6-qzR" secondAttribute="top" id="Fdp-jp-45z"/>
-                            <constraint firstItem="6Z7-6Z-siw" firstAttribute="leading" secondItem="bgM-vd-81T" secondAttribute="leading" id="ah0-i2-fWw"/>
-                            <constraint firstAttribute="bottom" secondItem="6Z7-6Z-siw" secondAttribute="bottom" id="fgh-Oc-YJq"/>
-                            <constraint firstItem="6Z7-6Z-siw" firstAttribute="trailing" secondItem="bgM-vd-81T" secondAttribute="trailing" id="pXU-lR-y9J"/>
-                        </constraints>
-                    </view>
-                    <size key="freeformSize" width="414" height="1500"/>
-                    <connections>
-                        <outlet property="backButton" destination="GXn-0V-Gte" id="hab-m2-hXD"/>
-                        <outlet property="topConstraint" destination="AJM-3H-nlm" id="1iM-cV-7IM"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="DPw-zP-50K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1585.5999999999999" y="93.103448275862078"/>
-        </scene>
     </scenes>
     <resources>
-        <image name="btnBackLookBack" width="48" height="48"/>
-        <image name="onboarding_bg" width="375" height="812"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
