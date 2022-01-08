@@ -42,6 +42,18 @@
 		CE24BFD32789986700E8EB25 /* RetrospectEmotionItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE24BFCF2789986700E8EB25 /* RetrospectEmotionItemCell.xib */; };
 		CE24BFD42789986700E8EB25 /* RetrospectEmotionItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE24BFCF2789986700E8EB25 /* RetrospectEmotionItemCell.xib */; };
 		CE24BFD52789986700E8EB25 /* RetrospectEmotionItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE24BFCF2789986700E8EB25 /* RetrospectEmotionItemCell.xib */; };
+		CE24BFD82789A79C00E8EB25 /* RetrospectEmotionReasonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE24BFD62789A79C00E8EB25 /* RetrospectEmotionReasonTableViewCell.swift */; };
+		CE24BFD92789A79C00E8EB25 /* RetrospectEmotionReasonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE24BFD62789A79C00E8EB25 /* RetrospectEmotionReasonTableViewCell.swift */; };
+		CE24BFDA2789A79C00E8EB25 /* RetrospectEmotionReasonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE24BFD62789A79C00E8EB25 /* RetrospectEmotionReasonTableViewCell.swift */; };
+		CE24BFDB2789A79C00E8EB25 /* RetrospectEmotionReasonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE24BFD72789A79C00E8EB25 /* RetrospectEmotionReasonTableViewCell.xib */; };
+		CE24BFDC2789A79C00E8EB25 /* RetrospectEmotionReasonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE24BFD72789A79C00E8EB25 /* RetrospectEmotionReasonTableViewCell.xib */; };
+		CE24BFDD2789A79C00E8EB25 /* RetrospectEmotionReasonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE24BFD72789A79C00E8EB25 /* RetrospectEmotionReasonTableViewCell.xib */; };
+		CE24BFE02789AEBC00E8EB25 /* RetrospectEmotionReasonItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE24BFDE2789AEBC00E8EB25 /* RetrospectEmotionReasonItemCell.swift */; };
+		CE24BFE12789AEBC00E8EB25 /* RetrospectEmotionReasonItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE24BFDE2789AEBC00E8EB25 /* RetrospectEmotionReasonItemCell.swift */; };
+		CE24BFE22789AEBC00E8EB25 /* RetrospectEmotionReasonItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE24BFDE2789AEBC00E8EB25 /* RetrospectEmotionReasonItemCell.swift */; };
+		CE24BFE32789AEBC00E8EB25 /* RetrospectEmotionReasonItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE24BFDF2789AEBC00E8EB25 /* RetrospectEmotionReasonItemCell.xib */; };
+		CE24BFE42789AEBC00E8EB25 /* RetrospectEmotionReasonItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE24BFDF2789AEBC00E8EB25 /* RetrospectEmotionReasonItemCell.xib */; };
+		CE24BFE52789AEBC00E8EB25 /* RetrospectEmotionReasonItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE24BFDF2789AEBC00E8EB25 /* RetrospectEmotionReasonItemCell.xib */; };
 		CE2952E22687893000E21871 /* TodoAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2952E12687893000E21871 /* TodoAPI.swift */; };
 		CE2952E32687893000E21871 /* TodoAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2952E12687893000E21871 /* TodoAPI.swift */; };
 		CE2952E52687940100E21871 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2952E42687940100E21871 /* UIButton+.swift */; };
@@ -636,6 +648,10 @@
 		CE24BFC72789968800E8EB25 /* RetrospectEmotionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RetrospectEmotionTableViewCell.xib; sourceTree = "<group>"; };
 		CE24BFCE2789986700E8EB25 /* RetrospectEmotionItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrospectEmotionItemCell.swift; sourceTree = "<group>"; };
 		CE24BFCF2789986700E8EB25 /* RetrospectEmotionItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RetrospectEmotionItemCell.xib; sourceTree = "<group>"; };
+		CE24BFD62789A79C00E8EB25 /* RetrospectEmotionReasonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrospectEmotionReasonTableViewCell.swift; sourceTree = "<group>"; };
+		CE24BFD72789A79C00E8EB25 /* RetrospectEmotionReasonTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RetrospectEmotionReasonTableViewCell.xib; sourceTree = "<group>"; };
+		CE24BFDE2789AEBC00E8EB25 /* RetrospectEmotionReasonItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrospectEmotionReasonItemCell.swift; sourceTree = "<group>"; };
+		CE24BFDF2789AEBC00E8EB25 /* RetrospectEmotionReasonItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RetrospectEmotionReasonItemCell.xib; sourceTree = "<group>"; };
 		CE2952E12687893000E21871 /* TodoAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoAPI.swift; sourceTree = "<group>"; };
 		CE2952E42687940100E21871 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		CE2953752687A0A500E21871 /* Polaris Alpha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Polaris Alpha.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1237,6 +1253,7 @@
 				CEA5D9AC2786EE3600A6D6DE /* RetrospectCloseStarTableViewCell.xib */,
 				CEA5D9BC2787091300A6D6DE /* RetrospectFarStarTableViewCell.xib */,
 				CE24BFC72789968800E8EB25 /* RetrospectEmotionTableViewCell.xib */,
+				CE24BFD72789A79C00E8EB25 /* RetrospectEmotionReasonTableViewCell.xib */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -1257,6 +1274,7 @@
 				CEA5D9A42785D1D500A6D6DE /* RetrospectFoundStarItemCell.xib */,
 				CEA5D9B42786F92700A6D6DE /* RetrospectJourneyItemCell.xib */,
 				CE24BFCF2789986700E8EB25 /* RetrospectEmotionItemCell.xib */,
+				CE24BFDF2789AEBC00E8EB25 /* RetrospectEmotionReasonItemCell.xib */,
 			);
 			path = CollectionViewCell;
 			sourceTree = "<group>";
@@ -1347,6 +1365,7 @@
 				CEA5D9AB2786EE3600A6D6DE /* RetrospectCloseStarTableViewCell.swift */,
 				CEA5D9BB2787091300A6D6DE /* RetrospectFarStarTableViewCell.swift */,
 				CE24BFC62789968800E8EB25 /* RetrospectEmotionTableViewCell.swift */,
+				CE24BFD62789A79C00E8EB25 /* RetrospectEmotionReasonTableViewCell.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -1365,6 +1384,7 @@
 				CEA5D9A32785D1D500A6D6DE /* RetrospectFoundStarItemCell.swift */,
 				CEA5D9B32786F92700A6D6DE /* RetrospectCloseStarItemCell.swift */,
 				CE24BFCE2789986700E8EB25 /* RetrospectEmotionItemCell.swift */,
+				CE24BFDE2789AEBC00E8EB25 /* RetrospectEmotionReasonItemCell.swift */,
 			);
 			path = CollectionViewCell;
 			sourceTree = "<group>";
@@ -1480,6 +1500,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEA5D9C02787091400A6D6DE /* RetrospectFarStarTableViewCell.xib in Resources */,
+				CE24BFDB2789A79C00E8EB25 /* RetrospectEmotionReasonTableViewCell.xib in Resources */,
 				CE6CE90A26E25E3300BDDB6C /* ConfirmPopupView.xib in Resources */,
 				CE6CE93E26E3AC7A00BDDB6C /* RetrospectTableViewCell.xib in Resources */,
 				CEA5D98A2785A3FC00A6D6DE /* Retrospect.storyboard in Resources */,
@@ -1515,6 +1536,7 @@
 				ECA49456262B0D0900CC2EB8 /* TodoDateTodayHeaderView.xib in Resources */,
 				CE04A03D262340D1007C98E2 /* Main.storyboard in Resources */,
 				ECDC5A582636A0AB00A1B5A9 /* MainTodoContentTVC.xib in Resources */,
+				CE24BFE32789AEBC00E8EB25 /* RetrospectEmotionReasonItemCell.xib in Resources */,
 				ECDC5A48263552A700A1B5A9 /* MainTodoTVC.xib in Resources */,
 				CEA5D9A82785D1D500A6D6DE /* RetrospectFoundStarItemCell.xib in Resources */,
 				CEC19AE42650F86100DA747C /* DayTodoHeaderView.xib in Resources */,
@@ -1539,6 +1561,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEA5D9C12787091400A6D6DE /* RetrospectFarStarTableViewCell.xib in Resources */,
+				CE24BFDC2789A79C00E8EB25 /* RetrospectEmotionReasonTableViewCell.xib in Resources */,
 				CE6CE90B26E25E3300BDDB6C /* ConfirmPopupView.xib in Resources */,
 				CE6CE93F26E3AC7A00BDDB6C /* RetrospectTableViewCell.xib in Resources */,
 				CEA5D98B2785A3FC00A6D6DE /* Retrospect.storyboard in Resources */,
@@ -1574,6 +1597,7 @@
 				CE2953612687A0A500E21871 /* TodoDateTodayHeaderView.xib in Resources */,
 				CE2953622687A0A500E21871 /* Main.storyboard in Resources */,
 				CE2953632687A0A500E21871 /* MainTodoContentTVC.xib in Resources */,
+				CE24BFE42789AEBC00E8EB25 /* RetrospectEmotionReasonItemCell.xib in Resources */,
 				CE2953642687A0A500E21871 /* MainTodoTVC.xib in Resources */,
 				CEA5D9A92785D1D500A6D6DE /* RetrospectFoundStarItemCell.xib in Resources */,
 				CE2953652687A0A500E21871 /* DayTodoHeaderView.xib in Resources */,
@@ -1598,6 +1622,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEA5D9C22787091400A6D6DE /* RetrospectFarStarTableViewCell.xib in Resources */,
+				CE24BFDD2789A79C00E8EB25 /* RetrospectEmotionReasonTableViewCell.xib in Resources */,
 				CE6CE90C26E25E3300BDDB6C /* ConfirmPopupView.xib in Resources */,
 				CE6CE94026E3AC7A00BDDB6C /* RetrospectTableViewCell.xib in Resources */,
 				CEA5D98C2785A3FC00A6D6DE /* Retrospect.storyboard in Resources */,
@@ -1633,6 +1658,7 @@
 				CE43D07F26613D66003126F2 /* TodoDateTodayHeaderView.xib in Resources */,
 				CE43D08026613D66003126F2 /* Main.storyboard in Resources */,
 				CE43D08126613D66003126F2 /* MainTodoContentTVC.xib in Resources */,
+				CE24BFE52789AEBC00E8EB25 /* RetrospectEmotionReasonItemCell.xib in Resources */,
 				CE43D08226613D66003126F2 /* MainTodoTVC.xib in Resources */,
 				CEA5D9AA2785D1D500A6D6DE /* RetrospectFoundStarItemCell.xib in Resources */,
 				CE43D08326613D66003126F2 /* DayTodoHeaderView.xib in Resources */,
@@ -1855,6 +1881,7 @@
 				CEE574D82630422600EA64B7 /* AddTodoDayTableViewCell.swift in Sources */,
 				ECA49455262B0D0900CC2EB8 /* TodoDateTodayHeaderView.swift in Sources */,
 				CEE574F026307D7C00EA64B7 /* PerDayItemCollectionViewCell.swift in Sources */,
+				CE24BFD82789A79C00E8EB25 /* RetrospectEmotionReasonTableViewCell.swift in Sources */,
 				CEE574E926307B4400EA64B7 /* AddTodoDayViewModel.swift in Sources */,
 				CE24BFC82789968800E8EB25 /* RetrospectEmotionTableViewCell.swift in Sources */,
 				CE04A06626234CEE007C98E2 /* UITableView+.swift in Sources */,
@@ -1885,6 +1912,7 @@
 				CE6CE93B26E3AC7A00BDDB6C /* RetrospectTableViewCell.swift in Sources */,
 				CEA5D9A52785D1D500A6D6DE /* RetrospectFoundStarItemCell.swift in Sources */,
 				CEA5D9AD2786EE3600A6D6DE /* RetrospectCloseStarTableViewCell.swift in Sources */,
+				CE24BFE02789AEBC00E8EB25 /* RetrospectEmotionReasonItemCell.swift in Sources */,
 				ECDC5A47263552A700A1B5A9 /* MainTodoTVC.swift in Sources */,
 				CE38762E26CD695E003BDCCA /* Journey.swift in Sources */,
 				CEEE5760262AD62C00C39358 /* AddTodoVC.swift in Sources */,
@@ -1995,6 +2023,7 @@
 				CE2953212687A0A500E21871 /* AddTodoDayTableViewCell.swift in Sources */,
 				CE2953222687A0A500E21871 /* TodoDateTodayHeaderView.swift in Sources */,
 				CE2953232687A0A500E21871 /* PerDayItemCollectionViewCell.swift in Sources */,
+				CE24BFD92789A79C00E8EB25 /* RetrospectEmotionReasonTableViewCell.swift in Sources */,
 				CE2953242687A0A500E21871 /* AddTodoDayViewModel.swift in Sources */,
 				CE24BFC92789968800E8EB25 /* RetrospectEmotionTableViewCell.swift in Sources */,
 				CE2953252687A0A500E21871 /* UITableView+.swift in Sources */,
@@ -2025,6 +2054,7 @@
 				CE6CE93C26E3AC7A00BDDB6C /* RetrospectTableViewCell.swift in Sources */,
 				CEA5D9A62785D1D500A6D6DE /* RetrospectFoundStarItemCell.swift in Sources */,
 				CEA5D9AE2786EE3600A6D6DE /* RetrospectCloseStarTableViewCell.swift in Sources */,
+				CE24BFE12789AEBC00E8EB25 /* RetrospectEmotionReasonItemCell.swift in Sources */,
 				CE2953352687A0A500E21871 /* MainTodoTVC.swift in Sources */,
 				CE38762F26CD695E003BDCCA /* Journey.swift in Sources */,
 				CE2953362687A0A500E21871 /* AddTodoVC.swift in Sources */,
@@ -2135,6 +2165,7 @@
 				CE43D04926613D66003126F2 /* AddTodoDayTableViewCell.swift in Sources */,
 				CE43D04A26613D66003126F2 /* TodoDateTodayHeaderView.swift in Sources */,
 				CE43D04B26613D66003126F2 /* PerDayItemCollectionViewCell.swift in Sources */,
+				CE24BFDA2789A79C00E8EB25 /* RetrospectEmotionReasonTableViewCell.swift in Sources */,
 				CE43D04C26613D66003126F2 /* AddTodoDayViewModel.swift in Sources */,
 				CE24BFCA2789968800E8EB25 /* RetrospectEmotionTableViewCell.swift in Sources */,
 				CE43D04D26613D66003126F2 /* UITableView+.swift in Sources */,
@@ -2165,6 +2196,7 @@
 				CE6CE93D26E3AC7A00BDDB6C /* RetrospectTableViewCell.swift in Sources */,
 				CEA5D9A72785D1D500A6D6DE /* RetrospectFoundStarItemCell.swift in Sources */,
 				CEA5D9AF2786EE3600A6D6DE /* RetrospectCloseStarTableViewCell.swift in Sources */,
+				CE24BFE22789AEBC00E8EB25 /* RetrospectEmotionReasonItemCell.swift in Sources */,
 				CE43D05826613D66003126F2 /* MainTodoTVC.swift in Sources */,
 				CE38763026CD695E003BDCCA /* Journey.swift in Sources */,
 				CE43D05926613D66003126F2 /* AddTodoVC.swift in Sources */,
