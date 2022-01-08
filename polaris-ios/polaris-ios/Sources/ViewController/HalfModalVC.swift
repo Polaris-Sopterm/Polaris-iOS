@@ -87,6 +87,12 @@ open class HalfModalVC: UIViewController {
         backgroundView.alpha            = 0.5
         self.backgroundView             = backgroundView
         
+        let tapGesture = UITapGestureRecognizer()
+        tapGesture.rx.event.observeOnMain(onNext: { [weak self] recognizer in
+            self?.dismissWithAnimation()
+        }).disposed(by: self.disposeBag)
+        self.backgroundView?.addGestureRecognizer(tapGesture)
+        
         self.view.addSubview(backgroundView)
         
         if let halfModalView = self.halfModalView { self.view.bringSubviewToFront(halfModalView) }
@@ -129,8 +135,8 @@ open class HalfModalVC: UIViewController {
     
     static let animationDuration: TimeInterval  = 0.4
     
-    private static var screen_height: CGFloat               { return UIScreen.main.bounds.height }
-    private static var screen_width: CGFloat                { return UIScreen.main.bounds.width  }
+    private static var screen_height: CGFloat { return UIScreen.main.bounds.height }
+    private static var screen_width: CGFloat  { return UIScreen.main.bounds.width  }
     
     private var backgroundView: UIView?
     private var disposeBag = DisposeBag()

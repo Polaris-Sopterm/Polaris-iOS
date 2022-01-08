@@ -19,8 +19,8 @@ enum RetrospectReportCategory: Int, CaseIterable {
         case .foundStar:     return RetrospectFoundStarTableViewCell.self
         case .closeStar:     return RetrospectCloseStarTableViewCell.self
         case .farStar:       return RetrospectFarStarTableViewCell.self
-        case .emotion:       return RetrospectFarStarTableViewCell.self
-        case .emotionReason: return RetrospectFarStarTableViewCell.self
+        case .emotion:       return RetrospectEmotionTableViewCell.self
+        case .emotionReason: return RetrospectEmotionTableViewCell.self
         }
     }
     
