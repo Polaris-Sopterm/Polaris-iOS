@@ -44,7 +44,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btnCloseLookBack" translatesAutoresizingMaskIntoConstraints="NO" id="jcE-Xf-tu7">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btnCloseTextbox" translatesAutoresizingMaskIntoConstraints="NO" id="jcE-Xf-tu7">
                                 <rect key="frame" x="452" y="0.0" width="48" height="48"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -83,7 +83,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="btnCloseLookBack" width="48" height="48"/>
+        <image name="btnCloseTextbox" width="48" height="48"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

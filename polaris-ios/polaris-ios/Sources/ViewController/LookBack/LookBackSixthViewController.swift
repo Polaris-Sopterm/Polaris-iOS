@@ -45,12 +45,15 @@ class LookBackSixthViewController: UIViewController, LookBackViewModelProtocol {
     
     private func setUIs() {
         self.titleLabel.textColor = .maintext
-        self.subTitleLabel.textColor = .maintext
         self.titleLabel.setPartialBold(originalText: "지금 당신에게\n가장 필요한 별은 무엇인가요?", boldText: "가장 필요한 별", fontSize: 22, boldFontSize: 22)
+        self.subTitleLabel.textColor = .maintext
+
         self.starCollectionView.registerCell(cell: LookBackSecondCollectionViewCell.self)
+        
         self.nextButton.setTitle("", for: .normal)
         self.nextButton.setImage(UIImage(named: "btnNextDisabled"), for: .normal)
         self.nextButton.isEnabled = false
+        
         self.topYConstraint.constant *= deviceHeightRatio
         self.subLabelConstraint.constant *= deviceHeightRatio
         self.collectionViewYConstraint.constant *= deviceHeightRatio

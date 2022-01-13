@@ -55,11 +55,14 @@ class LookBackFirstViewController: UIViewController, LookBackViewModelProtocol {
     
     private func setupUIs() {
         self.titleLabel.textColor = .maintext
-        self.subtitleLabel.textColor = .maintext
         self.titleLabel.setPartialBold(originalText: "당신이 한 주 동안 찾은 별이에요.", boldText: "한 주 동안 찾은 별", fontSize: 22, boldFontSize: 22)
+        self.subtitleLabel.textColor = .maintext
+
         self.starCollectionView.registerCell(cell: LookBackFirstStarCollectionViewCell.self)
+        
         self.lookbackButton.setTitle("", for: .normal)
         self.lookbackButton.setImage(UIImage(named: "btnLookbackStart"), for: .normal)
+        
         self.topYConstraint.constant *= deviceHeightRatio
         self.subLabelYConstraint.constant *= deviceHeightRatio
         self.collectionViewYConstraint.constant *= deviceHeightRatio

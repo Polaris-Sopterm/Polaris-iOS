@@ -498,6 +498,9 @@
 		EC8C907F277B3845008BE7CD /* LookBackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8C907C277B3845008BE7CD /* LookBackViewModel.swift */; };
 		ECA0EEE826B3ED530040F42C /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA0EEE726B3ED530040F42C /* HomeModel.swift */; };
 		ECA0EEEA26B3ED730040F42C /* HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA0EEE926B3ED730040F42C /* HomeAPI.swift */; };
+		ECA0F78227905750008CD57B /* LookbackTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA0F78127905750008CD57B /* LookbackTextView.swift */; };
+		ECA0F78327905750008CD57B /* LookbackTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA0F78127905750008CD57B /* LookbackTextView.swift */; };
+		ECA0F78427905750008CD57B /* LookbackTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA0F78127905750008CD57B /* LookbackTextView.swift */; };
 		ECA3C461278014DB00970DF7 /* LookBackSecondCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA3C45F278014DB00970DF7 /* LookBackSecondCollectionViewCell.swift */; };
 		ECA3C462278014DB00970DF7 /* LookBackSecondCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA3C45F278014DB00970DF7 /* LookBackSecondCollectionViewCell.swift */; };
 		ECA3C463278014DB00970DF7 /* LookBackSecondCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA3C45F278014DB00970DF7 /* LookBackSecondCollectionViewCell.swift */; };
@@ -777,6 +780,7 @@
 		EC8C907C277B3845008BE7CD /* LookBackViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookBackViewModel.swift; sourceTree = "<group>"; };
 		ECA0EEE726B3ED530040F42C /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		ECA0EEE926B3ED730040F42C /* HomeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAPI.swift; sourceTree = "<group>"; };
+		ECA0F78127905750008CD57B /* LookbackTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookbackTextView.swift; sourceTree = "<group>"; };
 		ECA3C45F278014DB00970DF7 /* LookBackSecondCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookBackSecondCollectionViewCell.swift; sourceTree = "<group>"; };
 		ECA3C460278014DB00970DF7 /* LookBackSecondCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LookBackSecondCollectionViewCell.xib; sourceTree = "<group>"; };
 		ECA3C4672780254300970DF7 /* LookBackThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookBackThirdViewController.swift; sourceTree = "<group>"; };
@@ -1200,6 +1204,7 @@
 				CEC74B11267F9842002AFF18 /* PolarisPopupView.swift */,
 				CE6CE90D26E25E4800BDDB6C /* ConfirmPopupView.swift */,
 				ECA3C46F2780291300970DF7 /* LookBackSlider.swift */,
+				ECA0F78127905750008CD57B /* LookbackTextView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -1901,6 +1906,7 @@
 				CE132144265A5CD1001E3C1F /* SignupVC.swift in Sources */,
 				CE6CE93B26E3AC7A00BDDB6C /* RetrospectTableViewCell.swift in Sources */,
 				ECDC5A47263552A700A1B5A9 /* MainTodoTVC.swift in Sources */,
+				ECA0F78227905750008CD57B /* LookbackTextView.swift in Sources */,
 				CE38762E26CD695E003BDCCA /* Journey.swift in Sources */,
 				CEEE5760262AD62C00C39358 /* AddTodoVC.swift in Sources */,
 				ECD002A626B5229C005F733C /* JourneyWeekListModel.swift in Sources */,
@@ -2048,6 +2054,7 @@
 				CE2953342687A0A500E21871 /* SignupVC.swift in Sources */,
 				CE6CE93C26E3AC7A00BDDB6C /* RetrospectTableViewCell.swift in Sources */,
 				CE2953352687A0A500E21871 /* MainTodoTVC.swift in Sources */,
+				ECA0F78327905750008CD57B /* LookbackTextView.swift in Sources */,
 				CE38762F26CD695E003BDCCA /* Journey.swift in Sources */,
 				CE2953362687A0A500E21871 /* AddTodoVC.swift in Sources */,
 				ECD002A726B5229C005F733C /* JourneyWeekListModel.swift in Sources */,
@@ -2195,6 +2202,7 @@
 				CE43D05726613D66003126F2 /* SignupVC.swift in Sources */,
 				CE6CE93D26E3AC7A00BDDB6C /* RetrospectTableViewCell.swift in Sources */,
 				CE43D05826613D66003126F2 /* MainTodoTVC.swift in Sources */,
+				ECA0F78427905750008CD57B /* LookbackTextView.swift in Sources */,
 				CE38763026CD695E003BDCCA /* Journey.swift in Sources */,
 				CE43D05926613D66003126F2 /* AddTodoVC.swift in Sources */,
 				ECD002A826B5229C005F733C /* JourneyWeekListModel.swift in Sources */,

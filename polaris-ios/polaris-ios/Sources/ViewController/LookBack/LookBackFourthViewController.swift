@@ -51,19 +51,22 @@ class LookBackFourthViewController: UIViewController, LookBackViewModelProtocol 
     
     private func setUIs() {
         self.titleLabel.textColor = .maintext
-        self.subTitleLabel.textColor = .maintext
         self.titleLabel.setPartialBold(originalText: "지난 한 주를 생각하면\n어떤 감정이 느껴지나요?", boldText: "어떤 감정", fontSize: 22, boldFontSize: 22)
+        self.subTitleLabel.textColor = .maintext
+
+        self.emotionCollectionView.registerCell(cell: LookBackFourthCollectionViewCell.self)
+        self.emotionCollectionView.delegate = self
         self.emotionCollectionView.registerCell(cell: LookBackSecondCollectionViewCell.self)
+        
         self.nextButton.setTitle("", for: .normal)
         self.nextButton.setImage(UIImage(named: "btnNextDisabled"), for: .normal)
         self.nextButton.isEnabled = false
+        
         self.topYConstraint.constant *= deviceHeightRatio
         self.subLabelYConstraint.constant *= deviceHeightRatio
         self.collectionViewYConstraint.constant *= deviceHeightRatio
         self.collectionVIewHeightConstraint.constant *= deviceHeightRatio
         self.nextButtonYConstraint.constant *= deviceHeightRatio
-        self.emotionCollectionView.registerCell(cell: LookBackFourthCollectionViewCell.self)
-        self.emotionCollectionView.delegate = self
     }
     
     private func setUpDataSource() {

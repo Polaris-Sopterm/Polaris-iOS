@@ -283,16 +283,11 @@ final class MainSceneTableViewCell: MainTableViewCell {
     }
     
     @IBAction func settingButtonAction(_ sender: Any) {
-//        let viewController = SettingVC.instantiateFromStoryboard(StoryboardName.setting)
-//
-//        guard let visibleController = UIViewController.getVisibleController() else { return }
-//        guard let settingController = viewController                          else { return }
-//        visibleController.navigationController?.pushViewController(settingController, animated: true)
-        let viewController = LookBackMainViewController.instantiateFromStoryboard(StoryboardName.lookback)
-        
+        let viewController = SettingVC.instantiateFromStoryboard(StoryboardName.setting)
+
         guard let visibleController = UIViewController.getVisibleController() else { return }
-        guard let lookbackViewController = viewController                          else { return }
-        visibleController.navigationController?.pushViewController(lookbackViewController, animated: true)
+        guard let settingController = viewController                          else { return }
+        visibleController.navigationController?.pushViewController(settingController, animated: true)
     }
     
     
@@ -416,10 +411,10 @@ extension MainSceneTableViewCell: LookBackCloseDelegate {
     
     func apply(isLookBack: Bool) {
         if isLookBack {
+            let viewController = LookBackMainViewController.instantiateFromStoryboard(StoryboardName.lookback)
             guard let visibleController = UIViewController.getVisibleController() else { return }
-            guard let mainVC = visibleController as? MainVC                       else { return }
-            
-            mainVC.scrollToRetrospectCell()
+            guard let lookbackViewController = viewController                          else { return }
+            visibleController.navigationController?.pushViewController(lookbackViewController, animated: true)
         } else {
             let viewController = AddTodoVC.instantiateFromStoryboard(StoryboardName.addTodo)
             

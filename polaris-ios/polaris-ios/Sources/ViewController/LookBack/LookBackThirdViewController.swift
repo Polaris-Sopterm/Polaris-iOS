@@ -42,10 +42,12 @@ class LookBackThirdViewController: UIViewController, LookBackViewModelProtocol{
     
     private func setUIs() {
         self.titleLabel.textColor = .maintext
-        self.subTitleLabel.textColor = .maintext
         self.titleLabel.setPartialBold(originalText: "한 주 동안 당신만을 위한 시간을\n얼마나 보냈나요?", boldText: "당신만을 위한 시간", fontSize: 22, boldFontSize: 22)
+        self.subTitleLabel.textColor = .maintext
+
         self.nextButton.setTitle("", for: .normal)
         self.nextButton.setImage(UIImage(named: "btnNextEnabled"), for: .normal)
+        
         self.view.addSubview(self.slider)
         self.slider.isUserInteractionEnabled = true
         self.slider.snp.makeConstraints { make in
@@ -54,14 +56,19 @@ class LookBackThirdViewController: UIViewController, LookBackViewModelProtocol{
             make.trailing.equalToSuperview().offset(-53)
             make.height.equalTo(40 * deviceHeightRatio)
         }
-        self.backgroundImageView.image = UIImage(named: "lookBack3Illust00")
+        
+  
         self.slider.value = 0
         self.slider.addTarget(self, action: #selector(sliderValueChanged(sender:)), for: .valueChanged)
         self.slider.viewModel = self.viewModel
+        
+        self.backgroundImageView.image = UIImage(named: "lookBack3Illust00")
+        
+        self.view.addSubview(self.amountLabel)
         self.amountLabel.text = ""
         self.amountLabel.textColor = .white
         self.amountLabel.font = UIFont.systemFont(ofSize: 12)
-        self.view.addSubview(self.amountLabel)
+        
         
         self.titleLabelYPos.constant *= self.deviceHeightRatio
         self.imageViewYPos.constant *= self.deviceHeightRatio

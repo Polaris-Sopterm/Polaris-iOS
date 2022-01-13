@@ -35,6 +35,9 @@
                                         <color key="value" name="mainText"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="xButtonAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="YV0-Te-2rb"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="619-38-GBk">
                                 <rect key="frame" x="9" y="56" width="48" height="48"/>
@@ -469,14 +472,17 @@
                                     <action selector="nextButtonAction:" destination="OPw-kr-bJE" eventType="touchUpInside" id="9lo-nP-CuM"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="6Iv-Gb-6da">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="6Iv-Gb-6da">
                                 <rect key="frame" x="23" y="183.66666666666666" width="368" height="53"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="53" id="aP0-DN-YzP"/>
+                                </constraints>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="mkv-W5-B06">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="mkv-W5-B06">
                                 <rect key="frame" x="23" y="256.66666666666674" width="368" height="312.33333333333326"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
@@ -508,7 +514,7 @@
                         <outlet property="tableView" destination="mkv-W5-B06" id="gGN-EM-J69"/>
                         <outlet property="tableViewYPosConstraint" destination="Zix-5v-hp0" id="bIa-wK-MXG"/>
                         <outlet property="textView" destination="6Iv-Gb-6da" id="Uh1-fK-3Yi"/>
-                        <outlet property="textViewHeightConstraint" destination="6Iv-Gb-6da" id="QAF-kc-WRM"/>
+                        <outlet property="textViewHeightConstraint" destination="aP0-DN-YzP" id="6a5-ro-yzW"/>
                         <outlet property="textViewYPosConstraint" destination="8Gt-sr-aDB" id="5ae-aW-LvS"/>
                         <outlet property="titleLabel" destination="QYd-pd-zaw" id="eo1-HL-BJs"/>
                         <outlet property="topYPosConstraint" destination="xZy-DL-lnP" id="mdb-4m-pjp"/>

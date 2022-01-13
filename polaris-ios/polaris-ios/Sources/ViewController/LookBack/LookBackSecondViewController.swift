@@ -46,12 +46,15 @@ class LookBackSecondViewController: UIViewController, LookBackViewModelProtocol 
     
     private func setUIs() {
         self.titleLabel.textColor = .maintext
-        self.subTitleLabel.textColor = .maintext
         self.titleLabel.setPartialBold(originalText: "당신 마음에\n가장 가까이 닿은 별은 어떤 별인가요? ", boldText: "가장 가까이 닿은 별", fontSize: 22, boldFontSize: 22)
+        self.subTitleLabel.textColor = .maintext
+
         self.starCollectionView.registerCell(cell: LookBackSecondCollectionViewCell.self)
+        
         self.nextButton.setTitle("", for: .normal)
         self.nextButton.setImage(UIImage(named: "btnNextDisabled"), for: .normal)
         self.nextButton.isEnabled = false
+        
         self.topYConstraint.constant *= deviceHeightRatio
         self.subLabelConstraint.constant *= deviceHeightRatio
         self.collectionViewYConstraint.constant *= deviceHeightRatio

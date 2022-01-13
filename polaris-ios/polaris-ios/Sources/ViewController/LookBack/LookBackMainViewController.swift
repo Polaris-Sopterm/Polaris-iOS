@@ -20,6 +20,7 @@ class LookBackMainViewController: UIViewController {
     private var originPage = 0
     
     private var pageSubscription: AnyCancellable?
+    private var lookbackEndSubscription: AnyCancellable?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,7 +59,6 @@ class LookBackMainViewController: UIViewController {
         self.pageSubscription = self.viewModel.$page
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { value in
-                print(value)
                 self.pageControl.currentPage = value
                 self.pageInstance?.setViewControllers([(self.pageInstance?.VCArray[safe: value])!],
                                                       direction: self.originPage < value ? .forward : .reverse,
@@ -67,6 +67,13 @@ class LookBackMainViewController: UIViewController {
                 )
                 self.originPage = value
             })
+        self.lookbackEndSubscription = self.viewModel.$lookbackEnd
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { value in
+                if value {
+                    self.navigationController?.popViewController(animated: true)
+                }
+            })
     }
     
     @IBAction func backButtonAction(_ sender: Any) {
@@ -74,6 +81,9 @@ class LookBackMainViewController: UIViewController {
     }
     
     
+    @IBAction func xButtonAction(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
 }
 
 protocol LookBackPageDelegate {

@@ -43,6 +43,8 @@ final class LookBackViewModel {
     @Published var sixthvcStars: [LookBackStar] = []
     @Published var sixthvcNextButtonAble: Bool = false
     
+    @Published var lookbackEnd: Bool = false
+    
     private var disposeBag = DisposeBag()
     
     private var firstVCStarInfo = [LookBackStar(starName: "건강", starImageName: "imgChangeAdd", selected: false),
@@ -121,14 +123,6 @@ final class LookBackViewModel {
     ]
     
     private var fifthvcReasonInfo: [String] = []
-    
-    private let starEnumDict: [String: LookBackStarEnum] = ["행복":.HAPPINESS, "절제":.CONTROL, "감사":.GRATITUDE,"휴식":.REST,
-                                                            "성장":.GROWTH, "변화":.CHANGE, "건강":.HEALTH, "극복":.OVERCOME,
-                                                            "도전":.CHALLENGE]
-    private let emotionEnumDict: [String: LookBackEmotionEnum] = ["편안":.COMFORTABLE, "불편":.INCONVENIENCE,
-                                                                  "기대":.EXPECTATION,"답답":.FRUSTRATED,
-                                                                  "무난":.EASY, "기쁨":.JOY, "화남":.ANGRY, "아쉬운":.REGRETFUL,
-                                                                  "만족":.SATISFACTION]
     
     func toNextPage() {
         guard self.page < 5 else { return }
@@ -297,23 +291,21 @@ final class LookBackViewModel {
         self.sixthvcNextButtonAble = false
     }
     
-    func getSelectedStars(starList: [LookBackStar]) -> [LookBackStarEnum] {
-        var result: [LookBackStarEnum] = []
+    func getSelectedStars(starList: [LookBackStar]) -> [String] {
+        var result: [String] = []
         for star in starList {
             if star.selected {
-                guard let enumerated = self.starEnumDict[star.starName] else { continue }
-                result.append(enumerated)
+                result.append(star.starName)
             }
         }
         return result
     }
     
-    func getSelectedEmotions(emotionList: [LookBackEmotion]) -> [LookBackEmotionEnum] {
-        var result: [LookBackEmotionEnum] = []
+    func getSelectedEmotions(emotionList: [LookBackEmotion]) -> [String] {
+        var result: [String] = []
         for emotion in emotionList {
             if emotion.isSelected {
-                guard let enumerated = self.emotionEnumDict[emotion.emotion] else { continue }
-                result.append(enumerated)
+                result.append(emotion.emotion)
             }
         }
         return result
@@ -360,12 +352,10 @@ final class LookBackViewModel {
         
         NetworkManager.request(apiType: registAPI)
             .subscribe(onSuccess: { [weak self] (responseModel: LookBackResponseModel) in
-                print(responseModel)
+                self?.lookbackEnd = true
             })
             .disposed(by: self.disposeBag)
-        
-        
-        
+
         
     }
     

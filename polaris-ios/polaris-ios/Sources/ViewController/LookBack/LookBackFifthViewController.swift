@@ -12,7 +12,7 @@ class LookBackFifthViewController: UIViewController, LookBackViewModelProtocol {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subTitleLabel: UILabel!
-    @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var textView: LookbackTextView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var nextButton: UIButton!
     
@@ -20,7 +20,7 @@ class LookBackFifthViewController: UIViewController, LookBackViewModelProtocol {
     @IBOutlet weak var textViewYPosConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewYPosConstraint: NSLayoutConstraint!
     @IBOutlet weak var buttonYPosConstraint: NSLayoutConstraint!
-    @IBOutlet weak var textViewHeightConstraint: UITextView!
+    @IBOutlet weak var textViewHeightConstraint: NSLayoutConstraint!
     
     let deviceHeightRatio = DeviceInfo.screenHeight/812.0
     
@@ -45,15 +45,13 @@ class LookBackFifthViewController: UIViewController, LookBackViewModelProtocol {
     
     private func setUIs() {
         self.titleLabel.textColor = .maintext
-        self.subTitleLabel.textColor = .maintext
         self.titleLabel.setPartialBold(originalText: "한 주 동안 ‘불편, 아쉬움’을\n느낀 이유는 무엇인가요?", boldText: "‘불편, 아쉬움’", fontSize: 22, boldFontSize: 22)
-        
+        self.subTitleLabel.textColor = .maintext
+
         self.textView.makeRounded(cornerRadius: 16)
         self.textView.textContainerInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-        self.textView.isScrollEnabled = false
         self.textView.delegate = self
         self.placeholderSetting()
-        
         
         self.tableView.backgroundColor = .clear
         self.tableView.registerCell(cell: LookBackFifthTableViewCell.self)
@@ -62,8 +60,6 @@ class LookBackFifthViewController: UIViewController, LookBackViewModelProtocol {
         self.nextButton.setTitle("", for: .normal)
         self.nextButton.setImage(UIImage(named: "btnNextDisabled"), for: .normal)
 //        self.nextButton.isEnabled = false
-        
-        
     }
     
     private func setUpDataSource() {
@@ -119,17 +115,31 @@ class LookBackFifthViewController: UIViewController, LookBackViewModelProtocol {
     
     
     @IBAction func nextButtonAction(_ sender: Any) {
-        print("called")
         self.viewModel.toNextPage()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
         guard let reason = self.textView.text else { return }
-        guard reason != "한 주 동안 있었던 일 적어보기" else { return }
-
-        self.viewModel.addFifthvcReason(reason: reason)
+        
+        if self.checkValidReason(reason: reason) {
+            self.viewModel.addFifthvcReason(reason: reason)
+        }
+        self.textViewHeightConstraint.constant = 53
         self.placeholderSetting()
+    }
+    
+    private func checkValidReason(reason: String) -> Bool {
+        
+        var pureString = reason.replacingOccurrences(of: " ", with: "")
+        pureString = pureString.replacingOccurrences(of: "\n", with: "")
+        guard reason != "한 주 동안 있었던 일 적어보기",
+              pureString != ""
+              
+              
+        else { return false }
+        
+        return true
     }
     
 }
@@ -151,14 +161,13 @@ extension LookBackFifthViewController: UITextViewDelegate {
         
     }
     func textViewDidChange(_ textView: UITextView) {
-        if textView.intrinsicContentSize.height < 100 {
-            textView.isScrollEnabled = false
-        }
-        else {
-//            textView.isScrollEnabled = true
-        }
-//        textView.isScrollEnabled = false
-//        print(textView.intrinsicContentSize)
+        let width: CGFloat         = DeviceInfo.screenWidth
+        let horizonMargin: CGFloat = 24 + 24
+        let textViewSize           = CGSize(width: width - (2 * horizonMargin), height: .infinity)
+        let estimatedSize          = textView.sizeThatFits(textViewSize)
+        
+        self.textViewHeightConstraint.constant = max(53, estimatedSize.height)
+        self.view.layoutIfNeeded()
     }
     
     
