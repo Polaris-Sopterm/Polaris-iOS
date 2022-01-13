@@ -40,7 +40,7 @@ class MainVC: UIViewController {
     }
     
     func pushRetrospectViewController() {
-        let viewController = RetrospectReportVC.instantiateFromStoryboard(StoryboardName.main)
+        let viewController = RetrospectReportVC.instantiateFromStoryboard(StoryboardName.retrospect)
         
         guard let retropectVC = viewController else { return }
         self.navigationController?.pushViewController(retropectVC, animated: true)
