@@ -25,7 +25,7 @@ class LookBackFifthViewController: UIViewController, LookBackViewModelProtocol {
     let deviceHeightRatio = DeviceInfo.screenHeight/812.0
     
     private var viewModel = LookBackViewModel()
-    private var pageDelegate: LookBackPageDelegate?
+    private weak var pageDelegate: LookBackPageDelegate?
     private var dataSource: DataSource?
     private var reasonSubscription: AnyCancellable?
     private var nextButtonSubscription: AnyCancellable?
@@ -135,8 +135,6 @@ class LookBackFifthViewController: UIViewController, LookBackViewModelProtocol {
         pureString = pureString.replacingOccurrences(of: "\n", with: "")
         guard reason != "한 주 동안 있었던 일 적어보기",
               pureString != ""
-              
-              
         else { return false }
         
         return true

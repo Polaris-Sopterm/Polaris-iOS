@@ -86,7 +86,7 @@ class LookBackMainViewController: UIViewController {
     }
 }
 
-protocol LookBackPageDelegate {
+protocol LookBackPageDelegate: AnyObject {
     func toNextPage()
     func toPreviousPage()
 }

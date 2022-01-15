@@ -23,14 +23,7 @@ class LookBackSecondCollectionViewCell: UICollectionViewCell {
     private var star: LookBackStar? {
         didSet {
             guard let star = self.star else { return }
-            self.starImageView.image = UIImage(named: star.starImageName)
-            self.starNameLabel.text = star.starName
-            if star.selected {
-                self.backgroundImage.image = UIImage(named: "rectangleSelected")
-            }
-            else {
-                self.backgroundImage.image = UIImage(named: "rectangleUnselected")
-            }
+            self.updateUI(asStar: star)
         }
     }
     private var index: Int?
@@ -42,7 +35,7 @@ class LookBackSecondCollectionViewCell: UICollectionViewCell {
         self.addTapGestureRecognizer()
     }
     
-    func setLabel() {
+    private func setLabel() {
         self.starNameLabel.textColor = .white
         self.starNameLabel.font = UIFont.systemFont(ofSize: 13)
     }
@@ -75,6 +68,17 @@ class LookBackSecondCollectionViewCell: UICollectionViewCell {
             self.viewModel?.setStarSelectedSecondVC(index: index)
         case .sixth:
             self.viewModel?.setStarSelectedSixthVC(index: index)
+        }
+    }
+    
+    private func updateUI(asStar star: LookBackStar) {
+        self.starImageView.image = UIImage(named: star.starImageName)
+        self.starNameLabel.text = star.starName
+        if star.selected {
+            self.backgroundImage.image = UIImage(named: "rectangleSelected")
+        }
+        else {
+            self.backgroundImage.image = UIImage(named: "rectangleUnselected")
         }
     }
 }

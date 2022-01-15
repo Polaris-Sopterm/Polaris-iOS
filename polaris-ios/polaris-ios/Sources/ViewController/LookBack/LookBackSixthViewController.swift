@@ -29,7 +29,7 @@ class LookBackSixthViewController: UIViewController, LookBackViewModelProtocol {
     private var nextButtonSubscription: AnyCancellable?
     private var dataSource: DataSource?
     
-    var pageDelegate: LookBackPageDelegate?
+    private weak var pageDelegate: LookBackPageDelegate?
 
 
     typealias DataSource = UICollectionViewDiffableDataSource<Section, LookBackStar>

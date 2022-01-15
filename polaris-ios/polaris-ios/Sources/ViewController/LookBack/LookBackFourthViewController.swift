@@ -31,7 +31,7 @@ class LookBackFourthViewController: UIViewController, LookBackViewModelProtocol 
     let deviceHeightRatio = DeviceInfo.screenHeight/812.0
     
     private var viewModel = LookBackViewModel()
-    private var pageDelegate: LookBackPageDelegate?
+    private weak var pageDelegate: LookBackPageDelegate?
     
     private var emotionSubscription: AnyCancellable?
     private var nextButtonSubscription: AnyCancellable?

@@ -18,7 +18,7 @@ class LookBackFirstStarCollectionViewCell: UICollectionViewCell {
         // Initialization code
     }
     
-    func setLabel() {
+    private func setLabel() {
         self.starNameLabel.textColor = .white
         self.starNameLabel.font = UIFont.systemFont(ofSize: 13)
     }

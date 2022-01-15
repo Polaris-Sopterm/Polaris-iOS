@@ -30,7 +30,7 @@ class LookBackSecondViewController: UIViewController, LookBackViewModelProtocol 
     private var titleLabelSubscription: AnyCancellable?
     private var dataSource: DataSource?
     
-    var pageDelegate: LookBackPageDelegate?
+    private weak var pageDelegate: LookBackPageDelegate?
 
 
     typealias DataSource = UICollectionViewDiffableDataSource<Section, LookBackStar>

@@ -18,9 +18,6 @@ struct StoryboardName {
     static let common       = "Common"
     static let weekPicker   = "WeekPicker"
     static let setting      = "Setting"
-<<<<<<< HEAD
     static let lookback     = "LookBack"
-=======
     static let retrospect   = "Retrospect"
->>>>>>> d1a98546c51941e3be374db82bd06e4bdf3521c4
 }

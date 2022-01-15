@@ -15,16 +15,7 @@ class LookBackFourthCollectionViewCell: UICollectionViewCell {
     private var emotion: LookBackEmotion? {
         didSet {
             guard let emotion = self.emotion else { return }
-            self.emotionImageView.image = UIImage(named: emotion.emotionImageName)
-            self.titleLabel.text = emotion.emotion
-            if emotion.isSelected {
-                self.backgroundImageView.image = UIImage(named: "rectangleSelected")
-                self.titleLabel.textColor = .white
-            }
-            else {
-                self.backgroundImageView.image = UIImage(named: "rectangleUnselected")
-                self.titleLabel.textColor = .white30
-            }
+            self.updateUI(asEmotion: emotion)
         }
     }
     private var viewModel: LookBackViewModel?
@@ -36,7 +27,7 @@ class LookBackFourthCollectionViewCell: UICollectionViewCell {
         self.addTapGestureRecognizer()
     }
 
-    func setLabel() {
+    private func setLabel() {
         self.titleLabel.textColor = .white30
         self.titleLabel.font = UIFont.systemFont(ofSize: 13)
     }
@@ -59,5 +50,18 @@ class LookBackFourthCollectionViewCell: UICollectionViewCell {
     @objc func setSelected() {
         guard let index = self.index else { return }
         self.viewModel?.setEmotionSelectedFourthVC(index: index)
+    }
+    
+    private func updateUI(asEmotion emotion: LookBackEmotion) {
+        self.emotionImageView.image = UIImage(named: emotion.emotionImageName)
+        self.titleLabel.text = emotion.emotion
+        if emotion.isSelected {
+            self.backgroundImageView.image = UIImage(named: "rectangleSelected")
+            self.titleLabel.textColor = .white
+        }
+        else {
+            self.backgroundImageView.image = UIImage(named: "rectangleUnselected")
+            self.titleLabel.textColor = .white30
+        }
     }
 }

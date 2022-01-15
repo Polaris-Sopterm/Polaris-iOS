@@ -39,7 +39,7 @@ class LookBackFirstViewController: UIViewController, LookBackViewModelProtocol {
     private var subscriptions: [AnyCancellable] = []
     private var starSubsciption: AnyCancellable?
     private var dataSource: DataSource?
-    var pageDelegate: LookBackPageDelegate?
+    private weak var pageDelegate: LookBackPageDelegate?
     
     private let deviceHeightRatio = DeviceInfo.screenHeight/812.0
     private let deviceWidthRatio = DeviceInfo.screenWidth/375.0

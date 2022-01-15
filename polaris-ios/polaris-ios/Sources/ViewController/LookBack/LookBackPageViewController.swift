@@ -36,7 +36,6 @@ class LookBackPageViewController: UIPageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
-//        self.dataSource = self
         if let firstVC = VCArray.first{
             setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
         }
@@ -46,8 +45,6 @@ class LookBackPageViewController: UIPageViewController {
             guard let viewModelVC = vc as? LookBackViewModelProtocol else { continue }
             viewModelVC.setViewModel(viewModel: viewModel)
         }
-        
-        // Do any additional setup after loading the view.
     }
     
     private func VCInstane(storyboardName : String, vcName : String) ->UIViewController{
@@ -68,7 +65,6 @@ extension LookBackPageViewController : UIPageViewControllerDelegate, UIPageViewC
             return nil
         }
         else{
-//            onboardingDelegate?.toPrevPage(to: prevIdx)
             return VCArray[prevIdx]
         }
     }
@@ -84,47 +80,13 @@ extension LookBackPageViewController : UIPageViewControllerDelegate, UIPageViewC
             return nil
         }
         else{
-//            onboardingDelegate?.toNextPage(to: nextIdx)
-            
             return VCArray[nextIdx]
         }
     }
     
-    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-
-        if completed {
-//            previousPage = previousViewControllers[0]
-//            realNextPage = nextPage
-//            print(realNextPage)
-//            if realNextPage is BeMe.OnboardingFirstVC {
-//                self.keyValue.curPresentViewIndex = 0
-//                onboardingDelegate?.toNextPage(to: 0)
-//            }
-//            else if realNextPage is BeMe.OnboardingSecondVC{
-//                self.keyValue.curPresentViewIndex = 1
-//                onboardingDelegate?.toNextPage(to: 1)
-//            }
-//            else if realNextPage is BeMe.OnboardingThirdVC{
-//                self.keyValue.curPresentViewIndex = 2
-//                onboardingDelegate?.toNextPage(to: 2)
-//            }
-//            else{
-//                self.keyValue.curPresentViewIndex = 3
-//                onboardingDelegate?.toNextPage(to: 3)
-//            }
-        }
-
-    }
-
-
-
-
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
         nextPage = pendingViewControllers[0]
     }
-
-
-    
 }
 
 

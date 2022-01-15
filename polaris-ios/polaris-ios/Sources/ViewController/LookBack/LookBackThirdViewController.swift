@@ -27,7 +27,7 @@ class LookBackThirdViewController: UIViewController, LookBackViewModelProtocol{
     private let deviceHeightRatio = DeviceInfo.screenHeight/812.0
     private var viewModel = LookBackViewModel()
     
-    var pageDelegate: LookBackPageDelegate?
+    private weak var pageDelegate: LookBackPageDelegate?
 
     
     private var backgroundImageNameSubscription: AnyCancellable?
