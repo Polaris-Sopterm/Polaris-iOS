@@ -346,7 +346,6 @@ final class LookBackViewModel {
         let recordInfo = self.makeRecordInfo()
         
         let resultModel = LookBackModel(year: String(Date.currentYear), month: String(Date.currentMonth), weekNo: String(Date.currentWeekNoOfMonth), value: resultValue, record1: recordInfo[0], record2: recordInfo[1], record3: recordInfo[2])
-        print(resultModel)
         
         let registAPI = LookBackAPI.createLookBack(model: resultModel)
         
@@ -355,8 +354,6 @@ final class LookBackViewModel {
                 self?.lookbackEnd = true
             })
             .disposed(by: self.disposeBag)
-
-        
     }
     
 }

@@ -63,22 +63,26 @@ class LookBackFifthViewController: UIViewController, LookBackViewModelProtocol {
     }
     
     private func setUpDataSource() {
-        self.dataSource = UITableViewDiffableDataSource(tableView: self.tableView, cellProvider: { (tableView, indexPath, string) -> UITableViewCell? in
+        self.dataSource = UITableViewDiffableDataSource(tableView: self.tableView, cellProvider: { [weak self] (tableView, indexPath, string) -> UITableViewCell? in
             let cell = tableView.dequeueReusableCell(withIdentifier: "LookBackFifthTableViewCell",for: indexPath) as! LookBackFifthTableViewCell
             cell.setText(text: string)
             cell.setIndex(index: indexPath.item)
-            cell.setViewModel(viewModel: self.viewModel)
+            if let viewModel = self?.viewModel {
+                cell.setViewModel(viewModel: viewModel)
+            }
             return cell
         })
         
         self.reasonSubscription = viewModel.$fifthvcReason
             .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { reasons in
+            .sink(receiveValue: { [weak self] reasons in
+                guard let self = self else { return }
                 self.updateReasons(reasons: reasons)
             })
         self.nextButtonSubscription = viewModel.$fourthvcNextButtonAble
             .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { value in
+            .sink(receiveValue: { [weak self] value in
+                guard let self = self else { return }
                 if value {
                     self.nextButton.setImage(UIImage(named: "btnNextEnabled"), for: .normal)
                     self.nextButton.isEnabled = true

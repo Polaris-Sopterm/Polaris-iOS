@@ -78,8 +78,8 @@ class LookBackFirstViewController: UIViewController, LookBackViewModelProtocol {
         })
         self.starSubsciption = viewModel.$firstvcStars
             .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { stars in
-                self.updateStars(stars: stars)
+            .sink(receiveValue: { [weak self] stars in
+                self?.updateStars(stars: stars)
             })
     }
     

@@ -63,21 +63,25 @@ class LookBackSixthViewController: UIViewController, LookBackViewModelProtocol {
     
 
     private func setUpDataSource() {
-        self.dataSource = UICollectionViewDiffableDataSource(collectionView: starCollectionView, cellProvider: { (collectionView, indexPath, star) -> UICollectionViewCell? in
+        self.dataSource = UICollectionViewDiffableDataSource(collectionView: starCollectionView, cellProvider: { [weak self] (collectionView, indexPath, star) -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LookBackSecondCollectionViewCell", for: indexPath) as! LookBackSecondCollectionViewCell
             cell.setStar(star: star, index: indexPath.item)
-            cell.setViewModel(viewModel: self.viewModel)
+            if let viewModel = self?.viewModel {
+                cell.setViewModel(viewModel: viewModel)
+            }
             cell.setViewControllerCase(input: .sixth)
             return cell
         })
         self.starSubsciption = viewModel.$sixthvcStars
             .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { stars in
+            .sink(receiveValue: { [weak self] stars in
+                guard let self = self else { return }
                 self.updateStars(stars: stars)
             })
         self.nextButtonSubscription = viewModel.$sixthvcNextButtonAble
             .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { value in
+            .sink(receiveValue: { [weak self] value in
+                guard let self = self else { return }
                 if value {
                     self.nextButton.setImage(UIImage(named: "btnLookBackFinish"), for: .normal)
                     self.nextButton.isEnabled = true

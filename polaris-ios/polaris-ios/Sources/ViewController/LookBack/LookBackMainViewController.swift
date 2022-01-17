@@ -58,7 +58,8 @@ class LookBackMainViewController: UIViewController {
     private func bindViewModel() {
         self.pageSubscription = self.viewModel.$page
             .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { value in
+            .sink(receiveValue: { [weak self] value in
+                guard let self = self else { return }
                 self.pageControl.currentPage = value
                 self.pageInstance?.setViewControllers([(self.pageInstance?.VCArray[safe: value])!],
                                                       direction: self.originPage < value ? .forward : .reverse,
@@ -69,7 +70,8 @@ class LookBackMainViewController: UIViewController {
             })
         self.lookbackEndSubscription = self.viewModel.$lookbackEnd
             .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { value in
+            .sink(receiveValue: { [weak self] value in
+                guard let self = self else { return }
                 if value {
                     self.navigationController?.popViewController(animated: true)
                 }

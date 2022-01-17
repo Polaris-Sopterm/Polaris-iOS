@@ -70,20 +70,24 @@ class LookBackFourthViewController: UIViewController, LookBackViewModelProtocol 
     }
     
     private func setUpDataSource() {
-        self.dataSource = UICollectionViewDiffableDataSource(collectionView: self.emotionCollectionView, cellProvider: { (collectionView, indexPath, emotion) -> UICollectionViewCell? in
+        self.dataSource = UICollectionViewDiffableDataSource(collectionView: self.emotionCollectionView, cellProvider: { [weak self] (collectionView, indexPath, emotion) -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LookBackFourthCollectionViewCell", for: indexPath) as! LookBackFourthCollectionViewCell
             cell.setEmotion(emotion: emotion, index: indexPath.item)
-            cell.setViewModel(viewModel: self.viewModel)
+            if let viewModel = self?.viewModel {
+                cell.setViewModel(viewModel: viewModel)
+            }
             return cell
         })
         self.emotionSubscription = viewModel.$fourthvcEmotions
             .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { emotions in
+            .sink(receiveValue: { [weak self] emotions in
+                guard let self = self else { return }
                 self.updateEmotions(emotions: emotions)
             })
         self.nextButtonSubscription = viewModel.$fourthvcNextButtonAble
             .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { value in
+            .sink(receiveValue: { [weak self] value in
+                guard let self = self else { return }
                 if value {
                     self.nextButton.setImage(UIImage(named: "btnNextEnabled"), for: .normal)
                     self.nextButton.isEnabled = true

@@ -64,21 +64,25 @@ class LookBackSecondViewController: UIViewController, LookBackViewModelProtocol 
     
 
     private func setUpDataSource() {
-        self.dataSource = UICollectionViewDiffableDataSource(collectionView: starCollectionView, cellProvider: { (collectionView, indexPath, star) -> UICollectionViewCell? in
+        self.dataSource = UICollectionViewDiffableDataSource(collectionView: starCollectionView, cellProvider: { [weak self] (collectionView, indexPath, star) -> UICollectionViewCell? in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LookBackSecondCollectionViewCell", for: indexPath) as! LookBackSecondCollectionViewCell
             cell.setStar(star: star, index: indexPath.item)
-            cell.setViewModel(viewModel: self.viewModel)
+            if let viewModel = self?.viewModel {
+                cell.setViewModel(viewModel: viewModel)
+            }
             cell.setViewControllerCase(input: .second)
             return cell
         })
         self.starSubsciption = viewModel.$secondvcStars
             .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { stars in
+            .sink(receiveValue: { [weak self] stars in
+                guard let self = self else { return }
                 self.updateStars(stars: stars)
             })
         self.nextButtonSubscription = viewModel.$secondvcNextButtonAble
             .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { value in
+            .sink(receiveValue: { [weak self] value in
+                guard let self = self else { return }
                 if value {
                     self.nextButton.setImage(UIImage(named: "btnNextEnabled"), for: .normal)
                     self.nextButton.isEnabled = true
@@ -90,7 +94,8 @@ class LookBackSecondViewController: UIViewController, LookBackViewModelProtocol 
             })
         self.titleLabelSubscription = self.viewModel.$secondvcTitle
             .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { value in
+            .sink(receiveValue: { [weak self] value in
+                guard let self = self else { return }
                 if value.text.contains("않은") {
                     self.subTitleLabel.text = "한 주 동안 아쉬웠던 별을 선택해보세요."
                 }

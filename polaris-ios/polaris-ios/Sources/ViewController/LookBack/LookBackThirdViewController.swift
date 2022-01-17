@@ -78,8 +78,9 @@ class LookBackThirdViewController: UIViewController, LookBackViewModelProtocol{
     private func bindViewModel() {
         self.backgroundImageNameSubscription = self.viewModel.$thirdvcImageNameInfo
             .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { value in
+            .sink(receiveValue: { [weak self] value in
                 guard !value.isEmpty else { return }
+                guard let self = self else { return }
                 UIView.transition(with: self.backgroundImageView, duration: 0.2, options: .transitionCrossDissolve, animations: {
                     self.backgroundImageView.image = UIImage(named: value.last ?? "")
                 }, completion: nil)
@@ -87,7 +88,8 @@ class LookBackThirdViewController: UIViewController, LookBackViewModelProtocol{
         
         self.titleLabelSubscription = self.viewModel.$thirdvcTitle
             .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { value in
+            .sink(receiveValue: { [weak self] value in
+                guard let self = self else { return }
                 UIView.transition(with: self.titleLabel, duration: 0.2, options: .transitionCrossDissolve, animations: {
                     self.titleLabel.setPartialBold(originalText: value.text, boldText: value.highlightedText, fontSize: 22, boldFontSize: 22)
                 }, completion: nil)
