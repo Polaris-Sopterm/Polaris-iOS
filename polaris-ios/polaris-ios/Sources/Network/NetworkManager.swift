@@ -19,7 +19,6 @@ class NetworkManager {
                 switch result {
                 case .success(let response):
                     self.printForDebug(apiType, response)
-                    
                     if let polarisError = response.polarisErrorModel?.polarisError {
                         self.handlePolarisError(polarisError)
                         single(.failure(polarisError))

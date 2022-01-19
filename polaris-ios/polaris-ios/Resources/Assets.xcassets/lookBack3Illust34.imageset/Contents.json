@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "idiom" : "universal",
+      "filename" : "lookBack3Illust.png",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x",
+      "filename" : "lookBack3Illust@2x.png"
+    },
+    {
+      "scale" : "3x",
+      "idiom" : "universal",
+      "filename" : "lookBack3Illust@3x.png"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}
