@@ -21,7 +21,7 @@ class MainSceneViewModel {
     var heightList: [CGFloat] = [CGFloat(52.0),CGFloat(93.0),CGFloat(52.0),CGFloat(87.0),CGFloat(28.0),CGFloat(71),CGFloat(34),CGFloat(86),CGFloat(58)]
     
     private let disposeBag = DisposeBag()
-    
+    private let deviceRatio = DeviceInfo.screenHeight/812.0
     struct Input{
         let forceToShowStar: BehaviorRelay<Bool>
         let dateInfo: BehaviorRelay<DateInfo>
@@ -51,7 +51,16 @@ class MainSceneViewModel {
         
         input.forceToShowStar.subscribe(onNext: { force in
             starLoadingRelay.accept(true)
-            let homeAPI = HomeAPI.getHomeBanner(isSkipped: force)
+            var isForced = force
+            
+            if self.isAlreadyJumped() && force == false {
+                isForced = true
+            }
+            else if !self.isAlreadyJumped() && force == true {
+                self.setJumpDate()
+            }
+            
+            let homeAPI = HomeAPI.getHomeBanner(isSkipped: isForced)
             NetworkManager.request(apiType: homeAPI)
                 .subscribe(onSuccess: { [weak self] (homeModel: HomeModel) in
                     homeModelRelay.accept([homeModel])
@@ -202,6 +211,27 @@ class MainSceneViewModel {
     
     func changeToImgName(starName: String, level: Int)-> String {
         return String.makeStarImageName(starName: starName, level: level)
+    }
+    
+    func isAlreadyJumped() -> Bool {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy.MM.dd"
+        let date = Date()
+        let dateString = dateFormatter.string(from: date)
+        if let jumpDate = UserDefaults.standard.value(forKey: UserDefaultsKey.jumpDate) as? String,
+           jumpDate == dateString
+           {
+            return true
+        }
+        return false
+    }
+    
+    func setJumpDate() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy.MM.dd"
+        let date = Date()
+        let dateString = dateFormatter.string(from: date)
+        UserDefaults.standard.setValue(dateString, forKey: UserDefaultsKey.jumpDate)
     }
     
     private(set) var forceToShowStarRelay = BehaviorRelay(value: false)
