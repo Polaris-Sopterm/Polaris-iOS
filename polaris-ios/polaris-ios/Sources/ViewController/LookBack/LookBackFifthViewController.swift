@@ -14,6 +14,8 @@ class LookBackFifthViewController: UIViewController, LookBackViewModelProtocol {
     @IBOutlet weak var subTitleLabel: UILabel!
     @IBOutlet weak var textView: LookbackTextView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var skipButton: UIButton!
+    @IBOutlet weak var skipLabel: UILabel!
     @IBOutlet weak var nextButton: UIButton!
     
     @IBOutlet weak var topYPosConstraint: NSLayoutConstraint!
@@ -53,6 +55,11 @@ class LookBackFifthViewController: UIViewController, LookBackViewModelProtocol {
         self.textView.delegate = self
         self.placeholderSetting()
         
+        self.skipLabel.textColor = .veryLightPink
+        let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.thick.rawValue]
+        let underlineAttributedString = NSAttributedString(string: "건너뛰기", attributes: underlineAttribute)
+        self.skipLabel.attributedText = underlineAttributedString
+        
         self.tableView.backgroundColor = .clear
         self.tableView.registerCell(cell: LookBackFifthTableViewCell.self)
         self.tableView.delegate = self
@@ -79,17 +86,21 @@ class LookBackFifthViewController: UIViewController, LookBackViewModelProtocol {
                 guard let self = self else { return }
                 self.updateReasons(reasons: reasons)
             })
-        self.nextButtonSubscription = viewModel.$fourthvcNextButtonAble
+        self.nextButtonSubscription = viewModel.$fifthVCNextButtonAble
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] value in
                 guard let self = self else { return }
                 if value {
                     self.nextButton.setImage(UIImage(named: "btnNextEnabled"), for: .normal)
                     self.nextButton.isEnabled = true
+                    self.skipButton.alpha = 0
+                    self.skipLabel.alpha = 0
                 }
                 else {
                     self.nextButton.setImage(UIImage(named: "btnNextDisabled"), for: .normal)
                     self.nextButton.isEnabled = false
+                    self.skipButton.alpha = 1
+                    self.skipLabel.alpha = 1
                 }
             })
     }
@@ -132,6 +143,11 @@ class LookBackFifthViewController: UIViewController, LookBackViewModelProtocol {
         self.textViewHeightConstraint.constant = 53
         self.placeholderSetting()
     }
+    
+    @IBAction func skipButtonAction(_ sender: Any) {
+        self.viewModel.toNextPage()
+    }
+    
     
     private func checkValidReason(reason: String) -> Bool {
         

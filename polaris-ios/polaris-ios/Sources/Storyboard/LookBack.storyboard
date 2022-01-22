@@ -472,6 +472,19 @@
                                     <action selector="nextButtonAction:" destination="OPw-kr-bJE" eventType="touchUpInside" id="9lo-nP-CuM"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iCq-B0-BXx">
+                                <rect key="frame" x="157" y="518" width="100" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="W4r-cV-zKy"/>
+                                    <constraint firstAttribute="width" constant="100" id="cvo-wk-9X4"/>
+                                </constraints>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain"/>
+                                <connections>
+                                    <action selector="skipButtonAction:" destination="OPw-kr-bJE" eventType="touchUpInside" id="cfQ-sk-whD"/>
+                                </connections>
+                            </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="6Iv-Gb-6da">
                                 <rect key="frame" x="23" y="183.66666666666666" width="368" height="53"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -486,17 +499,27 @@
                                 <rect key="frame" x="23" y="256.66666666666674" width="368" height="312.33333333333326"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="건너뛰기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gfk-qU-3pg">
+                                <rect key="frame" x="182.66666666666666" y="541" width="48.666666666666657" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="J2f-Ba-lyA"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="PSx-kt-AE4" firstAttribute="top" secondItem="iCq-B0-BXx" secondAttribute="bottom" constant="26" id="3v4-FN-lT0"/>
                             <constraint firstItem="J2f-Ba-lyA" firstAttribute="trailing" secondItem="PSx-kt-AE4" secondAttribute="trailing" constant="23" id="8AM-1i-AWj"/>
                             <constraint firstItem="6Iv-Gb-6da" firstAttribute="top" secondItem="qVt-Io-2fb" secondAttribute="bottom" constant="83" id="8Gt-sr-aDB"/>
                             <constraint firstItem="PSx-kt-AE4" firstAttribute="leading" secondItem="J2f-Ba-lyA" secondAttribute="leading" constant="23" id="8YW-UE-EAb"/>
                             <constraint firstAttribute="bottom" secondItem="PSx-kt-AE4" secondAttribute="bottom" constant="37" id="9xh-28-8a8"/>
                             <constraint firstItem="QYd-pd-zaw" firstAttribute="leading" secondItem="J2f-Ba-lyA" secondAttribute="leading" constant="23" id="CKk-nP-tnt"/>
+                            <constraint firstItem="iCq-B0-BXx" firstAttribute="centerX" secondItem="J2f-Ba-lyA" secondAttribute="centerX" id="JNf-69-6Xl"/>
                             <constraint firstItem="J2f-Ba-lyA" firstAttribute="trailing" secondItem="mkv-W5-B06" secondAttribute="trailing" constant="23" id="NLt-V2-kGq"/>
+                            <constraint firstItem="Gfk-qU-3pg" firstAttribute="centerX" secondItem="iCq-B0-BXx" secondAttribute="centerX" id="QXR-SA-5mp"/>
                             <constraint firstItem="qVt-Io-2fb" firstAttribute="leading" secondItem="J2f-Ba-lyA" secondAttribute="leading" constant="23" id="RXa-Gu-BBs"/>
+                            <constraint firstItem="iCq-B0-BXx" firstAttribute="bottom" secondItem="Gfk-qU-3pg" secondAttribute="bottom" id="TCz-tY-3EM"/>
                             <constraint firstItem="PSx-kt-AE4" firstAttribute="top" secondItem="mkv-W5-B06" secondAttribute="bottom" constant="15" id="XzO-Xb-XMd"/>
                             <constraint firstItem="mkv-W5-B06" firstAttribute="top" secondItem="6Iv-Gb-6da" secondAttribute="bottom" constant="20" id="Zix-5v-hp0"/>
                             <constraint firstItem="mkv-W5-B06" firstAttribute="leading" secondItem="J2f-Ba-lyA" secondAttribute="leading" constant="23" id="euR-tY-Dsi"/>
@@ -510,6 +533,8 @@
                     <connections>
                         <outlet property="buttonYPosConstraint" destination="9xh-28-8a8" id="Wzg-sD-Nz7"/>
                         <outlet property="nextButton" destination="PSx-kt-AE4" id="gCy-xQ-fNG"/>
+                        <outlet property="skipButton" destination="iCq-B0-BXx" id="7nL-iA-csD"/>
+                        <outlet property="skipLabel" destination="Gfk-qU-3pg" id="5jc-uN-0M7"/>
                         <outlet property="subTitleLabel" destination="qVt-Io-2fb" id="U1k-sB-uqs"/>
                         <outlet property="tableView" destination="mkv-W5-B06" id="gGN-EM-J69"/>
                         <outlet property="tableViewYPosConstraint" destination="Zix-5v-hp0" id="bIa-wK-MXG"/>

@@ -39,6 +39,7 @@ final class LookBackViewModel {
     
     
     @Published var fifthvcReason: [String] = []
+    @Published var fifthVCNextButtonAble: Bool = false
     
     @Published var sixthvcStars: [LookBackStar] = []
     @Published var sixthvcNextButtonAble: Bool = false
@@ -256,6 +257,12 @@ final class LookBackViewModel {
     }
     
     func publishFifthReasonInfo() {
+        if self.fifthvcReasonInfo.isEmpty {
+            self.fifthVCNextButtonAble = false
+        }
+        else {
+            self.fifthVCNextButtonAble = true
+        }
         self.fifthvcReason = self.fifthvcReasonInfo
     }
     
@@ -314,7 +321,7 @@ final class LookBackViewModel {
     func makeRecordInfo() -> [String?] {
         var result: [String?] = []
         if self.fifthvcReasonInfo.count == 0 {
-            result = ["", nil, nil]
+            result = [nil, nil, nil]
         }
         else {
             for idx in 0..<3 {
