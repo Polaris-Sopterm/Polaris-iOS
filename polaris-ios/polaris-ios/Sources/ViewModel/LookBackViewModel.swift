@@ -399,6 +399,8 @@ final class LookBackViewModel {
         NetworkManager.request(apiType: registAPI)
             .subscribe(onSuccess: { [weak self] (responseModel: LookBackResponseModel) in
                 self?.lookbackEnd = true
+            },onFailure: { [weak self] error in
+                self?.lookbackEnd = true
             })
             .disposed(by: self.disposeBag)
     }
