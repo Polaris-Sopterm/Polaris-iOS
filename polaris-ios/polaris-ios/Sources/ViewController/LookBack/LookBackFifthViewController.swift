@@ -180,11 +180,12 @@ extension LookBackFifthViewController: UITextViewDelegate {
     }
     func textViewDidChange(_ textView: UITextView) {
         let width: CGFloat         = DeviceInfo.screenWidth
-        let horizonMargin: CGFloat = 24 + 24
+        let horizonMargin: CGFloat = 23
         let textViewSize           = CGSize(width: width - (2 * horizonMargin), height: .infinity)
         let estimatedSize          = textView.sizeThatFits(textViewSize)
         
-        self.textViewHeightConstraint.constant = max(53, estimatedSize.height)
+        let height = min(estimatedSize.height, 107)
+        self.textViewHeightConstraint.constant = max(53, height)
         self.view.layoutIfNeeded()
     }
     
