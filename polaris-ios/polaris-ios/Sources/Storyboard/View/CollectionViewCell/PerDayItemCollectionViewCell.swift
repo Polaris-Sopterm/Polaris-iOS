@@ -2,7 +2,7 @@
 //  PerDayItemCollectionViewCell.swift
 //  polaris-ios
 //
-//  Created by USER on 2021/04/22.
+//  Created by Dongmin on 2022/01/23.
 //
 
 import UIKit

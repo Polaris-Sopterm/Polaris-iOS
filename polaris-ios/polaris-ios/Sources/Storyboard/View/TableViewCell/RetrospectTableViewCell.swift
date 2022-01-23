@@ -65,6 +65,22 @@ class RetrospectTableViewCell: MainTableViewCell {
             
             mainVC.pushRetrospectViewController()
         }).disposed(by: self.disposeBag)
+        
+        self.shareButton.rx.tap.observeOnMain(onNext: { [weak self] in
+            self?.presentActivityController()
+        }).disposed(by: self.disposeBag)
+    }
+    
+    private func presentActivityController() {
+        guard let visibleController = UIViewController.getVisibleController() else { return }
+        guard let starsImage = self.capturedStarContainerImage                else { return }
+        
+        let activityController = UIActivityViewController(activityItems: [starsImage], applicationActivities: nil)
+        visibleController.present(activityController, animated: true, completion: nil)
+    }
+    
+    private var capturedStarContainerImage: UIImage? {
+        return self.starsContainerView.asImage()
     }
     
     private static var navigationHeight: CGFloat {
@@ -73,8 +89,21 @@ class RetrospectTableViewCell: MainTableViewCell {
     
     private let disposeBag = DisposeBag()
 
+    @IBOutlet private weak var starsContainerView: UIView!
+    
+    @IBOutlet private weak var changeStarWidthConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var happinessStarWidthConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var overcomeStarWidthConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var controlStarWidthConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var restStarWidthConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var healthStarConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var growthStarConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var thanksStarConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var challengeStarConstraint: NSLayoutConstraint!
+    
     @IBOutlet private weak var navigationHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var shareButton: UIButton!
     @IBOutlet private weak var seeReportButton: UIButton!
     
 }

@@ -306,6 +306,9 @@
 		CE574DBB26357CBC0046D20A /* PolarisToastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE574DBA26357CBC0046D20A /* PolarisToastManager.swift */; };
 		CE574DBE263588E20046D20A /* PolarisToastView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE574DBD263588E20046D20A /* PolarisToastView.xib */; };
 		CE574DC1263589180046D20A /* PolarisToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE574DC0263589180046D20A /* PolarisToastView.swift */; };
+		CE5C5AF4279D916D00FDCE32 /* PerDayItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5C5AF3279D916D00FDCE32 /* PerDayItemCollectionViewCell.swift */; };
+		CE5C5AF5279D916D00FDCE32 /* PerDayItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5C5AF3279D916D00FDCE32 /* PerDayItemCollectionViewCell.swift */; };
+		CE5C5AF6279D916D00FDCE32 /* PerDayItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5C5AF3279D916D00FDCE32 /* PerDayItemCollectionViewCell.swift */; };
 		CE63050B2667E36E00EBC1D4 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE63050A2667E36E00EBC1D4 /* UserAPI.swift */; };
 		CE63050F2667E7BA00EBC1D4 /* NetworkInform.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE63050E2667E7BA00EBC1D4 /* NetworkInform.swift */; };
 		CE6CE90A26E25E3300BDDB6C /* ConfirmPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6CE90926E25E3300BDDB6C /* ConfirmPopupView.xib */; };
@@ -599,9 +602,6 @@
 		ECB639BD2781DFD4006C7D29 /* LookBackFourthCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECB639B92781DFD4006C7D29 /* LookBackFourthCollectionViewCell.xib */; };
 		ECB639BE2781DFD4006C7D29 /* LookBackFourthCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECB639B92781DFD4006C7D29 /* LookBackFourthCollectionViewCell.xib */; };
 		ECB639BF2781DFD4006C7D29 /* LookBackFourthCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECB639B92781DFD4006C7D29 /* LookBackFourthCollectionViewCell.xib */; };
-		ECC544A6279C013F0016D391 /* PerDayItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC544A1279C013E0016D391 /* PerDayItemCollectionViewCell.swift */; };
-		ECC544A7279C013F0016D391 /* PerDayItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC544A1279C013E0016D391 /* PerDayItemCollectionViewCell.swift */; };
-		ECC544A8279C013F0016D391 /* PerDayItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC544A1279C013E0016D391 /* PerDayItemCollectionViewCell.swift */; };
 		ECC544A9279C013F0016D391 /* RetrospectEmotionItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC544A2279C013F0016D391 /* RetrospectEmotionItemCell.swift */; };
 		ECC544AA279C013F0016D391 /* RetrospectEmotionItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC544A2279C013F0016D391 /* RetrospectEmotionItemCell.swift */; };
 		ECC544AB279C013F0016D391 /* RetrospectEmotionItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC544A2279C013F0016D391 /* RetrospectEmotionItemCell.swift */; };
@@ -746,6 +746,7 @@
 		CE574DBA26357CBC0046D20A /* PolarisToastManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarisToastManager.swift; sourceTree = "<group>"; };
 		CE574DBD263588E20046D20A /* PolarisToastView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PolarisToastView.xib; sourceTree = "<group>"; };
 		CE574DC0263589180046D20A /* PolarisToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarisToastView.swift; sourceTree = "<group>"; };
+		CE5C5AF3279D916D00FDCE32 /* PerDayItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerDayItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		CE63050A2667E36E00EBC1D4 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		CE63050E2667E7BA00EBC1D4 /* NetworkInform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInform.swift; sourceTree = "<group>"; };
 		CE6CE90926E25E3300BDDB6C /* ConfirmPopupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConfirmPopupView.xib; sourceTree = "<group>"; };
@@ -895,7 +896,6 @@
 		ECB639B02781DC43006C7D29 /* LookBackFourthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookBackFourthViewController.swift; sourceTree = "<group>"; };
 		ECB639B82781DFD4006C7D29 /* LookBackFourthCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookBackFourthCollectionViewCell.swift; sourceTree = "<group>"; };
 		ECB639B92781DFD4006C7D29 /* LookBackFourthCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LookBackFourthCollectionViewCell.xib; sourceTree = "<group>"; };
-		ECC544A1279C013E0016D391 /* PerDayItemCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PerDayItemCollectionViewCell.swift; path = ../../../../../../../skeleton/PerDayItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		ECC544A2279C013F0016D391 /* RetrospectEmotionItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetrospectEmotionItemCell.swift; sourceTree = "<group>"; };
 		ECC544A3279C013F0016D391 /* RetrospectEmotionReasonItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetrospectEmotionReasonItemCell.swift; sourceTree = "<group>"; };
 		ECC544A4279C013F0016D391 /* RetrospectCloseStarItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetrospectCloseStarItemCell.swift; sourceTree = "<group>"; };
@@ -1498,7 +1498,6 @@
 				ECDC5A4B2635530300A1B5A9 /* MainTodoCVC.swift */,
 				CE574D9B263524140046D20A /* SelectStarItemCollectionViewCell.swift */,
 				EC08F3CE267DD24100F915F3 /* MainLookBackCollectionViewCell.swift */,
-				ECC544A1279C013E0016D391 /* PerDayItemCollectionViewCell.swift */,
 				ECC544A4279C013F0016D391 /* RetrospectCloseStarItemCell.swift */,
 				ECC544A2279C013F0016D391 /* RetrospectEmotionItemCell.swift */,
 				ECC544A3279C013F0016D391 /* RetrospectEmotionReasonItemCell.swift */,
@@ -1508,6 +1507,7 @@
 				EC0E354A277869E900B6B33F /* LookBackFirstStarCollectionViewCell.swift */,
 				ECA3C45F278014DB00970DF7 /* LookBackSecondCollectionViewCell.swift */,
 				ECB639B82781DFD4006C7D29 /* LookBackFourthCollectionViewCell.swift */,
+				CE5C5AF3279D916D00FDCE32 /* PerDayItemCollectionViewCell.swift */,
 			);
 			path = CollectionViewCell;
 			sourceTree = "<group>";
@@ -2038,7 +2038,6 @@
 				CEA5D9942785A67600A6D6DE /* RetrospectViewModel.swift in Sources */,
 				CEC19AE72650F87400DA747C /* DayTodoHeaderView.swift in Sources */,
 				CE6CE91226E27E7500BDDB6C /* SettingVC.swift in Sources */,
-				ECC544A6279C013F0016D391 /* PerDayItemCollectionViewCell.swift in Sources */,
 				CE40B3FE26C041630000151F /* OnboardingCollectionViewCell.swift in Sources */,
 				CEE574D82630422600EA64B7 /* AddTodoDayTableViewCell.swift in Sources */,
 				ECA49455262B0D0900CC2EB8 /* TodoDateTodayHeaderView.swift in Sources */,
@@ -2057,6 +2056,7 @@
 				ECA4947E262C670000CC2EB8 /* MainStarTVCViewModel.swift in Sources */,
 				CEA3CFF126A92B8900577DA4 /* TodoDayListModel.swift in Sources */,
 				CEA3CFD726A85C4B00577DA4 /* ShootingComet.swift in Sources */,
+				CE5C5AF4279D916D00FDCE32 /* PerDayItemCollectionViewCell.swift in Sources */,
 				ECB639B12781DC43006C7D29 /* LookBackFourthViewController.swift in Sources */,
 				CEDB478426AEF7520024ABD4 /* AddTodoResponseModel.swift in Sources */,
 				ECA3C461278014DB00970DF7 /* LookBackSecondCollectionViewCell.swift in Sources */,
@@ -2199,7 +2199,6 @@
 				CEA5D9952785A67600A6D6DE /* RetrospectViewModel.swift in Sources */,
 				CE2953202687A0A500E21871 /* DayTodoHeaderView.swift in Sources */,
 				CE6CE91326E27E7500BDDB6C /* SettingVC.swift in Sources */,
-				ECC544A7279C013F0016D391 /* PerDayItemCollectionViewCell.swift in Sources */,
 				CE40B3FF26C041630000151F /* OnboardingCollectionViewCell.swift in Sources */,
 				CE2953212687A0A500E21871 /* AddTodoDayTableViewCell.swift in Sources */,
 				CE2953222687A0A500E21871 /* TodoDateTodayHeaderView.swift in Sources */,
@@ -2218,6 +2217,7 @@
 				CE29532B2687A0A500E21871 /* MainStarTVCViewModel.swift in Sources */,
 				CEA3CFF226A92B8900577DA4 /* TodoDayListModel.swift in Sources */,
 				CEA3CFD826A85C6500577DA4 /* ShootingComet.swift in Sources */,
+				CE5C5AF5279D916D00FDCE32 /* PerDayItemCollectionViewCell.swift in Sources */,
 				ECB639B22781DC43006C7D29 /* LookBackFourthViewController.swift in Sources */,
 				CEDB478526AEF7CE0024ABD4 /* AddTodoResponseModel.swift in Sources */,
 				ECA3C462278014DB00970DF7 /* LookBackSecondCollectionViewCell.swift in Sources */,
@@ -2360,7 +2360,6 @@
 				CEA5D9962785A67600A6D6DE /* RetrospectViewModel.swift in Sources */,
 				CE43D04826613D66003126F2 /* DayTodoHeaderView.swift in Sources */,
 				CE6CE91426E27E7500BDDB6C /* SettingVC.swift in Sources */,
-				ECC544A8279C013F0016D391 /* PerDayItemCollectionViewCell.swift in Sources */,
 				CE40B40026C041630000151F /* OnboardingCollectionViewCell.swift in Sources */,
 				CE43D04926613D66003126F2 /* AddTodoDayTableViewCell.swift in Sources */,
 				CE43D04A26613D66003126F2 /* TodoDateTodayHeaderView.swift in Sources */,
@@ -2379,6 +2378,7 @@
 				CE43D05226613D66003126F2 /* MainStarTVCViewModel.swift in Sources */,
 				CEA3CFF326A92B8900577DA4 /* TodoDayListModel.swift in Sources */,
 				CEA3CFD926A85C6500577DA4 /* ShootingComet.swift in Sources */,
+				CE5C5AF6279D916D00FDCE32 /* PerDayItemCollectionViewCell.swift in Sources */,
 				ECB639B32781DC43006C7D29 /* LookBackFourthViewController.swift in Sources */,
 				CEDB478626AEF7CE0024ABD4 /* AddTodoResponseModel.swift in Sources */,
 				ECA3C463278014DB00970DF7 /* LookBackSecondCollectionViewCell.swift in Sources */,
@@ -2683,7 +2683,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6ZTQ76LJPZ;
+				DEVELOPMENT_TEAM = AKW8XUH283;
 				INFOPLIST_FILE = "polaris-ios/polaris-ios.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
