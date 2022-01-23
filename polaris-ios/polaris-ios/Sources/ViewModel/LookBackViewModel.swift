@@ -9,6 +9,7 @@ import Foundation
 import Combine
 import RxSwift
 import RxCocoa
+import MapKit
 
 struct LookBackTitle {
     var text: String
@@ -27,10 +28,15 @@ final class LookBackViewModel {
     @Published var secondvcTitle: LookBackTitle = LookBackTitle(text: "당신 마음에\n가장 가까이 닿은 별은 어떤 별인가요?",
                                                                 highlightedText: "가장 가까이 닿은 별")
     @Published var secondvcAnswerInfo: [[String]] = []
-    @Published var secondvcPhase: Int = 0
+    @Published var secondvcPhase: Int = 0 {
+        didSet {
+            self.secondvcCheckNextButtonEnabled()
+        }
+    }
     
+    @Published var thirdvcPhase: Int = 0
     @Published var thirdvcAnswerInfo: [Int] = []
-    @Published var thirdvcImageNameInfo: [String] = []
+    @Published var thirdvcImageNameInfo: String = "lookBack3Illust00"
     @Published var thirdvcTitle: LookBackTitle = LookBackTitle(text: "한 주 동안 당신만을 위한 시간을\n얼마나 보냈나요?",
                                                                highlightedText: "당신만을 위한 시간")
     
@@ -39,6 +45,7 @@ final class LookBackViewModel {
     
     
     @Published var fifthvcReason: [String] = []
+    @Published var fifthVCNextButtonAble: Bool = false
     
     @Published var sixthvcStars: [LookBackStar] = []
     @Published var sixthvcNextButtonAble: Bool = false
@@ -131,7 +138,14 @@ final class LookBackViewModel {
     
     func toPreviousPage() {
         guard self.page > 0 else { return }
-        self.page = self.page - 1
+        switch self.page {
+        case 1:
+            self.secondvcPrevPageButton()
+        case 2:
+            self.thirdvcPrevButtonTapped()
+        default:
+            self.page = self.page - 1
+        }
     }
     
     func publishFirstStarInfos() {
@@ -139,7 +153,7 @@ final class LookBackViewModel {
     }
     
     func publishSecondStarInfos() {
-        if self.secondvcAnswerInfo.count == 0 {
+        if self.secondvcPhase == 0 {
             self.secondvcStars = self.secondVCStarInfo1
         }
         else {
@@ -151,25 +165,27 @@ final class LookBackViewModel {
         if self.secondvcPhase == 0 {
             self.secondVCStarInfo1[index].selected = !self.secondVCStarInfo1[index].selected
             self.publishSecondStarInfos()
-            for star in self.secondVCStarInfo1 {
-                if star.selected {
-                    self.secondvcNextButtonAble = true
-                    return
-                }
-            }
-            self.secondvcNextButtonAble = false
+            self.secondvcCheckNextButtonEnabled()
         }
         else {
             self.secondVCStarInfo2[index].selected = !self.secondVCStarInfo2[index].selected
             self.publishSecondStarInfos()
-            for star in self.secondVCStarInfo2 {
-                if star.selected {
-                    self.secondvcNextButtonAble = true
-                    return
-                }
-            }
-            self.secondvcNextButtonAble = false
+            self.secondvcCheckNextButtonEnabled()
         }
+    }
+    
+    func secondvcCheckNextButtonEnabled() {
+        var starInfoList = self.secondVCStarInfo1
+        if self.secondvcPhase == 1 {
+            starInfoList = self.secondVCStarInfo2
+        }
+        for star in starInfoList {
+            if star.selected {
+                self.secondvcNextButtonAble = true
+                return
+            }
+        }
+        self.secondvcNextButtonAble = false
     }
     
     func secondvcNextButtonTapped() {
@@ -204,26 +220,51 @@ final class LookBackViewModel {
         }
     }
     
+    func secondvcPrevPageButton() {
+        if self.secondvcPhase == 0 {
+            self.page = self.page - 1
+        }
+        else {
+            self.secondvcPhase = 0
+            self.secondvcCheckNextButtonEnabled()
+            self.secondvcTitle = self.secondvcTitles[0]
+            self.secondvcStars = self.secondVCStarInfo1
+        }
+    }
+    
     func thirdvcAnswerChange(value: Int) {
-        guard thirdvcAnswers[self.thirdvcAnswers.count - 1] != value else { return }
-        self.thirdvcAnswers[self.thirdvcAnswers.count - 1] = value
-        self.thirdvcImageNames[self.thirdvcImageNames.count - 1] = self.makeBackgroundImageName(value: value)
+        guard thirdvcAnswers[self.thirdvcPhase] != value else { return }
+        self.thirdvcAnswers[self.thirdvcPhase] = value
+        self.thirdvcImageNames[self.thirdvcPhase] = self.makeBackgroundImageName(value: value)
         self.publishThirdVCInfos()
     }
     
     func publishThirdVCInfos() {
         self.thirdvcAnswerInfo = self.thirdvcAnswers
-        self.thirdvcImageNameInfo = self.thirdvcImageNames
-        self.thirdvcTitle = self.thirdvcTitles[self.thirdvcAnswers.count - 1]
+        self.thirdvcImageNameInfo = self.thirdvcImageNames[self.thirdvcPhase]
+        self.thirdvcTitle = self.thirdvcTitles[self.thirdvcPhase]
     }
     
     func thirdvcNextButtonTapped() {
-        if self.thirdvcAnswerInfo.count >= 4 {
+        if self.thirdvcPhase >= 3 {
             self.toNextPage()
         }
         else {
-            self.thirdvcAnswers.append(0)
-            self.thirdvcImageNames.append(makeBackgroundImageName(value: 0))
+            self.thirdvcPhase += 1
+            if self.thirdvcPhase >= self.thirdvcAnswers.count {
+                self.thirdvcAnswers.append(0)
+                self.thirdvcImageNames.append(makeBackgroundImageName(value: 0))
+            }
+            self.publishThirdVCInfos()
+        }
+    }
+    
+    func thirdvcPrevButtonTapped() {
+        if self.thirdvcPhase == 0 {
+            self.page = self.page - 1
+        }
+        else {
+            self.thirdvcPhase -= 1
             self.publishThirdVCInfos()
         }
     }
@@ -252,10 +293,16 @@ final class LookBackViewModel {
     }
     
     private func makeBackgroundImageName(value: Int) -> String {
-        return "lookBack3Illust" + String(self.thirdvcAnswers.count - 1) + String(value)
+        return "lookBack3Illust" + String(self.thirdvcPhase) + String(value)
     }
     
     func publishFifthReasonInfo() {
+        if self.fifthvcReasonInfo.isEmpty {
+            self.fifthVCNextButtonAble = false
+        }
+        else {
+            self.fifthVCNextButtonAble = true
+        }
         self.fifthvcReason = self.fifthvcReasonInfo
     }
     
@@ -314,7 +361,7 @@ final class LookBackViewModel {
     func makeRecordInfo() -> [String?] {
         var result: [String?] = []
         if self.fifthvcReasonInfo.count == 0 {
-            result = ["", nil, nil]
+            result = [nil, nil, nil]
         }
         else {
             for idx in 0..<3 {
@@ -352,10 +399,10 @@ final class LookBackViewModel {
         NetworkManager.request(apiType: registAPI)
             .subscribe(onSuccess: { [weak self] (responseModel: LookBackResponseModel) in
                 self?.lookbackEnd = true
+            },onFailure: { [weak self] error in
+                self?.lookbackEnd = true
             })
             .disposed(by: self.disposeBag)
     }
     
 }
-
-

@@ -82,7 +82,7 @@ class LookBackThirdViewController: UIViewController, LookBackViewModelProtocol{
                 guard !value.isEmpty else { return }
                 guard let self = self else { return }
                 UIView.transition(with: self.backgroundImageView, duration: 0.2, options: .transitionCrossDissolve, animations: {
-                    self.backgroundImageView.image = UIImage(named: value.last ?? "")
+                    self.backgroundImageView.image = UIImage(named: value)
                 }, completion: nil)
             })
         
