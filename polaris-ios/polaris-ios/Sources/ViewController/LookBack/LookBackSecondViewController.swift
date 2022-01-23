@@ -102,8 +102,8 @@ class LookBackSecondViewController: UIViewController, LookBackViewModelProtocol 
                 else {
                     self.subTitleLabel.text = "한 주 동안 좋았던 별을 선택해보세요."
                 }
-                self.nextButton.setImage(UIImage(named: "btnNextDisabled"), for: .normal)
-                self.nextButton.isEnabled = false
+//                self.nextButton.setImage(UIImage(named: "btnNextDisabled"), for: .normal)
+//                self.nextButton.isEnabled = false
                 UIView.transition(with: self.titleLabel, duration: 0.2, options: .transitionCrossDissolve, animations: {
                     self.titleLabel.setPartialBold(originalText: value.text, boldText: value.highlightedText, fontSize: 22, boldFontSize: 22)
                 }, completion: nil)
