@@ -309,6 +309,9 @@
 		CE5C5AF4279D916D00FDCE32 /* PerDayItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5C5AF3279D916D00FDCE32 /* PerDayItemCollectionViewCell.swift */; };
 		CE5C5AF5279D916D00FDCE32 /* PerDayItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5C5AF3279D916D00FDCE32 /* PerDayItemCollectionViewCell.swift */; };
 		CE5C5AF6279D916D00FDCE32 /* PerDayItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5C5AF3279D916D00FDCE32 /* PerDayItemCollectionViewCell.swift */; };
+		CE5C5AF8279D9ED600FDCE32 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5C5AF7279D9ED600FDCE32 /* UIImage+.swift */; };
+		CE5C5AF9279D9ED600FDCE32 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5C5AF7279D9ED600FDCE32 /* UIImage+.swift */; };
+		CE5C5AFA279D9ED600FDCE32 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5C5AF7279D9ED600FDCE32 /* UIImage+.swift */; };
 		CE63050B2667E36E00EBC1D4 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE63050A2667E36E00EBC1D4 /* UserAPI.swift */; };
 		CE63050F2667E7BA00EBC1D4 /* NetworkInform.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE63050E2667E7BA00EBC1D4 /* NetworkInform.swift */; };
 		CE6CE90A26E25E3300BDDB6C /* ConfirmPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6CE90926E25E3300BDDB6C /* ConfirmPopupView.xib */; };
@@ -747,6 +750,7 @@
 		CE574DBD263588E20046D20A /* PolarisToastView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PolarisToastView.xib; sourceTree = "<group>"; };
 		CE574DC0263589180046D20A /* PolarisToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarisToastView.swift; sourceTree = "<group>"; };
 		CE5C5AF3279D916D00FDCE32 /* PerDayItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerDayItemCollectionViewCell.swift; sourceTree = "<group>"; };
+		CE5C5AF7279D9ED600FDCE32 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		CE63050A2667E36E00EBC1D4 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		CE63050E2667E7BA00EBC1D4 /* NetworkInform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInform.swift; sourceTree = "<group>"; };
 		CE6CE90926E25E3300BDDB6C /* ConfirmPopupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConfirmPopupView.xib; sourceTree = "<group>"; };
@@ -1111,6 +1115,7 @@
 				CEA3CFE826A869D200577DA4 /* ObservableType+.swift */,
 				ECB5443626D3D0CA00FA4C50 /* UITextField+.swift */,
 				CE6CE91526E2850300BDDB6C /* NSNotification+Name.swift */,
+				CE5C5AF7279D9ED600FDCE32 /* UIImage+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1979,6 +1984,7 @@
 				CEEE574A262A95BD00C39358 /* UserDefaultWrapper.swift in Sources */,
 				CE574000267C8E9900665933 /* TodoViewModel.swift in Sources */,
 				CE40B3EF26C00F790000151F /* JourneyTitleListModel.swift in Sources */,
+				CE5C5AF8279D9ED600FDCE32 /* UIImage+.swift in Sources */,
 				CE207B892661CBC7009A812A /* ServerHost.swift in Sources */,
 				ECC544B2279C013F0016D391 /* RetrospectFoundStarItemCell.swift in Sources */,
 				CE6CE90E26E25E4800BDDB6C /* ConfirmPopupView.swift in Sources */,
@@ -2140,6 +2146,7 @@
 				CE2952FC2687A0A500E21871 /* TodoViewModel.swift in Sources */,
 				CE40B3F026C00F790000151F /* JourneyTitleListModel.swift in Sources */,
 				CE2952FD2687A0A500E21871 /* ServerHost.swift in Sources */,
+				CE5C5AF9279D9ED600FDCE32 /* UIImage+.swift in Sources */,
 				CE2952FE2687A0A500E21871 /* DropdownItemTableViewCell.swift in Sources */,
 				ECC544B3279C013F0016D391 /* RetrospectFoundStarItemCell.swift in Sources */,
 				CE6CE90F26E25E4800BDDB6C /* ConfirmPopupView.swift in Sources */,
@@ -2301,6 +2308,7 @@
 				CE574001267C8E9900665933 /* TodoViewModel.swift in Sources */,
 				CE40B3F126C00F790000151F /* JourneyTitleListModel.swift in Sources */,
 				CE207B8A2661CBC7009A812A /* ServerHost.swift in Sources */,
+				CE5C5AFA279D9ED600FDCE32 /* UIImage+.swift in Sources */,
 				CE43D02F26613D66003126F2 /* DropdownItemTableViewCell.swift in Sources */,
 				ECC544B4279C013F0016D391 /* RetrospectFoundStarItemCell.swift in Sources */,
 				CE6CE91026E25E4800BDDB6C /* ConfirmPopupView.swift in Sources */,

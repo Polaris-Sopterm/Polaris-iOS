@@ -80,7 +80,16 @@ class RetrospectTableViewCell: MainTableViewCell {
     }
     
     private var capturedStarContainerImage: UIImage? {
-        return self.starsContainerView.asImage()
+        let contentViewAsImage = self.contentView.asImage()
+        let screenScale = UIScreen.main.scale
+        let croppedFrame = self.starsContainerView.frame
+        let croppedFrameAdjustScale = CGRect(
+            x: croppedFrame.origin.x * screenScale,
+            y: croppedFrame.origin.y * screenScale,
+            width: croppedFrame.size.width * screenScale,
+            height: croppedFrame.size.height * screenScale
+        )
+        return contentViewAsImage?.cropImage(rect: croppedFrameAdjustScale)
     }
     
     private static var navigationHeight: CGFloat {
