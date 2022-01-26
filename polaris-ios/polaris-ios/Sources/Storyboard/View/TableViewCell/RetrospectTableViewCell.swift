@@ -19,6 +19,9 @@ class RetrospectTableViewCell: MainTableViewCell {
         self.setupLabels()
         self.setupCometAnimation()
         self.bindButtons()
+        self.observeViewModel()
+        
+        self.viewModel.requestRetrospectValues()
     }
     
     private func setupLabels() {
@@ -71,12 +74,54 @@ class RetrospectTableViewCell: MainTableViewCell {
         }).disposed(by: self.disposeBag)
     }
     
+    private func observeViewModel() {
+        self.viewModel.journeyValueRelay
+            .withUnretained(self)
+            .observeOnMain(onNext: { owner, valuesModel in
+                let sortedValues = owner.viewModel.sortRetrospectValueModel(model: valuesModel)
+                
+                owner.layoutStarAsRetrospectValues(sortedValues: sortedValues)
+            }).disposed(by: self.disposeBag)
+    }
+    
     private func presentActivityController() {
         guard let visibleController = UIViewController.getVisibleController() else { return }
         guard let starsImage = self.capturedStarContainerImage                else { return }
         
         let activityController = UIActivityViewController(activityItems: [starsImage], applicationActivities: nil)
         visibleController.present(activityController, animated: true, completion: nil)
+    }
+    
+    private func layoutStarAsRetrospectValues(sortedValues: [(String, Int)]) {
+        sortedValues.enumerated().forEach { index, value in
+            let ranking = index
+            let key = value.0
+            let collectionCount = value.1
+        
+            var starSize: CGFloat
+            if 0...2 ~= ranking && collectionCount == 0 { starSize = 48 }
+            else if 3...5 ~= ranking                    { starSize = 60 }
+            else                                        { starSize = 80 }
+                
+            guard let journey = Journey(rawValue: key) else { return }
+            let constraint = self.starConstraint(asJourney: journey)
+            constraint.constant = starSize
+            self.layoutIfNeeded()
+        }
+    }
+    
+    private func starConstraint(asJourney journey: Journey) -> NSLayoutConstraint {
+        switch journey {
+        case .happiness: return self.happinessStarWidthConstraint
+        case .control:   return self.controlStarWidthConstraint
+        case .thanks:    return self.thanksStarConstraint
+        case .rest:      return self.restStarWidthConstraint
+        case .growth:    return self.growthStarConstraint
+        case .change:    return self.changeStarWidthConstraint
+        case .health:    return self.healthStarConstraint
+        case .overcome:  return self.overcomeStarWidthConstraint
+        case .challenge: return self.challengeStarConstraint
+        }
     }
     
     private var capturedStarContainerImage: UIImage? {
@@ -96,6 +141,7 @@ class RetrospectTableViewCell: MainTableViewCell {
         return 51 + DeviceInfo.topSafeAreaInset
     }
     
+    private let viewModel = RetrospectViewModel()
     private let disposeBag = DisposeBag()
 
     @IBOutlet private weak var starsContainerView: UIView!

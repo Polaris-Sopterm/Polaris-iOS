@@ -2,48 +2,59 @@
 //  RetrospectViewModel.swift
 //  polaris-ios
 //
-//  Created by Dongmin on 2022/01/05.
+//  Created by Dongmin on 2022/01/26.
 //
 
+import Foundation
 import RxRelay
 import RxSwift
-import Foundation
 
-enum RetrospectReportCategory: Int, CaseIterable {
-    case foundStar
-    case closeStar
-    case farStar
-    case emotion
-    case emotionReason
+final class RetrospectViewModel {
     
-    var cellType: RetrospectReportCell.Type {
-        switch self {
-        case .foundStar:     return RetrospectFoundStarTableViewCell.self
-        case .closeStar:     return RetrospectCloseStarTableViewCell.self
-        case .farStar:       return RetrospectFarStarTableViewCell.self
-        case .emotion:       return RetrospectEmotionTableViewCell.self
-        case .emotionReason: return RetrospectEmotionReasonTableViewCell.self
-        }
-    }
-}
-
-class RetrospectReportViewModel {
-    
-    var reportDate: PolarisDate { return self.reportDateRelay.value }
-    
-    let reportDateRelay = BehaviorRelay<PolarisDate>(value: PolarisDate(year: Date.currentYear,
-                                                                         month: Date.currentMonth,
-                                                                         weekNo: Date.currentWeekNoOfMonth))
+    let journeyValueRelay: BehaviorRelay<RetrospectValuesModel> = {
+        let model = RetrospectValuesModel(
+            happiness: 0,
+            control: 0,
+            thanks: 0,
+            rest: 0,
+            growth: 0,
+            change: 0,
+            health: 0,
+            overcome: 0,
+            challenge: 0
+        )
+        return BehaviorRelay<RetrospectValuesModel>(value: model)
+    }()
     
     init(repository: RetrospectRepository = RetrospectRepositoryImpl()) {
         self.repository = repository
     }
     
-    func updateReportDate(date: PolarisDate) {
-        self.reportDateRelay.accept(date)
+    func requestRetrospectValues() {
+        let year = Date.currentYear
+        let month = Date.currentMonth
+        let weekNo = Date.currentWeekNoOfMonth
+        
+        let date = PolarisDate(year: year, month: month, weekNo: weekNo)
+        self.repository.fetchListValues(asDate: date)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, values in
+                owner.journeyValueRelay.accept(values)
+            }).disposed(by: self.disposeBag)
+    }
+    
+    func sortRetrospectValueModel(model: RetrospectValuesModel) -> [(String, Int)] {
+        guard let encodeModel = try? JSONEncoder().encode(model) else { return [] }
+        
+        let dic = try? JSONSerialization.jsonObject(with: encodeModel, options: .fragmentsAllowed) as? [String: Int]
+        guard let decodeDic = dic else { return [] }
+        
+        return decodeDic.sorted(by: { first, second in
+            return first.value < second.value
+        })
     }
     
     private let repository: RetrospectRepository
     private let disposeBag = DisposeBag()
-    
+
 }

@@ -8,11 +8,12 @@
 import Foundation
 import Moya
 
-enum LookBackAPI {
+enum RetrospectAPI {
     case createLookBack(model: LookBackModel)
+    case listValues(date: PolarisDate)
 }
 
-extension LookBackAPI: TargetType {
+extension RetrospectAPI: TargetType {
     
     var baseURL: URL {
         return URL(string: ServerHost.main)!
@@ -20,12 +21,16 @@ extension LookBackAPI: TargetType {
     
     var path: String {
         switch self {
-        case .createLookBack: return "/retrospect/v0"
+        case .createLookBack:   return "/retrospect/v0"
+        case .listValues:       return "/retrospect/v0/value"
         }
     }
     
     var method: Moya.Method {
-        return .post
+        switch self {
+        case .createLookBack:   return .post
+        case .listValues:       return .get
+        }
     }
     
     var sampleData: Data {
@@ -53,6 +58,13 @@ extension LookBackAPI: TargetType {
                                                    "record3": model.record3
                                                   ],
                                       encoding: JSONEncoding.default)
+        case .listValues(let date):
+            let param: [String: String] = [
+                "year": "\(date.year)",
+                "month": "\(date.month)",
+                "weekNo": "\(date.weekNo)"
+            ]
+            return .requestParameters(parameters: param, encoding: URLEncoding.default)
         }
        
     }

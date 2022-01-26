@@ -318,6 +318,12 @@
 		CE5C5B0127A0DE8400FDCE32 /* PolarisDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5C5B0027A0DE8400FDCE32 /* PolarisDate.swift */; };
 		CE5C5B0227A0DE8F00FDCE32 /* PolarisDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5C5B0027A0DE8400FDCE32 /* PolarisDate.swift */; };
 		CE5C5B0327A0DE8F00FDCE32 /* PolarisDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5C5B0027A0DE8400FDCE32 /* PolarisDate.swift */; };
+		CE5C5B0927A0EB2000FDCE32 /* RetrospectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5C5B0827A0EB2000FDCE32 /* RetrospectViewModel.swift */; };
+		CE5C5B0A27A0EB2000FDCE32 /* RetrospectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5C5B0827A0EB2000FDCE32 /* RetrospectViewModel.swift */; };
+		CE5C5B0B27A0EB2000FDCE32 /* RetrospectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5C5B0827A0EB2000FDCE32 /* RetrospectViewModel.swift */; };
+		CE5C5B0D27A0EEDB00FDCE32 /* RetrospectValuesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5C5B0C27A0EEDB00FDCE32 /* RetrospectValuesModel.swift */; };
+		CE5C5B0E27A0EEDB00FDCE32 /* RetrospectValuesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5C5B0C27A0EEDB00FDCE32 /* RetrospectValuesModel.swift */; };
+		CE5C5B0F27A0EEDB00FDCE32 /* RetrospectValuesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5C5B0C27A0EEDB00FDCE32 /* RetrospectValuesModel.swift */; };
 		CE63050B2667E36E00EBC1D4 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE63050A2667E36E00EBC1D4 /* UserAPI.swift */; };
 		CE63050F2667E7BA00EBC1D4 /* NetworkInform.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE63050E2667E7BA00EBC1D4 /* NetworkInform.swift */; };
 		CE6CE90A26E25E3300BDDB6C /* ConfirmPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6CE90926E25E3300BDDB6C /* ConfirmPopupView.xib */; };
@@ -402,9 +408,9 @@
 		CEA5D98F2785A43C00A6D6DE /* RetrospectReportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA5D98E2785A43C00A6D6DE /* RetrospectReportVC.swift */; };
 		CEA5D9902785A43C00A6D6DE /* RetrospectReportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA5D98E2785A43C00A6D6DE /* RetrospectReportVC.swift */; };
 		CEA5D9912785A43C00A6D6DE /* RetrospectReportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA5D98E2785A43C00A6D6DE /* RetrospectReportVC.swift */; };
-		CEA5D9942785A67600A6D6DE /* RetrospectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA5D9932785A67600A6D6DE /* RetrospectViewModel.swift */; };
-		CEA5D9952785A67600A6D6DE /* RetrospectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA5D9932785A67600A6D6DE /* RetrospectViewModel.swift */; };
-		CEA5D9962785A67600A6D6DE /* RetrospectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA5D9932785A67600A6D6DE /* RetrospectViewModel.swift */; };
+		CEA5D9942785A67600A6D6DE /* RetrospectReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA5D9932785A67600A6D6DE /* RetrospectReportViewModel.swift */; };
+		CEA5D9952785A67600A6D6DE /* RetrospectReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA5D9932785A67600A6D6DE /* RetrospectReportViewModel.swift */; };
+		CEA5D9962785A67600A6D6DE /* RetrospectReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA5D9932785A67600A6D6DE /* RetrospectReportViewModel.swift */; };
 		CEA5D99C2785C54D00A6D6DE /* RetrospectFoundStarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA5D9982785C54D00A6D6DE /* RetrospectFoundStarTableViewCell.xib */; };
 		CEA5D99D2785C54D00A6D6DE /* RetrospectFoundStarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA5D9982785C54D00A6D6DE /* RetrospectFoundStarTableViewCell.xib */; };
 		CEA5D99E2785C54D00A6D6DE /* RetrospectFoundStarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA5D9982785C54D00A6D6DE /* RetrospectFoundStarTableViewCell.xib */; };
@@ -532,9 +538,9 @@
 		EC81D50627853E59008608EA /* LookBackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB52B82278485A0000084CF /* LookBackModel.swift */; };
 		EC81D50727853E5C008608EA /* LookBackResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC81D50327853CE9008608EA /* LookBackResponseModel.swift */; };
 		EC81D50827853E5C008608EA /* LookBackResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC81D50327853CE9008608EA /* LookBackResponseModel.swift */; };
-		EC81D50A27856DCE008608EA /* LookBackAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC81D50927856DCE008608EA /* LookBackAPI.swift */; };
-		EC81D50B27856F1E008608EA /* LookBackAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC81D50927856DCE008608EA /* LookBackAPI.swift */; };
-		EC81D50C27856F1E008608EA /* LookBackAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC81D50927856DCE008608EA /* LookBackAPI.swift */; };
+		EC81D50A27856DCE008608EA /* RetrospectAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC81D50927856DCE008608EA /* RetrospectAPI.swift */; };
+		EC81D50B27856F1E008608EA /* RetrospectAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC81D50927856DCE008608EA /* RetrospectAPI.swift */; };
+		EC81D50C27856F1E008608EA /* RetrospectAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC81D50927856DCE008608EA /* RetrospectAPI.swift */; };
 		EC8C688626CA1BFB003CFA71 /* WeekPicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC8C688526CA1BFB003CFA71 /* WeekPicker.storyboard */; };
 		EC8C688726CA1BFB003CFA71 /* WeekPicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC8C688526CA1BFB003CFA71 /* WeekPicker.storyboard */; };
 		EC8C688826CA1BFB003CFA71 /* WeekPicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC8C688526CA1BFB003CFA71 /* WeekPicker.storyboard */; };
@@ -759,6 +765,8 @@
 		CE5C5AF7279D9ED600FDCE32 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		CE5C5AFC27A0DCDF00FDCE32 /* RetrospectRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrospectRepository.swift; sourceTree = "<group>"; };
 		CE5C5B0027A0DE8400FDCE32 /* PolarisDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarisDate.swift; sourceTree = "<group>"; };
+		CE5C5B0827A0EB2000FDCE32 /* RetrospectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrospectViewModel.swift; sourceTree = "<group>"; };
+		CE5C5B0C27A0EEDB00FDCE32 /* RetrospectValuesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrospectValuesModel.swift; sourceTree = "<group>"; };
 		CE63050A2667E36E00EBC1D4 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		CE63050E2667E7BA00EBC1D4 /* NetworkInform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInform.swift; sourceTree = "<group>"; };
 		CE6CE90926E25E3300BDDB6C /* ConfirmPopupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConfirmPopupView.xib; sourceTree = "<group>"; };
@@ -794,7 +802,7 @@
 		CEA44E6D267B3BE300A05650 /* TodoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodoTableViewCell.xib; sourceTree = "<group>"; };
 		CEA5D9892785A3FC00A6D6DE /* Retrospect.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Retrospect.storyboard; sourceTree = "<group>"; };
 		CEA5D98E2785A43C00A6D6DE /* RetrospectReportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrospectReportVC.swift; sourceTree = "<group>"; };
-		CEA5D9932785A67600A6D6DE /* RetrospectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrospectViewModel.swift; sourceTree = "<group>"; };
+		CEA5D9932785A67600A6D6DE /* RetrospectReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrospectReportViewModel.swift; sourceTree = "<group>"; };
 		CEA5D9982785C54D00A6D6DE /* RetrospectFoundStarTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RetrospectFoundStarTableViewCell.xib; sourceTree = "<group>"; };
 		CEA5D9A42785D1D500A6D6DE /* RetrospectFoundStarItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RetrospectFoundStarItemCell.xib; sourceTree = "<group>"; };
 		CEA5D9AC2786EE3600A6D6DE /* RetrospectCloseStarTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RetrospectCloseStarTableViewCell.xib; sourceTree = "<group>"; };
@@ -865,7 +873,7 @@
 		EC7A3BF726394CC900B59C98 /* MainTodoCVCViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTodoCVCViewModel.swift; sourceTree = "<group>"; };
 		EC7A3BFA2639537A00B59C98 /* MainTodoTVCViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTodoTVCViewModel.swift; sourceTree = "<group>"; };
 		EC81D50327853CE9008608EA /* LookBackResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookBackResponseModel.swift; sourceTree = "<group>"; };
-		EC81D50927856DCE008608EA /* LookBackAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookBackAPI.swift; sourceTree = "<group>"; };
+		EC81D50927856DCE008608EA /* RetrospectAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrospectAPI.swift; sourceTree = "<group>"; };
 		EC8C688526CA1BFB003CFA71 /* WeekPicker.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WeekPicker.storyboard; sourceTree = "<group>"; };
 		EC8C688926CA1C46003CFA71 /* WeekPickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekPickerVC.swift; sourceTree = "<group>"; };
 		EC8C907C277B3845008BE7CD /* LookBackViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookBackViewModel.swift; sourceTree = "<group>"; };
@@ -1195,7 +1203,7 @@
 				CE2952E12687893000E21871 /* TodoAPI.swift */,
 				ECA0EEE926B3ED730040F42C /* HomeAPI.swift */,
 				CE40B3E826C00E4E0000151F /* JourneyAPI.swift */,
-				EC81D50927856DCE008608EA /* LookBackAPI.swift */,
+				EC81D50927856DCE008608EA /* RetrospectAPI.swift */,
 			);
 			path = Moya;
 			sourceTree = "<group>";
@@ -1230,7 +1238,8 @@
 		CEA5D9922785A66900A6D6DE /* Retrospect */ = {
 			isa = PBXGroup;
 			children = (
-				CEA5D9932785A67600A6D6DE /* RetrospectViewModel.swift */,
+				CEA5D9932785A67600A6D6DE /* RetrospectReportViewModel.swift */,
+				CE5C5B0827A0EB2000FDCE32 /* RetrospectViewModel.swift */,
 			);
 			path = Retrospect;
 			sourceTree = "<group>";
@@ -1540,6 +1549,7 @@
 			children = (
 				ECB52B82278485A0000084CF /* LookBackModel.swift */,
 				EC81D50327853CE9008608EA /* LookBackResponseModel.swift */,
+				CE5C5B0C27A0EEDB00FDCE32 /* RetrospectValuesModel.swift */,
 			);
 			path = LookBack;
 			sourceTree = "<group>";
@@ -2053,14 +2063,14 @@
 				ECDC5A572636A0AB00A1B5A9 /* MainTodoContentTVC.swift in Sources */,
 				ECA4945B262C177D00CC2EB8 /* ImageName.swift in Sources */,
 				CE04A036262340D1007C98E2 /* AppDelegate.swift in Sources */,
-				EC81D50A27856DCE008608EA /* LookBackAPI.swift in Sources */,
+				EC81D50A27856DCE008608EA /* RetrospectAPI.swift in Sources */,
 				CE04A038262340D1007C98E2 /* SceneDelegate.swift in Sources */,
 				CE04A060262346C9007C98E2 /* UICollectionView+.swift in Sources */,
 				EC0E353727785D1B00B6B33F /* LookBackPageViewController.swift in Sources */,
 				ECDC5A4D2635530300A1B5A9 /* MainTodoCVC.swift in Sources */,
 				CED6B6E826CAD10300D37647 /* SettingViewModel.swift in Sources */,
 				CE574DC1263589180046D20A /* PolarisToastView.swift in Sources */,
-				CEA5D9942785A67600A6D6DE /* RetrospectViewModel.swift in Sources */,
+				CEA5D9942785A67600A6D6DE /* RetrospectReportViewModel.swift in Sources */,
 				CEC19AE72650F87400DA747C /* DayTodoHeaderView.swift in Sources */,
 				CE6CE91226E27E7500BDDB6C /* SettingVC.swift in Sources */,
 				CE40B3FE26C041630000151F /* OnboardingCollectionViewCell.swift in Sources */,
@@ -2070,6 +2080,7 @@
 				EC81D50427853CE9008608EA /* LookBackResponseModel.swift in Sources */,
 				CEE574E926307B4400EA64B7 /* AddTodoDayViewModel.swift in Sources */,
 				CE04A06626234CEE007C98E2 /* UITableView+.swift in Sources */,
+				CE5C5B0D27A0EEDB00FDCE32 /* RetrospectValuesModel.swift in Sources */,
 				ECA494292628298B00CC2EB8 /* TodoModel.swift in Sources */,
 				ECC544B6279C01C70016D391 /* RetrospectReportCell.swift in Sources */,
 				CE574DA526352CB60046D20A /* AddTodoSelectStarViewModel.swift in Sources */,
@@ -2080,6 +2091,7 @@
 				EC0E354C277869E900B6B33F /* LookBackFirstStarCollectionViewCell.swift in Sources */,
 				ECA4947E262C670000CC2EB8 /* MainStarTVCViewModel.swift in Sources */,
 				CEA3CFF126A92B8900577DA4 /* TodoDayListModel.swift in Sources */,
+				CE5C5B0927A0EB2000FDCE32 /* RetrospectViewModel.swift in Sources */,
 				CEA3CFD726A85C4B00577DA4 /* ShootingComet.swift in Sources */,
 				CE5C5AF4279D916D00FDCE32 /* PerDayItemCollectionViewCell.swift in Sources */,
 				ECB639B12781DC43006C7D29 /* LookBackFourthViewController.swift in Sources */,
@@ -2217,14 +2229,14 @@
 				CE29531A2687A0A500E21871 /* ImageName.swift in Sources */,
 				ECD002A426B3EFD6005F733C /* HomeModel.swift in Sources */,
 				CE29531B2687A0A500E21871 /* AppDelegate.swift in Sources */,
-				EC81D50B27856F1E008608EA /* LookBackAPI.swift in Sources */,
+				EC81D50B27856F1E008608EA /* RetrospectAPI.swift in Sources */,
 				CE29531C2687A0A500E21871 /* SceneDelegate.swift in Sources */,
 				CE29531D2687A0A500E21871 /* UICollectionView+.swift in Sources */,
 				EC0E353827785D1B00B6B33F /* LookBackPageViewController.swift in Sources */,
 				CE29531E2687A0A500E21871 /* MainTodoCVC.swift in Sources */,
 				CED6B6E926CAD10300D37647 /* SettingViewModel.swift in Sources */,
 				CE29531F2687A0A500E21871 /* PolarisToastView.swift in Sources */,
-				CEA5D9952785A67600A6D6DE /* RetrospectViewModel.swift in Sources */,
+				CEA5D9952785A67600A6D6DE /* RetrospectReportViewModel.swift in Sources */,
 				CE2953202687A0A500E21871 /* DayTodoHeaderView.swift in Sources */,
 				CE6CE91326E27E7500BDDB6C /* SettingVC.swift in Sources */,
 				CE40B3FF26C041630000151F /* OnboardingCollectionViewCell.swift in Sources */,
@@ -2234,6 +2246,7 @@
 				EC81D50727853E5C008608EA /* LookBackResponseModel.swift in Sources */,
 				CE2953242687A0A500E21871 /* AddTodoDayViewModel.swift in Sources */,
 				CE2953252687A0A500E21871 /* UITableView+.swift in Sources */,
+				CE5C5B0E27A0EEDB00FDCE32 /* RetrospectValuesModel.swift in Sources */,
 				CE2953262687A0A500E21871 /* TodoModel.swift in Sources */,
 				ECC544B7279C01C70016D391 /* RetrospectReportCell.swift in Sources */,
 				CE2953272687A0A500E21871 /* AddTodoSelectStarViewModel.swift in Sources */,
@@ -2244,6 +2257,7 @@
 				EC0E354D277869E900B6B33F /* LookBackFirstStarCollectionViewCell.swift in Sources */,
 				CE29532B2687A0A500E21871 /* MainStarTVCViewModel.swift in Sources */,
 				CEA3CFF226A92B8900577DA4 /* TodoDayListModel.swift in Sources */,
+				CE5C5B0A27A0EB2000FDCE32 /* RetrospectViewModel.swift in Sources */,
 				CEA3CFD826A85C6500577DA4 /* ShootingComet.swift in Sources */,
 				CE5C5AF5279D916D00FDCE32 /* PerDayItemCollectionViewCell.swift in Sources */,
 				ECB639B22781DC43006C7D29 /* LookBackFourthViewController.swift in Sources */,
@@ -2381,14 +2395,14 @@
 				CE43D04226613D66003126F2 /* ImageName.swift in Sources */,
 				ECD002A326B3EFD5005F733C /* HomeModel.swift in Sources */,
 				CE43D04326613D66003126F2 /* AppDelegate.swift in Sources */,
-				EC81D50C27856F1E008608EA /* LookBackAPI.swift in Sources */,
+				EC81D50C27856F1E008608EA /* RetrospectAPI.swift in Sources */,
 				CE43D04426613D66003126F2 /* SceneDelegate.swift in Sources */,
 				CE43D04526613D66003126F2 /* UICollectionView+.swift in Sources */,
 				EC0E353927785D1B00B6B33F /* LookBackPageViewController.swift in Sources */,
 				CE43D04626613D66003126F2 /* MainTodoCVC.swift in Sources */,
 				CED6B6EA26CAD10300D37647 /* SettingViewModel.swift in Sources */,
 				CE43D04726613D66003126F2 /* PolarisToastView.swift in Sources */,
-				CEA5D9962785A67600A6D6DE /* RetrospectViewModel.swift in Sources */,
+				CEA5D9962785A67600A6D6DE /* RetrospectReportViewModel.swift in Sources */,
 				CE43D04826613D66003126F2 /* DayTodoHeaderView.swift in Sources */,
 				CE6CE91426E27E7500BDDB6C /* SettingVC.swift in Sources */,
 				CE40B40026C041630000151F /* OnboardingCollectionViewCell.swift in Sources */,
@@ -2398,6 +2412,7 @@
 				EC81D50827853E5C008608EA /* LookBackResponseModel.swift in Sources */,
 				CE43D04C26613D66003126F2 /* AddTodoDayViewModel.swift in Sources */,
 				CE43D04D26613D66003126F2 /* UITableView+.swift in Sources */,
+				CE5C5B0F27A0EEDB00FDCE32 /* RetrospectValuesModel.swift in Sources */,
 				CE43D04E26613D66003126F2 /* TodoModel.swift in Sources */,
 				ECC544B8279C01C70016D391 /* RetrospectReportCell.swift in Sources */,
 				CE43D04F26613D66003126F2 /* AddTodoSelectStarViewModel.swift in Sources */,
@@ -2408,6 +2423,7 @@
 				EC0E354E277869E900B6B33F /* LookBackFirstStarCollectionViewCell.swift in Sources */,
 				CE43D05226613D66003126F2 /* MainStarTVCViewModel.swift in Sources */,
 				CEA3CFF326A92B8900577DA4 /* TodoDayListModel.swift in Sources */,
+				CE5C5B0B27A0EB2000FDCE32 /* RetrospectViewModel.swift in Sources */,
 				CEA3CFD926A85C6500577DA4 /* ShootingComet.swift in Sources */,
 				CE5C5AF6279D916D00FDCE32 /* PerDayItemCollectionViewCell.swift in Sources */,
 				ECB639B32781DC43006C7D29 /* LookBackFourthViewController.swift in Sources */,
