@@ -26,6 +26,14 @@ enum MainSceneCellType: Int, CaseIterable {
         }
     }
     
+    var statusBarStyle: UIStatusBarStyle {
+        switch self {
+        case .retrospect: return .lightContent
+        case .main:       return .lightContent
+        case .todoList:   return .darkContent
+        }
+    }
+    
 }
 
 

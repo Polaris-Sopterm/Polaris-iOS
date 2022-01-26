@@ -48,9 +48,11 @@ class WeekPickerVC: HalfModalVC {
     }
     
     private func setWeekPicker() {
-        self.weekPicker.selectRow(2, inComponent: 0, animated: false)
         self.weekPicker.selectRow(self.month-1, inComponent: 1, animated: false)
         self.weekPicker.selectRow(self.weekNo-1, inComponent: 2, animated: false)
+        
+        guard let yearIndex = self.yearList.firstIndex(of: self.year) else { return }
+        self.weekPicker.selectRow(yearIndex, inComponent: 0, animated: false)
     }
     
     @IBAction func closeButtonAction(_ sender: Any) {

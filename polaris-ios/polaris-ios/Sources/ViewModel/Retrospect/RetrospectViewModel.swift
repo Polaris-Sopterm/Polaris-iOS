@@ -5,6 +5,8 @@
 //  Created by Dongmin on 2022/01/05.
 //
 
+import RxRelay
+import RxSwift
 import Foundation
 
 enum RetrospectReportCategory: Int, CaseIterable {
@@ -23,11 +25,25 @@ enum RetrospectReportCategory: Int, CaseIterable {
         case .emotionReason: return RetrospectEmotionReasonTableViewCell.self
         }
     }
-    
 }
 
 class RetrospectReportViewModel {
     
+    var reportDate: PolarisDate { return self.reportDateRelay.value }
     
+    let reportDateRelay = BehaviorRelay<PolarisDate>(value: PolarisDate(year: Date.currentYear,
+                                                                         month: Date.currentMonth,
+                                                                         weekNo: Date.currentWeekNoOfMonth))
+    
+    init(repository: RetrospectRepository = RetrospectRepositoryImpl()) {
+        self.repository = repository
+    }
+    
+    func updateReportDate(date: PolarisDate) {
+        self.reportDateRelay.accept(date)
+    }
+    
+    private let repository: RetrospectRepository
+    private let disposeBag = DisposeBag()
     
 }

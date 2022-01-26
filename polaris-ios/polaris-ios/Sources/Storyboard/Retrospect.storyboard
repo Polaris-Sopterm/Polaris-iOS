@@ -83,6 +83,7 @@
                     <connections>
                         <outlet property="backButton" destination="5hZ-Kn-uxe" id="PmO-fP-miO"/>
                         <outlet property="calendarButton" destination="TNg-kG-jMA" id="fig-q8-imJ"/>
+                        <outlet property="dateLabel" destination="Yt5-AQ-e1K" id="dbV-kr-b6P"/>
                         <outlet property="tableView" destination="bxW-Pa-r2m" id="rZ2-iQ-caO"/>
                     </connections>
                 </viewController>

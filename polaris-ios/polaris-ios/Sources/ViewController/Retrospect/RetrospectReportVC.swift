@@ -16,6 +16,7 @@ class RetrospectReportVC: UIViewController {
         self.setupButtons()
         self.registerCell()
         self.setupTableView()
+        self.observeViewModel()
     }
     
     private func registerCell() {
@@ -39,10 +40,27 @@ class RetrospectReportVC: UIViewController {
         }).disposed(by: self.disposeBag)
     }
     
+    private func observeViewModel() {
+        self.viewModel.reportDateRelay
+            .withUnretained(self)
+            .observeOnMain(onNext: { owner, currentDate in
+                let weekNoDic = [1: "첫째주", 2: "둘째주", 3: "셋째주", 4: "넷째주", 5: "다섯째주"]
+                
+                let yearText = "\(currentDate.year)년 "
+                let monthText = "\(currentDate.month)월 "
+                guard let weekNoText = weekNoDic[currentDate.weekNo] else { return }
+                
+                self.dateLabel.text = yearText + monthText + weekNoText
+            }).disposed(by: self.disposeBag)
+    }
+    
     private func presentDatePickerView() {
         let viewController = WeekPickerVC.instantiateFromStoryboard(StoryboardName.weekPicker)
         
         guard let pickerVC = viewController else { return }
+        
+        let reportDate = self.viewModel.reportDate
+        pickerVC.setWeekInfo(year: reportDate.year, month: reportDate.month, weekNo: reportDate.weekNo)
         pickerVC.weekDelegate = self
         pickerVC.presentWithAnimation(from: self)
     }
@@ -50,6 +68,7 @@ class RetrospectReportVC: UIViewController {
     private let disposeBag = DisposeBag()
     private let viewModel = RetrospectReportViewModel()
     
+    @IBOutlet private weak var dateLabel: UILabel!
     @IBOutlet private weak var backButton: UIButton!
     @IBOutlet private weak var calendarButton: UIButton!
     @IBOutlet private weak var tableView: UITableView!
@@ -88,6 +107,8 @@ extension RetrospectReportVC: UITableViewDelegate {
 extension RetrospectReportVC: WeekPickerDelegate {
     
     func apply(year: Int, month: Int, weekNo: Int, weekText: String) {
+        let date = PolarisDate(year: year, month: month, weekNo: weekNo)
+        self.viewModel.updateReportDate(date: date)
     }
     
 }
