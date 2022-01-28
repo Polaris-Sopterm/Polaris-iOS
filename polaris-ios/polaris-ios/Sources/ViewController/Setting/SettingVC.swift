@@ -13,10 +13,16 @@ final class SettingVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setupNavigationProperty()
         self.setupLoadingIndicatorView()
         self.setupTableView()
         self.bindButtons()
         self.observeViewModel()
+    }
+    
+    private func setupNavigationProperty() {
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
     
     private func setupLoadingIndicatorView() {
