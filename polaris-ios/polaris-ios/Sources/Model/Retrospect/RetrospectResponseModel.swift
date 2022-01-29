@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct LookBackResponseModel: Codable {
+struct RetrospectResponseModel: Codable {
     let id: Int
 }

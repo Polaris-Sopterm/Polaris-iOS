@@ -31,6 +31,7 @@ class RetrospectReportViewModel {
     
     var reportDate: PolarisDate { return self.reportDateRelay.value }
     
+    let loadingSubject = PublishSubject<Bool>()
     let reportDateRelay = BehaviorRelay<PolarisDate>(value: PolarisDate(year: Date.currentYear,
                                                                          month: Date.currentMonth,
                                                                          weekNo: Date.currentWeekNoOfMonth))
@@ -41,6 +42,16 @@ class RetrospectReportViewModel {
     
     func updateReportDate(date: PolarisDate) {
         self.reportDateRelay.accept(date)
+    }
+    
+    func requestRetrospectReport(ofDate date: PolarisDate) {
+        self.loadingSubject.onNext(true)
+        self.repository.fetchRetrospect(ofDate: date)
+            .do(onNext: { [weak self] _ in self?.loadingSubject.onNext(false) })
+            .observeOnMain(onNext: { _ in
+                
+            })
+            .disposed(by: self.disposeBag)
     }
     
     private let repository: RetrospectRepository

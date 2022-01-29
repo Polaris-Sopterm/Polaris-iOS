@@ -9,8 +9,9 @@ import Foundation
 import Moya
 
 enum RetrospectAPI {
-    case createLookBack(model: LookBackModel)
+    case createLookBack(model: RetrospectModel)
     case listValues(date: PolarisDate)
+    case getRetrospect(date: PolarisDate)
 }
 
 extension RetrospectAPI: TargetType {
@@ -23,13 +24,15 @@ extension RetrospectAPI: TargetType {
         switch self {
         case .createLookBack:   return "/retrospect/v0"
         case .listValues:       return "/retrospect/v0/value"
+        case .getRetrospect:    return "/retrospect/v0/"
         }
     }
     
     var method: Moya.Method {
         switch self {
         case .createLookBack:   return .post
-        case .listValues:       return .get
+        case .listValues:       fallthrough
+        case .getRetrospect:    return .get
         }
     }
     
@@ -64,7 +67,15 @@ extension RetrospectAPI: TargetType {
                 "month": "\(date.month)",
                 "weekNo": "\(date.weekNo)"
             ]
-            return .requestParameters(parameters: param, encoding: URLEncoding.default)
+            return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
+            
+        case .getRetrospect(let date):
+            let param: [String: String] = [
+                "year": "\(date.year)",
+                "month": "\(date.month)",
+                "weekNo": "\(date.weekNo)"
+            ]
+            return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
         }
        
     }

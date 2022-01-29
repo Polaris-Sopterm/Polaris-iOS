@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RetrospectValuesModel: Codable {
+struct RetrospectValueListModel: Codable {
     let happiness: Int
     let control: Int
     let thanks: Int

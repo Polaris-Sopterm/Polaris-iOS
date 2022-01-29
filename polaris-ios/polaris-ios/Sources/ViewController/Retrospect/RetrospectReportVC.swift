@@ -51,7 +51,22 @@ class RetrospectReportVC: UIViewController {
                 guard let weekNoText = weekNoDic[currentDate.weekNo] else { return }
                 
                 self.dateLabel.text = yearText + monthText + weekNoText
-            }).disposed(by: self.disposeBag)
+                
+                let date = PolarisDate(
+                    year: currentDate.year,
+                    month: currentDate.month,
+                    weekNo: currentDate.weekNo
+                )
+                owner.viewModel.requestRetrospectReport(ofDate: date)
+            })
+            .disposed(by: self.disposeBag)
+        
+        self.viewModel.loadingSubject
+            .withUnretained(self)
+            .observeOnMain(onNext: { owner, loading in
+                loading ? owner.startIndicatorAnimation() : owner.stopIndicatorAnimation()
+            })
+            .disposed(by: self.disposeBag)
     }
     
     private func presentDatePickerView() {
@@ -65,6 +80,16 @@ class RetrospectReportVC: UIViewController {
         pickerVC.presentWithAnimation(from: self)
     }
     
+    private func startIndicatorAnimation() {
+        self.indicatorContainerView.isHidden = false
+        self.indicatorView.startAnimating()
+    }
+    
+    private func stopIndicatorAnimation() {
+        self.indicatorContainerView.isHidden = true
+        self.indicatorView.stopAnimating()
+    }
+    
     private let disposeBag = DisposeBag()
     private let viewModel = RetrospectReportViewModel()
     
@@ -72,6 +97,9 @@ class RetrospectReportVC: UIViewController {
     @IBOutlet private weak var backButton: UIButton!
     @IBOutlet private weak var calendarButton: UIButton!
     @IBOutlet private weak var tableView: UITableView!
+    
+    @IBOutlet private weak var indicatorContainerView: UIView!
+    @IBOutlet private weak var indicatorView: UIActivityIndicatorView!
     
 }
 

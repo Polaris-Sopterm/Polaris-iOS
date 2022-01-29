@@ -53,7 +53,7 @@ class RetrospectFoundStarTableViewCell: RetrospectReportCell {
                                                                    .foregroundColor: UIColor.white])
         
         let highlightedRange = (titleText as NSString).range(of: highlightedText)
-        attributeText.addAttribute(.font, value: UIFont.systemFont(ofSize: 18, weight: .medium), range: highlightedRange)
+        attributeText.addAttribute(.font, value: UIFont.systemFont(ofSize: 18, weight: .semibold), range: highlightedRange)
         self.titleLabel.attributedText = attributeText
     }
     

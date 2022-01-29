@@ -380,7 +380,7 @@ final class LookBackViewModel {
         guard self.thirdvcAnswerInfo.count == 4 else { return }
         
         
-        let resultValue = LookBackValueModel(y: self.getSelectedStars(starList: self.secondVCStarInfo1),
+        let resultValue = RetrospectValueModel(y: self.getSelectedStars(starList: self.secondVCStarInfo1),
                                              n: self.getSelectedStars(starList: self.secondVCStarInfo2),
                                              health: self.thirdvcAnswerInfo[0],
                                              happy: self.thirdvcAnswerInfo[1],
@@ -392,12 +392,12 @@ final class LookBackViewModel {
         
         let recordInfo = self.makeRecordInfo()
         
-        let resultModel = LookBackModel(year: String(Date.currentYear), month: String(Date.currentMonth), weekNo: String(Date.currentWeekNoOfMonth), value: resultValue, record1: recordInfo[0], record2: recordInfo[1], record3: recordInfo[2])
+        let resultModel = RetrospectModel(year: Date.currentYear, month: Date.currentMonth, weekNo: Date.currentWeekNoOfMonth, value: resultValue, record1: recordInfo[0], record2: recordInfo[1], record3: recordInfo[2])
         
         let registAPI = RetrospectAPI.createLookBack(model: resultModel)
         
         NetworkManager.request(apiType: registAPI)
-            .subscribe(onSuccess: { [weak self] (responseModel: LookBackResponseModel) in
+            .subscribe(onSuccess: { [weak self] (responseModel: RetrospectResponseModel) in
                 self?.lookbackEnd = true
             },onFailure: { [weak self] error in
                 self?.lookbackEnd = true

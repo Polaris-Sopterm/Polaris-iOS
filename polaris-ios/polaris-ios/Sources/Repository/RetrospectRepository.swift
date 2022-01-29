@@ -9,14 +9,20 @@ import RxSwift
 import Foundation
 
 protocol RetrospectRepository {
-    func fetchListValues(asDate date: PolarisDate) -> Observable<RetrospectValuesModel>
+    func fetchListValues(ofDate date: PolarisDate) -> Observable<RetrospectValueListModel>
+    func fetchRetrospect(ofDate date: PolarisDate) -> Observable<RetrospectModel>
 }
 
 final class RetrospectRepositoryImpl: RetrospectRepository {
     
-    func fetchListValues(asDate date: PolarisDate) -> Observable<RetrospectValuesModel> {
+    func fetchListValues(ofDate date: PolarisDate) -> Observable<RetrospectValueListModel> {
         let listValuesAPI = RetrospectAPI.listValues(date: date)
         return NetworkManager.request(apiType: listValuesAPI).asObservable()
+    }
+    
+    func fetchRetrospect(ofDate date: PolarisDate) -> Observable<RetrospectModel> {
+        let getRetrospectAPI = RetrospectAPI.getRetrospect(date: date)
+        return NetworkManager.request(apiType: getRetrospectAPI).asObservable()
     }
     
 }

@@ -11,8 +11,8 @@ import RxSwift
 
 final class RetrospectViewModel {
     
-    let journeyValueRelay: BehaviorRelay<RetrospectValuesModel> = {
-        let model = RetrospectValuesModel(
+    let journeyValueRelay: BehaviorRelay<RetrospectValueListModel> = {
+        let model = RetrospectValueListModel(
             happiness: 0,
             control: 0,
             thanks: 0,
@@ -23,7 +23,7 @@ final class RetrospectViewModel {
             overcome: 0,
             challenge: 0
         )
-        return BehaviorRelay<RetrospectValuesModel>(value: model)
+        return BehaviorRelay<RetrospectValueListModel>(value: model)
     }()
     
     init(repository: RetrospectRepository = RetrospectRepositoryImpl()) {
@@ -36,14 +36,14 @@ final class RetrospectViewModel {
         let weekNo = Date.currentWeekNoOfMonth
         
         let date = PolarisDate(year: year, month: month, weekNo: weekNo)
-        self.repository.fetchListValues(asDate: date)
+        self.repository.fetchListValues(ofDate: date)
             .withUnretained(self)
             .subscribe(onNext: { owner, values in
                 owner.journeyValueRelay.accept(values)
             }).disposed(by: self.disposeBag)
     }
     
-    func sortRetrospectValueModel(model: RetrospectValuesModel) -> [(String, Int)] {
+    func sortRetrospectValueModel(model: RetrospectValueListModel) -> [(String, Int)] {
         guard let encodeModel = try? JSONEncoder().encode(model) else { return [] }
         
         let dic = try? JSONSerialization.jsonObject(with: encodeModel, options: .fragmentsAllowed) as? [String: Int]
