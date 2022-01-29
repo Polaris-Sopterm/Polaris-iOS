@@ -439,6 +439,9 @@
 		CEB9EA6027A42BC20017F59B /* RetrospectCloseStarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB9EA5F27A42BC20017F59B /* RetrospectCloseStarViewModel.swift */; };
 		CEB9EA6127A42BC20017F59B /* RetrospectCloseStarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB9EA5F27A42BC20017F59B /* RetrospectCloseStarViewModel.swift */; };
 		CEB9EA6227A42BC20017F59B /* RetrospectCloseStarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB9EA5F27A42BC20017F59B /* RetrospectCloseStarViewModel.swift */; };
+		CEB9EA6427A5673B0017F59B /* TodoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB9EA6327A5673B0017F59B /* TodoRepository.swift */; };
+		CEB9EA6527A5673B0017F59B /* TodoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB9EA6327A5673B0017F59B /* TodoRepository.swift */; };
+		CEB9EA6627A5673B0017F59B /* TodoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB9EA6327A5673B0017F59B /* TodoRepository.swift */; };
 		CEC19AE42650F86100DA747C /* DayTodoHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC19AE32650F86100DA747C /* DayTodoHeaderView.xib */; };
 		CEC19AE72650F87400DA747C /* DayTodoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC19AE62650F87400DA747C /* DayTodoHeaderView.swift */; };
 		CEC19AEB265103AA00DA747C /* DayTodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC19AE9265103AA00DA747C /* DayTodoTableViewCell.swift */; };
@@ -822,6 +825,7 @@
 		CEB9EA5727A42A0D0017F59B /* RetrospectReportViewModelFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrospectReportViewModelFormatter.swift; sourceTree = "<group>"; };
 		CEB9EA5B27A42A710017F59B /* RetrospectFarStarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrospectFarStarViewModel.swift; sourceTree = "<group>"; };
 		CEB9EA5F27A42BC20017F59B /* RetrospectCloseStarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrospectCloseStarViewModel.swift; sourceTree = "<group>"; };
+		CEB9EA6327A5673B0017F59B /* TodoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRepository.swift; sourceTree = "<group>"; };
 		CEC19AE32650F86100DA747C /* DayTodoHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DayTodoHeaderView.xib; sourceTree = "<group>"; };
 		CEC19AE62650F87400DA747C /* DayTodoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayTodoHeaderView.swift; sourceTree = "<group>"; };
 		CEC19AE9265103AA00DA747C /* DayTodoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayTodoTableViewCell.swift; sourceTree = "<group>"; };
@@ -1205,6 +1209,7 @@
 			isa = PBXGroup;
 			children = (
 				CE5C5AFC27A0DCDF00FDCE32 /* RetrospectRepository.swift */,
+				CEB9EA6327A5673B0017F59B /* TodoRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -2041,6 +2046,7 @@
 				CE207B892661CBC7009A812A /* ServerHost.swift in Sources */,
 				ECC544B2279C013F0016D391 /* RetrospectFoundStarItemCell.swift in Sources */,
 				CE6CE90E26E25E4800BDDB6C /* ConfirmPopupView.swift in Sources */,
+				CEB9EA6427A5673B0017F59B /* TodoRepository.swift in Sources */,
 				ECC544C7279C01E70016D391 /* RetrospectEmotionReasonTableViewCell.swift in Sources */,
 				CEC48ED4262DCA9100FD887F /* DropdownItemTableViewCell.swift in Sources */,
 				ECB5443326D3CA0500FA4C50 /* NickChangeVC.swift in Sources */,
@@ -2210,6 +2216,7 @@
 				CE2952FE2687A0A500E21871 /* DropdownItemTableViewCell.swift in Sources */,
 				ECC544B3279C013F0016D391 /* RetrospectFoundStarItemCell.swift in Sources */,
 				CE6CE90F26E25E4800BDDB6C /* ConfirmPopupView.swift in Sources */,
+				CEB9EA6527A5673B0017F59B /* TodoRepository.swift in Sources */,
 				ECC544C8279C01E70016D391 /* RetrospectEmotionReasonTableViewCell.swift in Sources */,
 				CE2952FF2687A0A500E21871 /* TodoDateTVCViewModel.swift in Sources */,
 				ECB5443426D3CA0500FA4C50 /* NickChangeVC.swift in Sources */,
@@ -2379,6 +2386,7 @@
 				CE43D02F26613D66003126F2 /* DropdownItemTableViewCell.swift in Sources */,
 				ECC544B4279C013F0016D391 /* RetrospectFoundStarItemCell.swift in Sources */,
 				CE6CE91026E25E4800BDDB6C /* ConfirmPopupView.swift in Sources */,
+				CEB9EA6627A5673B0017F59B /* TodoRepository.swift in Sources */,
 				ECC544C9279C01E70016D391 /* RetrospectEmotionReasonTableViewCell.swift in Sources */,
 				CE43D03026613D66003126F2 /* TodoDateTVCViewModel.swift in Sources */,
 				ECB5443526D3CA0500FA4C50 /* NickChangeVC.swift in Sources */,

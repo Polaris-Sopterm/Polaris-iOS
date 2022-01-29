@@ -26,8 +26,12 @@ final class RetrospectViewModel {
         return BehaviorRelay<RetrospectValueListModel>(value: model)
     }()
     
-    init(repository: RetrospectRepository = RetrospectRepositoryImpl()) {
-        self.repository = repository
+    init(
+        retrospectRepository: RetrospectRepository = RetrospectRepositoryImpl(),
+        todoRepository: TodoRepository = TodoRepositoryImpl()
+    ) {
+        self.retrospectRepository = retrospectRepository
+        self.todoRepository = todoRepository
     }
     
     func requestRetrospectValues() {
@@ -36,11 +40,19 @@ final class RetrospectViewModel {
         let weekNo = Date.currentWeekNoOfMonth
         
         let date = PolarisDate(year: year, month: month, weekNo: weekNo)
-        self.repository.fetchListValues(ofDate: date)
+        self.retrospectRepository.fetchListValues(ofDate: date)
             .withUnretained(self)
             .subscribe(onNext: { owner, values in
                 owner.journeyValueRelay.accept(values)
             }).disposed(by: self.disposeBag)
+    }
+    
+    func requestTodoDayList() {
+        
+    }
+    
+    func requestTodoJourneyList() {
+        
     }
     
     func sortRetrospectValueModel(model: RetrospectValueListModel) -> [(String, Int)] {
@@ -54,7 +66,8 @@ final class RetrospectViewModel {
         })
     }
     
-    private let repository: RetrospectRepository
+    private let todoRepository: TodoRepository
+    private let retrospectRepository: RetrospectRepository
     private let disposeBag = DisposeBag()
 
 }
