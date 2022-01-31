@@ -16,27 +16,12 @@ class RetrospectTableViewCell: MainTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.navigationHeightConstraint.constant = type(of: self).navigationHeight
-        self.setupLabels()
         self.setupCometAnimation()
         self.bindButtons()
         self.observeViewModel()
         
         self.viewModel.requestRetrospectValues()
-    }
-    
-    private func setupLabels() {
-        let text: String =
-            """
-            내가 찾은 별로
-            나의 우주가 좀 더 밝아졌어요
-            """
-        let subRange = text.subRange(of: "나의 우주가 좀 더 밝아졌어요")
-        
-        let attributeText = NSMutableAttributedString(string: text)
-        attributeText.addAttribute(.kern, value: -0.69, range: NSRange(location: 0, length: text.count))
-        attributeText.setLineHeight(33, UIFont.systemFont(ofSize: 23), .left)
-        attributeText.addAttribute(.font, value: UIFont.systemFont(ofSize: 23, weight: .bold), range: subRange)
-        self.titleLabel.attributedText = attributeText
+        self.viewModel.requestLastWeekRetrospect()
     }
     
     private func setupCometAnimation() {
@@ -82,6 +67,15 @@ class RetrospectTableViewCell: MainTableViewCell {
                 
                 owner.layoutStarAsRetrospectValues(sortedValues: sortedValues)
             }).disposed(by: self.disposeBag)
+        
+        Observable.zip(self.viewModel.isExistLastWeekRetrospectRelay.asObservable(), self.viewModel.journeyValueRelay)
+            .withUnretained(self)
+            .subscribe(onNext: { (owner: RetrospectTableViewCell, tuple: (isExistLastWeekRetrospect: Bool,
+                                                                          journeyValues: RetrospectValueListModel)) in
+                let isArchieve = tuple.isExistLastWeekRetrospect || tuple.journeyValues.isAchieveJourneyAtLeastOne
+                owner.updateTitleLabelAsAchieveJourney(isAchieve: isArchieve)
+            })
+            .disposed(by: self.disposeBag)
     }
     
     private func presentActivityController() {
@@ -99,7 +93,7 @@ class RetrospectTableViewCell: MainTableViewCell {
             let collectionCount = value.1
         
             var starSize: CGFloat
-            if 0...2 ~= ranking && collectionCount == 0 { starSize = 48 }
+            if 0...2 ~= ranking || collectionCount == 0 { starSize = 48 }
             else if 3...5 ~= ranking                    { starSize = 60 }
             else                                        { starSize = 80 }
                 
@@ -122,6 +116,30 @@ class RetrospectTableViewCell: MainTableViewCell {
         case .overcome:  return self.overcomeStarWidthConstraint
         case .challenge: return self.challengeStarConstraint
         }
+    }
+    
+    private func updateTitleLabelAsAchieveJourney(isAchieve: Bool) {
+        let archieveText =
+            """
+            내가 찾은 별로
+            나의 우주가 좀 더 밝아졌어요
+            """
+        
+        let unArchieveText =
+            """
+            별을 찾아
+            나의 우주를 밝혀봐요
+            """
+        
+        let text: String = isAchieve ? archieveText : unArchieveText
+        let subRange = isAchieve ?
+        text.subRange(of: "나의 우주가 좀 더 밝아졌어요") : text.subRange(of: "나의 우주를 밝혀봐요")
+        
+        let attributeText = NSMutableAttributedString(string: text)
+        attributeText.addAttribute(.kern, value: -0.69, range: NSRange(location: 0, length: text.count))
+        attributeText.setLineHeight(33, UIFont.systemFont(ofSize: 23), .left)
+        attributeText.addAttribute(.font, value: UIFont.systemFont(ofSize: 23, weight: .bold), range: subRange)
+        self.titleLabel.attributedText = attributeText
     }
     
     private var capturedStarContainerImage: UIImage? {

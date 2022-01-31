@@ -67,4 +67,10 @@ struct RetrospectValueListModel: Codable {
         self.challenge = challenge
     }
     
+    var isAchieveJourneyAtLeastOne: Bool {
+        self.happiness != 0 || self.challenge != 0 || self.control != 0 ||
+        self.growth != 0 || self.health != 0 || self.overcome != 0 ||
+        self.rest != 0 || self.thanks != 0 || self.change != 0
+    }
+    
 }
