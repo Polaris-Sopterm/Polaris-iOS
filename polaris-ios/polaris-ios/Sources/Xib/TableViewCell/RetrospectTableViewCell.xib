@@ -308,18 +308,27 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="challengeImageView" destination="1za-9I-vGW" id="rrh-oN-Xoo"/>
                 <outlet property="challengeStarConstraint" destination="2Zb-oB-g2R" id="oda-13-BeA"/>
+                <outlet property="changeImageView" destination="SdG-39-OuV" id="q3J-Xq-4k1"/>
                 <outlet property="changeStarWidthConstraint" destination="M3T-cZ-hT7" id="IpM-aE-Wnr"/>
+                <outlet property="controlImageView" destination="TZZ-u6-KD1" id="QZn-Pk-iwM"/>
                 <outlet property="controlStarWidthConstraint" destination="y2r-NZ-zGU" id="23F-Gy-RL1"/>
+                <outlet property="growthImageView" destination="8qo-ZT-Dc9" id="A1W-OI-SDv"/>
                 <outlet property="growthStarConstraint" destination="ZwO-S4-b3p" id="IZD-oM-bPj"/>
+                <outlet property="happinessImageView" destination="Ca5-Ez-Jyz" id="xf5-mr-BSc"/>
                 <outlet property="happinessStarWidthConstraint" destination="Ugl-gm-kWW" id="04i-Tg-QfF"/>
+                <outlet property="healthImageView" destination="3JP-PH-kOg" id="lU2-qk-mox"/>
                 <outlet property="healthStarConstraint" destination="Ktu-Ip-DHo" id="UDh-QP-ZPg"/>
                 <outlet property="navigationHeightConstraint" destination="EaG-XQ-KT4" id="8od-X2-jKN"/>
+                <outlet property="overcomeImageView" destination="klh-eR-mTR" id="JDd-42-WJo"/>
                 <outlet property="overcomeStarWidthConstraint" destination="P74-jD-2fu" id="x0r-mC-9Fr"/>
+                <outlet property="restImageView" destination="6E7-61-eae" id="bs5-tG-dOh"/>
                 <outlet property="restStarWidthConstraint" destination="Lva-Tw-QOA" id="TKk-6e-TZc"/>
                 <outlet property="seeReportButton" destination="nhp-Rp-FoC" id="RHF-FD-eVl"/>
                 <outlet property="shareButton" destination="Wz4-fM-JkJ" id="PYI-bi-n8L"/>
                 <outlet property="starsContainerView" destination="kac-uY-IID" id="HAQ-4B-zc5"/>
+                <outlet property="thanksImageView" destination="9QK-xN-hTi" id="8ba-Fq-ak1"/>
                 <outlet property="thanksStarConstraint" destination="4Tw-zD-3tf" id="jhU-IH-ECc"/>
                 <outlet property="titleLabel" destination="oTZ-hh-uJ7" id="JaI-tB-7eD"/>
             </connections>
