@@ -68,9 +68,26 @@ struct RetrospectValueListModel: Codable {
     }
     
     var isAchieveJourneyAtLeastOne: Bool {
-        self.happiness != 0 || self.challenge != 0 || self.control != 0 ||
-        self.growth != 0 || self.health != 0 || self.overcome != 0 ||
-        self.rest != 0 || self.thanks != 0 || self.change != 0
+        self.foundStarsList.isEmpty == false
+    }
+    
+    var foundStarsList: [Journey] {
+        var list = [Journey]()
+        
+        if self.happiness != 0 { list.append(.happiness) }
+        if self.control != 0 { list.append(.control) }
+        if self.thanks != 0 { list.append(.thanks) }
+        if self.rest != 0 { list.append(.rest) }
+        if self.growth != 0 { list.append(.growth) }
+        if self.change != 0 { list.append(.change) }
+        if self.health != 0 { list.append(.health) }
+        if self.overcome != 0 { list.append(.overcome) }
+        if self.challenge != 0 { list.append(.challenge) }
+        return list
+    }
+    
+    var foundStarCount: Int {
+        self.foundStarsList.count
     }
     
 }

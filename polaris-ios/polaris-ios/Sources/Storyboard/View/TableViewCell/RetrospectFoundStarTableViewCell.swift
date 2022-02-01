@@ -22,6 +22,7 @@ class RetrospectFoundStarTableViewCell: RetrospectReportCell {
         
         guard let foundStarModel = self.presentable as? RetrospectFoundStarModel else { return }
         self.updateTitleLabelAttributeText(asDate: foundStarModel.date)
+        self.collectionView.reloadData()
     }
     
     private func setupCollectionView() {
@@ -66,15 +67,18 @@ class RetrospectFoundStarTableViewCell: RetrospectReportCell {
 extension RetrospectFoundStarTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // TODO: - 데이터 관리 필요
-        return 5
+        guard let foundStarModel = self.presentable as? RetrospectFoundStarModel else { return 0 }
+        return foundStarModel.foundStar.foundStarCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(cell: RetrospectFoundStarItemCell.self, forIndexPath: indexPath)
         
+        guard let foundStarModel = self.presentable as? RetrospectFoundStarModel else { return UICollectionViewCell() }
+        guard let foundStar = foundStarModel.foundStar.foundStarsList[safe: indexPath.row] else { return UICollectionViewCell() }
         guard let itemCell = cell else { return UICollectionViewCell() }
-        itemCell.configure(journey: .challenge)
+        
+        itemCell.configure(journey: foundStar)
         itemCell.layoutAsRow(indexPath.row)
         return itemCell
     }
