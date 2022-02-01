@@ -11,8 +11,12 @@ protocol RetrospectReportPresentable {}
 
 class RetrospectReportCell: UITableViewCell {
     
+    var presentable: RetrospectReportPresentable?
+    
     class var cellHeight: CGFloat { return 0 }
     
-    func configure(presentable: RetrospectReportPresentable) {}
+    func configure(presentable: RetrospectReportPresentable) {
+        self.presentable = presentable
+    }
     
 }

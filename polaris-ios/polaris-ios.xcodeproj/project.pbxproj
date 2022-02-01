@@ -167,9 +167,9 @@
 		CE29536C2687A0A500E21871 /* PolarisMarginTextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEE5779262BE54900C39358 /* PolarisMarginTextField.xib */; };
 		CE29536D2687A0A500E21871 /* TodoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA44E6D267B3BE300A05650 /* TodoTableViewCell.xib */; };
 		CE29536E2687A0A500E21871 /* MainTodoHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECDC5A5B2636A13600A1B5A9 /* MainTodoHeaderView.xib */; };
-		CE2DE7DD2773593D00AE4C66 /* Emotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2DE7DC2773593D00AE4C66 /* Emotion.swift */; };
-		CE2DE7DE2773593D00AE4C66 /* Emotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2DE7DC2773593D00AE4C66 /* Emotion.swift */; };
-		CE2DE7DF2773593D00AE4C66 /* Emotion.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2DE7DC2773593D00AE4C66 /* Emotion.swift */; };
+		CE2DE7DD2773593D00AE4C66 /* Emoticon.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2DE7DC2773593D00AE4C66 /* Emoticon.swift */; };
+		CE2DE7DE2773593D00AE4C66 /* Emoticon.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2DE7DC2773593D00AE4C66 /* Emoticon.swift */; };
+		CE2DE7DF2773593D00AE4C66 /* Emoticon.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2DE7DC2773593D00AE4C66 /* Emoticon.swift */; };
 		CE37CC6D265A7674004F327E /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37CC6C265A7674004F327E /* SignupViewModel.swift */; };
 		CE38762E26CD695E003BDCCA /* Journey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE38762D26CD695E003BDCCA /* Journey.swift */; };
 		CE38762F26CD695E003BDCCA /* Journey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE38762D26CD695E003BDCCA /* Journey.swift */; };
@@ -430,6 +430,15 @@
 		CEAC5991266F9F210092A255 /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAC598F266F9F210092A255 /* AuthModel.swift */; };
 		CEAC5995266FBEA50092A255 /* PolarisErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAC5994266FBEA50092A255 /* PolarisErrorModel.swift */; };
 		CEAC5996266FBEA50092A255 /* PolarisErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAC5994266FBEA50092A255 /* PolarisErrorModel.swift */; };
+		CEAFD8A527A9051400D390DB /* RetrospectEmoticonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAFD8A427A9051400D390DB /* RetrospectEmoticonModel.swift */; };
+		CEAFD8A627A9051400D390DB /* RetrospectEmoticonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAFD8A427A9051400D390DB /* RetrospectEmoticonModel.swift */; };
+		CEAFD8A727A9051400D390DB /* RetrospectEmoticonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAFD8A427A9051400D390DB /* RetrospectEmoticonModel.swift */; };
+		CEAFD8A927A9057A00D390DB /* RetrospectEmoticonReasonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAFD8A827A9057A00D390DB /* RetrospectEmoticonReasonModel.swift */; };
+		CEAFD8AA27A9057A00D390DB /* RetrospectEmoticonReasonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAFD8A827A9057A00D390DB /* RetrospectEmoticonReasonModel.swift */; };
+		CEAFD8AB27A9057A00D390DB /* RetrospectEmoticonReasonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAFD8A827A9057A00D390DB /* RetrospectEmoticonReasonModel.swift */; };
+		CEAFD8AD27A90EAF00D390DB /* RetrospectFoundStarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAFD8AC27A90EAF00D390DB /* RetrospectFoundStarModel.swift */; };
+		CEAFD8AE27A90EAF00D390DB /* RetrospectFoundStarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAFD8AC27A90EAF00D390DB /* RetrospectFoundStarModel.swift */; };
+		CEAFD8AF27A90EAF00D390DB /* RetrospectFoundStarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAFD8AC27A90EAF00D390DB /* RetrospectFoundStarModel.swift */; };
 		CEB9EA5827A42A0D0017F59B /* RetrospectReportViewModelFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB9EA5727A42A0D0017F59B /* RetrospectReportViewModelFormatter.swift */; };
 		CEB9EA5927A42A0D0017F59B /* RetrospectReportViewModelFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB9EA5727A42A0D0017F59B /* RetrospectReportViewModelFormatter.swift */; };
 		CEB9EA5A27A42A0D0017F59B /* RetrospectReportViewModelFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB9EA5727A42A0D0017F59B /* RetrospectReportViewModelFormatter.swift */; };
@@ -748,7 +757,7 @@
 		CE2952E42687940100E21871 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		CE2953752687A0A500E21871 /* Polaris Alpha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Polaris Alpha.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE2953882687A30F00E21871 /* polaris-alpha-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "polaris-alpha-Info.plist"; sourceTree = "<group>"; };
-		CE2DE7DC2773593D00AE4C66 /* Emotion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emotion.swift; sourceTree = "<group>"; };
+		CE2DE7DC2773593D00AE4C66 /* Emoticon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoticon.swift; sourceTree = "<group>"; };
 		CE37CC6C265A7674004F327E /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
 		CE38762D26CD695E003BDCCA /* Journey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Journey.swift; sourceTree = "<group>"; };
 		CE40B3E826C00E4E0000151F /* JourneyAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyAPI.swift; sourceTree = "<group>"; };
@@ -822,6 +831,9 @@
 		CEA5D9BC2787091300A6D6DE /* RetrospectFarStarTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RetrospectFarStarTableViewCell.xib; sourceTree = "<group>"; };
 		CEAC598F266F9F210092A255 /* AuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
 		CEAC5994266FBEA50092A255 /* PolarisErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarisErrorModel.swift; sourceTree = "<group>"; };
+		CEAFD8A427A9051400D390DB /* RetrospectEmoticonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrospectEmoticonModel.swift; sourceTree = "<group>"; };
+		CEAFD8A827A9057A00D390DB /* RetrospectEmoticonReasonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrospectEmoticonReasonModel.swift; sourceTree = "<group>"; };
+		CEAFD8AC27A90EAF00D390DB /* RetrospectFoundStarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrospectFoundStarModel.swift; sourceTree = "<group>"; };
 		CEB9EA5727A42A0D0017F59B /* RetrospectReportViewModelFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrospectReportViewModelFormatter.swift; sourceTree = "<group>"; };
 		CEB9EA5B27A42A710017F59B /* RetrospectFarStarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrospectFarStarViewModel.swift; sourceTree = "<group>"; };
 		CEB9EA5F27A42BC20017F59B /* RetrospectCloseStarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrospectCloseStarViewModel.swift; sourceTree = "<group>"; };
@@ -1232,7 +1244,7 @@
 				CEA3CFD626A85C4B00577DA4 /* ShootingComet.swift */,
 				CEA3CFEC26A8766700577DA4 /* ServiceTermKind.swift */,
 				CE38762D26CD695E003BDCCA /* Journey.swift */,
-				CE2DE7DC2773593D00AE4C66 /* Emotion.swift */,
+				CE2DE7DC2773593D00AE4C66 /* Emoticon.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -1578,6 +1590,9 @@
 				CE5C5B0C27A0EEDB00FDCE32 /* RetrospectValueListModel.swift */,
 				CEB9EA5B27A42A710017F59B /* RetrospectFarStarViewModel.swift */,
 				CEB9EA5F27A42BC20017F59B /* RetrospectCloseStarViewModel.swift */,
+				CEAFD8A427A9051400D390DB /* RetrospectEmoticonModel.swift */,
+				CEAFD8A827A9057A00D390DB /* RetrospectEmoticonReasonModel.swift */,
+				CEAFD8AC27A90EAF00D390DB /* RetrospectFoundStarModel.swift */,
 			);
 			path = Retrospect;
 			sourceTree = "<group>";
@@ -2019,6 +2034,7 @@
 				ECA49486262DC17A00CC2EB8 /* UILabel+.swift in Sources */,
 				CE40B3E926C00E4E0000151F /* JourneyAPI.swift in Sources */,
 				CEA44E59267B386800A05650 /* MainVC.swift in Sources */,
+				CEAFD8A927A9057A00D390DB /* RetrospectEmoticonReasonModel.swift in Sources */,
 				CE6CE92626E3497800BDDB6C /* PolarisMakersVC.swift in Sources */,
 				CE04A06A2623528C007C98E2 /* UIViewController+.swift in Sources */,
 				ECA3C4702780291300970DF7 /* LookBackSlider.swift in Sources */,
@@ -2073,8 +2089,10 @@
 				CEC48ED9262DCD2A00FD887F /* AddTodoDropdownViewModel.swift in Sources */,
 				ECC544CA279C01E70016D391 /* RetrospectEmotionTableViewCell.swift in Sources */,
 				ECC544AC279C013F0016D391 /* RetrospectEmotionReasonItemCell.swift in Sources */,
+				CEAFD8AD27A90EAF00D390DB /* RetrospectFoundStarModel.swift in Sources */,
 				CE04A07526235BD1007C98E2 /* DefaultSession.swift in Sources */,
 				CEEE5746262A958B00C39358 /* UserDefaultKey.swift in Sources */,
+				CEAFD8A527A9051400D390DB /* RetrospectEmoticonModel.swift in Sources */,
 				CE574019267CB1B700665933 /* TodoCellProtocol.swift in Sources */,
 				CEA3CFE526A8696400577DA4 /* PolarisWebViewController.swift in Sources */,
 				CEAC5990266F9F210092A255 /* AuthModel.swift in Sources */,
@@ -2143,7 +2161,7 @@
 				CEF055EE2667EB38000E34A0 /* CheckEmailModel.swift in Sources */,
 				CEA3CFDC26A85E7600577DA4 /* PolarisWebView.swift in Sources */,
 				CE132144265A5CD1001E3C1F /* SignupVC.swift in Sources */,
-				CE2DE7DD2773593D00AE4C66 /* Emotion.swift in Sources */,
+				CE2DE7DD2773593D00AE4C66 /* Emoticon.swift in Sources */,
 				CE6CE93B26E3AC7A00BDDB6C /* RetrospectTableViewCell.swift in Sources */,
 				ECDC5A47263552A700A1B5A9 /* MainTodoTVC.swift in Sources */,
 				ECA0F78227905750008CD57B /* LookbackTextView.swift in Sources */,
@@ -2189,6 +2207,7 @@
 				CE40B3EA26C00E4E0000151F /* JourneyAPI.swift in Sources */,
 				CE2952F22687A0A500E21871 /* MainVC.swift in Sources */,
 				CE2952F32687A0A500E21871 /* UIViewController+.swift in Sources */,
+				CEAFD8AA27A9057A00D390DB /* RetrospectEmoticonReasonModel.swift in Sources */,
 				CE6CE92726E3497800BDDB6C /* PolarisMakersVC.swift in Sources */,
 				CEDB478E26AF27DA0024ABD4 /* TodoListEmptyTableViewCell.swift in Sources */,
 				ECA3C4712780291300970DF7 /* LookBackSlider.swift in Sources */,
@@ -2243,8 +2262,10 @@
 				CE29530F2687A0A500E21871 /* DefaultSession.swift in Sources */,
 				ECC544CB279C01E70016D391 /* RetrospectEmotionTableViewCell.swift in Sources */,
 				ECC544AD279C013F0016D391 /* RetrospectEmotionReasonItemCell.swift in Sources */,
+				CEAFD8AE27A90EAF00D390DB /* RetrospectFoundStarModel.swift in Sources */,
 				CE2953102687A0A500E21871 /* UserDefaultKey.swift in Sources */,
 				CE2953112687A0A500E21871 /* TodoCellProtocol.swift in Sources */,
+				CEAFD8A627A9051400D390DB /* RetrospectEmoticonModel.swift in Sources */,
 				CEA3CFE626A8696400577DA4 /* PolarisWebViewController.swift in Sources */,
 				CE2953122687A0A500E21871 /* AuthModel.swift in Sources */,
 				CE2953132687A0A500E21871 /* MainSceneViewModel.swift in Sources */,
@@ -2313,7 +2334,7 @@
 				CE2953332687A0A500E21871 /* CheckEmailModel.swift in Sources */,
 				CEA3CFDD26A860F700577DA4 /* PolarisWebView.swift in Sources */,
 				CE2953342687A0A500E21871 /* SignupVC.swift in Sources */,
-				CE2DE7DE2773593D00AE4C66 /* Emotion.swift in Sources */,
+				CE2DE7DE2773593D00AE4C66 /* Emoticon.swift in Sources */,
 				CE6CE93C26E3AC7A00BDDB6C /* RetrospectTableViewCell.swift in Sources */,
 				CE2953352687A0A500E21871 /* MainTodoTVC.swift in Sources */,
 				ECA0F78327905750008CD57B /* LookbackTextView.swift in Sources */,
@@ -2359,6 +2380,7 @@
 				CE40B3EB26C00E4E0000151F /* JourneyAPI.swift in Sources */,
 				CEA44E5A267B386800A05650 /* MainVC.swift in Sources */,
 				CE43D02826613D66003126F2 /* UIViewController+.swift in Sources */,
+				CEAFD8AB27A9057A00D390DB /* RetrospectEmoticonReasonModel.swift in Sources */,
 				CE6CE92826E3497800BDDB6C /* PolarisMakersVC.swift in Sources */,
 				CEDB478F26AF27DA0024ABD4 /* TodoListEmptyTableViewCell.swift in Sources */,
 				ECA3C4722780291300970DF7 /* LookBackSlider.swift in Sources */,
@@ -2413,8 +2435,10 @@
 				CE43D03B26613D66003126F2 /* DefaultSession.swift in Sources */,
 				ECC544CC279C01E70016D391 /* RetrospectEmotionTableViewCell.swift in Sources */,
 				ECC544AE279C013F0016D391 /* RetrospectEmotionReasonItemCell.swift in Sources */,
+				CEAFD8AF27A90EAF00D390DB /* RetrospectFoundStarModel.swift in Sources */,
 				CE43D03C26613D66003126F2 /* UserDefaultKey.swift in Sources */,
 				CE57401A267CB1B700665933 /* TodoCellProtocol.swift in Sources */,
+				CEAFD8A727A9051400D390DB /* RetrospectEmoticonModel.swift in Sources */,
 				CEA3CFE726A8696400577DA4 /* PolarisWebViewController.swift in Sources */,
 				CEAC5991266F9F210092A255 /* AuthModel.swift in Sources */,
 				CE43D03D26613D66003126F2 /* MainSceneViewModel.swift in Sources */,
@@ -2483,7 +2507,7 @@
 				CEF055EF2667EB38000E34A0 /* CheckEmailModel.swift in Sources */,
 				CEA3CFDE26A860F700577DA4 /* PolarisWebView.swift in Sources */,
 				CE43D05726613D66003126F2 /* SignupVC.swift in Sources */,
-				CE2DE7DF2773593D00AE4C66 /* Emotion.swift in Sources */,
+				CE2DE7DF2773593D00AE4C66 /* Emoticon.swift in Sources */,
 				CE6CE93D26E3AC7A00BDDB6C /* RetrospectTableViewCell.swift in Sources */,
 				CE43D05826613D66003126F2 /* MainTodoTVC.swift in Sources */,
 				ECA0F78427905750008CD57B /* LookbackTextView.swift in Sources */,

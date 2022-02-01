@@ -10,8 +10,8 @@ import RxSwift
 
 extension ObservableType {
     
-    func observeOnMain(onNext: @escaping (Self.Element) -> Void) -> Disposable {
-        return self.observe(on: MainScheduler.instance).subscribe(onNext: onNext)
+    func observeOnMain(onNext: @escaping (Self.Element) -> Void, onError: ((Error) -> Void)? = nil) -> Disposable {
+        return self.observe(on: MainScheduler.instance).subscribe(onNext: onNext, onError: onError)
     }
     
 }

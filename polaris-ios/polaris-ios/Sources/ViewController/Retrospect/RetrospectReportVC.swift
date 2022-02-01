@@ -13,6 +13,7 @@ class RetrospectReportVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setupNavigationProperty()
         self.setupButtons()
         self.registerCell()
         self.setupTableView()
@@ -21,6 +22,11 @@ class RetrospectReportVC: UIViewController {
     
     private func registerCell() {
         RetrospectReportCategory.allCases.forEach { self.tableView.registerCell(cell: $0.cellType) }
+    }
+    
+    private func setupNavigationProperty() {
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
     
     private func setupTableView() {
@@ -51,13 +57,18 @@ class RetrospectReportVC: UIViewController {
                 guard let weekNoText = weekNoDic[currentDate.weekNo] else { return }
                 
                 self.dateLabel.text = yearText + monthText + weekNoText
+            })
+            .disposed(by: self.disposeBag)
+        
+        Observable.combineLatest(self.viewModel.retrospectReportRelay, self.viewModel.foundStarRelayBehaviorRelay)
+            .withUnretained(self)
+            .observeOnMain(onNext: { owner, tuple in
+                let retrospectModel = tuple.0
+                let foundStarModel = tuple.1
+                                
+                owner.tableView.reloadData()
                 
-                let date = PolarisDate(
-                    year: currentDate.year,
-                    month: currentDate.month,
-                    weekNo: currentDate.weekNo
-                )
-                owner.viewModel.requestRetrospectReport(ofDate: date)
+                // TODO: - Empty View 처리
             })
             .disposed(by: self.disposeBag)
         
@@ -106,7 +117,7 @@ class RetrospectReportVC: UIViewController {
 extension RetrospectReportVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        RetrospectReportCategory.allCases.count
+        return self.viewModel.numberOfRows()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -115,8 +126,9 @@ extension RetrospectReportVC: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(cell: reportCategory.cellType, forIndexPath: indexPath)
         
         guard let itemCell = cell else { return UITableViewCell() }
-        // TODO: - Presentable 대입 필요
-        // itemCell.configure(presentable: )
+        guard let presentable = self.viewModel.presentable(cellForCategoryAt: reportCategory) else { return UITableViewCell() }
+        
+        itemCell.configure(presentable: presentable)
         return itemCell
     }
     

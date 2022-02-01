@@ -10,7 +10,7 @@ import Moya
 
 enum RetrospectAPI {
     case createLookBack(model: RetrospectModel)
-    case listValues(date: PolarisDate)
+    case listValues(date: PolarisDate? = nil)
     case getRetrospect(date: PolarisDate)
 }
 
@@ -62,13 +62,16 @@ extension RetrospectAPI: TargetType {
                                                   ],
                                       encoding: JSONEncoding.default)
         case .listValues(let date):
-            let param: [String: String] = [
-                "year": "\(date.year)",
-                "month": "\(date.month)",
-                "weekNo": "\(date.weekNo)"
-            ]
-            return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
-            
+            if let date = date {
+                let param: [String: String] = [
+                    "year": "\(date.year)",
+                    "month": "\(date.month)",
+                    "weekNo": "\(date.weekNo)"
+                ]
+                return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
+            } else {
+                return .requestPlain
+            }
         case .getRetrospect(let date):
             let param: [String: String] = [
                 "year": "\(date.year)",

@@ -33,13 +33,7 @@ final class RetrospectViewModel {
     }
     
     func requestRetrospectValues() {
-        // FIXME: - 이전주의 날짜로 받아올 수 있게 수정해야 됌
-        let year = Date.currentYear
-        let month = Date.currentMonth
-        let weekNo = Date.currentWeekNoOfMonth
-        
-        let date = PolarisDate(year: year, month: month, weekNo: weekNo)
-        self.retrospectRepository.fetchListValues(ofDate: date)
+        self.retrospectRepository.fetchListValues(ofDate: nil)
             .bind(to: self.journeyValueRelay)
             .disposed(by: self.disposeBag)
     }
@@ -51,13 +45,10 @@ final class RetrospectViewModel {
         
         let date = PolarisDate(year: year, month: month, weekNo: weekNo)
         self.retrospectRepository.fetchRetrospect(ofDate: date)
-            .subscribe(onNext: { _ in
-                self.isExistLastWeekRetrospectRelay.accept(true)
-            }, onError: { error in
-                if let polarisError = error as? PolarisErrorModel.PolarisError {
-                    self.isExistLastWeekRetrospectRelay.accept(false)
+            .subscribe(onNext: { retrospect in
+                if retrospect != nil {
+                    self.isExistLastWeekRetrospectRelay.accept(true)
                 } else {
-                    // TODO: - 네트워크 에러에 따른 처리 필요(임시로 false accept)
                     self.isExistLastWeekRetrospectRelay.accept(false)
                 }
             })

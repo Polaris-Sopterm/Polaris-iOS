@@ -11,8 +11,8 @@ class RetrospectEmotionItemCell: UICollectionViewCell {
     
     static var cellSize: CGSize { CGSize(width: 74, height: 74) }
     
-    func configure(emotion: Emotion) {
-        self.emotionLabel.text = emotion.name
+    func configure(emotion: Emoticon) {
+        self.emotionLabel.text = emotion.rawValue
         self.emotionImageView.image = emotion.image
     }
     
