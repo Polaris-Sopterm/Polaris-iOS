@@ -28,8 +28,12 @@ final class RetrospectViewModel {
     
     let isExistLastWeekRetrospectRelay = BehaviorRelay<Bool>(value: false)
     
-    init(retrospectRepository: RetrospectRepository = RetrospectRepositoryImpl()) {
+    init(
+        retrospectRepository: RetrospectRepository = RetrospectRepositoryImpl(),
+        weekRepository: WeekRepository = WeekRepositoryImpl()
+    ) {
         self.retrospectRepository = retrospectRepository
+        self.weekRepository = weekRepository
     }
     
     func requestRetrospectValues() {
@@ -39,17 +43,23 @@ final class RetrospectViewModel {
     }
     
     func requestLastWeekRetrospect() {
-        let year = Date.currentYear
-        let month = Date.currentMonth
-        let weekNo = Date.currentWeekNoOfMonth
+        let lastWeekDate = Calendar.current.date(byAdding: .day, value: -7, to: Date.normalizedCurrent)
+        guard let lastWeekDate = lastWeekDate else { return }
         
-        let date = PolarisDate(year: year, month: month, weekNo: weekNo)
-        self.retrospectRepository.fetchRetrospect(ofDate: date)
-            .subscribe(onNext: { retrospect in
+        self.weekRepository.fetchWeekNo(ofDate: lastWeekDate)
+            .withUnretained(self)
+            .flatMapLatest { owner, weekNo -> Observable<RetrospectModel?> in
+                let currentYear = Date.currentYear
+                let currentMonth = Date.currentMonth
+                let polarisDate = PolarisDate(year: currentYear, month: currentMonth, weekNo: weekNo)
+                return owner.retrospectRepository.fetchRetrospect(ofDate: polarisDate)
+            }
+            .withUnretained(self)
+            .subscribe(onNext: { owner, retrospect in
                 if retrospect != nil {
-                    self.isExistLastWeekRetrospectRelay.accept(true)
+                    owner.isExistLastWeekRetrospectRelay.accept(true)
                 } else {
-                    self.isExistLastWeekRetrospectRelay.accept(false)
+                    owner.isExistLastWeekRetrospectRelay.accept(false)
                 }
             })
             .disposed(by: self.disposeBag)
@@ -69,6 +79,7 @@ final class RetrospectViewModel {
     private let retrospectSubject = PublishSubject<RetrospectModel?>()
     private let disposeBag = DisposeBag()
     
+    private let weekRepository: WeekRepository
     private let retrospectRepository: RetrospectRepository
 
 }
