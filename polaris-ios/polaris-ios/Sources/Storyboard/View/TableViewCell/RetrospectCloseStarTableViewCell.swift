@@ -11,7 +11,9 @@ import UIKit
 
 class RetrospectCloseStarTableViewCell: RetrospectReportCell {
     
-    override class var cellHeight: CGFloat { 160 + 24 }
+    override class var cellHeight: CGFloat {
+        RetrospectLayoutGuide.closeStarCellHeight
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,7 +23,7 @@ class RetrospectCloseStarTableViewCell: RetrospectReportCell {
     
     override func configure(presentable: RetrospectReportPresentable) {
         super.configure(presentable: presentable)
-        // TODO: - 서버 데이터 반영 필요
+        self.collectionView.reloadData()
     }
     
     private func setupCollectionView() {
@@ -40,6 +42,10 @@ class RetrospectCloseStarTableViewCell: RetrospectReportCell {
         }
     }
     
+    private var closeStarPresentable: RetrospectCloseStarsModel? {
+        self.presentable as? RetrospectCloseStarsModel
+    }
+    
     private let disposeBag = DisposeBag()
     
     @IBOutlet private weak var collectionView: UICollectionView!
@@ -49,21 +55,19 @@ class RetrospectCloseStarTableViewCell: RetrospectReportCell {
 extension RetrospectCloseStarTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // TODO: - 서버 데이터 반영 필요
-        return 5
+        self.closeStarPresentable?.closeStars.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(cell: RetrospectJourneyItemCell.self, forIndexPath: indexPath)
+        let closeStars = self.closeStarPresentable?.closeStars
         
         guard let itemCell = cell else { return UICollectionViewCell() }
-        itemCell.configure(journey: .control)
+        guard let journey = closeStars?[safe: indexPath.row] else { return UICollectionViewCell() }
+        itemCell.configure(journey: journey)
         return itemCell
     }
     
 }
 
-extension RetrospectCloseStarTableViewCell: UICollectionViewDelegate {
-    
-    
-}
+extension RetrospectCloseStarTableViewCell: UICollectionViewDelegate {}

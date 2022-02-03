@@ -9,7 +9,9 @@ import UIKit
 
 class RetrospectFoundStarTableViewCell: RetrospectReportCell {
     
-    static override var cellHeight: CGFloat { return 217 }
+    static override var cellHeight: CGFloat {
+        RetrospectLayoutGuide.foundStarCellHeight
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()

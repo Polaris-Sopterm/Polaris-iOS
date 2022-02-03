@@ -67,8 +67,7 @@ class RetrospectReportVC: UIViewController {
                 let foundStarModel = tuple.1
                                 
                 owner.tableView.reloadData()
-                
-                // TODO: - Empty View 처리
+                owner.updateEmptyViewUI(asFoundStar: foundStarModel, asRetrospect: retrospectModel)
             })
             .disposed(by: self.disposeBag)
         
@@ -101,6 +100,22 @@ class RetrospectReportVC: UIViewController {
         self.indicatorView.stopAnimating()
     }
     
+    private func updateEmptyViewUI(asFoundStar foundStar: RetrospectValueListModel, asRetrospect retrospect: RetrospectModel?) {
+        if foundStar.isAchieveJourneyAtLeastOne == false {
+            self.todoEmptyView.showCrossDissolve()
+            self.retrospectEmptyView.hideCrossDissolve()
+        } else if foundStar.isAchieveJourneyAtLeastOne == true && retrospect == nil {
+            self.todoEmptyView.hideCrossDissolve()
+            self.retrospectEmptyView.showCrossDissolve()
+        } else if foundStar.isAchieveJourneyAtLeastOne == true && retrospect != nil {
+            self.todoEmptyView.hideCrossDissolve()
+            self.retrospectEmptyView.hideCrossDissolve()
+        } else {
+            self.todoEmptyView.showCrossDissolve()
+            self.retrospectEmptyView.hideCrossDissolve()
+        }
+    }
+    
     private let disposeBag = DisposeBag()
     private let viewModel = RetrospectReportViewModel()
     
@@ -108,6 +123,8 @@ class RetrospectReportVC: UIViewController {
     @IBOutlet private weak var backButton: UIButton!
     @IBOutlet private weak var calendarButton: UIButton!
     @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var todoEmptyView: UIView!
+    @IBOutlet private weak var retrospectEmptyView: UIView!
     
     @IBOutlet private weak var indicatorContainerView: UIView!
     @IBOutlet private weak var indicatorView: UIActivityIndicatorView!

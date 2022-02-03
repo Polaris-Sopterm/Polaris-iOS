@@ -20,3 +20,11 @@ class RetrospectReportCell: UITableViewCell {
     }
     
 }
+
+struct RetrospectLayoutGuide {
+    static let foundStarCellHeight: CGFloat = 217
+    static let closeStarCellHeight: CGFloat = 160 + 24
+    static let farStarCellHeight: CGFloat = 8 + 160
+    static let emotionCellHeight: CGFloat = 16 + 160
+    static let emotionReasonCellHeight: CGFloat = 30 + 392
+}

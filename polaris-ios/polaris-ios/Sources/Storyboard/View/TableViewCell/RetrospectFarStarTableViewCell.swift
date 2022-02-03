@@ -9,7 +9,9 @@ import UIKit
 
 class RetrospectFarStarTableViewCell: RetrospectReportCell {
     
-    override class var cellHeight: CGFloat { 8 + 160 }
+    override class var cellHeight: CGFloat {
+        RetrospectLayoutGuide.farStarCellHeight
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()

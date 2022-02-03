@@ -11,7 +11,9 @@ import UIKit
 
 class RetrospectEmotionTableViewCell: RetrospectReportCell {
     
-    override class var cellHeight: CGFloat { 16 + 160 }
+    override class var cellHeight: CGFloat {
+        RetrospectLayoutGuide.emotionCellHeight
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()

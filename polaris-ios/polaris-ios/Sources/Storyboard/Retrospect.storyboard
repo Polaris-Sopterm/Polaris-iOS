@@ -73,6 +73,38 @@
                                     <constraint firstAttribute="trailing" secondItem="TNg-kG-jMA" secondAttribute="trailing" constant="10" id="kXA-vm-WH9"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X3G-hq-bfh">
+                                <rect key="frame" x="0.0" y="321" width="414" height="575"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이 주에는 회고를 하지 않았어요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JL4-OJ-Oxy">
+                                        <rect key="frame" x="94" y="277" width="226" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="JL4-OJ-Oxy" firstAttribute="centerY" secondItem="X3G-hq-bfh" secondAttribute="centerY" id="Zh2-29-fUk"/>
+                                    <constraint firstItem="JL4-OJ-Oxy" firstAttribute="centerX" secondItem="X3G-hq-bfh" secondAttribute="centerX" id="rIa-4z-8ck"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hg8-5h-MHJ">
+                                <rect key="frame" x="0.0" y="104" width="414" height="792"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이 주에는 할일을 등록하지 않았어요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Lg-st-fKL">
+                                        <rect key="frame" x="78.5" y="385.5" width="257" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="9Lg-st-fKL" firstAttribute="centerX" secondItem="hg8-5h-MHJ" secondAttribute="centerX" id="Vf4-3L-XVr"/>
+                                    <constraint firstItem="9Lg-st-fKL" firstAttribute="centerY" secondItem="hg8-5h-MHJ" secondAttribute="centerY" id="i7l-Fg-lYV"/>
+                                </constraints>
+                            </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Vo-pM-3K3">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
@@ -90,14 +122,22 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="hg8-5h-MHJ" secondAttribute="trailing" id="2bZ-Po-lUe"/>
                             <constraint firstItem="bxW-Pa-r2m" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="5Ze-iH-XEi"/>
+                            <constraint firstAttribute="bottom" secondItem="X3G-hq-bfh" secondAttribute="bottom" id="6oy-Ns-jRW"/>
                             <constraint firstItem="73E-EW-tIY" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="Klf-af-XcU"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="X3G-hq-bfh" secondAttribute="trailing" id="LoN-VE-afg"/>
+                            <constraint firstAttribute="bottom" secondItem="hg8-5h-MHJ" secondAttribute="bottom" id="P8Q-c4-Jbu"/>
+                            <constraint firstItem="X3G-hq-bfh" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Q37-Fv-Bvt"/>
                             <constraint firstItem="5Vo-pM-3K3" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="R2c-gY-Zgc"/>
                             <constraint firstAttribute="bottom" secondItem="5Vo-pM-3K3" secondAttribute="bottom" id="UAA-4p-ic2"/>
+                            <constraint firstItem="hg8-5h-MHJ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="WnE-Zg-1mo"/>
                             <constraint firstItem="0En-Nc-wNE" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="XEs-XK-6ZF"/>
                             <constraint firstItem="73E-EW-tIY" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="Xss-Qn-Ele"/>
                             <constraint firstItem="5Vo-pM-3K3" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="Y4c-o4-8OH"/>
+                            <constraint firstItem="X3G-hq-bfh" firstAttribute="top" secondItem="0En-Nc-wNE" secondAttribute="bottom" constant="217" id="cjy-8F-w6F"/>
                             <constraint firstAttribute="bottom" secondItem="73E-EW-tIY" secondAttribute="bottom" id="g2x-pm-Jjj"/>
+                            <constraint firstItem="hg8-5h-MHJ" firstAttribute="top" secondItem="0En-Nc-wNE" secondAttribute="bottom" id="gEq-nP-hZ3"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="bxW-Pa-r2m" secondAttribute="trailing" id="mQA-na-583"/>
                             <constraint firstItem="0En-Nc-wNE" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="sIN-Iu-wN9"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="0En-Nc-wNE" secondAttribute="trailing" id="t4k-eg-YUy"/>
@@ -113,7 +153,9 @@
                         <outlet property="dateLabel" destination="Yt5-AQ-e1K" id="dbV-kr-b6P"/>
                         <outlet property="indicatorContainerView" destination="5Vo-pM-3K3" id="p6e-61-LdR"/>
                         <outlet property="indicatorView" destination="5kO-n1-43n" id="HY0-qL-Lzd"/>
+                        <outlet property="retrospectEmptyView" destination="X3G-hq-bfh" id="klM-k8-6St"/>
                         <outlet property="tableView" destination="bxW-Pa-r2m" id="rZ2-iQ-caO"/>
+                        <outlet property="todoEmptyView" destination="hg8-5h-MHJ" id="GDk-av-PTO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
