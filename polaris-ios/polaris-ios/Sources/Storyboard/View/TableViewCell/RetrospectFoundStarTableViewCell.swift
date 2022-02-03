@@ -29,9 +29,10 @@ class RetrospectFoundStarTableViewCell: RetrospectReportCell {
     
     private func setupCollectionView() {
         self.collectionView.registerCell(cell: RetrospectFoundStarItemCell.self)
-        self.collectionView.showsHorizontalScrollIndicator = false
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
+        self.collectionView.allowsSelection = false
+        self.collectionView.showsHorizontalScrollIndicator = false
     }
     
     private func layoutCollectionView() {

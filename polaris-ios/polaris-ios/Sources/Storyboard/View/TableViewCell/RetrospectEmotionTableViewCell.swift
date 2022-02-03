@@ -23,7 +23,7 @@ class RetrospectEmotionTableViewCell: RetrospectReportCell {
     
     override func configure(presentable: RetrospectReportPresentable) {
         super.configure(presentable: presentable)
-        // TODO: - 서버 데이터 반영
+        self.collectionView.reloadData()
     }
     
     private func layoutCollectionView() {
@@ -38,9 +38,14 @@ class RetrospectEmotionTableViewCell: RetrospectReportCell {
     
     private func setupCollectionView() {
         self.collectionView.registerCell(cell: RetrospectEmotionItemCell.self)
-        self.collectionView.allowsSelection = false
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
+        self.collectionView.allowsSelection = false
+        self.collectionView.showsHorizontalScrollIndicator = false
+    }
+    
+    private var emotionPresentable: RetrospectEmoticonModel? {
+        self.presentable as? RetrospectEmoticonModel
     }
 
     @IBOutlet private weak var collectionView: UICollectionView!
@@ -50,21 +55,19 @@ class RetrospectEmotionTableViewCell: RetrospectReportCell {
 extension RetrospectEmotionTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // TODO: - 서버 데이터 반영 필요
-        return 4
+        self.emotionPresentable?.emoticons.count ?? 0
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(cell: RetrospectEmotionItemCell.self, forIndexPath: indexPath)
+        let emotions = self.emotionPresentable?.emoticons
         
         guard let itemCell = cell else { return UICollectionViewCell() }
-        itemCell.configure(emotion: .easy)
+        guard let emotion = emotions?[safe: indexPath.row] else { return UICollectionViewCell() }
+        itemCell.configure(emotion: emotion)
         return itemCell
     }
     
 }
 
-extension RetrospectEmotionTableViewCell: UICollectionViewDelegate {
-    
-}
+extension RetrospectEmotionTableViewCell: UICollectionViewDelegate {}

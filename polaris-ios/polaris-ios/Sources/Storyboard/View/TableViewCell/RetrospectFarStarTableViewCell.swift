@@ -28,6 +28,7 @@ class RetrospectFarStarTableViewCell: RetrospectReportCell {
         self.collectionView.registerCell(cell: RetrospectJourneyItemCell.self)
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
+        self.collectionView.allowsSelection = false
         self.collectionView.showsHorizontalScrollIndicator = false
     }
     
