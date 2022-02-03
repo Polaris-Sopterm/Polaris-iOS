@@ -15,15 +15,14 @@ class RetrospectFoundStarTableViewCell: RetrospectReportCell {
         super.awakeFromNib()
         self.layoutCollectionView()
         self.setupCollectionView()
-        
-        // FIXME: - 제거 필요 테스트용
-        self.updateTitleLabelAttributeText()
     }
     
     override func configure(presentable: RetrospectReportPresentable) {
         super.configure(presentable: presentable)
-        // TODO: - 데이터 반영 필요
-        self.updateTitleLabelAttributeText()
+        
+        guard let foundStarModel = self.presentable as? RetrospectFoundStarModel else { return }
+        self.updateTitleLabelAttributeText(asDate: foundStarModel.date)
+        self.collectionView.reloadData()
     }
     
     private func setupCollectionView() {
@@ -43,17 +42,20 @@ class RetrospectFoundStarTableViewCell: RetrospectReportCell {
         }
     }
     
-    private func updateTitleLabelAttributeText() {
-        // TODO: - 날짜 값 들어오면 반영 필요
-        let dayText = "4월 첫째주"
+    private func updateTitleLabelAttributeText(asDate date: PolarisDate) {
+        let weekNoDic = [1: "첫째주", 2: "둘째주", 3: "셋째주", 4: "넷째주", 5: "다섯째주"]
+        let yearText = "\(date.year)년 "
+        let monthText = "\(date.month)월 "
+        guard let weekNoText = weekNoDic[date.weekNo] else { return }
+
         let highlightedText = "찾은 별들이에요."
-        let titleText = dayText + "\n" + highlightedText
+        let titleText = yearText + monthText + weekNoText + "\n" + highlightedText
         let attributeText = NSMutableAttributedString(string: titleText,
                                                       attributes: [.font: UIFont.systemFont(ofSize: 18, weight: .regular),
                                                                    .foregroundColor: UIColor.white])
         
         let highlightedRange = (titleText as NSString).range(of: highlightedText)
-        attributeText.addAttribute(.font, value: UIFont.systemFont(ofSize: 18, weight: .medium), range: highlightedRange)
+        attributeText.addAttribute(.font, value: UIFont.systemFont(ofSize: 18, weight: .semibold), range: highlightedRange)
         self.titleLabel.attributedText = attributeText
     }
     
@@ -65,15 +67,18 @@ class RetrospectFoundStarTableViewCell: RetrospectReportCell {
 extension RetrospectFoundStarTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // TODO: - 데이터 관리 필요
-        return 5
+        guard let foundStarModel = self.presentable as? RetrospectFoundStarModel else { return 0 }
+        return foundStarModel.foundStar.foundStarCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(cell: RetrospectFoundStarItemCell.self, forIndexPath: indexPath)
         
+        guard let foundStarModel = self.presentable as? RetrospectFoundStarModel else { return UICollectionViewCell() }
+        guard let foundStar = foundStarModel.foundStar.foundStarsList[safe: indexPath.row] else { return UICollectionViewCell() }
         guard let itemCell = cell else { return UICollectionViewCell() }
-        itemCell.configure(journey: .challenge)
+        
+        itemCell.configure(journey: foundStar)
         itemCell.layoutAsRow(indexPath.row)
         return itemCell
     }

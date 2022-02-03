@@ -192,7 +192,6 @@ final class MainSceneTableViewCell: MainTableViewCell {
         .disposed(by: self.disposeBag)
         
         output.starList.bind(to: self.starCV.rx.items) { [weak self] collectionView, index, item in
-            //            self?.stopStarLoadingIndicator()
             if output.starList.value.last?.starModel.starName != "lookback" {
                 let indexPath  = IndexPath(item: index, section: 0)
                 let cell = collectionView.dequeueReusableCell(cell: MainStarCVC.self, forIndexPath: indexPath)
@@ -279,7 +278,6 @@ final class MainSceneTableViewCell: MainTableViewCell {
             weekNo: self.viewModel.dateInfoRelay.value.weekNo
         )
         weekPickerVC.presentWithAnimation(from: visibleController)
-        
     }
     
     @IBAction func settingButtonAction(_ sender: Any) {

@@ -75,6 +75,10 @@ class NetworkManager {
         #endif
     }
     
+    private static func decodeIfNeeded() {
+        
+    }
+    
 }
 
 extension NetworkManager {

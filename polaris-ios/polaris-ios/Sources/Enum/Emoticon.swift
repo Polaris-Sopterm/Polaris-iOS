@@ -7,16 +7,16 @@
 
 import UIKit
 
-enum Emotion: String {
-    case comfortable    // 편안
-    case inconvenient   // 불편
-    case expectation    // 기대
-    case frustrated     // 답답
-    case easy           // 무난
-    case joy            // 기쁨
-    case angry          // 화남
-    case regretful      // 아쉬움
-    case satisfaction   // 만족
+enum Emoticon: String {
+    case comfortable  = "편안"
+    case inconvenient = "불편"
+    case expectation  = "기대"
+    case frustrated   = "답답"
+    case easy         = "무난"
+    case joy          = "기쁨"
+    case angry        = "화남"
+    case regretful    = "아쉬운"
+    case satisfaction = "만족"
     
     var image: UIImage? {
         switch self {
@@ -32,17 +32,4 @@ enum Emotion: String {
         }
     }
     
-    var name: String {
-        switch self {
-        case .comfortable:  return "편안"
-        case .inconvenient: return "불편"
-        case .expectation:  return "기대"
-        case .frustrated:   return "답답"
-        case .easy:         return "무난"
-        case .joy:          return "기쁨"
-        case .angry:        return "화남"
-        case .regretful:    return "아쉬운"
-        case .satisfaction: return "만족"
-        }
-    }
 }

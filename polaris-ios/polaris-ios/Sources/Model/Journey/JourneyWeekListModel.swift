@@ -38,3 +38,7 @@ extension WeekJourneyModel {
     }
     
 }
+
+struct TodoJourneyListModel {
+    let data: [WeekJourneyModel]
+}

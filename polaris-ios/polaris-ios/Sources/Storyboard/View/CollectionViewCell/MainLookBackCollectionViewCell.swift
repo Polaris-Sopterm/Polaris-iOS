@@ -29,12 +29,11 @@ class MainLookBackCollectionViewCell: UICollectionViewCell {
     @IBOutlet var yDiffConstraints: [NSLayoutConstraint]!
     @IBOutlet var heightConstraints: [NSLayoutConstraint]!
     
-    
     private var state: MainLookBackCellState = .lookback
-    internal var delegate: LookBackCloseDelegate?
     private let deviceRatio = DeviceInfo.screenHeight/812.0
     private let deviceRatioSquare = DeviceInfo.screenHeight/812.0*DeviceInfo.screenHeight/812.0*DeviceInfo.screenHeight/812.0*DeviceInfo.screenHeight/812.0
     
+    weak var delegate: LookBackCloseDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -88,7 +87,7 @@ class MainLookBackCollectionViewCell: UICollectionViewCell {
     
 }
 
-protocol LookBackCloseDelegate {
+protocol LookBackCloseDelegate: AnyObject {
     func close()
     func apply(isLookBack: Bool)
 }

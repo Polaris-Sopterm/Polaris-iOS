@@ -10,6 +10,10 @@ import RxSwift
 import UIKit
 
 class MainVC: UIViewController {
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return self.customStatusBarStyle
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,16 +31,22 @@ class MainVC: UIViewController {
     func scrollToTodoListCell(animated: Bool = true) {
         let indexPath = IndexPath(row: MainSceneCellType.todoList.rawValue, section: 0)
         self.tableView.scrollToRow(at: indexPath, at: .top, animated: animated)
+        
+        self.updateStatusBarStyle(asIndexPath: indexPath)
     }
     
     func scrollToRetrospectCell(animated: Bool = true) {
         let indexPath = IndexPath(row: MainSceneCellType.retrospect.rawValue, section: 0)
         self.tableView.scrollToRow(at: indexPath, at: .top, animated: animated)
+        
+        self.updateStatusBarStyle(asIndexPath: indexPath)
     }
     
     func scrollToMainSceneCell(animated: Bool = true) {
         let indexPath = IndexPath(row: MainSceneCellType.main.rawValue, section: 0)
         self.tableView.scrollToRow(at: indexPath, at: .top, animated: animated)
+        
+        self.updateStatusBarStyle(asIndexPath: indexPath)
     }
     
     func pushRetrospectViewController() {
@@ -57,6 +67,14 @@ class MainVC: UIViewController {
         self.tableView.decelerationRate               = .fast
         self.tableView.contentInsetAdjustmentBehavior = .never
     }
+    
+    private func updateStatusBarStyle(asIndexPath indexPath: IndexPath) {
+        guard let mainCell =  MainSceneCellType(rawValue: indexPath.row) else { return }
+        self.customStatusBarStyle = mainCell.statusBarStyle
+        self.setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    private var customStatusBarStyle: UIStatusBarStyle = .lightContent
     
     private let disposeBag = DisposeBag()
     
@@ -101,6 +119,9 @@ extension MainVC: UITableViewDelegate {
         let estimatedContentOffsetY = CGFloat(estimatedPage) * DeviceInfo.screenHeight
         
         targetContentOffset.pointee = CGPoint(x: 0, y: estimatedContentOffsetY)
+        
+        let estimatedIndexPath = IndexPath(row: estimatedPage, section: 0)
+        self.updateStatusBarStyle(asIndexPath: estimatedIndexPath)
     }
     
 }

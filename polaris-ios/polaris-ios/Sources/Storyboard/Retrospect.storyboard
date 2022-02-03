@@ -35,10 +35,15 @@
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="btnBackLookBack" title=""/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="imageTintColor">
+                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2021년 4월 첫째주" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yt5-AQ-e1K">
-                                        <rect key="frame" x="138" y="19.5" width="138" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <rect key="frame" x="137" y="19.5" width="140" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -50,6 +55,11 @@
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="btnCalendar" title=""/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="imageTintColor">
+                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -63,26 +73,46 @@
                                     <constraint firstAttribute="trailing" secondItem="TNg-kG-jMA" secondAttribute="trailing" constant="10" id="kXA-vm-WH9"/>
                                 </constraints>
                             </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Vo-pM-3K3">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="5kO-n1-43n">
+                                        <rect key="frame" x="197" y="458" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="5kO-n1-43n" firstAttribute="centerX" secondItem="5Vo-pM-3K3" secondAttribute="centerX" id="0QB-B2-QB4"/>
+                                    <constraint firstItem="5kO-n1-43n" firstAttribute="centerY" secondItem="5Vo-pM-3K3" secondAttribute="centerY" id="txS-ii-JQd"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="bxW-Pa-r2m" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="5Ze-iH-XEi"/>
                             <constraint firstItem="73E-EW-tIY" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="Klf-af-XcU"/>
+                            <constraint firstItem="5Vo-pM-3K3" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="R2c-gY-Zgc"/>
+                            <constraint firstAttribute="bottom" secondItem="5Vo-pM-3K3" secondAttribute="bottom" id="UAA-4p-ic2"/>
                             <constraint firstItem="0En-Nc-wNE" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="XEs-XK-6ZF"/>
                             <constraint firstItem="73E-EW-tIY" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="Xss-Qn-Ele"/>
+                            <constraint firstItem="5Vo-pM-3K3" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="Y4c-o4-8OH"/>
                             <constraint firstAttribute="bottom" secondItem="73E-EW-tIY" secondAttribute="bottom" id="g2x-pm-Jjj"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="bxW-Pa-r2m" secondAttribute="trailing" id="mQA-na-583"/>
                             <constraint firstItem="0En-Nc-wNE" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="sIN-Iu-wN9"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="0En-Nc-wNE" secondAttribute="trailing" id="t4k-eg-YUy"/>
                             <constraint firstItem="73E-EW-tIY" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="tn2-On-C8v"/>
                             <constraint firstItem="bxW-Pa-r2m" firstAttribute="top" secondItem="0En-Nc-wNE" secondAttribute="bottom" id="uwe-g6-UgC"/>
+                            <constraint firstItem="5Vo-pM-3K3" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="vBU-R9-cJa"/>
                             <constraint firstAttribute="bottom" secondItem="bxW-Pa-r2m" secondAttribute="bottom" id="xm6-cZ-uwn"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="backButton" destination="5hZ-Kn-uxe" id="PmO-fP-miO"/>
                         <outlet property="calendarButton" destination="TNg-kG-jMA" id="fig-q8-imJ"/>
+                        <outlet property="dateLabel" destination="Yt5-AQ-e1K" id="dbV-kr-b6P"/>
+                        <outlet property="indicatorContainerView" destination="5Vo-pM-3K3" id="p6e-61-LdR"/>
+                        <outlet property="indicatorView" destination="5kO-n1-43n" id="HY0-qL-Lzd"/>
                         <outlet property="tableView" destination="bxW-Pa-r2m" id="rZ2-iQ-caO"/>
                     </connections>
                 </viewController>

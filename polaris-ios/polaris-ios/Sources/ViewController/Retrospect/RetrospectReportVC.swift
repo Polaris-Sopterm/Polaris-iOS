@@ -13,13 +13,20 @@ class RetrospectReportVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setupNavigationProperty()
         self.setupButtons()
         self.registerCell()
         self.setupTableView()
+        self.observeViewModel()
     }
     
     private func registerCell() {
         RetrospectReportCategory.allCases.forEach { self.tableView.registerCell(cell: $0.cellType) }
+    }
+    
+    private func setupNavigationProperty() {
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
     
     private func setupTableView() {
@@ -39,27 +46,78 @@ class RetrospectReportVC: UIViewController {
         }).disposed(by: self.disposeBag)
     }
     
+    private func observeViewModel() {
+        self.viewModel.reportDateRelay
+            .withUnretained(self)
+            .observeOnMain(onNext: { owner, currentDate in
+                let weekNoDic = [1: "첫째주", 2: "둘째주", 3: "셋째주", 4: "넷째주", 5: "다섯째주"]
+                
+                let yearText = "\(currentDate.year)년 "
+                let monthText = "\(currentDate.month)월 "
+                guard let weekNoText = weekNoDic[currentDate.weekNo] else { return }
+                
+                self.dateLabel.text = yearText + monthText + weekNoText
+            })
+            .disposed(by: self.disposeBag)
+        
+        Observable.combineLatest(self.viewModel.retrospectReportRelay, self.viewModel.foundStarRelayBehaviorRelay)
+            .withUnretained(self)
+            .observeOnMain(onNext: { owner, tuple in
+                let retrospectModel = tuple.0
+                let foundStarModel = tuple.1
+                                
+                owner.tableView.reloadData()
+                
+                // TODO: - Empty View 처리
+            })
+            .disposed(by: self.disposeBag)
+        
+        self.viewModel.loadingSubject
+            .withUnretained(self)
+            .observeOnMain(onNext: { owner, loading in
+                loading ? owner.startIndicatorAnimation() : owner.stopIndicatorAnimation()
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
     private func presentDatePickerView() {
         let viewController = WeekPickerVC.instantiateFromStoryboard(StoryboardName.weekPicker)
         
         guard let pickerVC = viewController else { return }
+        
+        let reportDate = self.viewModel.reportDate
+        pickerVC.setWeekInfo(year: reportDate.year, month: reportDate.month, weekNo: reportDate.weekNo)
         pickerVC.weekDelegate = self
         pickerVC.presentWithAnimation(from: self)
+    }
+    
+    private func startIndicatorAnimation() {
+        self.indicatorContainerView.isHidden = false
+        self.indicatorView.startAnimating()
+    }
+    
+    private func stopIndicatorAnimation() {
+        self.indicatorContainerView.isHidden = true
+        self.indicatorView.stopAnimating()
     }
     
     private let disposeBag = DisposeBag()
     private let viewModel = RetrospectReportViewModel()
     
+    @IBOutlet private weak var dateLabel: UILabel!
     @IBOutlet private weak var backButton: UIButton!
     @IBOutlet private weak var calendarButton: UIButton!
     @IBOutlet private weak var tableView: UITableView!
+    
+    @IBOutlet private weak var indicatorContainerView: UIView!
+    @IBOutlet private weak var indicatorView: UIActivityIndicatorView!
     
 }
 
 extension RetrospectReportVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        RetrospectReportCategory.allCases.count
+        return self.viewModel.numberOfRows()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -68,8 +126,9 @@ extension RetrospectReportVC: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(cell: reportCategory.cellType, forIndexPath: indexPath)
         
         guard let itemCell = cell else { return UITableViewCell() }
-        // TODO: - Presentable 대입 필요
-        // itemCell.configure(presentable: )
+        guard let presentable = self.viewModel.presentable(cellForCategoryAt: reportCategory) else { return UITableViewCell() }
+        
+        itemCell.configure(presentable: presentable)
         return itemCell
     }
     
@@ -88,6 +147,8 @@ extension RetrospectReportVC: UITableViewDelegate {
 extension RetrospectReportVC: WeekPickerDelegate {
     
     func apply(year: Int, month: Int, weekNo: Int, weekText: String) {
+        let date = PolarisDate(year: year, month: month, weekNo: weekNo)
+        self.viewModel.updateReportDate(date: date)
     }
     
 }

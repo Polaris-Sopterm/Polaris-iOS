@@ -99,5 +99,13 @@ extension UIView {
             self.layer.borderWidth = 1.0
         }
     }
+    
+    func asImage() -> UIImage? {
+        let renderer = UIGraphicsImageRenderer(bounds: self.bounds)
+        return renderer.image { renderImageContext in
+            self.layer.render(in: renderImageContext.cgContext)
+        }
+    }
+    
 }
 
