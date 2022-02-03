@@ -30,12 +30,13 @@ class RetrospectCloseStarTableViewCell: RetrospectReportCell {
         self.collectionView.registerCell(cell: RetrospectJourneyItemCell.self)
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
+        self.collectionView.showsHorizontalScrollIndicator = false
     }
     
     private func layoutCollectionView() {
         if let collectionViewLayout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             collectionViewLayout.scrollDirection = .horizontal
-            collectionViewLayout.itemSize = CGSize(width: 48, height: 84)
+            collectionViewLayout.itemSize = RetrospectJourneyItemCell.cellSize
             collectionViewLayout.minimumLineSpacing = 20
             collectionViewLayout.minimumInteritemSpacing = 0
             collectionViewLayout.sectionInset = UIEdgeInsets(top: 0, left: 27, bottom: 0, right: 27)
@@ -45,8 +46,6 @@ class RetrospectCloseStarTableViewCell: RetrospectReportCell {
     private var closeStarPresentable: RetrospectCloseStarsModel? {
         self.presentable as? RetrospectCloseStarsModel
     }
-    
-    private let disposeBag = DisposeBag()
     
     @IBOutlet private weak var collectionView: UICollectionView!
     
