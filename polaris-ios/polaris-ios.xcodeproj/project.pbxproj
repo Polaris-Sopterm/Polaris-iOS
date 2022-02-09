@@ -369,6 +369,15 @@
 		CE8F71A0266BDA3500D4FDD7 /* TermsOfServiceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8F719E266BDA3500D4FDD7 /* TermsOfServiceView.xib */; };
 		CE8F71A4266BDA4D00D4FDD7 /* TermsOfServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F71A3266BDA4D00D4FDD7 /* TermsOfServiceView.swift */; };
 		CE8F71A5266BDA4D00D4FDD7 /* TermsOfServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F71A3266BDA4D00D4FDD7 /* TermsOfServiceView.swift */; };
+		CE99FC8D27B3DAF200E264A5 /* LastWeekOfMonthResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE99FC8C27B3DAF200E264A5 /* LastWeekOfMonthResponseModel.swift */; };
+		CE99FC8E27B3DAF200E264A5 /* LastWeekOfMonthResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE99FC8C27B3DAF200E264A5 /* LastWeekOfMonthResponseModel.swift */; };
+		CE99FC8F27B3DAF200E264A5 /* LastWeekOfMonthResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE99FC8C27B3DAF200E264A5 /* LastWeekOfMonthResponseModel.swift */; };
+		CE99FC9127B3DB8800E264A5 /* WeekPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE99FC9027B3DB8800E264A5 /* WeekPickerViewModel.swift */; };
+		CE99FC9227B3DB8800E264A5 /* WeekPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE99FC9027B3DB8800E264A5 /* WeekPickerViewModel.swift */; };
+		CE99FC9327B3DB8800E264A5 /* WeekPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE99FC9027B3DB8800E264A5 /* WeekPickerViewModel.swift */; };
+		CE99FC9D27B3EA0900E264A5 /* NickChangeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE99FC9C27B3EA0900E264A5 /* NickChangeViewModel.swift */; };
+		CE99FC9E27B3EA0900E264A5 /* NickChangeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE99FC9C27B3EA0900E264A5 /* NickChangeViewModel.swift */; };
+		CE99FC9F27B3EA0900E264A5 /* NickChangeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE99FC9C27B3EA0900E264A5 /* NickChangeViewModel.swift */; };
 		CEA3CFD726A85C4B00577DA4 /* ShootingComet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA3CFD626A85C4B00577DA4 /* ShootingComet.swift */; };
 		CEA3CFD826A85C6500577DA4 /* ShootingComet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA3CFD626A85C4B00577DA4 /* ShootingComet.swift */; };
 		CEA3CFD926A85C6500577DA4 /* ShootingComet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA3CFD626A85C4B00577DA4 /* ShootingComet.swift */; };
@@ -817,6 +826,9 @@
 		CE82B9AC2661DA11004B6D81 /* polaris-ios.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "polaris-ios.plist"; sourceTree = "<group>"; };
 		CE8F719E266BDA3500D4FDD7 /* TermsOfServiceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TermsOfServiceView.xib; sourceTree = "<group>"; };
 		CE8F71A3266BDA4D00D4FDD7 /* TermsOfServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceView.swift; sourceTree = "<group>"; };
+		CE99FC8C27B3DAF200E264A5 /* LastWeekOfMonthResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastWeekOfMonthResponseModel.swift; sourceTree = "<group>"; };
+		CE99FC9027B3DB8800E264A5 /* WeekPickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekPickerViewModel.swift; sourceTree = "<group>"; };
+		CE99FC9C27B3EA0900E264A5 /* NickChangeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickChangeViewModel.swift; sourceTree = "<group>"; };
 		CEA3CFD626A85C4B00577DA4 /* ShootingComet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShootingComet.swift; sourceTree = "<group>"; };
 		CEA3CFDB26A85E7600577DA4 /* PolarisWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolarisWebView.swift; sourceTree = "<group>"; };
 		CEA3CFDF26A868C000577DA4 /* Common.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Common.storyboard; sourceTree = "<group>"; };
@@ -1115,6 +1127,7 @@
 				EC7A3BFA2639537A00B59C98 /* MainTodoTVCViewModel.swift */,
 				CE573FFF267C8E9900665933 /* TodoViewModel.swift */,
 				EC8C907C277B3845008BE7CD /* LookBackViewModel.swift */,
+				CE99FC9027B3DB8800E264A5 /* WeekPickerViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1358,6 +1371,7 @@
 				CED6B6E726CAD10300D37647 /* SettingViewModel.swift */,
 				CEEBE6D126DA25A0004A54BA /* SignoutViewModel.swift */,
 				CE6CE93126E3654A00BDDB6C /* PolarisMakerViewModel.swift */,
+				CE99FC9C27B3EA0900E264A5 /* NickChangeViewModel.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -1495,6 +1509,7 @@
 				CED6B6DA26CAC1F900D37647 /* SuccessModel.swift */,
 				CE5C5B0027A0DE8400FDCE32 /* PolarisDate.swift */,
 				CEB9EA6F27AAAD7D0017F59B /* WeekResponseModel.swift */,
+				CE99FC8C27B3DAF200E264A5 /* LastWeekOfMonthResponseModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2090,6 +2105,7 @@
 				ECA3C4682780254300970DF7 /* LookBackThirdViewController.swift in Sources */,
 				CEEE573D262A952100C39358 /* MockProviderFactory.swift in Sources */,
 				CEE574EC26307C4D00EA64B7 /* Array+.swift in Sources */,
+				CE99FC9D27B3EA0900E264A5 /* NickChangeViewModel.swift in Sources */,
 				ECB52B83278485A0000084CF /* RetrospectModel.swift in Sources */,
 				CEA5D98F2785A43C00A6D6DE /* RetrospectReportVC.swift in Sources */,
 				CEA3CFED26A8766700577DA4 /* ServiceTermKind.swift in Sources */,
@@ -2158,6 +2174,7 @@
 				EC0E354C277869E900B6B33F /* LookBackFirstStarCollectionViewCell.swift in Sources */,
 				ECA4947E262C670000CC2EB8 /* MainStarTVCViewModel.swift in Sources */,
 				CEA3CFF126A92B8900577DA4 /* TodoDayListModel.swift in Sources */,
+				CE99FC9127B3DB8800E264A5 /* WeekPickerViewModel.swift in Sources */,
 				CEB9EA5827A42A0D0017F59B /* RetrospectReportViewModelFormatter.swift in Sources */,
 				CE5C5B0927A0EB2000FDCE32 /* RetrospectViewModel.swift in Sources */,
 				CEA3CFD726A85C4B00577DA4 /* ShootingComet.swift in Sources */,
@@ -2169,6 +2186,7 @@
 				ECB639BA2781DFD4006C7D29 /* LookBackFourthCollectionViewCell.swift in Sources */,
 				CEC19AEB265103AA00DA747C /* DayTodoTableViewCell.swift in Sources */,
 				CEA44E6E267B3BE300A05650 /* TodoTableViewCell.swift in Sources */,
+				CE99FC8D27B3DAF200E264A5 /* LastWeekOfMonthResponseModel.swift in Sources */,
 				ECA494472629729000CC2EB8 /* TodoDateModel.swift in Sources */,
 				ECB5443726D3D0CA00FA4C50 /* UITextField+.swift in Sources */,
 				CE132141265A408F001E3C1F /* LoginViewModel.swift in Sources */,
@@ -2266,6 +2284,7 @@
 				ECA3C4692780254300970DF7 /* LookBackThirdViewController.swift in Sources */,
 				CE2953052687A0A500E21871 /* Array+.swift in Sources */,
 				CEA3CFEE26A8766700577DA4 /* ServiceTermKind.swift in Sources */,
+				CE99FC9E27B3EA0900E264A5 /* NickChangeViewModel.swift in Sources */,
 				EC81D50527853E59008608EA /* RetrospectModel.swift in Sources */,
 				CEA5D9902785A43C00A6D6DE /* RetrospectReportVC.swift in Sources */,
 				CEA3CFEA26A869D200577DA4 /* ObservableType+.swift in Sources */,
@@ -2334,6 +2353,7 @@
 				EC0E354D277869E900B6B33F /* LookBackFirstStarCollectionViewCell.swift in Sources */,
 				CE29532B2687A0A500E21871 /* MainStarTVCViewModel.swift in Sources */,
 				CEA3CFF226A92B8900577DA4 /* TodoDayListModel.swift in Sources */,
+				CE99FC9227B3DB8800E264A5 /* WeekPickerViewModel.swift in Sources */,
 				CEB9EA5927A42A0D0017F59B /* RetrospectReportViewModelFormatter.swift in Sources */,
 				CE5C5B0A27A0EB2000FDCE32 /* RetrospectViewModel.swift in Sources */,
 				CEA3CFD826A85C6500577DA4 /* ShootingComet.swift in Sources */,
@@ -2345,6 +2365,7 @@
 				ECB639BB2781DFD4006C7D29 /* LookBackFourthCollectionViewCell.swift in Sources */,
 				CE29532C2687A0A500E21871 /* DayTodoTableViewCell.swift in Sources */,
 				CE29532D2687A0A500E21871 /* TodoTableViewCell.swift in Sources */,
+				CE99FC8E27B3DAF200E264A5 /* LastWeekOfMonthResponseModel.swift in Sources */,
 				CE29532E2687A0A500E21871 /* TodoDateModel.swift in Sources */,
 				ECB5443826D3D0CA00FA4C50 /* UITextField+.swift in Sources */,
 				CE29532F2687A0A500E21871 /* LoginViewModel.swift in Sources */,
@@ -2442,6 +2463,7 @@
 				ECA3C46A2780254300970DF7 /* LookBackThirdViewController.swift in Sources */,
 				CE43D03426613D66003126F2 /* Array+.swift in Sources */,
 				CEA3CFEF26A8766700577DA4 /* ServiceTermKind.swift in Sources */,
+				CE99FC9F27B3EA0900E264A5 /* NickChangeViewModel.swift in Sources */,
 				EC81D50627853E59008608EA /* RetrospectModel.swift in Sources */,
 				CEA5D9912785A43C00A6D6DE /* RetrospectReportVC.swift in Sources */,
 				CEA3CFEB26A869D200577DA4 /* ObservableType+.swift in Sources */,
@@ -2510,6 +2532,7 @@
 				EC0E354E277869E900B6B33F /* LookBackFirstStarCollectionViewCell.swift in Sources */,
 				CE43D05226613D66003126F2 /* MainStarTVCViewModel.swift in Sources */,
 				CEA3CFF326A92B8900577DA4 /* TodoDayListModel.swift in Sources */,
+				CE99FC9327B3DB8800E264A5 /* WeekPickerViewModel.swift in Sources */,
 				CEB9EA5A27A42A0D0017F59B /* RetrospectReportViewModelFormatter.swift in Sources */,
 				CE5C5B0B27A0EB2000FDCE32 /* RetrospectViewModel.swift in Sources */,
 				CEA3CFD926A85C6500577DA4 /* ShootingComet.swift in Sources */,
@@ -2521,6 +2544,7 @@
 				ECB639BC2781DFD4006C7D29 /* LookBackFourthCollectionViewCell.swift in Sources */,
 				CE43D05326613D66003126F2 /* DayTodoTableViewCell.swift in Sources */,
 				CEA44E6F267B3BE300A05650 /* TodoTableViewCell.swift in Sources */,
+				CE99FC8F27B3DAF200E264A5 /* LastWeekOfMonthResponseModel.swift in Sources */,
 				CE43D05426613D66003126F2 /* TodoDateModel.swift in Sources */,
 				ECB5443926D3D0CA00FA4C50 /* UITextField+.swift in Sources */,
 				CE43D05526613D66003126F2 /* LoginViewModel.swift in Sources */,
