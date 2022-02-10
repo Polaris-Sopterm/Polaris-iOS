@@ -10,6 +10,7 @@ import Combine
 
 class LookBackMainViewController: UIViewController {
 
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var backButtonHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var containerViewHeightConstraint: NSLayoutConstraint!
@@ -67,6 +68,12 @@ class LookBackMainViewController: UIViewController {
                                                       completion: nil
                 )
                 self.originPage = value
+                if value == 0 {
+                    self.backButton.isHidden = true
+                }
+                else {
+                    self.backButton.isHidden = false
+                }
             })
         self.lookbackEndSubscription = self.viewModel.$lookbackEnd
             .receive(on: DispatchQueue.main)

@@ -89,6 +89,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="619-38-GBk" id="TWa-uO-OTZ"/>
                         <outlet property="backButtonHeightConstraint" destination="4Ls-R6-fsZ" id="9pD-yQ-fm0"/>
                         <outlet property="containerViewHeightConstraint" destination="Ldf-RN-30p" id="iKu-lN-Pu3"/>
                         <outlet property="pageControl" destination="Hzc-yZ-bnJ" id="1wR-IK-BOZ"/>
