@@ -392,7 +392,7 @@
                                     <action selector="changeButtonAction:" destination="cVb-GK-eAb" eventType="touchUpInside" id="Gyy-dQ-Z3Q"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Ew-gH-f36">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Ew-gH-f36">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="eEq-oC-fE3">
@@ -428,7 +428,6 @@
                     </view>
                     <connections>
                         <outlet property="backButton" destination="Luh-CH-gvl" id="zYK-eU-G54"/>
-                        <outlet property="dimView" destination="0Ew-gH-f36" id="Esr-Mm-eiV"/>
                         <outlet property="indicatorContainerView" destination="0Ew-gH-f36" id="vo9-nq-7gJ"/>
                         <outlet property="indicatorView" destination="eEq-oC-fE3" id="zWu-9i-MSj"/>
                         <outlet property="nickTextField" destination="6EQ-04-dEf" id="cOV-iy-Hme"/>

@@ -10,7 +10,7 @@ import Moya
 
 enum WeekAPI {
     case getWeekNo(date: Date)
-    case lastWeekOfMonth(year: Int, month: Int)
+    case lastWeekOfMonth
 }
 
 extension WeekAPI: TargetType {
@@ -31,7 +31,7 @@ extension WeekAPI: TargetType {
     var method: Moya.Method {
         switch self {
         case .getWeekNo:        return .get
-        case .lastWeekOfMonth:  return .post
+        case .lastWeekOfMonth:  return .get
         }
     }
     
@@ -43,8 +43,8 @@ extension WeekAPI: TargetType {
         switch self {
         case .getWeekNo:
             return .requestPlain
-        case .lastWeekOfMonth(let year, let month):
-            return .requestParameters(parameters: ["year": year, "month": month], encoding: JSONEncoding.default)
+        case .lastWeekOfMonth:
+            return .requestPlain
         }
     }
     

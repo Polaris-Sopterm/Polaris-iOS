@@ -101,18 +101,38 @@
                                     <constraint firstAttribute="bottom" secondItem="i6P-je-HGu" secondAttribute="bottom" id="rzD-Ml-ZQv"/>
                                 </constraints>
                             </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5dI-Gf-Mf7">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="cUF-HJ-3b9">
+                                        <rect key="frame" x="197" y="438" width="20" height="20"/>
+                                        <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="cUF-HJ-3b9" firstAttribute="centerY" secondItem="5dI-Gf-Mf7" secondAttribute="centerY" id="kj0-a6-f0o"/>
+                                    <constraint firstItem="cUF-HJ-3b9" firstAttribute="centerX" secondItem="5dI-Gf-Mf7" secondAttribute="centerX" id="vMt-Yj-OmU"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="abB-EC-nHK" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="5fX-wN-aBe"/>
                             <constraint firstAttribute="bottom" secondItem="abB-EC-nHK" secondAttribute="bottom" id="Gsh-U4-2hh"/>
+                            <constraint firstItem="5dI-Gf-Mf7" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="KEJ-Fx-hfK"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="abB-EC-nHK" secondAttribute="trailing" id="YoU-S4-rdp"/>
+                            <constraint firstAttribute="bottom" secondItem="5dI-Gf-Mf7" secondAttribute="bottom" id="gW0-oz-TqK"/>
+                            <constraint firstItem="5dI-Gf-Mf7" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="hx5-hb-s76"/>
+                            <constraint firstItem="5dI-Gf-Mf7" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="so7-zE-FxL"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="closeButton" destination="6Jc-kZ-ec0" id="Lf0-l1-3Fr"/>
                         <outlet property="confirmButton" destination="fyO-z8-mcK" id="mx1-NF-aNg"/>
+                        <outlet property="indicatorContainerView" destination="5dI-Gf-Mf7" id="iHF-0m-4pF"/>
+                        <outlet property="indicatorView" destination="cUF-HJ-3b9" id="wjf-xG-WD0"/>
                         <outlet property="lineView" destination="eow-sM-6LY" id="hbs-sd-TNK"/>
                         <outlet property="titleLabel" destination="BFS-r8-RB8" id="CSV-16-vpl"/>
                         <outlet property="weekPicker" destination="mEV-qo-j5f" id="BJm-hr-rfm"/>
