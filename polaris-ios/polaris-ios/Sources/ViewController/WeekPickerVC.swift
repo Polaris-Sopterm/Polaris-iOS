@@ -28,7 +28,7 @@ class WeekPickerVC: HalfModalVC {
         self.setUIs()
         self.observeViewModel()
         
-        self.viewModel.occurViewAction(action: .requestWeekInformation)
+        self.viewModel.occurViewAction(action: .viewDidLoad)
     }
     
     private func setUIs(){
@@ -48,16 +48,15 @@ class WeekPickerVC: HalfModalVC {
     }
     
     @IBAction func confirmButtonAction(_ sender: Any) {
-        let currentSelectedDate = self.viewModel.selectedDate
+        guard let selectedDate = self.viewModel.selectedDate                           else { return }
+        guard let weekNoText = self.convertWeekNoToString(weekNo: selectedDate.weekNo) else { return }
         
-        if let weekNoText = self.convertWeekNoToString(weekNo: currentSelectedDate.weekNo) {
-            let dateAsText = "\(currentSelectedDate.year)년 " + "\(currentSelectedDate.month)월 " + weekNoText
-            self.weekDelegate?.apply(year: currentSelectedDate.year,
-                                     month: currentSelectedDate.month,
-                                     weekNo: currentSelectedDate.weekNo,
-                                     weekText: dateAsText
-            )
-        }
+        let dateAsText = "\(selectedDate.year)년 " + "\(selectedDate.month)월 " + weekNoText
+        self.weekDelegate?.apply(year: selectedDate.year,
+                                 month: selectedDate.month,
+                                 weekNo: selectedDate.weekNo,
+                                 weekText: dateAsText
+        )
       
         self.dismissWithAnimation()
     }
@@ -87,7 +86,7 @@ class WeekPickerVC: HalfModalVC {
             .take(1)
             .withUnretained(self)
             .observeOnMain(onNext: { owner, _ in
-                let selectedDate = owner.viewModel.selectedDate
+                guard let selectedDate = owner.viewModel.selectedDate else { return }
                 
                 let yearRow = owner.viewModel.years.firstIndex(of: selectedDate.year) ?? 0
                 let monthRow = selectedDate.month - 1
@@ -128,7 +127,7 @@ extension WeekPickerVC: UIPickerViewDataSource {
             return Calendar.current.monthSymbols.count
         case .weekNo:
             let defaultWeekNo: Int = 4
-            let currentSelectedDate = self.viewModel.selectedDate
+            guard let currentSelectedDate = self.viewModel.selectedDate else { return defaultWeekNo }
             return self.viewModel.weekNo(ofYear: currentSelectedDate.year, ofMonth: currentSelectedDate.month) ?? defaultWeekNo
         }
     }
@@ -148,9 +147,9 @@ extension WeekPickerVC: UIPickerViewDelegate {
         
         switch pickerComponent {
         case .year:
-            return "\(self.viewModel.years[safe: row] ?? Date.currentYear)"+"년"
+            return "\(self.viewModel.years[safe: row] ?? Date.currentYear)" + "년"
         case .month:
-            return "\(row + 1)"+"월"
+            return "\(row + 1)" + "월"
         case .weekNo:
             return self.convertWeekNoToString(weekNo: row + 1)
         }
@@ -159,7 +158,7 @@ extension WeekPickerVC: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         guard let pickerComponent = PickerComponent(rawValue: component) else { return }
         
-        let currentSelectedDate = self.viewModel.selectedDate
+        guard let currentSelectedDate = self.viewModel.selectedDate else { return }
         
         switch pickerComponent {
         case .year:
