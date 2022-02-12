@@ -55,11 +55,10 @@ class RetrospectReportVC: UIViewController {
             .withUnretained(self)
             .observeOnMain(onNext: { owner, currentDate in
                 let currentDate = currentDate
-                let weekNoDic = [1: "첫째주", 2: "둘째주", 3: "셋째주", 4: "넷째주", 5: "다섯째주"]
                 
                 let yearText = "\(currentDate.year)년 "
                 let monthText = "\(currentDate.month)월 "
-                guard let weekNoText = weekNoDic[currentDate.weekNo] else { return }
+                guard let weekNoText = Date.convertWeekNoToString(weekNo: currentDate.weekNo) else { return }
                 
                 self.dateLabel.text = yearText + monthText + weekNoText
             })

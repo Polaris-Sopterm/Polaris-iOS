@@ -17,7 +17,6 @@ class WeekPickerVC: HalfModalVC {
     @IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var weekPicker: UIPickerView!
         
-    private let weekDict = [1:"첫째주",2:"둘째주",3:"셋째주",4:"넷째주",5:"다섯째주"]
     weak var weekDelegate: WeekPickerDelegate?
     
     override func viewDidLoad() {
@@ -100,11 +99,6 @@ class WeekPickerVC: HalfModalVC {
             .disposed(by: self.disposeBag)
     }
     
-    private func convertWeekNoToString(weekNo: Int) -> String? {
-        let weekDict = [1: "첫째주", 2: "둘째주", 3: "셋째주", 4: "넷째주", 5: "다섯째주"]
-        return weekDict[weekNo]
-    }
-    
     private let viewModel = WeekPickerViewModel()
     private let disposeBag = DisposeBag()
     
@@ -152,7 +146,7 @@ extension WeekPickerVC: UIPickerViewDelegate {
         case .month:
             return "\(row + 1)" + "월"
         case .weekNo:
-            return self.convertWeekNoToString(weekNo: row + 1)
+            return Date.convertWeekNoToString(weekNo: row + 1)
         }
     }
     

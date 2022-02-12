@@ -50,7 +50,6 @@ final class MainSceneTableViewCell: MainTableViewCell {
     private let starTVCHeight = 212*(DeviceInfo.screenHeight/812.0)
     
     override static var cellHeight: CGFloat { return DeviceInfo.screenHeight }
-    private let weekDict = [1:"첫째주",2:"둘째주",3:"셋째주",4:"넷째주",5:"다섯째주"]
     
     private var dateInfo = DateInfo(year: Date.currentYear, month: Date.currentMonth, weekNo: Date.currentWeekNoOfMonth)
 
@@ -93,7 +92,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
         self.weekContainView.makeRounded(cornerRadius: 9)
         self.weekLabel.font = UIFont.systemFont(ofSize: 13,weight: .bold)
         self.weekLabel.addCharacterSpacing(kernValue: -0.39)
-        if let weekText = self.weekDict[Date.currentWeekNoOfMonth] {
+        if let weekText = Date.convertWeekNoToString(weekNo: Date.currentWeekNoOfMonth) {
             self.weekLabel.text = String(Date.currentYear)+"년 "+String(Date.currentMonth)+"월"+weekText
         }
         self.weekLabel.textColor = .white
