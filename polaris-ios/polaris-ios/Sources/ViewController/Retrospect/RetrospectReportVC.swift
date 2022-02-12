@@ -167,8 +167,7 @@ extension RetrospectReportVC: UITableViewDelegate {
 
 extension RetrospectReportVC: WeekPickerDelegate {
     
-    func apply(year: Int, month: Int, weekNo: Int, weekText: String) {
-        let date = PolarisDate(year: year, month: month, weekNo: weekNo)
+    func weekPickerViewController(_ viewController: WeekPickerVC, didSelectedDate date: PolarisDate) {
         self.viewModel.occurViewAction(action: .weekPickerSelected(date: date))
     }
     

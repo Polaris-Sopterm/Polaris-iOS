@@ -51,7 +51,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
     
     override static var cellHeight: CGFloat { return DeviceInfo.screenHeight }
     
-    private var dateInfo = DateInfo(year: Date.currentYear, month: Date.currentMonth, weekNo: Date.currentWeekNoOfMonth)
+    private var dateInfo = PolarisDate(year: Date.currentYear, month: Date.currentMonth, weekNo: Date.currentWeekNoOfMonth)
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -427,10 +427,10 @@ extension MainSceneTableViewCell: LookBackCloseDelegate {
 
 extension MainSceneTableViewCell: WeekPickerDelegate {
     
-    func apply(year: Int, month: Int, weekNo: Int, weekText: String) {
-        let dateInfo = DateInfo(year: year, month: month, weekNo: weekNo)
-        self.weekLabel.text = weekText
-        self.viewModel.updateDateInfo(dateInfo)
+    func weekPickerViewController(_ viewController: WeekPickerVC, didSelectedDate date: PolarisDate) {
+        guard let weekNoText = Date.convertWeekNoToString(weekNo: date.weekNo) else { return }
+        self.weekLabel.text = "\(date.year)년 " + "\(date.month)월 " + weekNoText
+        self.viewModel.updateDateInfo(date)
     }
     
 }

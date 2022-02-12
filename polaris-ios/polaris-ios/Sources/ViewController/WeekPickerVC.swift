@@ -48,16 +48,9 @@ class WeekPickerVC: HalfModalVC {
     
     @IBAction func confirmButtonAction(_ sender: Any) {
         guard let selectedDate = self.viewModel.selectedDate                           else { return }
-        guard let weekNoText = self.convertWeekNoToString(weekNo: selectedDate.weekNo) else { return }
-        
-        let dateAsText = "\(selectedDate.year)년 " + "\(selectedDate.month)월 " + weekNoText
-        self.weekDelegate?.apply(
-            year: selectedDate.year,
-            month: selectedDate.month,
-            weekNo: selectedDate.weekNo,
-            weekText: dateAsText
-        )
-      
+        guard let weekNoText = Date.convertWeekNoToString(weekNo: selectedDate.weekNo) else { return }
+    
+        self.weekDelegate?.weekPickerViewController(self, didSelectedDate: selectedDate)
         self.dismissWithAnimation()
     }
     
@@ -188,7 +181,7 @@ extension WeekPickerVC: UIPickerViewDelegate {
 }
 
 protocol WeekPickerDelegate: AnyObject {
-    func apply(year: Int, month: Int, weekNo: Int, weekText: String)
+    func weekPickerViewController(_ viewController: WeekPickerVC, didSelectedDate date: PolarisDate)
 }
 
 

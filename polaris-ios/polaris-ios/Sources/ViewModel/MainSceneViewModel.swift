@@ -9,12 +9,6 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-struct DateInfo {
-    let year: Int
-    let month: Int
-    let weekNo: Int
-}
-
 class MainSceneViewModel {
     
     var heightRatio = CGFloat(DeviceInfo.screenHeight/812.0)
@@ -24,7 +18,7 @@ class MainSceneViewModel {
     private let deviceRatio = DeviceInfo.screenHeight/812.0
     struct Input{
         let forceToShowStar: BehaviorRelay<Bool>
-        let dateInfo: BehaviorRelay<DateInfo>
+        let dateInfo: BehaviorRelay<PolarisDate>
     }
     
     struct Output{
@@ -142,7 +136,7 @@ class MainSceneViewModel {
         return resultList
     }
     
-    func convertTodoCVCViewModel(weekJourneyModels: [WeekJourneyModel],dateInfo: DateInfo) -> [MainTodoCVCViewModel]{
+    func convertTodoCVCViewModel(weekJourneyModels: [WeekJourneyModel],dateInfo: PolarisDate) -> [MainTodoCVCViewModel]{
         var resultList: [MainTodoCVCViewModel] = []
         var thisWeekJouneyModels: [WeekJourneyModel] = []
         // 이번주에 해당하는 Model 추출
@@ -191,7 +185,7 @@ class MainSceneViewModel {
         self.forceToShowStarRelay.accept(isSkipped)
     }
     
-    func updateDateInfo(_ dateInfo: DateInfo) {
+    func updateDateInfo(_ dateInfo: PolarisDate) {
         self.dateInfoRelay.accept(dateInfo)
     }
     
@@ -235,7 +229,7 @@ class MainSceneViewModel {
     }
     
     private(set) var forceToShowStarRelay = BehaviorRelay(value: false)
-    private(set) var dateInfoRelay        = BehaviorRelay<DateInfo>(value: DateInfo(year: Date.currentYear,
+    private(set) var dateInfoRelay        = BehaviorRelay<PolarisDate>(value: PolarisDate(year: Date.currentYear,
                                                                                     month: Date.currentMonth,
                                                                                     weekNo: Date.currentWeekNoOfMonth))
     
