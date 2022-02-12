@@ -83,11 +83,13 @@ class MainSceneViewModel {
                 })
                 .disposed(by: self.disposeBag)
         })
-        .disposed(by: self.disposeBag)
+            .disposed(by: self.disposeBag)
         
         
         let todoStarList: BehaviorRelay<[MainTodoCVCViewModel]> = BehaviorRelay(value: [])
         input.dateInfo.subscribe(onNext: { date in
+            guard date.year > 0 else { return }
+            
             todoLoadingRelay.accept(true)
             let journeyAPI = JourneyAPI.getWeekJourney(year: date.year, month: date.month, weekNo: date.weekNo)
             var weekJourneyModels: [WeekJourneyModel] = []
@@ -99,11 +101,29 @@ class MainSceneViewModel {
                 })
                 .disposed(by: self.disposeBag)
         })
-        .disposed(by: self.disposeBag)
+            .disposed(by: self.disposeBag)
+        
+        let weekAPI = WeekAPI.getWeekNo(date: Date.normalizedCurrent)
+        NetworkManager.request(apiType: weekAPI)
+            .subscribe(onSuccess: { [weak self] (weekModel: WeekResponseModel) in
+                var year = Date.currentYear
+                var month = Date.currentMonth
+                if Date.todayDay < 7 * (weekModel.weekNo - 1) {
+                    if month == 1 {
+                        year -= 1
+                        month = 12
+                    }
+                    else {
+                        month -= 1
+                    }
+                }
+                input.dateInfo.accept(DateInfo(year: year, month: month, weekNo: weekModel.weekNo))
+            })
+            .disposed(by: self.disposeBag)
         
         lookBackState.accept([.build])
         starList.accept(self.convertStarCVCViewModel(mainStarModels: mainStarModels))
-       
+        
         return Output(starList: starList,todoStarList: todoStarList,state: state,lookBackState: lookBackState,mainTextRelay: mainTextRelay,homeModelRelay: homeModelRelay, starLoadingRelay: starLoadingRelay, todoLoadingRelay: todoLoadingRelay)
     }
     
@@ -214,7 +234,7 @@ class MainSceneViewModel {
         let dateString = dateFormatter.string(from: date)
         if let jumpDate = UserDefaults.standard.value(forKey: UserDefaultsKey.jumpDate) as? String,
            jumpDate == dateString
-           {
+        {
             return true
         }
         return false
