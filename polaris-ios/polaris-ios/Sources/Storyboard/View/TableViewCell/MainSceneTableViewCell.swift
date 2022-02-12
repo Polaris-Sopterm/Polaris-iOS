@@ -253,7 +253,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
         
         let cometImgNames = [ImageName.imgShootingstar,ImageName.imgShootingstar2]
         
-        //        0: small, 1 : big
+        // 0: small, 1 : big
         let cometSize = Int.random(in: 0...1)
         let comet = UIImageView(image: UIImage(named: cometImgNames[cometSize]))
         

@@ -31,8 +31,9 @@ final class WeekPickerViewModel {
     }
     
     func weekNo(ofYear year: Int, ofMonth month: Int) -> Int? {
-        guard let monthModel = self.lastWeekOfMonthModel.first(where: { $0.year == year }) else { return nil }
-        return monthModel.weekNo(ofMonth: month)
+        self.lastWeekOfMonthModel
+            .first(where: { $0.year == year })?
+            .weekNo(ofMonth: month)
     }
     
     func occurViewAction(action: ViewAction) {

@@ -52,10 +52,11 @@ class WeekPickerVC: HalfModalVC {
         guard let weekNoText = self.convertWeekNoToString(weekNo: selectedDate.weekNo) else { return }
         
         let dateAsText = "\(selectedDate.year)년 " + "\(selectedDate.month)월 " + weekNoText
-        self.weekDelegate?.apply(year: selectedDate.year,
-                                 month: selectedDate.month,
-                                 weekNo: selectedDate.weekNo,
-                                 weekText: dateAsText
+        self.weekDelegate?.apply(
+            year: selectedDate.year,
+            month: selectedDate.month,
+            weekNo: selectedDate.weekNo,
+            weekText: dateAsText
         )
       
         self.dismissWithAnimation()

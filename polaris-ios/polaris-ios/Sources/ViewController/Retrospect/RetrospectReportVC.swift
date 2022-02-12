@@ -18,10 +18,14 @@ class RetrospectReportVC: UIViewController {
         self.registerCell()
         self.setupTableView()
         self.observeViewModel()
+        
+        self.viewModel.occurViewAction(action: .viewDidLoad)
     }
     
     private func registerCell() {
-        RetrospectReportCategory.allCases.forEach { self.tableView.registerCell(cell: $0.cellType) }
+        RetrospectReportCategory.allCases.forEach {
+            self.tableView.registerCell(cell: $0.cellType)
+        }
     }
     
     private func setupNavigationProperty() {
@@ -47,9 +51,10 @@ class RetrospectReportVC: UIViewController {
     }
     
     private func observeViewModel() {
-        self.viewModel.reportDateRelay
+        self.viewModel.reportDateObservable
             .withUnretained(self)
             .observeOnMain(onNext: { owner, currentDate in
+                let currentDate = currentDate
                 let weekNoDic = [1: "첫째주", 2: "둘째주", 3: "셋째주", 4: "넷째주", 5: "다섯째주"]
                 
                 let yearText = "\(currentDate.year)년 "
@@ -60,7 +65,7 @@ class RetrospectReportVC: UIViewController {
             })
             .disposed(by: self.disposeBag)
         
-        Observable.combineLatest(self.viewModel.retrospectReportRelay, self.viewModel.foundStarRelayBehaviorRelay)
+        Observable.combineLatest(self.viewModel.reportObservable, self.viewModel.foundStarObservable)
             .withUnretained(self)
             .observeOnMain(onNext: { owner, tuple in
                 let retrospectModel = tuple.0
@@ -71,7 +76,7 @@ class RetrospectReportVC: UIViewController {
             })
             .disposed(by: self.disposeBag)
         
-        self.viewModel.loadingSubject
+        self.viewModel.loadingObservable
             .withUnretained(self)
             .observeOnMain(onNext: { owner, loading in
                 loading ? owner.startIndicatorAnimation() : owner.stopIndicatorAnimation()
@@ -82,9 +87,9 @@ class RetrospectReportVC: UIViewController {
     private func presentDatePickerView() {
         let viewController = WeekPickerVC.instantiateFromStoryboard(StoryboardName.weekPicker)
         
-        guard let pickerVC = viewController else { return }
+        guard let pickerVC = viewController              else { return }
+        guard let reportDate = self.viewModel.reportDate else { return }
         
-        let reportDate = self.viewModel.reportDate
         pickerVC.setWeekInfo(year: reportDate.year, month: reportDate.month, weekNo: reportDate.weekNo)
         pickerVC.weekDelegate = self
         pickerVC.presentWithAnimation(from: self)
@@ -165,7 +170,7 @@ extension RetrospectReportVC: WeekPickerDelegate {
     
     func apply(year: Int, month: Int, weekNo: Int, weekText: String) {
         let date = PolarisDate(year: year, month: month, weekNo: weekNo)
-        self.viewModel.updateReportDate(date: date)
+        self.viewModel.occurViewAction(action: .weekPickerSelected(date: date))
     }
     
 }
