@@ -9,7 +9,7 @@ import Foundation
 import Moya
 
 enum RetrospectAPI {
-    case createLookBack(model: RetrospectModel)
+    case create(model: RetrospectModel)
     case listValues(date: PolarisDate? = nil)
     case getRetrospect(date: PolarisDate)
 }
@@ -22,7 +22,7 @@ extension RetrospectAPI: TargetType {
     
     var path: String {
         switch self {
-        case .createLookBack:   return "/retrospect/v0"
+        case .create:   return "/retrospect/v0"
         case .listValues:       return "/retrospect/v0/value"
         case .getRetrospect:    return "/retrospect/v0/"
         }
@@ -30,7 +30,7 @@ extension RetrospectAPI: TargetType {
     
     var method: Moya.Method {
         switch self {
-        case .createLookBack:   return .post
+        case .create:   return .post
         case .listValues:       fallthrough
         case .getRetrospect:    return .get
         }
@@ -42,25 +42,26 @@ extension RetrospectAPI: TargetType {
     
     var task: Task {
         switch self {
-        case .createLookBack(let model):
-            return .requestParameters(parameters: ["year": model.year,
-                                                   "month": model.month,
-                                                   "weekNo": model.weekNo,
-                                                   "value": [
-                                                        "y": model.value.y,
-                                                        "n": model.value.n,
-                                                        "health": model.value.health,
-                                                        "happy": model.value.happy,
-                                                        "challenge": model.value.challenge,
-                                                        "moderation": model.value.moderation,
-                                                        "emoticon": model.value.emoticon,
-                                                        "need": model.value.need
-                                                   ],
-                                                   "record1": model.record1,
-                                                   "record2": model.record2,
-                                                   "record3": model.record3
-                                                  ],
-                                      encoding: JSONEncoding.default)
+        case .create(let model):
+            var params = [String: Any]()
+            params["year"] = model.year
+            params["month"] = model.month
+            params["weekNo"] = model.weekNo
+            params["value"] = [
+                "y": model.value.y,
+                "n": model.value.n,
+                "health": model.value.health,
+                "happy": model.value.happy,
+                "challenge": model.value.challenge,
+                "moderation": model.value.moderation,
+                "emoticon": model.value.emoticon,
+                "need": model.value.need
+            ]
+            
+            if let record1 = model.record1 { params["record1"] = record1 }
+            if let record2 = model.record2 { params["record2"] = record2 }
+            if let record3 = model.record3 { params["record3"] = record3 }
+            return .requestParameters(parameters: params, encoding: JSONEncoding.default)
         case .listValues(let date):
             if let date = date {
                 let param: [String: String] = [
