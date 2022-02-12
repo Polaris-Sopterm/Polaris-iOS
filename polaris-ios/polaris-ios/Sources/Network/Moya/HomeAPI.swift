@@ -43,7 +43,7 @@ extension HomeAPI: TargetType {
     
     var task: Task {
         switch self {
-        case .getHomeBanner(let isSkipped):
+        case .getHomeBanner(_):
             return .requestParameters(parameters: [:], encoding: URLEncoding.queryString)
         }
     }

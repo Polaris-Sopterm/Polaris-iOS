@@ -77,7 +77,7 @@ extension PolarisWebViewController: PolarisWebViewNavigationDelegate {
     }
     
     func polarisWebView(_ polarisWebView: PolarisWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        #warning("나중에 에러 로직 UX 관련해서 처리")
+
     }
     
 }

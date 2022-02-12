@@ -53,7 +53,7 @@ class LookBackFifthTableViewCell: UITableViewCell {
     }
     
     @IBAction func xButtonAction(_ sender: Any) {
-        guard let index = self.index,
+        guard self.index != nil,
               let removeReason = self.label.text
         else { return }
         self.viewModel?.removeFifthvcReason(removeReason: removeReason)

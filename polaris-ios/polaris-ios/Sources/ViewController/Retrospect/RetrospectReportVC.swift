@@ -10,6 +10,10 @@ import RxSwift
 import UIKit
 
 class RetrospectReportVC: UIViewController {
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

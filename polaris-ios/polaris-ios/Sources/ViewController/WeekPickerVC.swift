@@ -48,8 +48,7 @@ class WeekPickerVC: HalfModalVC {
     
     @IBAction func confirmButtonAction(_ sender: Any) {
         guard let selectedDate = self.viewModel.selectedDate                           else { return }
-        guard let weekNoText = Date.convertWeekNoToString(weekNo: selectedDate.weekNo) else { return }
-    
+        
         self.weekDelegate?.weekPickerViewController(self, didSelectedDate: selectedDate)
         self.dismissWithAnimation()
     }
