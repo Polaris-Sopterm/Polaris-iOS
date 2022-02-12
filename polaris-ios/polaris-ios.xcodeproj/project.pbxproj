@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		343EE86C1BBB3A61832CF112 /* Pods_polaris_ios_Polaris_Beta.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B35230A1FF0651B0EB66A598 /* Pods_polaris_ios_Polaris_Beta.framework */; };
 		7EB0D09D416E16BB73D26E01 /* Pods_polaris_ios_Polaris_Alpha.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19D1126DBB53127CC126B3AD /* Pods_polaris_ios_Polaris_Alpha.framework */; };
-		8924680670F33E94E942DFA3 /* Pods_polaris_ios_Polaris.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62A763CE321F34C429250864 /* Pods_polaris_ios_Polaris.framework */; };
 		CE04A036262340D1007C98E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A035262340D1007C98E2 /* AppDelegate.swift */; };
 		CE04A038262340D1007C98E2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE04A037262340D1007C98E2 /* SceneDelegate.swift */; };
 		CE04A03D262340D1007C98E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE04A03B262340D1007C98E2 /* Main.storyboard */; };
@@ -995,7 +994,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF563CFEB72C3AF1EB396E01 /* Pods_polaris_ios_Polaris.framework in Frameworks */,
-				8924680670F33E94E942DFA3 /* Pods_polaris_ios_Polaris.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1705,7 +1703,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 1300;
 				TargetAttributes = {
 					CE04A031262340D1007C98E2 = {
 						CreatedOnToolsVersion = 12.4;
@@ -2160,7 +2158,6 @@
 				ECA49455262B0D0900CC2EB8 /* TodoDateTodayHeaderView.swift in Sources */,
 				CEE574E926307B4400EA64B7 /* AddTodoDayViewModel.swift in Sources */,
 				EC81D50427853CE9008608EA /* RetrospectResponseModel.swift in Sources */,
-				CEE574E926307B4400EA64B7 /* AddTodoDayViewModel.swift in Sources */,
 				CE04A06626234CEE007C98E2 /* UITableView+.swift in Sources */,
 				CE5C5B0D27A0EEDB00FDCE32 /* RetrospectValueListModel.swift in Sources */,
 				ECA494292628298B00CC2EB8 /* TodoModel.swift in Sources */,
@@ -2339,7 +2336,6 @@
 				CE2953222687A0A500E21871 /* TodoDateTodayHeaderView.swift in Sources */,
 				CE2953242687A0A500E21871 /* AddTodoDayViewModel.swift in Sources */,
 				EC81D50727853E5C008608EA /* RetrospectResponseModel.swift in Sources */,
-				CE2953242687A0A500E21871 /* AddTodoDayViewModel.swift in Sources */,
 				CE2953252687A0A500E21871 /* UITableView+.swift in Sources */,
 				CE5C5B0E27A0EEDB00FDCE32 /* RetrospectValueListModel.swift in Sources */,
 				CE2953262687A0A500E21871 /* TodoModel.swift in Sources */,
@@ -2518,7 +2514,6 @@
 				CE43D04A26613D66003126F2 /* TodoDateTodayHeaderView.swift in Sources */,
 				CE43D04C26613D66003126F2 /* AddTodoDayViewModel.swift in Sources */,
 				EC81D50827853E5C008608EA /* RetrospectResponseModel.swift in Sources */,
-				CE43D04C26613D66003126F2 /* AddTodoDayViewModel.swift in Sources */,
 				CE43D04D26613D66003126F2 /* UITableView+.swift in Sources */,
 				CE5C5B0F27A0EEDB00FDCE32 /* RetrospectValueListModel.swift in Sources */,
 				CE43D04E26613D66003126F2 /* TodoModel.swift in Sources */,

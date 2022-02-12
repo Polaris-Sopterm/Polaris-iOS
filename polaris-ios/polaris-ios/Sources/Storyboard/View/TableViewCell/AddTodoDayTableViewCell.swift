@@ -25,7 +25,6 @@ class AddTodoDayTableViewCell: AddTodoTableViewCell {
     // MARK: - Life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         self.registerCell()
         self.layoutColletionView()
         self.bindCollectionView()
