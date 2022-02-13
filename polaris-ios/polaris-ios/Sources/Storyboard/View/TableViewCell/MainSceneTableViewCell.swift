@@ -22,6 +22,8 @@ final class MainSceneTableViewCell: MainTableViewCell {
     
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var starCVCHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var reloadButton: UIButton!
     @IBOutlet private weak var starCV: UICollectionView!
     @IBOutlet private weak var weekContainView: UIView!
     @IBOutlet private weak var weekLabel: UILabel!
@@ -86,6 +88,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
         for _ in 0...2{
             self.cometAnimation()
         }
+        self.reloadButton.setTitle("", for: .normal)
         self.weekContainView.backgroundColor = .white60
         self.weekContainView.setBorder(borderColor: .white, borderWidth: 1.0)
         self.weekContainView.makeRounded(cornerRadius: 9)
@@ -306,6 +309,11 @@ final class MainSceneTableViewCell: MainTableViewCell {
         addTodoVC.setAddOptions(.addJourney)
         addTodoVC.delegate = self
         addTodoVC.presentWithAnimation(from: visibleController)
+    }
+    
+    
+    @IBAction func reloadButtonAction(_ sender: Any) {
+        self.viewModel.reloadInfo()
     }
     
     @objc private func didUpdateTodo(_ notification: Notification) {

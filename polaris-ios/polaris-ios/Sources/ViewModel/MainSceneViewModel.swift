@@ -207,6 +207,11 @@ class MainSceneViewModel {
         return resultList
     }
     
+    func reloadInfo() {
+        self.forceToShowStarRelay.accept(self.forceToShowStarRelay.value)
+        self.dateInfoRelay.accept(self.dateInfoRelay.value)
+    }
+    
     func updateStarList(isSkipped: Bool) {
         self.forceToShowStarRelay.accept(isSkipped)
     }
