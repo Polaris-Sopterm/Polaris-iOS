@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -302,7 +303,7 @@
                                 </constraints>
                             </view>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="oci-kn-Wes">
-                                <rect key="frame" x="118" y="745" width="139" height="27"/>
+                                <rect key="frame" x="101.33333333333333" y="747" width="172.66666666666669" height="25"/>
                                 <color key="currentPageIndicatorTintColor" name="mainSky"/>
                             </pageControl>
                         </subviews>
@@ -391,11 +392,25 @@
                                     <action selector="changeButtonAction:" destination="cVb-GK-eAb" eventType="touchUpInside" id="Gyy-dQ-Z3Q"/>
                                 </connections>
                             </button>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Ew-gH-f36">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="eEq-oC-fE3">
+                                        <rect key="frame" x="177.66666666666666" y="396" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="eEq-oC-fE3" firstAttribute="centerX" secondItem="0Ew-gH-f36" secondAttribute="centerX" id="ejl-4T-WLE"/>
+                                    <constraint firstItem="eEq-oC-fE3" firstAttribute="centerY" secondItem="0Ew-gH-f36" secondAttribute="centerY" id="hvT-bG-N2H"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="WhI-7M-bdz"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="96a-Wv-xdO" firstAttribute="leading" secondItem="WhI-7M-bdz" secondAttribute="leading" constant="24" id="0ar-8S-ucC"/>
+                            <constraint firstItem="0Ew-gH-f36" firstAttribute="trailing" secondItem="WhI-7M-bdz" secondAttribute="trailing" id="3yy-gt-xok"/>
                             <constraint firstItem="WhI-7M-bdz" firstAttribute="trailing" secondItem="6EQ-04-dEf" secondAttribute="trailing" constant="23" id="7Ck-7X-40A"/>
                             <constraint firstAttribute="bottom" secondItem="M5h-yR-jjg" secondAttribute="bottom" constant="37" id="CkC-Mm-E9F"/>
                             <constraint firstItem="6EQ-04-dEf" firstAttribute="top" secondItem="96a-Wv-xdO" secondAttribute="bottom" constant="65" id="EmD-LB-HNN"/>
@@ -404,19 +419,24 @@
                             <constraint firstItem="96a-Wv-xdO" firstAttribute="top" secondItem="Luh-CH-gvl" secondAttribute="bottom" constant="3" id="N1M-H9-zTN"/>
                             <constraint firstItem="Luh-CH-gvl" firstAttribute="top" secondItem="RIU-Np-HM0" secondAttribute="top" constant="56" id="QMA-IF-FLf"/>
                             <constraint firstItem="M5h-yR-jjg" firstAttribute="width" secondItem="M5h-yR-jjg" secondAttribute="height" multiplier="184:27" id="Qhm-RV-82Q"/>
+                            <constraint firstItem="0Ew-gH-f36" firstAttribute="leading" secondItem="WhI-7M-bdz" secondAttribute="leading" id="VnW-4n-64h"/>
+                            <constraint firstAttribute="bottom" secondItem="0Ew-gH-f36" secondAttribute="bottom" id="cKD-5C-ZmH"/>
                             <constraint firstItem="M5h-yR-jjg" firstAttribute="leading" secondItem="WhI-7M-bdz" secondAttribute="leading" constant="23" id="ekc-Gh-g4Z"/>
                             <constraint firstItem="WhI-7M-bdz" firstAttribute="trailing" secondItem="M5h-yR-jjg" secondAttribute="trailing" constant="23" id="reu-na-WQ2"/>
+                            <constraint firstItem="0Ew-gH-f36" firstAttribute="top" secondItem="RIU-Np-HM0" secondAttribute="top" id="wTt-C7-UxP"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="backButton" destination="Luh-CH-gvl" id="zYK-eU-G54"/>
+                        <outlet property="indicatorContainerView" destination="0Ew-gH-f36" id="vo9-nq-7gJ"/>
+                        <outlet property="indicatorView" destination="eEq-oC-fE3" id="zWu-9i-MSj"/>
                         <outlet property="nickTextField" destination="6EQ-04-dEf" id="cOV-iy-Hme"/>
                         <outlet property="titleLabel" destination="96a-Wv-xdO" id="wPi-EL-4qP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dtR-78-bxL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="901" y="131"/>
+            <point key="canvasLocation" x="900" y="130.78817733990149"/>
         </scene>
     </scenes>
     <resources>

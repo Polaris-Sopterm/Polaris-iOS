@@ -9,7 +9,9 @@ import UIKit
 
 class RetrospectFarStarTableViewCell: RetrospectReportCell {
     
-    override class var cellHeight: CGFloat { 8 + 160 }
+    override class var cellHeight: CGFloat {
+        RetrospectLayoutGuide.farStarCellHeight
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -19,14 +21,14 @@ class RetrospectFarStarTableViewCell: RetrospectReportCell {
     
     override func configure(presentable: RetrospectReportPresentable) {
         super.configure(presentable: presentable)
-        
-        // TODO: - 서버 데이터 반영 필요
+        self.collectionView.reloadData()
     }
     
     private func setupCollectionView() {
         self.collectionView.registerCell(cell: RetrospectJourneyItemCell.self)
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
+        self.collectionView.allowsSelection = false
         self.collectionView.showsHorizontalScrollIndicator = false
     }
     
@@ -34,10 +36,14 @@ class RetrospectFarStarTableViewCell: RetrospectReportCell {
         if let collectionViewLayout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             collectionViewLayout.scrollDirection = .horizontal
             collectionViewLayout.itemSize = RetrospectJourneyItemCell.cellSize
-            collectionViewLayout.sectionInset = UIEdgeInsets(top: 0, left: 27, bottom: 0, right: 27)
             collectionViewLayout.minimumLineSpacing = 20
             collectionViewLayout.minimumInteritemSpacing = 0
+            collectionViewLayout.sectionInset = UIEdgeInsets(top: 0, left: 27, bottom: 0, right: 27)
         }
+    }
+    
+    private var farStarPresentable: RetrospectFarStarsModel? {
+        self.presentable as? RetrospectFarStarsModel
     }
     
     @IBOutlet private weak var collectionView: UICollectionView!
@@ -46,21 +52,20 @@ class RetrospectFarStarTableViewCell: RetrospectReportCell {
 
 extension RetrospectFarStarTableViewCell: UICollectionViewDataSource {
     
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        self.farStarPresentable?.farStars.count ?? 0
+    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(cell: RetrospectJourneyItemCell.self, forIndexPath: indexPath)
+        let farStars = self.farStarPresentable?.farStars
         
         guard let itemCell = cell else { return UICollectionViewCell() }
-        itemCell.configure(journey: .rest)
+        guard let journey = farStars?[safe: indexPath.row] else { return UICollectionViewCell() }
+        itemCell.configure(journey: journey)
         return itemCell
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
-    }
-    
 }
 
-
-extension RetrospectFarStarTableViewCell: UICollectionViewDelegate {
-    
-}
+extension RetrospectFarStarTableViewCell: UICollectionViewDelegate {}

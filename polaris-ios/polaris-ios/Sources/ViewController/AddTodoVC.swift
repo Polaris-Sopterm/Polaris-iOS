@@ -50,6 +50,10 @@ class AddTodoVC: HalfModalVC {
         self.viewModel.setEditTodoModel(todo)
     }
     
+    func setAddJourneyDate(_ date: PolarisDate) {
+        self.viewModel.setAddJourneyDate(date)
+    }
+    
     private func setupTitleLabel() {
         if self.viewModel.currentAddOption == .perDayAddTodo {
             guard let date = self.viewModel.currentDate else { return }
@@ -231,6 +235,7 @@ extension AddTodoVC: UITableViewDelegate {
 }
 
 extension AddTodoVC {
+    
     struct AddOptions: OptionSet {
         let rawValue: Int
         
@@ -258,4 +263,5 @@ extension AddTodoVC {
             return cellTypes
         }
     }
+    
 }

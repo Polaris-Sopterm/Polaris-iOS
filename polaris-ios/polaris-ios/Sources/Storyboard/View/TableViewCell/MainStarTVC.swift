@@ -48,8 +48,6 @@ class MainStarTVC: UITableViewCell {
     }
     
     func bindViewModel(){
-        let identifier = String(describing: MainStarCVC.self)
-        
         self.tvcViewModel.starListRelay.bind(to: starCV.rx.items) { collectionView, index, item in
             let identifier = String(describing: MainStarCVC.self)
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: IndexPath(item: index, section: 0)) as! MainStarCVC

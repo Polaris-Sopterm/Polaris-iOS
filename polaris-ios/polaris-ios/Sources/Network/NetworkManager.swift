@@ -36,7 +36,7 @@ class NetworkManager {
                         single(.failure(error))
                     }
                 case .failure(let error):
-                    // TODO: 여기 전역적으로 네트워크 에러 띄우는 팝업창 코드 추가 예정
+                    self.handleNetworkDisconnectIfNeeded()
                     single(.failure(error))
                 }
             }
@@ -75,8 +75,10 @@ class NetworkManager {
         #endif
     }
     
-    private static func decodeIfNeeded() {
-        
+    private static func handleNetworkDisconnectIfNeeded() {
+        if NetworkDetector.shared.isConnected == false {
+            PolarisToastManager.shared.showToast(with: "연결이 원활하지 않아요. 다시 시도해주세요.")
+        }
     }
     
 }

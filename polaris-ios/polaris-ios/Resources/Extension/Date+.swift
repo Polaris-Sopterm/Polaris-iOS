@@ -146,6 +146,11 @@ extension Date {
         let weeks = calendar.dateComponents([.weekOfMonth], from: first, to: last)
         return weeks.weekOfMonth! + 1
     }
+    
+    static func convertWeekNoToString(weekNo: Int) -> String? {
+        let weekDict = [1: "첫째주", 2: "둘째주", 3: "셋째주", 4: "넷째주", 5: "다섯째주"]
+        return weekDict[weekNo]
+    }
 
 }
 

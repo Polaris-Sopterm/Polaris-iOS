@@ -29,38 +29,34 @@ enum RetrospectReportCategory: Int, CaseIterable {
 
 class RetrospectReportViewModel {
     
-    let loadingSubject = PublishSubject<Bool>()
-    let reportDateRelay: BehaviorRelay<PolarisDate> = {
-        let currentDate = PolarisDate(
-            year: Date.currentYear,
-            month: Date.currentMonth,
-            weekNo: Date.currentWeekNoOfMonth
-        )
-        return BehaviorRelay<PolarisDate>(value: currentDate)
-    }()
+    var loadingObservable: Observable<Bool> {
+        self.loadingSubject.asObservable()
+    }
     
-    let retrospectReportRelay = BehaviorRelay<RetrospectModel?>(value: nil)
-    let foundStarRelayBehaviorRelay: BehaviorRelay<RetrospectValueListModel> = {
-        let model = RetrospectValueListModel(
-            happiness: 0,
-            control: 0,
-            thanks: 0,
-            rest: 0,
-            growth: 0,
-            change: 0,
-            health: 0,
-            overcome: 0,
-            challenge: 0
-        )
-        return BehaviorRelay<RetrospectValueListModel>(value: model)
-    }()
+    var reportObservable: Observable<RetrospectModel?> {
+        self.retrospectReportRelay.asObservable()
+    }
     
-    var reportDate: PolarisDate {
+    var foundStarObservable: Observable<RetrospectValueListModel> {
+        self.foundStarRelayBehaviorRelay.asObservable()
+    }
+    
+    var reportDateObservable: Observable<PolarisDate> {
+        self.reportDateRelay
+            .compactMap { $0 }
+            .asObservable()
+    }
+    
+    var reportDate: PolarisDate? {
         self.reportDateRelay.value
     }
     
-    init(repository: RetrospectRepository = RetrospectRepositoryImpl()) {
-        self.repository = repository
+    init(
+        retrospectRepository: RetrospectRepository = RetrospectRepositoryImpl(),
+        weekRepository: WeekRepository = WeekRepositoryImpl()
+    ) {
+        self.retrospectRepository = retrospectRepository
+        self.weekRepository = weekRepository
         
         self.bindDate()
     }
@@ -77,7 +73,7 @@ class RetrospectReportViewModel {
         switch category {
         case .foundStar:
             let foundStar = self.foundStarRelayBehaviorRelay.value
-            let date = self.reportDate
+            guard let date = self.reportDate else { return nil }
             return RetrospectReportPresentableFormatter.formatToFoundStarViewModel(fromModel: foundStar, date: date)
         case .closeStar:
             guard let retrospectModel = self.retrospectReportRelay.value else { return nil }
@@ -94,47 +90,94 @@ class RetrospectReportViewModel {
         }
     }
     
-    func updateReportDate(date: PolarisDate) {
+    func occurViewAction(action: ViewAction) {
+        switch action {
+        case .viewDidLoad:
+            self.requestCurrentDate()
+        case .weekPickerSelected(let date):
+            self.updateReportDate(date: date)
+        }
+    }
+    
+    private func updateReportDate(date: PolarisDate) {
         self.reportDateRelay.accept(date)
     }
     
     private func bindDate() {
-        self.reportDateRelay
+        let retrospectReportObservable = self.reportDateRelay
+            .compactMap { $0 }
             .withUnretained(self)
-            .do(onNext: { owner, _ in owner.retrospectLoadingSubject.onNext(true) })
+            .do(onNext: { owner, _ in owner.loadingSubject.onNext(true) })
             .flatMapLatest({ owner, date in
-                return owner.repository.fetchRetrospect(ofDate: date)
+                owner.retrospectRepository.fetchRetrospect(ofDate: date)
             })
-            .do(onNext: { [weak self] _ in self?.retrospectLoadingSubject.onNext(false) })
-            .bind(to: self.retrospectReportRelay)
-            .disposed(by: self.disposeBag)
         
-        self.reportDateRelay
+        let foundStarObservable = self.reportDateRelay
+            .compactMap { $0 }
             .withUnretained(self)
-            .do(onNext: { owner, _ in owner.foundStarLoadingSubject.onNext(true) })
+            .do(onNext: { owner, _ in owner.loadingSubject.onNext(true) })
             .flatMapLatest({ owner, date in
-                return owner.repository.fetchListValues(ofDate: date)
+                owner.retrospectRepository.fetchListValues(ofDate: date)
             })
-            .do(onNext: { [weak self] _ in self?.foundStarLoadingSubject.onNext(false) })
-            .bind(to: self.foundStarRelayBehaviorRelay)
-            .disposed(by: self.disposeBag)
         
-        Observable.combineLatest(self.retrospectLoadingSubject, self.foundStarLoadingSubject)
+        Observable.zip(retrospectReportObservable, foundStarObservable)
             .withUnretained(self)
             .subscribe(onNext: { owner, tuple in
-                let retrospectLoading = tuple.0
-                let foundStarLoading = tuple.1
-        
-                let loading = retrospectLoading || foundStarLoading
-                owner.loadingSubject.onNext(loading)
+                let retrospectModel = tuple.0
+                let foundStarModel = tuple.1
+                
+                owner.retrospectReportRelay.accept(retrospectModel)
+                owner.foundStarRelayBehaviorRelay.accept(foundStarModel)
+                owner.loadingSubject.onNext(false)
             })
             .disposed(by: self.disposeBag)
     }
     
-    private let foundStarLoadingSubject = PublishSubject<Bool>()
-    private let retrospectLoadingSubject = PublishSubject<Bool>()
+    private func requestCurrentDate() {
+        self.loadingSubject.onNext(true)
+        self.weekRepository.fetchWeekNo(ofDate: Date.normalizedCurrent)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, weekNo in
+                let currentYear = Date.currentYear
+                let currentMonth = Date.currentMonth
+                let currentWeekNo = weekNo
+                
+                let date = PolarisDate(year: currentYear, month: currentMonth, weekNo: currentWeekNo)
+                owner.reportDateRelay.accept(date)
+                owner.loadingSubject.onNext(false)
+            })
+            .disposed(by: self.disposeBag)
+    }
     
-    private let repository: RetrospectRepository
+    private let loadingSubject = PublishSubject<Bool>()
+    private let reportDateRelay = BehaviorRelay<PolarisDate?>(value: nil)
+    private let retrospectReportRelay = BehaviorRelay<RetrospectModel?>(value: nil)
+    private let foundStarRelayBehaviorRelay: BehaviorRelay<RetrospectValueListModel> = {
+        let model = RetrospectValueListModel(
+            happiness: 0,
+            control: 0,
+            thanks: 0,
+            rest: 0,
+            growth: 0,
+            change: 0,
+            health: 0,
+            overcome: 0,
+            challenge: 0
+        )
+        return BehaviorRelay<RetrospectValueListModel>(value: model)
+    }()
+    
+    private let weekRepository: WeekRepository
+    private let retrospectRepository: RetrospectRepository
     private let disposeBag = DisposeBag()
+    
+}
+
+extension RetrospectReportViewModel {
+    
+    enum ViewAction {
+        case viewDidLoad
+        case weekPickerSelected(date: PolarisDate)
+    }
     
 }

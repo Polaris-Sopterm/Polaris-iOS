@@ -394,7 +394,7 @@ final class LookBackViewModel {
         
         let resultModel = RetrospectModel(year: Date.currentYear, month: Date.currentMonth, weekNo: Date.currentWeekNoOfMonth, value: resultValue, record1: recordInfo[0], record2: recordInfo[1], record3: recordInfo[2])
         
-        let registAPI = RetrospectAPI.createLookBack(model: resultModel)
+        let registAPI = RetrospectAPI.create(model: resultModel)
         
         NetworkManager.request(apiType: registAPI)
             .subscribe(onSuccess: { [weak self] (responseModel: RetrospectResponseModel) in

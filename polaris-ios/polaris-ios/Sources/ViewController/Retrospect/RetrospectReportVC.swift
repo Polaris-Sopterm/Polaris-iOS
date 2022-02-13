@@ -10,6 +10,10 @@ import RxSwift
 import UIKit
 
 class RetrospectReportVC: UIViewController {
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,10 +22,14 @@ class RetrospectReportVC: UIViewController {
         self.registerCell()
         self.setupTableView()
         self.observeViewModel()
+        
+        self.viewModel.occurViewAction(action: .viewDidLoad)
     }
     
     private func registerCell() {
-        RetrospectReportCategory.allCases.forEach { self.tableView.registerCell(cell: $0.cellType) }
+        RetrospectReportCategory.allCases.forEach {
+            self.tableView.registerCell(cell: $0.cellType)
+        }
     }
     
     private func setupNavigationProperty() {
@@ -47,32 +55,31 @@ class RetrospectReportVC: UIViewController {
     }
     
     private func observeViewModel() {
-        self.viewModel.reportDateRelay
+        self.viewModel.reportDateObservable
             .withUnretained(self)
             .observeOnMain(onNext: { owner, currentDate in
-                let weekNoDic = [1: "첫째주", 2: "둘째주", 3: "셋째주", 4: "넷째주", 5: "다섯째주"]
+                let currentDate = currentDate
                 
                 let yearText = "\(currentDate.year)년 "
                 let monthText = "\(currentDate.month)월 "
-                guard let weekNoText = weekNoDic[currentDate.weekNo] else { return }
+                guard let weekNoText = Date.convertWeekNoToString(weekNo: currentDate.weekNo) else { return }
                 
                 self.dateLabel.text = yearText + monthText + weekNoText
             })
             .disposed(by: self.disposeBag)
         
-        Observable.combineLatest(self.viewModel.retrospectReportRelay, self.viewModel.foundStarRelayBehaviorRelay)
+        Observable.combineLatest(self.viewModel.reportObservable, self.viewModel.foundStarObservable)
             .withUnretained(self)
             .observeOnMain(onNext: { owner, tuple in
                 let retrospectModel = tuple.0
                 let foundStarModel = tuple.1
                                 
                 owner.tableView.reloadData()
-                
-                // TODO: - Empty View 처리
+                owner.updateEmptyViewUI(asFoundStar: foundStarModel, asRetrospect: retrospectModel)
             })
             .disposed(by: self.disposeBag)
         
-        self.viewModel.loadingSubject
+        self.viewModel.loadingObservable
             .withUnretained(self)
             .observeOnMain(onNext: { owner, loading in
                 loading ? owner.startIndicatorAnimation() : owner.stopIndicatorAnimation()
@@ -83,9 +90,9 @@ class RetrospectReportVC: UIViewController {
     private func presentDatePickerView() {
         let viewController = WeekPickerVC.instantiateFromStoryboard(StoryboardName.weekPicker)
         
-        guard let pickerVC = viewController else { return }
+        guard let pickerVC = viewController              else { return }
+        guard let reportDate = self.viewModel.reportDate else { return }
         
-        let reportDate = self.viewModel.reportDate
         pickerVC.setWeekInfo(year: reportDate.year, month: reportDate.month, weekNo: reportDate.weekNo)
         pickerVC.weekDelegate = self
         pickerVC.presentWithAnimation(from: self)
@@ -101,6 +108,22 @@ class RetrospectReportVC: UIViewController {
         self.indicatorView.stopAnimating()
     }
     
+    private func updateEmptyViewUI(asFoundStar foundStar: RetrospectValueListModel, asRetrospect retrospect: RetrospectModel?) {
+        if foundStar.isAchieveJourneyAtLeastOne == false {
+            self.todoEmptyView.showCrossDissolve()
+            self.retrospectEmptyView.hideCrossDissolve()
+        } else if foundStar.isAchieveJourneyAtLeastOne == true && retrospect == nil {
+            self.todoEmptyView.hideCrossDissolve()
+            self.retrospectEmptyView.showCrossDissolve()
+        } else if foundStar.isAchieveJourneyAtLeastOne == true && retrospect != nil {
+            self.todoEmptyView.hideCrossDissolve()
+            self.retrospectEmptyView.hideCrossDissolve()
+        } else {
+            self.todoEmptyView.showCrossDissolve()
+            self.retrospectEmptyView.hideCrossDissolve()
+        }
+    }
+    
     private let disposeBag = DisposeBag()
     private let viewModel = RetrospectReportViewModel()
     
@@ -108,6 +131,8 @@ class RetrospectReportVC: UIViewController {
     @IBOutlet private weak var backButton: UIButton!
     @IBOutlet private weak var calendarButton: UIButton!
     @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var todoEmptyView: UIView!
+    @IBOutlet private weak var retrospectEmptyView: UIView!
     
     @IBOutlet private weak var indicatorContainerView: UIView!
     @IBOutlet private weak var indicatorView: UIActivityIndicatorView!
@@ -146,9 +171,8 @@ extension RetrospectReportVC: UITableViewDelegate {
 
 extension RetrospectReportVC: WeekPickerDelegate {
     
-    func apply(year: Int, month: Int, weekNo: Int, weekText: String) {
-        let date = PolarisDate(year: year, month: month, weekNo: weekNo)
-        self.viewModel.updateReportDate(date: date)
+    func weekPickerViewController(_ viewController: WeekPickerVC, didSelectedDate date: PolarisDate) {
+        self.viewModel.occurViewAction(action: .weekPickerSelected(date: date))
     }
     
 }
