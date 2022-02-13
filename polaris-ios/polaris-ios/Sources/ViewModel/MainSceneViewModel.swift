@@ -105,7 +105,7 @@ class MainSceneViewModel {
         
         let weekAPI = WeekAPI.getWeekNo(date: Date.normalizedCurrent)
         NetworkManager.request(apiType: weekAPI)
-            .subscribe(onSuccess: { [weak self] (weekModel: WeekResponseModel) in
+            .subscribe(onSuccess: { (weekModel: WeekResponseModel) in
                 var year = Date.currentYear
                 var month = Date.currentMonth
                 if Date.todayDay < 7 * (weekModel.weekNo - 1) {
@@ -117,7 +117,7 @@ class MainSceneViewModel {
                         month -= 1
                     }
                 }
-                input.dateInfo.accept(DateInfo(year: year, month: month, weekNo: weekModel.weekNo))
+                input.dateInfo.accept(PolarisDate(year: year, month: month, weekNo: weekModel.weekNo))
             })
             .disposed(by: self.disposeBag)
         

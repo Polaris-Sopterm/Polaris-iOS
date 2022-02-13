@@ -37,6 +37,10 @@ class AddTodoViewModel {
     let completeRequestSubject = PublishSubject<Void>()
     let loadingSubject         = BehaviorSubject<Bool>(value: false)
     
+    init(weekRepository: WeekRepository = WeekRepositoryImpl()) {
+        self.weekRepository = weekRepository
+    }
+    
     func setViewModel(by addOptions: AddTodoVC.AddOptions) {
         self.currentAddOption = addOptions
         self.addListTypes.onNext(addOptions.addCellTypes)
@@ -53,6 +57,10 @@ class AddTodoViewModel {
     
     func setJourneyModel(_ journeyModel: WeekJourneyModel) {
         self.journeyModel = journeyModel
+    }
+    
+    func setAddJourneyDate(_ date: PolarisDate) {
+        self.addJourneyDate = date
     }
     
     func requestAddTodo() {
@@ -127,17 +135,23 @@ class AddTodoViewModel {
         let firstJourney: Journey   = journeySet.removeFirst()
         let secondJourney: Journey? = journeySet.isEmpty == false ? journeySet.removeFirst() : nil
         
-        let createJourney = JourneyAPI.createJourney(title: addText,
-                                                     value1: firstJourney.rawValue,
-                                                     value2: secondJourney?.rawValue,
-                                                     date: Date.normalizedCurrent.convertToString())
-        
-        NetworkManager.request(apiType: createJourney).subscribe(onSuccess: { [weak self] (journeyModel: WeekJourneyModel) in
-            self?.completeRequestSubject.onNext(())
-            self?.loadingSubject.onNext(false)
-        }, onFailure: { [weak self] error in
-            self?.loadingSubject.onNext(false)
-        }).disposed(by: self.disposeBag)
+        self.journeyDateObservable
+            .flatMapLatest { journeyDate -> Observable<WeekJourneyModel> in
+                let createJourney = JourneyAPI.createJourney(
+                    title: addText,
+                    value1: firstJourney.rawValue,
+                    value2: secondJourney?.rawValue,
+                    date: journeyDate
+                )
+                return NetworkManager.request(apiType: createJourney).asObservable()
+            }
+            .subscribe(onNext: { [weak self] journeyModel in
+                self?.completeRequestSubject.onNext(())
+                self?.loadingSubject.onNext(false)
+            }, onError: { [weak self] error in
+                self?.loadingSubject.onNext(false)
+            })
+            .disposed(by: self.disposeBag)
     }
     
     private func requestEditTodo() {
@@ -236,6 +250,16 @@ class AddTodoViewModel {
         }
     }
     
+    private var journeyDateObservable: Observable<PolarisDate> {
+        if let journeyDate = self.addJourneyDate {
+            return Observable.just(journeyDate)
+        } else {
+            return self.weekRepository.fetchWeekNo(ofDate: Date.normalizedCurrent)
+                .map { weekNo in PolarisDate(year: Date.currentYear, month: Date.currentMonth, weekNo: weekNo) }
+        }
+    }
+    
+    private let weekRepository: WeekRepository
     private let disposeBag = DisposeBag()
     
     // 날짜에 더할때만 씀 - Day Todo
@@ -246,6 +270,9 @@ class AddTodoViewModel {
     
     // 일정 수정할 때 씀 - Edit Todo
     private(set) var todoModel: TodoModel?
+    
+    // 여정 추가할 때 - PolarisDate
+    private(set) var addJourneyDate: PolarisDate?
     
     private(set) var currentAddOption: AddTodoVC.AddOptions?
     
