@@ -9,7 +9,9 @@ import UIKit
 
 class RetrospectEmotionReasonTableViewCell: RetrospectReportCell {
     
-    override class var cellHeight: CGFloat { return 30 + 392 }
+    override class var cellHeight: CGFloat {
+        RetrospectLayoutGuide.emotionReasonCellHeight
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -19,7 +21,7 @@ class RetrospectEmotionReasonTableViewCell: RetrospectReportCell {
     
     override func configure(presentable: RetrospectReportPresentable) {
         super.configure(presentable: presentable)
-        // TODO: - 서버 데이터 반영되고 필요
+        self.collectionView.reloadData()
     }
     
     private func layoutCollectionView() {
@@ -42,6 +44,10 @@ class RetrospectEmotionReasonTableViewCell: RetrospectReportCell {
         self.collectionView.allowsSelection = false
     }
     
+    private var emotionReasonPresentable: RetrospectEmoticonReasonModel? {
+        self.presentable as? RetrospectEmoticonReasonModel
+    }
+    
     @IBOutlet private weak var collectionView: UICollectionView!
     
 }
@@ -49,20 +55,20 @@ class RetrospectEmotionReasonTableViewCell: RetrospectReportCell {
 extension RetrospectEmotionReasonTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // TODO: - 서버 데이터 반영 필요
-        return 10
+        emotionReasonPresentable?.reasons.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(cell: RetrospectEmotionReasonItemCell.self, forIndexPath: indexPath)
+        let reasons = self.emotionReasonPresentable?.reasons
         
         guard let itemCell = cell else { return UICollectionViewCell() }
-        itemCell.configure(reasonText: "안녕하세요?\n아아아아아아아아")
+        guard let reason = reasons?[safe: indexPath.row] else { return UICollectionViewCell() }
+        
+        itemCell.configure(reasonText: reason)
         return itemCell
     }
     
 }
 
-extension RetrospectEmotionReasonTableViewCell: UICollectionViewDelegate {
-    
-}
+extension RetrospectEmotionReasonTableViewCell: UICollectionViewDelegate {}

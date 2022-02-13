@@ -10,6 +10,7 @@ import Foundation
 
 protocol WeekRepository {
     func fetchWeekNo(ofDate date: Date) -> Observable<Int>
+    func fetchLastWeekOfMonth() -> Observable<[LastWeekOfMonthDataModel]>
 }
 
 final class WeekRepositoryImpl: WeekRepository {
@@ -19,6 +20,15 @@ final class WeekRepositoryImpl: WeekRepository {
         return NetworkManager.request(apiType: weekAPI)
             .map { (weekModel: WeekResponseModel) in
                 return weekModel.weekNo
+            }
+            .asObservable()
+    }
+    
+    func fetchLastWeekOfMonth() -> Observable<[LastWeekOfMonthDataModel]> {
+        let weekAPI = WeekAPI.lastWeekOfMonth
+        return NetworkManager.request(apiType: weekAPI)
+            .map { (lastWeekModel: LastWeekOfMonthResponseModel) in
+                return lastWeekModel.data
             }
             .asObservable()
     }

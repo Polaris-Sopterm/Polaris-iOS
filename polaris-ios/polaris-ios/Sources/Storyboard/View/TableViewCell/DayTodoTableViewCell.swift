@@ -94,7 +94,7 @@ final class DayTodoTableViewCell: TodoCategoryCell {
         self.editButton.rx.tap.subscribe(onNext: { [weak self] in
             guard let self = self                else { return }
             guard let todoModel = self.todoModel else { return }
-            guard let indexPath = self.indexPath else { return }
+            guard self.indexPath != nil          else { return }
             
             self.layoutForExpaned(isExpaned: false, animated: true)
             self.delegate?.todoCategoryCell(self, category: .day, isExpanded: false, forTodo: todoModel)
@@ -104,7 +104,7 @@ final class DayTodoTableViewCell: TodoCategoryCell {
         self.deleteButton.rx.tap.subscribe(onNext: { [weak self] in
             guard let self = self                else { return }
             guard let todoModel = self.todoModel else { return }
-            guard let indexPath = self.indexPath else { return }
+            guard self.indexPath != nil          else { return }
             
             self.layoutForExpaned(isExpaned: false, animated: true)
             self.delegate?.todoCategoryCell(self, category: .day, isExpanded: false, forTodo: todoModel)

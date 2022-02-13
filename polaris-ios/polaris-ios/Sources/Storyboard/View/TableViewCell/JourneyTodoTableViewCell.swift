@@ -64,7 +64,7 @@ class JourneyTodoTableViewCell: TodoCategoryCell {
         self.editButton.rx.tap.observeOnMain(onNext: { [weak self] in
             guard let self = self                else { return }
             guard let todoModel = self.todoModel else { return }
-            guard let indexPath = self.indexPath else { return }
+            guard self.indexPath != nil          else { return }
             
             self.layoutForExpaned(isExpaned: false, animated: true)
             self._delegate?.journeyTodoTableViewCell(self, didTapEdit: todoModel)
@@ -74,7 +74,7 @@ class JourneyTodoTableViewCell: TodoCategoryCell {
         self.deleteButton.rx.tap.observeOnMain(onNext: { [weak self] in
             guard let self = self                else { return }
             guard let todoModel = self.todoModel else { return }
-            guard let indexPath = self.indexPath else { return }
+            guard self.indexPath != nil          else { return }
             
             self.layoutForExpaned(isExpaned: false, animated: true)
             self._delegate?.journeyTodoTableViewCell(self, didTapDelete: todoModel)

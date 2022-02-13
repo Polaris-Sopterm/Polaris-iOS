@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -28,8 +28,8 @@
                                     <constraint firstAttribute="width" constant="48" id="nXG-cG-khY"/>
                                     <constraint firstAttribute="height" constant="48" id="tuu-G1-1hH"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="btnCloseLookBack" title=" "/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title=" " image="btnCloseLookBack"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="imageTintColor">
                                         <color key="value" name="mainText"/>
@@ -45,8 +45,8 @@
                                     <constraint firstAttribute="width" constant="48" id="9cS-0p-gGd"/>
                                     <constraint firstAttribute="height" constant="48" id="Xts-lv-5We"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="btnBackLookBack" title=" "/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title=" " image="btnBackLookBack"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="imageTintColor">
                                         <color key="value" name="mainText"/>
@@ -57,7 +57,7 @@
                                 </connections>
                             </button>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" numberOfPages="5" translatesAutoresizingMaskIntoConstraints="NO" id="Hzc-yZ-bnJ">
-                                <rect key="frame" x="23" y="121" width="146.66666666666666" height="7"/>
+                                <rect key="frame" x="23" y="121" width="189.66666666666666" height="7"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="7" id="zfA-Oq-ZvE"/>
                                 </constraints>
@@ -155,8 +155,8 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="4Kb-Y8-L19"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title=" "/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title=" "/>
                                 <connections>
                                     <action selector="buttonAction:" destination="eDE-mJ-dtK" eventType="touchUpInside" id="Kjb-Ak-vQZ"/>
                                 </connections>
@@ -244,8 +244,8 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="jgw-Ss-Ygk"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title=""/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title=""/>
                                 <connections>
                                     <action selector="buttonAction:" destination="RQS-8z-Ry3" eventType="touchUpInside" id="rKg-Ss-thp"/>
                                 </connections>
@@ -313,8 +313,8 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="pYB-C5-9Ck"/>
                                 </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain"/>
                                 <connections>
                                     <action selector="nextButtonAction:" destination="qF5-0c-ubo" eventType="touchUpInside" id="WJn-l5-Xhg"/>
                                 </connections>
@@ -401,8 +401,8 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="yhF-0c-j1G"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title=""/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title=""/>
                                 <connections>
                                     <action selector="nextButtonAction:" destination="879-xA-Cq2" eventType="touchUpInside" id="wVe-Uc-YSk"/>
                                 </connections>
@@ -467,8 +467,8 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="hGs-SI-6Ba"/>
                                 </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain"/>
                                 <connections>
                                     <action selector="nextButtonAction:" destination="OPw-kr-bJE" eventType="touchUpInside" id="9lo-nP-CuM"/>
                                 </connections>
@@ -494,8 +494,8 @@
                                     <constraint firstAttribute="width" constant="100" id="cvo-wk-9X4"/>
                                 </constraints>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain"/>
                                 <connections>
                                     <action selector="skipButtonAction:" destination="OPw-kr-bJE" eventType="touchUpInside" id="cfQ-sk-whD"/>
                                 </connections>
@@ -600,8 +600,8 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="bYq-i7-uUh"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title=""/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title=""/>
                                 <connections>
                                     <action selector="buttonAction:" destination="vAy-hd-d70" eventType="touchUpInside" id="waT-qr-Sjz"/>
                                 </connections>

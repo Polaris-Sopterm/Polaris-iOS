@@ -59,7 +59,8 @@ class TodoViewModel {
     let reloadSubject   = PublishSubject<Bool>()
     let currentTabRelay = BehaviorRelay<TodoCategory>(value: .day)
     
-    init() {
+    init(weekRepository: WeekRepository = WeekRepositoryImpl()) {
+        self.weekRepository = weekRepository
         self.todoDayHeadersInform = Date.daysThisWeek
         self.todoDayHeadersInform.forEach { self.todoDayListTable.updateValue([], forKey: $0) }
     }
@@ -125,27 +126,43 @@ class TodoViewModel {
     }
     
     func requestTodoJourneyList() {
-        let todoListAPI = TodoAPI.listTodoByJourney(year: Date.currentYear,
-                                                    month: Date.currentMonth,
-                                                    weekNo: Date.currentWeekNoOfMonth)
-        NetworkManager.request(apiType: todoListAPI).subscribe(onSuccess: { [weak self] (todoListModel: [WeekJourneyModel]) in
-            self?.todoJourneyList = todoListModel
-            
-            guard self?.currentTabRelay.value == .journey else { return }
-            self?.reloadSubject.onNext(false)
-        }).disposed(by: self.disposeBag)
+        self.weekRepository.fetchWeekNo(ofDate: Date.normalizedCurrent)
+            .flatMapLatest { weekNo -> Observable<[WeekJourneyModel]> in
+                let todoListAPI = TodoAPI.listTodoByJourney(
+                    year: Date.currentYear,
+                    month: Date.currentMonth,
+                    weekNo: weekNo
+                )
+                return NetworkManager.request(apiType: todoListAPI).asObservable()
+            }
+            .withUnretained(self)
+            .subscribe(onNext: { owner, todoListModel in
+                owner.todoJourneyList = todoListModel
+                
+                guard owner.currentTabRelay.value == .journey else { return }
+                owner.reloadSubject.onNext(false)
+            })
+            .disposed(by: self.disposeBag)
     }
     
     func requestTodoDayList(shouldScroll: Bool) {
-        let todoListAPI = TodoAPI.listTodoByDate(year: Date.currentYear,
-                                                 month: Date.currentMonth,
-                                                 weekNo: Date.currentWeekNoOfMonth)
-        NetworkManager.request(apiType: todoListAPI).subscribe(onSuccess: { [weak self] (todoListModel: TodoDayListModel) in
-            self?.updateTodoDayListModel(todoListModel)
-            
-            guard self?.currentTabRelay.value == .day else { return }
-            self?.reloadSubject.onNext(shouldScroll)
-        }).disposed(by: self.disposeBag)
+        self.weekRepository.fetchWeekNo(ofDate: Date.normalizedCurrent)
+            .flatMapLatest { weekNo -> Observable<TodoDayListModel> in
+                let todoListAPI = TodoAPI.listTodoByDate(
+                    year: Date.currentYear,
+                    month: Date.currentMonth,
+                    weekNo: weekNo
+                )
+                return NetworkManager.request(apiType: todoListAPI).asObservable()
+            }
+            .withUnretained(self)
+            .subscribe(onNext: { owner, todoListModel in
+                owner.updateTodoDayListModel(todoListModel)
+                
+                guard owner.currentTabRelay.value == .day else { return }
+                owner.reloadSubject.onNext(shouldScroll)
+            })
+            .disposed(by: self.disposeBag)
     }
     
     func requestDeleteTodo(_ todoIdx: Int, completion: @escaping () -> Void) {
@@ -201,6 +218,8 @@ class TodoViewModel {
             self.todoDayListTable[todoHeader] = todoModelForHeader?.todoList ?? []
         }
     }
+    
+    private let weekRepository: WeekRepository
     
     private var requestingDelete: Bool = false
     private var requestingDone: Bool   = false

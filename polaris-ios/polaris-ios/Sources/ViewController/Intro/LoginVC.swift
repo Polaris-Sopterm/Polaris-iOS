@@ -53,6 +53,7 @@ final class LoginVC: UIViewController {
     }
     
     private func setupLoadingView() {
+        self.loadingIndicator.color = .white
         self.view.addSubview(self.loadingView)
         self.loadingView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
