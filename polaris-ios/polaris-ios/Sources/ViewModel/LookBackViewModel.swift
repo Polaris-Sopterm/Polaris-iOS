@@ -406,8 +406,16 @@ final class LookBackViewModel {
                 return NetworkManager.request(apiType: registAPI).asObservable()
             }
             .subscribe(onNext: { [weak self] (responseModel: RetrospectResponseModel) in
+                PolarisToastManager.shared.showToast(with: "회고 등록이 완료되었어요")
                 self?.lookbackEnd = true
             }, onError: { [weak self] error in
+                if let polarisError = error as? PolarisErrorModel.PolarisError {
+                    PolarisToastManager.shared.showToast(with: polarisError.message)
+                }
+                else {
+                    PolarisToastManager.shared.showToast(with: "회고 등록이 완료되었어요")
+                    
+                }
                 self?.lookbackEnd = true
             })
             .disposed(by: self.disposeBag)
