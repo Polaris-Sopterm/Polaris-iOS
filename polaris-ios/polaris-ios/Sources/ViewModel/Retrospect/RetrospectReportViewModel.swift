@@ -137,10 +137,10 @@ class RetrospectReportViewModel {
         self.loadingSubject.onNext(true)
         self.weekRepository.fetchWeekNo(ofDate: Date.normalizedCurrent)
             .withUnretained(self)
-            .subscribe(onNext: { owner, weekNo in
-                let currentYear = Date.currentYear
-                let currentMonth = Date.currentMonth
-                let currentWeekNo = weekNo
+            .subscribe(onNext: { owner, weekResponseModel in
+                let currentYear = weekResponseModel.year
+                let currentMonth = weekResponseModel.month
+                let currentWeekNo = weekResponseModel.weekNo
                 
                 let date = PolarisDate(year: currentYear, month: currentMonth, weekNo: currentWeekNo)
                 owner.reportDateRelay.accept(date)

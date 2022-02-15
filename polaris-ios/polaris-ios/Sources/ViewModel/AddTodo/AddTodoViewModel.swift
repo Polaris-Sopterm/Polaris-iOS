@@ -255,7 +255,13 @@ class AddTodoViewModel {
             return Observable.just(journeyDate)
         } else {
             return self.weekRepository.fetchWeekNo(ofDate: Date.normalizedCurrent)
-                .map { weekNo in PolarisDate(year: Date.currentYear, month: Date.currentMonth, weekNo: weekNo) }
+                .map { weekResponseModel in
+                    let year = weekResponseModel.year
+                    let month = weekResponseModel.month
+                    let weekNo = weekResponseModel.weekNo
+                    
+                    return PolarisDate(year: year, month: month, weekNo: weekNo)
+                }
         }
     }
     

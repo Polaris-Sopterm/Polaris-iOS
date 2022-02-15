@@ -127,11 +127,11 @@ class TodoViewModel {
     
     func requestTodoJourneyList() {
         self.weekRepository.fetchWeekNo(ofDate: Date.normalizedCurrent)
-            .flatMapLatest { weekNo -> Observable<[WeekJourneyModel]> in
+            .flatMapLatest { weekResponseModel -> Observable<[WeekJourneyModel]> in
                 let todoListAPI = TodoAPI.listTodoByJourney(
-                    year: Date.currentYear,
-                    month: Date.currentMonth,
-                    weekNo: weekNo
+                    year: weekResponseModel.year,
+                    month: weekResponseModel.month,
+                    weekNo: weekResponseModel.weekNo
                 )
                 return NetworkManager.request(apiType: todoListAPI).asObservable()
             }
@@ -147,11 +147,11 @@ class TodoViewModel {
     
     func requestTodoDayList(shouldScroll: Bool) {
         self.weekRepository.fetchWeekNo(ofDate: Date.normalizedCurrent)
-            .flatMapLatest { weekNo -> Observable<TodoDayListModel> in
+            .flatMapLatest { weekResponseModel -> Observable<TodoDayListModel> in
                 let todoListAPI = TodoAPI.listTodoByDate(
-                    year: Date.currentYear,
-                    month: Date.currentMonth,
-                    weekNo: weekNo
+                    year: weekResponseModel.year,
+                    month: weekResponseModel.month,
+                    weekNo: weekResponseModel.weekNo
                 )
                 return NetworkManager.request(apiType: todoListAPI).asObservable()
             }
