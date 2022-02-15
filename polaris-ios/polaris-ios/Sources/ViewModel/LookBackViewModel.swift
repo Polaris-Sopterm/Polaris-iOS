@@ -380,6 +380,7 @@ final class LookBackViewModel {
         guard self.thirdvcAnswerInfo.count == 4 else { return }
         
         
+        
         let resultValue = RetrospectValueModel(y: self.getSelectedStars(starList: self.secondVCStarInfo1),
                                              n: self.getSelectedStars(starList: self.secondVCStarInfo2),
                                              health: self.thirdvcAnswerInfo[0],
@@ -392,15 +393,31 @@ final class LookBackViewModel {
         
         let recordInfo = self.makeRecordInfo()
         
-        let resultModel = RetrospectModel(year: Date.currentYear, month: Date.currentMonth, weekNo: Date.currentWeekNoOfMonth, value: resultValue, record1: recordInfo[0], record2: recordInfo[1], record3: recordInfo[2])
-        
-        let registAPI = RetrospectAPI.create(model: resultModel)
-        
-        NetworkManager.request(apiType: registAPI)
-            .subscribe(onSuccess: { [weak self] (responseModel: RetrospectResponseModel) in
-                self?.lookbackEnd = true
-            },onFailure: { [weak self] error in
-                self?.lookbackEnd = true
+        let weekAPI = WeekAPI.getWeekNo(date: Date.normalizedCurrent)
+        NetworkManager.request(apiType: weekAPI)
+            .subscribe(onSuccess: { (weekModel: WeekResponseModel) in
+                var year = Date.currentYear
+                var month = Date.currentMonth
+                if Date.todayDay < 7 * (weekModel.weekNo - 1) {
+                    if month == 1 {
+                        year -= 1
+                        month = 12
+                    }
+                    else {
+                        month -= 1
+                    }
+                }
+                
+                let resultModel = RetrospectModel(year: year, month: month, weekNo: weekModel.weekNo, value: resultValue, record1: recordInfo[0], record2: recordInfo[1], record3: recordInfo[2])
+                
+                let registAPI = RetrospectAPI.create(model: resultModel)
+                NetworkManager.request(apiType: registAPI)
+                    .subscribe(onSuccess: { [weak self] (responseModel: RetrospectResponseModel) in
+                        self?.lookbackEnd = true
+                    },onFailure: { [weak self] error in
+                        self?.lookbackEnd = true
+                    })
+                    .disposed(by: self.disposeBag)
             })
             .disposed(by: self.disposeBag)
     }

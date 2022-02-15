@@ -53,8 +53,6 @@ final class MainSceneTableViewCell: MainTableViewCell {
     
     override static var cellHeight: CGFloat { return DeviceInfo.screenHeight }
     
-    private var dateInfo = PolarisDate(year: Date.currentYear, month: Date.currentMonth, weekNo: Date.currentWeekNoOfMonth)
-
     override func awakeFromNib() {
         super.awakeFromNib()
         self.addObservers()
@@ -95,9 +93,6 @@ final class MainSceneTableViewCell: MainTableViewCell {
         self.weekContainView.makeRounded(cornerRadius: 9)
         self.weekLabel.font = UIFont.systemFont(ofSize: 13,weight: .bold)
         self.weekLabel.addCharacterSpacing(kernValue: -0.39)
-        if let weekText = Date.convertWeekNoToString(weekNo: Date.currentWeekNoOfMonth) {
-            self.weekLabel.text = String(Date.currentYear)+"년 "+String(Date.currentMonth)+"월"+weekText
-        }
         self.weekLabel.textColor = .white
         self.nowLabel.font = UIFont.systemFont(ofSize: 16,weight: .bold)
         self.nowLabel.textColor = .white
@@ -229,6 +224,13 @@ final class MainSceneTableViewCell: MainTableViewCell {
             self.pageControl.numberOfPages = output.todoStarList.value.count
             return mainTodoCell
         }.disposed(by: self.disposeBag)
+        
+        viewModel.dateInfoRelay.subscribe(onNext: { [weak self] dateInfo in
+            if let weekText = Date.convertWeekNoToString(weekNo: dateInfo.weekNo) {
+                self?.weekLabel.text =  String(dateInfo.year)+"년 "+String(dateInfo.month)+"월"+weekText
+            }
+        })
+        .disposed(by: self.disposeBag)
         
     }
     
@@ -426,6 +428,7 @@ extension MainSceneTableViewCell: LookBackCloseDelegate {
             guard let visibleController = UIViewController.getVisibleController() else { return }
             guard let addTodoVC = viewController                                  else { return }
             addTodoVC.setAddOptions(.addJourney)
+            addTodoVC.setAddJourneyDate(self.viewModel.dateInfoRelay.value)
             addTodoVC.delegate = self
             addTodoVC.presentWithAnimation(from: visibleController)
         }

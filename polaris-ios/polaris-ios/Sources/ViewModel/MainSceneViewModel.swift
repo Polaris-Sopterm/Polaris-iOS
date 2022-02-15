@@ -118,6 +118,7 @@ class MainSceneViewModel {
                     }
                 }
                 input.dateInfo.accept(PolarisDate(year: year, month: month, weekNo: weekModel.weekNo))
+                self.dateInfoRelay.accept(PolarisDate(year: year, month: month, weekNo: weekModel.weekNo))
             })
             .disposed(by: self.disposeBag)
         
@@ -254,8 +255,8 @@ class MainSceneViewModel {
     }
     
     private(set) var forceToShowStarRelay = BehaviorRelay(value: false)
-    private(set) var dateInfoRelay        = BehaviorRelay<PolarisDate>(value: PolarisDate(year: Date.currentYear,
-                                                                                    month: Date.currentMonth,
-                                                                                    weekNo: Date.currentWeekNoOfMonth))
+    private(set) var dateInfoRelay        = BehaviorRelay<PolarisDate>(value: PolarisDate(year: 0,
+                                                                                    month: 0,
+                                                                                    weekNo: 0))
     
 }
