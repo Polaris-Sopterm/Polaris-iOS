@@ -55,6 +55,10 @@ class TodoViewModel {
         return IndexPath(row: row, section: section)
     }
     
+    var loadingObservable: Observable<Bool> {
+        self.loadingSubject.asObservable()
+    }
+    
     // Should Scroll 포함해서 Scroll 해야하는 경우
     let reloadSubject   = PublishSubject<Bool>()
     let currentTabRelay = BehaviorRelay<TodoCategory>(value: .day)
@@ -117,11 +121,15 @@ class TodoViewModel {
         let journeyIdx = todoModel.journey?.idx
         
         let createTodoAPI = TodoAPI.createToDo(title: title, date: date, journeyIdx: journeyIdx, isTop: isTop)
+        self.loadingSubject.onNext(true)
         NetworkManager.request(apiType: createTodoAPI).subscribe(onSuccess: { [weak self] (responseModel: AddTodoResponseModel) in
             self?.requestTodoJourneyList()
             self?.requestTodoDayList(shouldScroll: false)
             
+            self?.loadingSubject.onNext(false)
             NotificationCenter.default.post(name: .didUpdateTodo, object: MainSceneCellType.todoList.sceneIdentifier)
+        }, onFailure: { [weak self] _ in
+            self?.loadingSubject.onNext(false)
         }).disposed(by: self.disposeBag)
     }
     
@@ -166,45 +174,41 @@ class TodoViewModel {
     }
     
     func requestDeleteTodo(_ todoIdx: Int, completion: @escaping () -> Void) {
-        guard self.requestingDelete == false else { return }
+        self.loadingSubject.onNext(true)
         
         let todoDayDeleteAPI = TodoAPI.deleteTodo(idx: todoIdx)
-        
-        self.requestingDelete = true
         NetworkManager.request(apiType: todoDayDeleteAPI).subscribe(onSuccess: { [weak self] (successModel: SuccessModel) in
             guard let self = self else { return }
-            self.requestingDelete = false
+            self.loadingSubject.onNext(false)
             
             guard successModel.isSuccess == true else { return }
-            
             self.requestTodoJourneyList()
             self.requestTodoDayList(shouldScroll: false)
             completion()
             
             NotificationCenter.default.post(name: .didUpdateTodo, object: MainSceneCellType.todoList.sceneIdentifier)
         }, onFailure: { [weak self] _ in
-            self?.requestingDelete = false
+            self?.loadingSubject.onNext(false)
         }).disposed(by: self.disposeBag)
     }
     
     func updateDoneStatus(_ todoModel: TodoModel) {
-        guard self.requestingDone == false else { return }
-        guard let todoIdx = todoModel.idx  else { return }
+        guard let todoIdx = todoModel.idx else { return }
         
         let edittedIsDone = todoModel.isDone == nil ? true : false
         let todoEditAPI   = TodoAPI.editTodo(idx: todoIdx, isDone: edittedIsDone)
         
-        self.requestingDone = true
+        self.loadingSubject.onNext(true)
         NetworkManager.request(apiType: todoEditAPI).subscribe(onSuccess: { [weak self] (responseModel: TodoModel) in
             guard let self = self else { return }
-            self.requestingDone = false
+            self.loadingSubject.onNext(false)
             
             self.requestTodoDayList(shouldScroll: false)
             self.requestTodoJourneyList()
             
             NotificationCenter.default.post(name: .didUpdateTodo, object: MainSceneCellType.todoList.sceneIdentifier)
         }, onFailure: { [weak self] _ in
-            self?.requestingDone = false
+            self?.loadingSubject.onNext(false)
         }).disposed(by: self.disposeBag)
     }
     
@@ -221,9 +225,6 @@ class TodoViewModel {
     
     private let weekRepository: WeekRepository
     
-    private var requestingDelete: Bool = false
-    private var requestingDone: Bool   = false
-    
     /*
      날짜별 할일 보여줄 때, 사용하는 Property
      - Date 업데이트 시킬 때, 12:00:00으로 맞추어서 Normalized 시킴
@@ -238,6 +239,7 @@ class TodoViewModel {
     private(set) var journeyExpandedTodo: TodoModel?
     private(set) var todoJourneyList = [WeekJourneyModel]()
     
+    private let loadingSubject = PublishSubject<Bool>()
     private let disposeBag = DisposeBag()
     
 }
