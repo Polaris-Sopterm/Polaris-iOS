@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -89,7 +89,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="jY3-pg-gEc">
-                                <rect key="frame" x="128" y="446.5" width="155.5" height="26"/>
+                                <rect key="frame" x="128" y="446.5" width="115.5" height="26"/>
                             </pageControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d0i-CO-qq3">
                                 <rect key="frame" x="322" y="439.5" width="40" height="40"/>
@@ -159,6 +159,18 @@
                                 <rect key="frame" x="187" y="632" width="20" height="20"/>
                                 <color key="color" red="0.90989881750000001" green="0.90913724900000004" blue="0.96470707649999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="luH-tA-7LM">
+                                <rect key="frame" x="297" y="53" width="23" height="23"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="23" id="RSq-8a-KUo"/>
+                                    <constraint firstAttribute="height" constant="23" id="vtN-Fn-bPW"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="maskGroup"/>
+                                <connections>
+                                    <action selector="reloadButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="S7j-nL-fde"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemIndigoColor"/>
                         <constraints>
@@ -186,6 +198,7 @@
                             <constraint firstItem="ulR-tq-5Hk" firstAttribute="centerY" secondItem="0n5-IU-kY6" secondAttribute="centerY" id="YPT-EG-iaL"/>
                             <constraint firstAttribute="trailing" secondItem="cSs-CY-hwA" secondAttribute="trailing" id="ZeG-By-nz9"/>
                             <constraint firstAttribute="bottom" secondItem="0n5-IU-kY6" secondAttribute="bottom" id="apw-Fj-NYU"/>
+                            <constraint firstItem="Rg3-BV-iv8" firstAttribute="leading" secondItem="luH-tA-7LM" secondAttribute="trailing" constant="10" id="b2H-5f-03O"/>
                             <constraint firstAttribute="bottom" secondItem="fA6-Vr-FMY" secondAttribute="bottom" id="ez2-fM-GBH"/>
                             <constraint firstItem="ANC-x1-J10" firstAttribute="centerX" secondItem="m4T-O4-bt8" secondAttribute="centerX" id="h4S-mL-o09"/>
                             <constraint firstItem="jY3-pg-gEc" firstAttribute="leading" secondItem="gmU-qj-7Vu" secondAttribute="trailing" constant="11" id="hE2-Je-A30"/>
@@ -196,6 +209,7 @@
                             <constraint firstItem="fA6-Vr-FMY" firstAttribute="top" secondItem="m4T-O4-bt8" secondAttribute="top" id="oqc-3S-jMW"/>
                             <constraint firstItem="0n5-IU-kY6" firstAttribute="leading" secondItem="m4T-O4-bt8" secondAttribute="leading" id="p7S-K9-S9e"/>
                             <constraint firstItem="gmU-qj-7Vu" firstAttribute="leading" secondItem="m4T-O4-bt8" secondAttribute="leading" constant="24" id="uaQ-m6-tLT"/>
+                            <constraint firstItem="luH-tA-7LM" firstAttribute="centerY" secondItem="Rg3-BV-iv8" secondAttribute="centerY" id="wyC-WH-4tW"/>
                             <constraint firstAttribute="bottom" secondItem="zrA-6h-yWs" secondAttribute="bottom" id="xSb-WI-63P"/>
                             <constraint firstItem="81g-Yb-oX0" firstAttribute="centerX" secondItem="m4T-O4-bt8" secondAttribute="centerX" id="z6E-94-ozu"/>
                         </constraints>
@@ -213,6 +227,7 @@
                 <outlet property="addButton" destination="d0i-CO-qq3" id="Tp1-ld-2Zc"/>
                 <outlet property="nowLabel" destination="gmU-qj-7Vu" id="0QQ-MU-Qs6"/>
                 <outlet property="pageControl" destination="jY3-pg-gEc" id="jX6-ga-CDF"/>
+                <outlet property="reloadButton" destination="luH-tA-7LM" id="vfe-Ri-uIg"/>
                 <outlet property="starCV" destination="cSs-CY-hwA" id="C8I-vi-Iv2"/>
                 <outlet property="starCVCHeightConstraint" destination="y9l-cZ-YM7" id="6eB-fv-0PF"/>
                 <outlet property="starLoadingIndicator" destination="f3m-vK-74O" id="kec-eF-1ze"/>
@@ -238,6 +253,7 @@
         <image name="btnSettings" width="24" height="24"/>
         <image name="btnUnderscroll" width="40" height="40"/>
         <image name="btnUp" width="33" height="33"/>
+        <image name="maskGroup" width="24" height="24"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

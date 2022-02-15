@@ -380,6 +380,7 @@ final class LookBackViewModel {
         guard self.thirdvcAnswerInfo.count == 4 else { return }
         
         
+        
         let resultValue = RetrospectValueModel(y: self.getSelectedStars(starList: self.secondVCStarInfo1),
                                              n: self.getSelectedStars(starList: self.secondVCStarInfo2),
                                              health: self.thirdvcAnswerInfo[0],
@@ -392,17 +393,33 @@ final class LookBackViewModel {
         
         let recordInfo = self.makeRecordInfo()
         
-        let resultModel = RetrospectModel(year: Date.currentYear, month: Date.currentMonth, weekNo: Date.currentWeekNoOfMonth, value: resultValue, record1: recordInfo[0], record2: recordInfo[1], record3: recordInfo[2])
+        let weekAPI = WeekAPI.getWeekNo(date: Date.normalizedCurrent)
         
-        let registAPI = RetrospectAPI.create(model: resultModel)
-        
-        NetworkManager.request(apiType: registAPI)
-            .subscribe(onSuccess: { [weak self] (responseModel: RetrospectResponseModel) in
+        NetworkManager.request(apiType: weekAPI)
+            .asObservable()
+            .map { (weekModel: WeekResponseModel) -> RetrospectModel in
+                let resultModel = RetrospectModel(year: weekModel.year, month: weekModel.month, weekNo: weekModel.weekNo, value: resultValue, record1: recordInfo[0], record2: recordInfo[1], record3: recordInfo[2])
+                return resultModel
+            }
+            .flatMapLatest { resultModel -> Observable<RetrospectResponseModel> in
+                let registAPI = RetrospectAPI.create(model: resultModel)
+                return NetworkManager.request(apiType: registAPI).asObservable()
+            }
+            .subscribe(onNext: { [weak self] (responseModel: RetrospectResponseModel) in
+                PolarisToastManager.shared.showToast(with: "회고 등록이 완료되었어요")
                 self?.lookbackEnd = true
-            },onFailure: { [weak self] error in
+            }, onError: { [weak self] error in
+                if let polarisError = error as? PolarisErrorModel.PolarisError {
+                    PolarisToastManager.shared.showToast(with: polarisError.message)
+                }
+                else {
+                    PolarisToastManager.shared.showToast(with: "회고 등록이 완료되었어요")
+                    
+                }
                 self?.lookbackEnd = true
             })
             .disposed(by: self.disposeBag)
+        
     }
     
 }

@@ -22,6 +22,8 @@ final class MainSceneTableViewCell: MainTableViewCell {
     
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var starCVCHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var reloadButton: UIButton!
     @IBOutlet private weak var starCV: UICollectionView!
     @IBOutlet private weak var weekContainView: UIView!
     @IBOutlet private weak var weekLabel: UILabel!
@@ -51,8 +53,6 @@ final class MainSceneTableViewCell: MainTableViewCell {
     
     override static var cellHeight: CGFloat { return DeviceInfo.screenHeight }
     
-    private var dateInfo = PolarisDate(year: Date.currentYear, month: Date.currentMonth, weekNo: Date.currentWeekNoOfMonth)
-
     override func awakeFromNib() {
         super.awakeFromNib()
         self.addObservers()
@@ -87,14 +87,12 @@ final class MainSceneTableViewCell: MainTableViewCell {
         for _ in 0...2{
             self.cometAnimation()
         }
+        self.reloadButton.setTitle("", for: .normal)
         self.weekContainView.backgroundColor = .white60
         self.weekContainView.setBorder(borderColor: .white, borderWidth: 1.0)
         self.weekContainView.makeRounded(cornerRadius: 9)
         self.weekLabel.font = UIFont.systemFont(ofSize: 13,weight: .bold)
         self.weekLabel.addCharacterSpacing(kernValue: -0.39)
-        if let weekText = Date.convertWeekNoToString(weekNo: Date.currentWeekNoOfMonth) {
-            self.weekLabel.text = String(Date.currentYear)+"년 "+String(Date.currentMonth)+"월"+weekText
-        }
         self.weekLabel.textColor = .white
         self.nowLabel.font = UIFont.systemFont(ofSize: 16,weight: .bold)
         self.nowLabel.textColor = .white
@@ -227,6 +225,13 @@ final class MainSceneTableViewCell: MainTableViewCell {
             return mainTodoCell
         }.disposed(by: self.disposeBag)
         
+        viewModel.dateInfoRelay.subscribe(onNext: { [weak self] dateInfo in
+            if let weekText = Date.convertWeekNoToString(weekNo: dateInfo.weekNo) {
+                self?.weekLabel.text =  String(dateInfo.year)+"년 "+String(dateInfo.month)+"월"+weekText
+            }
+        })
+        .disposed(by: self.disposeBag)
+        
     }
     
     private func setCometLayout(comet: UIImageView,size: Int) {
@@ -307,6 +312,11 @@ final class MainSceneTableViewCell: MainTableViewCell {
         addTodoVC.setAddOptions(.addJourney)
         addTodoVC.delegate = self
         addTodoVC.presentWithAnimation(from: visibleController)
+    }
+    
+    
+    @IBAction func reloadButtonAction(_ sender: Any) {
+        self.viewModel.reloadInfo()
     }
     
     @objc private func didUpdateTodo(_ notification: Notification) {
@@ -418,6 +428,7 @@ extension MainSceneTableViewCell: LookBackCloseDelegate {
             guard let visibleController = UIViewController.getVisibleController() else { return }
             guard let addTodoVC = viewController                                  else { return }
             addTodoVC.setAddOptions(.addJourney)
+            addTodoVC.setAddJourneyDate(self.viewModel.dateInfoRelay.value)
             addTodoVC.delegate = self
             addTodoVC.presentWithAnimation(from: visibleController)
         }

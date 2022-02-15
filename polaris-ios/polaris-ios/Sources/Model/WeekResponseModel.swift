@@ -8,5 +8,7 @@
 import Foundation
 
 struct WeekResponseModel: Codable {
+    let year: Int
+    let month: Int
     let weekNo: Int
 }

@@ -106,18 +106,8 @@ class MainSceneViewModel {
         let weekAPI = WeekAPI.getWeekNo(date: Date.normalizedCurrent)
         NetworkManager.request(apiType: weekAPI)
             .subscribe(onSuccess: { (weekModel: WeekResponseModel) in
-                var year = Date.currentYear
-                var month = Date.currentMonth
-                if Date.todayDay < 7 * (weekModel.weekNo - 1) {
-                    if month == 1 {
-                        year -= 1
-                        month = 12
-                    }
-                    else {
-                        month -= 1
-                    }
-                }
-                input.dateInfo.accept(PolarisDate(year: year, month: month, weekNo: weekModel.weekNo))
+                input.dateInfo.accept(PolarisDate(year: weekModel.year, month: weekModel.month, weekNo: weekModel.weekNo))
+                self.dateInfoRelay.accept(PolarisDate(year: weekModel.year, month: weekModel.month, weekNo: weekModel.weekNo))
             })
             .disposed(by: self.disposeBag)
         
@@ -201,6 +191,11 @@ class MainSceneViewModel {
         return resultList
     }
     
+    func reloadInfo() {
+        self.forceToShowStarRelay.accept(self.forceToShowStarRelay.value)
+        self.dateInfoRelay.accept(self.dateInfoRelay.value)
+    }
+    
     func updateStarList(isSkipped: Bool) {
         self.forceToShowStarRelay.accept(isSkipped)
     }
@@ -249,8 +244,8 @@ class MainSceneViewModel {
     }
     
     private(set) var forceToShowStarRelay = BehaviorRelay(value: false)
-    private(set) var dateInfoRelay        = BehaviorRelay<PolarisDate>(value: PolarisDate(year: Date.currentYear,
-                                                                                    month: Date.currentMonth,
-                                                                                    weekNo: Date.currentWeekNoOfMonth))
+    private(set) var dateInfoRelay        = BehaviorRelay<PolarisDate>(value: PolarisDate(year: 0,
+                                                                                    month: 0,
+                                                                                    weekNo: 0))
     
 }
