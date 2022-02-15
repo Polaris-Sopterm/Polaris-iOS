@@ -394,32 +394,24 @@ final class LookBackViewModel {
         let recordInfo = self.makeRecordInfo()
         
         let weekAPI = WeekAPI.getWeekNo(date: Date.normalizedCurrent)
+        
         NetworkManager.request(apiType: weekAPI)
-            .subscribe(onSuccess: { (weekModel: WeekResponseModel) in
-                var year = Date.currentYear
-                var month = Date.currentMonth
-                if Date.todayDay < 7 * (weekModel.weekNo - 1) {
-                    if month == 1 {
-                        year -= 1
-                        month = 12
-                    }
-                    else {
-                        month -= 1
-                    }
-                }
-                
-                let resultModel = RetrospectModel(year: year, month: month, weekNo: weekModel.weekNo, value: resultValue, record1: recordInfo[0], record2: recordInfo[1], record3: recordInfo[2])
-                
+            .asObservable()
+            .map { (weekModel: WeekResponseModel) -> RetrospectModel in
+                let resultModel = RetrospectModel(year: Date.currentYear, month: Date.currentMonth, weekNo: weekModel.weekNo, value: resultValue, record1: recordInfo[0], record2: recordInfo[1], record3: recordInfo[2])
+                return resultModel
+            }
+            .flatMapLatest { resultModel -> Observable<RetrospectResponseModel> in
                 let registAPI = RetrospectAPI.create(model: resultModel)
-                NetworkManager.request(apiType: registAPI)
-                    .subscribe(onSuccess: { [weak self] (responseModel: RetrospectResponseModel) in
-                        self?.lookbackEnd = true
-                    },onFailure: { [weak self] error in
-                        self?.lookbackEnd = true
-                    })
-                    .disposed(by: self.disposeBag)
+                return NetworkManager.request(apiType: registAPI).asObservable()
+            }
+            .subscribe(onNext: { [weak self] (responseModel: RetrospectResponseModel) in
+                self?.lookbackEnd = true
+            }, onError: { [weak self] error in
+                self?.lookbackEnd = true
             })
             .disposed(by: self.disposeBag)
+        
     }
     
 }
