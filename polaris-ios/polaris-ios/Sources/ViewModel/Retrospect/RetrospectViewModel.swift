@@ -48,10 +48,12 @@ final class RetrospectViewModel {
         
         self.weekRepository.fetchWeekNo(ofDate: lastWeekDate)
             .withUnretained(self)
-            .flatMapLatest { owner, weekNo -> Observable<RetrospectModel?> in
-                let currentYear = Date.currentYear
-                let currentMonth = Date.currentMonth
-                let polarisDate = PolarisDate(year: currentYear, month: currentMonth, weekNo: weekNo)
+            .flatMapLatest { owner, weekResponseModel -> Observable<RetrospectModel?> in
+                let year = weekResponseModel.year
+                let month = weekResponseModel.month
+                let weekNo = weekResponseModel.weekNo
+                
+                let polarisDate = PolarisDate(year: year, month: month, weekNo: weekNo)
                 return owner.retrospectRepository.fetchRetrospect(ofDate: polarisDate)
             }
             .withUnretained(self)

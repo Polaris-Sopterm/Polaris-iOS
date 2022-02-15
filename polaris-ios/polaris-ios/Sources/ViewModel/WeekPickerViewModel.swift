@@ -50,8 +50,13 @@ final class WeekPickerViewModel {
         
         if self.selectedDate == nil {
             Observable.zip(self.requestWeekInformation(), self.requestCurrentWeekNo())
-                .subscribe(onNext: { [weak self] weeksModel, currentWeekNo in
-                    let selectedDate = PolarisDate(year: Date.currentYear, month: Date.currentMonth, weekNo: currentWeekNo)
+                .subscribe(onNext: { [weak self] weeksModel, weekResponseModel in
+                    let selectedDate = PolarisDate(
+                        year: weekResponseModel.year,
+                        month: weekResponseModel.month,
+                        weekNo: weekResponseModel.weekNo
+                    )
+                    
                     self?.selectedDate = selectedDate
                     self?.lastWeekOfMonthModel = weeksModel
                     self?.loadingSubject.onNext(false)
@@ -72,9 +77,9 @@ final class WeekPickerViewModel {
             .catchAndReturn([])
     }
     
-    private func requestCurrentWeekNo() -> Observable<Int> {
+    private func requestCurrentWeekNo() -> Observable<WeekResponseModel> {
         self.weekRepository.fetchWeekNo(ofDate: Date.normalizedCurrent)
-            .catchAndReturn(1)
+            .catchAndReturn(WeekResponseModel(year: Date.currentYear, month: Date.currentMonth, weekNo: 1))
     }
     
     private func updateSelectedDate(date: PolarisDate) {

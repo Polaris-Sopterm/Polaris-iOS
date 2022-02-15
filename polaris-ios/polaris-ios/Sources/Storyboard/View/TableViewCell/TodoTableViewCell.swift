@@ -137,6 +137,14 @@ class TodoTableViewCell: MainTableViewCell {
                 self.journeyEmptyView.isHidden = self.viewModel.todoJourneyList.isEmpty == false
             }
         }).disposed(by: self.disposeBag)
+        
+        self.viewModel.loadingObservable
+            .withUnretained(self)
+            .observeOnMain(onNext: { owner, loading in
+                owner.indicatorContainerView.isHidden = loading == false
+                loading ? owner.indicatorView.startAnimating() : owner.indicatorView.stopAnimating()
+            })
+            .disposed(by: self.disposeBag)
     }
     
     private func updateCategoryButton(as category: TodoCategory) {
@@ -168,6 +176,8 @@ class TodoTableViewCell: MainTableViewCell {
     @IBOutlet private weak var categoryButton: UIButton!
     @IBOutlet private weak var journeyEmptyView: UIView!
     @IBOutlet private weak var addJourneyButton: UIButton!
+    @IBOutlet private weak var indicatorContainerView: UIView!
+    @IBOutlet private weak var indicatorView: UIActivityIndicatorView!
     
 }
 
