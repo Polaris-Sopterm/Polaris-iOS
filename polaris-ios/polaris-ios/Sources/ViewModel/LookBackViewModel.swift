@@ -398,7 +398,7 @@ final class LookBackViewModel {
         NetworkManager.request(apiType: weekAPI)
             .asObservable()
             .map { (weekModel: WeekResponseModel) -> RetrospectModel in
-                let resultModel = RetrospectModel(year: Date.currentYear, month: Date.currentMonth, weekNo: weekModel.weekNo, value: resultValue, record1: recordInfo[0], record2: recordInfo[1], record3: recordInfo[2])
+                let resultModel = RetrospectModel(year: weekModel.year, month: weekModel.month, weekNo: weekModel.weekNo, value: resultValue, record1: recordInfo[0], record2: recordInfo[1], record3: recordInfo[2])
                 return resultModel
             }
             .flatMapLatest { resultModel -> Observable<RetrospectResponseModel> in
