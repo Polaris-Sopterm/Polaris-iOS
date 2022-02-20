@@ -170,7 +170,17 @@ class RetrospectTableViewCell: MainTableViewCell {
     private var capturedStarContainerImage: UIImage? {
         let contentViewAsImage = self.contentView.asImage()
         let screenScale = UIScreen.main.scale
-        let croppedFrame = self.starsContainerView.frame
+        
+        let labelContainerFrame = self.titleLabelContainerView.frame
+        let starsContainerFrame = self.starsContainerView.frame
+        
+        let croppedFrame = CGRect(
+            x: labelContainerFrame.origin.x,
+            y: labelContainerFrame.origin.y,
+            width: labelContainerFrame.width,
+            height: labelContainerFrame.height + starsContainerFrame.height
+        )
+
         let croppedFrameAdjustScale = CGRect(
             x: croppedFrame.origin.x * screenScale,
             y: croppedFrame.origin.y * screenScale,
@@ -187,6 +197,7 @@ class RetrospectTableViewCell: MainTableViewCell {
     private let viewModel = RetrospectViewModel()
     private let disposeBag = DisposeBag()
 
+    @IBOutlet private weak var titleLabelContainerView: UIView!
     @IBOutlet private weak var starsContainerView: UIView!
     
     @IBOutlet private weak var changeImageView: UIImageView!

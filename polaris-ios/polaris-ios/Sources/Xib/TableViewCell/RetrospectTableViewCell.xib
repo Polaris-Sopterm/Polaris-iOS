@@ -35,20 +35,35 @@
                             <constraint firstAttribute="trailing" secondItem="Wz4-fM-JkJ" secondAttribute="trailing" constant="8" id="vtI-Tm-EqJ"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="내가 찾은 별로" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oTZ-hh-uJ7">
-                        <rect key="frame" x="24" y="59.999999999999993" width="327" height="27.666666666666664"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="많이 찾은 별이 더 밝게 빛나요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b7B-9a-a4F">
-                        <rect key="frame" x="24" y="95.666666666666671" width="175.66666666666666" height="18"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7NO-4t-Ss9">
+                        <rect key="frame" x="0.0" y="60" width="375" height="52.666666666666657"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="내가 찾은 별로" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oTZ-hh-uJ7">
+                                <rect key="frame" x="24" y="0.0" width="327" height="27.666666666666668"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="많이 찾은 별이 더 밝게 빛나요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b7B-9a-a4F">
+                                <rect key="frame" x="24" y="34.666666666666671" width="327" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="b7B-9a-a4F" secondAttribute="bottom" id="G5v-2G-Qx7"/>
+                            <constraint firstItem="oTZ-hh-uJ7" firstAttribute="leading" secondItem="7NO-4t-Ss9" secondAttribute="leading" constant="24" id="JaR-ON-rtB"/>
+                            <constraint firstAttribute="trailing" secondItem="b7B-9a-a4F" secondAttribute="trailing" constant="24" id="MSC-MI-rsn"/>
+                            <constraint firstItem="b7B-9a-a4F" firstAttribute="leading" secondItem="7NO-4t-Ss9" secondAttribute="leading" constant="24" id="ioP-fX-4iG"/>
+                            <constraint firstItem="oTZ-hh-uJ7" firstAttribute="top" secondItem="7NO-4t-Ss9" secondAttribute="top" id="pRU-mW-zIG"/>
+                            <constraint firstItem="b7B-9a-a4F" firstAttribute="top" secondItem="oTZ-hh-uJ7" secondAttribute="bottom" constant="7" id="uoc-uf-qxH"/>
+                            <constraint firstAttribute="trailing" secondItem="oTZ-hh-uJ7" secondAttribute="trailing" constant="24" id="ybP-b7-5J8"/>
+                        </constraints>
+                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kac-uY-IID">
-                        <rect key="frame" x="0.0" y="113.66666666666666" width="375" height="469.33333333333337"/>
+                        <rect key="frame" x="0.0" y="112.66666666666666" width="375" height="469.33333333333337"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="MrQ-Hl-e3x">
                                 <rect key="frame" x="93.666666666666671" y="286" width="48.000000000000014" height="75.666666666666686"/>
@@ -290,20 +305,18 @@
                     <constraint firstAttribute="bottom" secondItem="nhp-Rp-FoC" secondAttribute="bottom" constant="48" id="4p4-By-eMw"/>
                     <constraint firstAttribute="bottom" secondItem="JoQ-J4-Tyb" secondAttribute="bottom" id="76U-gq-gKj"/>
                     <constraint firstItem="JoQ-J4-Tyb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="9uN-KM-r33"/>
-                    <constraint firstItem="b7B-9a-a4F" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="24" id="C4E-Mg-jbW"/>
+                    <constraint firstItem="7NO-4t-Ss9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="E22-GC-ZPT"/>
                     <constraint firstItem="kac-uY-IID" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="G5b-ig-0Bq"/>
-                    <constraint firstAttribute="trailing" secondItem="oTZ-hh-uJ7" secondAttribute="trailing" constant="24" id="TM4-7O-cKK"/>
                     <constraint firstItem="JoQ-J4-Tyb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="UEO-zK-vGq"/>
                     <constraint firstItem="nhp-Rp-FoC" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="ZF1-uz-cH2"/>
+                    <constraint firstItem="kac-uY-IID" firstAttribute="top" secondItem="7NO-4t-Ss9" secondAttribute="bottom" id="aGz-XU-0zH"/>
                     <constraint firstAttribute="trailing" secondItem="ZIV-Sq-fos" secondAttribute="trailing" id="apM-PB-tX5"/>
                     <constraint firstAttribute="trailing" secondItem="JoQ-J4-Tyb" secondAttribute="trailing" id="ayK-Tf-OZc"/>
-                    <constraint firstItem="b7B-9a-a4F" firstAttribute="top" secondItem="oTZ-hh-uJ7" secondAttribute="bottom" constant="8" id="cbI-gu-rLq"/>
-                    <constraint firstItem="oTZ-hh-uJ7" firstAttribute="top" secondItem="ZIV-Sq-fos" secondAttribute="bottom" id="dUi-Af-f32"/>
-                    <constraint firstItem="oTZ-hh-uJ7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="24" id="ea4-7Y-qHh"/>
                     <constraint firstAttribute="trailing" secondItem="kac-uY-IID" secondAttribute="trailing" id="j8M-DM-MZQ"/>
                     <constraint firstItem="ZIV-Sq-fos" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="r07-St-L12"/>
                     <constraint firstItem="ZIV-Sq-fos" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="sSo-Y2-cap"/>
-                    <constraint firstItem="kac-uY-IID" firstAttribute="top" secondItem="b7B-9a-a4F" secondAttribute="bottom" id="yW1-Bi-5jr"/>
+                    <constraint firstAttribute="trailing" secondItem="7NO-4t-Ss9" secondAttribute="trailing" id="sU4-OF-fyd"/>
+                    <constraint firstItem="7NO-4t-Ss9" firstAttribute="top" secondItem="ZIV-Sq-fos" secondAttribute="bottom" id="yDL-ET-EDQ"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -331,6 +344,7 @@
                 <outlet property="thanksImageView" destination="9QK-xN-hTi" id="8ba-Fq-ak1"/>
                 <outlet property="thanksStarConstraint" destination="4Tw-zD-3tf" id="jhU-IH-ECc"/>
                 <outlet property="titleLabel" destination="oTZ-hh-uJ7" id="JaI-tB-7eD"/>
+                <outlet property="titleLabelContainerView" destination="7NO-4t-Ss9" id="OBV-xK-gPt"/>
             </connections>
             <point key="canvasLocation" x="138.40000000000001" y="152.95566502463055"/>
         </tableViewCell>
