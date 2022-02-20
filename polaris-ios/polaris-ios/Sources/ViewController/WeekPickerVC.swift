@@ -127,6 +127,19 @@ extension WeekPickerVC: UIPickerViewDelegate {
         33
     }
     
+    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+        guard let pickerComponent = PickerComponent(rawValue: component) else { return 0 }
+
+        switch pickerComponent {
+        case .year:
+            return 106
+        case .month:
+            return 70
+        case .weekNo:
+            return 106
+        }
+    }
+    
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         pickerView.subviews[1].backgroundColor = .mainSky15
         
