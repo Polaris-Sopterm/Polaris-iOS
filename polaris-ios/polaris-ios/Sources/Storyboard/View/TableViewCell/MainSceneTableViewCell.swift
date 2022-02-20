@@ -126,6 +126,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
         self.todoCV.registerCell(cell: MainTodoCVC.self)
         self.todoCV.backgroundColor = .clear
         self.todoCV.decelerationRate = .fast
+        self.todoCV.allowsSelection = false
         self.todoCV.delegate = self
         let layout = self.todoCV.collectionViewLayout as! UICollectionViewFlowLayout
         layout.minimumLineSpacing = 0
