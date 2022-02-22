@@ -9,7 +9,7 @@ import UIKit
 
 extension UILabel {
     
-    func setPartialBold(originalText: String,boldText: String,fontSize: CGFloat,boldFontSize: CGFloat){
+    func setPartialBold(originalText: String, boldText: String, fontSize: CGFloat, boldFontSize: CGFloat){
         let attributedString = NSMutableAttributedString(string: originalText)
         let font = UIFont.systemFont(ofSize: boldFontSize, weight: .bold)
         self.font = UIFont.systemFont(ofSize: fontSize, weight: .light)

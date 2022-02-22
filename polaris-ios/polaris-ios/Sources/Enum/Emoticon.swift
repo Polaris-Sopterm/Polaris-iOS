@@ -25,7 +25,7 @@ enum Emoticon: String {
         case .expectation:  return UIImage(named: "imgFaceExpectation")
         case .frustrated:   return UIImage(named: "imgFaceFrustrated")
         case .easy:         return UIImage(named: "imgFaceEasy")
-        case .joy:          return UIImage(named: "imgFaceJog")
+        case .joy:          return UIImage(named: "imgFaceJoy")
         case .angry:        return UIImage(named: "imgFaceAngry")
         case .regretful:    return UIImage(named: "imgFaceRegretful")
         case .satisfaction: return UIImage(named: "imgFaceSatisfaction")

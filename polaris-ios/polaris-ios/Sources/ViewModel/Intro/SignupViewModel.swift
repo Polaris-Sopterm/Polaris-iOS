@@ -117,7 +117,8 @@ final class SignupViewModel {
     }
     
     private func checkNicknameCountValidation(_ nickname: String) {
-        let nicknameCountValidation = nickname.count >= 6
+        let trimmedNickname = nickname.trimmingCharacters(in: .whitespacesAndNewlines)
+        let nicknameCountValidation = trimmedNickname.isEmpty == false
         self.nicknameCountValidRelay.accept(nicknameCountValidation)
     }
     
