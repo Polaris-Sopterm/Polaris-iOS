@@ -228,7 +228,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
         
         viewModel.dateInfoRelay.subscribe(onNext: { [weak self] dateInfo in
             if let weekText = Date.convertWeekNoToString(weekNo: dateInfo.weekNo) {
-                self?.weekLabel.text =  String(dateInfo.year)+"년 "+String(dateInfo.month)+"월"+weekText
+                self?.weekLabel.text =  String(dateInfo.year)+"년 "+String(dateInfo.month)+"월 "+weekText
             }
         })
         .disposed(by: self.disposeBag)
