@@ -28,8 +28,8 @@ class LookBackFourthViewController: UIViewController, LookBackViewModelProtocol 
     @IBOutlet weak var nextButtonYConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var nextButton: UIButton!
-    let deviceHeightRatio = DeviceInfo.screenHeight/812.0
-    let deviceWidthRatio = DeviceInfo.screenWidth/375.0
+    private let deviceHeightRatio = DeviceInfo.screenHeight/812.0
+    private let deviceWidthRatio = DeviceInfo.screenWidth/375.0
     
     private var viewModel = LookBackViewModel()
     private weak var pageDelegate: LookBackPageDelegate?
@@ -129,7 +129,7 @@ class LookBackFourthViewController: UIViewController, LookBackViewModelProtocol 
 extension LookBackFourthViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 101, height: 101)
+        return CGSize(width: 101 * deviceWidthRatio, height: 101 * deviceWidthRatio)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

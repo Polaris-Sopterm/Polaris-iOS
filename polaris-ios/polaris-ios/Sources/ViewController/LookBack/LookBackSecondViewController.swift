@@ -23,6 +23,8 @@ class LookBackSecondViewController: UIViewController, LookBackViewModelProtocol 
     @IBOutlet weak var nextButtonYConstraint: NSLayoutConstraint!
     
     private let deviceHeightRatio = DeviceInfo.screenHeight/812.0
+    private let deviceWidthRatio = DeviceInfo.screenWidth/375.0
+
     private var viewModel = LookBackViewModel()
     private var subscriptions: [AnyCancellable] = []
     private var starSubsciption: AnyCancellable?
@@ -138,12 +140,12 @@ class LookBackSecondViewController: UIViewController, LookBackViewModelProtocol 
 extension LookBackSecondViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 101, height: 101 * deviceHeightRatio)
+        return CGSize(width: 101 * deviceWidthRatio, height: 101 * deviceWidthRatio)
     }
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 10 * deviceHeightRatio
+        return 10
     }
     
     
