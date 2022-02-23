@@ -33,6 +33,13 @@ enum TodoCategory {
         case .journey: return JourneyTodoHeaderView.self
         }
     }
+    
+    var buttonImage: UIImage? {
+        switch self {
+        case .day:     return UIImage(named: "icn_dateview")
+        case .journey: return UIImage(named: "icnJourneyview")
+        }
+    }
 }
 
 class TodoViewModel {
