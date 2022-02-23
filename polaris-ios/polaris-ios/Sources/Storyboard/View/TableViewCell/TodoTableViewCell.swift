@@ -148,6 +148,7 @@ class TodoTableViewCell: MainTableViewCell {
     }
     
     private func updateCategoryButton(as category: TodoCategory) {
+        self.categoryButton.setImage(category.buttonImage, for: .normal)
         self.categoryButton.setTitle(category.title, for: .normal)
     }
     

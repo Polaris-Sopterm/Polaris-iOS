@@ -126,11 +126,11 @@ extension OnboardingVC {
         
         var image: UIImage? {
             switch self {
-            case .first:    return UIImage(named: ImageName.mockImageFirst)
-            case .second:   return UIImage(named: ImageName.mockImageSecond)
-            case .third:    return UIImage(named: ImageName.mockImageThird)
-            case .fourth:   return UIImage(named: ImageName.mockImageFourth)
-            case .last:     return UIImage(named: ImageName.mockImageLast)
+            case .first:    return UIImage(named: ImageName.imgOnboarding1)
+            case .second:   return UIImage(named: ImageName.imgOnboarding2)
+            case .third:    return UIImage(named: ImageName.imgOnboarding3)
+            case .fourth:   return UIImage(named: ImageName.imgOnboarding4)
+            case .last:     return UIImage(named: ImageName.imgOnboarding5)
             }
         }
     }

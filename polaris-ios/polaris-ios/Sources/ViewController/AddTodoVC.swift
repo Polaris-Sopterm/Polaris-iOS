@@ -58,15 +58,20 @@ class AddTodoVC: HalfModalVC {
         if self.viewModel.currentAddOption == .perDayAddTodo {
             guard let date = self.viewModel.currentDate else { return }
             self.titleLabel.text = date.convertToString(using: "M월 d일") + "의 할 일"
+            self.addButton.setTitle("추가하기", for: .normal)
         } else if self.viewModel.currentAddOption == .perJourneyAddTodo {
             guard let journeyTitle = self.viewModel.journeyModel?.title else { return }
             self.titleLabel.text = journeyTitle == "default" ? "여정이 없는 할 일" : String(format: "%@의 할 일", journeyTitle)
+            self.addButton.setTitle("추가하기", for: .normal)
         } else if self.viewModel.currentAddOption == .addJourney {
             self.titleLabel.text = "여정 추가하기"
+            self.addButton.setTitle("추가하기", for: .normal)
         } else if self.viewModel.currentAddOption == .edittedTodo {
             self.titleLabel.text = "일정 수정하기"
+            self.addButton.setTitle("수정하기", for: .normal)
         } else if self.viewModel.currentAddOption == .edittedJourney {
             self.titleLabel.text = "여정 수정하기"
+            self.addButton.setTitle("수정하기", for: .normal)
         }
     }
     
