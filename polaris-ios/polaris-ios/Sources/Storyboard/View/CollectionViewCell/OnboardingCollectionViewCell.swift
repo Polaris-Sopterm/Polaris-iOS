@@ -34,6 +34,14 @@ class OnboardingCollectionViewCell: UICollectionViewCell {
         self.previousButton.isHidden = level == .first || level == .last
         self.nextButton.isHidden     = level == .last
         self.startButton.isHidden    = level != .last
+        
+        if level == .last {
+            let ratio = DeviceInfo.screenWidth / 375
+            let buttonHeight = 54 * ratio
+            self.onboardingImageBottomConstraint.constant = buttonHeight + DeviceInfo.bottomSafeAreaInset + 37 + 41
+        } else {
+            self.onboardingImageBottomConstraint.constant = 0
+        }
     }
     
     func willDisplay() {
@@ -80,6 +88,7 @@ class OnboardingCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var nextLabelBottomConstraint: NSLayoutConstraint!
     @IBOutlet private weak var previousBottomConstraint: NSLayoutConstraint!
     @IBOutlet private weak var startBottomConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var onboardingImageBottomConstraint: NSLayoutConstraint!
     
     @IBOutlet private weak var onboardingImageView: UIImageView!
     @IBOutlet private weak var titleLabel: UILabel!

@@ -79,12 +79,6 @@ struct ImageName {
     static let imgShootingstar = "imgShootingstar"
     static let imgShootingstar2 = "imgShootingstar2"
     
-    static let mockImageFirst = "imgMockup1"
-    static let mockImageSecond = "imgMockup2"
-    static let mockImageThird = "imgMockup3"
-    static let mockImageFourth = "imgMockup4"
-    static let mockImageLast = "imgMockup5"
-    
     static let plannerBackMoon = "lookBackIllust_Planner"
     static let designerBackMoon = "lookBackIllust_Designer"
     static let iosBackMoon = "lookBackIllust_iOS"
@@ -94,5 +88,11 @@ struct ImageName {
     static let designerMember = "imgMember_Designer"
     static let iosMember = "imgMember_iOS"
     static let serverMember = "imgMember_Server"
+    
+    static let imgOnboarding1 = "imgOnboarding1"
+    static let imgOnboarding2 = "imgOnboarding2"
+    static let imgOnboarding3 = "imgOnboarding3"
+    static let imgOnboarding4 = "imgOnboarding4"
+    static let imgOnboarding5 = "imgOnboarding5"
     
 }

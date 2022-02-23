@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -35,8 +36,8 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgMockup2" translatesAutoresizingMaskIntoConstraints="NO" id="WZs-2n-KFM">
-                        <rect key="frame" x="48" y="146" width="279" height="533"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgOnboarding1" translatesAutoresizingMaskIntoConstraints="NO" id="WZs-2n-KFM">
+                        <rect key="frame" x="23.5" y="155" width="328" height="524"/>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8uJ-9v-jVa">
                         <rect key="frame" x="23" y="588" width="54" height="54"/>
@@ -66,7 +67,6 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="qmO-Yl-ZSF" secondAttribute="trailing" constant="21" id="C4G-2p-x0H"/>
-                <constraint firstItem="WZs-2n-KFM" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="48" id="FVq-YB-dl0"/>
                 <constraint firstItem="WZs-2n-KFM" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="H7T-fa-WZ9"/>
                 <constraint firstItem="jyJ-5U-yvP" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="21" id="Hvb-ew-I9G"/>
                 <constraint firstItem="8uJ-9v-jVa" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="23" id="O3H-1l-JtD"/>
@@ -74,14 +74,12 @@
                 <constraint firstAttribute="bottom" secondItem="WZs-2n-KFM" secondAttribute="bottom" id="Q5S-gr-mf2"/>
                 <constraint firstAttribute="trailing" secondItem="17C-ra-lIf" secondAttribute="trailing" constant="21" id="QWr-s3-WlY"/>
                 <constraint firstItem="qmO-Yl-ZSF" firstAttribute="leading" secondItem="jyJ-5U-yvP" secondAttribute="leading" id="Qqr-qy-XZf"/>
-                <constraint firstAttribute="trailing" secondItem="WZs-2n-KFM" secondAttribute="trailing" constant="48" id="TjH-sA-KP6"/>
                 <constraint firstAttribute="trailing" secondItem="7CT-d4-ubY" secondAttribute="trailing" constant="23" id="ahh-0N-q7T"/>
                 <constraint firstItem="PTm-F7-3Yn" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="23" id="f4q-T9-sVg"/>
                 <constraint firstItem="17C-ra-lIf" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="21" id="fuD-vx-5rw"/>
                 <constraint firstAttribute="trailing" secondItem="PTm-F7-3Yn" secondAttribute="trailing" constant="23" id="hzu-QV-sKf"/>
                 <constraint firstItem="jyJ-5U-yvP" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="klx-qV-ayh"/>
                 <constraint firstAttribute="bottom" secondItem="8uJ-9v-jVa" secondAttribute="bottom" constant="37" id="lhB-ey-ieX"/>
-                <constraint firstItem="WZs-2n-KFM" firstAttribute="top" secondItem="17C-ra-lIf" secondAttribute="bottom" constant="51" id="sDG-nb-6j8"/>
                 <constraint firstItem="17C-ra-lIf" firstAttribute="top" secondItem="qmO-Yl-ZSF" secondAttribute="bottom" constant="15" id="wd9-z6-QlN"/>
                 <constraint firstAttribute="bottom" secondItem="7CT-d4-ubY" secondAttribute="bottom" constant="37" id="ziW-Oe-VlA"/>
                 <constraint firstItem="qmO-Yl-ZSF" firstAttribute="top" secondItem="jyJ-5U-yvP" secondAttribute="bottom" constant="7" id="ztr-fl-HDB"/>
@@ -90,6 +88,7 @@
                 <outlet property="descriptionLabel" destination="17C-ra-lIf" id="sxP-UR-LTZ"/>
                 <outlet property="nextButton" destination="7CT-d4-ubY" id="mHD-jx-1FG"/>
                 <outlet property="nextLabelBottomConstraint" destination="ziW-Oe-VlA" id="daT-B4-gsa"/>
+                <outlet property="onboardingImageBottomConstraint" destination="Q5S-gr-mf2" id="PTu-98-dlY"/>
                 <outlet property="onboardingImageView" destination="WZs-2n-KFM" id="g2T-2E-QyD"/>
                 <outlet property="previousBottomConstraint" destination="lhB-ey-ieX" id="OfT-iJ-Jau"/>
                 <outlet property="previousButton" destination="8uJ-9v-jVa" id="BYH-ja-Ba8"/>
@@ -104,7 +103,7 @@
     <resources>
         <image name="btnBack" width="54" height="54"/>
         <image name="btnNext" width="54" height="54"/>
-        <image name="imgMockup2" width="280" height="504"/>
+        <image name="imgOnboarding1" width="328" height="524"/>
         <namedColor name="mainSky">
             <color red="0.49799999594688416" green="0.85900002717971802" blue="0.93699997663497925" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
