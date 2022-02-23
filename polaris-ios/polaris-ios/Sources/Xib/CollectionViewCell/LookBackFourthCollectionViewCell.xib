@@ -17,10 +17,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="247" height="284"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ucr-ef-t62">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ucr-ef-t62">
                         <rect key="frame" x="0.0" y="0.0" width="247" height="284"/>
                     </imageView>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vYc-92-Eb4">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vYc-92-Eb4">
                         <rect key="frame" x="25" y="20" width="197" height="197"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="vYc-92-Eb4" secondAttribute="height" multiplier="1:1" id="Lru-jn-D8s"/>
