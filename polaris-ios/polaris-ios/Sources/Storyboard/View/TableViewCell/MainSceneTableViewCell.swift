@@ -37,6 +37,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
     @IBOutlet weak var topButtonTopConstraint: NSLayoutConstraint!
     @IBOutlet var heightConstarints: [NSLayoutConstraint]!
     @IBOutlet var yDiffConstraints: [NSLayoutConstraint]!
+    @IBOutlet weak var weekContainViewWidth: NSLayoutConstraint!
     
     private var currentIndex: CGFloat = 0
     private var viewState = StarCollectionViewState.showStar
@@ -88,8 +89,8 @@ final class MainSceneTableViewCell: MainTableViewCell {
             self.cometAnimation()
         }
         self.reloadButton.setTitle("", for: .normal)
-        self.weekContainView.backgroundColor = .white60
-        self.weekContainView.setBorder(borderColor: .white, borderWidth: 1.0)
+        self.weekContainView.backgroundColor = .white20
+        self.weekContainView.setBorder(borderColor: .white60, borderWidth: 1.0)
         self.weekContainView.makeRounded(cornerRadius: 9)
         self.weekLabel.font = UIFont.systemFont(ofSize: 13,weight: .bold)
         self.weekLabel.addCharacterSpacing(kernValue: -0.39)
@@ -229,6 +230,12 @@ final class MainSceneTableViewCell: MainTableViewCell {
         viewModel.dateInfoRelay.subscribe(onNext: { [weak self] dateInfo in
             if let weekText = Date.convertWeekNoToString(weekNo: dateInfo.weekNo) {
                 self?.weekLabel.text =  String(dateInfo.year)+"년 "+String(dateInfo.month)+"월 "+weekText
+                if weekText == "다섯째주" {
+                    self?.weekContainViewWidth.constant = 150
+                }
+                else {
+                    self?.weekContainViewWidth.constant = 140
+                }
             }
         })
         .disposed(by: self.disposeBag)
