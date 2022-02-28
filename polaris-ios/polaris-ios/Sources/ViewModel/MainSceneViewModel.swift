@@ -9,6 +9,12 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+enum MainSceneLoadingInfo {
+    case finished
+    case loading
+    case retryNeeded
+}
+
 class MainSceneViewModel {
     
     var heightRatio = CGFloat(DeviceInfo.screenHeight/812.0)
@@ -28,8 +34,8 @@ class MainSceneViewModel {
         let lookBackState: BehaviorRelay<[MainLookBackCellState]>
         let mainTextRelay: BehaviorRelay<[String]>
         let homeModelRelay: BehaviorRelay<[HomeModel]>
-        let starLoadingRelay: BehaviorRelay<Bool>
-        let todoLoadingRelay: BehaviorRelay<Bool>
+        let starLoadingRelay: BehaviorRelay<MainSceneLoadingInfo>
+        let todoLoadingRelay: BehaviorRelay<MainSceneLoadingInfo>
     }
     
     func connect(input: Input) -> Output{
@@ -40,11 +46,11 @@ class MainSceneViewModel {
         let homeModelRelay: BehaviorRelay<[HomeModel]> = BehaviorRelay(value: [])
         var mainStarModels: [MainStarModel] = []
         let mainStarModelRelay: BehaviorRelay<[MainStarModel]> = BehaviorRelay(value: [])
-        let starLoadingRelay: BehaviorRelay<Bool> = BehaviorRelay(value: false)
-        let todoLoadingRelay: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+        let starLoadingRelay: BehaviorRelay<MainSceneLoadingInfo> = BehaviorRelay(value: .finished)
+        let todoLoadingRelay: BehaviorRelay<MainSceneLoadingInfo> = BehaviorRelay(value: .finished)
         
         input.forceToShowStar.subscribe(onNext: { force in
-            starLoadingRelay.accept(true)
+            starLoadingRelay.accept(.loading)
             var isForced = force
             
             if self.isAlreadyJumped() && force == false {
@@ -58,7 +64,7 @@ class MainSceneViewModel {
             NetworkManager.request(apiType: homeAPI)
                 .subscribe(onSuccess: { [weak self] (homeModel: HomeModel) in
                     homeModelRelay.accept([homeModel])
-                    starLoadingRelay.accept(false)
+                    starLoadingRelay.accept(.finished)
                     for star in homeModel.starList {
                         mainStarModels.append(MainStarModel(starName: star.name, starLevel: star.level))
                     }
@@ -80,6 +86,8 @@ class MainSceneViewModel {
                     mainStarModelRelay.accept(mainStarModels)
                     mainStarModels = []
                     
+                },onFailure: { _ in
+                    starLoadingRelay.accept(.retryNeeded)
                 })
                 .disposed(by: self.disposeBag)
         })
@@ -90,14 +98,16 @@ class MainSceneViewModel {
         input.dateInfo.subscribe(onNext: { date in
             guard date.year > 0 else { return }
             
-            todoLoadingRelay.accept(true)
+            todoLoadingRelay.accept(.loading)
             let journeyAPI = JourneyAPI.getWeekJourney(year: date.year, month: date.month, weekNo: date.weekNo)
             var weekJourneyModels: [WeekJourneyModel] = []
             NetworkManager.request(apiType: journeyAPI)
                 .subscribe(onSuccess: { [weak self] (journeyModel: JourneyWeekListModel) in
                     weekJourneyModels = journeyModel.journeys!
-                    todoLoadingRelay.accept(false)
+                    todoLoadingRelay.accept(.finished)
                     todoStarList.accept(self?.convertTodoCVCViewModel(weekJourneyModels: weekJourneyModels, dateInfo: date) ?? [])
+                },onFailure: { _ in
+                    todoLoadingRelay.accept(.retryNeeded)
                 })
                 .disposed(by: self.disposeBag)
         })

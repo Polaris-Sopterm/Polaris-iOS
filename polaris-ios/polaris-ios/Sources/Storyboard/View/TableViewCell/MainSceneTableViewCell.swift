@@ -62,7 +62,6 @@ final class MainSceneTableViewCell: MainTableViewCell {
         self.setTodoCollectionView()
         self.bindViewModel()
         self.setupDimView()
-        
     }
     
     func updateDimView(alpha: CGFloat) {
@@ -148,6 +147,8 @@ final class MainSceneTableViewCell: MainTableViewCell {
                                              dateInfo: self.viewModel.dateInfoRelay)
         let output = viewModel.connect(input: input)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadInfo), name: .shouldReloadMainScene, object: nil)
+        
         output.homeModelRelay.subscribe(onNext: { [weak self] homeModel in
             self?.homeModel = homeModel.last
         })
@@ -181,12 +182,26 @@ final class MainSceneTableViewCell: MainTableViewCell {
         .disposed(by: self.disposeBag)
         
         output.starLoadingRelay.subscribe(onNext: { [weak self] loading in
-            loading ? self?.starLoadingIndicator.startAnimating() : self?.starLoadingIndicator.stopAnimating()
+            switch loading {
+            case .loading:
+                self?.starLoadingIndicator.startAnimating()
+            case .finished:
+                self?.starLoadingIndicator.stopAnimating()
+            case .retryNeeded:
+                NotificationCenter.default.post(name: .shouldReloadMainScene, object: nil)
+            }
         })
         .disposed(by: self.disposeBag)
         
         output.todoLoadingRelay.subscribe(onNext: { [weak self] loading in
-            loading ? self?.todoLoadingIndicator.startAnimating() : self?.todoLoadingIndicator.stopAnimating()
+            switch loading {
+            case .loading:
+                self?.todoLoadingIndicator.startAnimating()
+            case .finished:
+                self?.todoLoadingIndicator.stopAnimating()
+            case .retryNeeded:
+                NotificationCenter.default.post(name: .shouldReloadMainScene, object: nil)
+            }
         })
         .disposed(by: self.disposeBag)
         
@@ -257,7 +272,6 @@ final class MainSceneTableViewCell: MainTableViewCell {
         comet.bottomAnchor.constraint(equalTo: self.topAnchor,constant: heightConst).isActive = true
         comet.heightAnchor.constraint(equalToConstant: width).isActive = true
         comet.widthAnchor.constraint(equalToConstant: width).isActive = true
-        
     }
     
     
@@ -324,6 +338,10 @@ final class MainSceneTableViewCell: MainTableViewCell {
     
     
     @IBAction func reloadButtonAction(_ sender: Any) {
+        self.reloadInfo()
+    }
+    
+    @objc func reloadInfo() {
         self.viewModel.reloadInfo()
     }
     
