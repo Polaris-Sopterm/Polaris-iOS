@@ -50,6 +50,7 @@ final class LookBackViewModel {
     
     @Published var fifthvcReason: [String] = []
     @Published var fifthVCNextButtonAble: Bool = false
+    @Published var fifthVCEmotionString: String = ""
     
     @Published var sixthvcStars: [LookBackStar] = []
     @Published var sixthvcNextButtonAble: Bool = false
@@ -132,6 +133,8 @@ final class LookBackViewModel {
                                        LookBackEmotion(emotion: "만족", emotionImageName: "emotionSatisfactionSelectionUnselected", isSelected: false),
                                        
     ]
+    
+    private var fourthVCSelectedEmotions: [LookBackEmotion] = []
     
     private var fifthvcReasonInfo: [String] = []
     
@@ -297,13 +300,22 @@ final class LookBackViewModel {
     }
     
     func setEmotionSelectedFourthVC(index: Int) {
+        if !self.fourthVCEmotionInfo[index].isSelected {
+            self.fourthVCSelectedEmotions.append(fourthVCEmotionInfo[index])
+        }
         self.fourthVCEmotionInfo[index].isSelected = !self.fourthVCEmotionInfo[index].isSelected
         if self.fourthVCEmotionInfo[index].isSelected {
             self.fourthVCEmotionInfo[index].emotionImageName = self.fourthVCEmotionInfo[index].emotionImageName.replacingOccurrences(of: "Unselected", with: "Selected")
         }
         else {
             self.fourthVCEmotionInfo[index].emotionImageName = self.fourthVCEmotionInfo[index].emotionImageName.replacingOccurrences(of: "Selected", with: "Unselected")
+            if let existingIndex = self.fourthVCSelectedEmotions.firstIndex(of: self.fourthVCEmotionInfo[index]) {
+                self.fourthVCSelectedEmotions.remove(at: existingIndex)
+            }
         }
+        let emotionString = self.fourthVCSelectedEmotions.reduce("") { $0 + $1.emotion + ", "}
+        let index = emotionString.index(emotionString.endIndex, offsetBy: -3)
+        self.fifthVCEmotionString = String(emotionString[...index])
         
         self.publishFourthEmotionInfo()
         for emotion in self.fourthVCEmotionInfo {
@@ -313,6 +325,7 @@ final class LookBackViewModel {
             }
         }
         self.fourthvcNextButtonAble = false
+        
     }
     
     func publishFourthEmotionInfo() {

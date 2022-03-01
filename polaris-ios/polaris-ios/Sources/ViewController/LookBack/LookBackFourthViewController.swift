@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-struct LookBackEmotion: Codable, Hashable  {
+struct LookBackEmotion: Codable, Hashable, Equatable  {
     var emotion: String
     var emotionImageName: String
     var isSelected: Bool

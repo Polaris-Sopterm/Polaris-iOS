@@ -17,6 +17,7 @@ class LookBackFifthViewController: UIViewController, LookBackViewModelProtocol {
     @IBOutlet weak var skipButton: UIButton!
     @IBOutlet weak var skipLabel: UILabel!
     @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var sendButton: UIButton!
     
     @IBOutlet weak var topYPosConstraint: NSLayoutConstraint!
     @IBOutlet weak var textViewYPosConstraint: NSLayoutConstraint!
@@ -31,6 +32,7 @@ class LookBackFifthViewController: UIViewController, LookBackViewModelProtocol {
     private var dataSource: DataSource?
     private var reasonSubscription: AnyCancellable?
     private var nextButtonSubscription: AnyCancellable?
+    private var subtitleLabelSubscription: AnyCancellable?
     
     typealias DataSource = UITableViewDiffableDataSource<Section, String>
     typealias Snapshot = NSDiffableDataSourceSnapshot<Section, String>
@@ -47,11 +49,11 @@ class LookBackFifthViewController: UIViewController, LookBackViewModelProtocol {
     
     private func setUIs() {
         self.titleLabel.textColor = .maintext
-        self.titleLabel.setPartialBold(originalText: "한 주 동안 ‘불편, 아쉬움’을\n느낀 이유는 무엇인가요?", boldText: "‘불편, 아쉬움’", fontSize: 22, boldFontSize: 22)
+        self.titleLabel.setPartialBold(originalText: "한 주 동안 그런 감정을\n느낀 이유는 무엇인가요?", boldText: "그런 감정", fontSize: 22, boldFontSize: 22)
         self.subTitleLabel.textColor = .maintext
 
         self.textView.makeRounded(cornerRadius: 16)
-        self.textView.textContainerInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        self.textView.textContainerInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 70)
         self.textView.delegate = self
         self.placeholderSetting()
         
@@ -66,7 +68,9 @@ class LookBackFifthViewController: UIViewController, LookBackViewModelProtocol {
         
         self.nextButton.setTitle("", for: .normal)
         self.nextButton.setImage(UIImage(named: "btnNextDisabled"), for: .normal)
-//        self.nextButton.isEnabled = false
+
+        self.sendButton.setTitle("", for: .normal)
+        self.sendButton.setImage(UIImage(named: "btnTextSend"), for: .normal)
     }
     
     private func setUpDataSource() {
@@ -103,6 +107,11 @@ class LookBackFifthViewController: UIViewController, LookBackViewModelProtocol {
                     self.skipLabel.alpha = 1
                 }
             })
+        self.subtitleLabelSubscription = self.viewModel.$fifthVCEmotionString
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] value in
+                self?.subTitleLabel.text = value
+            })
     }
     
     private func updateReasons(reasons: [String]) {
@@ -135,13 +144,6 @@ class LookBackFifthViewController: UIViewController, LookBackViewModelProtocol {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
-        guard let reason = self.textView.text else { return }
-        
-        if self.checkValidReason(reason: reason) {
-            self.viewModel.addFifthvcReason(reason: reason)
-        }
-        self.textViewHeightConstraint.constant = 53
-        self.placeholderSetting()
     }
     
     @IBAction func skipButtonAction(_ sender: Any) {
@@ -160,6 +162,16 @@ class LookBackFifthViewController: UIViewController, LookBackViewModelProtocol {
         return true
     }
     
+    @IBAction func sendButtonAction(_ sender: Any) {
+        guard let reason = self.textView.text else { return }
+        
+        if self.checkValidReason(reason: reason) {
+            self.viewModel.addFifthvcReason(reason: reason)
+        }
+        self.textViewHeightConstraint.constant = 53
+        self.placeholderSetting()
+        self.view.endEditing(true)
+    }
 }
 
 extension LookBackFifthViewController: UITableViewDelegate {
