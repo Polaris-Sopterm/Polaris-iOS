@@ -16,8 +16,9 @@ class LookBackMainViewController: UIViewController {
     @IBOutlet weak var containerViewHeightConstraint: NSLayoutConstraint!
 
     let deviceHeightRatio = DeviceInfo.screenHeight/812.0
+    var dateInfo: PolarisDate?
     private var pageInstance : LookBackPageViewController?
-    private var viewModel = LookBackViewModel()
+    var viewModel = LookBackViewModel()
     private var originPage = 0
     
     private var pageSubscription: AnyCancellable?
@@ -57,6 +58,7 @@ class LookBackMainViewController: UIViewController {
     }
     
     private func bindViewModel() {
+        self.viewModel.dateInfo = dateInfo
         self.pageSubscription = self.viewModel.$page
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] value in

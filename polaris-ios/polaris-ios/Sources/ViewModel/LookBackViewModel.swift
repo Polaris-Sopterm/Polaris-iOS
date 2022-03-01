@@ -18,6 +18,10 @@ struct LookBackTitle {
 
 
 final class LookBackViewModel {
+    @Published var dateInfo: PolarisDate?
+    private var dateInfoSubscription: AnyCancellable?
+    
+    let firstvcStarRelay: BehaviorRelay<[LookBackStar]> = BehaviorRelay(value: [])
     
     @Published var page: Int = 0
     
@@ -131,6 +135,10 @@ final class LookBackViewModel {
     
     private var fifthvcReasonInfo: [String] = []
     
+    init() {
+        self.observeDateInfo()
+    }
+    
     func toNextPage() {
         guard self.page < 5 else { return }
         self.page = self.page + 1
@@ -148,9 +156,27 @@ final class LookBackViewModel {
         }
     }
     
+    func observeDateInfo() {
+        self.dateInfoSubscription = $dateInfo
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] date in
+                self?.publishFirstStarInfos()
+            })
+    }
+    
     func publishFirstStarInfos() {
-        self.firstvcStars = self.firstVCStarInfo
-//        현재 선택된 주차에서 저번주를 계산? 해서 요청하고 해당 정보로 수정해야함
+        guard let dateInfo = self.dateInfo else { return }
+        let lastWeekInfo = PolarisDate(year: dateInfo.year, month: dateInfo.month, weekNo: dateInfo.weekNo - 1)
+        let listValuesAPI = RetrospectAPI.listValues(date: lastWeekInfo)
+        var starInfo: [LookBackStar] = []
+        NetworkManager.request(apiType: listValuesAPI)
+            .subscribe(onSuccess: { [weak self] (responseModel: RetrospectValueListModel) in
+                for star in responseModel.foundStarsList {
+                    starInfo.append(LookBackStar(starName: star.rawValue, starImageName: star.lookbackFirstImageName, selected: false))
+                }
+                self?.firstvcStarRelay.accept(starInfo)
+            })
+            .disposed(by: self.disposeBag)
     }
     
     func publishSecondStarInfos() {
