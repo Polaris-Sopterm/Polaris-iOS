@@ -150,6 +150,7 @@ final class LookBackViewModel {
     
     func publishFirstStarInfos() {
         self.firstvcStars = self.firstVCStarInfo
+//        현재 선택된 주차에서 저번주를 계산? 해서 요청하고 해당 정보로 수정해야함
     }
     
     func publishSecondStarInfos() {

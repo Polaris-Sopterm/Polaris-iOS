@@ -50,6 +50,7 @@ class MainLookBackCollectionViewCell: UICollectionViewCell {
         self.lookBackButton.backgroundColor = .mainSky
         self.lookBackButton.makeRounded(cornerRadius: 18)
         self.lookBackButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        self.lookBackButton.titleLabel?.textColor = .white
         for constraint in self.yDiffConstraints {
             constraint.constant *= self.deviceRatioSquare
         }

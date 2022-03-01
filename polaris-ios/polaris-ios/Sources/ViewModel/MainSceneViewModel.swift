@@ -57,7 +57,7 @@ class MainSceneViewModel {
                 isForced = true
             }
             else if !self.isAlreadyJumped() && force == true {
-                self.setJumpDate()
+                self.addJumpDate()
             }
             
             let homeAPI = HomeAPI.getHomeBanner(isSkipped: isForced)
@@ -167,6 +167,9 @@ class MainSceneViewModel {
             if year == dateInfo.year && month == dateInfo.month && weekNo == dateInfo.weekNo {
                 thisWeekJouneyModels.append(weekJourneyModel)
             }
+            if thisWeekJouneyModels.count == 3 {
+                break
+            }
         }
         
         for thisWeekjourney in thisWeekJouneyModels {
@@ -233,24 +236,22 @@ class MainSceneViewModel {
     }
     
     func isAlreadyJumped() -> Bool {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy.MM.dd"
-        let date = Date()
-        let dateString = dateFormatter.string(from: date)
-        if let jumpDate = UserDefaults.standard.value(forKey: UserDefaultsKey.jumpDate) as? String,
-           jumpDate == dateString
+        let dateInfo = self.dateInfoRelay.value
+        let date = PolarisDate(year: dateInfo.year, month: dateInfo.month, weekNo: dateInfo.weekNo)
+
+        if let jumpDate = UserDefaults.standard.value(forKey: UserDefaultsKey.jumpDates) as? [PolarisDate],
+           jumpDate.contains(date)
         {
             return true
         }
         return false
     }
     
-    func setJumpDate() {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy.MM.dd"
-        let date = Date()
-        let dateString = dateFormatter.string(from: date)
-        UserDefaults.standard.setValue(dateString, forKey: UserDefaultsKey.jumpDate)
+    func addJumpDate() {
+        let dateInfo = self.dateInfoRelay.value
+        let date = PolarisDate(year: dateInfo.year, month: dateInfo.month, weekNo: dateInfo.weekNo)
+
+        UserDefaults.standard.setValue(date, forKey: UserDefaultsKey.jumpDates)
     }
     
     private(set) var forceToShowStarRelay = BehaviorRelay(value: false)
