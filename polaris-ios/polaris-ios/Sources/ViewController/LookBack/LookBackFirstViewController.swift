@@ -51,6 +51,8 @@ class LookBackFirstViewController: UIViewController, LookBackViewModelProtocol {
     
     private let deviceHeightRatio = DeviceInfo.screenHeight/812.0
     private let deviceWidthRatio = DeviceInfo.screenWidth/375.0
+    private var deviceSize: DeviceHeightInfo = .normal
+
     
     @Published var starList: [LookBackStar] = []
     let disposeBag = DisposeBag()
@@ -64,6 +66,10 @@ class LookBackFirstViewController: UIViewController, LookBackViewModelProtocol {
     }
     
     private func setupUIs() {
+        if DeviceInfo.screenHeight < 700 {
+            self.deviceSize = .small
+        }
+        
         self.titleLabel.textColor = .maintext
         self.titleLabel.setPartialBold(originalText: "당신이 한 주 동안 찾은 별이에요.", boldText: "한 주 동안 찾은 별", fontSize: 22, boldFontSize: 22)
         self.subtitleLabel.textColor = .maintext
@@ -75,9 +81,15 @@ class LookBackFirstViewController: UIViewController, LookBackViewModelProtocol {
         
         self.topYConstraint.constant *= deviceHeightRatio
         self.subLabelYConstraint.constant *= deviceHeightRatio
-        self.collectionViewYConstraint.constant *= deviceHeightRatio
-        self.collectionViewHeightConstraint.constant *= deviceHeightRatio
         self.buttonYConstraint.constant *= deviceHeightRatio
+        switch self.deviceSize {
+        case .normal:
+            self.collectionViewYConstraint.constant *= deviceHeightRatio
+            self.collectionViewHeightConstraint.constant *= deviceHeightRatio
+        case .small:
+            self.collectionViewYConstraint.constant = 32
+            self.collectionViewHeightConstraint.constant = 400
+        }
     }
     
     private func setUpDataSource() {

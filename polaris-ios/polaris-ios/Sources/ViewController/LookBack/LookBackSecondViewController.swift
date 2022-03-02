@@ -8,6 +8,10 @@
 import UIKit
 import Combine
 
+enum DeviceHeightInfo {
+    case normal
+    case small
+}
 
 class LookBackSecondViewController: UIViewController, LookBackViewModelProtocol {
     
@@ -33,6 +37,7 @@ class LookBackSecondViewController: UIViewController, LookBackViewModelProtocol 
     private var dataSource: DataSource?
     
     private weak var pageDelegate: LookBackPageDelegate?
+    private var deviceSize: DeviceHeightInfo = .normal
 
 
     typealias DataSource = UICollectionViewDiffableDataSource<Section, LookBackStar>
@@ -47,6 +52,10 @@ class LookBackSecondViewController: UIViewController, LookBackViewModelProtocol 
     }
     
     private func setUIs() {
+        if DeviceInfo.screenHeight < 700 {
+            self.deviceSize = .small
+        }
+        
         self.titleLabel.textColor = .maintext
         self.titleLabel.setPartialBold(originalText: "당신 마음에\n가장 가까이 닿은 별은 어떤 별인가요? ", boldText: "가장 가까이 닿은 별", fontSize: 22, boldFontSize: 22)
         self.subTitleLabel.textColor = .maintext
@@ -56,12 +65,18 @@ class LookBackSecondViewController: UIViewController, LookBackViewModelProtocol 
         self.nextButton.setTitle("", for: .normal)
         self.nextButton.setImage(UIImage(named: "btnNextDisabled"), for: .normal)
         self.nextButton.isEnabled = false
-        
         self.topYConstraint.constant *= deviceHeightRatio
         self.subLabelConstraint.constant *= deviceHeightRatio
-        self.collectionViewYConstraint.constant *= deviceHeightRatio
-        self.collectionViewHeightConstraint.constant *= deviceHeightRatio
         self.nextButtonYConstraint.constant *= deviceHeightRatio
+        switch self.deviceSize {
+        case .normal:
+            self.collectionViewYConstraint.constant *= deviceHeightRatio
+            self.collectionViewHeightConstraint.constant *= deviceHeightRatio
+        case .small:
+            self.collectionViewYConstraint.constant = 32
+            self.collectionViewHeightConstraint.constant = 400
+         
+        }
     }
     
 
