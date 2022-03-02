@@ -35,6 +35,20 @@ extension Journey {
         }
     }
     
+    var lookbackFirstImageName: String {
+        switch self {
+        case .happiness: return "imgHappinessAdd"
+        case .control:   return "imgControlAdd"
+        case .thanks:    return "imgThanksAdd"
+        case .rest:      return "imgRestAdd"
+        case .growth:    return "imgGrowthAdd"
+        case .change:    return "imgChangeAdd"
+        case .health:    return "imgHealthAdd"
+        case .overcome:  return "imgOvercomeAdd"
+        case .challenge: return "imgChallengeAdd"
+        }
+    }
+    
     var color: UIColor {
         switch self {
         case .happiness: return .peachyPink

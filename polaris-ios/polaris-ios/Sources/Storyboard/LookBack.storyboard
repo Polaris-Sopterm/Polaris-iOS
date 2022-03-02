@@ -510,6 +510,18 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dtr-Or-2dY">
+                                <rect key="frame" x="338" y="186.66666666666666" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="48" id="LSi-ar-BCs"/>
+                                    <constraint firstAttribute="height" constant="48" id="l15-Bq-8je"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain"/>
+                                <connections>
+                                    <action selector="sendButtonAction:" destination="OPw-kr-bJE" eventType="touchUpInside" id="dnY-eb-jPv"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="J2f-Ba-lyA"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -529,7 +541,9 @@
                             <constraint firstItem="mkv-W5-B06" firstAttribute="top" secondItem="6Iv-Gb-6da" secondAttribute="bottom" constant="20" id="Zix-5v-hp0"/>
                             <constraint firstItem="mkv-W5-B06" firstAttribute="leading" secondItem="J2f-Ba-lyA" secondAttribute="leading" constant="23" id="euR-tY-Dsi"/>
                             <constraint firstItem="6Iv-Gb-6da" firstAttribute="leading" secondItem="J2f-Ba-lyA" secondAttribute="leading" constant="23" id="gwn-zg-6oO"/>
+                            <constraint firstItem="Dtr-Or-2dY" firstAttribute="trailing" secondItem="6Iv-Gb-6da" secondAttribute="trailing" constant="-5" id="tOV-wE-JjV"/>
                             <constraint firstItem="J2f-Ba-lyA" firstAttribute="trailing" secondItem="6Iv-Gb-6da" secondAttribute="trailing" constant="23" id="vvM-as-D7G"/>
+                            <constraint firstItem="6Iv-Gb-6da" firstAttribute="top" secondItem="Dtr-Or-2dY" secondAttribute="top" constant="-3" id="wLK-pa-bwF"/>
                             <constraint firstItem="qVt-Io-2fb" firstAttribute="top" secondItem="QYd-pd-zaw" secondAttribute="bottom" constant="8" id="xEe-VT-rKo"/>
                             <constraint firstItem="QYd-pd-zaw" firstAttribute="top" secondItem="B63-ej-04E" secondAttribute="top" constant="22" id="xZy-DL-lnP"/>
                         </constraints>
@@ -538,6 +552,7 @@
                     <connections>
                         <outlet property="buttonYPosConstraint" destination="9xh-28-8a8" id="Wzg-sD-Nz7"/>
                         <outlet property="nextButton" destination="PSx-kt-AE4" id="gCy-xQ-fNG"/>
+                        <outlet property="sendButton" destination="Dtr-Or-2dY" id="yOr-U7-kVp"/>
                         <outlet property="skipButton" destination="iCq-B0-BXx" id="7nL-iA-csD"/>
                         <outlet property="skipLabel" destination="Gfk-qU-3pg" id="5jc-uN-0M7"/>
                         <outlet property="subTitleLabel" destination="qVt-Io-2fb" id="U1k-sB-uqs"/>

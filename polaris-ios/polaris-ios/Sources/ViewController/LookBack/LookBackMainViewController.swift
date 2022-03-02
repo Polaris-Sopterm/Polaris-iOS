@@ -16,8 +16,9 @@ class LookBackMainViewController: UIViewController {
     @IBOutlet weak var containerViewHeightConstraint: NSLayoutConstraint!
 
     let deviceHeightRatio = DeviceInfo.screenHeight/812.0
+    var dateInfo: PolarisDate?
     private var pageInstance : LookBackPageViewController?
-    private var viewModel = LookBackViewModel()
+    var viewModel = LookBackViewModel()
     private var originPage = 0
     
     private var pageSubscription: AnyCancellable?
@@ -57,6 +58,7 @@ class LookBackMainViewController: UIViewController {
     }
     
     private func bindViewModel() {
+        self.viewModel.dateInfo = dateInfo
         self.pageSubscription = self.viewModel.$page
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] value in
@@ -91,7 +93,13 @@ class LookBackMainViewController: UIViewController {
     
     
     @IBAction func xButtonAction(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        guard let confirmPopupView: PolarisPopupView = UIView.fromNib() else { return }
+        
+        confirmPopupView.configure(title: "여정 돌아보기를 중지하고 나갈까요?", subTitle: "나가면 지금까지의 기록이 사라져요. ", cancelTitle: "남아있기" ,confirmTitle: "나가기", confirmHandler:  { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        })
+        
+        confirmPopupView.show(in: self.view)
     }
 }
 

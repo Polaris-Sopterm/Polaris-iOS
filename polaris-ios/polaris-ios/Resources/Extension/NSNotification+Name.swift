@@ -9,4 +9,5 @@ import Foundation
 
 extension Notification.Name {
     static let didUpdateTodo = NSNotification.Name("didUpdateTodo")
+    static let shouldReloadMainScene = NSNotification.Name("shouldReloadMainScene")
 }

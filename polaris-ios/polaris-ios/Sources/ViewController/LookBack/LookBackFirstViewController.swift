@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import RxSwift
 
 struct LookBackStar: Codable, Hashable {
     var starName: String
@@ -35,7 +36,14 @@ class LookBackFirstViewController: UIViewController, LookBackViewModelProtocol {
     typealias DataSource = UICollectionViewDiffableDataSource<Section, LookBackStar>
     typealias Snapshot = NSDiffableDataSourceSnapshot<Section, LookBackStar>
     
-    private var viewModel = LookBackViewModel()
+    private var viewModel: LookBackViewModel? {
+        didSet {
+            self.viewModel?.firstvcStarRelay.subscribe(onNext: { [weak self] stars in
+                self?.starList = stars
+            })
+                .disposed(by: self.disposeBag)
+        }
+    }
     private var subscriptions: [AnyCancellable] = []
     private var starSubsciption: AnyCancellable?
     private var dataSource: DataSource?
@@ -44,12 +52,14 @@ class LookBackFirstViewController: UIViewController, LookBackViewModelProtocol {
     private let deviceHeightRatio = DeviceInfo.screenHeight/812.0
     private let deviceWidthRatio = DeviceInfo.screenWidth/375.0
     
+    @Published var starList: [LookBackStar] = []
+    let disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupUIs()
         self.setUpDataSource()
         self.starCollectionView.delegate = self
-        self.viewModel.publishFirstStarInfos()
         // Do any additional setup after loading the view.
     }
     
@@ -76,7 +86,8 @@ class LookBackFirstViewController: UIViewController, LookBackViewModelProtocol {
             cell.setStar(imageName: star.starImageName, starName: star.starName)
             return cell
         })
-        self.starSubsciption = viewModel.$firstvcStars
+        
+        self.starSubsciption = self.$starList
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] stars in
                 self?.updateStars(stars: stars)

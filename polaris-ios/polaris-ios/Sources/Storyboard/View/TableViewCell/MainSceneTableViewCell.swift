@@ -37,6 +37,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
     @IBOutlet weak var topButtonTopConstraint: NSLayoutConstraint!
     @IBOutlet var heightConstarints: [NSLayoutConstraint]!
     @IBOutlet var yDiffConstraints: [NSLayoutConstraint]!
+    @IBOutlet weak var weekContainViewWidth: NSLayoutConstraint!
     
     private var currentIndex: CGFloat = 0
     private var viewState = StarCollectionViewState.showStar
@@ -61,7 +62,6 @@ final class MainSceneTableViewCell: MainTableViewCell {
         self.setTodoCollectionView()
         self.bindViewModel()
         self.setupDimView()
-        
     }
     
     func updateDimView(alpha: CGFloat) {
@@ -88,8 +88,8 @@ final class MainSceneTableViewCell: MainTableViewCell {
             self.cometAnimation()
         }
         self.reloadButton.setTitle("", for: .normal)
-        self.weekContainView.backgroundColor = .white60
-        self.weekContainView.setBorder(borderColor: .white, borderWidth: 1.0)
+        self.weekContainView.backgroundColor = .white20
+        self.weekContainView.setBorder(borderColor: .white60, borderWidth: 1.0)
         self.weekContainView.makeRounded(cornerRadius: 9)
         self.weekLabel.font = UIFont.systemFont(ofSize: 13,weight: .bold)
         self.weekLabel.addCharacterSpacing(kernValue: -0.39)
@@ -147,6 +147,8 @@ final class MainSceneTableViewCell: MainTableViewCell {
                                              dateInfo: self.viewModel.dateInfoRelay)
         let output = viewModel.connect(input: input)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadInfo), name: .shouldReloadMainScene, object: nil)
+        
         output.homeModelRelay.subscribe(onNext: { [weak self] homeModel in
             self?.homeModel = homeModel.last
         })
@@ -180,12 +182,26 @@ final class MainSceneTableViewCell: MainTableViewCell {
         .disposed(by: self.disposeBag)
         
         output.starLoadingRelay.subscribe(onNext: { [weak self] loading in
-            loading ? self?.starLoadingIndicator.startAnimating() : self?.starLoadingIndicator.stopAnimating()
+            switch loading {
+            case .loading:
+                self?.starLoadingIndicator.startAnimating()
+            case .finished:
+                self?.starLoadingIndicator.stopAnimating()
+            case .retryNeeded:
+                NotificationCenter.default.post(name: .shouldReloadMainScene, object: nil)
+            }
         })
         .disposed(by: self.disposeBag)
         
         output.todoLoadingRelay.subscribe(onNext: { [weak self] loading in
-            loading ? self?.todoLoadingIndicator.startAnimating() : self?.todoLoadingIndicator.stopAnimating()
+            switch loading {
+            case .loading:
+                self?.todoLoadingIndicator.startAnimating()
+            case .finished:
+                self?.todoLoadingIndicator.stopAnimating()
+            case .retryNeeded:
+                NotificationCenter.default.post(name: .shouldReloadMainScene, object: nil)
+            }
         })
         .disposed(by: self.disposeBag)
         
@@ -229,6 +245,12 @@ final class MainSceneTableViewCell: MainTableViewCell {
         viewModel.dateInfoRelay.subscribe(onNext: { [weak self] dateInfo in
             if let weekText = Date.convertWeekNoToString(weekNo: dateInfo.weekNo) {
                 self?.weekLabel.text =  String(dateInfo.year)+"년 "+String(dateInfo.month)+"월 "+weekText
+                if weekText == "다섯째주" {
+                    self?.weekContainViewWidth.constant = 150
+                }
+                else {
+                    self?.weekContainViewWidth.constant = 140
+                }
             }
         })
         .disposed(by: self.disposeBag)
@@ -250,7 +272,6 @@ final class MainSceneTableViewCell: MainTableViewCell {
         comet.bottomAnchor.constraint(equalTo: self.topAnchor,constant: heightConst).isActive = true
         comet.heightAnchor.constraint(equalToConstant: width).isActive = true
         comet.widthAnchor.constraint(equalToConstant: width).isActive = true
-        
     }
     
     
@@ -317,6 +338,10 @@ final class MainSceneTableViewCell: MainTableViewCell {
     
     
     @IBAction func reloadButtonAction(_ sender: Any) {
+        self.reloadInfo()
+    }
+    
+    @objc func reloadInfo() {
         self.viewModel.reloadInfo()
     }
     
@@ -414,7 +439,13 @@ extension MainSceneTableViewCell: UIScrollViewDelegate {
 extension MainSceneTableViewCell: LookBackCloseDelegate {
     
     func close() {
-        self.viewModel.updateStarList(isSkipped: true)
+        guard let confirmPopupView: PolarisPopupView = UIView.fromNib() else { return }
+
+        confirmPopupView.configure(title: "이번주의 여정 돌아보기를 건너뛸까요?", subTitle: "한 번 건너뛴 여정은 다시 돌아볼 수 없어요.", confirmTitle: "건너뛰기", confirmHandler:  { [weak self] in
+            self?.viewModel.updateStarList(isSkipped: true)
+        })
+
+        confirmPopupView.show(in: self)
     }
     
     func apply(isLookBack: Bool) {
@@ -422,6 +453,7 @@ extension MainSceneTableViewCell: LookBackCloseDelegate {
             let viewController = LookBackMainViewController.instantiateFromStoryboard(StoryboardName.lookback)
             guard let visibleController = UIViewController.getVisibleController() else { return }
             guard let lookbackViewController = viewController                          else { return }
+            lookbackViewController.viewModel.dateInfo = self.viewModel.dateInfoRelay.value
             visibleController.navigationController?.pushViewController(lookbackViewController, animated: true)
         } else {
             let viewController = AddTodoVC.instantiateFromStoryboard(StoryboardName.addTodo)

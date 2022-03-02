@@ -18,6 +18,10 @@ struct LookBackTitle {
 
 
 final class LookBackViewModel {
+    @Published var dateInfo: PolarisDate?
+    private var dateInfoSubscription: AnyCancellable?
+    
+    let firstvcStarRelay: BehaviorRelay<[LookBackStar]> = BehaviorRelay(value: [])
     
     @Published var page: Int = 0
     
@@ -46,6 +50,7 @@ final class LookBackViewModel {
     
     @Published var fifthvcReason: [String] = []
     @Published var fifthVCNextButtonAble: Bool = false
+    @Published var fifthVCEmotionString: String = ""
     
     @Published var sixthvcStars: [LookBackStar] = []
     @Published var sixthvcNextButtonAble: Bool = false
@@ -129,7 +134,13 @@ final class LookBackViewModel {
                                        
     ]
     
+    private var fourthVCSelectedEmotions: [LookBackEmotion] = []
+    
     private var fifthvcReasonInfo: [String] = []
+    
+    init() {
+        self.observeDateInfo()
+    }
     
     func toNextPage() {
         guard self.page < 5 else { return }
@@ -148,8 +159,27 @@ final class LookBackViewModel {
         }
     }
     
+    func observeDateInfo() {
+        self.dateInfoSubscription = $dateInfo
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] date in
+                self?.publishFirstStarInfos()
+            })
+    }
+    
     func publishFirstStarInfos() {
-        self.firstvcStars = self.firstVCStarInfo
+        guard let dateInfo = self.dateInfo else { return }
+        let lastWeekInfo = PolarisDate(year: dateInfo.year, month: dateInfo.month, weekNo: dateInfo.weekNo - 1)
+        let listValuesAPI = RetrospectAPI.listValues(date: lastWeekInfo)
+        var starInfo: [LookBackStar] = []
+        NetworkManager.request(apiType: listValuesAPI)
+            .subscribe(onSuccess: { [weak self] (responseModel: RetrospectValueListModel) in
+                for star in responseModel.foundStarsList {
+                    starInfo.append(LookBackStar(starName: star.rawValue, starImageName: star.lookbackFirstImageName, selected: false))
+                }
+                self?.firstvcStarRelay.accept(starInfo)
+            })
+            .disposed(by: self.disposeBag)
     }
     
     func publishSecondStarInfos() {
@@ -270,13 +300,22 @@ final class LookBackViewModel {
     }
     
     func setEmotionSelectedFourthVC(index: Int) {
+        if !self.fourthVCEmotionInfo[index].isSelected {
+            self.fourthVCSelectedEmotions.append(fourthVCEmotionInfo[index])
+        }
         self.fourthVCEmotionInfo[index].isSelected = !self.fourthVCEmotionInfo[index].isSelected
         if self.fourthVCEmotionInfo[index].isSelected {
             self.fourthVCEmotionInfo[index].emotionImageName = self.fourthVCEmotionInfo[index].emotionImageName.replacingOccurrences(of: "Unselected", with: "Selected")
         }
         else {
             self.fourthVCEmotionInfo[index].emotionImageName = self.fourthVCEmotionInfo[index].emotionImageName.replacingOccurrences(of: "Selected", with: "Unselected")
+            if let existingIndex = self.fourthVCSelectedEmotions.firstIndex(of: self.fourthVCEmotionInfo[index]) {
+                self.fourthVCSelectedEmotions.remove(at: existingIndex)
+            }
         }
+        let emotionString = self.fourthVCSelectedEmotions.reduce("") { $0 + $1.emotion + ", "}
+        let index = emotionString.index(emotionString.endIndex, offsetBy: -3)
+        self.fifthVCEmotionString = String(emotionString[...index])
         
         self.publishFourthEmotionInfo()
         for emotion in self.fourthVCEmotionInfo {
@@ -286,6 +325,7 @@ final class LookBackViewModel {
             }
         }
         self.fourthvcNextButtonAble = false
+        
     }
     
     func publishFourthEmotionInfo() {

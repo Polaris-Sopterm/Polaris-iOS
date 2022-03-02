@@ -77,9 +77,9 @@
                                     <constraint firstItem="HPp-Gz-wno" firstAttribute="leading" secondItem="81g-Yb-oX0" secondAttribute="leading" id="eFY-uG-Vgq"/>
                                     <constraint firstItem="bdx-wR-V45" firstAttribute="centerY" secondItem="81g-Yb-oX0" secondAttribute="centerY" id="gxt-aO-5hw"/>
                                     <constraint firstItem="aIf-EY-oFi" firstAttribute="centerY" secondItem="81g-Yb-oX0" secondAttribute="centerY" id="lGA-Cp-tMg"/>
-                                    <constraint firstItem="bdx-wR-V45" firstAttribute="leading" secondItem="81g-Yb-oX0" secondAttribute="leading" constant="14" id="n8L-8e-jQf"/>
                                     <constraint firstAttribute="width" constant="150" id="qAP-cw-ntq"/>
                                     <constraint firstAttribute="trailing" secondItem="HPp-Gz-wno" secondAttribute="trailing" id="t2T-eZ-N1z"/>
+                                    <constraint firstItem="bdx-wR-V45" firstAttribute="leading" secondItem="81g-Yb-oX0" secondAttribute="leading" constant="14" id="zuf-nO-w4U"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이번주의 여정" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gmU-qj-7Vu">
@@ -236,6 +236,7 @@
                 <outlet property="todoLoadingIndicator" destination="ulR-tq-5Hk" id="hHm-ag-pUX"/>
                 <outlet property="topButtonTopConstraint" destination="7Aa-x6-dTa" id="bEM-Dy-hQw"/>
                 <outlet property="weekContainView" destination="81g-Yb-oX0" id="oIO-Fq-wdC"/>
+                <outlet property="weekContainViewWidth" destination="qAP-cw-ntq" id="TBH-hf-766"/>
                 <outlet property="weekLabel" destination="bdx-wR-V45" id="bMA-gu-0d1"/>
                 <outletCollection property="yDiffConstraints" destination="0ps-qs-yNH" collectionClass="NSMutableArray" id="XrJ-TI-8rC"/>
                 <outletCollection property="yDiffConstraints" destination="LDA-Zj-WKz" collectionClass="NSMutableArray" id="ycc-Ui-AC7"/>
