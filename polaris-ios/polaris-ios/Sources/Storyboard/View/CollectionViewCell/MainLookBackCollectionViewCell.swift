@@ -79,7 +79,6 @@ class MainLookBackCollectionViewCell: UICollectionViewCell {
     }
     
     @IBAction func closeButtonAction(_ sender: Any) {
-        guard let confirmPopupView: PolarisPopupView = UIView.fromNib() else { return }
         self.delegate?.close()
     }
     

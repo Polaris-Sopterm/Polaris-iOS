@@ -439,11 +439,6 @@ extension MainSceneTableViewCell: UIScrollViewDelegate {
 extension MainSceneTableViewCell: LookBackCloseDelegate {
     
     func close() {
-//        print("YJJJ")
-//        self.viewModel.updateStarList(isSkipped: true)
-        
-//      원래 팝업 뷰를 띄워야 하는데, 뷰가 이상하게 떠서 추후 수정 필요
-        
         guard let confirmPopupView: PolarisPopupView = UIView.fromNib() else { return }
 
         confirmPopupView.configure(title: "이번주의 여정 돌아보기를 건너뛸까요?", subTitle: "한 번 건너뛴 여정은 다시 돌아볼 수 없어요.", confirmTitle: "건너뛰기", confirmHandler:  { [weak self] in
