@@ -113,7 +113,15 @@ final class SignupVC: UIViewController {
             .distinctUntilChanged()
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { validation in
-                self.nicknameValidateImageView.image = validation ? #imageLiteral(resourceName: "icnPass") : #imageLiteral(resourceName: "icnError")
+                self.nicknameCountValidateImageView.image = validation ? #imageLiteral(resourceName: "icnPass") : #imageLiteral(resourceName: "icnError")
+            })
+            .disposed(by: self.disposeBag)
+        
+        self.viewModel.nicknameFormatValidRelay
+            .distinctUntilChanged()
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { validation in
+                self.nicknameFormatValidateImageView.image = validation ? #imageLiteral(resourceName: "icnPass") : #imageLiteral(resourceName: "icnError")
             })
             .disposed(by: self.disposeBag)
     }
@@ -167,13 +175,14 @@ final class SignupVC: UIViewController {
     
     private func updateValidationViewHiddenState(state: InputOptions, input: String) {
         if state == .id {
-            self.idFormatValidateView.isHidden     = input.isEmpty
+            self.idFormatValidateView.isHidden = input.isEmpty
             self.idDuplicatedValidateView.isHidden = input.isEmpty
         } else if state == .pw {
-            self.pwFormatValidateView.isHidden      = input.isEmpty
-            self.pwCountValidateView.isHidden      = input.isEmpty
+            self.pwFormatValidateView.isHidden = input.isEmpty
+            self.pwCountValidateView.isHidden = input.isEmpty
         } else {
-            self.nicknameValidateView.isHidden     = input.isEmpty
+            self.nicknameCountValidateView.isHidden = input.isEmpty
+            self.nicknameFormatValidateView.isHidden = input.isEmpty
         }
         
         UIView.animate(withDuration: 0.3) { self.view.layoutIfNeeded() }
@@ -209,8 +218,10 @@ final class SignupVC: UIViewController {
     @IBOutlet private weak var nicknameInputContainerView: UIView!
     @IBOutlet private weak var nicknameTextFieldContainerView: UIView!
     private var nicknameTextFieldView: PolarisMarginTextField? = UIView.fromNib()
-    @IBOutlet private weak var nicknameValidateView: UIView!
-    @IBOutlet private weak var nicknameValidateImageView: UIImageView!
+    @IBOutlet private weak var nicknameCountValidateView: UIView!
+    @IBOutlet private weak var nicknameCountValidateImageView: UIImageView!
+    @IBOutlet private weak var nicknameFormatValidateView: UIView!
+    @IBOutlet private weak var nicknameFormatValidateImageView: UIImageView!
     
 }
 

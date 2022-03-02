@@ -18,11 +18,12 @@ final class SignupViewModel {
     let pwSubject       = BehaviorSubject<String>(value: "")
     let nicknameSubject = BehaviorSubject<String>(value: "")
     
-    let idDuplicatedValidRelay  = BehaviorRelay<Bool>(value: false)
-    let idFormatValidRelay      = BehaviorRelay<Bool>(value: false)
-    let pwCountValidRelay       = BehaviorRelay<Bool>(value: false)
-    let pwFormatValidRelay      = BehaviorRelay<Bool>(value: false)
-    let nicknameCountValidRelay = BehaviorRelay<Bool>(value: false)
+    let idDuplicatedValidRelay   = BehaviorRelay<Bool>(value: false)
+    let idFormatValidRelay       = BehaviorRelay<Bool>(value: false)
+    let pwCountValidRelay        = BehaviorRelay<Bool>(value: false)
+    let pwFormatValidRelay       = BehaviorRelay<Bool>(value: false)
+    let nicknameCountValidRelay  = BehaviorRelay<Bool>(value: false)
+    let nicknameFormatValidRelay = BehaviorRelay<Bool>(value: false)
     
     let completeSignupSubject   = BehaviorSubject<Bool>(value: false)
     
@@ -48,6 +49,7 @@ final class SignupViewModel {
         
         self.nicknameSubject
             .subscribe(onNext: { [weak self] nickname in
+                self?.checkNicknameFormatValidation(nickname)
                 self?.checkNicknameCountValidation(nickname)
             })
             .disposed(by: self.disposeBag)
@@ -122,6 +124,18 @@ final class SignupViewModel {
         self.nicknameCountValidRelay.accept(nicknameCountValidation)
     }
     
+    // 닉네임에 이모지, 특수 부호가 포함된 경우 제한
+    private func checkNicknameFormatValidation(_ nickname: String) {
+        let regex = try? NSRegularExpression(pattern: "^[0-9a-zA-Z가-힣ㄱ-ㅎㅏ-ㅣ\\s]*$", options: .caseInsensitive)
+        let range = NSRange(location: 0, length: nickname.count)
+        
+        if let _ = regex?.firstMatch(in: nickname, options: .reportCompletion, range: range) {
+            self.nicknameFormatValidRelay.accept(true)
+        } else {
+            self.nicknameFormatValidRelay.accept(false)
+        }
+    }
+    
     private var isProcessableFirstStep: Bool {
         return self.idDuplicatedValidRelay.value == true && self.idFormatValidRelay.value == true
     }
@@ -133,6 +147,7 @@ final class SignupViewModel {
     
     private var isProcessableLastStep: Bool {
         return self.isProcessableSecondStep == true && self.nicknameCountValidRelay.value == true
+            && self.nicknameFormatValidRelay.value == true
     }
     
     private var disposeBag = DisposeBag()
