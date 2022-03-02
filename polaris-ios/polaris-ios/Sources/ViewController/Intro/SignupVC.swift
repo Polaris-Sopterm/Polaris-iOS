@@ -70,6 +70,7 @@ final class SignupVC: UIViewController {
             .subscribe(onNext: { [weak self] step in
                 guard let self = self else { return }
                 
+                self.becomeFirstResponder(asState: step)
                 self.updateUI(as: step)
             })
             .disposed(by: self.disposeBag)
@@ -152,6 +153,16 @@ final class SignupVC: UIViewController {
         
         guard state != .firstStep else { return }
         UIView.animate(withDuration: 0.35, delay: 0, options: [.curveEaseInOut]) { self.view.layoutIfNeeded() }
+    }
+    
+    private func becomeFirstResponder(asState state: InputOptions) {
+        if state == .firstStep {
+            self.idTextFieldView?.becomeKeyboardFirstResponder()
+        } else if state == .secondStep {
+            self.pwTextFieldView?.becomeKeyboardFirstResponder()
+        } else if state == .lastStep {
+            self.nicknameTextFieldView?.becomeKeyboardFirstResponder()
+        }
     }
     
     private func updateValidationViewHiddenState(state: InputOptions, input: String) {
