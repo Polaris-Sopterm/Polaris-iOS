@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PolarisDate: Equatable {
+struct PolarisDate: Equatable, Codable {
     let year: Int
     let month: Int
     let weekNo: Int

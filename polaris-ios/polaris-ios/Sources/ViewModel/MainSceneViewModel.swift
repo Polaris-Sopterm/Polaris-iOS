@@ -49,10 +49,10 @@ class MainSceneViewModel {
         let starLoadingRelay: BehaviorRelay<MainSceneLoadingInfo> = BehaviorRelay(value: .finished)
         let todoLoadingRelay: BehaviorRelay<MainSceneLoadingInfo> = BehaviorRelay(value: .finished)
         
-        input.forceToShowStar.subscribe(onNext: { force in
+        input.forceToShowStar.subscribe(onNext: { [weak self] force in
+            guard let self = self else { return }
             starLoadingRelay.accept(.loading)
             var isForced = force
-            
             if self.isAlreadyJumped() && force == false {
                 isForced = true
             }
@@ -95,9 +95,11 @@ class MainSceneViewModel {
         
         
         let todoStarList: BehaviorRelay<[MainTodoCVCViewModel]> = BehaviorRelay(value: [])
-        input.dateInfo.subscribe(onNext: { date in
-            guard date.year > 0 else { return }
-            
+        input.dateInfo.subscribe(onNext: { [weak self] date in
+            guard date.year > 0,
+                  let self = self
+            else { return }
+            self.forceToShowStarRelay.accept(self.forceToShowStarRelay.value)
             todoLoadingRelay.accept(.loading)
             let journeyAPI = JourneyAPI.getWeekJourney(year: date.year, month: date.month, weekNo: date.weekNo)
             var weekJourneyModels: [WeekJourneyModel] = []
@@ -115,9 +117,9 @@ class MainSceneViewModel {
         
         let weekAPI = WeekAPI.getWeekNo(date: Date.normalizedCurrent)
         NetworkManager.request(apiType: weekAPI)
-            .subscribe(onSuccess: { (weekModel: WeekResponseModel) in
+            .subscribe(onSuccess: { [weak self] (weekModel: WeekResponseModel) in
                 input.dateInfo.accept(PolarisDate(year: weekModel.year, month: weekModel.month, weekNo: weekModel.weekNo))
-                self.dateInfoRelay.accept(PolarisDate(year: weekModel.year, month: weekModel.month, weekNo: weekModel.weekNo))
+                self?.dateInfoRelay.accept(PolarisDate(year: weekModel.year, month: weekModel.month, weekNo: weekModel.weekNo))
             })
             .disposed(by: self.disposeBag)
         
@@ -238,11 +240,12 @@ class MainSceneViewModel {
     func isAlreadyJumped() -> Bool {
         let dateInfo = self.dateInfoRelay.value
         let date = PolarisDate(year: dateInfo.year, month: dateInfo.month, weekNo: dateInfo.weekNo)
-
-        if let jumpDate = UserDefaults.standard.value(forKey: UserDefaultsKey.jumpDates) as? [PolarisDate],
-           jumpDate.contains(date)
-        {
-            return true
+        if let data = UserDefaults.standard.object(forKey: UserDefaultsKey.jumpDates) as? Data {
+            let decoder = JSONDecoder()
+            if let decoded = try? decoder.decode([PolarisDate].self, from: data),
+               decoded.contains(date) {
+                return true
+            }
         }
         return false
     }
@@ -250,8 +253,22 @@ class MainSceneViewModel {
     func addJumpDate() {
         let dateInfo = self.dateInfoRelay.value
         let date = PolarisDate(year: dateInfo.year, month: dateInfo.month, weekNo: dateInfo.weekNo)
-
-        UserDefaults.standard.setValue(date, forKey: UserDefaultsKey.jumpDates)
+        let encoder = JSONEncoder()
+        let decoder = JSONDecoder()
+        if let data = UserDefaults.standard.object(forKey: UserDefaultsKey.jumpDates) as? Data {
+            if let decoded = try? decoder.decode([PolarisDate].self, from: data) {
+                var dates = decoded
+                dates.append(date)
+                if let encoded = try? encoder.encode(dates) {
+                    UserDefaults.standard.setValue(encoded, forKey: UserDefaultsKey.jumpDates)
+                }
+            }
+        }
+        else {
+            if let encoded = try? encoder.encode([date]) {
+                UserDefaults.standard.setValue(encoded, forKey: UserDefaultsKey.jumpDates)
+            }
+        }
     }
     
     private(set) var forceToShowStarRelay = BehaviorRelay(value: false)

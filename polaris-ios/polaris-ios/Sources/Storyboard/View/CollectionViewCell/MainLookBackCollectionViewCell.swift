@@ -80,13 +80,7 @@ class MainLookBackCollectionViewCell: UICollectionViewCell {
     
     @IBAction func closeButtonAction(_ sender: Any) {
         guard let confirmPopupView: PolarisPopupView = UIView.fromNib() else { return }
-        
-        confirmPopupView.configure(title: "이번주의 여정 돌아보기를 건너뛸까요?", confirmTitle: "건너뛰기", confirmHandler:  { [weak self] in
-            guard let self = self else { return }
-            
-        })
-        confirmPopupView.show(in: self)
-//        self.delegate?.close()
+        self.delegate?.close()
     }
     
     @IBAction func lookBackButtonAction(_ sender: Any) {
