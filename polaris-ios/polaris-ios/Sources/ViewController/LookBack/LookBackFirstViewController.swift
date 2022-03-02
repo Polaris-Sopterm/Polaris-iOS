@@ -96,7 +96,6 @@ class LookBackFirstViewController: UIViewController, LookBackViewModelProtocol {
     
     private func updateStars(stars: [LookBackStar]) {
         var snapshot = Snapshot()
-        print(stars)
         snapshot.appendSections([.main])
         snapshot.appendItems(stars)
         guard let dataSource = self.dataSource else {

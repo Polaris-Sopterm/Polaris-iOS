@@ -93,7 +93,13 @@ class LookBackMainViewController: UIViewController {
     
     
     @IBAction func xButtonAction(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        guard let confirmPopupView: PolarisPopupView = UIView.fromNib() else { return }
+        
+        confirmPopupView.configure(title: "여정 돌아보기를 중지하고 나갈까요?", subTitle: "나가면 지금까지의 기록이 사라져요. ", cancelTitle: "남아있기" ,confirmTitle: "나가기", confirmHandler:  { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        })
+        
+        confirmPopupView.show(in: self.view)
     }
 }
 
