@@ -8,7 +8,6 @@
 import Foundation
 import RxSwift
 import RxRelay
-import OSLog
 
 final class SignupViewModel {
     
@@ -18,11 +17,12 @@ final class SignupViewModel {
     let pwSubject       = BehaviorSubject<String>(value: "")
     let nicknameSubject = BehaviorSubject<String>(value: "")
     
-    let idDuplicatedValidRelay  = BehaviorRelay<Bool>(value: false)
-    let idFormatValidRelay      = BehaviorRelay<Bool>(value: false)
-    let pwCountValidRelay       = BehaviorRelay<Bool>(value: false)
-    let pwFormatValidRelay      = BehaviorRelay<Bool>(value: false)
-    let nicknameCountValidRelay = BehaviorRelay<Bool>(value: false)
+    let idDuplicatedValidRelay   = BehaviorRelay<Bool>(value: false)
+    let idFormatValidRelay       = BehaviorRelay<Bool>(value: false)
+    let pwCountValidRelay        = BehaviorRelay<Bool>(value: false)
+    let pwFormatValidRelay       = BehaviorRelay<Bool>(value: false)
+    let nicknameCountValidRelay  = BehaviorRelay<Bool>(value: false)
+    let nicknameFormatValidRelay = BehaviorRelay<Bool>(value: false)
     
     let completeSignupSubject   = BehaviorSubject<Bool>(value: false)
     
@@ -48,6 +48,7 @@ final class SignupViewModel {
         
         self.nicknameSubject
             .subscribe(onNext: { [weak self] nickname in
+                self?.checkNicknameFormatValidation(nickname)
                 self?.checkNicknameCountValidation(nickname)
             })
             .disposed(by: self.disposeBag)
@@ -56,13 +57,12 @@ final class SignupViewModel {
     func requestSignup(completion: @escaping () -> Void) {
         guard let id = try? self.idSubject.value(), let pw = try? self.pwSubject.value(),
               let nickname = try? self.nicknameSubject.value() else { return }
+        
         let userAPI = UserAPI.createUser(email: id, password: pw, nickname: nickname)
         NetworkManager.request(apiType: userAPI)
-            .subscribe(onSuccess: { (signupModel: PolarisUser) in
+            .subscribe(onSuccess: { [weak self] (signupModel: PolarisUser) in
                 PolarisUserManager.shared.updateUser(signupModel)
-                completion()
-            }, onFailure: { error in
-                print(error.localizedDescription)
+                self?.requestLogin(id: id, password: pw, completion: completion)
             })
             .disposed(by: self.disposeBag)
     }
@@ -122,6 +122,28 @@ final class SignupViewModel {
         self.nicknameCountValidRelay.accept(nicknameCountValidation)
     }
     
+    // 닉네임에 이모지, 특수 부호가 포함된 경우 제한
+    private func checkNicknameFormatValidation(_ nickname: String) {
+        let regex = try? NSRegularExpression(pattern: "^[0-9a-zA-Z가-힣ㄱ-ㅎㅏ-ㅣ\\s]*$", options: .caseInsensitive)
+        let range = NSRange(location: 0, length: nickname.count)
+        
+        if let _ = regex?.firstMatch(in: nickname, options: .reportCompletion, range: range) {
+            self.nicknameFormatValidRelay.accept(true)
+        } else {
+            self.nicknameFormatValidRelay.accept(false)
+        }
+    }
+    
+    private func requestLogin(id: String, password: String, completion: @escaping () -> Void) {
+        let userAPI = UserAPI.auth(email: id, password: password)
+        NetworkManager.request(apiType: userAPI)
+            .subscribe(onSuccess: { (authModel: AuthModel) in
+                PolarisUserManager.shared.updateAuthToken(authModel.accessToken, authModel.refreshToken)
+                completion()
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
     private var isProcessableFirstStep: Bool {
         return self.idDuplicatedValidRelay.value == true && self.idFormatValidRelay.value == true
     }
@@ -133,6 +155,7 @@ final class SignupViewModel {
     
     private var isProcessableLastStep: Bool {
         return self.isProcessableSecondStep == true && self.nicknameCountValidRelay.value == true
+            && self.nicknameFormatValidRelay.value == true
     }
     
     private var disposeBag = DisposeBag()

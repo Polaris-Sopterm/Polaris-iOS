@@ -70,6 +70,7 @@ final class SignupVC: UIViewController {
             .subscribe(onNext: { [weak self] step in
                 guard let self = self else { return }
                 
+                self.becomeFirstResponder(asState: step)
                 self.updateUI(as: step)
             })
             .disposed(by: self.disposeBag)
@@ -112,7 +113,15 @@ final class SignupVC: UIViewController {
             .distinctUntilChanged()
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { validation in
-                self.nicknameValidateImageView.image = validation ? #imageLiteral(resourceName: "icnPass") : #imageLiteral(resourceName: "icnError")
+                self.nicknameCountValidateImageView.image = validation ? #imageLiteral(resourceName: "icnPass") : #imageLiteral(resourceName: "icnError")
+            })
+            .disposed(by: self.disposeBag)
+        
+        self.viewModel.nicknameFormatValidRelay
+            .distinctUntilChanged()
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { validation in
+                self.nicknameFormatValidateImageView.image = validation ? #imageLiteral(resourceName: "icnPass") : #imageLiteral(resourceName: "icnError")
             })
             .disposed(by: self.disposeBag)
     }
@@ -154,15 +163,26 @@ final class SignupVC: UIViewController {
         UIView.animate(withDuration: 0.35, delay: 0, options: [.curveEaseInOut]) { self.view.layoutIfNeeded() }
     }
     
+    private func becomeFirstResponder(asState state: InputOptions) {
+        if state == .firstStep {
+            self.idTextFieldView?.becomeKeyboardFirstResponder()
+        } else if state == .secondStep {
+            self.pwTextFieldView?.becomeKeyboardFirstResponder()
+        } else if state == .lastStep {
+            self.nicknameTextFieldView?.becomeKeyboardFirstResponder()
+        }
+    }
+    
     private func updateValidationViewHiddenState(state: InputOptions, input: String) {
         if state == .id {
-            self.idFormatValidateView.isHidden     = input.isEmpty
+            self.idFormatValidateView.isHidden = input.isEmpty
             self.idDuplicatedValidateView.isHidden = input.isEmpty
         } else if state == .pw {
-            self.pwFormatValidateView.isHidden      = input.isEmpty
-            self.pwCountValidateView.isHidden      = input.isEmpty
+            self.pwFormatValidateView.isHidden = input.isEmpty
+            self.pwCountValidateView.isHidden = input.isEmpty
         } else {
-            self.nicknameValidateView.isHidden     = input.isEmpty
+            self.nicknameCountValidateView.isHidden = input.isEmpty
+            self.nicknameFormatValidateView.isHidden = input.isEmpty
         }
         
         UIView.animate(withDuration: 0.3) { self.view.layoutIfNeeded() }
@@ -198,8 +218,10 @@ final class SignupVC: UIViewController {
     @IBOutlet private weak var nicknameInputContainerView: UIView!
     @IBOutlet private weak var nicknameTextFieldContainerView: UIView!
     private var nicknameTextFieldView: PolarisMarginTextField? = UIView.fromNib()
-    @IBOutlet private weak var nicknameValidateView: UIView!
-    @IBOutlet private weak var nicknameValidateImageView: UIImageView!
+    @IBOutlet private weak var nicknameCountValidateView: UIView!
+    @IBOutlet private weak var nicknameCountValidateImageView: UIImageView!
+    @IBOutlet private weak var nicknameFormatValidateView: UIView!
+    @IBOutlet private weak var nicknameFormatValidateImageView: UIImageView!
     
 }
 
@@ -255,7 +277,13 @@ extension SignupVC: TermsOfServiceDelegate {
         self.viewModel.requestSignup { [weak self] in
             self?.stopLoadingIndicator()
             guard let mainVC = MainVC.instantiateFromStoryboard(StoryboardName.main) else { return }
-            UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController = mainVC
+            let navigationController = UINavigationController(rootViewController: mainVC)
+            navigationController.setNavigationBarHidden(true, animated: false)
+            UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController = navigationController
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                mainVC.scrollToMainSceneCell(animated: false)
+            }
         }
     }
     
