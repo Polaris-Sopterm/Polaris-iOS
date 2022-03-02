@@ -277,7 +277,13 @@ extension SignupVC: TermsOfServiceDelegate {
         self.viewModel.requestSignup { [weak self] in
             self?.stopLoadingIndicator()
             guard let mainVC = MainVC.instantiateFromStoryboard(StoryboardName.main) else { return }
-            UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController = mainVC
+            let navigationController = UINavigationController(rootViewController: mainVC)
+            navigationController.setNavigationBarHidden(true, animated: false)
+            UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController = navigationController
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                mainVC.scrollToMainSceneCell(animated: false)
+            }
         }
     }
     

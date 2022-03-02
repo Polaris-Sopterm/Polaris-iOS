@@ -38,13 +38,13 @@ final class LoginViewModel {
         self.loadingSubject.onNext(true)
         let userAPI = UserAPI.auth(email: id, password: password)
         NetworkManager.request(apiType: userAPI)
-            .subscribe(onSuccess: { (authModel: AuthModel) in
+            .subscribe(onSuccess: { [weak self] (authModel: AuthModel) in
                 PolarisUserManager.shared.updateAuthToken(authModel.accessToken, authModel.refreshToken)
-                self.completeLoginSubject.onNext(())
-                self.loadingSubject.onNext(false)
-            }, onFailure: { error in
+                self?.completeLoginSubject.onNext(())
+                self?.loadingSubject.onNext(false)
+            }, onFailure: { [weak self] error in
                 print(error.localizedDescription)
-                self.loadingSubject.onNext(false)
+                self?.loadingSubject.onNext(false)
             }).disposed(by: self.disposeBag)
     }
     

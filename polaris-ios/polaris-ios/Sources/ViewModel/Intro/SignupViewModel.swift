@@ -8,7 +8,6 @@
 import Foundation
 import RxSwift
 import RxRelay
-import OSLog
 
 final class SignupViewModel {
     
@@ -58,13 +57,12 @@ final class SignupViewModel {
     func requestSignup(completion: @escaping () -> Void) {
         guard let id = try? self.idSubject.value(), let pw = try? self.pwSubject.value(),
               let nickname = try? self.nicknameSubject.value() else { return }
+        
         let userAPI = UserAPI.createUser(email: id, password: pw, nickname: nickname)
         NetworkManager.request(apiType: userAPI)
-            .subscribe(onSuccess: { (signupModel: PolarisUser) in
+            .subscribe(onSuccess: { [weak self] (signupModel: PolarisUser) in
                 PolarisUserManager.shared.updateUser(signupModel)
-                completion()
-            }, onFailure: { error in
-                print(error.localizedDescription)
+                self?.requestLogin(id: id, password: pw, completion: completion)
             })
             .disposed(by: self.disposeBag)
     }
@@ -134,6 +132,16 @@ final class SignupViewModel {
         } else {
             self.nicknameFormatValidRelay.accept(false)
         }
+    }
+    
+    private func requestLogin(id: String, password: String, completion: @escaping () -> Void) {
+        let userAPI = UserAPI.auth(email: id, password: password)
+        NetworkManager.request(apiType: userAPI)
+            .subscribe(onSuccess: { (authModel: AuthModel) in
+                PolarisUserManager.shared.updateAuthToken(authModel.accessToken, authModel.refreshToken)
+                completion()
+            })
+            .disposed(by: self.disposeBag)
     }
     
     private var isProcessableFirstStep: Bool {
