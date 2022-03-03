@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-enum DeviceHeightInfo {
+enum DeviceHeightSizeType {
     case normal
     case small
 }
@@ -37,7 +37,7 @@ class LookBackSecondViewController: UIViewController, LookBackViewModelProtocol 
     private var dataSource: DataSource?
     
     private weak var pageDelegate: LookBackPageDelegate?
-    private var deviceSize: DeviceHeightInfo = .normal
+    private var deviceSize: DeviceHeightSizeType = .normal
 
 
     typealias DataSource = UICollectionViewDiffableDataSource<Section, LookBackStar>

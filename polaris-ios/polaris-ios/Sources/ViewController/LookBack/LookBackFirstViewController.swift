@@ -51,7 +51,7 @@ class LookBackFirstViewController: UIViewController, LookBackViewModelProtocol {
     
     private let deviceHeightRatio = DeviceInfo.screenHeight/812.0
     private let deviceWidthRatio = DeviceInfo.screenWidth/375.0
-    private var deviceSize: DeviceHeightInfo = .normal
+    private var deviceSize: DeviceHeightSizeType = .normal
 
     
     @Published var starList: [LookBackStar] = []

@@ -58,7 +58,6 @@ open class HalfModalVC: UIViewController {
     /// `HalfModalViewControlelr`를 상속받은 `UIViewController`가 dismiss 됩니다.
     public func dismissWithAnimation() {
         guard let halfModalView = self.halfModalView else { return }
-        NotificationCenter.default.post(name: .didUpdateTodo, object: nil)
         self.willDismissWithAnimation()
         UIView.animate(withDuration: Self.animationDuration, animations: {
             halfModalView.transform     = CGAffineTransform(translationX: 0, y: type(of: self).screen_height)
