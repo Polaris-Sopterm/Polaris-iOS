@@ -30,6 +30,7 @@ class LookBackFourthViewController: UIViewController, LookBackViewModelProtocol 
     @IBOutlet weak var nextButton: UIButton!
     private let deviceHeightRatio = DeviceInfo.screenHeight/812.0
     private let deviceWidthRatio = DeviceInfo.screenWidth/375.0
+    private var deviceSize: DeviceHeightSizeType = .normal
     
     private var viewModel = LookBackViewModel()
     private weak var pageDelegate: LookBackPageDelegate?
@@ -51,6 +52,10 @@ class LookBackFourthViewController: UIViewController, LookBackViewModelProtocol 
     }
     
     private func setUIs() {
+        if DeviceInfo.screenHeight < 700 {
+            self.deviceSize = .small
+        }
+
         self.titleLabel.textColor = .maintext
         self.titleLabel.setPartialBold(originalText: "지난 한 주를 생각하면\n어떤 감정이 느껴지나요?", boldText: "어떤 감정", fontSize: 22, boldFontSize: 22)
         self.subTitleLabel.textColor = .maintext
@@ -65,9 +70,16 @@ class LookBackFourthViewController: UIViewController, LookBackViewModelProtocol 
         
         self.topYConstraint.constant *= deviceHeightRatio
         self.subLabelYConstraint.constant *= deviceHeightRatio
-        self.collectionViewYConstraint.constant *= deviceHeightRatio
-        self.collectionVIewHeightConstraint.constant *= deviceHeightRatio
         self.nextButtonYConstraint.constant *= deviceHeightRatio
+    
+        switch self.deviceSize {
+        case .normal:
+            self.collectionViewYConstraint.constant *= deviceHeightRatio
+            self.collectionVIewHeightConstraint.constant *= deviceHeightRatio
+        case .small:
+            self.collectionViewYConstraint.constant = 32
+            self.collectionVIewHeightConstraint.constant = 400
+        }
     }
     
     private func setUpDataSource() {

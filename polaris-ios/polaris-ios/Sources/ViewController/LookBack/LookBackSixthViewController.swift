@@ -24,6 +24,7 @@ class LookBackSixthViewController: UIViewController, LookBackViewModelProtocol {
     
     private let deviceHeightRatio = DeviceInfo.screenHeight/812.0
     private let deviceWidthRatio = DeviceInfo.screenWidth/375.0
+    private var deviceSize: DeviceHeightSizeType = .normal
 
     private var viewModel = LookBackViewModel()
     private var subscriptions: [AnyCancellable] = []
@@ -46,6 +47,10 @@ class LookBackSixthViewController: UIViewController, LookBackViewModelProtocol {
     }
     
     private func setUIs() {
+        if DeviceInfo.screenHeight < 700 {
+            self.deviceSize = .small
+        }
+        
         self.titleLabel.textColor = .maintext
         self.titleLabel.setPartialBold(originalText: "지금 당신에게\n가장 필요한 별은 무엇인가요?", boldText: "가장 필요한 별", fontSize: 22, boldFontSize: 22)
         self.subTitleLabel.textColor = .maintext
@@ -58,9 +63,16 @@ class LookBackSixthViewController: UIViewController, LookBackViewModelProtocol {
         
         self.topYConstraint.constant *= deviceHeightRatio
         self.subLabelConstraint.constant *= deviceHeightRatio
-        self.collectionViewYConstraint.constant *= deviceHeightRatio
-        self.collectionViewHeightConstraint.constant *= deviceHeightRatio
         self.nextButtonYConstraint.constant *= deviceHeightRatio
+        
+        switch self.deviceSize {
+        case .normal:
+            self.collectionViewYConstraint.constant *= deviceHeightRatio
+            self.collectionViewHeightConstraint.constant *= deviceHeightRatio
+        case .small:
+            self.collectionViewYConstraint.constant = 32
+            self.collectionViewHeightConstraint.constant = 400
+        }
     }
     
 

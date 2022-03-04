@@ -197,6 +197,7 @@ class AddTodoVC: HalfModalVC {
             } else if currentOption == .addJourney {
                 PolarisToastManager.shared.showToast(with: "여정이 추가되었어요.")
             }
+            NotificationCenter.default.post(name: .didUpdateTodo, object: nil)
         }).disposed(by: self.disposeBag)
         
         self.viewModel.loadingSubject.observeOnMain(onNext: { [weak self] isLoading in
