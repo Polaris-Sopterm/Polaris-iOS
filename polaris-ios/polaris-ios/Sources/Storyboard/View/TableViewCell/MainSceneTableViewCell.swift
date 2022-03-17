@@ -157,8 +157,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
     
     private func bindViewModel(){
         
-        let input = MainSceneViewModel.Input(forceToShowStar: self.viewModel.forceToShowStarRelay,
-                                             dateInfo: self.viewModel.dateInfoRelay)
+        let input = MainSceneViewModel.Input(dateInfo: self.viewModel.dateInfoRelay)
         let output = viewModel.connect(input: input)
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.retryInfo), name: .shouldReloadMainScene, object: nil)
@@ -467,7 +466,7 @@ extension MainSceneTableViewCell: LookBackCloseDelegate {
         guard let confirmPopupView: PolarisPopupView = UIView.fromNib() else { return }
 
         confirmPopupView.configure(title: "이번주의 여정 돌아보기를 건너뛸까요?", subTitle: "한 번 건너뛴 여정은 다시 돌아볼 수 없어요.", confirmTitle: "건너뛰기", confirmHandler:  { [weak self] in
-            self?.viewModel.updateStarList(isSkipped: true)
+            self?.viewModel.reloadInfo()
         })
 
         confirmPopupView.show(in: self)
@@ -508,7 +507,7 @@ extension MainSceneTableViewCell: AddTodoViewControllerDelegate {
     
     func addTodoViewController(_ viewController: AddTodoVC, didCompleteAddOption option: AddTodoVC.AddOptions) {
         self.viewModel.updateDateInfo(self.viewModel.dateInfoRelay.value)
-        self.viewModel.updateStarList(isSkipped: true)
+        self.viewModel.reloadInfo()
         
         NotificationCenter.default.post(name: .didUpdateTodo, object: MainSceneCellType.main.sceneIdentifier)
     }
