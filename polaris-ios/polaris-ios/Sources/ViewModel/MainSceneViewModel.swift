@@ -74,6 +74,12 @@ class MainSceneViewModel {
                     }
                     switch homeModel.homeModelCase {
                     case "journey_complete":
+                        if mainStarModels.count == 1 &&
+                            mainStarModels[0].starName == "empty" {
+                            state.accept([StarCollectionViewState.showEmptyStar])
+                            starList.accept([])
+                            break
+                        }
                         state.accept([StarCollectionViewState.showStar])
                         lookBackState.accept([.build])
                         starList.accept(self?.convertStarCVCViewModel(mainStarModels: mainStarModels) ?? [])

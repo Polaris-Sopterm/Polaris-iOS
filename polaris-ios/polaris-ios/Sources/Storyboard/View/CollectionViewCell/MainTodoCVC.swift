@@ -35,6 +35,7 @@ class MainTodoCVC: UICollectionViewCell {
     
     var viewModel: MainTodoCVCViewModel? {
         didSet{
+            self.polarisEmptyView.removeFromSuperview()
             guard let viewModel = self.viewModel else { return }
             self.updateJourneyUI(viewModel.journeyValues)
             self.titleLabel.text = viewModel.journeyTitle != "default" ? viewModel.journeyTitle : "여정이 없는 할 일"

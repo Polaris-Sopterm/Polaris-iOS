@@ -13,6 +13,7 @@ import SnapKit
 
 enum StarCollectionViewState: Int, CaseIterable {
     case showStar = 1
+    case showEmptyStar
     case showLookBack
     case showIncomplete
 }
@@ -38,6 +39,8 @@ final class MainSceneTableViewCell: MainTableViewCell {
     @IBOutlet var heightConstarints: [NSLayoutConstraint]!
     @IBOutlet var yDiffConstraints: [NSLayoutConstraint]!
     @IBOutlet weak var weekContainViewWidth: NSLayoutConstraint!
+    
+    private let starEmptyView = PolarisStarEmptyView()
     
     private var currentIndex: CGFloat = 0
     private var viewState = StarCollectionViewState.showStar
@@ -141,6 +144,17 @@ final class MainSceneTableViewCell: MainTableViewCell {
         self.titleLabel.setPartialBold(originalText: text, boldText: boldText, fontSize: 23*deviceRatio, boldFontSize: 23*deviceRatio)
     }
     
+    private func showStarEmptyView() {
+        self.addSubview(self.starEmptyView)
+        self.starEmptyView.snp.makeConstraints { make in
+            make.edges.equalTo(self.starCV)
+        }
+    }
+    
+    private func hideStarEmptyView() {
+        self.starEmptyView.removeFromSuperview()
+    }
+    
     private func bindViewModel(){
         
         let input = MainSceneViewModel.Input(forceToShowStar: self.viewModel.forceToShowStarRelay,
@@ -160,8 +174,15 @@ final class MainSceneTableViewCell: MainTableViewCell {
         .disposed(by: disposeBag)
         
         output.state.subscribe(onNext: { [weak self] value in
+            guard let self = self else { return }
             if value.count > 0 {
-                self?.viewState = value[0]
+                self.viewState = value[0]
+                if value[0] == .showEmptyStar {
+                    self.showStarEmptyView()
+                }
+                else {
+                    self.hideStarEmptyView()
+                }
             }
         })
         .disposed(by: disposeBag)
