@@ -68,6 +68,7 @@ class MainSceneViewModel {
             NetworkManager.request(apiType: homeAPI)
                 .subscribe(onSuccess: { [weak self] (homeModel: HomeModel) in
                     homeModelRelay.accept([homeModel])
+                    self?.lastWeekRelay.accept(homeModel.lastWeek)
                     starLoadingRelay.accept(.finished)
                     for star in homeModel.starList {
                         mainStarModels.append(MainStarModel(starName: star.name, starLevel: star.level))
@@ -314,5 +315,6 @@ class MainSceneViewModel {
     private(set) var dateInfoRelay        = BehaviorRelay<PolarisDate>(value: PolarisDate(year: 0,
                                                                                     month: 0,
                                                                                     weekNo: 0))
+    var lastWeekRelay: BehaviorRelay<LastWeek?> = BehaviorRelay(value: nil)
     
 }

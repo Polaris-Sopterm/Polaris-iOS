@@ -478,7 +478,7 @@ extension MainSceneTableViewCell: LookBackCloseDelegate {
             let viewController = LookBackMainViewController.instantiateFromStoryboard(StoryboardName.lookback)
             guard let visibleController = UIViewController.getVisibleController() else { return }
             guard let lookbackViewController = viewController                          else { return }
-            lookbackViewController.viewModel.dateInfo = self.viewModel.dateInfoRelay.value
+            lookbackViewController.viewModel.dateInfo = self.viewModel.lastWeekRelay.value
             visibleController.navigationController?.pushViewController(lookbackViewController, animated: true)
         } else {
             let viewController = AddTodoVC.instantiateFromStoryboard(StoryboardName.addTodo)

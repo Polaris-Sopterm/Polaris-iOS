@@ -16,7 +16,7 @@ class LookBackMainViewController: UIViewController {
     @IBOutlet weak var containerViewHeightConstraint: NSLayoutConstraint!
 
     let deviceHeightRatio = DeviceInfo.screenHeight/812.0
-    var dateInfo: PolarisDate?
+    var dateInfo: LastWeek?
     private var pageInstance : LookBackPageViewController?
     var viewModel = LookBackViewModel()
     private var originPage = 0
