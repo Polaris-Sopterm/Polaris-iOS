@@ -162,6 +162,17 @@ class MainSceneViewModel {
         return resultList
     }
     
+    func convertWeekJourneyUnderThreeTodos(weekJourneyModel: WeekJourneyModel) -> WeekJourneyModel {
+        guard let todos = weekJourneyModel.toDos,
+           todos.count > 2
+        else {
+            return weekJourneyModel
+        }
+        let cutTodos = Array(todos[0...2])
+        let newWeekJourney = WeekJourneyModel(idx: weekJourneyModel.idx, title: weekJourneyModel.title, year: weekJourneyModel.year, month: weekJourneyModel.month, weekNo: weekJourneyModel.weekNo, userIdx: weekJourneyModel.userIdx, value1: weekJourneyModel.value1, value2: weekJourneyModel.value2, toDos: cutTodos)
+        return newWeekJourney
+    }
+    
     func convertTodoCVCViewModel(weekJourneyModels: [WeekJourneyModel],dateInfo: PolarisDate) -> [MainTodoCVCViewModel]{
         var resultList: [MainTodoCVCViewModel] = []
         var thisWeekJouneyModels: [WeekJourneyModel] = []
@@ -170,11 +181,9 @@ class MainSceneViewModel {
             guard let year = weekJourneyModel.year     else { continue }
             guard let month = weekJourneyModel.month   else { continue }
             guard let weekNo = weekJourneyModel.weekNo else { continue }
+            
             if year == dateInfo.year && month == dateInfo.month && weekNo == dateInfo.weekNo {
-                thisWeekJouneyModels.append(weekJourneyModel)
-            }
-            if thisWeekJouneyModels.count == 3 {
-                break
+                thisWeekJouneyModels.append(convertWeekJourneyUnderThreeTodos(weekJourneyModel: weekJourneyModel))
             }
         }
         
