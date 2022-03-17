@@ -147,7 +147,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
                                              dateInfo: self.viewModel.dateInfoRelay)
         let output = viewModel.connect(input: input)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadInfo), name: .shouldReloadMainScene, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.retryInfo), name: .shouldReloadMainScene, object: nil)
         
         output.homeModelRelay.subscribe(onNext: { [weak self] homeModel in
             self?.homeModel = homeModel.last
@@ -343,6 +343,10 @@ final class MainSceneTableViewCell: MainTableViewCell {
     
     @objc func reloadInfo() {
         self.viewModel.reloadInfo()
+    }
+    
+    @objc func retryInfo() {
+        self.viewModel.retryAPIs()
     }
     
     @objc private func didUpdateTodo(_ notification: Notification) {

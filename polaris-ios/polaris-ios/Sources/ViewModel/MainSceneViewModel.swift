@@ -19,7 +19,9 @@ class MainSceneViewModel {
     
     var heightRatio = CGFloat(DeviceInfo.screenHeight/812.0)
     var heightList: [CGFloat] = [CGFloat(52.0),CGFloat(93.0),CGFloat(52.0),CGFloat(87.0),CGFloat(28.0),CGFloat(71),CGFloat(34),CGFloat(86),CGFloat(58)]
+    var retryCount: Int = 0
     
+    var reloadQueue = DispatchQueue(label: "MainSceneReloadQueue")
     private let disposeBag = DisposeBag()
     private let deviceRatio = DeviceInfo.screenHeight/812.0
     struct Input{
@@ -211,6 +213,26 @@ class MainSceneViewModel {
     func reloadInfo() {
         self.forceToShowStarRelay.accept(self.forceToShowStarRelay.value)
         self.dateInfoRelay.accept(self.dateInfoRelay.value)
+    }
+    
+    func retryAPIs() {
+        reloadQueue.sync { [weak self] in
+            guard let self = self else { return }
+            switch retryCount {
+            case 2:
+                Thread.sleep(forTimeInterval: 2)
+                fallthrough
+            case 1:
+                Thread.sleep(forTimeInterval: 1)
+                fallthrough
+            case 0:
+                Thread.sleep(forTimeInterval: 1)
+                retryCount += 1
+                self.reloadInfo()
+            default:
+                return
+            }
+        }
     }
     
     func updateStarList(isSkipped: Bool) {
