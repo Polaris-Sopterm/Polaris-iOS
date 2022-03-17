@@ -9,16 +9,7 @@ import Foundation
 import Moya
 
 enum HomeAPI {
-    case getHomeBanner(isSkipped: Bool)
-    
-    func getPath() -> String {
-        switch self {
-        case let .getHomeBanner(isSkipped):
-            return "/home/v0/banner/"+String(isSkipped)
-            
-        }
-    }
-    
+    case getHomeBanner(weekModel: PolarisDate)
 }
 
 extension HomeAPI: TargetType {
@@ -29,7 +20,7 @@ extension HomeAPI: TargetType {
     
     var path: String {
         switch self {
-        case .getHomeBanner: return HomeAPI.getPath(self)()
+        case .getHomeBanner: return "/home/v0/banner/"
         }
     }
     
@@ -43,8 +34,9 @@ extension HomeAPI: TargetType {
     
     var task: Task {
         switch self {
-        case .getHomeBanner(_):
-            return .requestParameters(parameters: [:], encoding: URLEncoding.queryString)
+        case .getHomeBanner(let weekModel):
+            let params: [String: Any] = ["year": weekModel.year, "month": weekModel.month, "weekNo": weekModel.weekNo]
+            return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
         }
     }
     

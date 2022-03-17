@@ -14,10 +14,11 @@ struct HomeModel: Codable {
     let mainText: String
     let boldText: String
     let bannerTitle, bannerText, buttonText: String?
+    let lastWeek: LastWeek
 
     enum CodingKeys: String, CodingKey {
         case homeModelCase = "case"
-        case starList, mainText, boldText, bannerTitle, bannerText, buttonText
+        case starList, mainText, boldText, bannerTitle, bannerText, buttonText, lastWeek
     }
 }
 
@@ -25,4 +26,8 @@ struct HomeModel: Codable {
 struct StarList: Codable {
     let name: String
     let level: Int
+}
+
+struct LastWeek: Codable {
+    let year, month, weekNo: Int?
 }

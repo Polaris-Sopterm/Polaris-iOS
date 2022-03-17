@@ -50,7 +50,9 @@ class MainSceneViewModel {
         let todoLoadingRelay: BehaviorRelay<MainSceneLoadingInfo> = BehaviorRelay(value: .finished)
         
         input.forceToShowStar.subscribe(onNext: { [weak self] force in
-            guard let self = self else { return }
+            guard let self = self,
+                  self.dateInfoRelay.value.year != 0
+            else { return }
             starLoadingRelay.accept(.loading)
             var isForced = force
             if self.isAlreadyJumped() && force == false {
@@ -60,7 +62,7 @@ class MainSceneViewModel {
                 self.addJumpDate()
             }
             
-            let homeAPI = HomeAPI.getHomeBanner(isSkipped: isForced)
+            let homeAPI = HomeAPI.getHomeBanner(weekModel: self.dateInfoRelay.value)
             NetworkManager.request(apiType: homeAPI)
                 .subscribe(onSuccess: { [weak self] (homeModel: HomeModel) in
                     homeModelRelay.accept([homeModel])
