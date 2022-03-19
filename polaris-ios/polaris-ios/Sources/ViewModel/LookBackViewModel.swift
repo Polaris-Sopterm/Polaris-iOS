@@ -18,7 +18,7 @@ struct LookBackTitle {
 
 
 final class LookBackViewModel {
-    @Published var dateInfo: PolarisDate?
+    @Published var dateInfo: LastWeek?
     private var dateInfoSubscription: AnyCancellable?
     
     let firstvcStarRelay: BehaviorRelay<[LookBackStar]> = BehaviorRelay(value: [])
@@ -168,8 +168,12 @@ final class LookBackViewModel {
     }
     
     func publishFirstStarInfos() {
-        guard let dateInfo = self.dateInfo else { return }
-        let lastWeekInfo = PolarisDate(year: dateInfo.year, month: dateInfo.month, weekNo: dateInfo.weekNo - 1)
+        guard let dateInfo = self.dateInfo,
+              let year = dateInfo.year,
+              let month = dateInfo.month,
+              let weekNo = dateInfo.weekNo
+        else { return }
+        let lastWeekInfo = PolarisDate(year: year, month: month, weekNo: weekNo)
         let listValuesAPI = RetrospectAPI.listValues(date: lastWeekInfo)
         var starInfo: [LookBackStar] = []
         NetworkManager.request(apiType: listValuesAPI)
@@ -417,9 +421,12 @@ final class LookBackViewModel {
     }
     
     func registerLookBackResult() {
-        guard self.thirdvcAnswerInfo.count == 4 else { return }
-        
-        
+        guard self.thirdvcAnswerInfo.count == 4,
+              let dateInfo = self.dateInfo,
+              let year = dateInfo.year,
+              let month = dateInfo.month,
+              let weekNo = dateInfo.weekNo
+        else { return }
         
         let resultValue = RetrospectValueModel(y: self.getSelectedStars(starList: self.secondVCStarInfo1),
                                              n: self.getSelectedStars(starList: self.secondVCStarInfo2),
@@ -433,33 +440,22 @@ final class LookBackViewModel {
         
         let recordInfo = self.makeRecordInfo()
         
-        let weekAPI = WeekAPI.getWeekNo(date: Date.normalizedCurrent)
-        
-        NetworkManager.request(apiType: weekAPI)
-            .asObservable()
-            .map { (weekModel: WeekResponseModel) -> RetrospectModel in
-                let resultModel = RetrospectModel(year: weekModel.year, month: weekModel.month, weekNo: weekModel.weekNo, value: resultValue, record1: recordInfo[0], record2: recordInfo[1], record3: recordInfo[2])
-                return resultModel
+        let resultModel = RetrospectModel(year: year, month: month, weekNo: weekNo, value: resultValue, record1: recordInfo[0], record2: recordInfo[1], record3: recordInfo[2])
+        let registAPI = RetrospectAPI.create(model: resultModel)
+        NetworkManager.request(apiType: registAPI).subscribe(onSuccess: { [weak self] (responseModel: RetrospectResponseModel) in
+            PolarisToastManager.shared.showToast(with: "회고 등록이 완료되었어요")
+            self?.lookbackEnd = true
+        }, onFailure: { [weak self] error in
+            if let polarisError = error as? PolarisErrorModel.PolarisError {
+                PolarisToastManager.shared.showToast(with: polarisError.message)
             }
-            .flatMapLatest { resultModel -> Observable<RetrospectResponseModel> in
-                let registAPI = RetrospectAPI.create(model: resultModel)
-                return NetworkManager.request(apiType: registAPI).asObservable()
-            }
-            .subscribe(onNext: { [weak self] (responseModel: RetrospectResponseModel) in
+            else {
                 PolarisToastManager.shared.showToast(with: "회고 등록이 완료되었어요")
-                self?.lookbackEnd = true
-            }, onError: { [weak self] error in
-                if let polarisError = error as? PolarisErrorModel.PolarisError {
-                    PolarisToastManager.shared.showToast(with: polarisError.message)
-                }
-                else {
-                    PolarisToastManager.shared.showToast(with: "회고 등록이 완료되었어요")
-                    
-                }
-                self?.lookbackEnd = true
-            })
+                
+            }
+            self?.lookbackEnd = true
+        })
             .disposed(by: self.disposeBag)
-        
     }
     
 }

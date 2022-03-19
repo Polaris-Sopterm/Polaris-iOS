@@ -2,16 +2,16 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "imgEmptyTodo.png",
+      "filename" : "imgMainNoJourney1.png",
       "scale" : "1x"
     },
     {
       "scale" : "2x",
-      "filename" : "imgEmptyTodo@2x.png",
+      "filename" : "imgMainNoJourney1@2x.png",
       "idiom" : "universal"
     },
     {
-      "filename" : "imgEmptyTodo@3x.png",
+      "filename" : "imgMainNoJourney1@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

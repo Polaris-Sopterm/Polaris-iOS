@@ -19,11 +19,12 @@ class MainSceneViewModel {
     
     var heightRatio = CGFloat(DeviceInfo.screenHeight/812.0)
     var heightList: [CGFloat] = [CGFloat(52.0),CGFloat(93.0),CGFloat(52.0),CGFloat(87.0),CGFloat(28.0),CGFloat(71),CGFloat(34),CGFloat(86),CGFloat(58)]
+    var retryCount: Int = 0
     
+    var reloadQueue = DispatchQueue(label: "MainSceneReloadQueue")
     private let disposeBag = DisposeBag()
     private let deviceRatio = DeviceInfo.screenHeight/812.0
     struct Input{
-        let forceToShowStar: BehaviorRelay<Bool>
         let dateInfo: BehaviorRelay<PolarisDate>
     }
     
@@ -49,27 +50,29 @@ class MainSceneViewModel {
         let starLoadingRelay: BehaviorRelay<MainSceneLoadingInfo> = BehaviorRelay(value: .finished)
         let todoLoadingRelay: BehaviorRelay<MainSceneLoadingInfo> = BehaviorRelay(value: .finished)
         
-        input.forceToShowStar.subscribe(onNext: { [weak self] force in
-            guard let self = self else { return }
-            starLoadingRelay.accept(.loading)
-            var isForced = force
-            if self.isAlreadyJumped() && force == false {
-                isForced = true
-            }
-            else if !self.isAlreadyJumped() && force == true {
-                self.addJumpDate()
-            }
+        let todoStarList: BehaviorRelay<[MainTodoCVCViewModel]> = BehaviorRelay(value: [])
+        input.dateInfo.subscribe(onNext: { [weak self] date in
+            guard date.year > 0,
+                  let self = self
+            else { return }
             
-            let homeAPI = HomeAPI.getHomeBanner(isSkipped: isForced)
+            let homeAPI = HomeAPI.getHomeBanner(weekModel: date)
             NetworkManager.request(apiType: homeAPI)
                 .subscribe(onSuccess: { [weak self] (homeModel: HomeModel) in
                     homeModelRelay.accept([homeModel])
+                    self?.lastWeekRelay.accept(homeModel.lastWeek)
                     starLoadingRelay.accept(.finished)
                     for star in homeModel.starList {
                         mainStarModels.append(MainStarModel(starName: star.name, starLevel: star.level))
                     }
                     switch homeModel.homeModelCase {
                     case "journey_complete":
+                        if mainStarModels.count == 1 &&
+                            mainStarModels[0].starName == "empty" {
+                            state.accept([StarCollectionViewState.showEmptyStar])
+                            starList.accept([])
+                            break
+                        }
                         state.accept([StarCollectionViewState.showStar])
                         lookBackState.accept([.build])
                         starList.accept(self?.convertStarCVCViewModel(mainStarModels: mainStarModels) ?? [])
@@ -90,16 +93,7 @@ class MainSceneViewModel {
                     starLoadingRelay.accept(.retryNeeded)
                 })
                 .disposed(by: self.disposeBag)
-        })
-            .disposed(by: self.disposeBag)
-        
-        
-        let todoStarList: BehaviorRelay<[MainTodoCVCViewModel]> = BehaviorRelay(value: [])
-        input.dateInfo.subscribe(onNext: { [weak self] date in
-            guard date.year > 0,
-                  let self = self
-            else { return }
-            self.forceToShowStarRelay.accept(self.forceToShowStarRelay.value)
+            
             todoLoadingRelay.accept(.loading)
             let journeyAPI = JourneyAPI.getWeekJourney(year: date.year, month: date.month, weekNo: date.weekNo)
             var weekJourneyModels: [WeekJourneyModel] = []
@@ -158,6 +152,17 @@ class MainSceneViewModel {
         return resultList
     }
     
+    func convertWeekJourneyUnderThreeTodos(weekJourneyModel: WeekJourneyModel) -> WeekJourneyModel {
+        guard let todos = weekJourneyModel.toDos,
+           todos.count > 2
+        else {
+            return weekJourneyModel
+        }
+        let cutTodos = Array(todos[0...2])
+        let newWeekJourney = WeekJourneyModel(idx: weekJourneyModel.idx, title: weekJourneyModel.title, year: weekJourneyModel.year, month: weekJourneyModel.month, weekNo: weekJourneyModel.weekNo, userIdx: weekJourneyModel.userIdx, value1: weekJourneyModel.value1, value2: weekJourneyModel.value2, toDos: cutTodos)
+        return newWeekJourney
+    }
+    
     func convertTodoCVCViewModel(weekJourneyModels: [WeekJourneyModel],dateInfo: PolarisDate) -> [MainTodoCVCViewModel]{
         var resultList: [MainTodoCVCViewModel] = []
         var thisWeekJouneyModels: [WeekJourneyModel] = []
@@ -166,11 +171,9 @@ class MainSceneViewModel {
             guard let year = weekJourneyModel.year     else { continue }
             guard let month = weekJourneyModel.month   else { continue }
             guard let weekNo = weekJourneyModel.weekNo else { continue }
+            
             if year == dateInfo.year && month == dateInfo.month && weekNo == dateInfo.weekNo {
-                thisWeekJouneyModels.append(weekJourneyModel)
-            }
-            if thisWeekJouneyModels.count == 3 {
-                break
+                thisWeekJouneyModels.append(convertWeekJourneyUnderThreeTodos(weekJourneyModel: weekJourneyModel))
             }
         }
         
@@ -207,12 +210,27 @@ class MainSceneViewModel {
     }
     
     func reloadInfo() {
-        self.forceToShowStarRelay.accept(self.forceToShowStarRelay.value)
         self.dateInfoRelay.accept(self.dateInfoRelay.value)
     }
     
-    func updateStarList(isSkipped: Bool) {
-        self.forceToShowStarRelay.accept(isSkipped)
+    func retryAPIs() {
+        reloadQueue.sync { [weak self] in
+            guard let self = self else { return }
+            switch retryCount {
+            case 2:
+                Thread.sleep(forTimeInterval: 2)
+                fallthrough
+            case 1:
+                Thread.sleep(forTimeInterval: 1)
+                fallthrough
+            case 0:
+                Thread.sleep(forTimeInterval: 1)
+                retryCount += 1
+                self.reloadInfo()
+            default:
+                return
+            }
+        }
     }
     
     func updateDateInfo(_ dateInfo: PolarisDate) {
@@ -237,43 +255,9 @@ class MainSceneViewModel {
         return String.makeStarImageName(starName: starName, level: level)
     }
     
-    func isAlreadyJumped() -> Bool {
-        let dateInfo = self.dateInfoRelay.value
-        let date = PolarisDate(year: dateInfo.year, month: dateInfo.month, weekNo: dateInfo.weekNo)
-        if let data = UserDefaults.standard.object(forKey: UserDefaultsKey.jumpDates) as? Data {
-            let decoder = JSONDecoder()
-            if let decoded = try? decoder.decode([PolarisDate].self, from: data),
-               decoded.contains(date) {
-                return true
-            }
-        }
-        return false
-    }
-    
-    func addJumpDate() {
-        let dateInfo = self.dateInfoRelay.value
-        let date = PolarisDate(year: dateInfo.year, month: dateInfo.month, weekNo: dateInfo.weekNo)
-        let encoder = JSONEncoder()
-        let decoder = JSONDecoder()
-        if let data = UserDefaults.standard.object(forKey: UserDefaultsKey.jumpDates) as? Data {
-            if let decoded = try? decoder.decode([PolarisDate].self, from: data) {
-                var dates = decoded
-                dates.append(date)
-                if let encoded = try? encoder.encode(dates) {
-                    UserDefaults.standard.setValue(encoded, forKey: UserDefaultsKey.jumpDates)
-                }
-            }
-        }
-        else {
-            if let encoded = try? encoder.encode([date]) {
-                UserDefaults.standard.setValue(encoded, forKey: UserDefaultsKey.jumpDates)
-            }
-        }
-    }
-    
-    private(set) var forceToShowStarRelay = BehaviorRelay(value: false)
     private(set) var dateInfoRelay        = BehaviorRelay<PolarisDate>(value: PolarisDate(year: 0,
                                                                                     month: 0,
                                                                                     weekNo: 0))
+    var lastWeekRelay: BehaviorRelay<LastWeek?> = BehaviorRelay(value: nil)
     
 }

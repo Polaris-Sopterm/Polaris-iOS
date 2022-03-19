@@ -30,8 +30,6 @@ class MainStarCVC: UICollectionViewCell {
         self.categoryLabel.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 13)
         self.labelBackground.backgroundColor = .darkBlue10
         self.labelBackground.makeRoundCorner(radius: 10)
-        
-        
     }
     
     func setStar(image: UIImage, category: String,starHeight: CGFloat) {

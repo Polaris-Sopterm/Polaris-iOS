@@ -13,6 +13,7 @@ import SnapKit
 
 enum StarCollectionViewState: Int, CaseIterable {
     case showStar = 1
+    case showEmptyStar
     case showLookBack
     case showIncomplete
 }
@@ -38,6 +39,8 @@ final class MainSceneTableViewCell: MainTableViewCell {
     @IBOutlet var heightConstarints: [NSLayoutConstraint]!
     @IBOutlet var yDiffConstraints: [NSLayoutConstraint]!
     @IBOutlet weak var weekContainViewWidth: NSLayoutConstraint!
+    
+    private let starEmptyView = PolarisStarEmptyView()
     
     private var currentIndex: CGFloat = 0
     private var viewState = StarCollectionViewState.showStar
@@ -141,13 +144,23 @@ final class MainSceneTableViewCell: MainTableViewCell {
         self.titleLabel.setPartialBold(originalText: text, boldText: boldText, fontSize: 23*deviceRatio, boldFontSize: 23*deviceRatio)
     }
     
+    private func showStarEmptyView() {
+        self.addSubview(self.starEmptyView)
+        self.starEmptyView.snp.makeConstraints { make in
+            make.edges.equalTo(self.starCV)
+        }
+    }
+    
+    private func hideStarEmptyView() {
+        self.starEmptyView.removeFromSuperview()
+    }
+    
     private func bindViewModel(){
         
-        let input = MainSceneViewModel.Input(forceToShowStar: self.viewModel.forceToShowStarRelay,
-                                             dateInfo: self.viewModel.dateInfoRelay)
+        let input = MainSceneViewModel.Input(dateInfo: self.viewModel.dateInfoRelay)
         let output = viewModel.connect(input: input)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadInfo), name: .shouldReloadMainScene, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.retryInfo), name: .shouldReloadMainScene, object: nil)
         
         output.homeModelRelay.subscribe(onNext: { [weak self] homeModel in
             self?.homeModel = homeModel.last
@@ -160,8 +173,15 @@ final class MainSceneTableViewCell: MainTableViewCell {
         .disposed(by: disposeBag)
         
         output.state.subscribe(onNext: { [weak self] value in
+            guard let self = self else { return }
             if value.count > 0 {
-                self?.viewState = value[0]
+                self.viewState = value[0]
+                if value[0] == .showEmptyStar {
+                    self.showStarEmptyView()
+                }
+                else {
+                    self.hideStarEmptyView()
+                }
             }
         })
         .disposed(by: disposeBag)
@@ -345,6 +365,10 @@ final class MainSceneTableViewCell: MainTableViewCell {
         self.viewModel.reloadInfo()
     }
     
+    @objc func retryInfo() {
+        self.viewModel.retryAPIs()
+    }
+    
     @objc private func didUpdateTodo(_ notification: Notification) {
         guard let sceneIdentifier = notification.object as? String      else { return }
         guard sceneIdentifier != MainSceneCellType.main.sceneIdentifier else { return }
@@ -442,7 +466,7 @@ extension MainSceneTableViewCell: LookBackCloseDelegate {
         guard let confirmPopupView: PolarisPopupView = UIView.fromNib() else { return }
 
         confirmPopupView.configure(title: "이번주의 여정 돌아보기를 건너뛸까요?", subTitle: "한 번 건너뛴 여정은 다시 돌아볼 수 없어요.", confirmTitle: "건너뛰기", confirmHandler:  { [weak self] in
-            self?.viewModel.updateStarList(isSkipped: true)
+            self?.viewModel.reloadInfo()
         })
 
         confirmPopupView.show(in: self)
@@ -453,7 +477,7 @@ extension MainSceneTableViewCell: LookBackCloseDelegate {
             let viewController = LookBackMainViewController.instantiateFromStoryboard(StoryboardName.lookback)
             guard let visibleController = UIViewController.getVisibleController() else { return }
             guard let lookbackViewController = viewController                          else { return }
-            lookbackViewController.viewModel.dateInfo = self.viewModel.dateInfoRelay.value
+            lookbackViewController.viewModel.dateInfo = self.viewModel.lastWeekRelay.value
             visibleController.navigationController?.pushViewController(lookbackViewController, animated: true)
         } else {
             let viewController = AddTodoVC.instantiateFromStoryboard(StoryboardName.addTodo)
@@ -483,7 +507,7 @@ extension MainSceneTableViewCell: AddTodoViewControllerDelegate {
     
     func addTodoViewController(_ viewController: AddTodoVC, didCompleteAddOption option: AddTodoVC.AddOptions) {
         self.viewModel.updateDateInfo(self.viewModel.dateInfoRelay.value)
-        self.viewModel.updateStarList(isSkipped: true)
+        self.viewModel.reloadInfo()
         
         NotificationCenter.default.post(name: .didUpdateTodo, object: MainSceneCellType.main.sceneIdentifier)
     }

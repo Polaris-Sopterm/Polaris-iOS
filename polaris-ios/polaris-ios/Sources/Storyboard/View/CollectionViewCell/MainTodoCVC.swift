@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import SnapKit
 
 protocol MainTodoCollectionViewCellDelegate: AnyObject {
     func mainTodoCollectionViewCell(_ cell: MainTodoCVC, didTapDone todo: TodoModel)
@@ -30,12 +31,22 @@ class MainTodoCVC: UICollectionViewCell {
     
     
     weak var delegate: MainTodoCollectionViewCellDelegate?
+    private let polarisEmptyView = PolarisTodoEmptyView()
     
     var viewModel: MainTodoCVCViewModel? {
         didSet{
+            self.polarisEmptyView.removeFromSuperview()
             guard let viewModel = self.viewModel else { return }
             self.updateJourneyUI(viewModel.journeyValues)
             self.titleLabel.text = viewModel.journeyTitle != "default" ? viewModel.journeyTitle : "여정이 없는 할 일"
+            
+            if viewModel.journeyTitle == "이런 별을 찾는건 어떠세요?" ||
+                viewModel.journeyTitle == "지금 이런 별이 필요할 것 같아요" {
+                self.addSubview(self.polarisEmptyView)
+                self.polarisEmptyView.snp.makeConstraints { make in
+                    make.leading.top.trailing.bottom.equalTo(self.todoTV)
+                }
+            }
             
             viewModel.todoListRelay.bind(to: todoTV.rx.items) { [weak self] tableView, index, item in
                 let indexPath = IndexPath(row: index, section: 0)
@@ -51,6 +62,7 @@ class MainTodoCVC: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        self.polarisEmptyView.removeFromSuperview()
         self.disposeBag = DisposeBag()
     }
     
