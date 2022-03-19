@@ -48,10 +48,6 @@ class TodoTableViewCell: MainTableViewCell {
         self.viewModel.requestTodoJourneyList()
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-    }
-    
     private func addObservers() {
         let center = NotificationCenter.default
         center.addObserver(self, selector: #selector(self.didUpdateTodo(_:)), name: .didUpdateTodo, object: nil)

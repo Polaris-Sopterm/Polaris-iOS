@@ -72,8 +72,12 @@ class TodoViewModel {
     
     init(weekRepository: WeekRepository = WeekRepositoryImpl()) {
         self.weekRepository = weekRepository
-        self.todoDayHeadersInform = Date.daysThisWeek
-        self.todoDayHeadersInform.forEach { self.todoDayListTable.updateValue([], forKey: $0) }
+        self.observe(mainDateSelector: MainSceneDateSelector.shared)
+        self.observe(viewEvent: self.viewEventRelay)
+    }
+    
+    func occur(viewEvent: ViewEvent) {
+        self.viewEventRelay.accept(viewEvent)
     }
     
     func updateCurrentTab(_ tab: TodoCategory) {
@@ -219,6 +223,26 @@ class TodoViewModel {
         }).disposed(by: self.disposeBag)
     }
     
+    private func observe(mainDateSelector: MainSceneDateSelector) {
+        mainDateSelector.selectedDateObservable
+            .compactMap { $0 }
+            .map { .selectDate($0) }
+            .bind(to: self.viewEventRelay)
+            .disposed(by: self.disposeBag)
+    }
+    
+    private func observe(viewEvent: PublishRelay<ViewEvent>) {
+        viewEvent
+            .withUnretained(self)
+            .subscribe(onNext: { owner, event in
+                switch event {
+                case .selectDate(let date):
+                    self.updateSelectedDate(date)
+                }
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
     private func updateTodoDayListModel(_ todoListModel: TodoDayListModel) {
         self.todoDayHeadersInform.forEach { todoHeader in
             let todoModelForHeader = todoListModel.data?.first(where: { todoModel in
@@ -230,6 +254,17 @@ class TodoViewModel {
         }
     }
     
+    private func updateSelectedDate(_ date: PolarisDate) {
+        
+    }
+    
+    private func updateTodoHeaderInform(ofDate date: Date) {
+        self.todoDayHeadersInform = date.oneWeekIncludesDate
+        self.todoDayHeadersInform.forEach {
+            self.todoDayListTable.updateValue([], forKey: $0)
+        }
+    }
+    
     private let weekRepository: WeekRepository
     
     /*
@@ -237,7 +272,7 @@ class TodoViewModel {
      - Date 업데이트 시킬 때, 12:00:00으로 맞추어서 Normalized 시킴
      */
     private(set) var dayExpandedTodo: TodoModel?
-    private(set) var todoDayHeadersInform: [Date]
+    private(set) var todoDayHeadersInform = [Date]()
     private(set) var todoDayListTable = [Date: [TodoModel]]()
     
     /*
@@ -246,7 +281,16 @@ class TodoViewModel {
     private(set) var journeyExpandedTodo: TodoModel?
     private(set) var todoJourneyList = [WeekJourneyModel]()
     
+    private let viewEventRelay = PublishRelay<ViewEvent>()
     private let loadingSubject = PublishSubject<Bool>()
     private let disposeBag = DisposeBag()
+    
+}
+
+extension TodoViewModel {
+    
+    enum ViewEvent {
+        case selectDate(PolarisDate)
+    }
     
 }

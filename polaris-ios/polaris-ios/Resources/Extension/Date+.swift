@@ -80,42 +80,6 @@ extension Date {
         return datesIncludedWeek
     }
     
-    static var daysThisWeek: [Date] {
-        let currentWeekDay  = Calendar.current.component(.weekday, from: self.normalizedCurrent)
-        
-        var thisWeekDates: [Date] = []
-        var distancesBetweenWeekDay: [Int] = []
-        
-        if currentWeekDay == WeekDay.sunday.rawValue {
-            distancesBetweenWeekDay = [-6, -5, -4, -3, -2, -1, 0] }
-        else {
-            for weekDay in WeekDay.monday.rawValue...WeekDay.saturday.rawValue {
-                let tempDistanceBetweenWeekDay = weekDay - currentWeekDay
-                distancesBetweenWeekDay.append(tempDistanceBetweenWeekDay)
-            }
-            
-            let sundayWeekDay = 8
-            distancesBetweenWeekDay.append(sundayWeekDay - currentWeekDay)
-        }
-        
-        distancesBetweenWeekDay.forEach { distance in
-            guard let calculatedDate = Calendar.current.date(byAdding: .day, value: distance, to: self.normalizedCurrent) else { return }
-            thisWeekDates.append(calculatedDate)
-        }
-        return thisWeekDates
-    }
-    
-    var normalizedDate: Date? {
-        return Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: self)
-    }
-    
-    func convertToString(using format: String = "yyyy-MM-dd") -> String {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "ko_KR")
-        formatter.dateFormat = format
-        return formatter.string(from: self)
-    }
-    
     static var currentWeekNoOfMonth: Int {
         return Calendar.current.component(.weekOfMonth, from: self.normalizedCurrent)
     }
@@ -126,6 +90,41 @@ extension Date {
     
     static var currentYear: Int {
         return Calendar.current.component(.year, from: self.normalizedCurrent)
+    }
+    
+    var normalizedDate: Date? {
+        return Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: self)
+    }
+    
+    var oneWeekIncludesDate: [Date] {
+        let weekDayOfDate = Calendar.current.component(.weekday, from: self)
+        
+        var weekDates = [Date]()
+        var distancesBetweenWeekDay = [Int]()
+        
+        if weekDayOfDate == WeekDay.sunday.rawValue {
+            distancesBetweenWeekDay = [-6, -5, -4, -3, -2, -1, 0]
+        } else {
+            for weekDay in WeekDay.monday.rawValue...WeekDay.saturday.rawValue {
+                let tempDistanceBetweenWeekDay = weekDay - weekDayOfDate
+                distancesBetweenWeekDay.append(tempDistanceBetweenWeekDay)
+            }
+            
+            let sundayWeekDay = 8
+            distancesBetweenWeekDay.append(sundayWeekDay - weekDayOfDate)
+        }
+        
+        distancesBetweenWeekDay.forEach { distance in
+            guard let calculatedDate = Calendar.current.date(byAdding: .day, value: distance, to: self) else { return }
+            weekDates.append(calculatedDate)
+        }
+        
+        return weekDates
+    }
+    
+    static func convertWeekNoToString(weekNo: Int) -> String? {
+        let weekDict = [1: "첫째주", 2: "둘째주", 3: "셋째주", 4: "넷째주", 5: "다섯째주"]
+        return weekDict[weekNo]
     }
     
     static func numberOfMondaysInMonth(_ month: Int, forYear year: Int) -> Int? {
@@ -147,9 +146,11 @@ extension Date {
         return weeks.weekOfMonth! + 1
     }
     
-    static func convertWeekNoToString(weekNo: Int) -> String? {
-        let weekDict = [1: "첫째주", 2: "둘째주", 3: "셋째주", 4: "넷째주", 5: "다섯째주"]
-        return weekDict[weekNo]
+    func convertToString(using format: String = "yyyy-MM-dd") -> String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.dateFormat = format
+        return formatter.string(from: self)
     }
 
 }
