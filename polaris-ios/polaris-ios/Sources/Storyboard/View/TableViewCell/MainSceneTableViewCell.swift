@@ -263,7 +263,6 @@ final class MainSceneTableViewCell: MainTableViewCell {
         MainSceneDateSelector.shared.selectedDateObservable
             .withUnretained(self)
             .subscribe(onNext: { owner, dateInfo in
-                guard let dateInfo = dateInfo                                            else { return }
                 guard let weekText = Date.convertWeekNoToString(weekNo: dateInfo.weekNo) else { return }
                 
                 owner.weekLabel.text =  String(dateInfo.year) + "년 " + String(dateInfo.month) + "월 " + weekText

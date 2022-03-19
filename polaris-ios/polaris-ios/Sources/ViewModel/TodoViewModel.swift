@@ -42,7 +42,7 @@ enum TodoCategory {
     }
 }
 
-class TodoViewModel {
+final class TodoViewModel {
     
     var dayExpandedTodoIndexPath: IndexPath? {
         guard let date = self.dayExpandedTodo?.date?.convertToDate()?.normalizedDate        else { return nil }
@@ -66,14 +66,18 @@ class TodoViewModel {
         self.loadingSubject.asObservable()
     }
     
+    var currentDate: PolarisDate {
+        MainSceneDateSelector.shared.selectedDate
+    }
+    
     // Should Scroll 포함해서 Scroll 해야하는 경우
     let reloadSubject   = PublishSubject<Bool>()
     let currentTabRelay = BehaviorRelay<TodoCategory>(value: .day)
     
-    init(weekRepository: WeekRepository = WeekRepositoryImpl()) {
-        self.weekRepository = weekRepository
-        self.observe(mainDateSelector: MainSceneDateSelector.shared)
+    init(todoRepository: TodoRepository = TodoRepositoryImpl()) {
+        self.todoRepository = todoRepository
         self.observe(viewEvent: self.viewEventRelay)
+        self.observe(mainDateSelector: MainSceneDateSelector.shared)
     }
     
     func occur(viewEvent: ViewEvent) {
@@ -125,38 +129,11 @@ class TodoViewModel {
         }
     }
     
-    func requestAddTodo(_ todoModel: TodoModel) {
-        guard let title = todoModel.title             else { return }
-        guard let date = todoModel.date               else { return }
-        guard let isTop = todoModel.isTop             else { return }
-        let journeyIdx = todoModel.journey?.idx
-        
-        let createTodoAPI = TodoAPI.createToDo(title: title, date: date, journeyIdx: journeyIdx, isTop: isTop)
-        self.loadingSubject.onNext(true)
-        NetworkManager.request(apiType: createTodoAPI).subscribe(onSuccess: { [weak self] (responseModel: AddTodoResponseModel) in
-            self?.requestTodoJourneyList()
-            self?.requestTodoDayList(shouldScroll: false)
-            
-            self?.loadingSubject.onNext(false)
-            NotificationCenter.default.post(name: .didUpdateTodo, object: MainSceneCellType.todoList.sceneIdentifier)
-        }, onFailure: { [weak self] _ in
-            self?.loadingSubject.onNext(false)
-        }).disposed(by: self.disposeBag)
-    }
-    
-    func requestTodoJourneyList() {
-        self.weekRepository.fetchWeekNo(ofDate: Date.normalizedCurrent)
-            .flatMapLatest { weekResponseModel -> Observable<[WeekJourneyModel]> in
-                let todoListAPI = TodoAPI.listTodoByJourney(
-                    year: weekResponseModel.year,
-                    month: weekResponseModel.month,
-                    weekNo: weekResponseModel.weekNo
-                )
-                return NetworkManager.request(apiType: todoListAPI).asObservable()
-            }
+    func requestTodoJourneyList(ofDate date: PolarisDate) {
+        self.todoRepository.fetchTodoJourneyList(ofDate: date)
             .withUnretained(self)
             .subscribe(onNext: { owner, todoListModel in
-                owner.todoJourneyList = todoListModel
+                owner.todoJourneyList = todoListModel.data
                 
                 guard owner.currentTabRelay.value == .journey else { return }
                 owner.reloadSubject.onNext(false)
@@ -164,16 +141,8 @@ class TodoViewModel {
             .disposed(by: self.disposeBag)
     }
     
-    func requestTodoDayList(shouldScroll: Bool) {
-        self.weekRepository.fetchWeekNo(ofDate: Date.normalizedCurrent)
-            .flatMapLatest { weekResponseModel -> Observable<TodoDayListModel> in
-                let todoListAPI = TodoAPI.listTodoByDate(
-                    year: weekResponseModel.year,
-                    month: weekResponseModel.month,
-                    weekNo: weekResponseModel.weekNo
-                )
-                return NetworkManager.request(apiType: todoListAPI).asObservable()
-            }
+    func requestTodoDayList(ofDate date: PolarisDate, shouldScroll: Bool) {
+        self.todoRepository.fetchTodoDayList(ofDate: date)
             .withUnretained(self)
             .subscribe(onNext: { owner, todoListModel in
                 owner.updateTodoDayListModel(todoListModel)
@@ -184,23 +153,38 @@ class TodoViewModel {
             .disposed(by: self.disposeBag)
     }
     
+    func requestAddTodo(_ todoModel: TodoModel) {
+        guard let requestBody = todoModel.addTodoRequestBody else { return }
+
+        self.loadingSubject.onNext(true)
+        self.todoRepository.createTodo(requestBody: requestBody)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, responseModel in
+                owner.reloadTodoList(ofDate: owner.currentDate)
+                
+                owner.loadingSubject.onNext(false)
+                NotificationCenter.default.post(name: .didUpdateTodo, object: MainSceneCellType.todoList.sceneIdentifier)
+            }, onError: { [weak self] _ in
+                self?.loadingSubject.onNext(false)
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
     func requestDeleteTodo(_ todoIdx: Int, completion: @escaping () -> Void) {
         self.loadingSubject.onNext(true)
-        
-        let todoDayDeleteAPI = TodoAPI.deleteTodo(idx: todoIdx)
-        NetworkManager.request(apiType: todoDayDeleteAPI).subscribe(onSuccess: { [weak self] (successModel: SuccessModel) in
-            guard let self = self else { return }
-            self.loadingSubject.onNext(false)
-            
-            guard successModel.isSuccess == true else { return }
-            self.requestTodoJourneyList()
-            self.requestTodoDayList(shouldScroll: false)
-            completion()
-            
-            NotificationCenter.default.post(name: .didUpdateTodo, object: MainSceneCellType.todoList.sceneIdentifier)
-        }, onFailure: { [weak self] _ in
-            self?.loadingSubject.onNext(false)
-        }).disposed(by: self.disposeBag)
+        self.todoRepository.deleteTodo(todoIdx: todoIdx)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, successModel in
+                owner.loadingSubject.onNext(false)
+                
+                guard successModel.isSuccess == true else { return }
+                owner.reloadTodoList(ofDate: owner.currentDate)
+                completion()
+                NotificationCenter.default.post(name: .didUpdateTodo, object: MainSceneCellType.todoList.sceneIdentifier)
+            }, onError: { [weak self] _ in
+                self?.loadingSubject.onNext(false)
+            })
+            .disposed(by: self.disposeBag)
     }
     
     func updateDoneStatus(_ todoModel: TodoModel) {
@@ -214,9 +198,7 @@ class TodoViewModel {
             guard let self = self else { return }
             self.loadingSubject.onNext(false)
             
-            self.requestTodoDayList(shouldScroll: false)
-            self.requestTodoJourneyList()
-            
+            self.reloadTodoList(ofDate: self.currentDate)
             NotificationCenter.default.post(name: .didUpdateTodo, object: MainSceneCellType.todoList.sceneIdentifier)
         }, onFailure: { [weak self] _ in
             self?.loadingSubject.onNext(false)
@@ -237,7 +219,12 @@ class TodoViewModel {
             .subscribe(onNext: { owner, event in
                 switch event {
                 case .selectDate(let date):
-                    self.updateSelectedDate(date)
+                    self.updateWeeksHeaderInform(ofDate: date)
+                    self.reloadTodoList(ofDate: date)
+                    
+                case .notifyUpdateTodo(let scene):
+                    self.reloadTodoListIfNeeded(asScene: scene)
+                    
                 }
             })
             .disposed(by: self.disposeBag)
@@ -254,30 +241,32 @@ class TodoViewModel {
         }
     }
     
-    private func updateSelectedDate(_ date: PolarisDate) {
-        
-    }
-    
-    private func updateTodoHeaderInform(ofDate date: Date) {
-        self.todoDayHeadersInform = date.oneWeekIncludesDate
+    private func updateWeeksHeaderInform(ofDate date: PolarisDate) {
+        self.todoDayHeadersInform = date.thisWeekDates
         self.todoDayHeadersInform.forEach {
             self.todoDayListTable.updateValue([], forKey: $0)
         }
     }
     
-    private let weekRepository: WeekRepository
+    private func reloadTodoList(ofDate date: PolarisDate) {
+        self.requestTodoJourneyList(ofDate: date)
+        self.requestTodoDayList(ofDate: date, shouldScroll: false)
+    }
     
-    /*
-     날짜별 할일 보여줄 때, 사용하는 Property
-     - Date 업데이트 시킬 때, 12:00:00으로 맞추어서 Normalized 시킴
-     */
+    private func reloadTodoListIfNeeded(asScene scene: String) {
+        guard scene != MainSceneCellType.todoList.sceneIdentifier else { return }
+        self.reloadTodoList(ofDate: self.currentDate)
+    }
+    
+    private let todoRepository: TodoRepository
+
+    
+    // 날짜별 할일 보여줄 때, 사용하는 Property
     private(set) var dayExpandedTodo: TodoModel?
     private(set) var todoDayHeadersInform = [Date]()
     private(set) var todoDayListTable = [Date: [TodoModel]]()
     
-    /*
-     여정별 할일 보여줄 때, 사용하는 Property
-     */
+    // 여정별 할일 보여줄 때, 사용하는 Property
     private(set) var journeyExpandedTodo: TodoModel?
     private(set) var todoJourneyList = [WeekJourneyModel]()
     
@@ -291,6 +280,7 @@ extension TodoViewModel {
     
     enum ViewEvent {
         case selectDate(PolarisDate)
+        case notifyUpdateTodo(scene: String)
     }
     
 }

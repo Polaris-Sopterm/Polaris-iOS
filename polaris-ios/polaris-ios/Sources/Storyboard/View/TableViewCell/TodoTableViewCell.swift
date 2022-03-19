@@ -43,9 +43,6 @@ class TodoTableViewCell: MainTableViewCell {
         self.setupTableView()
         self.bindButtons()
         self.observeViewModel()
-        
-        self.viewModel.requestTodoDayList(shouldScroll: true)
-        self.viewModel.requestTodoJourneyList()
     }
     
     private func addObservers() {
@@ -70,11 +67,8 @@ class TodoTableViewCell: MainTableViewCell {
     }
     
     @objc private func didUpdateTodo(_ notification: Notification) {
-        guard let sceneIdentifier = notification.object as? String          else { return }
-        guard sceneIdentifier != MainSceneCellType.todoList.sceneIdentifier else { return }
-        
-        self.viewModel.requestTodoDayList(shouldScroll: false)
-        self.viewModel.requestTodoJourneyList()
+        guard let sceneIdentifier = notification.object as? String else { return }
+        self.viewModel.occur(viewEvent: .notifyUpdateTodo(scene: sceneIdentifier))
     }
     
     private func bindButtons() {
@@ -180,7 +174,7 @@ extension TodoTableViewCell: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         let currentTab = self.viewModel.currentTabRelay.value
-        if currentTab == .day { return Date.WeekDay.allCases.count }
+        if currentTab == .day { return WeekDay.allCases.count }
         else                  { return self.viewModel.todoJourneyList.count }
     }
     
@@ -366,8 +360,8 @@ extension TodoTableViewCell: JourneyTodoTableViewDelegate {
 extension TodoTableViewCell: AddTodoViewControllerDelegate {
     
     func addTodoViewController(_ viewController: AddTodoVC, didCompleteAddOption option: AddTodoVC.AddOptions) {
-        self.viewModel.requestTodoDayList(shouldScroll: false)
-        self.viewModel.requestTodoJourneyList()
+//        self.viewModel.requestTodoDayList(shouldScroll: false)
+//        self.viewModel.requestTodoJourneyList()
         
         NotificationCenter.default.post(name: .didUpdateTodo, object: MainSceneCellType.todoList.sceneIdentifier)
     }

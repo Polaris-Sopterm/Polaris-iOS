@@ -55,7 +55,6 @@ class MainSceneViewModel {
         let todoStarList: BehaviorRelay<[MainTodoCVCViewModel]> = BehaviorRelay(value: [])
         MainSceneDateSelector.shared.selectedDateObservable.subscribe(onNext: { [weak self] date in
             guard let self = self else { return }
-            guard let date = date else { return }
             
             let homeAPI = HomeAPI.getHomeBanner(weekModel: date)
             NetworkManager.request(apiType: homeAPI)

@@ -24,7 +24,7 @@ class PerDayItemCollectionViewCell: UICollectionViewCell {
        let weekDay = Calendar.current.component(.weekday, from: date)
         let day    = Calendar.current.component(.day, from: date)
         
-        self.dayLabel.text       = Date.WeekDay(rawValue: weekDay)?.korWeekday
+        self.dayLabel.text       = WeekDay(rawValue: weekDay)?.korWeekday
         self.dayNumberLabel.text = "\(day)"
     }
     
