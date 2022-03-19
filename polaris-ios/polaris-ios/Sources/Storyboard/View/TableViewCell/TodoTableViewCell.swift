@@ -50,16 +50,11 @@ class TodoTableViewCell: MainTableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.setupSuperTableView()
     }
     
     private func addObservers() {
         let center = NotificationCenter.default
         center.addObserver(self, selector: #selector(self.didUpdateTodo(_:)), name: .didUpdateTodo, object: nil)
-    }
-    
-    private func setupSuperTableView() {
-        self.superTableView = self.superview as? UITableView
     }
     
     private func registerCell() {
@@ -171,7 +166,10 @@ class TodoTableViewCell: MainTableViewCell {
     private let viewModel  = TodoViewModel()
     private let disposeBag = DisposeBag()
     
-    private weak var superTableView: UITableView?
+    private var superTableView: UITableView? {
+        self.superview as? UITableView
+    }
+    
     @IBOutlet private weak var navigationHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var tableView: TodoCustomTableView!
     @IBOutlet private weak var categoryButton: UIButton!

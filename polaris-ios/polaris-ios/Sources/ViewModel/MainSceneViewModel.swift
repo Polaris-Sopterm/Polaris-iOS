@@ -22,11 +22,13 @@ class MainSceneViewModel {
     var retryCount: Int = 0
     
     var reloadQueue = DispatchQueue(label: "MainSceneReloadQueue")
+    
+    var currentDate: PolarisDate? {
+        MainSceneDateSelector.shared.selectedDate
+    }
+    
     private let disposeBag = DisposeBag()
     private let deviceRatio = DeviceInfo.screenHeight/812.0
-    struct Input{
-        let dateInfo: BehaviorRelay<PolarisDate>
-    }
     
     struct Output{
         let starList: BehaviorRelay<[MainStarCVCViewModel]>
@@ -39,7 +41,7 @@ class MainSceneViewModel {
         let todoLoadingRelay: BehaviorRelay<MainSceneLoadingInfo>
     }
     
-    func connect(input: Input) -> Output{
+    func connect() -> Output{
         let starList: BehaviorRelay<[MainStarCVCViewModel]> = BehaviorRelay(value: [])
         let state: BehaviorRelay<[StarCollectionViewState]> = BehaviorRelay(value: [])
         let lookBackState: BehaviorRelay<[MainLookBackCellState]> = BehaviorRelay(value: [])
@@ -51,10 +53,9 @@ class MainSceneViewModel {
         let todoLoadingRelay: BehaviorRelay<MainSceneLoadingInfo> = BehaviorRelay(value: .finished)
         
         let todoStarList: BehaviorRelay<[MainTodoCVCViewModel]> = BehaviorRelay(value: [])
-        input.dateInfo.subscribe(onNext: { [weak self] date in
-            guard date.year > 0,
-                  let self = self
-            else { return }
+        MainSceneDateSelector.shared.selectedDateObservable.subscribe(onNext: { [weak self] date in
+            guard let self = self else { return }
+            guard let date = date else { return }
             
             let homeAPI = HomeAPI.getHomeBanner(weekModel: date)
             NetworkManager.request(apiType: homeAPI)
@@ -106,16 +107,7 @@ class MainSceneViewModel {
                     todoLoadingRelay.accept(.retryNeeded)
                 })
                 .disposed(by: self.disposeBag)
-        })
-            .disposed(by: self.disposeBag)
-        
-        let weekAPI = WeekAPI.getWeekNo(date: Date.normalizedCurrent)
-        NetworkManager.request(apiType: weekAPI)
-            .subscribe(onSuccess: { [weak self] (weekModel: WeekResponseModel) in
-                input.dateInfo.accept(PolarisDate(year: weekModel.year, month: weekModel.month, weekNo: weekModel.weekNo))
-                self?.dateInfoRelay.accept(PolarisDate(year: weekModel.year, month: weekModel.month, weekNo: weekModel.weekNo))
-            })
-            .disposed(by: self.disposeBag)
+        }).disposed(by: self.disposeBag)
         
         lookBackState.accept([.build])
         starList.accept(self.convertStarCVCViewModel(mainStarModels: mainStarModels))
@@ -210,7 +202,8 @@ class MainSceneViewModel {
     }
     
     func reloadInfo() {
-        self.dateInfoRelay.accept(self.dateInfoRelay.value)
+        guard let currentDate = self.currentDate else { return }
+        MainSceneDateSelector.shared.updateDate(currentDate)
     }
     
     func retryAPIs() {
@@ -234,7 +227,7 @@ class MainSceneViewModel {
     }
     
     func updateDateInfo(_ dateInfo: PolarisDate) {
-        self.dateInfoRelay.accept(dateInfo)
+        MainSceneDateSelector.shared.updateDate(dateInfo)
     }
     
     func updateDoneStatus(_ todoModel: TodoModel) {
@@ -243,10 +236,10 @@ class MainSceneViewModel {
         let edittedIsDone = todoModel.isDone == nil ? true : false
         let todoEditAPI   = TodoAPI.editTodo(idx: todoIdx, isDone: edittedIsDone)
         
-        NetworkManager.request(apiType: todoEditAPI).subscribe(onSuccess: { [weak self] (responseModel: TodoModel) in
-            guard let self = self else { return }
-            self.updateDateInfo(self.dateInfoRelay.value)
-            
+        NetworkManager.request(apiType: todoEditAPI).subscribe(onSuccess: { (responseModel: TodoModel) in
+            guard let currentDate = self.currentDate else { return }
+
+            MainSceneDateSelector.shared.updateDate(currentDate)
             NotificationCenter.default.post(name: .didUpdateTodo, object: MainSceneCellType.main.sceneIdentifier)
         }).disposed(by: self.disposeBag)
     }
@@ -255,9 +248,6 @@ class MainSceneViewModel {
         return String.makeStarImageName(starName: starName, level: level)
     }
     
-    private(set) var dateInfoRelay        = BehaviorRelay<PolarisDate>(value: PolarisDate(year: 0,
-                                                                                    month: 0,
-                                                                                    weekNo: 0))
-    var lastWeekRelay: BehaviorRelay<LastWeek?> = BehaviorRelay(value: nil)
+    var lastWeekRelay = BehaviorRelay<LastWeek?>(value: nil)
     
 }
