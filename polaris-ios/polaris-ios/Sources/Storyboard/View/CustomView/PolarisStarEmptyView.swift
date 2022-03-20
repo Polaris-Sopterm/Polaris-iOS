@@ -31,7 +31,7 @@ class PolarisStarEmptyView: UIView {
         super.init(coder: coder)
     }
     
-    func setUIs() {
+    private func setUIs() {
         self.addSubview(self.emptyStarImageView)
         self.addSubview(self.emptyStarImageView2)
         self.backgroundColor = .clear

@@ -43,7 +43,7 @@ class MainTodoCVC: UICollectionViewCell {
             if viewModel.journeyTitle == "이런 별을 찾는건 어떠세요?" ||
                 viewModel.journeyTitle == "지금 이런 별이 필요할 것 같아요" {
                 self.addSubview(self.polarisEmptyView)
-                self.polarisEmptyView.snp.makeConstraints { make in
+                self.polarisEmptyView.snp.remakeConstraints { make in
                     make.leading.top.trailing.bottom.equalTo(self.todoTV)
                 }
             }
