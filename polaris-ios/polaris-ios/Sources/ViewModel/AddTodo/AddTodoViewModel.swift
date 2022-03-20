@@ -37,10 +37,6 @@ class AddTodoViewModel {
     let completeRequestSubject = PublishSubject<Void>()
     let loadingSubject         = BehaviorSubject<Bool>(value: false)
     
-    init(weekRepository: WeekRepository = WeekRepositoryImpl()) {
-        self.weekRepository = weekRepository
-    }
-    
     func setViewModel(by addOptions: AddTodoVC.AddOptions) {
         self.currentAddOption = addOptions
         self.addListTypes.onNext(addOptions.addCellTypes)
@@ -254,18 +250,11 @@ class AddTodoViewModel {
         if let journeyDate = self.addJourneyDate {
             return Observable.just(journeyDate)
         } else {
-            return self.weekRepository.fetchWeekNo(ofDate: Date.normalizedCurrent)
-                .map { weekResponseModel in
-                    let year = weekResponseModel.year
-                    let month = weekResponseModel.month
-                    let weekNo = weekResponseModel.weekNo
-                    
-                    return PolarisDate(year: year, month: month, weekNo: weekNo)
-                }
+            let date = PolarisDate(year: Date.currentYear, month: Date.currentMonth, weekNo: Date.currentWeekOfMonth)
+            return Observable.just(date)
         }
     }
     
-    private let weekRepository: WeekRepository
     private let disposeBag = DisposeBag()
     
     // 날짜에 더할때만 씀 - Day Todo

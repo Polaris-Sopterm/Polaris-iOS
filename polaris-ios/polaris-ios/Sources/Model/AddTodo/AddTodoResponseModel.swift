@@ -7,6 +7,13 @@
 
 import Foundation
 
+struct AddTodoRequestBody {
+    let title: String
+    let date: String
+    let isTop: Bool
+    var journeyIdx: Int?
+}
+
 struct AddTodoResponseModel: Codable {
     let idx: Int?
     let createdAt: String?

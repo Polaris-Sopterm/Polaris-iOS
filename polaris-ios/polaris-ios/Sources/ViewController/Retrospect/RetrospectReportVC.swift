@@ -22,8 +22,6 @@ class RetrospectReportVC: UIViewController {
         self.registerCell()
         self.setupTableView()
         self.observeViewModel()
-        
-        self.viewModel.occurViewAction(action: .viewDidLoad)
     }
     
     private func registerCell() {
