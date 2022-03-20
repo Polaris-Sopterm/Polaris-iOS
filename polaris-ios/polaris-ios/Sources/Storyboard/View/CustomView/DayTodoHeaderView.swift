@@ -20,11 +20,13 @@ class DayTodoHeaderView: TodoHeaderView {
         didSet { self._delegate = self.delegate as? DayTodoHeaderViewDelegate }
     }
     
-    func configure(_ date: Date) {
-        self.date = date
+    override func configure(_ presentable: TodoSectionHeaderPresentable) {
+        super.configure(presentable)
         
-        self.dayLabel.text = date.convertToString(using: "M월 d일 EEEE")
-        date.normalizedDate == Date().normalizedDate ? self.updateUI(as: .today) : self.updateUI(as: .other)
+        guard let dayHeader = presentable as? TodoDayListPresentationModel else { return }
+        self.date = dayHeader.date
+        self.dayLabel.text = dayHeader.date.convertToString(using: "M월 d일 EEEE")
+        dayHeader.date == Date.normalizedCurrent ? self.updateUI(as: .today) : self.updateUI(as: .other)
     }
 
     private func updateUI(as headerType: HeaderType) {

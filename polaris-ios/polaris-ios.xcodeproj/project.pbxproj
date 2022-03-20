@@ -296,6 +296,12 @@
 		CE43D08726613D66003126F2 /* TodoDateHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECA4943E26284B0B00CC2EB8 /* TodoDateHeaderView.xib */; };
 		CE43D08826613D66003126F2 /* PolarisMarginTextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEE5779262BE54900C39358 /* PolarisMarginTextField.xib */; };
 		CE43D08A26613D66003126F2 /* MainTodoHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECDC5A5B2636A13600A1B5A9 /* MainTodoHeaderView.xib */; };
+		CE5342D027E650DF0082F570 /* TodoCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5342CF27E650DF0082F570 /* TodoCategory.swift */; };
+		CE5342D127E650E20082F570 /* TodoCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5342CF27E650DF0082F570 /* TodoCategory.swift */; };
+		CE5342D227E650E20082F570 /* TodoCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5342CF27E650DF0082F570 /* TodoCategory.swift */; };
+		CE5342D527E6511B0082F570 /* TodoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5342D427E6511B0082F570 /* TodoController.swift */; };
+		CE5342D627E6511B0082F570 /* TodoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5342D427E6511B0082F570 /* TodoController.swift */; };
+		CE5342D727E6511B0082F570 /* TodoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5342D427E6511B0082F570 /* TodoController.swift */; };
 		CE574000267C8E9900665933 /* TodoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE573FFF267C8E9900665933 /* TodoViewModel.swift */; };
 		CE574001267C8E9900665933 /* TodoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE573FFF267C8E9900665933 /* TodoViewModel.swift */; };
 		CE57400E267C903700665933 /* JourneyTodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE57400C267C903700665933 /* JourneyTodoTableViewCell.swift */; };
@@ -809,6 +815,8 @@
 		CE40B3FC26C041630000151F /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
 		CE40B3FD26C041630000151F /* OnboardingCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnboardingCollectionViewCell.xib; sourceTree = "<group>"; };
 		CE43D09026613D66003126F2 /* Polaris Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Polaris Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE5342CF27E650DF0082F570 /* TodoCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCategory.swift; sourceTree = "<group>"; };
+		CE5342D427E6511B0082F570 /* TodoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoController.swift; sourceTree = "<group>"; };
 		CE573FFF267C8E9900665933 /* TodoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewModel.swift; sourceTree = "<group>"; };
 		CE57400C267C903700665933 /* JourneyTodoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyTodoTableViewCell.swift; sourceTree = "<group>"; };
 		CE57400D267C903700665933 /* JourneyTodoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JourneyTodoTableViewCell.xib; sourceTree = "<group>"; };
@@ -1118,6 +1126,7 @@
 			children = (
 				CE04A035262340D1007C98E2 /* AppDelegate.swift */,
 				CE04A037262340D1007C98E2 /* SceneDelegate.swift */,
+				CE5342CB27E650800082F570 /* TodoList */,
 				CEA3CFD526A85C3D00577DA4 /* Enum */,
 				CEEE5772262BE1B300C39358 /* Protocol */,
 				CEEE5748262A958F00C39358 /* Constants */,
@@ -1151,7 +1160,6 @@
 				EC7A3BF426394C3400B59C98 /* TodoStarModel.swift */,
 				EC7A3BF726394CC900B59C98 /* MainTodoCVCViewModel.swift */,
 				EC7A3BFA2639537A00B59C98 /* MainTodoTVCViewModel.swift */,
-				CE573FFF267C8E9900665933 /* TodoViewModel.swift */,
 				EC8C907C277B3845008BE7CD /* LookBackViewModel.swift */,
 				CE99FC9027B3DB8800E264A5 /* WeekPickerViewModel.swift */,
 			);
@@ -1269,6 +1277,50 @@
 				CE40B3F826C040A10000151F /* OnboardingViewModel.swift */,
 			);
 			path = Intro;
+			sourceTree = "<group>";
+		};
+		CE5342CB27E650800082F570 /* TodoList */ = {
+			isa = PBXGroup;
+			children = (
+				CE5342D327E6510A0082F570 /* Controller */,
+				CE5342CE27E650D60082F570 /* Enum */,
+				CE5342CD27E650BB0082F570 /* ViewModel */,
+				CE5342CC27E650B10082F570 /* View */,
+			);
+			path = TodoList;
+			sourceTree = "<group>";
+		};
+		CE5342CC27E650B10082F570 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CEA44E6C267B3BE300A05650 /* TodoTableViewCell.swift */,
+				CEA44E6D267B3BE300A05650 /* TodoTableViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CE5342CD27E650BB0082F570 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CE573FFF267C8E9900665933 /* TodoViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		CE5342CE27E650D60082F570 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				CE5342CF27E650DF0082F570 /* TodoCategory.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
+		CE5342D327E6510A0082F570 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				CE5342D427E6511B0082F570 /* TodoController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		CE5C5AFB27A0DCBF00FDCE32 /* Repository */ = {
@@ -1472,7 +1524,6 @@
 				CEC19AEA265103AA00DA747C /* DayTodoTableViewCell.xib */,
 				CE57400D267C903700665933 /* JourneyTodoTableViewCell.xib */,
 				CEA44E5E267B398100A05650 /* MainSceneTableViewCell.xib */,
-				CEA44E6D267B3BE300A05650 /* TodoTableViewCell.xib */,
 				CEDB478926AF26610024ABD4 /* TodoListEmptyTableViewCell.xib */,
 				CED6B6EC26CAD29200D37647 /* SettingMenuTableViewCell.xib */,
 				CE6CE91A26E3327800BDDB6C /* AddTodoDeleteJourneyTableViewCell.xib */,
@@ -1606,7 +1657,6 @@
 				CE57400C267C903700665933 /* JourneyTodoTableViewCell.swift */,
 				CEA44E5D267B398100A05650 /* MainSceneTableViewCell.swift */,
 				CEA44E67267B3B8100A05650 /* MainTableViewCell.swift */,
-				CEA44E6C267B3BE300A05650 /* TodoTableViewCell.swift */,
 				CEDB478826AF26610024ABD4 /* TodoListEmptyTableViewCell.swift */,
 				CEC48ED2262DCA9100FD887F /* DropdownItemTableViewCell.swift */,
 				CED6B6EB26CAD29200D37647 /* SettingMenuTableViewCell.swift */,
@@ -2110,6 +2160,7 @@
 				ECA49489262DC40F00CC2EB8 /* String+.swift in Sources */,
 				CEEE5766262ADBA200C39358 /* PolarisButton.swift in Sources */,
 				CEEE5782262C018F00C39358 /* AddTodoViewModel.swift in Sources */,
+				CE5342D027E650DF0082F570 /* TodoCategory.swift in Sources */,
 				ECA461972782868A00FBD425 /* LookBackFifthTableViewCell.swift in Sources */,
 				CEB9EA6C27AAAD200017F59B /* WeekRepository.swift in Sources */,
 				CEEE5786262C112E00C39358 /* AddTodoFixOnTopTableViewCell.swift in Sources */,
@@ -2159,6 +2210,7 @@
 				ECC544AC279C013F0016D391 /* RetrospectEmotionReasonItemCell.swift in Sources */,
 				CEAFD8AD27A90EAF00D390DB /* RetrospectFoundStarModel.swift in Sources */,
 				CE04A07526235BD1007C98E2 /* DefaultSession.swift in Sources */,
+				CE5342D527E6511B0082F570 /* TodoController.swift in Sources */,
 				CEEE5746262A958B00C39358 /* UserDefaultKey.swift in Sources */,
 				CEAFD8A527A9051400D390DB /* RetrospectEmoticonModel.swift in Sources */,
 				CE574019267CB1B700665933 /* TodoCellProtocol.swift in Sources */,
@@ -2295,6 +2347,7 @@
 				CE2952F82687A0A500E21871 /* PolarisButton.swift in Sources */,
 				CE2952F92687A0A500E21871 /* AddTodoViewModel.swift in Sources */,
 				CE2952FA2687A0A500E21871 /* AddTodoFixOnTopTableViewCell.swift in Sources */,
+				CE5342D127E650E20082F570 /* TodoCategory.swift in Sources */,
 				ECA461982782868A00FBD425 /* LookBackFifthTableViewCell.swift in Sources */,
 				CEB9EA6D27AAAD200017F59B /* WeekRepository.swift in Sources */,
 				CED6B6DC26CAC1F900D37647 /* SuccessModel.swift in Sources */,
@@ -2344,6 +2397,7 @@
 				ECC544AD279C013F0016D391 /* RetrospectEmotionReasonItemCell.swift in Sources */,
 				CEAFD8AE27A90EAF00D390DB /* RetrospectFoundStarModel.swift in Sources */,
 				CE2953102687A0A500E21871 /* UserDefaultKey.swift in Sources */,
+				CE5342D627E6511B0082F570 /* TodoController.swift in Sources */,
 				CE2953112687A0A500E21871 /* TodoCellProtocol.swift in Sources */,
 				CEAFD8A627A9051400D390DB /* RetrospectEmoticonModel.swift in Sources */,
 				CEA3CFE626A8696400577DA4 /* PolarisWebViewController.swift in Sources */,
@@ -2480,6 +2534,7 @@
 				CE43D02B26613D66003126F2 /* PolarisButton.swift in Sources */,
 				CE43D02C26613D66003126F2 /* AddTodoViewModel.swift in Sources */,
 				CE43D02D26613D66003126F2 /* AddTodoFixOnTopTableViewCell.swift in Sources */,
+				CE5342D227E650E20082F570 /* TodoCategory.swift in Sources */,
 				ECA461992782868A00FBD425 /* LookBackFifthTableViewCell.swift in Sources */,
 				CEB9EA6E27AAAD200017F59B /* WeekRepository.swift in Sources */,
 				CED6B6DD26CAC1F900D37647 /* SuccessModel.swift in Sources */,
@@ -2529,6 +2584,7 @@
 				ECC544AE279C013F0016D391 /* RetrospectEmotionReasonItemCell.swift in Sources */,
 				CEAFD8AF27A90EAF00D390DB /* RetrospectFoundStarModel.swift in Sources */,
 				CE43D03C26613D66003126F2 /* UserDefaultKey.swift in Sources */,
+				CE5342D727E6511B0082F570 /* TodoController.swift in Sources */,
 				CE57401A267CB1B700665933 /* TodoCellProtocol.swift in Sources */,
 				CEAFD8A727A9051400D390DB /* RetrospectEmoticonModel.swift in Sources */,
 				CEA3CFE726A8696400577DA4 /* PolarisWebViewController.swift in Sources */,

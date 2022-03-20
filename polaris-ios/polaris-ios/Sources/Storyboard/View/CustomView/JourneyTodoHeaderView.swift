@@ -26,19 +26,22 @@ class JourneyTodoHeaderView: TodoHeaderView {
         self.bindButtons()
     }
     
-    func configure(_ journeyModel: WeekJourneyModel) {
-        self.journeyModel = journeyModel
+    override func configure(_ presentable: TodoSectionHeaderPresentable) {
+        super.configure(presentable)
         
-        self.titleLabel.text = journeyModel.title != "default" ? journeyModel.title : "여정이 없는 할 일"
-        self.editButton.isHidden = journeyModel.title == "default"
+        guard let journeyHeader = presentable as? WeekJourneyModel else { return }
+        self.journeyModel = journeyHeader
         
-        self.firstStarCategoryView.isHidden          = journeyModel.value1 == nil
-        self.firstCategoryLabel.text                 = journeyModel.value1
-        self.firstCategoryColorView.backgroundColor  = journeyModel.firstValueJourney?.color
+        self.titleLabel.text = journeyHeader.title != "default" ? journeyHeader.title : "여정이 없는 할 일"
+        self.editButton.isHidden = journeyHeader.title == "default"
         
-        self.secondStarCategoryView.isHidden         = journeyModel.value2 == nil
-        self.secondCategoryLabel.text                = journeyModel.value2
-        self.secondCategoryColorView.backgroundColor = journeyModel.secondValueJourney?.color
+        self.firstStarCategoryView.isHidden          = journeyHeader.value1 == nil
+        self.firstCategoryLabel.text                 = journeyHeader.value1
+        self.firstCategoryColorView.backgroundColor  = journeyHeader.firstValueJourney?.color
+        
+        self.secondStarCategoryView.isHidden         = journeyHeader.value2 == nil
+        self.secondCategoryLabel.text                = journeyHeader.value2
+        self.secondCategoryColorView.backgroundColor = journeyHeader.secondValueJourney?.color
     }
     
     private func bindButtons() {
