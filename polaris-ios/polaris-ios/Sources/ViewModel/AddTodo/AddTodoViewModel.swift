@@ -37,10 +37,6 @@ class AddTodoViewModel {
     let completeRequestSubject = PublishSubject<Void>()
     let loadingSubject         = BehaviorSubject<Bool>(value: false)
     
-    init(weekRepository: WeekRepository = WeekRepositoryImpl()) {
-        self.weekRepository = weekRepository
-    }
-    
     func setViewModel(by addOptions: AddTodoVC.AddOptions) {
         self.currentAddOption = addOptions
         self.addListTypes.onNext(addOptions.addCellTypes)
