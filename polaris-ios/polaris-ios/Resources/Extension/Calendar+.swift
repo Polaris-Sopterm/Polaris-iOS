@@ -16,4 +16,13 @@ extension Calendar {
         return isoCalendar
     }()
     
+    func polarisDate(from date: Date) -> PolarisDate {
+        let components = self.dateComponents([.year, .month, .weekOfMonth], from: date)
+        return PolarisDate(
+            year: components.year ?? Date.currentYear,
+            month: components.month ?? Date.currentMonth,
+            weekNo: components.weekOfMonth ?? Date.currentWeekOfMonth
+        )
+    }
+    
 }

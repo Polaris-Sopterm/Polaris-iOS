@@ -9,17 +9,10 @@ import RxSwift
 import Foundation
 
 protocol WeekRepository {
-    func fetchWeekNo(ofDate date: Date) -> Observable<WeekResponseModel>
     func fetchLastWeekOfMonth() -> Observable<[LastWeekOfMonthDataModel]>
 }
 
 final class WeekRepositoryImpl: WeekRepository {
-    
-    func fetchWeekNo(ofDate date: Date) -> Observable<WeekResponseModel> {
-        let weekAPI = WeekAPI.getWeekNo(date: date)
-        return NetworkManager.request(apiType: weekAPI)
-            .asObservable()
-    }
     
     func fetchLastWeekOfMonth() -> Observable<[LastWeekOfMonthDataModel]> {
         let weekAPI = WeekAPI.lastWeekOfMonth

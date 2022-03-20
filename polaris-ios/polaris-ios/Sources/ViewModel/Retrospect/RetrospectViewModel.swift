@@ -43,19 +43,11 @@ final class RetrospectViewModel {
     }
     
     func requestLastWeekRetrospect() {
-        let lastWeekDate = Calendar.current.date(byAdding: .day, value: -7, to: Date.normalizedCurrent)
-        guard let lastWeekDate = lastWeekDate else { return }
+        let date = Calendar.koreaISO8601.date(byAdding: .weekOfMonth, value: -1, to: Date.normalizedCurrent)
+        guard let lastWeekDate = date else { return }
         
-        self.weekRepository.fetchWeekNo(ofDate: lastWeekDate)
-            .withUnretained(self)
-            .flatMapLatest { owner, weekResponseModel -> Observable<RetrospectModel?> in
-                let year = weekResponseModel.year
-                let month = weekResponseModel.month
-                let weekNo = weekResponseModel.weekNo
-                
-                let polarisDate = PolarisDate(year: year, month: month, weekNo: weekNo)
-                return owner.retrospectRepository.fetchRetrospect(ofDate: polarisDate)
-            }
+        let polarisDate = Calendar.koreaISO8601.polarisDate(from: lastWeekDate)
+        self.retrospectRepository.fetchRetrospect(ofDate: polarisDate)
             .withUnretained(self)
             .subscribe(onNext: { owner, retrospect in
                 if retrospect != nil {
