@@ -45,8 +45,6 @@ final class TodoViewModel {
         self.outputEventRelay.asObservable()
     }
     
-    let currentTabRelay = BehaviorRelay<TodoCategory>(value: .day)
-    
     init(todoRepository: TodoRepository = TodoRepositoryImpl()) {
         self.todoRepository = todoRepository
         self.observe(viewEvent: self.viewEventRelay)
@@ -57,12 +55,8 @@ final class TodoViewModel {
         self.viewEventRelay.accept(viewEvent)
     }
     
-    func updateCurrentTab(_ tab: TodoCategory) {
-        self.currentTabRelay.accept(tab)
-    }
-    
     func isEmptyDayTodoSection(at section: Int) -> Bool {
-        let currentTab = self.currentTabRelay.value
+        let currentTab = self.currentTab
         
         guard currentTab == .day else { return false }
         let todoDayList = self.todoList(at: section)
@@ -70,7 +64,7 @@ final class TodoViewModel {
     }
     
     func numberOfSections() -> Int {
-        if self.currentTabRelay.value == .day {
+        if self.self.currentTab == .day {
             return WeekDay.allCases.count
         } else {
             return self.todoController.journeySections.count
@@ -78,7 +72,7 @@ final class TodoViewModel {
     }
     
     func todoListNumberOfRows(in section: Int) -> Int {
-        if self.currentTabRelay.value == .day {
+        if self.self.currentTab == .day {
             let sections = self.todoController.daySections
             guard let todoList = sections[safe: section]?.todoList else { return 1 }
             return todoList.count != 0 ? todoList.count : 1
@@ -91,7 +85,7 @@ final class TodoViewModel {
     }
     
     func todoList(at section: Int) -> [TodoModel] {
-        if self.currentTabRelay.value == .day {
+        if self.currentTab == .day {
             let sections = self.todoController.daySections
             return sections[safe: section]?.todoList ?? []
         } else {
@@ -101,7 +95,7 @@ final class TodoViewModel {
     }
     
     func headerModel(of section: Int) -> TodoSectionHeaderPresentable? {
-        if self.currentTabRelay.value == .day {
+        if self.currentTab == .day {
             return self.todoController.daySections[safe: section]
         } else {
             return self.todoController.journeySections[safe: section]
@@ -117,24 +111,6 @@ final class TodoViewModel {
         case .day:     self.dayExpandedTodo = isExpanded ? todo : nil
         case .journey: self.journeyExpandedTodo = isExpanded ? todo : nil
         }
-    }
-    
-    func updateDoneStatus(_ todoModel: TodoModel) {
-        guard let todoIdx = todoModel.idx else { return }
-        
-        let edittedIsDone = todoModel.isDone == nil ? true : false
-        let todoEditAPI   = TodoAPI.editTodo(idx: todoIdx, isDone: edittedIsDone)
-        
-        self.outputEventRelay.accept(.loading(true))
-        NetworkManager.request(apiType: todoEditAPI).subscribe(onSuccess: { [weak self] (responseModel: TodoModel) in
-            guard let self = self else { return }
-            self.outputEventRelay.accept(.loading(false))
-            
-            self.reloadTodoList(ofDate: self.currentDate)
-            NotificationCenter.default.post(name: .didUpdateTodo, object: MainSceneCellType.todoList.sceneIdentifier)
-        }, onFailure: { [weak self] _ in
-            self?.outputEventRelay.accept(.loading(false))
-        }).disposed(by: self.disposeBag)
     }
     
     private func observe(mainDateSelector: MainSceneDateSelector) {
@@ -157,32 +133,46 @@ final class TodoViewModel {
     private func handleViewEvent(_ event: ViewEvent) {
         switch event {
         case .selectDate(let date):
-            self.reloadTodoList(ofDate: date)
+            self.reloadTodoList(ofDate: date, shouldScroll: self.isInitialRequest)
+            self.isInitialRequest = false
+            
+        case .categoryBtnTapped:
+            self.updateCategory()
             
         case .notifyUpdateTodo(let scene):
             self.reloadTodoListIfNeeded(asScene: scene)
             
         case .deleteBtnTapped(let todo):
-            self.deleteTodo(todo: todo)
+            self.deleteTodo(todo)
             
         case .addToastTapped(let todo):
-            self.addTodo(todo: todo)
+            self.addTodo(todo)
+            
+        case .checkBtnTapped(let todo):
+            self.editTodo(todo)
         }
     }
     
-    private func addTodo(todo: TodoModel) {
+    private func updateCategory() {
+        let currentTab = self.currentTab
+        let changedTab: TodoCategory = currentTab == .day ? .journey : .day
+        self.currentTab = changedTab
+        self.outputEventRelay.accept(.updateCategory(changedTab))
+    }
+    
+    private func addTodo(_ todo: TodoModel) {
         self.outputEventRelay.accept(.loading(true))
         self.todoController.addTodo(todo) { [weak self] isSuccess in
             guard let self = self else { return }
             defer { self.outputEventRelay.accept(.loading(false)) }
             
             guard isSuccess == true else { return }
-            self.outputEventRelay.accept(.reload(shouldScroll: false))
+            self.reloadTodoList(ofDate: self.currentDate, shouldScroll: false)
             NotificationCenter.default.post(name: .didUpdateTodo, object: MainSceneCellType.todoList.sceneIdentifier)
         }
     }
     
-    private func deleteTodo(todo: TodoModel) {
+    private func deleteTodo(_ todo: TodoModel) {
         guard let todoIdx = todo.idx else { return }
         
         self.outputEventRelay.accept(.loading(true))
@@ -192,35 +182,41 @@ final class TodoViewModel {
             
             guard isSuccess == true else { return }
             self.outputEventRelay.accept(.completeDelete(todo: todo))
-            self.outputEventRelay.accept(.reload(shouldScroll: false))
+            self.reloadTodoList(ofDate: self.currentDate, shouldScroll: false)
             NotificationCenter.default.post(name: .didUpdateTodo, object: MainSceneCellType.todoList.sceneIdentifier)
         }
     }
     
-    private func reloadTodoList(ofDate date: PolarisDate) {
-        self.fetchTodoDayList(ofDate:  date)
-        self.fetchTodoJourneyList(ofDate: date)
-    }
-    
-    private func fetchTodoDayList(ofDate date: PolarisDate) {
-        self.todoController.fetchTodoDayList(ofDate: date) { [weak self] _ in
-            guard let self = self                    else { return }
-            guard self.currentTabRelay.value == .day else { return }
-            self.outputEventRelay.accept(.reload(shouldScroll: false))
+    private func editTodo(_ todo: TodoModel) {
+        self.outputEventRelay.accept(.loading(true))
+        self.todoController.editDoneStatus(todo) { [weak self] isSuccess in
+            guard let self = self else { return }
+            defer { self.outputEventRelay.accept(.loading(false)) }
+            
+            self.reloadTodoList(ofDate: self.currentDate, shouldScroll: false)
+            NotificationCenter.default.post(name: .didUpdateTodo, object: MainSceneCellType.todoList.sceneIdentifier)
         }
     }
     
-    private func fetchTodoJourneyList(ofDate date: PolarisDate) {
-        self.todoController.fetchTodoJourneyList(ofDate: date) { [weak self] _ in
-            guard let self = self                        else { return }
-            guard self.currentTabRelay.value == .journey else { return }
-            self.outputEventRelay.accept(.reload(shouldScroll: false))
-        }
+    private func reloadTodoList(ofDate date: PolarisDate, shouldScroll: Bool) {
+        let dayListObservable = self.todoController.fetchTodoDayList(ofDate: date)
+        let journeyListObservable = self.todoController.fetchTodoJourneyList(ofDate: date)
+        
+        self.outputEventRelay.accept(.loading(true))
+        Observable.zip(dayListObservable, journeyListObservable)
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.outputEventRelay.accept(.loading(false))
+                owner.outputEventRelay.accept(.reload(shouldScroll: shouldScroll))
+            }, onError: { [weak self] _ in
+                self?.outputEventRelay.accept(.loading(false))
+            })
+            .disposed(by: self.disposeBag)
     }
-    
+        
     private func reloadTodoListIfNeeded(asScene scene: String) {
         guard scene != MainSceneCellType.todoList.sceneIdentifier else { return }
-        self.reloadTodoList(ofDate: self.currentDate)
+        self.reloadTodoList(ofDate: self.currentDate, shouldScroll: false)
     }
     
     private let todoRepository: TodoRepository
@@ -231,6 +227,9 @@ final class TodoViewModel {
     // 여정별 할일 보여줄 때, 사용하는 Property
     private(set) var journeyExpandedTodo: TodoModel?
     
+    private(set) var currentTab: TodoCategory = .day
+    
+    private var isInitialRequest = true
     private let disposeBag = DisposeBag()
     private let outputEventRelay = PublishRelay<OutputEvent>()
     private let viewEventRelay = PublishRelay<ViewEvent>()
@@ -241,7 +240,7 @@ final class TodoViewModel {
 extension TodoViewModel: AddTodoViewControllerDelegate {
     
     func addTodoViewController(_ viewController: AddTodoVC, didCompleteAddOption option: AddTodoVC.AddOptions) {
-        self.reloadTodoList(ofDate: self.currentDate)
+        self.reloadTodoList(ofDate: self.currentDate, shouldScroll: false)
         NotificationCenter.default.post(name: .didUpdateTodo, object: MainSceneCellType.todoList.sceneIdentifier)
     }
     
@@ -254,12 +253,15 @@ extension TodoViewModel {
         case notifyUpdateTodo(scene: String)
         case deleteBtnTapped(todo: TodoModel)
         case addToastTapped(todo: TodoModel)
+        case categoryBtnTapped
+        case checkBtnTapped(todo: TodoModel)
     }
     
     enum OutputEvent {
         case loading(Bool)
         case completeDelete(todo: TodoModel)
         case reload(shouldScroll: Bool)
+        case updateCategory(TodoCategory)
     }
     
 }

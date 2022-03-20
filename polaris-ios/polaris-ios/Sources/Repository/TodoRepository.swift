@@ -11,6 +11,7 @@ import Foundation
 protocol TodoRepository {
     func createTodo(requestBody: AddTodoRequestBody) -> Observable<AddTodoResponseModel>
     func deleteTodo(todoIdx: Int) -> Observable<SuccessModel>
+    func editTodo(todoIdx: Int, isDone: Bool) -> Observable<TodoModel>
     func fetchTodoDayList(ofDate date: PolarisDate) -> Observable<TodoDayListModel>
     func fetchTodoJourneyList(ofDate date: PolarisDate) -> Observable<TodoJourneyListModel>
 }
@@ -31,6 +32,12 @@ final class TodoRepositoryImpl: TodoRepository {
     func deleteTodo(todoIdx: Int) -> Observable<SuccessModel> {
         let deleteTodoAPI = TodoAPI.deleteTodo(idx: todoIdx)
         return NetworkManager.request(apiType: deleteTodoAPI)
+            .asObservable()
+    }
+    
+    func editTodo(todoIdx: Int, isDone: Bool) -> Observable<TodoModel> {
+        let editAPI = TodoAPI.editTodo(idx: todoIdx, isDone: isDone)
+        return NetworkManager.request(apiType: editAPI)
             .asObservable()
     }
     

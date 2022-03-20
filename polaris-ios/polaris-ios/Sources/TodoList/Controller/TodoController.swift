@@ -25,29 +25,27 @@ final class TodoController {
         self.todoRepository = todoRepository
     }
     
-    func fetchTodoDayList(ofDate date: PolarisDate, completion: (([TodoDayListPresentationModel]) -> Void)? = nil) {
+    func fetchTodoDayList(ofDate date: PolarisDate) -> Observable<[TodoDayListPresentationModel]> {
         self.todoRepository.fetchTodoDayList(ofDate: date)
             .withUnretained(self)
-            .subscribe(onNext: { owner, todoListModel in
+            .map { owner, todoListModel in
                 let sectionModel = todoListModel.data ?? []
                 let presentationList = owner.convertDayPresentationModel(from: sectionModel, ofDate: date)
-                
-                owner.daySections = presentationList
-                completion?(presentationList)
+                return presentationList
+            }
+            .do(onNext: { [weak self] presentationList in
+                self?.daySections = presentationList
             })
-            .disposed(by: self.disposeBag)
     }
     
-    func fetchTodoJourneyList(ofDate date: PolarisDate, completion: (([WeekJourneyModel]) -> Void)? = nil) {
+    func fetchTodoJourneyList(ofDate date: PolarisDate) -> Observable<[WeekJourneyModel]> {
         self.todoRepository.fetchTodoJourneyList(ofDate: date)
-            .withUnretained(self)
-            .subscribe(onNext: { owner, todoListModel in
-                owner.journeySections = todoListModel.data
-                completion?(todoListModel.data)
+            .map { $0.data }
+            .do(onNext: { [weak self] journeySections in
+                self?.journeySections = journeySections
             })
-            .disposed(by: self.disposeBag)
     }
-    
+        
     func addTodo(_ todoModel: TodoModel, completion: @escaping (Bool) -> Void) {
         guard let requestBody = todoModel.addTodoRequestBody else { return }
         self.todoRepository.createTodo(requestBody: requestBody)
@@ -61,9 +59,21 @@ final class TodoController {
     
     func deleteTodo(ofIdx idx: Int, completion: @escaping (Bool) -> Void) {
         self.todoRepository.deleteTodo(todoIdx: idx)
-            .withUnretained(self)
-            .subscribe(onNext: { owner, successModel in
+            .subscribe(onNext: { successModel in
                 completion(successModel.isSuccess ?? false)
+            }, onError: { _ in
+                completion(false)
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
+    func editDoneStatus(_ todoModel: TodoModel, completion: @escaping (Bool) -> Void) {
+        guard let todoIdx = todoModel.idx else { return }
+        
+        let edittedIsDone = todoModel.isDone == nil ? true : false
+        self.todoRepository.editTodo(todoIdx: todoIdx, isDone: edittedIsDone)
+            .subscribe(onNext: { todoModel in
+                completion(true)
             }, onError: { _ in
                 completion(false)
             })
