@@ -239,7 +239,7 @@ class MainSceneViewModel {
             guard let currentDate = self.currentDate else { return }
 
             MainSceneDateSelector.shared.updateDate(currentDate)
-            NotificationCenter.default.post(name: .didUpdateTodo, object: MainSceneCellType.main.sceneIdentifier)
+            NotificationCenter.default.postUpdateTodo(fromScene: .main)
         }).disposed(by: self.disposeBag)
     }
     

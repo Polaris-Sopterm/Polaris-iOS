@@ -508,7 +508,7 @@ extension MainSceneTableViewCell: AddTodoViewControllerDelegate {
     
     func addTodoViewController(_ viewController: AddTodoVC, didCompleteAddOption option: AddTodoVC.AddOptions) {
         self.viewModel.reloadInfo()
-        NotificationCenter.default.post(name: .didUpdateTodo, object: MainSceneCellType.main.sceneIdentifier)
+        NotificationCenter.default.postUpdateTodo(fromScene: .main)
     }
     
 }

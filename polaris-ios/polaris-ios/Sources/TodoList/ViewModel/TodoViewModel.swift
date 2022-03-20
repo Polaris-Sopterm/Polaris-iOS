@@ -168,7 +168,7 @@ final class TodoViewModel {
             
             guard isSuccess == true else { return }
             self.reloadTodoList(ofDate: self.currentDate, shouldScroll: false)
-            NotificationCenter.default.post(name: .didUpdateTodo, object: MainSceneCellType.todoList.sceneIdentifier)
+            NotificationCenter.default.postUpdateTodo(fromScene: .todoList)
         }
     }
     
@@ -183,7 +183,7 @@ final class TodoViewModel {
             guard isSuccess == true else { return }
             self.outputEventRelay.accept(.completeDelete(todo: todo))
             self.reloadTodoList(ofDate: self.currentDate, shouldScroll: false)
-            NotificationCenter.default.post(name: .didUpdateTodo, object: MainSceneCellType.todoList.sceneIdentifier)
+            NotificationCenter.default.postUpdateTodo(fromScene: .todoList)
         }
     }
     
@@ -194,7 +194,7 @@ final class TodoViewModel {
             defer { self.outputEventRelay.accept(.loading(false)) }
             
             self.reloadTodoList(ofDate: self.currentDate, shouldScroll: false)
-            NotificationCenter.default.post(name: .didUpdateTodo, object: MainSceneCellType.todoList.sceneIdentifier)
+            NotificationCenter.default.postUpdateTodo(fromScene: .todoList)
         }
     }
     
@@ -241,7 +241,7 @@ extension TodoViewModel: AddTodoViewControllerDelegate {
     
     func addTodoViewController(_ viewController: AddTodoVC, didCompleteAddOption option: AddTodoVC.AddOptions) {
         self.reloadTodoList(ofDate: self.currentDate, shouldScroll: false)
-        NotificationCenter.default.post(name: .didUpdateTodo, object: MainSceneCellType.todoList.sceneIdentifier)
+        NotificationCenter.default.postUpdateTodo(fromScene: .todoList)
     }
     
 }
