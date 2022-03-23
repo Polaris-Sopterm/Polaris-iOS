@@ -25,7 +25,7 @@ struct WeekJourneyModel: Codable {
     let toDos: [TodoModel]?
 }
 
-extension WeekJourneyModel {
+extension WeekJourneyModel: TodoSectionHeaderPresentable {
     
     var firstValueJourney: Journey? {
         guard let value = self.value1 else { return nil }

@@ -47,29 +47,12 @@ final class WeekPickerViewModel {
     
     private func requestInitialData() {
         self.loadingSubject.onNext(true)
-        
-        if self.selectedDate == nil {
-            Observable.zip(self.requestWeekInformation(), self.requestCurrentWeekNo())
-                .subscribe(onNext: { [weak self] weeksModel, weekResponseModel in
-                    let selectedDate = PolarisDate(
-                        year: weekResponseModel.year,
-                        month: weekResponseModel.month,
-                        weekNo: weekResponseModel.weekNo
-                    )
-                    
-                    self?.selectedDate = selectedDate
-                    self?.lastWeekOfMonthModel = weeksModel
-                    self?.loadingSubject.onNext(false)
-                })
-                .disposed(by: self.disposeBag)
-        } else {
-            self.requestWeekInformation()
-                .subscribe(onNext: { [weak self] weeksModel in
-                    self?.lastWeekOfMonthModel = weeksModel
-                    self?.loadingSubject.onNext(false)
-                })
-                .disposed(by: self.disposeBag)
-        }
+        self.requestWeekInformation()
+            .subscribe(onNext: { [weak self] weeksModel in
+                self?.lastWeekOfMonthModel = weeksModel
+                self?.loadingSubject.onNext(false)
+            })
+            .disposed(by: self.disposeBag)
     }
     
     private func requestWeekInformation() -> Observable<[LastWeekOfMonthDataModel]> {
@@ -77,16 +60,15 @@ final class WeekPickerViewModel {
             .catchAndReturn([])
     }
     
-    private func requestCurrentWeekNo() -> Observable<WeekResponseModel> {
-        self.weekRepository.fetchWeekNo(ofDate: Date.normalizedCurrent)
-            .catchAndReturn(WeekResponseModel(year: Date.currentYear, month: Date.currentMonth, weekNo: 1))
-    }
-    
     private func updateSelectedDate(date: PolarisDate) {
         self.selectedDate = date
     }
     
-    private(set) var selectedDate: PolarisDate?
+    private(set) var selectedDate = PolarisDate(
+        year: Date.currentYear,
+        month: Date.currentMonth,
+        weekNo: Date.currentWeekOfMonth
+    )
     private var lastWeekOfMonthModel = [LastWeekOfMonthDataModel]()
     
     private let loadingSubject = PublishSubject<Bool>()

@@ -156,9 +156,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
     }
     
     private func bindViewModel(){
-        
-        let input = MainSceneViewModel.Input(dateInfo: self.viewModel.dateInfoRelay)
-        let output = viewModel.connect(input: input)
+        let output = viewModel.connect()
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.retryInfo), name: .shouldReloadMainScene, object: nil)
         
@@ -208,7 +206,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
             case .finished:
                 self?.starLoadingIndicator.stopAnimating()
             case .retryNeeded:
-                NotificationCenter.default.post(name: .shouldReloadMainScene, object: nil)
+                NotificationCenter.default.postReloadHome()
             }
         })
         .disposed(by: self.disposeBag)
@@ -220,7 +218,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
             case .finished:
                 self?.todoLoadingIndicator.stopAnimating()
             case .retryNeeded:
-                NotificationCenter.default.post(name: .shouldReloadMainScene, object: nil)
+                NotificationCenter.default.postReloadHome()
             }
         })
         .disposed(by: self.disposeBag)
@@ -262,19 +260,19 @@ final class MainSceneTableViewCell: MainTableViewCell {
             return mainTodoCell
         }.disposed(by: self.disposeBag)
         
-        viewModel.dateInfoRelay.subscribe(onNext: { [weak self] dateInfo in
-            if let weekText = Date.convertWeekNoToString(weekNo: dateInfo.weekNo) {
-                self?.weekLabel.text =  String(dateInfo.year)+"년 "+String(dateInfo.month)+"월 "+weekText
-                if weekText == "다섯째주" {
-                    self?.weekContainViewWidth.constant = 150
+        MainSceneDateSelector.shared.selectedDateObservable
+            .withUnretained(self)
+            .subscribe(onNext: { owner, dateInfo in
+                guard let weekText = Date.convertWeekNoToString(weekNo: dateInfo.weekNo) else { return }
+                
+                owner.weekLabel.text =  String(dateInfo.year) + "년 " + String(dateInfo.month) + "월 " + weekText
+                if dateInfo.weekNo == 5 {
+                    owner.weekContainViewWidth.constant = 150
+                } else {
+                    owner.weekContainViewWidth.constant = 140
                 }
-                else {
-                    self?.weekContainViewWidth.constant = 140
-                }
-            }
-        })
-        .disposed(by: self.disposeBag)
-        
+            })
+            .disposed(by: self.disposeBag)
     }
     
     private func setCometLayout(comet: UIImageView,size: Int) {
@@ -315,13 +313,15 @@ final class MainSceneTableViewCell: MainTableViewCell {
     }
     
     @objc private func showWeekPicker(){
-        guard let weekPickerVC = WeekPickerVC.instantiateFromStoryboard(StoryboardName.weekPicker),
-              let visibleController = UIViewController.getVisibleController() else { return }
+        guard let currentDate = self.viewModel.currentDate                                         else { return }
+        guard let weekPickerVC = WeekPickerVC.instantiateFromStoryboard(StoryboardName.weekPicker) else { return }
+        guard let visibleController = UIViewController.getVisibleController()                      else { return }
+        
         weekPickerVC.weekDelegate = self
         weekPickerVC.setWeekInfo(
-            year: self.viewModel.dateInfoRelay.value.year,
-            month: self.viewModel.dateInfoRelay.value.month,
-            weekNo: self.viewModel.dateInfoRelay.value.weekNo
+            year: currentDate.year,
+            month: currentDate.month,
+            weekNo: currentDate.weekNo
         )
         weekPickerVC.presentWithAnimation(from: visibleController)
     }
@@ -372,7 +372,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
     @objc private func didUpdateTodo(_ notification: Notification) {
         guard let sceneIdentifier = notification.object as? String      else { return }
         guard sceneIdentifier != MainSceneCellType.main.sceneIdentifier else { return }
-        self.viewModel.updateDateInfo(self.viewModel.dateInfoRelay.value)
+        self.viewModel.reloadInfo()
     }
     
     private var dimView: UIView = UIView(frame: .zero)
@@ -466,7 +466,7 @@ extension MainSceneTableViewCell: LookBackCloseDelegate {
         guard let confirmPopupView: PolarisPopupView = UIView.fromNib() else { return }
 
         confirmPopupView.configure(title: "이번주의 여정 돌아보기를 건너뛸까요?", subTitle: "한 번 건너뛴 여정은 다시 돌아볼 수 없어요.", confirmTitle: "건너뛰기", confirmHandler:  { [weak self] in
-            self?.viewModel.reloadInfo()
+            self?.viewModel.skipRetrospect()
         })
 
         confirmPopupView.show(in: self)
@@ -476,16 +476,17 @@ extension MainSceneTableViewCell: LookBackCloseDelegate {
         if isLookBack {
             let viewController = LookBackMainViewController.instantiateFromStoryboard(StoryboardName.lookback)
             guard let visibleController = UIViewController.getVisibleController() else { return }
-            guard let lookbackViewController = viewController                          else { return }
+            guard let lookbackViewController = viewController                     else { return }
             lookbackViewController.viewModel.dateInfo = self.viewModel.lastWeekRelay.value
             visibleController.navigationController?.pushViewController(lookbackViewController, animated: true)
         } else {
             let viewController = AddTodoVC.instantiateFromStoryboard(StoryboardName.addTodo)
             
+            guard let currentDate = self.viewModel.currentDate                    else { return }
             guard let visibleController = UIViewController.getVisibleController() else { return }
             guard let addTodoVC = viewController                                  else { return }
             addTodoVC.setAddOptions(.addJourney)
-            addTodoVC.setAddJourneyDate(self.viewModel.dateInfoRelay.value)
+            addTodoVC.setAddJourneyDate(currentDate)
             addTodoVC.delegate = self
             addTodoVC.presentWithAnimation(from: visibleController)
         }
@@ -506,10 +507,8 @@ extension MainSceneTableViewCell: WeekPickerDelegate {
 extension MainSceneTableViewCell: AddTodoViewControllerDelegate {
     
     func addTodoViewController(_ viewController: AddTodoVC, didCompleteAddOption option: AddTodoVC.AddOptions) {
-        self.viewModel.updateDateInfo(self.viewModel.dateInfoRelay.value)
         self.viewModel.reloadInfo()
-        
-        NotificationCenter.default.post(name: .didUpdateTodo, object: MainSceneCellType.main.sceneIdentifier)
+        NotificationCenter.default.postUpdateTodo(fromScene: .main)
     }
     
 }

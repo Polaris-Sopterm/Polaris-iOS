@@ -26,7 +26,7 @@ extension RetrospectAPI: TargetType {
         case .create:   return "/retrospect/v0"
         case .listValues:       return "/retrospect/v0/value"
         case .getRetrospect:    return "/retrospect/v0/"
-        case .skipRetrospect:   return "/restrospect/v0/skip"
+        case .skipRetrospect:   return "/retrospect/v0/skip"
         }
     }
     
@@ -77,14 +77,19 @@ extension RetrospectAPI: TargetType {
                 return .requestPlain
             }
         case .getRetrospect(let date):
-            fallthrough
-        case .skipRetrospect(let date):
             let param: [String: String] = [
                 "year": "\(date.year)",
                 "month": "\(date.month)",
                 "weekNo": "\(date.weekNo)"
             ]
             return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
+        case .skipRetrospect(let date):
+            let param: [String: Int] = [
+                "year": date.year,
+                "month": date.month,
+                "weekNo": date.weekNo
+            ]
+            return .requestParameters(parameters: param, encoding: JSONEncoding.default)
         }
        
     }

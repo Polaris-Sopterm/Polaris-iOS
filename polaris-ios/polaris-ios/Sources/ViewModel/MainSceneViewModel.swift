@@ -21,11 +21,14 @@ class MainSceneViewModel {
     var heightList: [CGFloat] = [CGFloat(52.0),CGFloat(93.0),CGFloat(52.0),CGFloat(87.0),CGFloat(28.0),CGFloat(71),CGFloat(34),CGFloat(86),CGFloat(58)]
     var retryCount: Int = 0
     
+    var reloadQueue = DispatchQueue(label: "MainSceneReloadQueue")
+    
+    var currentDate: PolarisDate? {
+        MainSceneDateSelector.shared.selectedDate
+    }
+    
     private let disposeBag = DisposeBag()
     private let deviceRatio = DeviceInfo.screenHeight/812.0
-    struct Input{
-        let dateInfo: BehaviorRelay<PolarisDate>
-    }
     
     struct Output{
         let starList: BehaviorRelay<[MainStarCVCViewModel]>
@@ -38,7 +41,7 @@ class MainSceneViewModel {
         let todoLoadingRelay: BehaviorRelay<MainSceneLoadingInfo>
     }
     
-    func connect(input: Input) -> Output{
+    func connect() -> Output{
         let starList: BehaviorRelay<[MainStarCVCViewModel]> = BehaviorRelay(value: [])
         let state: BehaviorRelay<[StarCollectionViewState]> = BehaviorRelay(value: [])
         let lookBackState: BehaviorRelay<[MainLookBackCellState]> = BehaviorRelay(value: [])
@@ -50,11 +53,24 @@ class MainSceneViewModel {
         let todoLoadingRelay: BehaviorRelay<MainSceneLoadingInfo> = BehaviorRelay(value: .finished)
         
         let todoStarList: BehaviorRelay<[MainTodoCVCViewModel]> = BehaviorRelay(value: [])
-        input.dateInfo.subscribe(onNext: { [weak self] date in
-            guard date.year > 0,
-                  let self = self
+        MainSceneDateSelector.shared.selectedDateObservable.subscribe(onNext: { date in
+            requestHomeBanner(date: date)
+            requestTodos(date: date)
+        }).disposed(by: self.disposeBag)
+        
+        self.reloadRelay.subscribe(onNext: { [weak self] value in
+            guard let date = self?.currentDate,
+                  value == true
             else { return }
-            
+            requestHomeBanner(date: date)
+            requestTodos(date: date)
+        }).disposed(by: self.disposeBag)
+        
+        lookBackState.accept([.build])
+        starList.accept(self.convertStarCVCViewModel(mainStarModels: mainStarModels))
+        
+        func requestHomeBanner(date: PolarisDate) {
+            starLoadingRelay.accept(.loading)
             let homeAPI = HomeAPI.getHomeBanner(weekModel: date)
             NetworkManager.request(apiType: homeAPI)
                 .subscribe(onSuccess: { [weak self] (homeModel: HomeModel) in
@@ -92,7 +108,9 @@ class MainSceneViewModel {
                     starLoadingRelay.accept(.retryNeeded)
                 })
                 .disposed(by: self.disposeBag)
-            
+        }
+        
+        func requestTodos(date: PolarisDate) {
             todoLoadingRelay.accept(.loading)
             let journeyAPI = JourneyAPI.getWeekJourney(year: date.year, month: date.month, weekNo: date.weekNo)
             var weekJourneyModels: [WeekJourneyModel] = []
@@ -105,19 +123,7 @@ class MainSceneViewModel {
                     todoLoadingRelay.accept(.retryNeeded)
                 })
                 .disposed(by: self.disposeBag)
-        })
-            .disposed(by: self.disposeBag)
-        
-        let weekAPI = WeekAPI.getWeekNo(date: Date.normalizedCurrent)
-        NetworkManager.request(apiType: weekAPI)
-            .subscribe(onSuccess: { [weak self] (weekModel: WeekResponseModel) in
-                input.dateInfo.accept(PolarisDate(year: weekModel.year, month: weekModel.month, weekNo: weekModel.weekNo))
-                self?.dateInfoRelay.accept(PolarisDate(year: weekModel.year, month: weekModel.month, weekNo: weekModel.weekNo))
-            })
-            .disposed(by: self.disposeBag)
-        
-        lookBackState.accept([.build])
-        starList.accept(self.convertStarCVCViewModel(mainStarModels: mainStarModels))
+        }
         
         return Output(starList: starList,todoStarList: todoStarList,state: state,lookBackState: lookBackState,mainTextRelay: mainTextRelay,homeModelRelay: homeModelRelay, starLoadingRelay: starLoadingRelay, todoLoadingRelay: todoLoadingRelay)
     }
@@ -209,18 +215,29 @@ class MainSceneViewModel {
     }
     
     func skipRetrospect() {
-        let skipAPI = RetrospectAPI.skipRetrospect(date: self.dateInfoRelay.value)
+        guard let lastWeek = lastWeekRelay.value,
+                let year = lastWeek.year,
+                let month = lastWeek.month,
+                let weekNo = lastWeek.weekNo
+        else { return }
+        let skipDate = PolarisDate(year: year, month: month, weekNo: weekNo)
+        let skipAPI = RetrospectAPI.skipRetrospect(date: skipDate)
         NetworkManager.request(apiType: skipAPI)
-            .subscribe(onSuccess: { [weak self] (_: RetrospectSkipModel) in
-                
-            }, onError: { error  in
-                
+            .subscribe(onSuccess: { [weak self] (skipModel: RetrospectSkipModel) in
+                self?.reloadHome()
+            }, onFailure: { error  in
+                PolarisToastManager.shared.showToast(with: "여정 돌아보기 건너뛰기가 불가능합니다.")
             })
             .disposed(by: self.disposeBag)
     }
     
+    func reloadHome() {
+        self.reloadRelay.accept(true)
+    }
+    
     func reloadInfo() {
-        self.dateInfoRelay.accept(self.dateInfoRelay.value)
+        guard let currentDate = self.currentDate else { return }
+        MainSceneDateSelector.shared.updateDate(currentDate)
     }
     
     func retryAPIs() {
@@ -236,7 +253,7 @@ class MainSceneViewModel {
             case 0:
                 Thread.sleep(forTimeInterval: 1)
                 self.retryCount += 1
-                self.reloadInfo()
+                self.reloadHome()
             default:
                 return
             }
@@ -244,7 +261,7 @@ class MainSceneViewModel {
     }
     
     func updateDateInfo(_ dateInfo: PolarisDate) {
-        self.dateInfoRelay.accept(dateInfo)
+        MainSceneDateSelector.shared.updateDate(dateInfo)
     }
     
     func updateDoneStatus(_ todoModel: TodoModel) {
@@ -253,11 +270,11 @@ class MainSceneViewModel {
         let edittedIsDone = todoModel.isDone == nil ? true : false
         let todoEditAPI   = TodoAPI.editTodo(idx: todoIdx, isDone: edittedIsDone)
         
-        NetworkManager.request(apiType: todoEditAPI).subscribe(onSuccess: { [weak self] (responseModel: TodoModel) in
-            guard let self = self else { return }
-            self.updateDateInfo(self.dateInfoRelay.value)
-            
-            NotificationCenter.default.post(name: .didUpdateTodo, object: MainSceneCellType.main.sceneIdentifier)
+        NetworkManager.request(apiType: todoEditAPI).subscribe(onSuccess: { (responseModel: TodoModel) in
+            guard let currentDate = self.currentDate else { return }
+
+            MainSceneDateSelector.shared.updateDate(currentDate)
+            NotificationCenter.default.postUpdateTodo(fromScene: .main)
         }).disposed(by: self.disposeBag)
     }
     
@@ -265,9 +282,6 @@ class MainSceneViewModel {
         return String.makeStarImageName(starName: starName, level: level)
     }
     
-    private(set) var dateInfoRelay        = BehaviorRelay<PolarisDate>(value: PolarisDate(year: 0,
-                                                                                    month: 0,
-                                                                                    weekNo: 0))
-    var lastWeekRelay: BehaviorRelay<LastWeek?> = BehaviorRelay(value: nil)
-    
+    var lastWeekRelay = BehaviorRelay<LastWeek?>(value: nil)
+    var reloadRelay = BehaviorRelay<Bool>(value: false)
 }

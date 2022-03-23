@@ -25,3 +25,15 @@ struct TodoModel: Codable {
     let createdAt: String?
     let journey: JourneyTitleModel?
 }
+
+extension TodoModel {
+    
+    var addTodoRequestBody: AddTodoRequestBody? {
+        guard let title = self.title else { return nil }
+        guard let date = self.date   else { return nil }
+        guard let isTop = self.isTop else { return nil }
+        let journeyIdx = self.journey?.idx
+        return AddTodoRequestBody(title: title, date: date, isTop: isTop, journeyIdx: journeyIdx)
+    }
+    
+}

@@ -51,12 +51,8 @@ class RetrospectReportViewModel {
         self.reportDateRelay.value
     }
     
-    init(
-        retrospectRepository: RetrospectRepository = RetrospectRepositoryImpl(),
-        weekRepository: WeekRepository = WeekRepositoryImpl()
-    ) {
+    init(retrospectRepository: RetrospectRepository = RetrospectRepositoryImpl()) {
         self.retrospectRepository = retrospectRepository
-        self.weekRepository = weekRepository
         
         self.bindDate()
     }
@@ -92,8 +88,6 @@ class RetrospectReportViewModel {
     
     func occurViewAction(action: ViewAction) {
         switch action {
-        case .viewDidLoad:
-            self.requestCurrentDate()
         case .weekPickerSelected(let date):
             self.updateReportDate(date: date)
         }
@@ -133,24 +127,14 @@ class RetrospectReportViewModel {
             .disposed(by: self.disposeBag)
     }
     
-    private func requestCurrentDate() {
-        self.loadingSubject.onNext(true)
-        self.weekRepository.fetchWeekNo(ofDate: Date.normalizedCurrent)
-            .withUnretained(self)
-            .subscribe(onNext: { owner, weekResponseModel in
-                let currentYear = weekResponseModel.year
-                let currentMonth = weekResponseModel.month
-                let currentWeekNo = weekResponseModel.weekNo
-                
-                let date = PolarisDate(year: currentYear, month: currentMonth, weekNo: currentWeekNo)
-                owner.reportDateRelay.accept(date)
-                owner.loadingSubject.onNext(false)
-            })
-            .disposed(by: self.disposeBag)
-    }
-    
     private let loadingSubject = PublishSubject<Bool>()
-    private let reportDateRelay = BehaviorRelay<PolarisDate?>(value: nil)
+    private let reportDateRelay: BehaviorRelay<PolarisDate> = {
+        let currentYear = Date.currentYear
+        let currentMonth = Date.currentMonth
+        let currentWeekNo = Date.currentWeekOfMonth
+        let date = PolarisDate(year: currentYear, month: currentMonth, weekNo: currentWeekNo)
+        return BehaviorRelay<PolarisDate>(value: date)
+    }()
     private let retrospectReportRelay = BehaviorRelay<RetrospectModel?>(value: nil)
     private let foundStarRelayBehaviorRelay: BehaviorRelay<RetrospectValueListModel> = {
         let model = RetrospectValueListModel(
@@ -167,7 +151,6 @@ class RetrospectReportViewModel {
         return BehaviorRelay<RetrospectValueListModel>(value: model)
     }()
     
-    private let weekRepository: WeekRepository
     private let retrospectRepository: RetrospectRepository
     private let disposeBag = DisposeBag()
     
@@ -176,7 +159,6 @@ class RetrospectReportViewModel {
 extension RetrospectReportViewModel {
     
     enum ViewAction {
-        case viewDidLoad
         case weekPickerSelected(date: PolarisDate)
     }
     
