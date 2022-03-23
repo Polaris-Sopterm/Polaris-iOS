@@ -208,6 +208,17 @@ class MainSceneViewModel {
         return resultList
     }
     
+    func skipRetrospect() {
+        let skipAPI = RetrospectAPI.skipRetrospect(date: self.dateInfoRelay.value)
+        NetworkManager.request(apiType: skipAPI)
+            .subscribe(onSuccess: { [weak self] (_: RetrospectSkipModel) in
+                
+            }, onError: { error  in
+                
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
     func reloadInfo() {
         self.dateInfoRelay.accept(self.dateInfoRelay.value)
     }

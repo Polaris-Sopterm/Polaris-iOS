@@ -651,6 +651,9 @@
 		ECA7C9DF27E70B80001062F5 /* DispatchQueue+.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA7C9DE27E70B80001062F5 /* DispatchQueue+.swift */; };
 		ECA7C9E027E70B80001062F5 /* DispatchQueue+.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA7C9DE27E70B80001062F5 /* DispatchQueue+.swift */; };
 		ECA7C9E127E70B80001062F5 /* DispatchQueue+.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA7C9DE27E70B80001062F5 /* DispatchQueue+.swift */; };
+		ECA8238127EB41F000141914 /* RetrospectSkipModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA8238027EB41F000141914 /* RetrospectSkipModel.swift */; };
+		ECA8238227EB41F000141914 /* RetrospectSkipModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA8238027EB41F000141914 /* RetrospectSkipModel.swift */; };
+		ECA8238327EB41F000141914 /* RetrospectSkipModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA8238027EB41F000141914 /* RetrospectSkipModel.swift */; };
 		ECB52B83278485A0000084CF /* RetrospectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB52B82278485A0000084CF /* RetrospectModel.swift */; };
 		ECB5443326D3CA0500FA4C50 /* NickChangeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5443226D3CA0500FA4C50 /* NickChangeVC.swift */; };
 		ECB5443426D3CA0500FA4C50 /* NickChangeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5443226D3CA0500FA4C50 /* NickChangeVC.swift */; };
@@ -977,6 +980,7 @@
 		ECA49485262DC17A00CC2EB8 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		ECA49488262DC40F00CC2EB8 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		ECA7C9DE27E70B80001062F5 /* DispatchQueue+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+.swift"; sourceTree = "<group>"; };
+		ECA8238027EB41F000141914 /* RetrospectSkipModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrospectSkipModel.swift; sourceTree = "<group>"; };
 		ECB52B82278485A0000084CF /* RetrospectModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrospectModel.swift; sourceTree = "<group>"; };
 		ECB5443226D3CA0500FA4C50 /* NickChangeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickChangeVC.swift; sourceTree = "<group>"; };
 		ECB5443626D3D0CA00FA4C50 /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
@@ -1641,6 +1645,7 @@
 				CEAFD8A427A9051400D390DB /* RetrospectEmoticonModel.swift */,
 				CEAFD8A827A9057A00D390DB /* RetrospectEmoticonReasonModel.swift */,
 				CEAFD8AC27A90EAF00D390DB /* RetrospectFoundStarModel.swift */,
+				ECA8238027EB41F000141914 /* RetrospectSkipModel.swift */,
 			);
 			path = Retrospect;
 			sourceTree = "<group>";
@@ -2115,6 +2120,7 @@
 				CEB9EA6427A5673B0017F59B /* TodoRepository.swift in Sources */,
 				ECC544C7279C01E70016D391 /* RetrospectEmotionReasonTableViewCell.swift in Sources */,
 				CEC48ED4262DCA9100FD887F /* DropdownItemTableViewCell.swift in Sources */,
+				ECA8238127EB41F000141914 /* RetrospectSkipModel.swift in Sources */,
 				ECB5443326D3CA0500FA4C50 /* NickChangeVC.swift in Sources */,
 				ECA4944426296F6E00CC2EB8 /* TodoDateTVCViewModel.swift in Sources */,
 				CEE574F5263092A400EA64B7 /* Date+.swift in Sources */,
@@ -2297,6 +2303,7 @@
 				CEB9EA6527A5673B0017F59B /* TodoRepository.swift in Sources */,
 				ECC544C8279C01E70016D391 /* RetrospectEmotionReasonTableViewCell.swift in Sources */,
 				CE2952FF2687A0A500E21871 /* TodoDateTVCViewModel.swift in Sources */,
+				ECA8238227EB41F000141914 /* RetrospectSkipModel.swift in Sources */,
 				ECB5443426D3CA0500FA4C50 /* NickChangeVC.swift in Sources */,
 				CE2953002687A0A500E21871 /* Date+.swift in Sources */,
 				CE2953012687A0A500E21871 /* MainTableViewCell.swift in Sources */,
@@ -2479,6 +2486,7 @@
 				CEB9EA6627A5673B0017F59B /* TodoRepository.swift in Sources */,
 				ECC544C9279C01E70016D391 /* RetrospectEmotionReasonTableViewCell.swift in Sources */,
 				CE43D03026613D66003126F2 /* TodoDateTVCViewModel.swift in Sources */,
+				ECA8238327EB41F000141914 /* RetrospectSkipModel.swift in Sources */,
 				ECB5443526D3CA0500FA4C50 /* NickChangeVC.swift in Sources */,
 				CE43D03126613D66003126F2 /* Date+.swift in Sources */,
 				CEA44E69267B3B8100A05650 /* MainTableViewCell.swift in Sources */,
