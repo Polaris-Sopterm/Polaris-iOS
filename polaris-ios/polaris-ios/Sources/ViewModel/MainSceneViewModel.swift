@@ -53,9 +53,24 @@ class MainSceneViewModel {
         let todoLoadingRelay: BehaviorRelay<MainSceneLoadingInfo> = BehaviorRelay(value: .finished)
         
         let todoStarList: BehaviorRelay<[MainTodoCVCViewModel]> = BehaviorRelay(value: [])
-        MainSceneDateSelector.shared.selectedDateObservable.subscribe(onNext: { [weak self] date in
-            guard let self = self else { return }
-            
+        MainSceneDateSelector.shared.selectedDateObservable.subscribe(onNext: { date in
+            requestHomeBanner(date: date)
+            requestTodos(date: date)
+        }).disposed(by: self.disposeBag)
+        
+        self.reloadRelay.subscribe(onNext: { [weak self] value in
+            guard let date = self?.currentDate,
+                  value == true
+            else { return }
+            requestHomeBanner(date: date)
+            requestTodos(date: date)
+        }).disposed(by: self.disposeBag)
+        
+        lookBackState.accept([.build])
+        starList.accept(self.convertStarCVCViewModel(mainStarModels: mainStarModels))
+        
+        func requestHomeBanner(date: PolarisDate) {
+            starLoadingRelay.accept(.loading)
             let homeAPI = HomeAPI.getHomeBanner(weekModel: date)
             NetworkManager.request(apiType: homeAPI)
                 .subscribe(onSuccess: { [weak self] (homeModel: HomeModel) in
@@ -93,7 +108,9 @@ class MainSceneViewModel {
                     starLoadingRelay.accept(.retryNeeded)
                 })
                 .disposed(by: self.disposeBag)
-            
+        }
+        
+        func requestTodos(date: PolarisDate) {
             todoLoadingRelay.accept(.loading)
             let journeyAPI = JourneyAPI.getWeekJourney(year: date.year, month: date.month, weekNo: date.weekNo)
             var weekJourneyModels: [WeekJourneyModel] = []
@@ -106,10 +123,7 @@ class MainSceneViewModel {
                     todoLoadingRelay.accept(.retryNeeded)
                 })
                 .disposed(by: self.disposeBag)
-        }).disposed(by: self.disposeBag)
-        
-        lookBackState.accept([.build])
-        starList.accept(self.convertStarCVCViewModel(mainStarModels: mainStarModels))
+        }
         
         return Output(starList: starList,todoStarList: todoStarList,state: state,lookBackState: lookBackState,mainTextRelay: mainTextRelay,homeModelRelay: homeModelRelay, starLoadingRelay: starLoadingRelay, todoLoadingRelay: todoLoadingRelay)
     }
@@ -200,15 +214,36 @@ class MainSceneViewModel {
         return resultList
     }
     
+    func skipRetrospect() {
+        guard let lastWeek = lastWeekRelay.value,
+                let year = lastWeek.year,
+                let month = lastWeek.month,
+                let weekNo = lastWeek.weekNo
+        else { return }
+        let skipDate = PolarisDate(year: year, month: month, weekNo: weekNo)
+        let skipAPI = RetrospectAPI.skipRetrospect(date: skipDate)
+        NetworkManager.request(apiType: skipAPI)
+            .subscribe(onSuccess: { [weak self] (skipModel: RetrospectSkipModel) in
+                self?.reloadHome()
+            }, onFailure: { error  in
+                PolarisToastManager.shared.showToast(with: "여정 돌아보기 건너뛰기가 불가능합니다.")
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
+    func reloadHome() {
+        self.reloadRelay.accept(true)
+    }
+    
     func reloadInfo() {
         guard let currentDate = self.currentDate else { return }
         MainSceneDateSelector.shared.updateDate(currentDate)
     }
     
     func retryAPIs() {
-        reloadQueue.sync { [weak self] in
+        DispatchQueue.mainSceneReloadQueue.async { [weak self] in
             guard let self = self else { return }
-            switch retryCount {
+            switch self.retryCount {
             case 2:
                 Thread.sleep(forTimeInterval: 2)
                 fallthrough
@@ -217,8 +252,8 @@ class MainSceneViewModel {
                 fallthrough
             case 0:
                 Thread.sleep(forTimeInterval: 1)
-                retryCount += 1
-                self.reloadInfo()
+                self.retryCount += 1
+                self.reloadHome()
             default:
                 return
             }
@@ -248,5 +283,5 @@ class MainSceneViewModel {
     }
     
     var lastWeekRelay = BehaviorRelay<LastWeek?>(value: nil)
-    
+    var reloadRelay = BehaviorRelay<Bool>(value: false)
 }

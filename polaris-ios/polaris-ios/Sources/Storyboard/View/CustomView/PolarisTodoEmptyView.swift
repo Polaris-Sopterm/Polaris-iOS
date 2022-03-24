@@ -41,7 +41,7 @@ class PolarisTodoEmptyView: UIView {
         super.init(coder: coder)
     }
     
-    func setUIs() {
+    private func setUIs() {
         self.addSubview(self.emptyImageView)
         self.addSubview(self.titleLabel)
         self.addSubview(self.subTitleLabel)

@@ -206,7 +206,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
             case .finished:
                 self?.starLoadingIndicator.stopAnimating()
             case .retryNeeded:
-                NotificationCenter.default.post(name: .shouldReloadMainScene, object: nil)
+                NotificationCenter.default.postReloadHome()
             }
         })
         .disposed(by: self.disposeBag)
@@ -218,7 +218,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
             case .finished:
                 self?.todoLoadingIndicator.stopAnimating()
             case .retryNeeded:
-                NotificationCenter.default.post(name: .shouldReloadMainScene, object: nil)
+                NotificationCenter.default.postReloadHome()
             }
         })
         .disposed(by: self.disposeBag)
@@ -466,7 +466,7 @@ extension MainSceneTableViewCell: LookBackCloseDelegate {
         guard let confirmPopupView: PolarisPopupView = UIView.fromNib() else { return }
 
         confirmPopupView.configure(title: "이번주의 여정 돌아보기를 건너뛸까요?", subTitle: "한 번 건너뛴 여정은 다시 돌아볼 수 없어요.", confirmTitle: "건너뛰기", confirmHandler:  { [weak self] in
-            self?.viewModel.reloadInfo()
+            self?.viewModel.skipRetrospect()
         })
 
         confirmPopupView.show(in: self)

@@ -12,6 +12,7 @@ enum RetrospectAPI {
     case create(model: RetrospectModel)
     case listValues(date: PolarisDate? = nil)
     case getRetrospect(date: PolarisDate)
+    case skipRetrospect(date: PolarisDate)
 }
 
 extension RetrospectAPI: TargetType {
@@ -25,6 +26,7 @@ extension RetrospectAPI: TargetType {
         case .create:   return "/retrospect/v0"
         case .listValues:       return "/retrospect/v0/value"
         case .getRetrospect:    return "/retrospect/v0/"
+        case .skipRetrospect:   return "/retrospect/v0/skip"
         }
     }
     
@@ -33,6 +35,7 @@ extension RetrospectAPI: TargetType {
         case .create:   return .post
         case .listValues:       fallthrough
         case .getRetrospect:    return .get
+        case .skipRetrospect:   return .patch
         }
     }
     
@@ -80,6 +83,13 @@ extension RetrospectAPI: TargetType {
                 "weekNo": "\(date.weekNo)"
             ]
             return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
+        case .skipRetrospect(let date):
+            let param: [String: Int] = [
+                "year": date.year,
+                "month": date.month,
+                "weekNo": date.weekNo
+            ]
+            return .requestParameters(parameters: param, encoding: JSONEncoding.default)
         }
        
     }

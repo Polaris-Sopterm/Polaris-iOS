@@ -13,4 +13,8 @@ extension NotificationCenter {
         self.post(name: .didUpdateTodo, object: scene.sceneIdentifier)
     }
     
+    func postReloadHome() {
+        self.post(name: .shouldReloadMainScene, object: nil)
+    }
+    
 }
