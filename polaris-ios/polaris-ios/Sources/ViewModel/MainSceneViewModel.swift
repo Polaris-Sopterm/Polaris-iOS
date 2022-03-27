@@ -23,7 +23,7 @@ class MainSceneViewModel {
     
     var reloadQueue = DispatchQueue(label: "MainSceneReloadQueue")
     
-    var currentDate: PolarisDate? {
+    var currentDate: PolarisDate {
         MainSceneDateSelector.shared.selectedDate
     }
     
@@ -236,7 +236,7 @@ class MainSceneViewModel {
     }
     
     func reloadInfo() {
-        guard let currentDate = self.currentDate else { return }
+        let currentDate = self.currentDate
         MainSceneDateSelector.shared.updateDate(currentDate)
     }
     
@@ -270,9 +270,9 @@ class MainSceneViewModel {
         let edittedIsDone = todoModel.isDone == nil ? true : false
         let todoEditAPI   = TodoAPI.editTodo(idx: todoIdx, isDone: edittedIsDone)
         
-        NetworkManager.request(apiType: todoEditAPI).subscribe(onSuccess: { (responseModel: TodoModel) in
-            guard let currentDate = self.currentDate else { return }
-
+        NetworkManager.request(apiType: todoEditAPI).subscribe(onSuccess: { [weak self] (responseModel: TodoModel) in
+            guard let currentDate = self?.currentDate else { return }
+            
             MainSceneDateSelector.shared.updateDate(currentDate)
             NotificationCenter.default.postUpdateTodo(fromScene: .main)
         }).disposed(by: self.disposeBag)

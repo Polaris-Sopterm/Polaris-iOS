@@ -313,10 +313,10 @@ final class MainSceneTableViewCell: MainTableViewCell {
     }
     
     @objc private func showWeekPicker(){
-        guard let currentDate = self.viewModel.currentDate                                         else { return }
         guard let weekPickerVC = WeekPickerVC.instantiateFromStoryboard(StoryboardName.weekPicker) else { return }
         guard let visibleController = UIViewController.getVisibleController()                      else { return }
         
+        let currentDate = self.viewModel.currentDate
         weekPickerVC.weekDelegate = self
         weekPickerVC.setWeekInfo(
             year: currentDate.year,
@@ -347,13 +347,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
     }
     
     @IBAction func addNewJourneyButton(_ sender: Any) {
-        let viewController = AddTodoVC.instantiateFromStoryboard(StoryboardName.addTodo)
-        
-        guard let visibleController = UIViewController.getVisibleController() else { return }
-        guard let addTodoVC = viewController                                  else { return }
-        addTodoVC.setAddOptions(.addJourney)
-        addTodoVC.delegate = self
-        addTodoVC.presentWithAnimation(from: visibleController)
+        self.presentAddJourneyViewController()
     }
     
     
@@ -373,6 +367,19 @@ final class MainSceneTableViewCell: MainTableViewCell {
         guard let sceneIdentifier = notification.object as? String      else { return }
         guard sceneIdentifier != MainSceneCellType.main.sceneIdentifier else { return }
         self.viewModel.reloadInfo()
+    }
+    
+    private func presentAddJourneyViewController() {
+        let viewController = AddTodoVC.instantiateFromStoryboard(StoryboardName.addTodo)
+        let currentDate = self.viewModel.currentDate
+        
+        guard let visibleController = UIViewController.getVisibleController() else { return }
+        guard let addTodoVC = viewController                                  else { return }
+        
+        addTodoVC.setAddOptions(.addJourney)
+        addTodoVC.setAddJourneyDate(currentDate)
+        addTodoVC.delegate = self
+        addTodoVC.presentWithAnimation(from: visibleController)
     }
     
     private var dimView: UIView = UIView(frame: .zero)
@@ -480,15 +487,7 @@ extension MainSceneTableViewCell: LookBackCloseDelegate {
             lookbackViewController.viewModel.dateInfo = self.viewModel.lastWeekRelay.value
             visibleController.navigationController?.pushViewController(lookbackViewController, animated: true)
         } else {
-            let viewController = AddTodoVC.instantiateFromStoryboard(StoryboardName.addTodo)
-            
-            guard let currentDate = self.viewModel.currentDate                    else { return }
-            guard let visibleController = UIViewController.getVisibleController() else { return }
-            guard let addTodoVC = viewController                                  else { return }
-            addTodoVC.setAddOptions(.addJourney)
-            addTodoVC.setAddJourneyDate(currentDate)
-            addTodoVC.delegate = self
-            addTodoVC.presentWithAnimation(from: visibleController)
+            self.presentAddJourneyViewController()
         }
     }
     
