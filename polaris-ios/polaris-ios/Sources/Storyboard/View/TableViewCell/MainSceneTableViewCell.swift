@@ -370,15 +370,13 @@ final class MainSceneTableViewCell: MainTableViewCell {
     }
     
     private func presentAddJourneyViewController() {
-        let viewController = AddTodoVC.instantiateFromStoryboard(StoryboardName.addTodo)
-        let currentDate = self.viewModel.currentDate
+        let param = AddTodoViewMakingParameter(
+            mode: .addJourney(self.viewModel.currentDate),
+            delegate: self
+        )
         
-        guard let visibleController = UIViewController.getVisibleController() else { return }
-        guard let addTodoVC = viewController                                  else { return }
-        
-        addTodoVC.setAddOptions(.addJourney)
-        addTodoVC.setAddJourneyDate(currentDate)
-        addTodoVC.delegate = self
+        guard let addTodoVC = AddTodoViewFactory.makeAddTodoViewController(param: param) else { return }
+        guard let visibleController = UIViewController.getVisibleController()            else { return }
         addTodoVC.presentWithAnimation(from: visibleController)
     }
     
@@ -505,7 +503,7 @@ extension MainSceneTableViewCell: WeekPickerDelegate {
 
 extension MainSceneTableViewCell: AddTodoViewControllerDelegate {
     
-    func addTodoViewController(_ viewController: AddTodoVC, didCompleteAddOption option: AddTodoVC.AddOptions) {
+    func addTodoViewController(_ viewController: AddTodoVC, didCompleteAddMode mode: AddTodoVC.AddMode) {
         self.viewModel.reloadInfo()
         NotificationCenter.default.postUpdateTodo(fromScene: .main)
     }

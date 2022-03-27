@@ -22,12 +22,14 @@ class AddTodoDeleteJourneyTableViewCell: AddTodoTableViewCell {
     override var delegate: AddTodoTableViewCellDelegate? {
         didSet { self._delegate = self.delegate as? AddTodoDeleteJourneyTableViewCellDelegate }
     }
-    
-    weak var _delegate: AddTodoDeleteJourneyTableViewCellDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
         self.bindButtons()
+    }
+    
+    override func configure(by addMode: AddTodoVC.AddMode, date: Date? = nil) {
+        super.configure(by: addMode, date: date)
     }
     
     private func bindButtons() {
@@ -38,6 +40,8 @@ class AddTodoDeleteJourneyTableViewCell: AddTodoTableViewCell {
                 self._delegate?.addTodoDeleteJourneyTableViewCellDidTapDelete(self)
             }).disposed(by: self.disposeBag)
     }
+    
+    private weak var _delegate: AddTodoDeleteJourneyTableViewCellDelegate?
     
     private let disposeBag = DisposeBag()
     

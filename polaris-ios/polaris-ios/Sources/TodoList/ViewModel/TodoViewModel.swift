@@ -239,7 +239,7 @@ final class TodoViewModel {
 
 extension TodoViewModel: AddTodoViewControllerDelegate {
     
-    func addTodoViewController(_ viewController: AddTodoVC, didCompleteAddOption option: AddTodoVC.AddOptions) {
+    func addTodoViewController(_ viewController: AddTodoVC, didCompleteAddMode mode: AddTodoVC.AddMode) {
         self.reloadTodoList(ofDate: self.currentDate, shouldScroll: false)
         NotificationCenter.default.postUpdateTodo(fromScene: .todoList)
     }

@@ -10,7 +10,7 @@ import RxCocoa
 import RxSwift
 
 protocol AddTodoViewControllerDelegate: AnyObject {
-    func addTodoViewController(_ viewController: AddTodoVC, didCompleteAddOption option: AddTodoVC.AddOptions)
+    func addTodoViewController(_ viewController: AddTodoVC, didCompleteAddMode mode: AddTodoVC.AddMode)
 }
 
 class AddTodoVC: HalfModalVC {
@@ -30,98 +30,36 @@ class AddTodoVC: HalfModalVC {
         self.bindButtons()
         self.bindEnableButton()
         self.observeViewModel()
-        self.setupCurrentUIAsOption()
     }
     
     // MARK: - Set Up
-    func setAddOptions(_ options: AddOptions) {
-        self.viewModel.setViewModel(by: options)
-    }
-    
-    func setAddTodoDate(_ date: Date) {
-        self.viewModel.setAddTodoDate(date)
-    }
-    
-    func setJourneyModel(_ journeyModel: WeekJourneyModel) {
-        self.viewModel.setJourneyModel(journeyModel)
-    }
-    
-    func setEditTodo(_ todo: TodoModel) {
-        self.viewModel.setEditTodoModel(todo)
-    }
-    
-    func setAddJourneyDate(_ date: PolarisDate) {
-        self.viewModel.setAddJourneyDate(date)
+    func setAddMode(_ mode: AddMode) {
+        self.viewModel.setAddMode(mode)
     }
     
     private func setupTitleLabel() {
-        if self.viewModel.currentAddOption == .perDayAddTodo {
-            guard let date = self.viewModel.currentDate else { return }
+        guard let mode = self.viewModel.addMode else { return }
+        switch mode {
+        case .addDayTodo(let date):
             self.titleLabel.text = date.convertToString(using: "M월 d일") + "의 할 일"
             self.addButton.setTitle("추가하기", for: .normal)
-        } else if self.viewModel.currentAddOption == .perJourneyAddTodo {
-            guard let journeyTitle = self.viewModel.journeyModel?.title else { return }
+            
+        case .addJourneyTodo(let journey):
+            let journeyTitle = journey.title ?? "default"
             self.titleLabel.text = journeyTitle == "default" ? "여정이 없는 할 일" : String(format: "%@의 할 일", journeyTitle)
             self.addButton.setTitle("추가하기", for: .normal)
-        } else if self.viewModel.currentAddOption == .addJourney {
+            
+        case .addJourney:
             self.titleLabel.text = "여정 추가하기"
             self.addButton.setTitle("추가하기", for: .normal)
-        } else if self.viewModel.currentAddOption == .edittedTodo {
+            
+        case .editTodo:
             self.titleLabel.text = "일정 수정하기"
             self.addButton.setTitle("수정하기", for: .normal)
-        } else if self.viewModel.currentAddOption == .edittedJourney {
+            
+        case .editJourney:
             self.titleLabel.text = "여정 수정하기"
             self.addButton.setTitle("수정하기", for: .normal)
-        }
-    }
-    
-    private func setupCurrentUIAsOption() {
-        guard let currentAddOption = self.viewModel.currentAddOption else { return }
-            
-        if currentAddOption == .edittedTodo {
-            self.setupEdittedTodoUI()
-        } else if currentAddOption == .edittedJourney {
-            self.setupEdittedJourneyUI()
-        }
-    }
-    
-    private func setupEdittedTodoUI() {
-        guard let todoModel = self.viewModel.todoModel else { return }
-        
-        for index in 0..<self.viewModel.addOptionCount {
-            let indexPath = IndexPath(row: index, section: 0)
-            guard let cell = self.tableView.cellForRow(at: indexPath) else { continue }
-            
-            if let addTextCell = cell as? AddTodoTextTableViewCell {
-                addTextCell.updateAddText(todoModel.title ?? "")
-            } else if let dropdownCell = cell as? AddTodoDropdownTableViewCell {
-                dropdownCell.updateSelectedJourney(todoModel.journey ?? JourneyTitleModel(idx: nil, title: "default",
-                                                                                          year: nil, month: nil,
-                                                                                          weekNo: nil, userIdx: nil))
-            } else if let selectDayCell = cell as? AddTodoDayTableViewCell,
-                      let selectDate = todoModel.date?.convertToDate()?.normalizedDate {
-                selectDayCell.updateSelectDate(selectDate)
-            } else if let fixOnTopCell = cell as? AddTodoFixOnTopTableViewCell {
-                fixOnTopCell.updateFix(todoModel.isTop ?? false)
-            }
-        }
-    }
-    
-    private func setupEdittedJourneyUI() {
-        guard let journeyModel = self.viewModel.journeyModel else { return }
-        
-        for index in 0..<self.viewModel.addOptionCount {
-            let indexPath = IndexPath(row: index, section: 0)
-            guard let cell = self.tableView.cellForRow(at: indexPath) else { continue }
-            
-            if let addTextCell = cell as? AddTodoTextTableViewCell {
-                addTextCell.updateAddText(journeyModel.title ?? "")
-            } else if let selectJourneyCell = cell as? AddTodoSelectStarTableViewCell {
-                var journeySet: Set<Journey> = []
-                if let firstJourney = journeyModel.firstValueJourney   { journeySet.insert(firstJourney) }
-                if let secondJourney = journeyModel.secondValueJourney { journeySet.insert(secondJourney) }
-                selectJourneyCell.updateSelectJourney(journeySet)
-            }
         }
     }
     
@@ -152,10 +90,10 @@ class AddTodoVC: HalfModalVC {
                 let cell      = tableView.dequeueReusableCell(cell: item, forIndexPath: indexPath)
                 
                 guard let addTodoCell = cell as? AddTodoTableViewCellProtocol else { return UITableViewCell() }
-                guard let currentAddOption = self.viewModel.currentAddOption  else { return UITableViewCell() }
+                guard let currentAddMode = self.viewModel.addMode             else { return UITableViewCell() }
                 
                 addTodoCell.delegate = self
-                addTodoCell.configure(by: currentAddOption, date: self.viewModel.currentDate)
+                addTodoCell.configure(by: currentAddMode, date: self.viewModel.currentDate)
                 return addTodoCell
             }
             .disposed(by: self.disposeBag)
@@ -172,9 +110,12 @@ class AddTodoVC: HalfModalVC {
             self?.dismissWithAnimation()
         }).disposed(by: self.disposeBag)
         
-        self.addButton.rx.tap.subscribe(onNext: { [weak self] in
-            self?.viewModel.requestAddTodo()
-        }).disposed(by: self.disposeBag)
+        self.addButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { owner, _ in
+                owner.viewModel.occur(viewEvent: .didTapAddButton)
+            })
+            .disposed(by: self.disposeBag)
     }
     
     private func bindEnableButton() {
@@ -188,16 +129,21 @@ class AddTodoVC: HalfModalVC {
     private func observeViewModel() {
         self.viewModel.completeRequestSubject.observeOnMain(onNext: { [weak self] in
             guard let self = self                                     else { return }
-            guard let currentOption = self.viewModel.currentAddOption else { return }
-            self.delegate?.addTodoViewController(self, didCompleteAddOption: currentOption)
+            guard let currentMode = self.viewModel.addMode            else { return }
+            
+            self.delegate?.addTodoViewController(self, didCompleteAddMode: currentMode)
             self.dismissWithAnimation()
             
-            if currentOption == .perDayAddTodo || currentOption == .perJourneyAddTodo {
+            switch currentMode {
+            case .addDayTodo, .addJourneyTodo:
                 PolarisToastManager.shared.showToast(with: "할 일이 추가되었어요.")
-            } else if currentOption == .addJourney {
+                
+            case .addJourney:
                 PolarisToastManager.shared.showToast(with: "여정이 추가되었어요.")
+                
+            default:
+                break
             }
-            NotificationCenter.default.post(name: .didUpdateTodo, object: nil)
         }).disposed(by: self.disposeBag)
         
         self.viewModel.loadingSubject.observeOnMain(onNext: { [weak self] isLoading in
@@ -267,6 +213,24 @@ extension AddTodoVC {
             if self.contains(.selectJourney) { cellTypes.append(AddTodoSelectStarTableViewCell.self)    }
             if self.contains(.deleteJourney) { cellTypes.append(AddTodoDeleteJourneyTableViewCell.self) }
             return cellTypes
+        }
+    }
+    
+    enum AddMode {
+        case addDayTodo(Date)
+        case addJourneyTodo(WeekJourneyModel)
+        case addJourney(PolarisDate)
+        case editTodo(TodoModel)
+        case editJourney(WeekJourneyModel)
+        
+        var addOptions: AddOptions {
+            switch self {
+            case .addDayTodo:       return .perDayAddTodo
+            case .addJourneyTodo:   return .perJourneyAddTodo
+            case .addJourney:       return .addJourney
+            case .editTodo:         return .edittedTodo
+            case .editJourney:      return .edittedJourney
+            }
         }
     }
     
