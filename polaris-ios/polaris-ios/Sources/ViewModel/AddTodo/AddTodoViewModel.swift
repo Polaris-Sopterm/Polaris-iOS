@@ -29,21 +29,17 @@ class AddTodoViewModel {
         self.addModeRelay.value
     }
     
-    var addOptionCount: Int {
-        return (try? self.addListTypes.value().count) ?? 0
-    }
+    let addListTypes = BehaviorSubject<[AddTodoTableViewCellProtocol.Type]>(value: [])
     
-    let addListTypes    = BehaviorSubject<[AddTodoTableViewCellProtocol.Type]>(value: [])
-    
-    let addTextRelay       = BehaviorRelay<String?>(value: nil)
-    let dropdownRelay      = BehaviorRelay<JourneyTitleModel?>(value: nil)
-    let fixOnTopRelay      = BehaviorRelay<Bool?>(value: nil)
-    let selectDateRelay    = BehaviorRelay<Date?>(value: nil)
+    let addTextRelay = BehaviorRelay<String?>(value: nil)
+    let dropdownRelay = BehaviorRelay<JourneyTitleModel?>(value: nil)
+    let fixOnTopRelay = BehaviorRelay<Bool?>(value: nil)
+    let selectDateRelay = BehaviorRelay<Date?>(value: nil)
     let selectJourneyRelay = BehaviorRelay<Set<Journey>?>(value: nil)
     
-    let addEnableFlagSubject   = BehaviorSubject<Bool>(value: false)
+    let addEnableFlagSubject = BehaviorSubject<Bool>(value: false)
     let completeRequestSubject = PublishSubject<Void>()
-    let loadingSubject         = BehaviorSubject<Bool>(value: false)
+    let loadingSubject = BehaviorSubject<Bool>(value: false)
     
     init() {
         self.observeMode(self.addModeRelay)
