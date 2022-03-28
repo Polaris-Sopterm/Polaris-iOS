@@ -87,9 +87,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
     }
     
     private func setUIs(){
-        for _ in 0...2{
-            self.cometAnimation()
-        }
+        self.contentView.addCometAnimation()
         self.reloadButton.setTitle("", for: .normal)
         self.weekContainView.backgroundColor = .white20
         self.weekContainView.setBorder(borderColor: .white60, borderWidth: 1.0)
@@ -275,48 +273,11 @@ final class MainSceneTableViewCell: MainTableViewCell {
             .disposed(by: self.disposeBag)
     }
     
-    private func setCometLayout(comet: UIImageView,size: Int) {
-        let heightConst = CGFloat(Int.random(in: 0...400))
-        var width: CGFloat = 0.0
-        if size == 0 {
-            width = 70.0
-        }
-        else {
-            width = 120.0
-        }
-        self.addSubview(comet)
-        comet.translatesAutoresizingMaskIntoConstraints = false
-        comet.leftAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-        comet.bottomAnchor.constraint(equalTo: self.topAnchor,constant: heightConst).isActive = true
-        comet.heightAnchor.constraint(equalToConstant: width).isActive = true
-        comet.widthAnchor.constraint(equalToConstant: width).isActive = true
-    }
-    
-    
-    private func cometAnimation(){
-        
-        let cometImgNames = [ImageName.imgShootingstar,ImageName.imgShootingstar2]
-        
-        // 0: small, 1 : big
-        let cometSize = Int.random(in: 0...1)
-        let comet = UIImageView(image: UIImage(named: cometImgNames[cometSize]))
-        
-        setCometLayout(comet: comet, size: cometSize)
-        let duration = Double(Int.random(in: 15...60))/10.0
-        
-        UIView.animate(withDuration: duration,delay:0.0, options:.curveEaseIn,animations: {
-            comet.transform = CGAffineTransform(translationX: -DeviceInfo.screenWidth-120, y: DeviceInfo.screenWidth+120.0)
-        }, completion: { finished in
-            comet.removeFromSuperview()
-            self.cometAnimation()
-        })
-    }
-    
     @objc private func showWeekPicker(){
-        guard let currentDate = self.viewModel.currentDate                                         else { return }
         guard let weekPickerVC = WeekPickerVC.instantiateFromStoryboard(StoryboardName.weekPicker) else { return }
         guard let visibleController = UIViewController.getVisibleController()                      else { return }
         
+        let currentDate = self.viewModel.currentDate
         weekPickerVC.weekDelegate = self
         weekPickerVC.setWeekInfo(
             year: currentDate.year,
@@ -347,13 +308,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
     }
     
     @IBAction func addNewJourneyButton(_ sender: Any) {
-        let viewController = AddTodoVC.instantiateFromStoryboard(StoryboardName.addTodo)
-        
-        guard let visibleController = UIViewController.getVisibleController() else { return }
-        guard let addTodoVC = viewController                                  else { return }
-        addTodoVC.setAddOptions(.addJourney)
-        addTodoVC.delegate = self
-        addTodoVC.presentWithAnimation(from: visibleController)
+        self.presentAddJourneyViewController()
     }
     
     
@@ -373,6 +328,17 @@ final class MainSceneTableViewCell: MainTableViewCell {
         guard let sceneIdentifier = notification.object as? String      else { return }
         guard sceneIdentifier != MainSceneCellType.main.sceneIdentifier else { return }
         self.viewModel.reloadInfo()
+    }
+    
+    private func presentAddJourneyViewController() {
+        let param = AddTodoViewMakingParameter(
+            mode: .addJourney(self.viewModel.currentDate),
+            delegate: self
+        )
+        
+        guard let addTodoVC = AddTodoViewFactory.makeAddTodoViewController(param: param) else { return }
+        guard let visibleController = UIViewController.getVisibleController()            else { return }
+        addTodoVC.presentWithAnimation(from: visibleController)
     }
     
     private var dimView: UIView = UIView(frame: .zero)
@@ -480,15 +446,7 @@ extension MainSceneTableViewCell: LookBackCloseDelegate {
             lookbackViewController.viewModel.dateInfo = self.viewModel.lastWeekRelay.value
             visibleController.navigationController?.pushViewController(lookbackViewController, animated: true)
         } else {
-            let viewController = AddTodoVC.instantiateFromStoryboard(StoryboardName.addTodo)
-            
-            guard let currentDate = self.viewModel.currentDate                    else { return }
-            guard let visibleController = UIViewController.getVisibleController() else { return }
-            guard let addTodoVC = viewController                                  else { return }
-            addTodoVC.setAddOptions(.addJourney)
-            addTodoVC.setAddJourneyDate(currentDate)
-            addTodoVC.delegate = self
-            addTodoVC.presentWithAnimation(from: visibleController)
+            self.presentAddJourneyViewController()
         }
     }
     
@@ -506,7 +464,7 @@ extension MainSceneTableViewCell: WeekPickerDelegate {
 
 extension MainSceneTableViewCell: AddTodoViewControllerDelegate {
     
-    func addTodoViewController(_ viewController: AddTodoVC, didCompleteAddOption option: AddTodoVC.AddOptions) {
+    func addTodoViewController(_ viewController: AddTodoVC, didCompleteAddMode mode: AddTodoVC.AddMode) {
         self.viewModel.reloadInfo()
         NotificationCenter.default.postUpdateTodo(fromScene: .main)
     }

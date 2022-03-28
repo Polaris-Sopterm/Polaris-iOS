@@ -16,8 +16,9 @@ protocol AddTodoDropdownTableViewCellDelegate: AddTodoTableViewCellDelegate {
 class AddTodoDropdownTableViewCell: AddTodoTableViewCell {
     override class var cellHeight: CGFloat { return UITableView.automaticDimension }
     
-    override weak var delegate: AddTodoTableViewCellDelegate? { didSet { self._delegate = self.delegate as? AddTodoDropdownTableViewCellDelegate } }
-    weak var _delegate: AddTodoDropdownTableViewCellDelegate?
+    override weak var delegate: AddTodoTableViewCellDelegate? {
+        didSet { self._delegate = self.delegate as? AddTodoDropdownTableViewCellDelegate }
+    }
     
     // MARK: - Life Cycle
     override func awakeFromNib() {
@@ -29,11 +30,30 @@ class AddTodoDropdownTableViewCell: AddTodoTableViewCell {
         self.bindTableView()
     }
     
-    override func configure(by addOptions: AddTodoVC.AddOptions, date: Date? = nil) {
+    override func configure(by addMode: AddTodoVC.AddMode, date: Date? = nil) {
+        super.configure(by: addMode, date: date)
+        
         self.viewModel.requestJourneyList(date)
+        
+        switch addMode {
+        case .editTodo(let todo):
+            let defaultJourney = JourneyTitleModel(
+                idx: nil,
+                title: "default",
+                year: nil,
+                month: nil,
+                weekNo: nil,
+                userIdx: nil
+            )
+            let journey = todo.journey ?? defaultJourney
+            self.updateSelectedJourney(journey)
+            
+        default:
+            break
+        }
     }
     
-    func updateSelectedJourney(_ journey: JourneyTitleModel) {
+    private func updateSelectedJourney(_ journey: JourneyTitleModel) {
         self.viewModel.updateSelectedMenu(journey)
     }
     
@@ -118,6 +138,8 @@ class AddTodoDropdownTableViewCell: AddTodoTableViewCell {
     private static let screenRatio: CGFloat         = DeviceInfo.screenWidth / 375
     private static let menuCellHeight: CGFloat      = 56 * screenRatio
     private static let selectBorderColor: UIColor   = UIColor.mainSky
+    
+    private weak var _delegate: AddTodoDropdownTableViewCellDelegate?
     
     private var viewModel  = AddTodoDropdownViewModel()
     private var disposeBag = DisposeBag()

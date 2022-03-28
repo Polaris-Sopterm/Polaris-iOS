@@ -31,7 +31,22 @@ class AddTodoSelectStarTableViewCell: AddTodoTableViewCell {
         self.bindCollectionView()
     }
     
-    func updateSelectJourney(_ journeys: Set<Journey>) {
+    override func configure(by addMode: AddTodoVC.AddMode, date: Date? = nil) {
+        super.configure(by: addMode, date: date)
+        
+        switch addMode {
+        case .editJourney(let journey):
+            var journeySet: Set<Journey> = []
+            if let firstJourney = journey.firstValueJourney   { journeySet.insert(firstJourney) }
+            if let secondJourney = journey.secondValueJourney { journeySet.insert(secondJourney) }
+            self.updateSelectJourney(journeySet)
+            
+        default:
+            break
+        }
+    }
+    
+    private func updateSelectJourney(_ journeys: Set<Journey>) {
         self._delegate?.addTodoSelectStarTableViewCell(self, didSelectedStars: journeys)
         
         journeys.forEach { journey in self.viewModel.selectJourney(journey) }

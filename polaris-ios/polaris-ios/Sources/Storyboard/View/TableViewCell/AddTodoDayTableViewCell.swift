@@ -13,14 +13,16 @@ protocol AddTodoDayTableViewCellDelegate: AddTodoTableViewCellDelegate {
 }
 
 class AddTodoDayTableViewCell: AddTodoTableViewCell {
+    
     override class var cellHeight: CGFloat {
         let labelHeight: CGFloat = 17
         let spacing: CGFloat     = 15
         return (verticalInset * 2) + dayCellHeight + spacing + labelHeight
     }
     
-    override weak var delegate: AddTodoTableViewCellDelegate? { didSet { self._delegate = delegate as? AddTodoDayTableViewCellDelegate } }
-    weak var _delegate: AddTodoDayTableViewCellDelegate?
+    override weak var delegate: AddTodoTableViewCellDelegate? {
+        didSet { self._delegate = delegate as? AddTodoDayTableViewCellDelegate }
+    }
     
     // MARK: - Life Cycle
     override func awakeFromNib() {
@@ -30,7 +32,20 @@ class AddTodoDayTableViewCell: AddTodoTableViewCell {
         self.bindCollectionView()
     }
     
-    func updateSelectDate(_ date: Date) {
+    override func configure(by addMode: AddTodoVC.AddMode, date: Date? = nil) {
+        super.configure(by: addMode, date: date)
+        
+        switch addMode {
+        case .editTodo(let todo):
+            guard let todoDate = todo.date?.convertToDate()?.normalizedDate else { return }
+            self.updateSelectDate(todoDate)
+            
+        default:
+            break
+        }
+    }
+    
+    private func updateSelectDate(_ date: Date) {
         guard let selectedDateIndex = self.viewModel.datesRelay.value.firstIndex(of: date) else { return }
         let indexPath = IndexPath(item: selectedDateIndex, section: 0)
         self.collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
@@ -79,6 +94,8 @@ class AddTodoDayTableViewCell: AddTodoTableViewCell {
                 self._delegate?.addTodoDayTableViewCell(self, didSelectDate: selectedDate)
             }).disposed(by: self.disposeBag)
     }
+    
+    private weak var _delegate: AddTodoDayTableViewCellDelegate?
     
     private static let horizontalInset: CGFloat     = 23
     private static let verticalInset: CGFloat       = 10

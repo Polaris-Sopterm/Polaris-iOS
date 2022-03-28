@@ -14,6 +14,7 @@ protocol AddTodoTextTableViewCellDelegate: AddTodoTableViewCellDelegate {
 }
 
 class AddTodoTextTableViewCell: AddTodoTableViewCell {
+    
     class override var cellHeight: CGFloat {
         let textFieldHeight: CGFloat = (screenRaito * 53)
         let space: CGFloat           = 15
@@ -21,8 +22,11 @@ class AddTodoTextTableViewCell: AddTodoTableViewCell {
         return (verticalInset * 2) + space + textFieldHeight + labelHeight
     }
     
-    override weak var delegate: AddTodoTableViewCellDelegate? { didSet { _delegate = self.delegate as? AddTodoTextTableViewCellDelegate } }
-    weak var _delegate: AddTodoTextTableViewCellDelegate?
+    override weak var delegate: AddTodoTableViewCellDelegate? {
+        didSet { _delegate = self.delegate as? AddTodoTextTableViewCellDelegate }
+    }
+    
+    private weak var _delegate: AddTodoTextTableViewCellDelegate?
     
     // MARK: - Life Cycle
     override func awakeFromNib() {
@@ -30,19 +34,31 @@ class AddTodoTextTableViewCell: AddTodoTableViewCell {
         self.setupTextFieldView()
     }
     
-    override func configure(by addOptions: AddTodoVC.AddOptions, date: Date?) {
+    override func configure(by addMode: AddTodoVC.AddMode, date: Date?) {
+        super.configure(by: addMode, date: date)
+        
         var addTodoCategory: AddTextCategory
-        if addOptions.contains(.perDayAddTodo) || addOptions.contains(.perJourneyAddTodo) {
-            addTodoCategory = AddTextCategory.todo
-        } else {
-            addTodoCategory = AddTextCategory.journey
+        switch addMode {
+        case .addJourneyTodo, .addDayTodo:
+            addTodoCategory = .todo
+            
+        case .editTodo(let todo):
+            addTodoCategory = .todo
+            self.updateAddText(todo.title ?? "")
+            
+        case .editJourney(let journey):
+            addTodoCategory = .journey
+            self.updateAddText(journey.title ?? "")
+            
+        default:
+            addTodoCategory = .journey
         }
         
         self.titleLabel.text = addTodoCategory.title
         self.polarisMarginTextFieldView?.setPlaceholder(text: addTodoCategory.placeHolder)
     }
     
-    func updateAddText(_ addText: String) {
+    private func updateAddText(_ addText: String) {
         self.polarisMarginTextFieldView?.setText(addText)
         self._delegate?.addTodoTextTableViewCell(self, didChangeText: addText)
     }
@@ -64,6 +80,7 @@ class AddTodoTextTableViewCell: AddTodoTableViewCell {
 }
 
 extension AddTodoTextTableViewCell {
+    
     enum AddTextCategory {
         case todo
         case journey
@@ -82,6 +99,7 @@ extension AddTodoTextTableViewCell {
             }
         }
     }
+    
 }
 
 extension AddTodoTextTableViewCell: PolarisMarginTextFieldDelegate {

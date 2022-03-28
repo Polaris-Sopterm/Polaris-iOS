@@ -39,6 +39,11 @@ extension UIView {
         return nib.first as? T
     }
     
+    func addCometAnimation(cometCount: Int = 3) {
+        guard cometCount >= 0 else { return }
+        (0..<cometCount).forEach { _ in self.startCometAnimation() }
+    }
+    
     func showCrossDissolve(duration: TimeInterval = 0.2, completion: (() -> Void)? = nil) {
         self.isHidden = false
         self.alpha    = 0
@@ -105,6 +110,41 @@ extension UIView {
         return renderer.image { renderImageContext in
             self.layer.render(in: renderImageContext.cgContext)
         }
+    }
+    
+    private func startCometAnimation() {
+        guard let cometImageView = self.makeRandomCometImageView() else { return }
+        self.addSubview(cometImageView)
+        
+        let duration: Double = Double(Int.random(in: 15...60)) / 10.0
+        let restDistance: CGFloat = 100
+        
+        UIView.animate(withDuration: duration, delay: 0, options: .curveEaseIn, animations: {
+            cometImageView.transform = CGAffineTransform(
+                translationX: -DeviceInfo.screenWidth - restDistance,
+                y: DeviceInfo.screenWidth + restDistance
+            )
+        }, completion: { [weak self] _ in
+            cometImageView.removeFromSuperview()
+            self?.startCometAnimation()
+        })
+    }
+    
+    private func makeRandomCometImageView() -> UIImageView? {
+        guard let cometType = ShootingComet.allCases.randomElement() else { return nil }
+        
+        let screenWidth = DeviceInfo.screenWidth
+        let screenHeight = DeviceInfo.screenHeight
+        let yPosition = CGFloat(Int.random(in: 0...(Int(screenHeight) / 2)))
+        
+        let cometImageView = UIImageView(image: cometType.starImage)
+        cometImageView.frame = CGRect(
+            x: screenWidth,
+            y: yPosition,
+            width: cometType.size,
+            height: cometType.size
+        )
+        return cometImageView
     }
     
 }

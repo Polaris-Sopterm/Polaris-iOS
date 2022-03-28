@@ -13,12 +13,12 @@ protocol AddTodoTableViewCellProtocol: UITableViewCell {
     static var cellHeight: CGFloat { get }
     var delegate: AddTodoTableViewCellDelegate? { get set }
     
-    func configure(by addOptions: AddTodoVC.AddOptions, date: Date?)
+    func configure(by addMode: AddTodoVC.AddMode, date: Date?)
 }
 
 class AddTodoTableViewCell: UITableViewCell, AddTodoTableViewCellProtocol {
     class var cellHeight: CGFloat { return 0 }
     weak var delegate: AddTodoTableViewCellDelegate?
     
-    func configure(by addOptions: AddTodoVC.AddOptions, date: Date? = nil) { }
+    func configure(by addMode: AddTodoVC.AddMode, date: Date? = nil) { }
 }

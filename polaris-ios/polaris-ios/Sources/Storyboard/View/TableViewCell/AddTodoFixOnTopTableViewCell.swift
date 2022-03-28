@@ -13,6 +13,7 @@ protocol AddTodoFixOnTopTableViewCellDelegate: AddTodoTableViewCellDelegate {
 }
 
 class AddTodoFixOnTopTableViewCell: AddTodoTableViewCell {
+    
     override class var cellHeight: CGFloat {
         let verticalInset: CGFloat  = 10
         let labelHeight: CGFloat    = 17
@@ -21,8 +22,12 @@ class AddTodoFixOnTopTableViewCell: AddTodoTableViewCell {
         return (verticalInset * 2) + labelHeight + spacing + buttonHeight
     }
     
-    override weak var delegate: AddTodoTableViewCellDelegate? { didSet { self._delegate = self.delegate as? AddTodoFixOnTopTableViewCellDelegate; self._delegate?.addTodoFixOnTopTableViewCell(self, shouldFixed: false) } }
-    weak var _delegate: AddTodoFixOnTopTableViewCellDelegate?
+    override weak var delegate: AddTodoTableViewCellDelegate? {
+        didSet {
+            self._delegate = self.delegate as? AddTodoFixOnTopTableViewCellDelegate
+            self._delegate?.addTodoFixOnTopTableViewCell(self, shouldFixed: false)
+        }
+    }
     
     // MARK: - Life Cycle
     override func awakeFromNib() {
@@ -32,7 +37,19 @@ class AddTodoFixOnTopTableViewCell: AddTodoTableViewCell {
         self.bindUI()
     }
     
-    func updateFix(_ fix: Bool) {
+    override func configure(by addMode: AddTodoVC.AddMode, date: Date? = nil) {
+        super.configure(by: addMode, date: date)
+        
+        switch addMode {
+        case .editTodo(let todo):
+            self.updateFix(todo.isTop ?? false)
+            
+        default:
+            break
+        }
+    }
+    
+    private func updateFix(_ fix: Bool) {
         fix ? self.setFixSelected() : self.setNotFixSelected()
         self._delegate?.addTodoFixOnTopTableViewCell(self, shouldFixed: fix)
     }
@@ -104,6 +121,8 @@ class AddTodoFixOnTopTableViewCell: AddTodoTableViewCell {
     
     private static let selectedBorderColor: UIColor         = UIColor.mainSky
     private static let unselectedBorderColor: UIColor       = UIColor.inactiveText
+    
+    private weak var _delegate: AddTodoFixOnTopTableViewCellDelegate?
     
     private var disposeBag = DisposeBag()
     private var fixed      = BehaviorSubject<Bool>(value: false)

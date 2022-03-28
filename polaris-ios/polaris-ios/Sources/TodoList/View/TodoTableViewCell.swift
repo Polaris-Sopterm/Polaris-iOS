@@ -79,15 +79,19 @@ class TodoTableViewCell: MainTableViewCell {
             self.viewModel.occur(viewEvent: .categoryBtnTapped)
         }).disposed(by: self.disposeBag)
         
-        self.addJourneyButton.rx.tap.observeOnMain(onNext: { [weak self] in            
-            let viewController = AddTodoVC.instantiateFromStoryboard(StoryboardName.addTodo)
-            
-            guard let visibleController = UIViewController.getVisibleController() else { return }
-            guard let addTodoVC = viewController                                  else { return }
-            addTodoVC.setAddOptions(.addJourney)
-            addTodoVC.delegate = self?.viewModel
-            addTodoVC.presentWithAnimation(from: visibleController)
-        }).disposed(by: self.disposeBag)
+        self.addJourneyButton.rx.tap
+            .withUnretained(self)
+            .observeOnMain(onNext: { owner, _ in
+                let param = AddTodoViewMakingParameter(
+                    mode: .addJourney(owner.viewModel.currentDate),
+                    delegate: owner.viewModel
+                )
+                
+                guard let addTodoVC = AddTodoViewFactory.makeAddTodoViewController(param: param) else { return }
+                guard let visibleController = UIViewController.getVisibleController()            else { return }
+                addTodoVC.presentWithAnimation(from: visibleController)
+            })
+            .disposed(by: self.disposeBag)
     }
     
     private func observeViewModel() {
@@ -277,11 +281,13 @@ extension TodoTableViewCell: UITableViewDelegate {
 extension TodoTableViewCell: DayTodoHeaderViewDelegate {
     
     func dayTodoHeaderView(_ dayTodoHeaderView: DayTodoHeaderView, didTapAddTodo date: Date) {
-        guard let addTodoVC = AddTodoVC.instantiateFromStoryboard(StoryboardName.addTodo),
-              let visibleController = UIViewController.getVisibleController() else { return }
-        addTodoVC.setAddOptions(.perDayAddTodo)
-        addTodoVC.setAddTodoDate(date)
-        addTodoVC.delegate = self.viewModel
+        let param = AddTodoViewMakingParameter(
+            mode: .addDayTodo(date),
+            delegate: self.viewModel
+        )
+        
+        guard let addTodoVC = AddTodoViewFactory.makeAddTodoViewController(param: param) else { return }
+        guard let visibleController = UIViewController.getVisibleController()            else { return }
         addTodoVC.presentWithAnimation(from: visibleController)
     }
     
@@ -290,20 +296,24 @@ extension TodoTableViewCell: DayTodoHeaderViewDelegate {
 extension TodoTableViewCell: JourneyTodoHeaderViewDelegate {
     
     func journeyTodoHeaderView(_ journeyTodoHeaderView: JourneyTodoHeaderView, didTapEdit todo: WeekJourneyModel) {
-        guard let addTodoVC = AddTodoVC.instantiateFromStoryboard(StoryboardName.addTodo),
-              let visibleController = UIViewController.getVisibleController() else { return }
-        addTodoVC.setJourneyModel(todo)
-        addTodoVC.setAddOptions(.edittedJourney)
-        addTodoVC.delegate = self.viewModel
+        let param = AddTodoViewMakingParameter(
+            mode: .editJourney(todo),
+            delegate: self.viewModel
+        )
+        
+        guard let addTodoVC = AddTodoViewFactory.makeAddTodoViewController(param: param) else { return }
+        guard let visibleController = UIViewController.getVisibleController()            else { return }
         addTodoVC.presentWithAnimation(from: visibleController)
     }
     
     func journeyTodoHeaderView(_ journeyTodoHeaderView: JourneyTodoHeaderView, didTapAdd todo: WeekJourneyModel) {
-        guard let addTodoVC = AddTodoVC.instantiateFromStoryboard(StoryboardName.addTodo),
-              let visibleController = UIViewController.getVisibleController() else { return }
-        addTodoVC.setAddOptions(.perJourneyAddTodo)
-        addTodoVC.setJourneyModel(todo)
-        addTodoVC.delegate = self.viewModel
+        let param = AddTodoViewMakingParameter(
+            mode: .addJourneyTodo(todo),
+            delegate: self.viewModel
+        )
+        
+        guard let addTodoVC = AddTodoViewFactory.makeAddTodoViewController(param: param) else { return }
+        guard let visibleController = UIViewController.getVisibleController()            else { return }
         addTodoVC.presentWithAnimation(from: visibleController)
     }
     
@@ -331,12 +341,13 @@ extension TodoTableViewCell: DayTodoTableViewCellDelegate {
     }
     
     func dayTodoTableViewCell(_ cell: DayTodoTableViewCell, didTapEdit todo: TodoModel) {
-        guard let addTodoVC = AddTodoVC.instantiateFromStoryboard(StoryboardName.addTodo),
-              let visibleController = UIViewController.getVisibleController() else { return }
+        let param = AddTodoViewMakingParameter(
+            mode: .editTodo(todo),
+            delegate: self.viewModel
+        )
         
-        addTodoVC.setAddOptions(.edittedTodo)
-        addTodoVC.setEditTodo(todo)
-        addTodoVC.delegate = self.viewModel
+        guard let addTodoVC = AddTodoViewFactory.makeAddTodoViewController(param: param) else { return }
+        guard let visibleController = UIViewController.getVisibleController()            else { return }
         addTodoVC.presentWithAnimation(from: visibleController)
     }
     
@@ -353,12 +364,13 @@ extension TodoTableViewCell: JourneyTodoTableViewDelegate {
     }
     
     func journeyTodoTableViewCell(_ cell: JourneyTodoTableViewCell, didTapEdit todo: TodoModel) {
-        guard let addTodoVC = AddTodoVC.instantiateFromStoryboard(StoryboardName.addTodo),
-              let visibleController = UIViewController.getVisibleController() else { return }
+        let param = AddTodoViewMakingParameter(
+            mode: .editTodo(todo),
+            delegate: self.viewModel
+        )
         
-        addTodoVC.setAddOptions(.edittedTodo)
-        addTodoVC.setEditTodo(todo)
-        addTodoVC.delegate = self.viewModel
+        guard let addTodoVC = AddTodoViewFactory.makeAddTodoViewController(param: param) else { return }
+        guard let visibleController = UIViewController.getVisibleController()            else { return }
         addTodoVC.presentWithAnimation(from: visibleController)
     }
     
