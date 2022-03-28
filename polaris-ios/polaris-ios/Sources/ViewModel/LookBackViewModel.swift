@@ -58,6 +58,7 @@ final class LookBackViewModel {
     @Published var lookbackEnd: Bool = false
     
     private var disposeBag = DisposeBag()
+    private var dateInfoForSubmission: LastWeek?
     
     private var firstVCStarInfo = [LookBackStar(starName: "건강", starImageName: "imgChangeAdd", selected: false),
                                    LookBackStar(starName: "극복", starImageName: "imgOvercomeAdd", selected: false),
@@ -163,15 +164,16 @@ final class LookBackViewModel {
         self.dateInfoSubscription = $dateInfo
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] date in
-                self?.publishFirstStarInfos()
+                guard let date = date else { return }
+                self?.dateInfoForSubmission = LastWeek(year: date.year, month: date.month, weekNo: date.weekNo)
+                self?.publishFirstStarInfos(date: date)
             })
     }
     
-    func publishFirstStarInfos() {
-        guard let dateInfo = self.dateInfo,
-              let year = dateInfo.year,
-              let month = dateInfo.month,
-              let weekNo = dateInfo.weekNo
+    func publishFirstStarInfos(date: LastWeek) {
+        guard let year = date.year,
+              let month = date.month,
+              let weekNo = date.weekNo
         else { return }
         let lastWeekInfo = PolarisDate(year: year, month: month, weekNo: weekNo)
         let listValuesAPI = RetrospectAPI.listValues(date: lastWeekInfo)
@@ -422,7 +424,7 @@ final class LookBackViewModel {
     
     func registerLookBackResult() {
         guard self.thirdvcAnswerInfo.count == 4,
-              let dateInfo = self.dateInfo,
+              let dateInfo = self.dateInfoForSubmission,
               let year = dateInfo.year,
               let month = dateInfo.month,
               let weekNo = dateInfo.weekNo
