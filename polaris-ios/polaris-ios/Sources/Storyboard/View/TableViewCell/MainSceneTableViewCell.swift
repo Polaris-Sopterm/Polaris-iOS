@@ -87,9 +87,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
     }
     
     private func setUIs(){
-        for _ in 0...2{
-            self.cometAnimation()
-        }
+        self.contentView.addCometAnimation()
         self.reloadButton.setTitle("", for: .normal)
         self.weekContainView.backgroundColor = .white20
         self.weekContainView.setBorder(borderColor: .white60, borderWidth: 1.0)
@@ -273,43 +271,6 @@ final class MainSceneTableViewCell: MainTableViewCell {
                 }
             })
             .disposed(by: self.disposeBag)
-    }
-    
-    private func setCometLayout(comet: UIImageView,size: Int) {
-        let heightConst = CGFloat(Int.random(in: 0...400))
-        var width: CGFloat = 0.0
-        if size == 0 {
-            width = 70.0
-        }
-        else {
-            width = 120.0
-        }
-        self.addSubview(comet)
-        comet.translatesAutoresizingMaskIntoConstraints = false
-        comet.leftAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-        comet.bottomAnchor.constraint(equalTo: self.topAnchor,constant: heightConst).isActive = true
-        comet.heightAnchor.constraint(equalToConstant: width).isActive = true
-        comet.widthAnchor.constraint(equalToConstant: width).isActive = true
-    }
-    
-    
-    private func cometAnimation(){
-        
-        let cometImgNames = [ImageName.imgShootingstar,ImageName.imgShootingstar2]
-        
-        // 0: small, 1 : big
-        let cometSize = Int.random(in: 0...1)
-        let comet = UIImageView(image: UIImage(named: cometImgNames[cometSize]))
-        
-        setCometLayout(comet: comet, size: cometSize)
-        let duration = Double(Int.random(in: 15...60))/10.0
-        
-        UIView.animate(withDuration: duration,delay:0.0, options:.curveEaseIn,animations: {
-            comet.transform = CGAffineTransform(translationX: -DeviceInfo.screenWidth-120, y: DeviceInfo.screenWidth+120.0)
-        }, completion: { finished in
-            comet.removeFromSuperview()
-            self.cometAnimation()
-        })
     }
     
     @objc private func showWeekPicker(){

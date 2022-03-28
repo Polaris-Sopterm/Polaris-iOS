@@ -91,25 +91,7 @@ final class LoginVC: UIViewController {
     }
     
     private func setupCometAnimation() {
-        (0...2).forEach { _ in self.startCometAnimation() }
-    }
-    
-    private func startCometAnimation() {
-        guard let cometType = ShootingComet.allCases.randomElement() else { return }
-        
-        let yPosition = CGFloat(Int.random(in: 0...400))
-        let duration  = Double(Int.random(in: 15...60)) / 10.0
-        
-        let cometImageView   = UIImageView(image: cometType.starImage)
-        cometImageView.frame = CGRect(x: DeviceInfo.screenWidth, y: yPosition, width: cometType.size, height: cometType.size)
-        self.view.addSubview(cometImageView)
-
-        UIView.animate(withDuration: duration, delay: 0, options: .curveEaseIn, animations: {
-            cometImageView.transform = CGAffineTransform(translationX: -DeviceInfo.screenWidth - 120, y: DeviceInfo.screenWidth + 120)
-        }, completion: { [weak self] _ in
-            cometImageView.removeFromSuperview()
-            self?.startCometAnimation()
-        })
+        self.view.addCometAnimation()
     }
     
     private func startLoadingIndicator() {

@@ -11,12 +11,16 @@ import UIKit
 
 class RetrospectTableViewCell: MainTableViewCell {
     
-    override class var cellHeight: CGFloat { return DeviceInfo.screenHeight }
+    override class var cellHeight: CGFloat {
+        DeviceInfo.screenHeight
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
         self.navigationHeightConstraint.constant = type(of: self).navigationHeight
-        self.setupCometAnimation()
+        self.addObserver()
+        self.addCometAnimation()
+//        self.setupCometAnimation()
         self.bindButtons()
         self.observeViewModel()
         
@@ -24,26 +28,14 @@ class RetrospectTableViewCell: MainTableViewCell {
         self.viewModel.requestLastWeekRetrospect()
     }
     
-    private func setupCometAnimation() {
-        (0...2).forEach { _ in self.startCometAnimation() }
+    private func addObserver() {
+        let center = NotificationCenter.default
+        center.addObserver(self, selector: #selector(self.didUpdateTodo(_:)), name: .didUpdateTodo, object: nil)
     }
     
-    private func startCometAnimation() {
-        guard let cometType = ShootingComet.allCases.randomElement() else { return }
-        
-        let yPosition = CGFloat(Int.random(in: 0...400))
-        let duration  = Double(Int.random(in: 15...60)) / 10.0
-        
-        let cometImageView   = UIImageView(image: cometType.starImage)
-        cometImageView.frame = CGRect(x: DeviceInfo.screenWidth, y: yPosition, width: cometType.size, height: cometType.size)
-        self.contentView.addSubview(cometImageView)
-
-        UIView.animate(withDuration: duration, delay: 0, options: .curveEaseIn, animations: {
-            cometImageView.transform = CGAffineTransform(translationX: -DeviceInfo.screenWidth - 120, y: DeviceInfo.screenWidth + 120)
-        }, completion: { [weak self] _ in
-            cometImageView.removeFromSuperview()
-            self?.startCometAnimation()
-        })
+    @objc private func didUpdateTodo(_ notification: Notification) {
+        guard let sceneIdentifier = notification.object as? String else { return }
+        print(notification)
     }
     
     private func bindButtons() {
