@@ -20,12 +20,10 @@ class RetrospectTableViewCell: MainTableViewCell {
         self.navigationHeightConstraint.constant = type(of: self).navigationHeight
         self.addObserver()
         self.addCometAnimation()
-//        self.setupCometAnimation()
         self.bindButtons()
         self.observeViewModel()
         
-        self.viewModel.requestRetrospectValues()
-        self.viewModel.requestLastWeekRetrospect()
+        self.viewModel.occur(viewEvent: .viewDidLoad)
     }
     
     private func addObserver() {
@@ -35,7 +33,7 @@ class RetrospectTableViewCell: MainTableViewCell {
     
     @objc private func didUpdateTodo(_ notification: Notification) {
         guard let sceneIdentifier = notification.object as? String else { return }
-        print(notification)
+        self.viewModel.occur(viewEvent: .notifyUpdateTodo(scene: sceneIdentifier))
     }
     
     private func bindButtons() {
