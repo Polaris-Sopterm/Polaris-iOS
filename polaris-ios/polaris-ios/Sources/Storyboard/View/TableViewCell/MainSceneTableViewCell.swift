@@ -264,11 +264,7 @@ final class MainSceneTableViewCell: MainTableViewCell {
                 guard let weekText = Date.convertWeekNoToString(weekNo: dateInfo.weekNo) else { return }
                 
                 owner.weekLabel.text =  String(dateInfo.year) + "년 " + String(dateInfo.month) + "월 " + weekText
-                if dateInfo.weekNo == 5 {
-                    owner.weekContainViewWidth.constant = 150
-                } else {
-                    owner.weekContainViewWidth.constant = 140
-                }
+                owner.weekContainViewWidth.constant = owner.weekLabel.intrinsicContentSize.width + 35.0
             })
             .disposed(by: self.disposeBag)
     }
