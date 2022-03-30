@@ -24,7 +24,6 @@ final class MainSceneTableViewCell: MainTableViewCell {
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var starCVCHeightConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak var reloadButton: UIButton!
     @IBOutlet private weak var starCV: UICollectionView!
     @IBOutlet private weak var weekContainView: UIView!
     @IBOutlet private weak var weekLabel: UILabel!
@@ -88,7 +87,6 @@ final class MainSceneTableViewCell: MainTableViewCell {
     
     private func setUIs(){
         self.contentView.addCometAnimation()
-        self.reloadButton.setTitle("", for: .normal)
         self.weekContainView.backgroundColor = .white20
         self.weekContainView.setBorder(borderColor: .white60, borderWidth: 1.0)
         self.weekContainView.makeRounded(cornerRadius: 9)
