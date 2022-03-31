@@ -96,6 +96,10 @@ extension Date {
         Calendar.koreaISO8601.component(.weekOfMonth, from: self.normalizedCurrent)
     }
     
+    static var currentPolarisDate: PolarisDate {
+        PolarisDate(year: Date.currentYear, month: Date.currentMonth, weekNo: Date.currentWeekNoOfMonth)
+    }
+    
     var normalizedDate: Date? {
         return Calendar.koreaISO8601.date(bySettingHour: 12, minute: 0, second: 0, of: self)
     }
