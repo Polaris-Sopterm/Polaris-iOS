@@ -265,6 +265,12 @@ final class MainSceneTableViewCell: MainTableViewCell {
                 
                 owner.weekLabel.text =  String(dateInfo.year) + "년 " + String(dateInfo.month) + "월 " + weekText
                 owner.weekContainViewWidth.constant = owner.weekLabel.intrinsicContentSize.width + 35.0
+                if dateInfo == Date.currentPolarisDate {
+                    owner.nowLabel.text = "이번주의 여정"
+                }
+                else {
+                    owner.nowLabel.text = "이 주의 여정"
+                }
             })
             .disposed(by: self.disposeBag)
     }
