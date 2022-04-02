@@ -80,20 +80,20 @@ extension Date {
         return datesIncludedWeek
     }
     
+    static var thursdayofThisWeek: Date {
+        datesIncludedThisWeek[3]
+    }
+    
     static var currentWeekNoOfMonth: Int {
-        Calendar.koreaISO8601.component(.weekOfMonth, from: self.normalizedCurrent)
+        Calendar.koreaISO8601.component(.weekOfMonth, from: Date.thursdayofThisWeek)
     }
     
     static var currentMonth: Int {
-        Calendar.koreaISO8601.component(.month, from: self.normalizedCurrent)
+        Calendar.koreaISO8601.component(.month, from: Date.thursdayofThisWeek)
     }
     
     static var currentYear: Int {
-        Calendar.koreaISO8601.component(.year, from: self.normalizedCurrent)
-    }
-    
-    static var currentWeekOfMonth: Int {
-        Calendar.koreaISO8601.component(.weekOfMonth, from: self.normalizedCurrent)
+        Calendar.koreaISO8601.component(.year, from: Date.thursdayofThisWeek)
     }
     
     static var currentPolarisDate: PolarisDate {

@@ -131,7 +131,7 @@ class RetrospectReportViewModel {
     private let reportDateRelay: BehaviorRelay<PolarisDate> = {
         let currentYear = Date.currentYear
         let currentMonth = Date.currentMonth
-        let currentWeekNo = Date.currentWeekOfMonth
+        let currentWeekNo = Date.currentWeekNoOfMonth
         let date = PolarisDate(year: currentYear, month: currentMonth, weekNo: currentWeekNo)
         return BehaviorRelay<PolarisDate>(value: date)
     }()
