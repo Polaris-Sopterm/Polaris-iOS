@@ -67,7 +67,7 @@ final class WeekPickerViewModel {
     private(set) var selectedDate = PolarisDate(
         year: Date.currentYear,
         month: Date.currentMonth,
-        weekNo: Date.currentWeekOfMonth
+        weekNo: Date.currentWeekNoOfMonth
     )
     private var lastWeekOfMonthModel = [LastWeekOfMonthDataModel]()
     

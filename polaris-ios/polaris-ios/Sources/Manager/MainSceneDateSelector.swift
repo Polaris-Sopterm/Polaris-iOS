@@ -29,12 +29,7 @@ final class MainSceneDateSelector {
     
     private let disposeBag = DisposeBag()
     private let selectedDateRelay: BehaviorRelay<PolarisDate> = {
-        let currentYear = Date.currentYear
-        let currentMonth = Date.currentMonth
-        let currentWeekOfMonth = Date.currentWeekOfMonth
-        let date = PolarisDate(year: currentYear, month: currentMonth, weekNo: currentWeekOfMonth)
-        
-        return BehaviorRelay<PolarisDate>(value: date)
+        return BehaviorRelay<PolarisDate>(value: Date.currentPolarisDate)
     }()
     
 }

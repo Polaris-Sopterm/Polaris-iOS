@@ -21,7 +21,7 @@ extension Calendar {
         return PolarisDate(
             year: components.year ?? Date.currentYear,
             month: components.month ?? Date.currentMonth,
-            weekNo: components.weekOfMonth ?? Date.currentWeekOfMonth
+            weekNo: components.weekOfMonth ?? Date.currentWeekNoOfMonth
         )
     }
     
