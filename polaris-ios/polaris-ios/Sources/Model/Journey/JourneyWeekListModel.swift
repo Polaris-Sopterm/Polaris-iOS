@@ -22,7 +22,7 @@ struct WeekJourneyModel: Codable {
     let year, month, weekNo: Int?
     let userIdx: Int?
     let value1, value2: String?
-    let toDos: [TodoModel]?
+    var toDos: [TodoModel]?
 }
 
 extension WeekJourneyModel: TodoSectionHeaderPresentable {
@@ -35,6 +35,17 @@ extension WeekJourneyModel: TodoSectionHeaderPresentable {
     var secondValueJourney: Journey? {
         guard let value = self.value2 else { return nil }
         return Journey(rawValue: value)
+    }
+    
+    var journeyTitleModel: JourneyTitleModel {
+        JourneyTitleModel(
+            idx: self.idx,
+            title: self.title,
+            year: self.year,
+            month: self.month,
+            weekNo: self.weekNo,
+            userIdx: self.userIdx
+        )
     }
     
 }

@@ -11,37 +11,8 @@ import Foundation
 
 fileprivate extension Date {
     
-    static func normalizedDate(date: Date) -> Date {
-        Calendar.koreaISO8601.date(bySettingHour: 12, minute: 0, second: 0, of: date) ?? date
-    }
-    
-    static func datesIncludedInWeekFromDate(date: Date) -> [Date] {
-        let weekDay = Calendar.koreaISO8601.component(.weekday, from: normalizedDate(date: date))
-        var datesIncludedWeek: [Date]      = []
-        var distancesBetweenWeekDay: [Int] = []
-        
-        if weekDay == WeekDay.sunday.rawValue {
-            distancesBetweenWeekDay = [-6, -5, -4, -3, -2, -1, 0] }
-        else {
-            for weekDayValue in WeekDay.monday.rawValue...WeekDay.saturday.rawValue {
-                let tempDistanceBetweenWeekDay = weekDayValue - weekDay
-                distancesBetweenWeekDay.append(tempDistanceBetweenWeekDay)
-            }
-            
-            let sundayWeekDay = 8
-            distancesBetweenWeekDay.append(sundayWeekDay - weekDay)
-        }
-        
-        distancesBetweenWeekDay.forEach { distance in
-            guard let calculatedDate = Calendar.koreaISO8601.date(byAdding: .day, value: distance, to: normalizedDate(date: date)) else { return }
-            datesIncludedWeek.append(calculatedDate)
-        }
-        
-        return datesIncludedWeek
-    }
-    
     static func thursdayOfWeekIncludesDate(date: Date) -> Date {
-        return datesIncludedInWeekFromDate(date: normalizedDate(date: date))[3]
+        return datesIncludedInWeek(fromDate: date.normalizedDate ?? date)[3]
     }
     
     static func weekNoOfDate(date: Date) -> Int {

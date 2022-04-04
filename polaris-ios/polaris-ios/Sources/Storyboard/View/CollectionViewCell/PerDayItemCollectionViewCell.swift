@@ -9,7 +9,9 @@ import UIKit
 
 class PerDayItemCollectionViewCell: UICollectionViewCell {
     
-    override var isSelected: Bool { didSet { self.update(by: self.isSelected) } }
+    override var isSelected: Bool {
+        didSet { self.update(by: self.isSelected) }
+    }
     
     @IBOutlet weak var dayLabel: UILabel!
     @IBOutlet weak var dayNumberLabel: UILabel!

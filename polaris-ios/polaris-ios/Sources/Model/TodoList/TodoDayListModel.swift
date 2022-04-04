@@ -23,7 +23,7 @@ struct TodoModel: Codable {
     var isDone: String?
     let date: String?
     let createdAt: String?
-    let journey: JourneyTitleModel?
+    var journey: JourneyTitleModel?
 }
 
 extension TodoModel {

@@ -37,19 +37,14 @@ class AddTodoDayTableViewCell: AddTodoTableViewCell {
         
         switch addMode {
         case .editTodo(let todo):
-            guard let todoDate = todo.date?.convertToDate()?.normalizedDate else { return }
-            self.updateSelectDate(todoDate)
+            self.viewModel.occur(viewEvent: .configureForEdit(todo))
+            
+        case .addJourneyTodo(let journey):
+            self.viewModel.occur(viewEvent: .configureForAddJourneyTodo(journey))
             
         default:
             break
         }
-    }
-    
-    private func updateSelectDate(_ date: Date) {
-        guard let selectedDateIndex = self.viewModel.datesRelay.value.firstIndex(of: date) else { return }
-        let indexPath = IndexPath(item: selectedDateIndex, section: 0)
-        self.collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
-        self.viewModel.selectedDateSubject.onNext(date)
     }
     
     // MARK: - Set Up
@@ -69,30 +64,41 @@ class AddTodoDayTableViewCell: AddTodoTableViewCell {
     
     // MARK: - Bind
     private func bindCollectionView() {
-        self.viewModel.datesRelay.bind(to: self.collectionView.rx.items) { collectionView, index, item in
+        self.viewModel.datesObservable.bind(to: self.collectionView.rx.items) { collectionView, index, item in
             let indexPath = IndexPath(item: index, section: 0)
-            let cell      = collectionView.dequeueReusableCell(cell: PerDayItemCollectionViewCell.self, forIndexPath: indexPath)
+            let cell = collectionView.dequeueReusableCell(
+                cell: PerDayItemCollectionViewCell.self,
+                forIndexPath: indexPath
+            )
             
             guard let perDayCell = cell else { return UICollectionViewCell() }
             perDayCell.configure(item)
             return perDayCell
         }.disposed(by: self.disposeBag)
         
-        self.collectionView.rx.itemSelected
-            .subscribe(onNext: { [weak self] indexPath in
-                guard let self = self else { return }
-                guard let selectedDate = self.viewModel.datesRelay.value[safe: indexPath.row] else { return }
-                self.viewModel.selectedDateSubject.onNext(selectedDate)
+        self.viewModel.selectedDateObservable
+            .withUnretained(self)
+            .observeOnMain(onNext: { owner, selectedDate in
+                guard let selectedDate = selectedDate else { return }
+                
+                owner.updateSelectedDateCell(selectedDate)
+                owner._delegate?.addTodoDayTableViewCell(owner, didSelectDate: selectedDate)
             })
             .disposed(by: self.disposeBag)
         
-        self.viewModel.selectedDateSubject
-            .subscribe(onNext: { [weak self] selectedDate in
-                guard let self = self                 else { return }
-                guard let selectedDate = selectedDate else { return }
-                
-                self._delegate?.addTodoDayTableViewCell(self, didSelectDate: selectedDate)
-            }).disposed(by: self.disposeBag)
+        self.collectionView.rx.itemSelected
+            .withUnretained(self)
+            .subscribe(onNext: { owner, indexPath in
+                owner.viewModel.occur(viewEvent: .selectCollectionView(indexPath: indexPath))
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
+    private func updateSelectedDateCell(_ selectedDate: Date) {
+        guard let selectedIndex = self.viewModel.dates.firstIndex(of: selectedDate) else { return }
+        
+        let selectedIndexPath = IndexPath(item: selectedIndex, section: 0)
+        self.collectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: [])
     }
     
     private weak var _delegate: AddTodoDayTableViewCellDelegate?
