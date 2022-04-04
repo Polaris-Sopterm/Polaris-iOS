@@ -64,11 +64,7 @@ final class WeekPickerViewModel {
         self.selectedDate = date
     }
     
-    private(set) var selectedDate = PolarisDate(
-        year: Date.currentYear,
-        month: Date.currentMonth,
-        weekNo: Date.currentWeekNoOfMonth
-    )
+    private(set) var selectedDate = Date.currentPolarisDate
     private var lastWeekOfMonthModel = [LastWeekOfMonthDataModel]()
     
     private let loadingSubject = PublishSubject<Bool>()
