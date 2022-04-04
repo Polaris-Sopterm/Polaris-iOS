@@ -69,29 +69,7 @@ extension Date {
     /// - 토 index : 5
     /// - 일 index : 6
     static var datesIncludedThisWeek: [Date] {
-        let currentWeekDay = Calendar.koreaISO8601.component(.weekday, from: self.normalizedCurrent)
-        
-        var datesIncludedWeek: [Date]      = []
-        var distancesBetweenWeekDay: [Int] = []
-        
-        if currentWeekDay == WeekDay.sunday.rawValue {
-            distancesBetweenWeekDay = [-6, -5, -4, -3, -2, -1, 0] }
-        else {
-            for weekDay in WeekDay.monday.rawValue...WeekDay.saturday.rawValue {
-                let tempDistanceBetweenWeekDay = weekDay - currentWeekDay
-                distancesBetweenWeekDay.append(tempDistanceBetweenWeekDay)
-            }
-            
-            let sundayWeekDay = 8
-            distancesBetweenWeekDay.append(sundayWeekDay - currentWeekDay)
-        }
-        
-        distancesBetweenWeekDay.forEach { distance in
-            guard let calculatedDate = Calendar.koreaISO8601.date(byAdding: .day, value: distance, to: self.normalizedCurrent) else { return }
-            datesIncludedWeek.append(calculatedDate)
-        }
-        
-        return datesIncludedWeek
+        self.datesIncludedInWeek(fromDate: .normalizedCurrent)
     }
     
     static var thursdayOfThisWeek: Date {
@@ -121,6 +99,33 @@ extension Date {
     static func convertWeekNoToString(weekNo: Int) -> String? {
         let weekDict = [1: "첫째주", 2: "둘째주", 3: "셋째주", 4: "넷째주", 5: "다섯째주"]
         return weekDict[weekNo]
+    }
+    
+    static func datesIncludedInWeek(fromDate date: Date) -> [Date] {
+        let normalizedDate = date.normalizedDate ?? date
+        let weekDay = Calendar.koreaISO8601.component(.weekday, from: normalizedDate)
+        
+        var datesIncludedWeek: [Date]      = []
+        var distancesBetweenWeekDay: [Int] = []
+        
+        if weekDay == WeekDay.sunday.rawValue {
+            distancesBetweenWeekDay = [-6, -5, -4, -3, -2, -1, 0] }
+        else {
+            for weekDayValue in WeekDay.monday.rawValue...WeekDay.saturday.rawValue {
+                let tempDistanceBetweenWeekDay = weekDayValue - weekDay
+                distancesBetweenWeekDay.append(tempDistanceBetweenWeekDay)
+            }
+            
+            let sundayWeekDay = 8
+            distancesBetweenWeekDay.append(sundayWeekDay - weekDay)
+        }
+        
+        distancesBetweenWeekDay.forEach { distance in
+            guard let calculatedDate = Calendar.koreaISO8601.date(byAdding: .day, value: distance, to: normalizedDate) else { return }
+            datesIncludedWeek.append(calculatedDate)
+        }
+        
+        return datesIncludedWeek
     }
     
     func convertToString(using format: String = "yyyy-MM-dd") -> String {
