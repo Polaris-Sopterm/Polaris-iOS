@@ -41,6 +41,24 @@ final class TodoController {
     func fetchTodoJourneyList(ofDate date: PolarisDate) -> Observable<[WeekJourneyModel]> {
         self.todoRepository.fetchTodoJourneyList(ofDate: date)
             .map { $0.data }
+            .map { journeySections in
+                var newJourenySections = [WeekJourneyModel]()
+                
+                for index in 0..<journeySections.count {
+                    guard var section = journeySections[safe: index] else { continue }
+                    
+                    let journeyTitleModel = section.journeyTitleModel
+                    let newTodos = section.toDos?.map { todo -> TodoModel in
+                        var todo = todo
+                        todo.journey = journeyTitleModel
+                        return todo
+                    }
+                    
+                    section.toDos = newTodos
+                    newJourenySections.append(section)
+                }
+                return newJourenySections
+            }
             .do(onNext: { [weak self] journeySections in
                 self?.journeySections = journeySections
             })
