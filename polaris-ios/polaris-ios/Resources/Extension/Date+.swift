@@ -128,6 +128,23 @@ extension Date {
         return datesIncludedWeek
     }
     
+    static func datesIncludedInWeek(fromPolarisDate date: PolarisDate) -> [Date] {
+        let dateComponents = DateComponents(
+            calendar: .koreaISO8601,
+            timeZone: .korea,
+            year: date.year,
+            month: date.month,
+            hour: 12,
+            minute: 0,
+            second: 0,
+            weekday: WeekDay.thursday.rawValue,
+            weekOfMonth: date.weekNo
+        )
+        
+        let dateFromComponent = Calendar.koreaISO8601.date(from: dateComponents) ?? .normalizedCurrent
+        return Self.datesIncludedInWeek(fromDate: dateFromComponent)
+    }
+    
     func convertToString(using format: String = "yyyy-MM-dd") -> String {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "ko_KR")

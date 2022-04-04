@@ -28,6 +28,9 @@ class AddTodoDayViewModel {
         case .configureForEdit(let todo):
             self.prepareDatesForEdit(todo: todo)
             
+        case .configureForAddJourneyTodo(let journey):
+            self.prepareDatesForAddJourneyTodo(journey: journey)
+            
         case .selectCollectionView(let indexPath):
             self.selectDate(ofIndexPath: indexPath)
         
@@ -45,6 +48,12 @@ class AddTodoDayViewModel {
         self.selectDate(ofIndexPath: todoDateIndexPath)
     }
     
+    private func prepareDatesForAddJourneyTodo(journey: WeekJourneyModel) {
+        let polarisDate = PolarisDate(year: journey.year ?? 0, month: journey.month ?? 0, weekNo: journey.weekNo ?? 0)
+        let weekDates = Date.datesIncludedInWeek(fromPolarisDate: polarisDate)
+        self.datesRelay.accept(weekDates)
+    }
+    
     private func updateDates(fromTodo todo: TodoModel) {
         guard let todoDate = todo.date?.convertToDate()?.normalizedDate else { return }
         
@@ -57,10 +66,6 @@ class AddTodoDayViewModel {
         self.selectedDateRelay.accept(selectedDate)
     }
     
-    private func selectDate(ofTodo todo: TodoModel) {
-        
-    }
-    
     private let selectedDateRelay = BehaviorRelay<Date?>(value: nil)
     private let datesRelay = BehaviorRelay<[Date]>(value: Date.datesIncludedThisWeek)
     
@@ -70,6 +75,7 @@ extension AddTodoDayViewModel {
     
     enum ViewEvent {
         case configureForEdit(TodoModel)
+        case configureForAddJourneyTodo(WeekJourneyModel)
         case selectCollectionView(indexPath: IndexPath)
     }
     

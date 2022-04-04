@@ -39,6 +39,9 @@ class AddTodoDayTableViewCell: AddTodoTableViewCell {
         case .editTodo(let todo):
             self.viewModel.occur(viewEvent: .configureForEdit(todo))
             
+        case .addJourneyTodo(let journey):
+            self.viewModel.occur(viewEvent: .configureForAddJourneyTodo(journey))
+            
         default:
             break
         }
