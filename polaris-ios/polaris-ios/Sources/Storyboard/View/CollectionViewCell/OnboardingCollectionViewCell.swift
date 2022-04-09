@@ -26,36 +26,30 @@ class OnboardingCollectionViewCell: UICollectionViewCell {
     }
 
     func configure(_ level: OnboardingVC.OnboardingLevel) {
-        self.titleLabel.text            = level.title
-        self.subTitleLabel.text         = level.subTitle
-        self.descriptionLabel.text      = level.description
-        self.onboardingImageView.image  = level.image
+        self.titleLabel.text = level.title
+        self.subTitleLabel.text = level.subTitle
+        self.descriptionLabel.text = level.description
+        self.onboardingImageView.image = level.image
         
         self.previousButton.isHidden = level == .first || level == .last
-        self.nextButton.isHidden     = level == .last
-        self.startButton.isHidden    = level != .last
+        self.nextButton.isHidden = level == .last
+        self.startButton.isHidden = level != .last
         
-        if level == .last {
-            let ratio = DeviceInfo.screenWidth / 375
-            let buttonHeight = 54 * ratio
-            self.onboardingImageBottomConstraint.constant = buttonHeight + DeviceInfo.bottomSafeAreaInset + 37 + 41
-        } else {
-            self.onboardingImageBottomConstraint.constant = 0
-        }
+        self.updateImageLayout(asLevel: level)
     }
     
     func willDisplay() {
-        self.titleLabel.alpha              = 0
-        self.subTitleLabel.alpha           = 0
-        self.descriptionLabel.alpha        = 0
-        self.onboardingImageView.alpha     = 0
+        self.titleLabel.alpha = 0
+        self.subTitleLabel.alpha = 0
+        self.descriptionLabel.alpha = 0
+        self.onboardingImageView.alpha = 0
         self.onboardingImageView.transform = CGAffineTransform(translationX: 0, y: 300)
         
         UIView.animate(withDuration: 1.0) {
-            self.titleLabel.alpha              = 1
-            self.subTitleLabel.alpha           = 1
-            self.descriptionLabel.alpha        = 1
-            self.onboardingImageView.alpha     = 1
+            self.titleLabel.alpha = 1
+            self.subTitleLabel.alpha = 1
+            self.descriptionLabel.alpha = 1
+            self.onboardingImageView.alpha = 1
             self.onboardingImageView.transform = .identity
         }
     }
@@ -83,12 +77,36 @@ class OnboardingCollectionViewCell: UICollectionViewCell {
         self.startBottomConstraint.constant     = 37 + DeviceInfo.bottomSafeAreaInset
     }
     
+    private func updateImageLayout(asLevel level: OnboardingVC.OnboardingLevel) {
+        let widthRatio = DeviceInfo.screenWidth / 375
+        let heightRatio = DeviceInfo.screenHeight / 812
+        
+        if level == .last {
+            let imageHeight = 367 * heightRatio
+            let imageWidth = imageHeight * level.imageRatio
+            
+            let buttonHeight = 54 * widthRatio
+            self.onboardingImageBottomConstraint.constant = buttonHeight + DeviceInfo.bottomSafeAreaInset + 37 + 41
+            self.onboardingImageHeightConstraint?.constant = imageHeight
+            self.onboardingImageWidthConstraint?.constant = imageWidth
+        } else {
+            let imageHeight = 524 * heightRatio
+            let imageWidth = imageHeight * level.imageRatio
+            
+            self.onboardingImageBottomConstraint.constant = 0
+            self.onboardingImageHeightConstraint?.constant = imageHeight
+            self.onboardingImageWidthConstraint?.constant = imageWidth
+        }
+    }
+    
     private let disposeBag = DisposeBag()
     
     @IBOutlet private weak var nextLabelBottomConstraint: NSLayoutConstraint!
     @IBOutlet private weak var previousBottomConstraint: NSLayoutConstraint!
     @IBOutlet private weak var startBottomConstraint: NSLayoutConstraint!
     @IBOutlet private weak var onboardingImageBottomConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var onboardingImageWidthConstraint: NSLayoutConstraint?
+    @IBOutlet private weak var onboardingImageHeightConstraint: NSLayoutConstraint?
     
     @IBOutlet private weak var onboardingImageView: UIImageView!
     @IBOutlet private weak var titleLabel: UILabel!

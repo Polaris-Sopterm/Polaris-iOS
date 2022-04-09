@@ -5,6 +5,7 @@
 //  Created by Dongmin on 2021/09/04.
 //
 
+import SnapKit
 import RxCocoa
 import RxSwift
 import UIKit
@@ -18,12 +19,22 @@ class RetrospectTableViewCell: MainTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.navigationHeightConstraint.constant = type(of: self).navigationHeight
+        self.setupCollectionView()
         self.addObserver()
         self.addCometAnimation()
         self.bindButtons()
         self.observeViewModel()
         
         self.viewModel.occur(viewEvent: .viewDidLoad)
+    }
+    
+    private func setupCollectionView() {
+        self.contentView.addSubview(self.journeyCollectionView)
+        self.journeyCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(self.titleLabelContainerView.snp.bottom).offset(50)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(LayoutGuide.collectionViewHeight)
+        }
     }
     
     private func addObserver() {
@@ -81,7 +92,7 @@ class RetrospectTableViewCell: MainTableViewCell {
             let ranking = index
             let key = value.0
             let collectionCount = value.1
-        
+
             var starSize: CGFloat
             var starLevel: Int
             if 0...2 ~= ranking || collectionCount == 0 {
@@ -94,42 +105,10 @@ class RetrospectTableViewCell: MainTableViewCell {
                 starLevel = 4
                 starSize = 80
             }
-                
-            guard let journey = Journey(rawValue: key) else { return }
             
-            let constraint = self.starConstraint(asJourney: journey)
-            let imageView = self.starImageView(asJourney: journey)
-            imageView.image = journey.getImage(by: starLevel)
-            constraint.constant = starSize
-            self.layoutIfNeeded()
-        }
-    }
-    
-    private func starConstraint(asJourney journey: Journey) -> NSLayoutConstraint {
-        switch journey {
-        case .happiness: return self.happinessStarWidthConstraint
-        case .control:   return self.controlStarWidthConstraint
-        case .thanks:    return self.thanksStarConstraint
-        case .rest:      return self.restStarWidthConstraint
-        case .growth:    return self.growthStarConstraint
-        case .change:    return self.changeStarWidthConstraint
-        case .health:    return self.healthStarConstraint
-        case .overcome:  return self.overcomeStarWidthConstraint
-        case .challenge: return self.challengeStarConstraint
-        }
-    }
-    
-    private func starImageView(asJourney journey: Journey) -> UIImageView {
-        switch journey {
-        case .happiness: return self.happinessImageView
-        case .control:   return self.controlImageView
-        case .thanks:    return self.thanksImageView
-        case .rest:      return self.restImageView
-        case .growth:    return self.growthImageView
-        case .change:    return self.changeImageView
-        case .health:    return self.healthImageView
-        case .overcome:  return self.overcomeImageView
-        case .challenge: return self.challengeImageView
+            guard let journey = Journey(rawValue: key)                                   else { return }
+            guard let journeyCell = self.journeyCollectionView.cell(forJourney: journey) else { return }
+            journeyCell.updateJourneyImage(size: starSize, journeyLevel: starLevel)
         }
     }
     
@@ -162,13 +141,14 @@ class RetrospectTableViewCell: MainTableViewCell {
         let screenScale = UIScreen.main.scale
         
         let labelContainerFrame = self.titleLabelContainerView.frame
-        let starsContainerFrame = self.starsContainerView.frame
+        let collectionViewHeight = LayoutGuide.collectionViewHeight
         
+        let spacing: CGFloat = 50
         let croppedFrame = CGRect(
             x: labelContainerFrame.origin.x,
             y: labelContainerFrame.origin.y,
-            width: labelContainerFrame.width,
-            height: labelContainerFrame.height + starsContainerFrame.height
+            width: DeviceInfo.screenWidth,
+            height: labelContainerFrame.height + spacing + collectionViewHeight
         )
 
         let croppedFrameAdjustScale = CGRect(
@@ -187,32 +167,47 @@ class RetrospectTableViewCell: MainTableViewCell {
     private let viewModel = RetrospectViewModel()
     private let disposeBag = DisposeBag()
 
+    private let journeyCollectionView: JourneyCollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = LayoutGuide.cellSize
+        layout.sectionInset = LayoutGuide.sectionInset
+        layout.minimumLineSpacing = LayoutGuide.minimumLineSpacing
+        layout.minimumInteritemSpacing = LayoutGuide.minimumInteritemSpacing
+        return JourneyCollectionView(frame: .zero, collectionViewLayout: layout)
+    }()
     @IBOutlet private weak var titleLabelContainerView: UIView!
-    @IBOutlet private weak var starsContainerView: UIView!
-    
-    @IBOutlet private weak var changeImageView: UIImageView!
-    @IBOutlet private weak var happinessImageView: UIImageView!
-    @IBOutlet private weak var overcomeImageView: UIImageView!
-    @IBOutlet private weak var controlImageView: UIImageView!
-    @IBOutlet private weak var restImageView: UIImageView!
-    @IBOutlet private weak var healthImageView: UIImageView!
-    @IBOutlet private weak var growthImageView: UIImageView!
-    @IBOutlet private weak var thanksImageView: UIImageView!
-    @IBOutlet private weak var challengeImageView: UIImageView!
-    
-    @IBOutlet private weak var changeStarWidthConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var happinessStarWidthConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var overcomeStarWidthConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var controlStarWidthConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var restStarWidthConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var healthStarConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var growthStarConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var thanksStarConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var challengeStarConstraint: NSLayoutConstraint!
     
     @IBOutlet private weak var navigationHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var shareButton: UIButton!
     @IBOutlet private weak var seeReportButton: UIButton!
+    
+}
+
+extension RetrospectTableViewCell {
+    
+    struct LayoutGuide {
+        
+        static var collectionViewHeight: CGFloat {
+            let verticalItemCount: CGFloat = 3
+            let cellHeight = self.cellSize.height
+            let totalCellHeight = cellHeight * verticalItemCount
+            let totalLineSpaing = self.minimumLineSpacing * (verticalItemCount - 1)
+            return totalCellHeight + totalLineSpaing
+        }
+        
+        static var cellSize: CGSize {
+            let lineItemCount: CGFloat = 3
+            let collectionViewWidth = DeviceInfo.screenWidth - self.sectionInset.left - self.sectionInset.right
+            let totalItemWidth = collectionViewWidth - ((lineItemCount - 1) * self.minimumInteritemSpacing)
+            let itemWidth = totalItemWidth / lineItemCount
+            return CGSize(width: itemWidth, height: itemWidth)
+        }
+        
+        static let sectionInset: UIEdgeInsets = UIEdgeInsets(top: 0, left: 28, bottom: 0, right: 28)
+        static let minimumLineSpacing: CGFloat = 10
+        static let minimumInteritemSpacing: CGFloat = 8
+        
+    }
     
 }

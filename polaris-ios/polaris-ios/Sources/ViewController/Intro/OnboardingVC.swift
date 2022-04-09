@@ -133,6 +133,17 @@ extension OnboardingVC {
             case .last:     return UIImage(named: ImageName.imgOnboarding5)
             }
         }
+        
+        // WIDTH / HEIGHT
+        var imageRatio: CGFloat {
+            switch self {
+            case .first:  return 328 / 524
+            case .second: return 328 / 524
+            case .third:  return 328 / 524
+            case .fourth: return 328 / 524
+            case .last:   return 291 / 367
+            }
+        }
     }
     
 }

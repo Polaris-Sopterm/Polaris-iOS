@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -38,6 +38,10 @@
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgOnboarding1" translatesAutoresizingMaskIntoConstraints="NO" id="WZs-2n-KFM">
                         <rect key="frame" x="23.5" y="155" width="328" height="524"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="524" id="RD6-sD-epe"/>
+                            <constraint firstAttribute="width" constant="328" id="o9j-qG-sBu"/>
+                        </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8uJ-9v-jVa">
                         <rect key="frame" x="23" y="588" width="54" height="54"/>
@@ -89,7 +93,9 @@
                 <outlet property="nextButton" destination="7CT-d4-ubY" id="mHD-jx-1FG"/>
                 <outlet property="nextLabelBottomConstraint" destination="ziW-Oe-VlA" id="daT-B4-gsa"/>
                 <outlet property="onboardingImageBottomConstraint" destination="Q5S-gr-mf2" id="PTu-98-dlY"/>
+                <outlet property="onboardingImageHeightConstraint" destination="RD6-sD-epe" id="RKv-ys-Co2"/>
                 <outlet property="onboardingImageView" destination="WZs-2n-KFM" id="g2T-2E-QyD"/>
+                <outlet property="onboardingImageWidthConstraint" destination="o9j-qG-sBu" id="nie-WS-79g"/>
                 <outlet property="previousBottomConstraint" destination="lhB-ey-ieX" id="OfT-iJ-Jau"/>
                 <outlet property="previousButton" destination="8uJ-9v-jVa" id="BYH-ja-Ba8"/>
                 <outlet property="startBottomConstraint" destination="Or8-iR-Isl" id="xfJ-mV-PNq"/>
